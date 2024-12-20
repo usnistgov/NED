@@ -1,0 +1,114 @@
+{
+	"definitions": {
+	},
+	"properties": {
+		"id": {
+			"type": "primary key",
+			"description": "Unique identifier for each observation of experimental data.",
+		},
+		"reference_id": {
+			"type": "foreign key",
+			"description": "Unique identifier for a particular reference in db_reference.csv.",
+		},
+		"specimen": {
+			"type": "string",
+			"description": "Name of tested specimen, as noted by the author(s) in the reference document.",
+		},
+		"reviewer": {
+			"type": "string",
+			"description": "individual or institution repsonsible for documenting this particular observation of experimental data in the database.",
+		},
+		"nistir_id": {
+			"type": "foreign key",
+			"description": "Unique identifier for a particular NISTIR category in db_nistir.csv.",
+		},
+		"p58_fragility": {
+			"type": "string",
+			"description": "FEMA P-58 component ID. Indicates expermintal data used in the development of the FEMA P-58 fragilities. Empty if experimental data is not associated with any FEMA P-58 fragility.",
+		},
+		"comp_type": {
+			"type": "string",
+			"description": "Name of the NISTIR component category",
+		},
+		"sub_type": {
+			"type": "string",
+			"description": "Describes the major subgrouping of components within the NISTIR class. Can separate full system tests from individual components tests, or major types of components like full height from partial height walls.",
+		},
+		"connection_detail": {
+			"type": "string",
+			"description": "Describes the specific type of installation or connection type of the component, such as perimeter-fixed vs back-braced ceilings.",
+		},
+		"material_class": {
+			"type": "string",
+			"description": "Describes a general grouping of components based on material, i.e., light weight vs heavy weight ceiling tiles or CPVC vs iron sprinkler pipes.",
+		},
+		"size_class": {
+			"type": "string",
+			"description": "Describes a general grouping of components based on size, i.e., large gridded area of ceiling tiles or specific equipment size.",
+		},
+		"test_type": {
+			"type": "string",
+			"description": "The type of test generally describing the condition under which the specimen was loaded. Where applicable, one of the following seven test_types should be selected: <'Dynamic, uniaxial', 'Dynamic, bi-directional', 'Dynamic, 3D', 'Monotonic, compression', 'Monotonic, tension', 'Quasi-static Cyclic, uniaxial', 'Quasi-static Cyclic, bi-directional'>",
+		},
+		"loading_protocol": {
+			"type": "string",
+			"description": "Name, ID, or general description of the ground motion or loading protocol used in the test.",
+		},
+		"peak_test_amplitude": {
+			"type": "string",
+			"description": "The maximum amplitude to which this test was performed. Descrition should include both the amplitude value, metric, and unit (e.g., 1.5 g Peak Ground Acceleration).",
+		},
+		"location": {
+			"type": "string",
+			"description": "The location where the specimen was conducted.",
+		},
+		"design_objective": {
+			"type": "string",
+			"description": "General description of the performance level to which the specimen was designed, e.g., following a certain code, or meeting a certain damage objective under a specific loading condition.",
+		},
+		"comp_description": {
+			"type": "string",
+			"description": "General description of the component, materials used, boundary conditions, and any other installation details.",
+		},
+		"ds_description": {
+			"type": "string",
+			"description": "General description of the damage observed, if any, under this test.",
+		},
+		"proir_damage": {
+			"type": "string",
+			"description": "Description of any prior damage that was noted during a previous test of this specimen. Should also describe if and how the specimen was repaired prior to this test. Empty if no prior damage was noted.",
+		},
+		"is_repaired": {
+			"type": "boolean",
+			"description": "TRUE if prior damage was noted and repaired prior to this test. FALSE if prior damage was noted and not repiared.",
+		},
+		"ds_intensity": {
+			"type": "number",
+			"description": "Peak test amplitude at the onset of observed damage.",
+		},
+		"ds_intensity_unit": {
+			"type": "string",
+			"description": "Unit of peak test amplitude at the onset of observed damage. Typically recorded in terms of building response or ground motion intensty measures that show the best correlation with damage to the component. Where applicable, one of the following seven units should be selected: <'Story Drift Ratio', 'Story Drift Ratio, bi-directional', 'Peak Floor Acceleration, Horizontal (g)', 'Peak Floor Acceleration, Vertical (g)'>. For other metrics that don’t fit in these bins, provide an in kind unit name (metric followed by unit in paranthesis, e.g., 'Force, compression (kips)').",
+		},
+		"ds_intensity_alt": {
+			"type": "number",
+			"description": "Secondary peak test amplitude (in terms of alternative ground motion intensity or building response parameter)",
+		},
+		"ds_intensity_unit_alt": {
+			"type": "string",
+			"description": "Unit of secondary peak test amplitude (in terms of alternative ground motion intensity or building response parameter)",
+		},
+		"ds_rank": {
+			"type": "integer",
+			"description": "Damage state rank provided by the investigator (e.g., first, second, third sequencial damage state observed). Empty if none provided by the investigator.",
+		},
+		"ds_class": {
+			"type": "string",
+			"description": "Classification of observed damage into one of the three categories: <'No damage', 'Inconsequential', 'Consequential'>. Where damage is unclear, select 'Unknown'.",
+		},
+		"notes": {
+			"type": "string",
+			"description": "General open field for dcoumentation by reviewer.",
+		}
+	}
+}
