@@ -26,14 +26,14 @@ The following section provides a detailed description of several data attributes
 
 #### Component Subcategorization Hierarchy
 To categorize building components, we rely on the UNIFORMAT II element classification system (NISTIR 6389). However, this system only classifies nonstructural components at a high level, and further detail is needed to adequately separate different types of components within each category for the purpose of assessing building performance.  Therefore, we propose a new subcategorization hierarchy consisting of four nested component attributes:
--	**Layer 1: Component Subtype** - Describes the major subgrouping of components within the NISTIR class. Can separate full system tests from individual components tests, or major types of components like full height from partial height walls. 
--	**Layer 2: Connection Detail** – Describes the specific type of installation or connection type of the component, such as perimeter-fixed vs back-braced ceilings.
--	**Layer 3: Material Class** – Describes a general grouping of components based on material, i.e., light weight vs heavy weight ceiling tiles or CPVC vs iron sprinkler pipes.
--	**Layer 4: Size Class** - Describes a general grouping of components based on size, i.e., large gridded area of ceiling tiles or specific equipment size.
+-	**Child Attribute 1: Component Subtype** - Describes the major subgrouping of components within the NISTIR class. Can separate full system tests from individual components tests, or major types of components like full height from partial height walls. 
+-	**Child Attribute 2: Connection Detail** – Describes the specific type of installation or connection type of the component, such as perimeter-fixed vs back-braced ceilings.
+-	**Child Attribute 3: Material Class** – Describes a general grouping of components based on material, i.e., light weight vs heavy weight ceiling tiles or CPVC vs iron sprinkler pipes.
+-	**Child Attribute 4: Size Class** - Describes a general grouping of components based on size, i.e., large gridded area of ceiling tiles or specific equipment size.
 
-![image](https://github.com/user-attachments/assets/ed66e51b-b4ed-4e45-9cf5-e4626c9a183a)
+![image](https://github.com/user-attachments/assets/5f4af1ad-7a57-41d7-97ce-d86d7de96565)
 
-The purpose of the component subcategorization is to provide further structured detail to end users who use the collected data for fragility development. When populating data attributes, not all subcategorization layers need to be assigned if they are not applicable. Also, consistent naming, case, and spelling schemes should be used when populating subcategorization attributes. Reviewers should review the Sweets MasterFormat construction products database to familiarize themselves with general component taxonomy and terminology prior to developing subcategorization hierarchies for particular component types.
+The purpose of the component subcategorization is to provide further structured detail to end users who use the collected data for fragility development. Each child attribute is only nested under the parent component category attribute; no explicit hierachy exists between child attribites and not all subcategorization layers need to be assigned if they are not applicable. Cnsistent naming, case, and spelling schemes should be used when populating subcategorization attributes. Reviewers should review the Sweets MasterFormat construction products database to familiarize themselves with general component taxonomy and terminology prior to developing subcategorization hierarchies for particular component types.
 
 #### DS Class
 To provide a structured detail of observed damage attributes, we propose a DS Class attribute consisting of the possible mutually exclusive classifications: 
