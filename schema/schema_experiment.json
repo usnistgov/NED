@@ -14,6 +14,10 @@
 			"type": "string",
 			"description": "Name of tested specimen, as noted by the author(s) in the reference document.",
 		},
+		"specimen_inspection_sequence": {
+			"type": "integer",
+			"description": "Test number of a particular specimen. Documented as the sequence intenger of repeated test, i.e., this field would read '5', if this is the fifth test and inpsection of this particular specimen",
+		},
 		"reviewer": {
 			"type": "string",
 			"description": "individual or institution repsonsible for documenting this particular observation of experimental data in the database.",
@@ -21,6 +25,10 @@
 		"nistir_id": {
 			"type": "foreign key",
 			"description": "Unique identifier for a particular NISTIR category in db_nistir.csv.",
+		},
+		"p58_db": {
+			"type": "boolean",
+			"description": "TRUE if this particular test was used to develop FEMA P-58 fragilities. FALSE otherwise.",
 		},
 		"p58_fragility": {
 			"type": "string",
@@ -34,11 +42,11 @@
 			"type": "string",
 			"description": "Describes the major subgrouping of components within the NISTIR class. Can separate full system tests from individual components tests, or major types of components like full height from partial height walls.",
 		},
-		"connection_detail": {
+		"detailing": {
 			"type": "string",
 			"description": "Describes the specific type of installation or connection type of the component, such as perimeter-fixed vs back-braced ceilings.",
 		},
-		"material_class": {
+		"material": {
 			"type": "string",
 			"description": "Describes a general grouping of components based on material, i.e., light weight vs heavy weight ceiling tiles or CPVC vs iron sprinkler pipes.",
 		},
@@ -74,33 +82,41 @@
 			"type": "string",
 			"description": "General description of the damage observed, if any, under this test.",
 		},
-		"proir_damage": {
+		"prior_damage": {
 			"type": "string",
 			"description": "Description of any prior damage that was noted during a previous test of this specimen. Should also describe if and how the specimen was repaired prior to this test. Empty if no prior damage was noted.",
 		},
-		"is_repaired": {
+		"prior_damage_repaired": {
 			"type": "boolean",
 			"description": "TRUE if prior damage was noted and repaired prior to this test. FALSE if prior damage was noted and not repiared.",
 		},
-		"ds_intensity": {
+		"edp_metric": {
+			"type": "string",
+			"description": "Metric of measure for the peak test amplitude at the onset of observed damage. Typically recorded in terms of building response or ground motion intensty measures that show the best correlation with damage to the component. Where possible, metrics should select from exising metrics used in other entries",
+		},
+		"edp_unit": {
+			"type": "string",
+			"description": "Unit of the EDP metric recorded for this test. Where possible, metrics should select from exising metrics used in other entries.",
+		},
+		"edp_value": {
 			"type": "number",
 			"description": "Peak test amplitude at the onset of observed damage.",
 		},
-		"ds_intensity_unit": {
+		"alt_edp_metric": {
 			"type": "string",
-			"description": "Unit of peak test amplitude at the onset of observed damage. Typically recorded in terms of building response or ground motion intensty measures that show the best correlation with damage to the component. Where applicable, one of the following seven units should be selected: <'Story Drift Ratio', 'Story Drift Ratio, bi-directional', 'Peak Floor Acceleration, Horizontal (g)', 'Peak Floor Acceleration, Vertical (g)'>. For other metrics that don’t fit in these bins, provide an in kind unit name (metric followed by unit in paranthesis, e.g., 'Force, compression (kips)').",
+			"description": "Secondary metric of measure for the peak test amplitude at the onset of observed damage.",
 		},
-		"ds_intensity_alt": {
+		"alt_edp_unit": {
+			"type": "string",
+			"description": "Unit of the secondary EDP metric (alt_edp_metric) recorded for this test.",
+		},
+		"alt_edp_value": {
 			"type": "number",
-			"description": "Secondary peak test amplitude (in terms of alternative ground motion intensity or building response parameter)",
-		},
-		"ds_intensity_unit_alt": {
-			"type": "string",
-			"description": "Unit of secondary peak test amplitude (in terms of alternative ground motion intensity or building response parameter)",
+			"description": "Peak test amplitude at the onset of observed damage of the secondary EDP metric (alt_edp_metric).",
 		},
 		"ds_rank": {
 			"type": "integer",
-			"description": "Damage state rank provided by the investigator (e.g., first, second, third sequencial damage state observed). Empty if none provided by the investigator.",
+			"description": "Damage state rank provided by the original investigator (e.g., first, second, third sequencial damage state observed). Empty if none provided by the investigator.",
 		},
 		"ds_class": {
 			"type": "string",

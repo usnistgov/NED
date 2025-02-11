@@ -26,14 +26,12 @@ RAH-2014-SYS,Seismic Response of Ceiling/Piping/Partition Systems in NEESR-GC Sy
 RES-2011-PER,Performance Characteristics of Light Gage Steel Stud Partition Walls,"Restrepo, Bersofsky",2011,Experiment,Partition Walls,https://doi.org/10.1016/j.tws.2010.10.001,'',Unknown,True
 RYA-2015-SEI,Seismic Simulation of an Integrated Ceiling-Partition Wall-Piping System at E-Defense. I: Three-Dimensional Structural Response and Base Isolation,Ryan,2015,Experiment,Ceiling and Fire Sprinker assemblies,http://doi.org/10.1061/(ASCE)ST.1943-541X.0001384,'',Unknown,True
 RYU-2019-EXP,Experimental Study of Large Area Suspended Ceilings,Ryu et al.,2019,Experiment,Suspended Ceilings,https://doi.org/10.1080/13632469.2017.1342294,'',Journal Article,True
-SOR-2018-FRA,Fragility Analysis of Suspended Ceiling Systems in a Full-Scale Experiment,Soroushian et al.,2018,Experiment,Suspended Ceiling Systems,https://doi.org/10.1061/(ASCE)ST.1943-541X.0002273,'',Journal Article,True
 SUN-2021-SEI,Seismic behavior of riser pipes with pressure and groove joints using an in-plane cyclic loading test,"Sung-Wan Kim, Bub-Gyu Jeon, Seong-Woo Ahn, Sung-Woo Wi",2021,Experiment,Fire Sprinkler,https://doi.org/10.1016/j.jobe.2020.101911,'',Unknown,True
 TAO-2019-EXP,Experiments and Fragility Analyses of Piping Systems Connected by Grooved Fit Joints With Large Deformability,"Tao Wang, Qingxue Shang, Xi Chen, Jichao Li",2019,Experiment,Fire Sprinkler,https://doi.org/10.3389/fbuil.2019.00049,'',Unknown,True
 TAS-2014-DAM,Damage Mitigation Strategies for Non-Structural Infill Walls (PhD Thesis),Tasligedik et al.,2014,Experiment,"Partition Walls, Infill Walls",http://doi.org/10.26021/3160,'',Unknown,True
 TAT-2018-INP,"In‐plane quasi‐static cyclic tests of nonstructural
 lightweight steel drywall partitions for seismic performance
 evaluation",Pali et al. ,2018,Experiment,Internal partition walls,https://doi.org/10.1002/eqe.3031 ,'',Journal article,True
-WAN-2016-SHA,Shake table testing of an elevator system in a full-scale five-story building,Wang et al.,2016,Experiment,Elevators,https://doi.org/10.1002/eqe.2793,'',Journal article,True
 YUA-2015-SEI,Seismic Response of Pressurized Fire Sprinkler Piping Systems I: Experimental Study,"Yuan Tian, Andre Filiatrault, and Gilberto Mosqueda",2015,Experiment,Fire Sprinkler,https://doi.org/10.1080/13632469.2014.994147,'',Unknown,True
 ZHE-2016-EXP,EXPERIMENTAL STUDIES OF A TYPICAL SPRINKLER PIPING SYSTEM IN HOSPITALS,"Zhen-Tu Lin, Fan-RU Lin, Juin-Fu Chai, Kuo-Chun Chang",2016,Experiment,Fire Sprinkler,https://doi.org/10.5459/bnzsee.49.1.1-12,'',Unknown,True
 BAO-2017-SHA,Shaking Table Tests of the Cable Tray System in Nuclear Power Plants,Baofeng Huang et al.,2017,Experiment,cable trays,https://doi.org/10.1061/(ASCE)CF.1943-5509.0001009,'',Journal Article,True
