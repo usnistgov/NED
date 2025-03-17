@@ -72,7 +72,7 @@
 		},
 		"design_objective": {
 			"type": "string",
-			"description": "General description of the performance level to which the specimen was designed, e.g., following a certain code, or meeting a certain damage objective under a specific loading condition.",
+			"description": "General description of the standard or performance level to which the specimen was designed, e.g., following a certain code, or meeting a certain damage objective under a specific loading condition.",
 		},
 		"comp_description": {
 			"type": "string",
