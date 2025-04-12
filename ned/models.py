@@ -55,8 +55,8 @@ class Experiment(models.Model):
         "Nistir",
         on_delete=models.PROTECT,
         )
-    p58_db = models.BooleanField(_("from FEMA P-58 database"), default=False)
     p58_fragility = models.CharField(_("FEMA P-58 fragility id"), max_length=50, blank=True)
+    fragility_id = models.CharField(_("Fragility Identifier Foriegn Key"), max_length=50, blank=True)
     comp_type = models.CharField(_("component type"), max_length=255)
     sub_type = models.CharField(_("component sub-type"), max_length=255, blank=True)
     detailing = models.CharField(_("connection detail"), max_length=255, blank=True)
@@ -136,6 +136,7 @@ class Fragility(models.Model):
         CUSTOM = 'Custom'
 
     id = models.CharField(_("id"), primary_key=True, max_length=255)
+    group_id = models.CharField(_("group id"), max_length=255)
     reviewer = models.CharField(_("reviewer"), max_length=255)
     source = models.CharField(_("source"), max_length=255)
     basis = models.CharField(_("basis"), 

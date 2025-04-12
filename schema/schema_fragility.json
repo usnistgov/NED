@@ -4,7 +4,11 @@
 	"properties": {
 		"id": {
 			"type": "primary key",
-			"description": "Unique identifier for each fragiliry.",
+			"description": "Unique identifier for each individual fragility curve or damage state.",
+		},
+		"group_id": {
+			"type": "string",
+			"description": "Unique identifier for each fragility group. For example, a FEMA P-58 fragility is a single fragility group (grouping of several fragility curves or damage states into on fragility model based on underlying data of component performance).",
 		},
 		"reviewer": {
 			"type": "string",
@@ -24,7 +28,7 @@
 		},
 		"reference_id": {
 			"type": "foreign key",
-			"description": "Unique identifier for a particular reference in db_reference.csv.",
+			"description": "Unique identifier for a particular reference in db_reference.csv. This reference should be for the original documentation of the fragility model itself, not nesessarily the underlying data (e.g., the experimental test report).",
 		},
 		"p58_fragility": {
 			"type": "string",
