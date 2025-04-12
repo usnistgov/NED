@@ -10,9 +10,10 @@ The goal of this project is to develop a robust and scalable database of fragili
 ![image](https://github.com/user-attachments/assets/bdc7e08a-554e-4cfc-9a85-e0cfb10a2cad)
 
 ## Repository Organization
-- **data** - database tables. Currently implmented as csv tables with attributes defined as column headers.
+- **data** - initial database tables. Currently implemented as csv tables with attributes defined as column headers. Values in these tables are used to populate the initial sql database
 - **scehma** - data schema for each table in the *data* directory. Currenlty implemented as json files that provide the name, datatype, and description of each attribute (column) within each csv data table.
 - **visualization** - Juptyer notebook visualization and data interfacing scripts. Low-code alternative for developing GUI interactions. These scripts are usefull if you want to explore and visualize what data is available within the current database.
+- **ned** - Main ned Django application with custom mangament tools for mangaing the NED database, which is contained in the file `db.sqlite3`.
 
 ### Data Tables
 - **db_experiment.csv** - Database containing observations of damage from experimental tests of nonstructural building components. Each database entry represents a sigle test of a given specimen (e.g., five different tests of a particular partion wall speciment represents five seperate entries in the table).
@@ -46,6 +47,29 @@ To provide a structured detail of observed damage attributes, we propose a DS Cl
 The purpose of the DS Class attributes is to provides a first-pass structured grouping of observed damage to aid in later fragility development. However, we recognize that any grouping of damage states introduced subjectiveness into the process. Therefore, our goal is to implement as little subjectiveness as possible while still providing useful structured data for later users of the database.  This attributes simply acts to separate consequential damage from inconsequential damage. Further separation of consequential damage into multiple damage states is an attribute of the damage state itself and not the initial observation of damage and is therefore up to the fragility developer to refine. 
 
 All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
+
+## Setting up the Django App
+To set up the Djago app to intialize and interact with the sqlite NED database, first set up your virtual environment and then run the commands below to create the sqlite database from the Django model
+```
+python manage.py makemigrations ned
+python manage.py migrate ned
+```
+
+Then run the following commands to intialize the database with data from the csvs in the \data directory:
+```
+python manage.py initialize_db data\nistir.csv Nistir
+python manage.py initialize_db data\reference.csv Reference
+python manage.py initialize_db data\experiment.csv Experiment
+python manage.py initialize_db data\fragility.csv Fragility
+```
+
+### Tip on virtual environment
+For running python locally, I like to use visual studio code with the DB viewer extension, and set up the virtual environment by running the following commands
+```
+-m venv venv         # create a virtual environment called "venv"
+venv\Sripts\activate # activate your virtual environmnet
+pip install Django   # make sure the Django library is installed 
+```
 
 ---
 
