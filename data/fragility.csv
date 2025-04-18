@@ -1,4 +1,4 @@
-id,group_id,reviewer,source,basis,num_observations,reference_id,p58_fragility,nistir_id,comp_type,sub_type,detailing,material,size_class,comp_description,edp_metric,edp_unit,ds_rank,ds_description,median,beta,probability
+id,fragility_group_id,reviewer,source,basis,num_observations,reference_id,p58_fragility,nistir_id,comp_type,sub_type,detailing,material,size_class,comp_description,edp_metric,edp_unit,ds_rank,ds_description,median,beta,probability
 fra1001-1,fra1001,NIST,Literature,Experimental,,TIA-2012-EXP,'',D4011,Fire Sprinkler,'','','','',"Component level- Tee joint- Black Iron with Threaded Joints - Pipe size 6 inches, 40 psi",Joint Rotation,Radians,1,First leakage,0.006,0.204,
 fra1002-1,fra1002,NIST,Literature,Experimental,,TIA-2012-EXP,'',D4011,Fire Sprinkler,'','','','',"Component level- Tee joint- Black Iron with Threaded Joints - Pipe size 4 inches, 40 psi",Joint Rotation,Radians,1,First leakage,0.01,0.216,
 fra1003-1,fra1003,NIST,Literature,Experimental,,TIA-2012-EXP,'',D4011,Fire Sprinkler,'','','','',"Component level- Tee joint- Black Iron with Threaded Joints - Pipe size 2 inches, 40 psi",Joint Rotation,Radians,1,First leakage,0.014,0.094,
