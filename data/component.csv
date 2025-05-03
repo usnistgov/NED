@@ -1,9 +1,9 @@
-id,comp_type,nistir_id
+id,name,nistir_subelement_id
 B2011.A,CFS Exterior walls,B2011
 B2011.B,Light-framed wood exterior walls,B2011
 B2011.C,Precast concrete cladding panels,B2011
 B2012.A,Unreinforced Masonry Parapet,B2012
-B2012.A,Masonry Chimney,B2012
+B2012.B,Masonry Chimney,B2012
 B2022.A,Dry-glazed stick built curtain walls,B2022
 B2022.B,Semi-unitized curtain walls,B2022
 B2022.C,Unitized curtain walls,B2022

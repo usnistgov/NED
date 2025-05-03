@@ -51,20 +51,13 @@ class Experiment(models.Model):
     specimen = models.CharField(_("specimen"), max_length=255, blank=True)
     specimen_inspection_sequence = models.CharField(_("specimen inspection sequence"), max_length=255, blank=True)
     reviewer = models.CharField(_("reviewer"), max_length=50)
-    nistir = models.ForeignKey(
-        "Nistir",
+    component = models.ForeignKey(
+        "Component",
         on_delete=models.PROTECT,
         )
-    p58_fragility = models.CharField(_("FEMA P-58 fragility id"), max_length=50, blank=True)
-    # fragility_id = models.CharField(_("Fragility Identifier Foriegn Key"), max_length=50, blank=True)
-    # fragility_group = models.ManyToManyField(
-    #     "Fragility_group",
-    #     )
-    comp_type = models.CharField(_("component type"), max_length=255)
-    sub_type = models.CharField(_("component sub-type"), max_length=255, blank=True)
-    detailing = models.CharField(_("connection detail"), max_length=255, blank=True)
-    material = models.CharField(_("material classification"), max_length=255, blank=True)
-    size_class = models.CharField(_("size classification"), max_length=255, blank=True)
+    comp_detail = models.CharField(_("component detail tag"), max_length=100)
+    material = models.CharField(_("material classification tag"), max_length=100, blank=True)
+    size_class = models.CharField(_("size classification tag"), max_length=100, blank=True)
     test_type = models.CharField(_("test type"),
         max_length=50,
         choices=testtypeChoices.choices,
@@ -107,7 +100,7 @@ class Experiment(models.Model):
     def __str__(self):
         return self.name
 
-class Fragility(models.Model):
+class FragilityCurve(models.Model):
 
     class basisChoices(models.TextChoices):
         EXPERIMENT = 'Experiment'
@@ -139,8 +132,8 @@ class Fragility(models.Model):
         CUSTOM = 'Custom'
 
     id = models.CharField(_("id"), primary_key=True, max_length=255)
-    fragility_group = models.ForeignKey(
-        "Fragility_group",
+    fragility_model = models.ForeignKey(
+        "FragilityModel",
         on_delete=models.PROTECT,
         )
     reviewer = models.CharField(_("reviewer"), max_length=255)
@@ -155,17 +148,6 @@ class Fragility(models.Model):
         "Reference",
         on_delete=models.PROTECT,
         )
-    p58_fragility = models.CharField(_("FEMA P-58 fragility id"), max_length=50, blank=True)
-    nistir = models.ForeignKey(
-        "Nistir",
-        on_delete=models.PROTECT,
-        )
-    comp_type = models.CharField(_("component type"), max_length=255)
-    sub_type = models.CharField(_("component sub-type"), max_length=255, blank=True)
-    detailing = models.CharField(_("connection detail"), max_length=255, blank=True)
-    material = models.CharField(_("material classification"), max_length=255, blank=True)
-    size_class = models.CharField(_("size classification"), max_length=255, blank=True)
-    comp_description = models.TextField(_("component description"))
     edp_metric = models.CharField(_("edp metric"), 
         choices=edpmetricChoices.choices,
         max_length=255,
@@ -183,29 +165,86 @@ class Fragility(models.Model):
     def __str__(self):
         return self.name
 
-class Fragility_group(models.Model):
+class FragilityModel(models.Model):
 
     id = models.CharField(_("id"), primary_key=True, max_length=255)
-    
+    p58_fragility = models.CharField(_("FEMA P-58 fragility id"), max_length=50, blank=True)
+    component = models.ForeignKey(
+        "Component",
+        on_delete=models.PROTECT,
+        )
+    comp_detail = models.CharField(_("component detail tag"), max_length=100)
+    material = models.CharField(_("material classification tag"), max_length=100, blank=True)
+    size_class = models.CharField(_("size classification tag"), max_length=100, blank=True)
+    comp_description = models.TextField(_("component description"))
     def __str__(self):
         return self.name
     
-class Experiment_fragility_group(models.Model):
+class ExperimentFragilityModelBridge(models.Model):
 
     id = models.CharField(_("id"), primary_key=True, max_length=255)
     experiment = models.ForeignKey(
         "Experiment",
         on_delete=models.PROTECT,
         )
-    fragility_group = models.ForeignKey(
-        "Fragility_group",
+    fragility_model = models.ForeignKey(
+        "FragilityModel",
         on_delete=models.PROTECT,
         )
     
     def __str__(self):
         return self.name
     
-class Nistir(models.Model):
+
+class Component(models.Model):
+
+    id = models.CharField(_("id"), primary_key=True,max_length=5)
+    name = models.CharField(_("component type name"), max_length=255)
+    nistir_subelement = models.ForeignKey(
+        "NistirSubElement",
+        on_delete=models.PROTECT,
+        )
+
+    def __str__(self):
+        return self.id
+
+class NistirSubElement(models.Model):
+
+    id = models.CharField(_("id"), primary_key=True,max_length=5)
+    name = models.CharField(_("sub-element name"), max_length=255)
+    nistir_element = models.ForeignKey(
+        "NistirElement",
+        on_delete=models.PROTECT,
+        )
+
+    def __str__(self):
+        return self.id
+    
+class NistirElement(models.Model):
+
+    id = models.CharField(_("id"), primary_key=True,max_length=5)
+    name = models.CharField(_("element name"), max_length=255)
+    nistir_group = models.ForeignKey(
+        "NistirGroup",
+        on_delete=models.PROTECT,
+    )
+
+    def __str__(self):
+        return self.id
+    
+class NistirGroup(models.Model):
+
+    id = models.CharField(_("id"), primary_key=True,max_length=5)
+    name = models.CharField(_("group name"), max_length=255)
+    nistir_major_group = models.ForeignKey(
+        "NistirMajorGroup",
+        on_delete=models.PROTECT,
+    )
+
+    def __str__(self):
+        return self.id
+
+class NistirMajorGroup(models.Model):
 
     class majorgroupChoices(models.TextChoices):
         A = 'Substructure'
@@ -216,13 +255,7 @@ class Nistir(models.Model):
         F = 'Special Construction & Demolition'
 
     id = models.CharField(_("id"), primary_key=True,max_length=5)
-    sub_element = models.CharField(_("sub-element name"), max_length=255)
-    element_id = models.CharField(_("element id"), max_length=5)
-    element = models.CharField(_("element name"), max_length=255)
-    group_id = models.CharField(_("group id"), max_length=3)
-    group = models.CharField(_("group name"), max_length=50)
-    major_group_id = models.CharField(_("major group id"), max_length=1)
-    major_group = models.CharField(_("major group name"),
+    name = models.CharField(_("major group name"),
         max_length=50,
         choices=majorgroupChoices.choices,
         )
