@@ -1,0 +1,71 @@
+id,name,nistir_subelement_id
+B2011.A,CFS Exterior walls,B2011
+B2011.B,Light-framed wood exterior walls,B2011
+B2011.C,Precast concrete cladding panels,B2011
+B2012.A,Unreinforced Masonry Parapet,B2012
+B2012.B,Masonry Chimney,B2012
+B2022.A,Dry-glazed stick built curtain walls,B2022
+B2022.B,Semi-unitized curtain walls,B2022
+B2022.C,Unitized curtain walls,B2022
+B2023.A,Dry-glazed stick built storefronts,B2023
+B2030.A,Exterior doors - Swinging,B2030
+B2030.B,Exterior doors - Roll-up/Slide-up,B2030
+B3011.A,Concrete tile roof,B3011
+B3011.B,Clay tile roof,B3011
+C1011.A,CFS interior partition,C1011
+C1011.B,Wood light framed interior partition,C1011
+C1011.C,Masonry interior partition walls,C1011
+C1021.A,Interior doors - Swinging,C1021
+C1021.B,Interior doors - Sliding/folding,C1021
+C2011.A,Prefabricated Steel Stairs,C2011
+C2011.B,Precast Concrete Stairs,C2011
+C2011.C,Monolithic Cast in Place concrete Stairs,C2011
+C2011.D,Hybrid Stair (steel stringers and concrete treads),C2011
+C3011.A,Interior Wall Finish,C3011
+C3012.A,Interior Wall Finish,C3012
+C3021.A,Generic Floor Covering,C3021
+C3027.A,Raised access floor,C3027
+C3031.A,Hard mounted ceilings ,C3031
+C3032.A,Suspended ceilings,C3032
+D1011.A,Traction Elevators,D1011
+D1011.B,Hydraulic Elevators,D1011
+D2021.A,Domestic Water Piping - Horizontal Mains and Branches,D2021
+D2022.A,Domestic Water Piping - Horizontal Mains and Branches,D2022
+D2031.A,Sanitary Waste Piping,D2031
+D2091.A,Gas piping - Horizontal Mains and Branches,D2091
+D3031.A,Chiller,D3031
+D3031.B,Cooling Towers,D3031
+D3032.A,Cooling System Direct Expansion Compressor,D3032
+D3041.A,HVAC Ducting,D3041
+D3041.B,HVAC Drop/Diffuser,D3041
+D3041.C,HVAC in-line fan,D3041
+D3041.D,HVAC VAV Box,D3041
+D3042.A,Exhaust Fan,D3042
+D3043.A,Steam piping - Horizontal Mains and Branches,D3043
+D3044.A,HVAC hot water piping - Horizontal Mains and Branches,D3044
+D3045.A,HVAC chilled water piping - Horizontal Mains and Branches,D3045
+D3052.A,Air Handling Unit,D3052
+D3067.A,HVAC Control Panel,D3067
+D4011.A,Fire Sprinkler Water Piping - Horizontal Mains and Branches,D4011
+D4011.B,Fire Sprinkler Drop Standard Threaded Steel,D4011
+D4011.C,Fire sprinkler piping Tee-joint,D4011
+D4011.D,Fire sprinkler piping straight joint,D4011
+D4011.E,Fire sprinkler piping elbow joint,D4011
+D4011.F,Fire sprinkler wire brace,D4011
+D4011.G,Fire sprinkler threaded hanger rods,D4011
+D4011.H,Fire sprinkler structural braces,D4011
+D5011.A,Transformer,D5011
+D5012.A,Motor control center,D5012
+D5012.B,Low Voltage Switchgears,D5012
+D5012.C,Distribution Panel,D5012
+D5012.D,Cable trays,D5012
+D5022.A,Pendant Lighting,D5022
+D5092.A,Battery Rack,D5092
+D5092.B,Battery Charger,D5092
+D5092.C,Diesel Generator,D5092
+E2022.A,Modular Office Work Stations,E2022
+E2022.B,Content on Shelves,E2022
+E2022.C,Electronic Equipment,E2022
+E2022.D,Bookcase,E2022
+E2022.E,Filing cabinet,E2022
+F1012.A,Storage racks,F1012

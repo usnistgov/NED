@@ -1,0 +1,275 @@
+id,name,nistir_element_id
+A1011,Wall Foundations,A1010
+A1012,Column Foundations & Pile Caps,A1010
+A1013,Perimeter Drainage & Insulation,A1010
+A1021,Pile Foundations,A1020
+A1022,Grade Beams,A1020
+A1023,Caissons,A1020
+A1024,Underprinting,A1020
+A1025,Dewatering,A1020
+A1026,Raft Foundations,A1020
+A1027,Pressure Injected Grouting,A1020
+A1029,Other Special Conditions,A1020
+A1031,Standard Slab on Grade,A1030
+A1032,Structural Slab on Grade,A1030
+A1033,Inclined Slab on Grade,A1030
+A1034,"Trenches, Pits & Bases",A1030
+A1035,Under-Slab Drainage & Insulation,A1030
+A2011,Excavation for Basements,A2010
+A2012,Structure Back Fill & Compaction,A2010
+A2013,Shoring,A2010
+A2021,Basement Wall Construction,A2020
+A2022,Moisture Protection,A2020
+A2023,Basement Wall Insulation,A2020
+A2024,Interior Skin,A2020
+B1011,Suspended Basement Floors Construction,B1010
+B1012,Upper Floors Construction,B1010
+B1013,Balcony Floors Construction,B1010
+B1014,Ramps,B1010
+B1015,Exterior Stairs and Fire Escapes,B1010
+B1016,Floor Raceway Systems,B1010
+B1019,Other Floor Construction,B1010
+B1021,Flat Roof Construction,B1020
+B1022,Pitched Roof Construction,B1020
+B1023,Canopies,B1020
+B1029,Other Roof Systems,B1020
+B2011,Exterior Wall Construction,B2010
+B2012,Parapets,B2010
+B2013,"Exterior Louvers, Screens, and Fencing",B2010
+B2014,Exterior Sun Control Devices,B2010
+B2015,Balcony Walls & Handrails,B2010
+B2016,Exterior Soffits,B2010
+B2021,Windows,B2020
+B2022,Curtain Walls,B2020
+B2023,Storefronts,B2020
+B2031,Glazed Doors & Entrances,B2030
+B2032,Solid Exterior Doors,B2030
+B2033,Revolving Doors,B2030
+B2034,Overhead Doors,B2030
+B2039,Other Doors & Entrances,B2030
+B3011,Roof Finishes,B3010
+B3012,Traffic Toppings & Paving Membranes,B3010
+B3013,Roof Insulation & Fill,B3010
+B3014,Flashings & Trim,B3010
+B3015,Roof Eaves and Soffits,B3010
+B3016,Gutters and Downspouts,B3010
+B3021,Glazed Roof Openings,B3020
+B3022,Roof Hatches,B3020
+B3023,Gravity Roof Ventilators,B3020
+C1011,Fixed Partitions,C1010
+C1012,Demountable Partitions,C1010
+C1013,Retractable Partitions,C1010
+C1014,Site Built Toilet Partitions,C1010
+C1015,Site Built Compartments Cubicles,C1010
+C1016,Interior Balustrades and Screens,C1010
+C1017,Interior Windows & Storefronts,C1010
+C1021,Interior Doors,C1020
+C1022,Interior Door Frames,C1020
+C1023,Interior Door Hardware,C1020
+C1024,Interior Door Wall Opening Elements,C1020
+C1025,Interior Door Sidelights & Transoms,C1020
+C1026,Interior Hatches & Access Doors,C1020
+C1027,Door Painting & Decoration,C1020
+C1031,Fabricated Toilet Partitions,C1030
+C1032,Fabricated Compartments & Cubicles,C1030
+C1033,Storage Shelving and Lockers,C1030
+C1034,Ornamental Metals and Handrails,C1030
+C1035,Identifying Devices,C1030
+C1036,Closet Specialties,C1030
+C1037,General Fittings & Misc. Metals,C1030
+C2011,Regular Stairs,C2010
+C2012,Curved Stairs,C2010
+C2013,Spiral Stairs,C2010
+C2014,Stair Handrails and Balustrades,C2010
+C2021,"Stair, Tread, and Landing Finishes",C2020
+C2022,Stair Soffit Finishes,C2020
+C2023,Stair Handrail & Balustrade Finishes,C2020
+C3011,Wall Finishes to Inside Exterior Wall,C3010
+C3012,Wall Finishes to Interior Walls,C3010
+C3013,Column Finishes,C3010
+C3021,Floor Toppings,C3020
+C3022,Traffic Membranes,C3020
+C3023,Hardeners and Sealers,C3020
+C3024,Flooring,C3020
+C3025,Carpeting,C3020
+C3026,"Bases, Curbs and Trim",C3020
+C3027,Access Pedastal Flooring,C3020
+C3031,Ceiling Finishes,C3030
+C3032,Suspended Ceilings,C3030
+C3033,Other Ceilings,C3030
+D1011,Passenger Elevators,D1010
+D1012,Freight Elevators,D1010
+D1013,Lifts,D1010
+D1021,Escalators,D1020
+D1022,Moving Walks,D1020
+D1091,Dumbwaiters,D1090
+D1092,Pneumatic Tube Systems,D1090
+D1093,Hoists & Cranes,D1090
+D1094,Conveyors,D1090
+D1095,Chutes,D1090
+D1096,Turntables,D1090
+D1097,Baggage Handling & Loading Systems,D1090
+D1098,Transportation Systems,D1090
+D2011,Water Closets,D2010
+D2012,Urinals,D2010
+D2013,Lavatories,D2010
+D2014,Sinks,D2010
+D2015,Bathtubs,D2010
+D2016,Wash Fountains,D2010
+D2017,Showers,D2010
+D2018,Drinking Fountains and Coolers,D2010
+D2019,Bidets and Other Plumbing Fixtures,D2010
+D2021,Cold Water Service,D2020
+D2022,Hot Water Service,D2020
+D2023,Domestic Water Supply Equipment,D2020
+D2031,Waste Piping,D2030
+D2032,Vent Piping,D2030
+D2033,Floor Drains,D2030
+D2034,Sanitary Waste Equipment,D2030
+D2035,Pipe Insulation,D2030
+D2041,Pipe & Fittings,D2040
+D2042,Roof Drains,D2040
+D2043,Rainwater Drainage Equipment,D2040
+D2044,Pipe Insulation,D2040
+D2091,Gas Distribution,D2090
+D2092,Acid Waste Systems,D2090
+D2093,Interceptors,D2090
+D2094,Pool Piping and Equipment,D2090
+D2095,Decorative Fountain Piping Devices,D2090
+D2099,Other Piping Systems,D2090
+D3011,Oil Supply System,D3010
+D3012,Gas Supply System,D3010
+D3013,Coal Supply System,D3010
+D3014,Steam Supply System,D3010
+D3015,Hot Water Supply System,D3010
+D3016,Solar Energy System,D3010
+D3017,Wind Energy System,D3010
+D3021,Boilers,D3020
+D3022,Boiler Room Piping & Specialties,D3020
+D3023,Auxiliary Equipment,D3020
+D3024,Insulation,D3020
+D3031,Chilled Water Systems,D3030
+D3032,Direct Expansion Systems,D3030
+D3041,Air Distribution Systems,D3040
+D3042,Exhaust Ventilation Systems,D3040
+D3043,Steam Distribution Systems,D3040
+D3044,Hot Water Distribution,D3040
+D3045,Chilled Water Distribution,D3040
+D3046,Change-over Distribution System,D3040
+D3047,Glycol Distribution Systems,D3040
+D3051,Terminal Self-Contained Units,D3050
+D3052,Package Units,D3050
+D3061,Heating Generating Systems,D3060
+D3062,Cooling Generating Systems,D3060
+D3063,Heating/Cooling Air Handling Units,D3060
+D3064,Exhaust & Ventilating Systems,D3060
+D3065,Hoods and Exhaust Systems,D3060
+D3066,Terminal Devices,D3060
+D3067,Energy Monitoring & Control,D3060
+D3068,Building Automation Systems,D3060
+D3069,Other Controls & Instrumentation,D3060
+D3071,Piping System Testing & Balancing,D3070
+D3072,Air Systems Testing & Balancing,D3070
+D3073,HVAC Commissioning,D3070
+D3079,Other Systems Testing and Balacing,D3070
+D3091,Special Cooling Systems & Devices,D3090
+D3092,Special Humidity Control,D3090
+D3093,Dust & Fume Collectors,D3090
+D3094,Air Curtains,D3090
+D3095,Air Purifiers,D3090
+D3096,Paint Spray Booth Ventilation,D3090
+D3097,General Construction Items (HVAC),D3090
+D4011,Sprinkler Water Supply,D4010
+D4012,Sprinkler Pumping Equipment,D4010
+D4013,Dry Sprinkler System,D4010
+D4021,Standpipe Water Supply,D4020
+D4022,Pumping Equipment,D4020
+D4023,Standpipe Equipment,D4020
+D4024,Fire Hose Equipment,D4020
+D4031,Fire Extinguishers,D4030
+D4032,Fire Extinguisher Cabinets,D4030
+D4091,Carbon Dioxide Systems,D4090
+D4092,Foam Generating Equipment,D4090
+D4093,Clean Agent Systems,D4090
+D4094,Dry Chemical System,D4090
+D4095,Hood & Duct Fire Protection,D4090
+D5011,High Tension Service & Dist.,D5010
+D5012,Low Tension Service & Dist.,D5010
+D5021,Branch Wiring Devices,D5020
+D5022,Lighting Equipment,D5020
+D5031,Public Address & Music Systems,D5030
+D5032,Intercommunication & Paging Syst.,D5030
+D5033,Telephone Systems,D5030
+D5034,Call Systems,D5030
+D5035,Television Systems,D5030
+D5036,Clock and Program Systems,D5030
+D5037,Fire Alarm Systems,D5030
+D5038,Security and Detection Systems,D5030
+D5039,Local Area Networks,D5030
+D5091,Grounding Systems,D5090
+D5092,Emergency Light & Power Systems,D5090
+D5093,Floor Raceway Systems,D5090
+D5094,Other Special Systems & Devices,D5090
+D5095,General Construction Items (Elect.),D5090
+E1011,Security & Vault Equipment,E1010
+E1012,Teller and Service Equipment,E1010
+E1013,Registration Equipment,E1010
+E1014,Checkroom Equipment,E1010
+E1015,Mercantile Equipment,E1010
+E1016,Laundry & Dry Cleaning Equipment,E1010
+E1017,Vending Equipment,E1010
+E1018,Office Equipment,E1010
+E1021,Ecclesiastical Equipment,E1020
+E1022,Library Equipment,E1020
+E1023,Theater & Stage Equipment,E1020
+E1024,Instrumental Equipment,E1020
+E1025,Audio-visual Equipment,E1020
+E1026,Detention Equipment,E1020
+E1027,Laboratory Equipment,E1020
+E1028,Medical Equipment,E1020
+E1029,Other Institutional Equipment,E1020
+E1031,Vehicular Service Equipment,E1030
+E1032,Parking Control Equipment,E1030
+E1033,Loading Dock Equipment,E1030
+E1039,Other Vehicular Equipment,E1030
+E1091,Maintenance Equipment,E1090
+E1092,Solid Waste Handling Equipment,E1090
+E1093,Food Service Equipment,E1090
+E1094,Residential Equipment,E1090
+E1095,Unit Kitchens,E1090
+E1096,Window Washing Equipment,E1090
+E1099,Other Equipment,E1090
+E2011,Fixed Artwork,E2010
+E2012,Fixed Casework,E2010
+E2013,Blinds and Other Window Treatment,E2010
+E2014,Fixed Floor Grilles and Mats,E2010
+E2015,Fixed Multiple Seating,E2010
+E2016,Fixed Interior Landscaping,E2010
+E2021,Movable Artwork,E2020
+E2022,Furniture & Accessories,E2020
+E2023,Movable Rugs and Mats,E2020
+E2024,Movable Interior Landscaping,E2020
+F1011,Air Supported Structures,F1010
+F1012,Pre-engineered Structures,F1010
+F1013,Other Special Structures,F1010
+F1021,Integrated Assemblies,F1020
+F1022,Special Purpose Rooms,F1020
+F1023,Other Integrated Construction,F1020
+F1031,"Sound, Vibration & Seismic Const.",F1030
+F1032,Radiation Protection,F1030
+F1033,Special Security Systems,F1030
+F1034,Vaults,F1030
+F1039,Other Special Construction Systems,F1030
+F1041,Aquatic Facilities,F1040
+F1042,Ice Rinks,F1040
+F1043,Site Constructed Incinerators,F1040
+F1044,Kennels & Animal Shelters,F1040
+F1045,Liquid & Gas Storage Tanks,F1040
+F1049,Other Special Facilities,F1040
+F1051,Recording Instrumentation,F1050
+F1052,Building Automation System,F1050
+F1059,Other Special Controls & Instrumentation,F1050
+F2011,Building Interior Demolition,F2010
+F2012,Building Exterior Demolition,F2010
+F2021,Removal of Hazardous Components,F2020
+F2022,Encapsulation of Hazardous Components,F2020

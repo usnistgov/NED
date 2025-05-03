@@ -1,0 +1,1012 @@
+id,fragility_model_id,reviewer,source,basis,num_observations,reference_id,edp_metric,edp_unit,ds_rank,ds_description,median,beta,probability
+fra1001-1,fra1001,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.006,0.204,
+fra1002-1,fra1002,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.01,0.216,
+fra1003-1,fra1003,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.014,0.094,
+fra1004-1,fra1004,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.031,0.146,
+fra1005-1,fra1005,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.04,0.206,
+fra1006-1,fra1006,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.088,0.112,
+fra1007-1,fra1007,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.148,0.031,
+fra1008-1,fra1008,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.153,0.099,
+fra1009-1,fra1009,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.021,0.049,
+fra1010-1,fra1010,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.077,0.17,
+fra1011-1,fra1011,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.079,0.105,
+fra1012-1,fra1012,NIST,Literature,Experimental,,TIA-2012-EXP,Joint Rotation,Radians,1,First leakage,0.059,0.102,
+fra1013-1,fra1013,NIST,Literature,Experimental,,TAO-2019-EXP,Joint Rotation,Radians,1,"Massive Leakage, pressure drops to 0 psi",0.0891,0.2907,
+fra1013-2,fra1013,NIST,Literature,Experimental,,TAO-2019-EXP,Joint Rotation,Radians,2,"Complete damage of the joints, including the resistance
+force dropping to 85% of the peak force, visible cracks, and the pipe pull-out",0.1195,0.2686,
+fra1014-1,fra1014,NIST,Literature,Experimental,,TAO-2019-EXP,Joint Rotation,Radians,1,"Massive Leakage, pressure drops to 0 psi",0.2174,0.2591,
+fra1014-2,fra1014,NIST,Literature,Experimental,,TAO-2019-EXP,Joint Rotation,Radians,2,"Complete damage of the joints, including the resistance
+force dropping to 85% of the peak force, visible cracks, and the pipe pull-out",0.2987,0.2543,
+fra1015-1,fra1015,NIST,Literature,Experimental,,TAO-2019-EXP,Joint Rotation,Radians,1,"Massive Leakage, pressure drops to 0 psi",0.0642,0.3129,
+fra1015-2,fra1015,NIST,Literature,Experimental,,TAO-2019-EXP,Joint Rotation,Radians,2,"Complete damage of the joints, including the resistance
+force dropping to 85% of the peak force, visible cracks, and the pipe pull-out",0.0964,0.3979,
+fra1028-1,fra1028,NIST,Literature,Experimental,,GOO-2004-EXP,"Force, tension",Kips,1,failed at the clamped portion of the cable,1.471,0.154,
+fra1029-1,fra1029,NIST,Literature,Experimental,,GOO-2004-EXP,"Force, tension",Kips,1,Load drops to zero,19.16,0.022,
+fra1030-1,fra1030,NIST,Literature,Experimental,,SOR-2013-ANA,"Force, tension",Kips,1,Load drops to zero,0.596,0.063,
+B2011.001a-1,B2011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Sheathing faster pull through or tear out.  (20% of fasteners.),0.004,0.4,1.0
+B2011.001a-2,B2011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Failure of structural panels.  ,0.0226,0.3,1.0
+B2011.001a-3,B2011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Failure of wall.,0.0267,0.25,1.0
+B2011.001b-1,B2011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Sheathing faster pull through or tear out.  (20% of fasteners.),0.004,0.4,1.0
+B2011.001b-2,B2011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Failure of structural panels.  ,0.0226,0.3,1.0
+B2011.001b-3,B2011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Failure of wall.,0.0267,0.25,1.0
+B2011.011a-1,B2011.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Local buckling of chord studs.,0.0139,0.25,1.0
+B2011.011a-2,B2011.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Failure of many framing members and collapse.,0.0179,0.25,1.0
+B2011.011b-1,B2011.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Local buckling of chord studs.,0.0139,0.25,1.0
+B2011.011b-2,B2011.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Failure of many framing members and collapse.,0.0179,0.25,1.0
+B2011.021a-1,B2011.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Pull out of sheathing fasteners from studs.,0.019,0.25,1.0
+B2011.021a-2,B2011.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Buckling of steel sheathing.  Buckling of framing members.,0.0253,0.25,1.0
+B2011.021b-1,B2011.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Pull out of sheathing fasteners from studs.,0.019,0.25,1.0
+B2011.021b-2,B2011.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Buckling of steel sheathing.  Buckling of framing members.,0.0253,0.25,1.0
+B2011.101-1,B2011.101,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Slight separation of sheathing or nails which come loose.,0.01,0.4,1.0
+B2011.101-2,B2011.101,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Permanent rotation of sheathing, tear out of nails or sheathing.",0.0175,0.4,1.0
+B2011.101-3,B2011.101,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,"Fracture of studs, major sill plate cracking.",0.025,0.4,1.0
+B2011.102-1,B2011.102,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Cracking of stucco.,0.0025,0.44,1.0
+B2011.102-2,B2011.102,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Spalling of stucco, separation of stucco and sheathing from studs. ",0.0052,0.3,1.0
+B2011.102-3,B2011.102,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,"Fracture of studs, major sill plate cracking.",0.0252,0.16,1.0
+B2011.111-1,B2011.111,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Cracking of stucco.,0.0017,0.5,1.0
+B2011.111-2,B2011.111,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Spalling of stucco, separation of stucco and sheathing from studs. ",0.0035,0.4,1.0
+B2011.111-3,B2011.111,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,"Fracture of studs, major sill plate cracking.",0.017,0.4,1.0
+B2011.121-1,B2011.121,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Slight separation of sheathing or nails which come loose.,0.015,0.4,1.0
+B2011.121-2,B2011.121,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Permanent rotation of sheathing, tear out of nails or sheathing.",0.0262,0.19,1.0
+B2011.121-3,B2011.121,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,"Fracture of studs, major sill plate cracking.",0.0369,0.2,1.0
+B2011.131-1,B2011.131,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Failure of diagonal bracing.,0.01,0.4,1.0
+B2011.201a-1,B2011.201a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Cladding units damaged by impact at corners at  column covers.  Damage in field is either attributed to natural edge chipping / damage,  or is deemed to not warrant full repair.  Repair assumes cosmetic chip patching.",,,0.5
+B2011.201a-2,B2011.201a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Cladding units damaged by impact at corners at  column covers.,,,0.5
+B2011.201b-1,B2011.201b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Cladding units damaged by out of plane anchorage failure.  Unit requires replacement.,,,1.0
+B2022.001-1,B2022.001,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0338,0.4,1.0
+B2022.001-2,B2022.001,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0383,0.4,1.0
+B2022.002-1,B2022.002,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.021,0.45,1.0
+B2022.002-2,B2022.002,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.024,0.45,1.0
+B2022.011-1,B2022.011,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.026,0.25,1.0
+B2022.011-2,B2022.011,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.0268,0.25,1.0
+B2022.011-3,B2022.011,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.0339,0.25,1.0
+B2022.021-1,B2022.021,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0156,0.35,1.0
+B2022.021-2,B2022.021,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0561,0.3,1.0
+B2022.022-1,B2022.022,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0392,0.29,1.0
+B2022.022-2,B2022.022,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0434,0.25,1.0
+B2022.023-1,B2022.023,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0347,0.26,1.0
+B2022.023-2,B2022.023,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.04,0.6,1.0
+B2022.031-1,B2022.031,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0138,0.25,1.0
+B2022.031-2,B2022.031,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0219,0.3,1.0
+B2022.032-1,B2022.032,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0088,0.25,1.0
+B2022.032-2,B2022.032,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0108,0.25,1.0
+B2022.033-1,B2022.033,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0084,0.25,1.0
+B2022.033-2,B2022.033,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0107,0.35,1.0
+B2022.034-1,B2022.034,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0147,0.25,1.0
+B2022.034-2,B2022.034,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0164,0.25,1.0
+B2022.035-1,B2022.035,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0181,0.25,1.0
+B2022.035-2,B2022.035,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0212,0.25,1.0
+B2022.036-1,B2022.036,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.022,0.3,1.0
+B2022.036-2,B2022.036,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0257,0.25,1.0
+B2022.037-1,B2022.037,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0288,0.26,1.0
+B2022.037-2,B2022.037,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.04,0.6,1.0
+B2022.038-1,B2022.038,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0273,0.28,1.0
+B2022.038-2,B2022.038,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0286,0.28,1.0
+B2022.039-1,B2022.039,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.027,0.26,1.0
+B2022.039-2,B2022.039,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.029,0.26,1.0
+B2022.040-1,B2022.040,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.02,0.26,1.0
+B2022.040-2,B2022.040,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.023,0.28,1.0
+B2022.041-1,B2022.041,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.024,0.25,1.0
+B2022.041-2,B2022.041,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.027,0.32,1.0
+B2022.051-1,B2022.051,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.043,0.25,1.0
+B2022.051-2,B2022.051,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.05,0.25,1.0
+B2022.052-1,B2022.052,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.042,0.3,1.0
+B2022.052-2,B2022.052,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.052,0.3,1.0
+B2022.053-1,B2022.053,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.029,0.3,1.0
+B2022.053-2,B2022.053,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.039,0.3,1.0
+B2022.054-1,B2022.054,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.033,0.25,1.0
+B2022.054-2,B2022.054,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.043,0.25,1.0
+B2022.061-1,B2022.061,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.024,0.29,1.0
+B2022.061-2,B2022.061,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.025,0.29,1.0
+B2022.071-1,B2022.071,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.027,0.3,1.0
+B2022.071-2,B2022.071,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.0276,0.3,1.0
+B2022.071-3,B2022.071,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.0303,0.3,1.0
+B2022.072-1,B2022.072,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.0262,0.3,1.0
+B2022.072-2,B2022.072,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.0266,0.3,1.0
+B2022.072-3,B2022.072,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.0299,0.3,1.0
+B2022.081-1,B2022.081,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0234,0.3,1.0
+B2022.081-2,B2022.081,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.031,0.3,1.0
+B2022.082-1,B2022.082,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.0142,0.25,1.0
+B2022.082-2,B2022.082,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass falls from frame.,0.0221,0.25,1.0
+B2022.083-1,B2022.083,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.026,0.11,1.0
+B2022.083-2,B2022.083,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.051,0.25,1.0
+B2022.083-3,B2022.083,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.054,0.25,1.0
+B2022.084-1,B2022.084,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.026,0.11,1.0
+B2022.084-2,B2022.084,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.051,0.25,1.0
+B2022.084-3,B2022.084,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.054,0.25,1.0
+B2022.091-1,B2022.091,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.026,0.11,1.0
+B2022.091-2,B2022.091,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.031,0.25,1.0
+B2022.091-3,B2022.091,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.032,0.25,1.0
+B2022.101-1,B2022.101,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.026,0.3,1.0
+B2022.101-2,B2022.101,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.027,0.3,1.0
+B2022.101-3,B2022.101,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.028,0.3,1.0
+B2022.201-1,B2022.201,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.026,0.45,1.0
+B2022.201-2,B2022.201,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.05,0.25,1.0
+B2022.201-3,B2022.201,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.1,0.25,1.0
+B2023.001-1,B2023.001,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.029,0.5,1.0
+B2023.001-2,B2023.001,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.0473,0.25,1.0
+B2023.001-3,B2023.001,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.07,0.25,1.0
+B2023.002-1,B2023.002,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.0423,0.3,1.0
+B2023.002-2,B2023.002,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.059,0.25,1.0
+B2023.002-3,B2023.002,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.0665,0.35,1.0
+B2023.011-1,B2023.011,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.029,0.5,1.0
+B2023.011-2,B2023.011,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.0567,0.3,1.0
+B2023.011-3,B2023.011,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.08,0.3,1.0
+B2023.021-1,B2023.021,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.0303,0.5,1.0
+B2023.021-2,B2023.021,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.0413,0.3,1.0
+B2023.021-3,B2023.021,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.051,0.3,1.0
+B2023.031-1,B2023.031,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.03,1.0,1.0
+B2023.031-2,B2023.031,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Frame Damage,0.052,0.4,1.0
+B2023.032-1,B2023.032,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.042,0.55,1.0
+B2023.032-2,B2023.032,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Frame Damage,0.05,1.0,1.0
+B2023.033-1,B2023.033,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.03,1.0,1.0
+B2023.033-2,B2023.033,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Frame Damage,0.05,0.4,1.0
+B2023.034-1,B2023.034,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Glass cracking.,0.036,0.75,1.0
+B2023.034-2,B2023.034,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Frame Damage,0.05,1.0,1.0
+B2023.041-1,B2023.041,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Gasket seal failure.,0.0423,0.3,1.0
+B2023.041-2,B2023.041,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracking.,0.059,0.25,1.0
+B2023.041-3,B2023.041,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Glass falls out.,0.0665,0.25,1.0
+B2023.051-1,B2023.051,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Panel damage (no glass damage).,0.05,0.29,1.0
+B2023.051-2,B2023.051,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracks.,0.16,1.0,1.0
+B2023.052-1,B2023.052,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Panel damage (no glass damage).,0.054,0.28,1.0
+B2023.052-2,B2023.052,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracks.,0.16,1.0,1.0
+B2023.053-1,B2023.053,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Panel damage (no glass damage).,0.05,0.28,1.0
+B2023.053-2,B2023.053,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracks.,0.16,1.0,1.0
+B2023.054-1,B2023.054,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Panel damage (no glass damage).,0.1,0.32,1.0
+B2023.054-2,B2023.054,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracks.,0.11,0.32,1.0
+B2023.055-1,B2023.055,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Panel damage (no glass damage).,0.055,0.29,1.0
+B2023.055-2,B2023.055,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracks.,0.1,0.32,1.0
+B2023.056-1,B2023.056,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Panel damage (no glass damage).,0.055,0.32,1.0
+B2023.056-2,B2023.056,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracks.,0.1,0.32,1.0
+B2023.057-1,B2023.057,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Panel damage (no glass damage).,0.055,0.32,1.0
+B2023.057-2,B2023.057,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracks.,0.1,0.32,1.0
+B2023.058-1,B2023.058,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Panel damage (no glass damage).,0.09,1.0,1.0
+B2023.058-2,B2023.058,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Glass cracks.,0.1,0.32,1.0
+B3011.011-1,B3011.011,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor damage; tiles dislodged.,1.1,0.4,1.0
+B3011.011-2,B3011.011,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Major portion of tile dislodged.,1.4,0.4,1.0
+B3011.012-1,B3011.012,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor damage; tiles dislodged.,1.4,0.3,1.0
+B3011.012-2,B3011.012,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Major portion of tile dislodged.,1.7,0.3,1.0
+B3011.013-1,B3011.013,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor damage; tiles dislodged.,0.5,0.4,1.0
+B3011.013-2,B3011.013,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Major portion of tile dislodged.,0.7,0.4,1.0
+B3011.014-1,B3011.014,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor damage; tiles dislodged.,0.4,0.3,1.0
+B3011.014-2,B3011.014,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Major portion of tile dislodged.,0.5,0.3,1.0
+B3031.001a-1,B3031.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Cracking with offset > 1/16""",0.35,0.6,1.0
+B3031.001a-2,B3031.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Toppling of all or a portion of the chimney.,0.5,0.6,1.0
+B3031.001b-1,B3031.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Cracking with offset > 1/16""",0.35,0.6,1.0
+B3031.001b-2,B3031.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Toppling of all or a portion of the chimney.,0.5,0.6,1.0
+B3031.001c-1,B3031.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Cracking with offset > 1/16""",0.35,0.6,1.0
+B3031.001c-2,B3031.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Toppling of all or a portion of the chimney.,0.5,0.6,1.0
+B3031.002a-1,B3031.002a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Cracking with offset > 1/16""",0.35,0.6,1.0
+B3031.002a-2,B3031.002a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Toppling of all or a portion of the chimney.,0.5,0.6,1.0
+B3031.002b-1,B3031.002b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Cracking with offset > 1/16""",0.35,0.6,1.0
+B3031.002b-2,B3031.002b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Toppling of all or a portion of the chimney.,0.5,0.6,1.0
+B3031.002c-1,B3031.002c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Cracking with offset > 1/16""",0.35,0.6,1.0
+B3031.002c-2,B3031.002c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Toppling of all or a portion of the chimney.,0.5,0.6,1.0
+B3041.001-1,B3041.001,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Cracking with offset > 1/16""",0.2,0.6,1.0
+B3041.001-2,B3041.001,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Toppling of all or portion of parapet.,0.4,0.6,1.0
+C1011.001a-1,C1011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Screw pop-out, cracking of wall board, warping or cracking of tape, slight crushing of wall panel at corners.",0.005,0.4,1.0
+C1011.001a-2,C1011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Moderate cracking or crushing of gypsum wall boards (typically in corners).  Moderate corner gap openings, bending of boundary studs.",0.01,0.3,1.0
+C1011.001a-3,C1011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,"Buckling of studs and tearing of tracks.  Tearing or bending of top track, tearing at corners with transverse walls, large gap openings, walls displaced.",0.021,0.2,1.0
+C1011.001b-1,C1011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Screw pop-out, cracking of wall board, warping or cracking of tape, slight crushing of wall panel at corners.",0.01,0.3,1.0
+C1011.001b-2,C1011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Moderate cracking or crushing of gypsum wall boards (typically in corners).  Moderate corner gap openings, bending of boundary studs.",0.013,0.3,1.0
+C1011.001b-3,C1011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,"Buckling of studs and tearing of tracks.  Tearing or bending of top track, tearing at corners with transverse walls, large gap openings, walls displaced.",0.018,0.3,1.0
+C1011.001c-1,C1011.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Screw pop-out, cracking of wall board, warping or cracking of tape, slight crushing of wall panel at corners.",0.004,0.45,1.0
+C1011.001c-2,C1011.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Moderate cracking or crushing of gypsum wall boards (typically in corners).  Moderate corner gap openings, bending of boundary studs.",0.011,0.35,1.0
+C1011.001c-3,C1011.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,"Buckling of studs and tearing of tracks.  Tearing or bending of top track, tearing at corners with transverse walls, large gap openings, walls displaced.",0.019,0.25,1.0
+C1011.001d-1,C1011.001d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Screw pop-out, cracking of wall board, warping or cracking of tape, slight crushing of wall panel at corners.",0.0035,0.6,1.0
+C1011.001d-2,C1011.001d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Moderate cracking or crushing of gypsum wall boards (typically in corners).  Moderate corner gap openings, bending of boundary studs.",0.0095,0.45,1.0
+C1011.011a-1,C1011.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Cracking of paint over fasteners or joints.,0.0021,0.6,1.0
+C1011.011a-2,C1011.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Local and global buckling out-of-plane and crushing of gypsum wallboards.  Studs are typically not damaged by failure of the gypsum wallboard.,0.0071,0.45,0.8
+C1011.011a-3,C1011.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Local and global buckling out-of-plane and crushing of gypsum wallboards.  Studs are typically not damaged by failure of the gypsum wallboard.,0.0071,0.45,0.2
+C2011.001a-1,C2011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Non structural damage, local steel yielding.",,,1.0
+C2011.001a-2,C2011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Structural damage but live load capacity remains intact.  Buckling of steel, weld cracking.",,,1.0
+C2011.001a-3,C2011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Loss of live load capacity.  Connection and or weld fracture.,,,1.0
+C2011.001b-1,C2011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Non structural damage, local steel yielding.",0.005,0.6,1.0
+C2011.001b-2,C2011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Buckling of steel, weld cracking.",0.017,0.6,1.0
+C2011.001b-3,C2011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Loss of live load capacity.  Connection and or weld fracture.,0.028,0.45,1.0
+C2011.011a-1,C2011.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Non structural damage, local concrete cracking, localized concrete spalling, localized rebar yielding.",,,1.0
+C2011.011a-2,C2011.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Structural damage but live load capacity remains intact.  Extensive concrete cracking, concrete crushing, buckling of rebar.",,,1.0
+C2011.011a-3,C2011.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,"Loss of live load capacity.  Extensive concrete crushing, connection failure.",,,1.0
+C2011.011b-1,C2011.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Non structural damage, local concrete cracking, localized concrete spalling, localized rebar yielding.",0.005,0.6,1.0
+C2011.011b-2,C2011.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Structural damage but live load capacity remains intact.  Extensive concrete cracking, concrete crushing, buckling of rebar.",0.017,0.6,1.0
+C2011.011b-3,C2011.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,"Loss of live load capacity.  Extensive concrete crushing, connection failure.",0.028,0.45,1.0
+C2011.021a-1,C2011.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Local concrete cracking, localized concrete spalling",,,1.0
+C2011.021a-2,C2011.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Extensive concrete cracking, concrete crushing",,,1.0
+C2011.021a-3,C2011.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Loss of live load capacity.  ,,,1.0
+C2011.021b-1,C2011.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Local concrete cracking, localized concrete spalling",,,1.0
+C2011.021b-2,C2011.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Extensive concrete cracking, concrete crushing",,,1.0
+C2011.021b-3,C2011.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Loss of live load capacity.  ,,,1.0
+C2011.021c-1,C2011.021c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Local concrete cracking, localized concrete spalling",,,1.0
+C2011.021c-2,C2011.021c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Extensive concrete cracking, concrete crushing",,,1.0
+C2011.021c-3,C2011.021c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Loss of live load capacity.  ,,,1.0
+C2011.021d-1,C2011.021d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,"Local concrete cracking, localized concrete spalling",,,1.0
+C2011.021d-2,C2011.021d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Extensive concrete cracking, concrete crushing",,,1.0
+C2011.021d-3,C2011.021d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Loss of live load capacity.  ,,,1.0
+C2011.031a-1,C2011.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Localized steel yielding.,,,1.0
+C2011.031a-2,C2011.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Buckling of steel, weld cracking.",,,1.0
+C2011.031a-3,C2011.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Loss of live load capacity.  ,,,1.0
+C2011.031b-1,C2011.031b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Localized steel yielding.,0.005,0.6,1.0
+C2011.031b-2,C2011.031b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,"Buckling of steel, weld cracking.",0.017,0.6,1.0
+C2011.031b-3,C2011.031b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,3,Loss of live load capacity.  ,0.028,0.45,1.0
+C3011.001a-1,C3011.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Wall paper warped and torn.,0.0021,0.6,1.0
+C3011.001b-1,C3011.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Wall paper warped and torn.,0.0064,0.3,1.0
+C3011.001c-1,C3011.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Wall paper warped and torn.,0.002,0.7,1.0
+C3011.001d-1,C3011.001d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Wall paper warped and torn.,0.0035,0.7,1.0
+C3011.002a-1,C3011.002a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Minor cracked joints and tile.,0.0021,0.6,1.0
+C3011.002a-2,C3011.002a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Cracked joints and tile.,0.0071,0.45,1.0
+C3011.002b-1,C3011.002b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Minor cracked joints and tile.,0.0064,0.3,1.0
+C3011.002b-2,C3011.002b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Cracked joints and tile.,0.011,0.3,1.0
+C3011.002c-1,C3011.002c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Minor cracked joints and tile.,0.002,0.7,1.0
+C3011.002c-2,C3011.002c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Cracked joints and tile.,0.005,0.4,1.0
+C3011.002d-1,C3011.002d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,Minor cracked joints and tile.,0.0035,0.7,1.0
+C3011.002d-2,C3011.002d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,Cracked joints and tile.,0.0093,0.45,1.0
+C3011.003a-1,C3011.003a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,minor cracked joints and minor cracks in marble / wood paneling.,0.0021,0.6,1.0
+C3011.003a-2,C3011.003a,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,significant cracks in marble / wood paneling.,0.0071,0.45,1.0
+C3011.003b-1,C3011.003b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,minor cracked joints and minor cracks in marble / wood paneling.,0.0064,0.3,1.0
+C3011.003b-2,C3011.003b,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,significant cracks in marble / wood paneling.,0.011,0.3,1.0
+C3011.003c-1,C3011.003c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,minor cracked joints and minor cracks in marble / wood paneling.,0.002,0.7,1.0
+C3011.003c-2,C3011.003c,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,significant cracks in marble / wood paneling.,0.005,0.4,1.0
+C3011.003d-1,C3011.003d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,1,minor cracked joints and minor cracks in marble / wood paneling.,0.0035,0.7,1.0
+C3011.003d-2,C3011.003d,NIST,FEMA P-58,'',,FEM-2018-SEI,Story Drift Ratio,Ratio,2,significant cracks in marble / wood paneling.,0.0093,0.45,1.0
+C3021.001a-1,C3021.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.  ,,,1.0
+C3021.001b-1,C3021.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001c-1,C3021.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001d-1,C3021.001d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001e-1,C3021.001e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001f-1,C3021.001f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001g-1,C3021.001g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001h-1,C3021.001h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001i-1,C3021.001i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001j-1,C3021.001j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001k-1,C3021.001k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001l-1,C3021.001l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001m-1,C3021.001m,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001n-1,C3021.001n,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001o-1,C3021.001o,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3021.001p-1,C3021.001p,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Flooding of all or a portion of the total floor associated with a major leakage of a pipe.,,,1.0
+C3027.001-1,C3027.001,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor damage to the flooring system.  Damage to the equipment of the flooring system.,0.5,0.5,1.0
+C3027.002-1,C3027.002,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor damage to the flooring system.  Damage to the equipment of the flooring system.,1.5,0.4,1.0
+C3032.001a-1,C3032.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.17,0.25,1.0
+C3032.001a-2,C3032.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,1.58,0.25,1.0
+C3032.001a-3,C3032.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,1.82,0.25,1.0
+C3032.001b-1,C3032.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.01,0.25,1.0
+C3032.001b-2,C3032.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,1.45,0.25,1.0
+C3032.001b-3,C3032.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,1.69,0.25,1.0
+C3032.001c-1,C3032.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,0.7,0.25,1.0
+C3032.001c-2,C3032.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,1.2,0.25,1.0
+C3032.001c-3,C3032.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,1.43,0.25,1.0
+C3032.001d-1,C3032.001d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,0.56,0.25,1.0
+C3032.001d-2,C3032.001d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,1.08,0.25,1.0
+C3032.001d-3,C3032.001d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,1.31,0.25,1.0
+C3032.003a-1,C3032.003a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.6,0.3,1.0
+C3032.003a-2,C3032.003a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,1.95,0.3,1.0
+C3032.003a-3,C3032.003a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,2.07,0.3,1.0
+C3032.003b-1,C3032.003b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.47,0.3,1.0
+C3032.003b-2,C3032.003b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,1.88,0.3,1.0
+C3032.003b-3,C3032.003b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,2.03,0.3,1.0
+C3032.003c-1,C3032.003c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.21,0.3,1.0
+C3032.003c-2,C3032.003c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,1.75,0.3,1.0
+C3032.003c-3,C3032.003c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,1.95,0.3,1.0
+C3032.003d-1,C3032.003d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.09,0.3,1.0
+C3032.003d-2,C3032.003d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,1.69,0.3,1.0
+C3032.003d-3,C3032.003d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,1.91,0.3,1.0
+C3032.004a-1,C3032.004a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.92,0.3,1.0
+C3032.004a-2,C3032.004a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,2.34,0.3,1.0
+C3032.004a-3,C3032.004a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,2.48,0.3,1.0
+C3032.004b-1,C3032.004b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.76,0.3,1.0
+C3032.004b-2,C3032.004b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,2.26,0.3,1.0
+C3032.004b-3,C3032.004b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,2.44,0.3,1.0
+C3032.004c-1,C3032.004c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.45,0.3,1.0
+C3032.004c-2,C3032.004c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,2.1,0.3,1.0
+C3032.004c-3,C3032.004c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,2.34,0.3,1.0
+C3032.004d-1,C3032.004d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,5 % of ceiling grid and tile damage.  ,1.31,0.3,1.0
+C3032.004d-2,C3032.004d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,30% of ceiling grid and tile damage.,2.03,0.3,1.0
+C3032.004d-3,C3032.004d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,50% of ceiling grid and tile damage.,2.29,0.3,1.0
+C3034.001-1,C3034.001,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Disassembly of rod system at connections with horizontal light fixture, low cycle fatigue failure of the threaded rod, pullout of rods from ceiling assembly.",0.6,0.4,1.0
+C3034.002-1,C3034.002,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Disassembly of rod system at connections with horizontal light fixture, low cycle fatigue failure of the threaded rod, pullout of rods from ceiling assembly.",1.5,0.4,1.0
+D1014.011-1,D1014.011,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Controller anchorage failed, and or machine anchorage failed, and or motor generator anchorage failed, and or governor anchorage failed, and or rope guard failures.",0.39,0.45,0.26
+D1014.011-2,D1014.011,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Rail distortion, and or intermediate bracket separate and spread, and or counterweight bracket break or bend, and or car bracket break or bend, and or car guide shoes damaged, and or counterweight guide shoes damaged, and or counterweight frame distortion, and or tail sheave dislodged and/or twisted",0.39,0.45,0.79
+D1014.011-3,D1014.011,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Cab stabilizers bent, or cab walls damaged, or cab doors damaged.",0.39,0.45,0.68
+D1014.011-4,D1014.011,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Cab ceiling damaged.,0.39,0.45,0.17
+D1014.012-1,D1014.012,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Controller anchorage failed, and or machine anchorage failed, and or motor generator anchorage failed, and or governor anchorage failed, and or rope guard failures.",0.31,0.45,0.26
+D1014.012-2,D1014.012,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Rail distortion, and or intermediate bracket separate and spread, and or counterweight bracket break or bend, and or car bracket break or bend, and or car guide shoes damaged, and or counterweight guide shoes damaged, and or counterweight frame distortion, and or tail sheave dislodged and/or twisted",0.31,0.45,0.79
+D1014.012-3,D1014.012,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Cab stabilizers bent, or cab walls damaged, or cab doors damaged.",0.31,0.45,0.68
+D1014.012-4,D1014.012,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Cab ceiling damaged.,0.31,0.45,0.17
+D1014.021-1,D1014.021,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged controls.,0.5,0.3,0.3
+D1014.021-2,D1014.021,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged vane and hoist-way switches, and or bent cab stabilizers, and or damaged car guide shoes.",0.5,0.3,0.49
+D1014.021-3,D1014.021,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged entrance and car door, and or flooring damage.",0.5,0.3,0.44
+D1014.021-4,D1014.021,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Oil leak in hydraulic line, and or hydraulic tank failure.",0.5,0.3,0.37
+D1014.022-1,D1014.022,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged controls.,0.3,0.3,0.3
+D1014.022-2,D1014.022,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged vane and hoist-way switches, and or bent cab stabilizers, and or damaged car guide shoes.",0.3,0.3,0.49
+D1014.022-3,D1014.022,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged entrance and car door, and or flooring damage.",0.3,0.3,0.44
+D1014.022-4,D1014.022,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Oil leak in hydraulic line, and or hydraulic tank failure.",0.3,0.3,0.37
+D2061.023a-1,D2061.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe.,2.25,0.4,1.0
+D2061.023a-2,D2061.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe,4.1,0.4,1.0
+D2061.023b-1,D2061.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 feet of pipe .,1.5,0.4,1.0
+D2061.023b-2,D2061.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe ,2.25,0.4,1.0
+D2061.024a-1,D2061.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000 feet of pipe.,2.25,0.4,1.0
+D2061.024a-2,D2061.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe,4.1,0.4,1.0
+D2061.024b-1,D2061.024b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 feet of pipe.,1.5,0.4,1.0
+D2061.024b-2,D2061.024b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe ,2.25,0.4,1.0
+D3031.011a-1,D3031.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",0.2,0.4,1.0
+D3031.011b-1,D3031.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",0.2,0.4,1.0
+D3031.011c-1,D3031.011c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",0.2,0.4,1.0
+D3031.011d-1,D3031.011d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",0.2,0.4,1.0
+D3031.012a-1,D3031.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.012a-2,D3031.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.012b-1,D3031.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",0.43,0.6,1.0
+D3031.012c-1,D3031.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.012c-2,D3031.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.012c-3,D3031.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D3031.012d-1,D3031.012d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.012d-2,D3031.012d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.012e-1,D3031.012e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",0.43,0.6,1.0
+D3031.012f-1,D3031.012f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.012f-2,D3031.012f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.012f-3,D3031.012f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D3031.012g-1,D3031.012g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.012g-2,D3031.012g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.012h-1,D3031.012h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",0.43,0.6,1.0
+D3031.012i-1,D3031.012i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.012i-2,D3031.012i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.012i-3,D3031.012i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D3031.012j-1,D3031.012j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.012j-2,D3031.012j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.012k-1,D3031.012k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",0.43,0.6,1.0
+D3031.012l-1,D3031.012l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.012l-2,D3031.012l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.012l-3,D3031.012l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D3031.013a-1,D3031.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.013a-2,D3031.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.013b-1,D3031.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",0.72,0.2,1.0
+D3031.013c-1,D3031.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.013c-2,D3031.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.013c-3,D3031.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D3031.013d-1,D3031.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.013d-2,D3031.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.013e-1,D3031.013e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",0.72,0.2,1.0
+D3031.013f-1,D3031.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.013f-2,D3031.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.013f-3,D3031.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D3031.013g-1,D3031.013g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.013g-2,D3031.013g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.013h-1,D3031.013h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",0.72,0.2,1.0
+D3031.013i-1,D3031.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.013i-2,D3031.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.013i-3,D3031.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D3031.013j-1,D3031.013j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.013j-2,D3031.013j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.013k-1,D3031.013k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",0.72,0.2,1.0
+D3031.013l-1,D3031.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.013l-2,D3031.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.013l-3,D3031.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D3031.021a-1,D3031.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping.,0.5,0.4,1.0
+D3031.021b-1,D3031.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping.,0.5,0.4,1.0
+D3031.021c-1,D3031.021c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping.,0.5,0.4,1.0
+D3031.021d-1,D3031.021d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping.,0.5,0.4,1.0
+D3031.022a-1,D3031.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.022a-2,D3031.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.022b-1,D3031.022b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping but anchorage is OK.,0.97,0.6,1.0
+D3031.022c-1,D3031.022c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.022c-2,D3031.022c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.022c-3,D3031.022c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damaged equipment and attached piping but anchorage OK.,,,0.5
+D3031.022d-1,D3031.022d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.022d-2,D3031.022d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.022e-1,D3031.022e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping but anchorage is OK.,0.97,0.6,1.0
+D3031.022f-1,D3031.022f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.022f-2,D3031.022f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.022f-3,D3031.022f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damaged equipment and attached piping but anchorage OK.,,,0.5
+D3031.022g-1,D3031.022g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.022g-2,D3031.022g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.022h-1,D3031.022h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping but anchorage is OK.,0.97,0.6,1.0
+D3031.022i-1,D3031.022i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.022i-2,D3031.022i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.022i-3,D3031.022i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damaged equipment and attached piping but anchorage OK.,,,0.5
+D3031.022j-1,D3031.022j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.022j-2,D3031.022j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.022k-1,D3031.022k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping but anchorage is OK.,0.97,0.6,1.0
+D3031.022l-1,D3031.022l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.022l-2,D3031.022l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.022l-3,D3031.022l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damaged equipment and attached piping but anchorage OK.,,,0.5
+D3031.023a-1,D3031.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.023a-2,D3031.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.023b-1,D3031.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping but anchorage is OK.,1.52,0.4,1.0
+D3031.023c-1,D3031.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.023c-2,D3031.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.023c-3,D3031.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damaged equipment and attached piping but anchorage OK.,,,0.5
+D3031.023d-1,D3031.023d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.023d-2,D3031.023d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.023e-1,D3031.023e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping but anchorage is OK.,1.52,0.4,1.0
+D3031.023f-1,D3031.023f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.023f-2,D3031.023f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.023f-3,D3031.023f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damaged equipment and attached piping but anchorage OK.,,,0.5
+D3031.023g-1,D3031.023g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.023g-2,D3031.023g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.023h-1,D3031.023h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping but anchorage is OK.,1.52,0.4,1.0
+D3031.023i-1,D3031.023i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.023i-2,D3031.023i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.023i-3,D3031.023i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damaged equipment and attached piping but anchorage OK.,,,0.5
+D3031.023j-1,D3031.023j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3031.023j-2,D3031.023j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3031.023k-1,D3031.023k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Damaged equipment and attached piping but anchorage is OK.,1.52,0.4,1.0
+D3031.023l-1,D3031.023l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3031.023l-2,D3031.023l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3031.023l-3,D3031.023l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damaged equipment and attached piping but anchorage OK.,,,0.5
+D3032.011a-1,D3032.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function. Motor is damaged.,0.25,0.45,0.5
+D3032.011a-2,D3032.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function. Equipment damaged beyond repair.,0.25,0.45,0.5
+D3032.011b-1,D3032.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function. Motor is damaged.,0.25,0.45,0.5
+D3032.011b-2,D3032.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function. Equipment damaged beyond repair.,0.25,0.45,0.5
+D3032.011c-1,D3032.011c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function. Motor is damaged.,0.25,0.45,0.5
+D3032.011c-2,D3032.011c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function. Equipment damaged beyond repair.,0.25,0.45,0.5
+D3032.011d-1,D3032.011d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function. Motor is damaged.,0.25,0.45,0.5
+D3032.011d-2,D3032.011d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function. Equipment damaged beyond repair.,0.25,0.45,0.5
+D3032.012a-1,D3032.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3032.012a-2,D3032.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3032.012b-1,D3032.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Motor is damaged.,0.47,0.2,0.5
+D3032.012b-2,D3032.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,0.47,0.2,0.5
+D3032.012c-1,D3032.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3032.012c-2,D3032.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3032.012c-3,D3032.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Motor damaged but anchorage is OK.,,,0.25
+D3032.012c-4,D3032.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.25
+D3032.012d-1,D3032.012d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3032.012d-2,D3032.012d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3032.012e-1,D3032.012e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Motor is damaged.,0.47,0.2,0.5
+D3032.012e-2,D3032.012e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,0.47,0.2,0.5
+D3032.012f-1,D3032.012f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3032.012f-2,D3032.012f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3032.012f-3,D3032.012f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Motor damaged but anchorage is OK.,,,0.25
+D3032.012f-4,D3032.012f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.25
+D3032.012g-1,D3032.012g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3032.012g-2,D3032.012g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3032.012h-1,D3032.012h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Motor is damaged.,0.47,0.2,0.5
+D3032.012h-2,D3032.012h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,0.47,0.2,0.5
+D3032.012i-1,D3032.012i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3032.012i-2,D3032.012i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3032.012i-3,D3032.012i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Motor damaged but anchorage is OK.,,,0.25
+D3032.012i-4,D3032.012i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.25
+D3032.012j-1,D3032.012j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3032.012j-2,D3032.012j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3032.012k-1,D3032.012k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Motor is damaged.,0.47,0.2,0.5
+D3032.012k-2,D3032.012k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,0.47,0.2,0.5
+D3032.012l-1,D3032.012l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3032.012l-2,D3032.012l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3032.012l-3,D3032.012l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Motor damaged but anchorage is OK.,,,0.25
+D3032.012l-4,D3032.012l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.25
+D3032.013a-1,D3032.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3032.013a-2,D3032.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3032.013b-1,D3032.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Motor is damaged.,1.84,0.6,0.5
+D3032.013b-2,D3032.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,1.84,0.6,0.5
+D3032.013c-1,D3032.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3032.013c-2,D3032.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3032.013c-3,D3032.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Motor damaged but anchorage is OK.,,,0.25
+D3032.013c-4,D3032.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.25
+D3032.013d-1,D3032.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3032.013d-2,D3032.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3032.013e-1,D3032.013e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Motor is damaged.,1.84,0.6,0.5
+D3032.013e-2,D3032.013e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,1.84,0.6,0.5
+D3032.013f-1,D3032.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3032.013f-2,D3032.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3032.013f-3,D3032.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Motor damaged but anchorage is OK.,,,0.25
+D3032.013f-4,D3032.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.25
+D3032.013g-1,D3032.013g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3032.013g-2,D3032.013g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3032.013h-1,D3032.013h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Motor is damaged.,1.84,0.6,0.5
+D3032.013h-2,D3032.013h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,1.84,0.6,0.5
+D3032.013i-1,D3032.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3032.013i-2,D3032.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3032.013i-3,D3032.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Motor damaged but anchorage is OK.,,,0.25
+D3032.013i-4,D3032.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.25
+D3032.013j-1,D3032.013j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3032.013j-2,D3032.013j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3032.013k-1,D3032.013k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Motor is damaged.,1.84,0.6,0.5
+D3032.013k-2,D3032.013k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,1.84,0.6,0.5
+D3032.013l-1,D3032.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3032.013l-2,D3032.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3032.013l-3,D3032.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Motor damaged but anchorage is OK.,,,0.25
+D3032.013l-4,D3032.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.25
+D3041.001a-1,D3041.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Bellows fails at fans.,1.92,0.5,1.0
+D3041.001a-2,D3041.001a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Fan dislodges from isolators and drops.,2.4,0.5,1.0
+D3041.001b-1,D3041.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Bellows fails at fans.,1.92,0.5,1.0
+D3041.001b-2,D3041.001b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Fan dislodges from isolators and drops.,2.4,0.5,1.0
+D3041.001c-1,D3041.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Bellows fails at fans.,2.25,0.4,1.0
+D3041.001c-2,D3041.001c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Fan dislodges from isolators and drops.,2.6,0.4,1.0
+D3041.001d-1,D3041.001d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Bellows fails at fans.,2.25,0.4,1.0
+D3041.001d-2,D3041.001d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Fan dislodges from isolators and drops.,2.6,0.4,1.0
+D3041.002a-1,D3041.002a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Bellows fails at fans.,1.9,0.4,1.0
+D3041.002b-1,D3041.002b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Bellows fails at fans.,1.9,0.4,1.0
+D3041.002c-1,D3041.002c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Bellows fails at fans.,2.25,0.4,1.0
+D3041.002d-1,D3041.002d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Bellows fails at fans.,2.25,0.4,1.0
+D3041.011a-1,D3041.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.011a-2,D3041.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.011b-1,D3041.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.011b-2,D3041.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.011c-1,D3041.011c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.011c-2,D3041.011c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.011d-1,D3041.011d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.011d-2,D3041.011d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.012a-1,D3041.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.012a-2,D3041.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.012b-1,D3041.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.012b-2,D3041.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.012c-1,D3041.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,3.75,0.4,1.0
+D3041.012c-2,D3041.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,4.5,0.4,1.0
+D3041.012d-1,D3041.012d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,3.75,0.4,1.0
+D3041.012d-2,D3041.012d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,4.5,0.4,1.0
+D3041.021a-1,D3041.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.021a-2,D3041.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.021b-1,D3041.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.021b-2,D3041.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.021c-1,D3041.021c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.021c-2,D3041.021c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.021d-1,D3041.021d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.021d-2,D3041.021d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.022a-1,D3041.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.022a-2,D3041.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.022b-1,D3041.022b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,1.5,0.4,1.0
+D3041.022b-2,D3041.022b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,2.25,0.4,1.0
+D3041.022c-1,D3041.022c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,3.75,0.4,1.0
+D3041.022c-2,D3041.022c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,4.5,0.4,1.0
+D3041.022d-1,D3041.022d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Individual supports fail and duct sags - 1 failed support per 1000 feet of ducting.,3.75,0.4,1.0
+D3041.022d-2,D3041.022d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Several adjacent supports fail and sections of ducting fall - 60 feet of ducting fail and fall per 1000 foot of ducting.,4.5,0.4,1.0
+D3041.031a-1,D3041.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,HVAC drops or diffusers dislodges and falls.,1.3,0.4,1.0
+D3041.031b-1,D3041.031b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,HVAC drops or diffusers dislodges and falls.,1.3,0.4,1.0
+D3041.032a-1,D3041.032a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,HVAC drops or diffusers dislodges and falls.,1.5,0.4,1.0
+D3041.032b-1,D3041.032b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,HVAC drops or diffusers dislodges and falls.,1.5,0.4,1.0
+D3041.032c-1,D3041.032c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,HVAC drops or diffusers dislodges and falls.,1.5,0.4,1.0
+D3041.032d-1,D3041.032d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,HVAC drops or diffusers dislodges and falls.,1.5,0.4,1.0
+D3041.041a-1,D3041.041a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Coil damages connection to plumbing.  Leakage of hot water.,1.9,0.4,1.0
+D3041.041b-1,D3041.041b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Coil damages connection to plumbing.  Leakage of hot water.,1.9,0.4,1.0
+D3041.101a-1,D3041.101a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",0.5,0.4,1.0
+D3041.102a-1,D3041.102a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3041.102a-2,D3041.102a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3041.102b-1,D3041.102b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",1.0,0.6,1.0
+D3041.102c-1,D3041.102c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3041.102c-2,D3041.102c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3041.102c-3,D3041.102c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.5
+D3041.103a-1,D3041.103a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3041.103a-2,D3041.103a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3041.103b-1,D3041.103b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",4.8,0.6,1.0
+D3041.103c-1,D3041.103c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3041.103c-2,D3041.103c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3041.103c-3,D3041.103c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.5
+D3052.011a-1,D3052.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function. Damage to attached ducting or piping.,0.25,0.4,0.67
+D3052.011a-2,D3052.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function Equipment damaged beyond repair.,0.25,0.4,0.33
+D3052.011b-1,D3052.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function. Damage to attached ducting or piping.,0.25,0.4,0.67
+D3052.011b-2,D3052.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function Equipment damaged beyond repair.,0.25,0.4,0.33
+D3052.011c-1,D3052.011c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function. Damage to attached ducting or piping.,0.25,0.4,0.67
+D3052.011c-2,D3052.011c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function Equipment damaged beyond repair.,0.25,0.4,0.33
+D3052.011d-1,D3052.011d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function. Damage to attached ducting or piping.,0.25,0.4,0.67
+D3052.011d-2,D3052.011d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function Equipment damaged beyond repair.,0.25,0.4,0.33
+D3052.013a-1,D3052.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3052.013a-2,D3052.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3052.013b-1,D3052.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Damage to attached ducting or piping.,1.54,0.6,0.67
+D3052.013b-2,D3052.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,1.54,0.6,0.33
+D3052.013c-1,D3052.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3052.013c-2,D3052.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3052.013c-3,D3052.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damage to attached ducting or piping but anchorage is OK.,,,0.35
+D3052.013c-4,D3052.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.15
+D3052.013d-1,D3052.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3052.013d-2,D3052.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3052.013e-1,D3052.013e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Damage to attached ducting or piping.,1.54,0.6,0.67
+D3052.013e-2,D3052.013e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,1.54,0.6,0.33
+D3052.013f-1,D3052.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3052.013f-2,D3052.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3052.013f-3,D3052.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damage to attached ducting or piping but anchorage is OK.,,,0.35
+D3052.013f-4,D3052.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.15
+D3052.013g-1,D3052.013g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3052.013g-2,D3052.013g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3052.013h-1,D3052.013h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Damage to attached ducting or piping.,1.54,0.6,0.67
+D3052.013h-2,D3052.013h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,1.54,0.6,0.33
+D3052.013i-1,D3052.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3052.013i-2,D3052.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3052.013i-3,D3052.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damage to attached ducting or piping but anchorage is OK.,,,0.35
+D3052.013i-4,D3052.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.15
+D3052.013j-1,D3052.013j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3052.013j-2,D3052.013j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3052.013k-1,D3052.013k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Equipment does not function but anchorage is OK. Damage to attached ducting or piping.,1.54,0.6,0.67
+D3052.013k-2,D3052.013k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Equipment does not function but anchorage is OK. Equipment damaged beyond repair.,1.54,0.6,0.33
+D3052.013l-1,D3052.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3052.013l-2,D3052.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3052.013l-3,D3052.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Damage to attached ducting or piping but anchorage is OK.,,,0.35
+D3052.013l-4,D3052.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment damaged beyond repair but anchorage is OK.,,,0.15
+D3067.011a-1,D3067.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",0.69,0.4,1.0
+D3067.012a-1,D3067.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D3067.012a-2,D3067.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D3067.012b-1,D3067.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",3.0,0.4,1.0
+D3067.012c-1,D3067.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D3067.012c-2,D3067.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D3067.012c-3,D3067.012c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.5
+D4011.021a-1,D4011.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at joints -  0.02 leaks per 20 ft section of pipe.,1.1,0.4,1.0
+D4011.021a-2,D4011.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Joints Break - Major Leakage - 0.02 breaks  per 20 ft section of pipe.,2.4,0.5,1.0
+D4011.022a-1,D4011.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at joints -  0.02 leaks per 20 ft section of pipe.,1.1,0.4,1.0
+D4011.022a-2,D4011.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Joints Break - Major Leakage - 0.02 breaks  per 20 ft section of pipe.,2.4,0.5,1.0
+D4011.023a-1,D4011.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at joints -  0.02 leaks per 20 ft section of pipe.,1.5,0.4,1.0
+D4011.023a-2,D4011.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Joints Break - Major Leakage - 0.02 breaks  per 20 ft section of pipe.,2.6,0.4,1.0
+D4011.024a-1,D4011.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at joints -  0.02 leaks per 20 ft section of pipe.,1.9,0.4,1.0
+D4011.024a-2,D4011.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Joints Break - Major Leakage - 0.02 breaks  per 20 ft section of pipe.,3.4,0.4,1.0
+D4011.031a-1,D4011.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,0.75,0.4,1.0
+D4011.031a-2,D4011.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,0.95,0.4,1.0
+D4011.032a-1,D4011.032a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,0.75,0.4,1.0
+D4011.032a-2,D4011.032a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,0.95,0.4,1.0
+D4011.033a-1,D4011.033a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,0.95,0.4,1.0
+D4011.034a-1,D4011.034a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,1.3,0.4,1.0
+D4011.041a-1,D4011.041a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,0.55,0.4,1.0
+D4011.041a-2,D4011.041a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,0.95,0.4,1.0
+D4011.042a-1,D4011.042a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,0.55,0.4,1.0
+D4011.042a-2,D4011.042a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,0.95,0.4,1.0
+D4011.053a-1,D4011.053a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,1.5,0.4,1.0
+D4011.053a-2,D4011.053a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,2.25,0.4,1.0
+D4011.054a-1,D4011.054a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,1.9,0.4,1.0
+D4011.054a-2,D4011.054a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,3.0,0.4,1.0
+D4011.063a-1,D4011.063a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,0.55,0.4,1.0
+D4011.063a-2,D4011.063a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,1.3,0.4,1.0
+D4011.064a-1,D4011.064a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,1.1,0.4,1.0
+D4011.064a-2,D4011.064a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,2.25,0.4,1.0
+D4011.071a-1,D4011.071a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,1.5,0.4,1.0
+D4011.071a-2,D4011.071a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,2.25,0.4,1.0
+D4011.072a-1,D4011.072a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,1.5,0.4,1.0
+D4011.072a-2,D4011.072a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,2.25,0.4,1.0
+D4011.073a-1,D4011.073a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,2.6,0.4,1.0
+D4011.073a-2,D4011.073a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,3.0,0.4,1.0
+D4011.074a-1,D4011.074a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Spraying & Dripping Leakage at drop joints -  0.01 leaks per drop.,3.75,0.4,1.0
+D4011.074a-2,D4011.074a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Drop Joints Break - Major Leakage - 0.01 breaks  per drop.,4.5,0.4,1.0
+D5011.011a-1,D5011.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",1.01,0.6,1.0
+D5011.011b-1,D5011.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",1.01,0.6,1.0
+D5011.011c-1,D5011.011c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",1.01,0.6,1.0
+D5011.011d-1,D5011.011d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",1.01,0.6,1.0
+D5011.013a-1,D5011.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5011.013a-2,D5011.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5011.013b-1,D5011.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",3.05,0.5,1.0
+D5011.013c-1,D5011.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5011.013c-2,D5011.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5011.013c-3,D5011.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5011.013d-1,D5011.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5011.013d-2,D5011.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5011.013e-1,D5011.013e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",3.05,0.5,1.0
+D5011.013f-1,D5011.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5011.013f-2,D5011.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5011.013f-3,D5011.013f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5011.013g-1,D5011.013g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5011.013g-2,D5011.013g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5011.013h-1,D5011.013h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",3.05,0.5,1.0
+D5011.013i-1,D5011.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5011.013i-2,D5011.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5011.013i-3,D5011.013i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5011.013j-1,D5011.013j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5011.013j-2,D5011.013j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5011.013k-1,D5011.013k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",3.05,0.5,1.0
+D5011.013l-1,D5011.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5011.013l-2,D5011.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5011.013l-3,D5011.013l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5012.013a-1,D5012.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative",0.73,0.45,1.0
+D5012.013b-1,D5012.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5012.013b-2,D5012.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5012.013c-1,D5012.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.5,0.4,1.0
+D5012.013d-1,D5012.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5012.013d-2,D5012.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5012.013d-3,D5012.013d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5012.021a-1,D5012.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",1.28,0.4,1.0
+D5012.021b-1,D5012.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",1.28,0.4,1.0
+D5012.021c-1,D5012.021c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",1.28,0.4,1.0
+D5012.021d-1,D5012.021d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative.",1.28,0.4,1.0
+D5012.023a-1,D5012.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5012.023a-2,D5012.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5012.023b-1,D5012.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.4,0.4,1.0
+D5012.023c-1,D5012.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5012.023c-2,D5012.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5012.023c-3,D5012.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5012.023d-1,D5012.023d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5012.023d-2,D5012.023d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5012.023e-1,D5012.023e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.4,0.4,1.0
+D5012.023f-1,D5012.023f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5012.023f-2,D5012.023f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5012.023f-3,D5012.023f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5012.023g-1,D5012.023g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5012.023g-2,D5012.023g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5012.023h-1,D5012.023h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.4,0.4,1.0
+D5012.023i-1,D5012.023i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5012.023i-2,D5012.023i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5012.023i-3,D5012.023i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5012.023j-1,D5012.023j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5012.023j-2,D5012.023j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5012.023k-1,D5012.023k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.4,0.4,1.0
+D5012.023l-1,D5012.023l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5012.023l-2,D5012.023l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5012.023l-3,D5012.023l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5012.031a-1,D5012.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.16,0.45,1.0
+D5012.031b-1,D5012.031b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.16,0.45,1.0
+D5012.031c-1,D5012.031c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.16,0.45,1.0
+D5012.031d-1,D5012.031d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.16,0.45,1.0
+D5012.033a-1,D5012.033a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5012.033a-2,D5012.033a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5012.033b-1,D5012.033b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",3.05,0.4,1.0
+D5012.033c-1,D5012.033c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5012.033c-2,D5012.033c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5012.033c-3,D5012.033c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5012.033d-1,D5012.033d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5012.033d-2,D5012.033d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5012.033e-1,D5012.033e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",3.05,0.4,1.0
+D5012.033f-1,D5012.033f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5012.033f-2,D5012.033f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5012.033f-3,D5012.033f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5012.033g-1,D5012.033g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5012.033g-2,D5012.033g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5012.033h-1,D5012.033h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",3.05,0.4,1.0
+D5012.033i-1,D5012.033i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5012.033i-2,D5012.033i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5012.033i-3,D5012.033i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5012.033j-1,D5012.033j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5012.033j-2,D5012.033j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5012.033k-1,D5012.033k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",3.05,0.4,1.0
+D5012.033l-1,D5012.033l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5012.033l-2,D5012.033l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5012.033l-3,D5012.033l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK.",,,0.5
+D5092.011a-1,D5092.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative. Batteries fall, crack cases, dislodge conductors, or are otherwise damaged.",1.11,0.6,1.0
+D5092.011a-2,D5092.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Batteries spill battery acid.,1.11,0.6,0.5
+D5092.011a-3,D5092.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Battery rack collapses.,1.11,0.6,0.1
+D5092.013a-1,D5092.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.013a-2,D5092.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.013b-1,D5092.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK. Batteries fall, crack cases, dislodge conductors, or are otherwise damaged.",2.32,0.2,1.0
+D5092.013b-2,D5092.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Batteries spill battery acid.,2.32,0.2,0.5
+D5092.013b-3,D5092.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Battery rack collapses.,2.32,0.2,0.1
+D5092.013c-1,D5092.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.013c-2,D5092.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.013c-3,D5092.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Equipment is damaged and inoperative.,,,0.15
+D5092.013c-4,D5092.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative.,,,0.25
+D5092.013c-5,D5092.013c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,5,Equipment is damaged and inoperative.,,,0.1
+D5092.021a-1,D5092.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",1.07,0.4,0.5
+D5092.021a-2,D5092.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Equipment damaged beyond repair.",1.07,0.4,0.5
+D5092.023a-1,D5092.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.023a-2,D5092.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.023b-1,D5092.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK.",2.7,0.6,0.5
+D5092.023b-2,D5092.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Equipment damaged beyond repair.",2.7,0.6,0.5
+D5092.023c-1,D5092.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.023c-2,D5092.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.023c-3,D5092.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,Equipment is damaged and inoperative.,,,0.25
+D5092.023c-4,D5092.023c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative.,,,0.25
+D5092.031a-1,D5092.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative. Pipes and nozzles damaged.",0.9,0.4,0.7
+D5092.031a-2,D5092.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative. Drive shaft misalignment.",0.9,0.4,0.1
+D5092.031a-3,D5092.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative. Minor electrical damage, e.g., failed relay.",0.9,0.4,0.1
+D5092.031a-4,D5092.031a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative. Exhaust line disconnected at expansion bellows.",0.9,0.4,0.1
+D5092.031b-1,D5092.031b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative. Pipes and nozzles damaged.",0.9,0.4,0.7
+D5092.031b-2,D5092.031b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative. Drive shaft misalignment.",0.9,0.4,0.1
+D5092.031b-3,D5092.031b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative. Minor electrical damage, e.g., failed relay.",0.9,0.4,0.1
+D5092.031b-4,D5092.031b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative. Exhaust line disconnected at expansion bellows.",0.9,0.4,0.1
+D5092.031c-1,D5092.031c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative. Pipes and nozzles damaged.",0.9,0.4,0.7
+D5092.031c-2,D5092.031c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative. Drive shaft misalignment.",0.9,0.4,0.1
+D5092.031c-3,D5092.031c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative. Minor electrical damage, e.g., failed relay.",0.9,0.4,0.1
+D5092.031c-4,D5092.031c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative. Exhaust line disconnected at expansion bellows.",0.9,0.4,0.1
+D5092.031d-1,D5092.031d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative. Pipes and nozzles damaged.",0.9,0.4,0.7
+D5092.031d-2,D5092.031d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative. Drive shaft misalignment.",0.9,0.4,0.1
+D5092.031d-3,D5092.031d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative. Minor electrical damage, e.g., failed relay.",0.9,0.4,0.1
+D5092.031d-4,D5092.031d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative. Exhaust line disconnected at expansion bellows.",0.9,0.4,0.1
+D5092.032a-1,D5092.032a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.032a-2,D5092.032a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.032b-1,D5092.032b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK. Pipes and nozzles damaged.",1.07,0.4,0.7
+D5092.032b-2,D5092.032b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Drive shaft misalignment.",1.07,0.4,0.1
+D5092.032b-3,D5092.032b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative but anchorage is OK. Minor electrical damage, e.g., failed relay.",1.07,0.4,0.1
+D5092.032b-4,D5092.032b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative but anchorage is OK. Exhaust line disconnected at expansion bellows.",1.07,0.4,0.1
+D5092.032c-1,D5092.032c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.032c-2,D5092.032c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.032c-3,D5092.032c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.4
+D5092.032c-4,D5092.032c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.032c-5,D5092.032c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,5,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.032d-1,D5092.032d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.032d-2,D5092.032d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.032e-1,D5092.032e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK. Pipes and nozzles damaged.",1.07,0.4,0.7
+D5092.032e-2,D5092.032e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Drive shaft misalignment.",1.07,0.4,0.1
+D5092.032e-3,D5092.032e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative but anchorage is OK. Minor electrical damage, e.g., failed relay.",1.07,0.4,0.1
+D5092.032e-4,D5092.032e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative but anchorage is OK. Exhaust line disconnected at expansion bellows.",1.07,0.4,0.1
+D5092.032f-1,D5092.032f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.032f-2,D5092.032f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.032f-3,D5092.032f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.4
+D5092.032f-4,D5092.032f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.032f-5,D5092.032f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,5,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.032g-1,D5092.032g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.032g-2,D5092.032g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.032h-1,D5092.032h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK. Pipes and nozzles damaged.",1.07,0.4,0.7
+D5092.032h-2,D5092.032h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Drive shaft misalignment.",1.07,0.4,0.1
+D5092.032h-3,D5092.032h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative but anchorage is OK. Minor electrical damage, e.g., failed relay.",1.07,0.4,0.1
+D5092.032h-4,D5092.032h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative but anchorage is OK. Exhaust line disconnected at expansion bellows.",1.07,0.4,0.1
+D5092.032i-1,D5092.032i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.032i-2,D5092.032i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.032i-3,D5092.032i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.4
+D5092.032i-4,D5092.032i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.032i-5,D5092.032i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,5,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.032j-1,D5092.032j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.032j-2,D5092.032j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.032k-1,D5092.032k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK. Pipes and nozzles damaged.",1.07,0.4,0.7
+D5092.032k-2,D5092.032k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Drive shaft misalignment.",1.07,0.4,0.1
+D5092.032k-3,D5092.032k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative but anchorage is OK. Minor electrical damage, e.g., failed relay.",1.07,0.4,0.1
+D5092.032k-4,D5092.032k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative but anchorage is OK. Exhaust line disconnected at expansion bellows.",1.07,0.4,0.1
+D5092.032l-1,D5092.032l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.032l-2,D5092.032l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.032l-3,D5092.032l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.4
+D5092.032l-4,D5092.032l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.032l-5,D5092.032l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,5,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.033a-1,D5092.033a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.033a-2,D5092.033a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.033b-1,D5092.033b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK. Pipes and nozzles damaged.",2.0,0.2,0.7
+D5092.033b-2,D5092.033b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Drive shaft misalignment.",2.0,0.2,0.1
+D5092.033b-3,D5092.033b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative but anchorage is OK. Minor electrical damage, e.g., failed relay.",2.0,0.2,0.1
+D5092.033b-4,D5092.033b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative but anchorage is OK. Exhaust line disconnected at expansion bellows.",2.0,0.2,0.1
+D5092.033c-1,D5092.033c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.033c-2,D5092.033c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.033c-3,D5092.033c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.4
+D5092.033c-4,D5092.033c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.033c-5,D5092.033c,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,5,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.033d-1,D5092.033d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.033d-2,D5092.033d,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.033e-1,D5092.033e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK. Pipes and nozzles damaged.",2.0,0.2,0.7
+D5092.033e-2,D5092.033e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Drive shaft misalignment.",2.0,0.2,0.1
+D5092.033e-3,D5092.033e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative but anchorage is OK. Minor electrical damage, e.g., failed relay.",2.0,0.2,0.1
+D5092.033e-4,D5092.033e,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative but anchorage is OK. Exhaust line disconnected at expansion bellows.",2.0,0.2,0.1
+D5092.033f-1,D5092.033f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.033f-2,D5092.033f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.033f-3,D5092.033f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.4
+D5092.033f-4,D5092.033f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.033f-5,D5092.033f,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,5,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.033g-1,D5092.033g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.033g-2,D5092.033g,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.033h-1,D5092.033h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK. Pipes and nozzles damaged.",2.0,0.2,0.7
+D5092.033h-2,D5092.033h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Drive shaft misalignment.",2.0,0.2,0.1
+D5092.033h-3,D5092.033h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative but anchorage is OK. Minor electrical damage, e.g., failed relay.",2.0,0.2,0.1
+D5092.033h-4,D5092.033h,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative but anchorage is OK. Exhaust line disconnected at expansion bellows.",2.0,0.2,0.1
+D5092.033i-1,D5092.033i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.033i-2,D5092.033i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.033i-3,D5092.033i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.4
+D5092.033i-4,D5092.033i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.033i-5,D5092.033i,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,5,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.033j-1,D5092.033j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.7
+D5092.033j-2,D5092.033j,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.3
+D5092.033k-1,D5092.033k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Damaged, inoperative but anchorage is OK. Pipes and nozzles damaged.",2.0,0.2,0.7
+D5092.033k-2,D5092.033k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,"Damaged, inoperative but anchorage is OK. Drive shaft misalignment.",2.0,0.2,0.1
+D5092.033k-3,D5092.033k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, inoperative but anchorage is OK. Minor electrical damage, e.g., failed relay.",2.0,0.2,0.1
+D5092.033k-4,D5092.033k,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,"Damaged, inoperative but anchorage is OK. Exhaust line disconnected at expansion bellows.",2.0,0.2,0.1
+D5092.033l-1,D5092.033l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Anchorage failure.,,,0.35
+D5092.033l-2,D5092.033l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Anchorage failure & Equipment damaged beyond repair.,,,0.15
+D5092.033l-3,D5092.033l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,3,"Damaged, Inoperative but anchorage is OK",,,0.4
+D5092.033l-4,D5092.033l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,4,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+D5092.033l-5,D5092.033l,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,5,Equipment is damaged and inoperative but anchorage is OK.,,,0.05
+E2022.001-1,E2022.001,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Wall units need to be adjusted and straightened.  Some elements are bent / damaged and need to be replaced.  ,1.0,0.4,1.0
+E2022.010-1,E2022.010,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Object falls off shelf or shelf overturns and object breaks or object breaks within cabinet.,0.4,0.6,1.0
+E2022.011-1,E2022.011,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Object falls off shelf or shelf overturns and object breaks or object breaks within cabinet.,1.0,0.5,1.0
+E2022.012-1,E2022.012,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Object falls off shelf or shelf overturns and object breaks or object breaks within cabinet.,0.6,0.6,1.0
+E2022.013-1,E2022.013,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Object falls off shelf or shelf overturns and object breaks or object breaks within cabinet.,0.25,0.5,1.0
+E2022.020-1,E2022.020,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Falls, does not function.",0.8,0.45,1.0
+E2022.021-1,E2022.021,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Falls, does not function.",2.5,0.5,1.0
+E2022.022-1,E2022.022,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Falls, does not function.",1.0,0.5,1.0
+E2022.023-1,E2022.023,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,"Falls, does not function.",0.4,0.5,1.0
+E2022.102a-1,E2022.102a,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,0.724,0.5,1.0
+E2022.102b-1,E2022.102b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,,,1.0
+E2022.103a-1,E2022.103a,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,0.493,0.5,1.0
+E2022.103b-1,E2022.103b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,,,1.0
+E2022.104a-1,E2022.104a,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,0.361,0.5,1.0
+E2022.104b-1,E2022.104b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,,,1.0
+E2022.105a-1,E2022.105a,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,0.29,0.5,1.0
+E2022.105b-1,E2022.105b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,,,1.0
+E2022.106a-1,E2022.106a,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,0.251,0.5,1.0
+E2022.106b-1,E2022.106b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Book case falls over and contents are scattered.  Likely damage to bookcase.  ,,,1.0
+E2022.112a-1,E2022.112a,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Filing cabinet falls over and contents are scattered.  Likely damage to file cabinet.  ,1.229,0.5,1.0
+E2022.112b-1,E2022.112b,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Filing cabinet falls over and contents are scattered.  Likely damage to file cabinet.  ,,,1.0
+E2022.114a-1,E2022.114a,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Filing cabinet falls over and contents are scattered.  Likely damage to file cabinet.  ,0.498,0.5,1.0
+E2022.114b-1,E2022.114b,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Filing cabinet falls over and contents are scattered.  Likely damage to file cabinet.  ,,,1.0
+E2022.124a-1,E2022.124a,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Filing cabinet falls over and contents are scattered.  Likely damage to file cabinet.  ,0.688,0.5,1.0
+E2022.124b-1,E2022.124b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Filing cabinet falls over and contents are scattered.  Likely damage to file cabinet.  ,,,1.0
+E2022.125a-1,E2022.125a,NIST,FEMA P-58,'',,FEM-2018-SEI,Peak Floor Velocity,Meters Per Second,1,Filing cabinet falls over and contents are scattered.  Likely damage to file cabinet.  ,0.526,0.5,1.0
+E2022.125b-1,E2022.125b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Filing cabinet falls over and contents are scattered.  Likely damage to file cabinet.  ,,,1.0
+F1012.001-1,F1012.001,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Significant merchandise shedding from rack shelves.,0.42,0.4,0.6
+F1012.001-2,F1012.001,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Significant structural damage to rack structure.,0.42,0.4,0.4
+D2021.011a-1,D2021.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.011a-2,D2021.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe. ,2.6,0.4,1.0
+D2021.011b-1,D2021.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.011b-2,D2021.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe.,2.6,0.4,1.0
+D2021.012a-1,D2021.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.012a-2,D2021.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,2.6,0.4,1.0
+D2021.012b-1,D2021.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.012b-2,D2021.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe.,2.6,0.4,1.0
+D2021.013a-1,D2021.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000 feet of pipe.,2.25,0.4,1.0
+D2021.013a-2,D2021.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,4.1,0.4,1.0
+D2021.013b-1,D2021.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.014a-1,D2021.014a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000 feet of pipe.,2.25,0.4,1.0
+D2021.014a-2,D2021.014a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,4.1,0.4,1.0
+D2021.014b-1,D2021.014b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.021a-1,D2021.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.021a-2,D2021.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe. ,2.6,0.4,1.0
+D2021.022a-1,D2021.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.022a-2,D2021.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe. ,2.6,0.4,1.0
+D2021.023a-1,D2021.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000 feet of pipe.,2.25,0.4,1.0
+D2021.023a-2,D2021.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,4.1,0.4,1.0
+D2021.023b-1,D2021.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.023b-2,D2021.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe.,2.25,0.4,1.0
+D2021.024a-1,D2021.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000 feet of pipe.,2.25,0.4,1.0
+D2021.024a-2,D2021.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,4.1,0.4,1.0
+D2021.024b-1,D2021.024b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 feet of pipe.,1.5,0.4,1.0
+D2021.024b-2,D2021.024b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe.,2.25,0.4,1.0
+D2022.011a-1,D2022.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2022.011a-2,D2022.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair  - 1 leak per 1000 feet of pipe.,1.1,,1.0
+D2022.011b-1,D2022.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2022.011b-2,D2022.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and 60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet).,2.4,,1.0
+D2022.012a-1,D2022.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2022.012a-2,D2022.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair  - 1 leak per 1000 feet of pipe.,1.1,,1.0
+D2022.012b-1,D2022.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2022.012b-2,D2022.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and 60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet).,2.4,,1.0
+D2022.013a-1,D2022.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2022.013a-2,D2022.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair - 1 leak per 1000 feet of pipe.,1.1,,1.0
+D2022.013b-1,D2022.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,2.25,,1.0
+D2022.014a-1,D2022.014a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2022.014a-2,D2022.014a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair - 1 leak per 1000 feet of pipe.,1.1,,1.0
+D2022.014b-1,D2022.014b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,3.0,,1.0
+D2022.021a-1,D2022.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe.,1.5,,1.0
+D2022.021a-2,D2022.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,2.6,,1.0
+D2022.022a-1,D2022.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe. ,1.5,,1.0
+D2022.022a-2,D2022.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,2.6,,1.0
+D2022.023a-1,D2022.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe. ,2.25,,1.0
+D2022.023a-2,D2022.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,4.1,,1.0
+D2022.023b-1,D2022.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 foot of pipe.,1.5,,1.0
+D2022.023b-2,D2022.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe.,2.25,,1.0
+D2022.024a-1,D2022.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe.  ,2.25,,1.0
+D2022.024a-2,D2022.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,4.1,,1.0
+D2022.024b-1,D2022.024b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 foot of pipe.,1.5,,1.0
+D2022.024b-2,D2022.024b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe. ,2.25,,1.0
+D2031.011b-1,D2031.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2031.011b-2,D2031.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and    60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet).,2.4,,1.0
+D2031.012b-1,D2031.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2031.012b-2,D2031.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and    60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet).,2.4,,1.0
+D2031.013b-1,D2031.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,2.25,,1.0
+D2031.014b-1,D2031.014b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,3.0,,1.0
+D2031.021a-1,D2031.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Joints break - 1 break per 1000 feet of pipe.,2.25,,1.0
+D2031.021b-1,D2031.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2031.021b-2,D2031.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and    60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet),2.4,,1.0
+D2031.022a-1,D2031.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2031.022b-1,D2031.022b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2031.022b-2,D2031.022b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and    60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet),2.4,,1.0
+D2031.023a-1,D2031.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Joints break - 1 break per 1000 feet of pipe.,3.0,,1.0
+D2031.023b-1,D2031.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,2.25,,1.0
+D2031.024a-1,D2031.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Joints break - 1 break per 1000 feet of pipe.,3.0,,1.0
+D2031.024b-1,D2031.024b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,2.25,,1.0
+D2051.011a-1,D2051.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2051.011a-2,D2051.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair - 1 leak per 1000 feet of pipe.,1.1,,1.0
+D2051.011b-1,D2051.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2051.011b-2,D2051.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and 60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet).,2.4,,1.0
+D2051.012a-1,D2051.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2051.012a-2,D2051.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair - 1 leak per 1000 feet of pipe.,1.1,,1.0
+D2051.012b-1,D2051.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2051.012b-2,D2051.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and 60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet).,2.4,,1.0
+D2051.013a-1,D2051.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2051.013a-2,D2051.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair - 1 leak per 1000 feet of pipe.,1.1,,1.0
+D2051.013b-1,D2051.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,2.25,,1.0
+D2051.014a-1,D2051.014a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2051.014a-2,D2051.014a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair - 1 leak per 1000 feet of pipe.,1.1,,1.0
+D2051.014b-1,D2051.014b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 0.5 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,3.0,,1.0
+D2051.021a-1,D2051.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe.  Retighten flange at leaking joint.,1.5,,1.0
+D2051.021a-2,D2051.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,2.6,,1.0
+D2051.021b-1,D2051.021b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Vertical Brace Failure - 1 failure per 1000 feet of pipe ,2.25,,1.0
+D2051.022a-1,D2051.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe.,1.5,,1.0
+D2051.022a-2,D2051.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,2.6,,1.0
+D2051.023a-1,D2051.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe.,2.25,,1.0
+D2051.023a-2,D2051.023a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,4.1,,1.0
+D2051.023b-1,D2051.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 0.01 failures per 20 foot pipe section.,1.5,,1.0
+D2051.023b-2,D2051.023b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe.,2.25,,1.0
+D2051.024a-1,D2051.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe.,2.25,,1.0
+D2051.024a-2,D2051.024a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.,4.1,,1.0
+D2051.024b-1,D2051.024b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Lateral Brace Failure - 1 failure per 1000 foot of pipe.,1.5,,1.0
+D2051.024b-2,D2051.024b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Vertical Brace Failure - 1 failure per 1000 feet of pipe.,2.25,,1.0
+D2061.011a-1,D2061.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2061.011a-2,D2061.011a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair  - 1 leak per 1000 feet of pipe.  Replace one 20 ft section per 1000 LF pipe.,1.1,,1.0
+D2061.011b-1,D2061.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 1 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2061.011b-2,D2061.011b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and 60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet).,2.4,,1.0
+D2061.012a-1,D2061.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2061.012a-2,D2061.012a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair  - 1 leak per 1000 feet of pipe.  Replace one 20 ft section per 1000 LF pipe.,1.1,,1.0
+D2061.012b-1,D2061.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 1 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,1.2,,1.0
+D2061.012b-2,D2061.012b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Multiple supports failure and 60 feet of pipe fail per 1000 feet of pipe (assuming supports every 20 feet).,2.4,,1.0
+D2061.013a-1,D2061.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2061.013a-2,D2061.013a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair - 1 leak per 1000 feet of pipe.  Replace one 20 ft section per 1000 LF pipe.,1.1,,1.0
+D2061.013b-1,D2061.013b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 1 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,2.25,,1.0
+D2061.014a-1,D2061.014a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Small Leakage at joints - 1 leak per 1000 feet of pipe.,0.55,,1.0
+D2061.014a-2,D2061.014a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Large Leakage w/ major repair - 1 leak per 1000 feet of pipe.  Replace one 20 ft section per 1000 LF pipe.,1.1,,1.0
+D2061.014b-1,D2061.014b,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Isolated support failure w/o leakage - 1 supports fail per 1000 feet of pipe (assuming supports every 20 feet).,3.0,,1.0
+D2061.021a-1,D2061.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe.,1.5,,1.0
+D2061.021a-2,D2061.021a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.   Replace one 20 ft section per 1000 LF pipe.,2.6,,1.0
+D2061.022a-1,D2061.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,1,Minor leakage at flange connections  -  1 leak per 1000  feet of pipe.,1.5,,1.0
+D2061.022a-2,D2061.022a,NIST,FEMA P-58,'',,FEM-2018-SEI,"Peak Floor Acceleration, horizontal",g,2,Pipe Break - 1 break per 1000 feet of pipe.   Replace one 20 ft section per 1000 LF pipe.,2.6,,1.0
