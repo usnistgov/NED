@@ -8,11 +8,11 @@
 		},
 		"group_id": {
 			"type": "string",
-			"description": "Unique identifier for each fragility group. For example, a FEMA P-58 fragility is a single fragility group (grouping of several fragility curves or damage states into on fragility model based on underlying data of component performance).",
+			"description": "Unique identifier for each fragility group. For example, a FEMA P-58 fragility is a single fragility group (grouping of several fragility curves or damage states into one fragility model based on underlying data of component performance).",
 		},
 		"reviewer": {
 			"type": "string",
-			"description": "individual or institution repsonsible for documenting this particular fragility in the database.",
+			"description": "Individual or institution responsible for documenting this particular fragility in the database.",
 		},
 		"source": {
 			"type": "string",
@@ -28,7 +28,7 @@
 		},
 		"reference_id": {
 			"type": "foreign key",
-			"description": "Unique identifier for a particular reference in db_reference.csv. This reference should be for the original documentation of the fragility model itself, not nesessarily the underlying data (e.g., the experimental test report).",
+			"description": "Unique identifier for a particular reference in db_reference.csv. This reference should be for the original documentation of the fragility model itself, not necessarily the underlying data (e.g., the experimental test report).",
 		},
 		"p58_fragility": {
 			"type": "string",
@@ -40,7 +40,7 @@
 		},
 		"comp_type": {
 			"type": "string",
-			"description": "Name of the NISTIR component category",
+			"description": "Name of the NISTIR component category.",
 		},
 		"sub_type": {
 			"type": "string",
@@ -64,15 +64,15 @@
 		},
 		"edp": {
 			"type": "string",
-			"description": "Metric of peak amplitude at the onset of observed damage. Typically recorded in terms of building response or ground motion intensty measures that show the best correlation with damage to the component. Where applicable, one of the following seven units should be selected: <'Story Drift Ratio', 'Story Drift Ratio, bi-directional', 'Peak Floor Acceleration, Horizontal', 'Peak Floor Acceleration, Vertical'>.",
+			"description": "Metric of peak amplitude at the onset of observed damage. Typically recorded in terms of building response or ground motion intensity measures that show the best correlation with damage to the component. Where applicable, one of the following four units should be selected: <'Story Drift Ratio', 'Story Drift Ratio, bi-directional', 'Peak Floor Acceleration, Horizontal', 'Peak Floor Acceleration, Vertical'>.",
 		},
 		"edp_unit": {
 			"type": "string",
-			"description": "Unit of the edp metric, e.g., g, ratio, radians, kips, etc...",
+			"description": "Unit of the edp metric, e.g., g, ratio, radians, kips, etc.",
 		},
 		"ds_rank": {
 			"type": "integer",
-			"description": "Damage state rank of this damage for a given component (e.g., first, second, third sequencial damage state observed).",
+			"description": "Damage state rank of this damage for a given component (e.g., first, second, third sequential damage state observed).",
 		},
 		"ds_description": {
 			"type": "string",
@@ -88,7 +88,7 @@
 		},
 		"probability": {
 			"type": "number",
-			"description": "Probability of observing this particular damage among mutually exlusive damage states.",
+			"description": "Probability of observing this particular damage among mutually exclusive damage states.",
 		}
 	}
 }

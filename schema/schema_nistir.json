@@ -12,15 +12,15 @@
 		},
 		"element_id": {
 			"type": "string",
-			"description": "5-digit alphanumeric indentifier of the element.",
+			"description": "5-digit alphanumeric identifier of the element.",
 		},
 		"element": {
 			"type": "string",
-			"description": "Classification of the specific element of intererst within the group.",
+			"description": "Classification of the specific element of interest within the group.",
 		},
 		"group_id": {
 			"type": "string",
-			"description": "3-digit alphanumeric indentifier of the group.",
+			"description": "3-digit alphanumeric identifier of the group.",
 		},
 		"group": {
 			"type": "string",
@@ -28,7 +28,7 @@
 		},
 		"major_group_id": {
 			"type": "string",
-			"description": "1-digit alphabetical indentifier of the major group.",
+			"description": "1-digit alphabetical identifier of the major group.",
 		},
 		"major_group": {
 			"type": "string",

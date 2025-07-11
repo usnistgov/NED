@@ -16,7 +16,7 @@ The goal of this project is to develop a robust and scalable database of fragili
 - **ned** - Main ned Django application with custom management tools for managing the NED database, which is contained in the file `db.sqlite3`.
 
 ### Data Tables
-- **experiment.csv** - Database containing observations of damage from experimental tests of nonstructural building components. Each database entry represents a single test of a given specimen (e.g., five different tests of a particular partition wall specimen represents five separate entries in the table).
+- **experiment.csv** - Database containing observations of damage from experimental tests of nonstructural building components. Each database entry represents a single test of a given specimen (e.g., five different tests of a particular partition wall specimen are stored as five separate entries in the table).
 - **fragility_curve.csv** - Individual fragility curve for a particular damage state of interest (e.g., a FEMA P-58 fragility with three damage states would use three rows in this database).
 - **fragility_model.csv** - Database grouping fragility curves into seismic fragility models of nonstructural building components.
 - **component.csv** - Various types of nonstructural components found within buildings.
@@ -30,8 +30,8 @@ The following section provides a detailed description of several data attributes
 #### Component Subcategorization Hierarchy
 To categorize building components, we rely on the UNIFORMAT II element classification system (NISTIR 6389). However, this system only classifies nonstructural components at a high level, and further detail is needed to adequately separate different types of components within each category for the purpose of assessing building performance.  Therefore, we propose a new subcategorization hierarchy consisting of four nested component attributes:
 -	**Child Attribute 1: Connection Detail** – Describes the specific type of installation or connection type of the component, such as perimeter-fixed vs back-braced ceilings.
--	**Child Attribute 2: Material** – Describes a general grouping of components based on material, i.e., light weight vs heavy weight ceiling tiles or CPVC vs iron sprinkler pipes.
--	**Child Attribute 3: Size Class** - Describes a general grouping of components based on size, i.e., large gridded area of ceiling tiles or specific equipment size.
+-	**Child Attribute 2: Material** – Describes a general grouping of components based on material, e.g., light weight vs heavy weight ceiling tiles or CPVC vs iron sprinkler pipes.
+-	**Child Attribute 3: Size Class** - Describes a general grouping of components based on size, e.g., large gridded area of ceiling tiles or specific equipment size.
 
 The purpose of the component subcategorization is to provide further structured detail to end users who use the collected data for fragility development. Each child attribute is only nested under the parent component category attribute; no explicit hierarchy exists between child attributes and not all subcategorization layers need to be assigned if they are not applicable. Consistent naming, case, and spelling schemes should be used when populating subcategorization attributes. Reviewers should review the Sweets MasterFormat construction products database to familiarize themselves with general component taxonomy and terminology prior to developing subcategorization hierarchies for particular component types.
 

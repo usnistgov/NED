@@ -24,7 +24,7 @@
 		},
 		"comp_type": {
 			"type": "string",
-			"description": "Type of component(s) invenstigated in study.",
+			"description": "Type of component(s) investigated in study.",
 		},
 		"doi": {
 			"type": "string",
@@ -36,7 +36,7 @@
 		},
 		"publication_type": {
 			"type": "string",
-			"description": "Classification of the type of publication. Where applicable, one of the following six study types should be selected: <'Journal Article', 'Conference Paper', 'Technical Report', 'Master's Thesis', 'Dissertation', 'Other'>",
+			"description": "Classification of the type of publication. Where applicable, one of the following six study types should be selected: <'Journal Article', 'Conference Paper', 'Technical Report', 'Master\'s Thesis', 'Dissertation', 'Other'>",
 		},
 		"pdf_saved": {
 			"type": "boolean",
