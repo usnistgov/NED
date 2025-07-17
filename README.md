@@ -41,8 +41,8 @@ All observations of damage in the database are assigned into one of the three af
 ## Setting up the Django App
 To set up the Djago app to intialize and interact with the sqlite NED database, first set up your virtual environment and then run the commands below to create the sqlite database from the Django model
 ```
-python manage.py makemigrations ned
-python manage.py migrate ned
+python manage.py makemigrations
+python manage.py migrate
 ```
 ## Adding data to the database
 Data can be added to the database locally by either of the two methods
