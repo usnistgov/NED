@@ -1,0 +1,32 @@
+[
+    {
+        "id": "exp1502a",
+        "reference": "ARA-2012-EXP",
+        "specimen": "81.0",
+        "specimen_inspection_sequence": "",
+        "reviewer": "NIST",
+        "component": "D2022.A",
+        "comp_detail": "Hospital distrubution system - Braced",
+        "material": "Steel",
+        "size_class": "",
+        "test_type": "Dynamic, uniaxial",
+        "loading_protocol": "Synthetic table input motion compatible with AC156 response spectrum",
+        "peak_test_amplitude": "Peak acceleration = 1.31g Peak displacement= 8.65 in (4.3% inter-story drift) Increasing Intensities of IM from 5% to 100% of full scale motion",
+        "location": "NEES, University of Nevada, Reno",
+        "governing_design_standard": "",
+        "design_objective": "",
+        "comp_description": "RESTRAINED and WELDED Assembly Two water heaters (attached to shake table), one heat exchanger (atatched to shake table), three riser branches, and horizontal runs.  The piping assembly consists of 3in (out dia=3.5 in, thickness=0.216 in) and 4 in (out dia=4.5 in, thickness=0.237 in) schedule 40 ASTM A53 Grade B black steel pipe.  Water heater connected to 3 in file through four-bolt flanged connectionHeat Exhanger and all valves connected to 4 in pipe through eght-bolt flanged connectionHydrostatic pressure1/8 in dia galvanized 7 no.s of strands x19 wires per strand aircraft grade steel (with min break strength of 1700lbs) Cable restrainers used as seismic bracing 5/8 in dia all threaded rods for 4-in pipes /2 in dia all threaded rods for 3-in pipes Vertical hanger rods braced laterally along their length with a 1  5/8 in sq, 12 gauge strut to prevent buckling cross bolts in hanger clevises Welded assemblies (Root material E6010 and fill material E7018). Each joint was prepared with a 65o, 3/32-in root and 3/32-in landing.",
+        "ds_description": "Flanged connection joining the heat exchanger to the pipe began to leak (100% IM)",
+        "prior_damage": "",
+        "prior_damage_repaired": "",
+        "edp_metric": "Story Drift Ratio",
+        "edp_unit": "Ratio",
+        "edp_value": 0.043,
+        "alt_edp_metric": "",
+        "alt_edp_unit": "",
+        "alt_edp_value": "",
+        "ds_rank": null,
+        "ds_class": "Consequential",
+        "notes": ""
+    }
+]

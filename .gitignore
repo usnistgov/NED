@@ -1,1 +1,3 @@
 venv/
+ned_app/migrations/
+resources/data/
