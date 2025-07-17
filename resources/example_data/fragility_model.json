@@ -1,0 +1,20 @@
+[
+    {
+        "id": "B2011.001a",
+        "p58_fragility": "B2011.001a",
+        "component": "B2011.A",
+        "comp_detail": "",
+        "material": "",
+        "size_class": "",
+        "comp_description": "Exterior Wall - Cold formed steel walls with wood structural panel sheathing, interior - gypsum board - Costing for each 100 ft^2 Wall Panel. Assumed framing: 38 mil cold formed steel framing with 7/16 OSB and 3/8 plywood panel sheathing with overturning restraint at each end of the wall per AISI design standard. No. 8 screws 2\" to 6\" OC at perimeter and 12\" OC EW in field."
+    },
+    {
+        "id": "B2011.001b",
+        "p58_fragility": "B2011.001b",
+        "component": "B2011.A",
+        "comp_detail": "",
+        "material": "",
+        "size_class": "",
+        "comp_description": "Exterior Wall - Cold formed steel walls with wood structural panel sheathing, exterior - stucco one side - Costing for each 100 ft^2 Wall Panel. Assumed framing: 38 mil cold formed steel framing with 7/16 OSB and 3/8 plywood panel sheathing with overturning restraint at each end of the wall per AISI design standard. No. 8 screws 2\" to 6\" OC at perimeter and 12\" OC EW in field."
+    }
+]
