@@ -7,23 +7,16 @@ This repository provides remote hosting and version control for the development 
 ## Database Architecture
 The goal of this project is to develop a robust and scalable database of fragility and consequence models of nonstructural building elements for seismic performance evaluation. Data is organized in a way such that each data table represents an abtract portion of the fragility model, e.g., serperating observations of component performance from an experimentantal test from that of a fragility model and repair costs consequence models. It that way, that data is both nimble/scalable with new information and can be clearly linked back to original source data and models through explicit relational keys. The outcomes of this project will expand the applicability of performance- and recovery-based earthquake assessments, resulting in a publicly available database to support current research and building design. The figure below outlines the current portions of the database under development and future development plans.
  
-![image](https://github.com/user-attachments/assets/bdc7e08a-554e-4cfc-9a85-e0cfb10a2cad)
+<img width="3287" height="905" alt="ned_ERD" src="https://github.com/user-attachments/assets/dfba505e-a3d0-4797-98fb-fbcd8c9ef61a" />
 
 ## Repository Organization
-- **data** - initial database tables. Currently implemented as csv tables with attributes defined as column headers. Values in these tables are used to populate the initial sql database
-- **scehma** - data schema for each table in the *data* directory. Currenlty implemented as json files that provide the name, datatype, and description of each attribute (column) within each csv data table.
-- **visualization** - Juptyer notebook visualization and data interfacing scripts. Low-code alternative for developing GUI interactions. These scripts are usefull if you want to explore and visualize what data is available within the current database.
-- **ned** - Main ned Django application with custom mangament tools for mangaing the NED database, which is contained in the file `db.sqlite3`.
-
-### Data Tables
-- **db_experiment.csv** - Database containing observations of damage from experimental tests of nonstructural building components. Each database entry represents a sigle test of a given specimen (e.g., five different tests of a particular partion wall speciment represents five seperate entries in the table).
-- **db_fragility.csv** - Database containing seismic fragilities of nonstrcural building components. Each database entry represents a fragility model of an individual damage state (e.g., a FEMA P-58 fragility with three damage states would use three rows in this database).
-- **db_nistir.csv** - NIST IR Uniformat II Element Classification System. https://www.nist.gov/publications/uniformat-ii-elemental-classification-building-specifications-cost-estimating-and-cost
-- **db_reference.csv** - Database containing references of experimental programs used to populate *db_experiment.csv*.
-- **db_relate_exp_frag.csv** - Relational database table that develops a many-to-many relationship between experimental observations and seismic fragilities.
+- **db.sqlite3** - SQL implementation of the NED database.
+- **ned_app** - Django application (python) facilitating database management (e.g., model definition, etc).
+- **ned_proj** - Django project settings.
+- **visualization_tools** - Jupyter notebook workflows that interact with the NED database to illustrate backend interactions via python.
 
 ### Data Schema
-The following section provides a detailed description of several data attributes within the database. General descrptions of all attributes can be found in the *schema* subdirectory.
+Model and field descriptions are provided in the docsigns in ned_app/models.py. The overview below provides a bried description of two of the fields found in the experiment model.
 
 #### Component Subcategorization Hierarchy
 To categorize building components, we rely on the UNIFORMAT II element classification system (NISTIR 6389). However, this system only classifies nonstructural components at a high level, and further detail is needed to adequately separate different types of components within each category for the purpose of assessing building performance.  Therefore, we propose a new subcategorization hierarchy consisting of four nested component attributes:
@@ -54,13 +47,26 @@ To set up the Djago app to intialize and interact with the sqlite NED database, 
 python manage.py makemigrations ned
 python manage.py migrate ned
 ```
-
-Then run the following commands to intialize the database with data from the csvs in the \data directory:
+## Adding data to the database
+Data can be added to the database locally by either of the two methods
+1) Lauch the Django server and add data using the Django admin interface
+2) Configure the json files in `resources/data` and run the following command:
 ```
-python manage.py initialize_db data\nistir.csv Nistir
-python manage.py initialize_db data\reference.csv Reference
-python manage.py initialize_db data\experiment.csv Experiment
-python manage.py initialize_db data\fragility.csv Fragility
+python manage.py ingest
+```
+>Example json files can be found in `resources/example_data`
+
+## Launch the Django Admin
+To launch and take advantage of the administrative interface, run the web server:
+```
+python manage.py runserver
+```
+Then, in a browser, launch the URL: http://localhost:8000/admin/
+
+
+>Note, you may need to set up your own admin username and password by running the following command*
+```
+python manage.py createsuperuser
 ```
 
 ### Tip on virtual environment
