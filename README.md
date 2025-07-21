@@ -7,7 +7,7 @@ This repository provides remote hosting and version control for the development 
 ## Database Architecture
 The goal of this project is to develop a robust and scalable database of fragility and consequence models of nonstructural building elements for seismic performance evaluation. Data is organized in a way such that each data table represents an abtract portion of the fragility model, e.g., serperating observations of component performance from an experimentantal test from that of a fragility model and repair costs consequence models. It that way, that data is both nimble/scalable with new information and can be clearly linked back to original source data and models through explicit relational keys. The outcomes of this project will expand the applicability of performance- and recovery-based earthquake assessments, resulting in a publicly available database to support current research and building design. The figure below outlines the current portions of the database under development and future development plans.
  
-<img width="3287" height="905" alt="ned_ERD" src="https://github.com/user-attachments/assets/dfba505e-a3d0-4797-98fb-fbcd8c9ef61a" />
+<img width="859" height="1918" alt="ned_ERD" src="https://github.com/user-attachments/assets/ba00a466-9ce4-454d-b671-b5bcc5b4d75c" />
 
 ## Repository Organization
 - **db.sqlite3** - SQL implementation of the NED database.
@@ -38,13 +38,24 @@ The purpose of the DS Class attributes is to provides a first-pass structured gr
 
 All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
 
-## Setting up the Django App
-To set up the Djago app to intialize and interact with the sqlite NED database, first set up your virtual environment and then run the commands below to create the sqlite database from the Django model
+## Contributers Guide
+
+### Setting up a Virtual Environment (optional but recommended)
+Setting up a virtual environment helps to ensure you are able to setup an isolated project for using the NED database locally and aviod conflicts with other dependancies. While there are many ways to setup a virtual environment, below is an example using Python's built in `venv` module.
 ```
-python manage.py makemigrations
-python manage.py migrate
+python -m venv venv      # create a virtual environment called "venv"
+venv\Sripts\activate     # (On Windows) activate your virtual environmnet
+source venv/bin/activate # (On Mac) activate your virtual environmnet
 ```
-## Adding data to the database
+
+### Installing the Required Packages
+Be sure that all pacakages below habe been installed in your virtual or global environment.
+```
+pip install Django
+pip install djangorestframework
+```
+
+### Adding Data to the Database
 Data can be added to the database locally by either of the two methods
 1) Lauch the Django server and add data using the Django admin interface
 2) Configure the json files in `resources/data` and run the following command:
@@ -53,7 +64,7 @@ python manage.py ingest
 ```
 >Example json files can be found in `resources/example_data`
 
-## Launch the Django Admin
+### Launch the Django Admin
 To launch and take advantage of the administrative interface, run the web server:
 ```
 python manage.py runserver
@@ -66,14 +77,12 @@ Then, in a browser, launch the URL: http://localhost:8000/admin/
 python manage.py createsuperuser
 ```
 
-### Tip on virtual environment
-For running python locally, I like to use visual studio code with the DB viewer extension, and set up the virtual environment by running the following commands
+### Making Changes to the Schema (not recommended)
+Changing the Django model may cause data corruption and validations issue with the existing data. After making changes, run the following commands to apply the changes to the sql db.
 ```
--m venv venv         # create a virtual environment called "venv"
-venv\Sripts\activate # activate your virtual environmnet
-pip install Django   # make sure the Django library is installed 
+python manage.py makemigrations
+python manage.py migrate
 ```
-
 ---
 
 This repository is principally developed and maintained by:
