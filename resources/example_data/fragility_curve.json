@@ -1,0 +1,17 @@
+[
+    {
+        "fragility_model": "B2011.001a",
+        "reviewer": "NIST",
+        "source": "Literature",
+        "basis": "Experiment",
+        "num_observations": null,
+        "reference": "ARA-2012-EXP",
+        "edp_metric": "Joint Rotation",
+        "edp_unit": "Radians",
+        "ds_rank": 1,
+        "ds_description": "First Leakage",
+        "median": 0.006,
+        "beta": 0.204,
+        "probability": null
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "id": "ARA-2012-EXP",
+        "name": "Experimental and Analytical Studies of Hospital Piping Assemblies Subjected to Seismic Loading",
+        "author": "Arash E. Zaghi, E. Maragakis, Ahmad Itani, Elliot Goodwin",
+        "year": 2012,
+        "study_type": "Experiment",
+        "comp_type": "Hospital Piping Assembly",
+        "doi": "https://doi.org/10.1193/1.3672911",
+        "citation": "",
+        "publication_type": "Unknown",
+        "pdf_saved": "True"
+    },
+    {
+        "id": "ARA-2012-NOV",
+        "name": "Novel Sliding/frictional Connections for Improved Seismic Performance of Gypsum Wallboard Partitions",
+        "author": "Araya-Letelier and Miranda",
+        "year": 2012,
+        "study_type": "Experiment",
+        "comp_type": "Partition Walls",
+        "doi": "https://doi.org/10.1193/1.3672911",
+        "citation": "Araya-Letelier, Gerardo and Miranda, Eduardo. (2012). Novel Sliding/Frictional Connections for Improved Seismic Performance of Gypsum Wallboard Partitions. 15th World Conference on Earthquake Engineering, Lisbon, Portugal.",
+        "publication_type": "Conference paper",
+        "pdf_saved": "True"
+    }
+]
