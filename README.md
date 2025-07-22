@@ -5,8 +5,8 @@
 This repository provides remote hosting and version control for the development of NED, the Nonstructural Element Database. NED is a relational database that collects information from experimental, analytical, and historic performance observations of nonstructural building elements into seismic fragilities and consequence models to support building-specific seismic performance research and assessments. Currently, the project is still in its early development phase and does not yet have consequence models or data from historical events, but has collected over 1500 experimental data points and compiled a fragility data set that includes and expands upon the full FEMA P-58 nonstructural database. The experimental test data and seismic fragility are explicitly related through primary and foreign key architecture within the database to promote data transparency and reuse. Once completed, NED will be hosted on a stable and scalable web-based backend framework with restful API access points and a stand-alone GUI for use by engineers and researchers.
 
 ## Database Architecture
-The goal of this project is to develop a robust and scalable database of fragility and consequence models of nonstructural building elements for seismic performance evaluation. Data is organized in a way such that each data table represents an abtract portion of the fragility model, e.g., serperating observations of component performance from an experimentantal test from that of a fragility model and repair costs consequence models. It that way, that data is both nimble/scalable with new information and can be clearly linked back to original source data and models through explicit relational keys. The outcomes of this project will expand the applicability of performance- and recovery-based earthquake assessments, resulting in a publicly available database to support current research and building design. The figure below outlines the current portions of the database under development and future development plans.
- 
+The goal of this project is to develop a robust and scalable database of fragility and consequence models of nonstructural building elements for seismic performance evaluation. Data is organized in a way such that each data table represents an abstract portion of the fragility model, e.g., separating observations of component performance from an experimental test from that of a fragility model and repair costs consequence models. In that way, that data is both nimble/scalable with new information and can be clearly linked back to original source data and models through explicit relational keys. The outcomes of this project will expand the applicability of performance- and recovery-based earthquake assessments, resulting in a publicly available database to support current research and building design. The figure below outlines the current portions of the database under development and future development plans.
+
 <img width="859" height="1918" alt="ned_ERD" src="https://github.com/user-attachments/assets/ba00a466-9ce4-454d-b671-b5bcc5b4d75c" />
 
 ## Repository Organization
@@ -16,7 +16,7 @@ The goal of this project is to develop a robust and scalable database of fragili
 - **visualization_tools** - Jupyter notebook workflows that interact with the NED database to illustrate backend interactions via python.
 
 ### Data Schema
-Model and field descriptions are provided in the docsigns in ned_app/models.py. The overview below provides a bried description of two of the fields found in the experiment model.
+Model and field descriptions are provided in the docstrings in ned_app/models.py. The overview below provides a brief description of two of the fields found in the experiment model.
 
 #### Component Subcategorization Hierarchy
 To categorize building components, we rely on the UNIFORMAT II element classification system (NISTIR 6389). However, this system only classifies nonstructural components at a high level, and further detail is needed to adequately separate different types of components within each category for the purpose of assessing building performance.  Therefore, we propose a new subcategorization hierarchy consisting of four nested component attributes:
@@ -41,15 +41,15 @@ All observations of damage in the database are assigned into one of the three af
 ## Contributers Guide
 
 ### Setting up a Virtual Environment (optional but recommended)
-Setting up a virtual environment helps to ensure you are able to setup an isolated project for using the NED database locally and aviod conflicts with other dependancies. While there are many ways to setup a virtual environment, below is an example using Python's built in `venv` module.
+Setting up a virtual environment helps to ensure you are able to setup an isolated project for using the NED database locally and avoid conflicts with other dependencies. While there are many ways to setup a virtual environment, below is an example using Python's built in `venv` module.
 ```
 python -m venv venv      # create a virtual environment called "venv"
-venv\Sripts\activate     # (On Windows) activate your virtual environmnet
-source venv/bin/activate # (On Mac) activate your virtual environmnet
+venv\Scripts\activate     # (On Windows) activate your virtual environment
+source venv/bin/activate # (On Mac) activate your virtual environment
 ```
 
 ### Installing the Required Packages
-Be sure that all pacakages below habe been installed in your virtual or global environment.
+Be sure that all packages below have been installed in your virtual or global environment.
 ```
 pip install Django
 pip install djangorestframework
@@ -57,7 +57,7 @@ pip install djangorestframework
 
 ### Adding Data to the Database
 Data can be added to the database locally by either of the two methods
-1) Lauch the Django server and add data using the Django admin interface
+1) Launch the Django server and add data using the Django admin interface
 2) Configure the json files in `resources/data` and run the following command:
 ```
 python manage.py ingest
