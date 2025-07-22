@@ -38,7 +38,7 @@ The purpose of the DS Class attribute is to provide a first-pass structured grou
 
 All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
 
-## Contributers Guide
+## Contributors Guide
 
 ### Setting up a Virtual Environment (optional but recommended)
 Setting up a virtual environment helps to ensure you are able to setup an isolated project for using the NED database locally and avoid conflicts with other dependencies. While there are many ways to setup a virtual environment, below is an example using Python's built in `venv` module.
@@ -83,6 +83,16 @@ Changing the Django model may cause data corruption and validations issue with t
 python manage.py makemigrations
 python manage.py migrate
 ```
+
+### Code quality assurance
+We use automated checks at every commit to maintain a high-quality codebase. Please ensure the following tests pass before committing new code.
+
+#### Spell checking with Codespell
+Codespell can catch spelling mistakes in text files. Add any words that generate false positives to the `ignore_words.txt` to skip them. Entire files can be skipped by adding to the `skip` list in the `pyproject.toml` file. Run the spell check with the following command:
+```
+codespell .
+```
+
 ---
 
 This repository is principally developed and maintained by:
