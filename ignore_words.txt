@@ -1,0 +1,34 @@
+# Technical abbreviations
+NED
+ACI
+API
+JSON
+XML
+HTTP
+HTTPS
+URL
+URI
+UUID
+SQL
+NoSQL
+
+# Domain-specific terms
+multistory
+
+# Common technical terms
+config
+configs
+init
+utils
+async
+auth
+repo
+repos
+
+# File extensions
+yml
+yaml
+toml
+json
+csv
+xlsx
