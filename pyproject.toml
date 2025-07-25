@@ -1,0 +1,13 @@
+[tool.codespell]
+ignore-words = "ignore_words.txt"
+skip = [
+    "*/ned_app/*",
+    "*/ned_proj/*",
+    "*/resources/*",
+    "*/visualization_tools/*",
+    'fair-software.md'
+]
+check-filenames = true
+check-hidden = false
+count = true
+quiet-level = 2
