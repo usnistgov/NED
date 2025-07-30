@@ -35,6 +35,7 @@ class Reference(models.Model):
     citation = models.TextField(_("citation"), blank = True, help_text="Full reference for publication, including authors, year, title, and publisher. Only required if no DOI is available.")
     publication_type = models.CharField(_("publication type"), max_length=50, blank = True, help_text="A classification of the type of publication.")
     pdf_saved = models.BooleanField(_("pdf saved"), default=False, help_text="Is a pdf saved in the archive repository.")
+    csl_data = models.JSONField(_("csl data"), null=True, blank=True, help_text="Reference data in CSL-JSON format.")
 
     class Meta:
         verbose_name = "Reference"
@@ -178,10 +179,10 @@ class FragilityModel(models.Model):
     class Meta:
         verbose_name = "Fragility Model"
         verbose_name_plural = "Fragility Models"
-    
+
     def __str__(self):
         return self.id
-    
+
 class ExperimentFragilityModelBridge(models.Model):
     """
     A bridge model facilitating a many-to-many relationship between experiments and fragility models.
@@ -197,10 +198,10 @@ class ExperimentFragilityModelBridge(models.Model):
     class Meta:
         verbose_name = "Experiment - Fragility Pair"
         verbose_name_plural = "Experiment - Fragility Pairs"
-    
+
     def __str__(self):
         return f"{self.experiment}_{self.fragility_model}"
-    
+
 class FragilityCurve(models.Model):
     """
     A model representing an individual fragility curve, as a lognormal distribution, for a particular damage state of interest
@@ -305,10 +306,10 @@ class NistirMajorGroupElement(models.Model):
     class Meta:
         verbose_name = "NISTIR Major Group Element"
         verbose_name_plural = "NISTIR Major Group Elements"
-    
+
     def __str__(self):
         return self.name
-    
+
 class NistirGroupElement(models.Model):
     """
     A model representing an Sub-group classification in the NISTIR building component taxonomy.
@@ -327,10 +328,10 @@ class NistirGroupElement(models.Model):
     class Meta:
         verbose_name = "NISTIR Group Element"
         verbose_name_plural = "NISTIR Group Elements"
-    
+
     def __str__(self):
         return self.name
-    
+
 class NistirIndivElement(models.Model):
     """
     A model representing an building element in the NISTIR building component taxonomy.
@@ -349,10 +350,10 @@ class NistirIndivElement(models.Model):
     class Meta:
         verbose_name = "NISTIR Individual Element"
         verbose_name_plural = "NISTIR Individual Elements"
-    
+
     def __str__(self):
         return self.name
-    
+
 class NistirSubElement(models.Model):
     """
     A model representing a subcategorization of an element in the NISTIR building component taxonomy.
@@ -371,6 +372,6 @@ class NistirSubElement(models.Model):
     class Meta:
         verbose_name = "NISTIR Sub Element"
         verbose_name_plural = "NISTIR Sub Elements"
-    
+
     def __str__(self):
         return self.name
