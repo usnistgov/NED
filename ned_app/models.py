@@ -4,18 +4,16 @@ from django.utils.translation import gettext as _
 # Create your models here.
 class Reference(models.Model):
     """
-    A model representing a person.
+    A model representing a reference to a research publication.
 
     Attributes:
-        name (str): The title of paper or manuscript.
-        author (str): The name(s) of the author(s).
-        year (int): The year the study was published.
+        title (str): The title of paper or manuscript (auto-populated from csl_data).
+        author (str): The name(s) of the author(s) (auto-populated from csl_data).
+        year (int): The year the study was published (auto-populated from csl_data).
         study_type (str): A classification of the type of study conducted.
         comp_type (str): The type of component(s) invenstigated in study.
-        doi (str): Digital Object identifier. Leave empty if the paper does not have a DOI.
-        citation (str): Full reference for publication, including authors, year, title, and publisher. Only required if no DOI is available.
-        publication_type (str): A classification of the type of publication.
         pdf_saved (bool): Is a pdf saved in the archive repository.
+        csl_data (dict): Reference data in CSL-JSON format.
     """
 
     class studytypeChoices(models.TextChoices):
@@ -26,14 +24,11 @@ class Reference(models.Model):
         OTHER = 'Other'
 
     id = models.CharField(_("id"), primary_key=True, max_length=255)
-    name = models.CharField(_("name"), max_length=255, blank = False, help_text="The title of paper or manuscript.")
-    author = models.CharField(_("author"), max_length=255, blank = False, help_text="The name(s) of the author(s).")
-    year = models.IntegerField(_("year"), blank = False, null = False, help_text="The year the study was published.")
+    title = models.CharField(_("title"), default='', max_length=255, blank = False, editable=False, help_text="The title of paper or manuscript.")
+    author = models.CharField(_("author"), max_length=255, blank = False, editable=False, help_text="The name(s) of the author(s).")
+    year = models.IntegerField(_("year"), blank = False, null = False, editable=False, help_text="The year the study was published.")
     study_type = models.CharField(_("study type"), max_length=50, choices=studytypeChoices.choices, default=studytypeChoices.OTHER, help_text="A classification of the type of study conducted.")
     comp_type = models.CharField(_("component type"), max_length=255, blank = True, help_text="The type of component(s) invenstigated in study.")
-    doi = models.URLField(_("doi"), max_length=200, blank = True, null = True, help_text="Digital Object identifier. Leave empty if the paper does not have a DOI.")
-    citation = models.TextField(_("citation"), blank = True, help_text="Full reference for publication, including authors, year, title, and publisher. Only required if no DOI is available.")
-    publication_type = models.CharField(_("publication type"), max_length=50, blank = True, help_text="A classification of the type of publication.")
     pdf_saved = models.BooleanField(_("pdf saved"), default=False, help_text="Is a pdf saved in the archive repository.")
     csl_data = models.JSONField(_("csl data"), null=True, blank=True, help_text="Reference data in CSL-JSON format.")
 
@@ -42,14 +37,14 @@ class Reference(models.Model):
         verbose_name_plural = "References"
 
     def __str__(self):
-        return self.name
+        return self.title
 
     def save(self, *args, **kwargs):
         """Override save to automatically populate fields from csl_data."""
         if self.csl_data:
-            # Populate name field from csl_data title
+            # Populate title field from csl_data title
             if 'title' in self.csl_data:
-                self.name = self.csl_data['title']
+                self.title = self.csl_data['title']
 
             # Populate year field from csl_data issued date-parts
             if 'issued' in self.csl_data and 'date-parts' in self.csl_data['issued']:

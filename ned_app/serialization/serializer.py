@@ -8,7 +8,7 @@ from ned_app.models import Reference, Component, FragilityModel, Experiment, Exp
 class ReferenceSerializer(serializers.ModelSerializer):
     csl_data = serializers.JSONField()
     # Make auto-populated fields optional since they'll be set by the model's save() method
-    name = serializers.CharField(required=False, allow_blank=True)
+    title = serializers.CharField(required=False, allow_blank=True)
     author = serializers.CharField(required=False, allow_blank=True)
     year = serializers.IntegerField(required=False, allow_null=True)
 
