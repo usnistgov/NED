@@ -44,6 +44,43 @@ class Reference(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        """Override save to automatically populate fields from csl_data."""
+        if self.csl_data:
+            # Populate name field from csl_data title
+            if 'title' in self.csl_data:
+                self.name = self.csl_data['title']
+
+            # Populate year field from csl_data issued date-parts
+            if 'issued' in self.csl_data and 'date-parts' in self.csl_data['issued']:
+                date_parts = self.csl_data['issued']['date-parts']
+                if date_parts and len(date_parts) > 0 and len(date_parts[0]) > 0:
+                    self.year = date_parts[0][0]
+
+            # Populate author field with formatted string from csl_data authors
+            if 'author' in self.csl_data:
+                authors = self.csl_data['author']
+                if authors:
+                    family_names = []
+                    for author in authors:
+                        if 'family' in author:
+                            family_names.append(author['family'])
+                        elif 'literal' in author:
+                            # For literal names, try to extract family name (last word)
+                            literal_parts = author['literal'].split()
+                            if literal_parts:
+                                family_names.append(literal_parts[-1])
+
+                    if family_names:
+                        if len(family_names) == 1:
+                            self.author = family_names[0]
+                        elif len(family_names) == 2:
+                            self.author = f"{family_names[0]} and {family_names[1]}"
+                        else:  # 3 or more authors
+                            self.author = f"{family_names[0]} et al."
+
+        super().save(*args, **kwargs)
+
 class Experiment(models.Model):
     """
     A model representing a person.

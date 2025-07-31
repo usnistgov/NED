@@ -1,11 +1,41 @@
+import json
+import os
+import jsonschema
+from django.conf import settings
 from rest_framework import serializers
 from ned_app.models import Reference, Component, FragilityModel, Experiment, ExperimentFragilityModelBridge, FragilityCurve, NistirMajorGroupElement, NistirGroupElement, NistirIndivElement, NistirSubElement
 
 class ReferenceSerializer(serializers.ModelSerializer):
+    csl_data = serializers.JSONField()
+    # Make auto-populated fields optional since they'll be set by the model's save() method
+    name = serializers.CharField(required=False, allow_blank=True)
+    author = serializers.CharField(required=False, allow_blank=True)
+    year = serializers.IntegerField(required=False, allow_null=True)
+
     class Meta:
         model = Reference
         fields = '__all__'
         # exclude = ('field_abc',)  # useful if there are any exclusions to consider
+
+    def validate_csl_data(self, value):
+        """Validate csl_data against CSL-JSON schema."""
+        if not value:
+            raise serializers.ValidationError("csl_data is required")
+
+        # Load CSL schema for validation
+        schema_path = os.path.join(settings.BASE_DIR, 'ned_app', 'schemas', 'csl-data.json')
+        try:
+            with open(schema_path, 'r') as f:
+                csl_schema = json.load(f)
+        except FileNotFoundError:
+            raise serializers.ValidationError(f"CSL schema not found at {schema_path}")
+
+        try:
+            jsonschema.validate([value], csl_schema)
+        except jsonschema.ValidationError as e:
+            raise serializers.ValidationError(f"CSL data validation failed: {e}")
+
+        return value
 
     # create the Reference record in the database via the framework
     def create(self, json_data) -> Reference:
@@ -13,7 +43,7 @@ class ReferenceSerializer(serializers.ModelSerializer):
         reference: Reference = Reference.objects.create(**json_data)
 
         return reference
-    
+
 class ComponentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Component
@@ -25,7 +55,7 @@ class ComponentSerializer(serializers.ModelSerializer):
         component: Component = Component.objects.create(**json_data)
 
         return component
-    
+
 class FragilityModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = FragilityModel
@@ -37,7 +67,7 @@ class FragilityModelSerializer(serializers.ModelSerializer):
         fragility_model: FragilityModel = FragilityModel.objects.create(**json_data)
 
         return fragility_model
-    
+
 class ExperimentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experiment
@@ -49,7 +79,7 @@ class ExperimentSerializer(serializers.ModelSerializer):
         experiment: Experiment = Experiment.objects.create(**json_data)
 
         return experiment
-    
+
 class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExperimentFragilityModelBridge
@@ -60,7 +90,7 @@ class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
         bridge: ExperimentFragilityModelBridge = ExperimentFragilityModelBridge.objects.create(**json_data)
 
         return bridge
-    
+
 class FragilityCurveSerializer(serializers.ModelSerializer):
     class Meta:
         model = FragilityCurve
@@ -71,9 +101,9 @@ class FragilityCurveSerializer(serializers.ModelSerializer):
         curve: FragilityCurve = FragilityCurve.objects.create(**json_data)
 
         return curve
-    
+
 class NistirSubElementSerializer(serializers.ModelSerializer):
-        
+
     class Meta:
         model = NistirSubElement
         # fields = '__all__'
@@ -86,9 +116,9 @@ class NistirSubElementSerializer(serializers.ModelSerializer):
         return sub_element 
 
 class NistirIndivElementSerializer(serializers.ModelSerializer):
-    
+
     sub_elements = NistirSubElementSerializer(many = True, read_only = False, required = False) # NOTE: not requiring that all sub-elements be present in the JSON data
-    
+
     class Meta:
         model = NistirIndivElement
         # fields = '__all__'
@@ -103,7 +133,7 @@ class NistirIndivElementSerializer(serializers.ModelSerializer):
 class NistirGroupElementSerializer(serializers.ModelSerializer):
     # adding as its of field ensures the serializer picks up and deserializes the indiv_elements content
     indiv_elements = NistirIndivElementSerializer(many = True, read_only = False)
-    
+
     class Meta:
         model = NistirGroupElement
         # fields = '__all__'
@@ -119,7 +149,7 @@ class NistirGroupElementSerializer(serializers.ModelSerializer):
 class NistirMajorGroupElementSerializer(serializers.ModelSerializer):
 
     group_elements = NistirGroupElementSerializer(many = True, read_only = False)
-    
+
     class Meta:
         model = NistirMajorGroupElement
         fields = '__all__' # includes the declared "group_elements" field above
@@ -129,11 +159,11 @@ class NistirMajorGroupElementSerializer(serializers.ModelSerializer):
     def create(self, validated_data) -> NistirMajorGroupElement:
         group_elements_data = validated_data.pop('group_elements')
         major_group_element: NistirMajorGroupElement = NistirMajorGroupElement.objects.create(**validated_data)
-        
+
         for group_element_data in group_elements_data:
             indiv_elements_data = group_element_data.pop('indiv_elements')
             group_element: NistirGroupElement = NistirGroupElement.objects.create(major_group_element=major_group_element, **group_element_data)
-            
+
             for indiv_element_data in indiv_elements_data:
                 if 'sub_elements' in indiv_element_data:
                     sub_elements_data = indiv_element_data.pop('sub_elements')
@@ -143,5 +173,5 @@ class NistirMajorGroupElementSerializer(serializers.ModelSerializer):
                         sub_element: NistirSubElement = NistirSubElement.objects.create(indiv_element = indiv_element, **sub_element_data)
                 else:
                     indiv_element: NistirIndivElement = NistirIndivElement.objects.create(group_element = group_element, **indiv_element_data)
-        
+
         return major_group_element

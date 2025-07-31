@@ -40,9 +40,9 @@ def load_data(data_filename: str):
         except json.JSONDecodeError as ex:
             err_msg = (f"A '{ex.__class__.__name__}' exception was trapped while trying to parse the following data file content: {data_filepath()}. Message: {ex}")
             raise DataFileLoadError(err_msg)
-        
+
         return data_file_content
-    
+
 def import_avail_data() -> None: 
 
     if PROCESS_REFERENCES:
@@ -50,16 +50,21 @@ def import_avail_data() -> None:
         print("processing JSON Reference data...")
         loaded_data = load_data(REFERENCES_DATA_FILENAME)
         for item in loaded_data:
+            # Expect input JSON files to have a csl_data key with CSL-JSON dictionary
+            if 'csl_data' not in item:
+                err_msg = f"Reference item missing required 'csl_data' field: {item.get('id', 'unknown')}"
+                raise DataFileDeserializationError(err_msg)
+
             references_serializer = ReferenceSerializer(data=item)
             if references_serializer.is_valid():
                 reference: Reference = references_serializer.save() # creates and saves
-                print(f"Reference ID '{reference.id} successfully ingested")
+                print(f"Reference ID '{reference.id}' successfully ingested")
             else:
                 err_msg = f"There was a least one validation error on references data file deserialization: {references_serializer.errors}"
                 raise DataFileDeserializationError(err_msg)
     else:
         print("processing references bypassed")
-        
+
     if PROCESS_NISTIRS:
         # process NISTIR data
         print("processing JSON NISTR data...")
@@ -149,5 +154,3 @@ def import_avail_data() -> None:
                 raise DataFileDeserializationError(err_msg)
     else:
         print("processing fragility curve data bypassed")
-    
- 
