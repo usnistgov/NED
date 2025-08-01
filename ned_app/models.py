@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext as _
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Reference(models.Model):
@@ -24,13 +25,13 @@ class Reference(models.Model):
         OTHER = 'Other'
 
     id = models.CharField(_("id"), primary_key=True, max_length=255)
-    title = models.CharField(_("title"), default='', max_length=255, blank = False, editable=False, help_text="The title of paper or manuscript.")
-    author = models.CharField(_("author"), max_length=255, blank = False, editable=False, help_text="The name(s) of the author(s).")
-    year = models.IntegerField(_("year"), blank = False, null = False, editable=False, help_text="The year the study was published.")
+    title = models.CharField(_("title"), max_length=255, null = False, blank = False, editable=False, help_text="The title of paper or manuscript.")
+    author = models.CharField(_("author"), max_length=255, null = False, blank = False, editable=False, help_text="The name(s) of the author(s).")
+    year = models.IntegerField(_("year"), null = False, blank = False, editable=False, help_text="The year the study was published.")
     study_type = models.CharField(_("study type"), max_length=50, choices=studytypeChoices.choices, default=studytypeChoices.OTHER, help_text="A classification of the type of study conducted.")
     comp_type = models.CharField(_("component type"), max_length=255, blank = True, help_text="The type of component(s) invenstigated in study.")
     pdf_saved = models.BooleanField(_("pdf saved"), default=False, help_text="Is a pdf saved in the archive repository.")
-    csl_data = models.JSONField(_("csl data"), null=True, blank=True, help_text="Reference data in CSL-JSON format.")
+    csl_data = models.JSONField(_("csl data"), null=False, blank=False, help_text="Reference data in CSL-JSON format.")
 
     class Meta:
         verbose_name = "Reference"
@@ -41,6 +42,33 @@ class Reference(models.Model):
 
     def save(self, *args, **kwargs):
         """Override save to automatically populate fields from csl_data."""
+        # Validate required keys in csl_data before populating denormalized fields
+        if self.csl_data:
+            # Check for required keys and non-empty values
+            if 'title' not in self.csl_data or not self.csl_data['title']:
+                raise ValidationError("csl_data must contain a non-empty 'title' field")
+
+            if 'author' not in self.csl_data or not self.csl_data['author']:
+                raise ValidationError("csl_data must contain a non-empty 'author' field")
+
+            # Check for valid issued year
+            if 'issued' not in self.csl_data:
+                raise ValidationError("csl_data must contain an 'issued' field")
+
+            issued = self.csl_data['issued']
+            if 'date-parts' not in issued:
+                raise ValidationError("csl_data 'issued' field must contain 'date-parts'")
+
+            date_parts = issued['date-parts']
+            if not date_parts or len(date_parts) == 0 or len(date_parts[0]) == 0:
+                raise ValidationError("csl_data 'issued' field must contain valid date-parts with at least a year")
+
+            year = date_parts[0][0]
+            if not isinstance(year, int) or year <= 0:
+                raise ValidationError("csl_data 'issued' field must contain a valid year")
+        else:
+            raise ValidationError("csl_data is required and cannot be empty")
+
         if self.csl_data:
             # Populate title field from csl_data title
             if 'title' in self.csl_data:
