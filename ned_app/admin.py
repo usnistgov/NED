@@ -8,7 +8,7 @@ from ned_app.models import Reference, Component, Experiment, FragilityCurve, Fra
 @admin.register(Reference)
 class ReferenceAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('id','name','author')
+    list_display = ('id','title','author','year')
 
 @admin.register(Experiment)
 class ExperimentAdmin(admin.ModelAdmin):

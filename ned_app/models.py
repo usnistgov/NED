@@ -1,21 +1,20 @@
 from django.db import models
 from django.utils.translation import gettext as _
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Reference(models.Model):
     """
-    A model representing a person.
+    A model representing a reference to a research publication.
 
     Attributes:
-        name (str): The title of paper or manuscript.
-        author (str): The name(s) of the author(s).
-        year (int): The year the study was published.
+        title (str): The title of paper or manuscript (auto-populated from csl_data).
+        author (str): The name(s) of the author(s) (auto-populated from csl_data).
+        year (int): The year the study was published (auto-populated from csl_data).
         study_type (str): A classification of the type of study conducted.
         comp_type (str): The type of component(s) invenstigated in study.
-        doi (str): Digital Object identifier. Leave empty if the paper does not have a DOI.
-        citation (str): Full reference for publication, including authors, year, title, and publisher. Only required if no DOI is available.
-        publication_type (str): A classification of the type of publication.
         pdf_saved (bool): Is a pdf saved in the archive repository.
+        csl_data (dict): Reference data in CSL-JSON format.
     """
 
     class studytypeChoices(models.TextChoices):
@@ -26,22 +25,84 @@ class Reference(models.Model):
         OTHER = 'Other'
 
     id = models.CharField(_("id"), primary_key=True, max_length=255)
-    name = models.CharField(_("name"), max_length=255, blank = False, help_text="The title of paper or manuscript.")
-    author = models.CharField(_("author"), max_length=255, blank = False, help_text="The name(s) of the author(s).")
-    year = models.IntegerField(_("year"), blank = False, null = False, help_text="The year the study was published.")
+    title = models.CharField(_("title"), max_length=255, null = False, blank = False, editable=False, help_text="The title of paper or manuscript.")
+    author = models.CharField(_("author"), max_length=255, null = False, blank = False, editable=False, help_text="The name(s) of the author(s).")
+    year = models.IntegerField(_("year"), null = False, blank = False, editable=False, help_text="The year the study was published.")
     study_type = models.CharField(_("study type"), max_length=50, choices=studytypeChoices.choices, default=studytypeChoices.OTHER, help_text="A classification of the type of study conducted.")
     comp_type = models.CharField(_("component type"), max_length=255, blank = True, help_text="The type of component(s) invenstigated in study.")
-    doi = models.URLField(_("doi"), max_length=200, blank = True, null = True, help_text="Digital Object identifier. Leave empty if the paper does not have a DOI.")
-    citation = models.TextField(_("citation"), blank = True, help_text="Full reference for publication, including authors, year, title, and publisher. Only required if no DOI is available.")
-    publication_type = models.CharField(_("publication type"), max_length=50, blank = True, help_text="A classification of the type of publication.")
     pdf_saved = models.BooleanField(_("pdf saved"), default=False, help_text="Is a pdf saved in the archive repository.")
+    csl_data = models.JSONField(_("csl data"), null=False, blank=False, help_text="Reference data in CSL-JSON format.")
 
     class Meta:
         verbose_name = "Reference"
         verbose_name_plural = "References"
 
     def __str__(self):
-        return self.name
+        return self.title
+
+    def save(self, *args, **kwargs):
+        """Override save to automatically populate fields from csl_data."""
+        # Validate required keys in csl_data before populating denormalized fields
+        if self.csl_data:
+            # Check for required keys and non-empty values
+            if 'title' not in self.csl_data or not self.csl_data['title']:
+                raise ValidationError("csl_data must contain a non-empty 'title' field")
+
+            if 'author' not in self.csl_data or not self.csl_data['author']:
+                raise ValidationError("csl_data must contain a non-empty 'author' field")
+
+            # Check for valid issued year
+            if 'issued' not in self.csl_data:
+                raise ValidationError("csl_data must contain an 'issued' field")
+
+            issued = self.csl_data['issued']
+            if 'date-parts' not in issued:
+                raise ValidationError("csl_data 'issued' field must contain 'date-parts'")
+
+            date_parts = issued['date-parts']
+            if not date_parts or len(date_parts) == 0 or len(date_parts[0]) == 0:
+                raise ValidationError("csl_data 'issued' field must contain valid date-parts with at least a year")
+
+            year = date_parts[0][0]
+            if not isinstance(year, int) or year <= 0:
+                raise ValidationError("csl_data 'issued' field must contain a valid year")
+        else:
+            raise ValidationError("csl_data is required and cannot be empty")
+
+        if self.csl_data:
+            # Populate title field from csl_data title
+            if 'title' in self.csl_data:
+                self.title = self.csl_data['title']
+
+            # Populate year field from csl_data issued date-parts
+            if 'issued' in self.csl_data and 'date-parts' in self.csl_data['issued']:
+                date_parts = self.csl_data['issued']['date-parts']
+                if date_parts and len(date_parts) > 0 and len(date_parts[0]) > 0:
+                    self.year = date_parts[0][0]
+
+            # Populate author field with formatted string from csl_data authors
+            if 'author' in self.csl_data:
+                authors = self.csl_data['author']
+                if authors:
+                    family_names = []
+                    for author in authors:
+                        if 'family' in author:
+                            family_names.append(author['family'])
+                        elif 'literal' in author:
+                            # For literal names, try to extract family name (last word)
+                            literal_parts = author['literal'].split()
+                            if literal_parts:
+                                family_names.append(literal_parts[-1])
+
+                    if family_names:
+                        if len(family_names) == 1:
+                            self.author = family_names[0]
+                        elif len(family_names) == 2:
+                            self.author = f"{family_names[0]} and {family_names[1]}"
+                        else:  # 3 or more authors
+                            self.author = f"{family_names[0]} et al."
+
+        super().save(*args, **kwargs)
 
 class Experiment(models.Model):
     """
@@ -178,10 +239,10 @@ class FragilityModel(models.Model):
     class Meta:
         verbose_name = "Fragility Model"
         verbose_name_plural = "Fragility Models"
-    
+
     def __str__(self):
         return self.id
-    
+
 class ExperimentFragilityModelBridge(models.Model):
     """
     A bridge model facilitating a many-to-many relationship between experiments and fragility models.
@@ -197,10 +258,10 @@ class ExperimentFragilityModelBridge(models.Model):
     class Meta:
         verbose_name = "Experiment - Fragility Pair"
         verbose_name_plural = "Experiment - Fragility Pairs"
-    
+
     def __str__(self):
         return f"{self.experiment}_{self.fragility_model}"
-    
+
 class FragilityCurve(models.Model):
     """
     A model representing an individual fragility curve, as a lognormal distribution, for a particular damage state of interest
@@ -305,10 +366,10 @@ class NistirMajorGroupElement(models.Model):
     class Meta:
         verbose_name = "NISTIR Major Group Element"
         verbose_name_plural = "NISTIR Major Group Elements"
-    
+
     def __str__(self):
         return self.name
-    
+
 class NistirGroupElement(models.Model):
     """
     A model representing an Sub-group classification in the NISTIR building component taxonomy.
@@ -327,10 +388,10 @@ class NistirGroupElement(models.Model):
     class Meta:
         verbose_name = "NISTIR Group Element"
         verbose_name_plural = "NISTIR Group Elements"
-    
+
     def __str__(self):
         return self.name
-    
+
 class NistirIndivElement(models.Model):
     """
     A model representing an building element in the NISTIR building component taxonomy.
@@ -349,10 +410,10 @@ class NistirIndivElement(models.Model):
     class Meta:
         verbose_name = "NISTIR Individual Element"
         verbose_name_plural = "NISTIR Individual Elements"
-    
+
     def __str__(self):
         return self.name
-    
+
 class NistirSubElement(models.Model):
     """
     A model representing a subcategorization of an element in the NISTIR building component taxonomy.
@@ -371,6 +432,6 @@ class NistirSubElement(models.Model):
     class Meta:
         verbose_name = "NISTIR Sub Element"
         verbose_name_plural = "NISTIR Sub Elements"
-    
+
     def __str__(self):
         return self.name
