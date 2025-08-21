@@ -93,6 +93,12 @@ Codespell can catch spelling mistakes in text files. Add any words that generate
 codespell .
 ```
 
+#### Unit Tests
+Unit tests are included in this repository, but are not automatically run in github. Please run the unit test prior to committing changes with the following command:
+```
+python manage.py test ned_app
+```
+
 ---
 
 This repository is principally developed and maintained by:
