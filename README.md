@@ -50,9 +50,15 @@ source venv/bin/activate # (On Mac) activate your virtual environment
 
 ### Installing the Required Packages
 Be sure that all packages below have been installed in your virtual or global environment.
+
+**For production dependencies:**
 ```
-pip install Django
-pip install djangorestframework
+pip install -r requirements.txt
+```
+
+**For development dependencies (includes ruff for code quality):**
+```
+pip install -r requirements-dev.txt
 ```
 
 ### Adding Data to the Database
@@ -174,7 +180,7 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_csl_data
 **Common test failure causes:**
 - **Database issues**: Make sure you haven't changed model fields without creating migrations
 - **Missing test data**: Ensure test fixtures and sample data are properly set up
-- **Import errors**: Check that all required dependencies are installed with `pip install -e .[dev]`
+- **Import errors**: Check that all required dependencies are installed with `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
 
 **Test coverage**: The project has 41 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
 
@@ -196,13 +202,17 @@ python manage.py test ned_app.tests
 ```
 
 #### Installing Development Dependencies
-To run these tools locally, make sure you have the development dependencies installed:
+To run these tools locally, make sure you have all dependencies installed:
 
 ```bash
-pip install -e .[dev]
+# Install production dependencies
+pip install -r requirements.txt
+
+# Install development dependencies
+pip install -r requirements-dev.txt
 ```
 
-This installs ruff and other development tools. The main project dependencies (Django, djangorestframework, jsonschema) are also installed automatically.
+This installs all required packages including Django, djangorestframework, jsonschema, and ruff for code quality checks.
 
 ---
 

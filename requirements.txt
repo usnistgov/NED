@@ -1,0 +1,4 @@
+Django>=5.2.0
+djangorestframework>=3.14.0
+django-extensions>=4.1
+jsonschema>=4.0.0

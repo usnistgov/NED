@@ -445,7 +445,7 @@ def reverse_func(apps, schema_editor):
                 for author in authors:
                     if 'given' in author and 'family' in author:
                         author_strings.append(
-                            f"{author['given']} {author['family']}"
+                            f'{author["given"]} {author["family"]}'
                         )
                     elif 'family' in author:
                         author_strings.append(author['family'])

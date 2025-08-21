@@ -1,16 +1,3 @@
-[project]
-name = "ned"
-dynamic = ["version"]
-dependencies = [
-    "Django>=5.2.0",
-    "djangorestframework>=3.14.0",
-    "jsonschema>=4.0.0",
-]
-
-[project.optional-dependencies]
-dev = [
-    "ruff==0.12.9",
-]
 
 [tool.codespell]
 ignore-words = "ignore_words.txt"
@@ -37,7 +24,6 @@ exclude = [
 
 [tool.ruff.lint]
 ignore = [
-    "ANN101",
     "D211",
     "D212",
     "Q000",
