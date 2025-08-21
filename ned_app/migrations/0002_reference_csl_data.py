@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ned_app', '0001_initial'),
     ]
@@ -13,6 +12,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='reference',
             name='csl_data',
-            field=models.JSONField(blank=True, help_text='Reference data in CSL-JSON format.', null=True, verbose_name='csl data'),
+            field=models.JSONField(
+                blank=True,
+                help_text='Reference data in CSL-JSON format.',
+                null=True,
+                verbose_name='csl data',
+            ),
         ),
     ]
