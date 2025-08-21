@@ -1,4 +1,6 @@
-import os, json, csv
+import os
+import json
+import csv
 from typing import List
 
 from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
@@ -74,7 +76,7 @@ def import_avail_data() -> None:
             for item in loaded_data:
                 # Check for required id field first
                 if 'id' not in item:
-                    err_msg = f"Reference item missing required 'id' field"
+                    err_msg = 'Reference item missing required "id" field'
                     raise DataFileDeserializationError(err_msg)
 
                 # Expect input JSON files to have a csl_data key with CSL-JSON dictionary

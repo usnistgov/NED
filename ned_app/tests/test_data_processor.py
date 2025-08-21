@@ -125,8 +125,6 @@ class DataFilesProcessorTest(TestCase):
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', True)
     def test_import_avail_data_success_with_csl_data(self):
         """Test that import_avail_data successfully processes data with csl_data."""
-        json_data = json.dumps(self.valid_reference_data)
-
         with patch(
             'ned_app.serialization.data_files_processor.load_data'
         ) as mock_load:
@@ -228,7 +226,9 @@ class DataFilesProcessorTest(TestCase):
             with self.assertRaises(DataFileDeserializationError) as context:
                 import_avail_data()
 
-            self.assertIn("missing required 'id' field", str(context.exception))
+            self.assertIn(
+                'Reference item missing required "id" field', str(context.exception)
+            )
 
     @patch(
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_CURVES', False
@@ -426,8 +426,6 @@ class DataFilesProcessorTest(TestCase):
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', True)
     def test_import_avail_data_integration_with_real_serializer(self):
         """Integration test with real ReferenceSerializer."""
-        schema_path = os.path.join('ned_app', 'schemas', 'csl-data.json')
-
         with patch(
             'ned_app.serialization.data_files_processor.load_data'
         ) as mock_load:

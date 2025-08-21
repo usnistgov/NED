@@ -244,10 +244,8 @@ class NistirMajorGroupElementSerializer(serializers.ModelSerializer):
                     )
 
                     for sub_element_data in sub_elements_data:
-                        sub_element: NistirSubElement = (
-                            NistirSubElement.objects.create(
-                                indiv_element=indiv_element, **sub_element_data
-                            )
+                        NistirSubElement.objects.create(
+                            indiv_element=indiv_element, **sub_element_data
                         )
                 else:
                     indiv_element: NistirIndivElement = (

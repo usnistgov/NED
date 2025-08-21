@@ -224,10 +224,6 @@ class ReferenceSerializerTest(TestCase):
 
     def test_serializer_validation_with_real_schema(self):
         """Test serializer validation against the actual CSL schema."""
-        schema_path = os.path.join(
-            settings.BASE_DIR, 'ned_app', 'schemas', 'csl-data.json'
-        )
-
         serializer = ReferenceSerializer(data=self.valid_reference_data)
 
         # This should work with the real schema
