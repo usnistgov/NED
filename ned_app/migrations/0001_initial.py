@@ -5,18 +5,31 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='Component',
             fields=[
-                ('id', models.CharField(max_length=10, primary_key=True, serialize=False, verbose_name='id')),
-                ('name', models.CharField(help_text='Name of the individual type of building component.', max_length=255, verbose_name='component type name')),
+                (
+                    'id',
+                    models.CharField(
+                        max_length=10,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='id',
+                    ),
+                ),
+                (
+                    'name',
+                    models.CharField(
+                        help_text='Name of the individual type of building component.',
+                        max_length=255,
+                        verbose_name='component type name',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'Component',
@@ -26,8 +39,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='NistirGroupElement',
             fields=[
-                ('id', models.CharField(max_length=255, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Sub-group classification of the major grouping.', max_length=1024, verbose_name='name')),
+                (
+                    'id',
+                    models.CharField(
+                        max_length=255,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'name',
+                    models.CharField(
+                        help_text='Sub-group classification of the major grouping.',
+                        max_length=1024,
+                        verbose_name='name',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'NISTIR Group Element',
@@ -37,8 +65,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='NistirMajorGroupElement',
             fields=[
-                ('id', models.CharField(max_length=255, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text="Broad category of buildng's component categorization.", max_length=1024, verbose_name='name')),
+                (
+                    'id',
+                    models.CharField(
+                        max_length=255,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'name',
+                    models.CharField(
+                        help_text="Broad category of buildng's component categorization.",
+                        max_length=1024,
+                        verbose_name='name',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'NISTIR Major Group Element',
@@ -48,16 +91,97 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Reference',
             fields=[
-                ('id', models.CharField(max_length=255, primary_key=True, serialize=False, verbose_name='id')),
-                ('name', models.CharField(help_text='The title of paper or manuscript.', max_length=255, verbose_name='name')),
-                ('author', models.CharField(help_text='The name(s) of the author(s).', max_length=255, verbose_name='author')),
-                ('year', models.IntegerField(help_text='The year the study was published.', verbose_name='year')),
-                ('study_type', models.CharField(choices=[('Experiment', 'Experiment'), ('Historical Event', 'Recon'), ('Analytical Study', 'Analytical'), ('Lit Review', 'Lit Review'), ('Other', 'Other')], default='Other', help_text='A classification of the type of study conducted.', max_length=50, verbose_name='study type')),
-                ('comp_type', models.CharField(blank=True, help_text='The type of component(s) invenstigated in study.', max_length=255, verbose_name='component type')),
-                ('doi', models.URLField(blank=True, help_text='Digital Object identifier. Leave empty if the paper does not have a DOI.', null=True, verbose_name='doi')),
-                ('citation', models.TextField(blank=True, help_text='Full reference for publication, including authors, year, title, and publisher. Only required if no DOI is available.', verbose_name='citation')),
-                ('publication_type', models.CharField(blank=True, help_text='A classification of the type of publication.', max_length=50, verbose_name='publication type')),
-                ('pdf_saved', models.BooleanField(default=False, help_text='Is a pdf saved in the archive repository.', verbose_name='pdf saved')),
+                (
+                    'id',
+                    models.CharField(
+                        max_length=255,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='id',
+                    ),
+                ),
+                (
+                    'name',
+                    models.CharField(
+                        help_text='The title of paper or manuscript.',
+                        max_length=255,
+                        verbose_name='name',
+                    ),
+                ),
+                (
+                    'author',
+                    models.CharField(
+                        help_text='The name(s) of the author(s).',
+                        max_length=255,
+                        verbose_name='author',
+                    ),
+                ),
+                (
+                    'year',
+                    models.IntegerField(
+                        help_text='The year the study was published.',
+                        verbose_name='year',
+                    ),
+                ),
+                (
+                    'study_type',
+                    models.CharField(
+                        choices=[
+                            ('Experiment', 'Experiment'),
+                            ('Historical Event', 'Recon'),
+                            ('Analytical Study', 'Analytical'),
+                            ('Lit Review', 'Lit Review'),
+                            ('Other', 'Other'),
+                        ],
+                        default='Other',
+                        help_text='A classification of the type of study conducted.',
+                        max_length=50,
+                        verbose_name='study type',
+                    ),
+                ),
+                (
+                    'comp_type',
+                    models.CharField(
+                        blank=True,
+                        help_text='The type of component(s) invenstigated in study.',
+                        max_length=255,
+                        verbose_name='component type',
+                    ),
+                ),
+                (
+                    'doi',
+                    models.URLField(
+                        blank=True,
+                        help_text='Digital Object identifier. Leave empty if the paper does not have a DOI.',
+                        null=True,
+                        verbose_name='doi',
+                    ),
+                ),
+                (
+                    'citation',
+                    models.TextField(
+                        blank=True,
+                        help_text='Full reference for publication, including authors, year, title, and publisher. Only required if no DOI is available.',
+                        verbose_name='citation',
+                    ),
+                ),
+                (
+                    'publication_type',
+                    models.CharField(
+                        blank=True,
+                        help_text='A classification of the type of publication.',
+                        max_length=50,
+                        verbose_name='publication type',
+                    ),
+                ),
+                (
+                    'pdf_saved',
+                    models.BooleanField(
+                        default=False,
+                        help_text='Is a pdf saved in the archive repository.',
+                        verbose_name='pdf saved',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'Reference',
@@ -67,34 +191,311 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Experiment',
             fields=[
-                ('id', models.CharField(max_length=255, primary_key=True, serialize=False, verbose_name='id')),
-                ('specimen', models.CharField(blank=True, help_text='ID or name of the specimen as recorded in the reference.', max_length=255, verbose_name='specimen')),
-                ('specimen_inspection_sequence', models.CharField(blank=True, help_text='The ith test of this specimen.', max_length=255, verbose_name='specimen inspection sequence')),
-                ('reviewer', models.CharField(blank=True, help_text='Individual or institution repsonsible for documenting this particular fragility in the database.', max_length=50, verbose_name='reviewer')),
-                ('comp_detail', models.CharField(blank=True, help_text='Classification or short description of the component attachement detailing.', max_length=100, verbose_name='component detail tag')),
-                ('material', models.CharField(blank=True, help_text='Classification or short description of the component material (if applicable).', max_length=100, verbose_name='material classification tag')),
-                ('size_class', models.CharField(blank=True, help_text='Classification or short description of the general size of this paticular components compared to others of the same type (if applicable).', max_length=100, verbose_name='size classification tag')),
-                ('test_type', models.CharField(choices=[('Dynamic, uniaxial', 'Dyna 1D'), ('Dynamic, bi-directional', 'Dyna 2D'), ('Dynamic, horizontal and vertical', 'Dyna 2D Vert'), ('Dynamic, 3D', 'Dyna 3D'), ('Monotonic, compression', 'Mono C'), ('Monotonic, tension', 'Mono T'), ('Monotonic, bending', 'Mono M'), ('Monotonic, lateral', 'Mono L'), ('Quasi-static Cyclic, uniaxial', 'Quasi 1D'), ('Quasi-static Cyclic, bi-directional', 'Quasi 2D')], help_text='The type of test generally describing the condition under which the specimen was loaded.', max_length=50, verbose_name='test type')),
-                ('loading_protocol', models.TextField(blank=True, help_text='Name, ID, or general description of the ground motion or loading protocol used in the test.', verbose_name='loading protocol')),
-                ('peak_test_amplitude', models.CharField(blank=True, help_text='The maximum amplitude to which this test was performed.', max_length=255, verbose_name='peak test amplitute')),
-                ('location', models.CharField(blank=True, help_text='The location where the specimen was conducted.', max_length=255, verbose_name='location')),
-                ('governing_design_standard', models.CharField(blank=True, help_text='Name of the standard governing the design of the specimen, if applicable.', max_length=255, verbose_name='governing design standard')),
-                ('design_objective', models.TextField(blank=True, help_text='General description of the performance level to which the specimen was designed, e.g., code compliant, common construciton practice, low-damage-design, or meeting a certain damage objective under a specific loading condition.', verbose_name='design objective')),
-                ('comp_description', models.TextField(help_text='Genearl description of the type of component.', verbose_name='component description')),
-                ('ds_description', models.TextField(help_text='Description of the damage being observed.', verbose_name='damage state description')),
-                ('prior_damage', models.TextField(blank=True, help_text='Description of any prior damage that was noted during a previous test of this specimen. Should also describe if and how the specimen was repaired prior to this test. Empty if no prior damage was noted.', verbose_name='prior damage')),
-                ('prior_damage_repaired', models.TextField(blank=True, help_text='TRUE if prior damage was noted and repaired prior to this test. FALSE if prior damage was noted and not repiared. Or, a general description of the previous damage that was repaired.', max_length=255, verbose_name='is prior damage repaired')),
-                ('edp_metric', models.CharField(choices=[('Story Drift Ratio', 'Sdr'), ('Story Drift Ratio, bi-directional', 'Sdr 2D'), ('Peak Floor Acceleration, horizontal', 'Pfa H'), ('Peak Table Acceleration, horizontal', 'Pfa Table H'), ('Peak Floor Acceleration, vertical', 'Pfa V'), ('Peak Floor Velocity', 'Pfv'), ('Joint Rotation', 'Rot Joint'), ('Force, tension', 'Force T'), ('Force, compression', 'Force C'), ('Force, bending', 'Force M'), ('Force, lateral', 'Force V'), ('Custom', 'Custom')], help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.', max_length=50, verbose_name='edp metric')),
-                ('edp_unit', models.CharField(choices=[('g', 'G'), ('Ratio', 'Ratio'), ('Radians', 'Rad'), ('Kips', 'Kip'), ('k-in', 'K In'), ('Meters Per Second', 'Mps'), ('Custom', 'Custom')], help_text='Unit of the engineering demand parameter.', max_length=50, verbose_name='edp unit')),
-                ('edp_value', models.DecimalField(decimal_places=6, help_text='Value of the engineering demand parameter recorded for this observation.', max_digits=12, null=True, verbose_name='edp value')),
-                ('alt_edp_metric', models.CharField(blank=True, choices=[('Story Drift Ratio', 'Sdr'), ('Story Drift Ratio, bi-directional', 'Sdr 2D'), ('Peak Floor Acceleration, horizontal', 'Pfa H'), ('Peak Table Acceleration, horizontal', 'Pfa Table H'), ('Peak Floor Acceleration, vertical', 'Pfa V'), ('Peak Floor Velocity', 'Pfv'), ('Joint Rotation', 'Rot Joint'), ('Force, tension', 'Force T'), ('Force, compression', 'Force C'), ('Force, bending', 'Force M'), ('Force, lateral', 'Force V'), ('Custom', 'Custom')], help_text='Secondary EDP metric.', max_length=50, verbose_name='alternative edp metric')),
-                ('alt_edp_unit', models.CharField(blank=True, choices=[('g', 'G'), ('Ratio', 'Ratio'), ('Radians', 'Rad'), ('Kips', 'Kip'), ('k-in', 'K In'), ('Meters Per Second', 'Mps'), ('Custom', 'Custom')], help_text='Secondary EDP unit.', max_length=50, verbose_name='alternative edp unit')),
-                ('alt_edp_value', models.DecimalField(blank=True, decimal_places=6, help_text='Secondary EDP value. ', max_digits=12, null=True, verbose_name='alternative edp value')),
-                ('ds_rank', models.IntegerField(blank=True, help_text='Integer rank ordering this observed damage with other damage observed in the same specimen.', null=True, verbose_name='damage state rank')),
-                ('ds_class', models.CharField(choices=[('No damage', 'No Damage'), ('Inconsequential', 'Inconsequential'), ('Consequential', 'Consequential'), ('Unknown', 'Unknown')], help_text='General identification of damage as consequential or not.', max_length=50, verbose_name='damage state class')),
-                ('notes', models.TextField(blank=True, help_text='Additional notes providing context for damage observations.', verbose_name='notes')),
-                ('component', models.ForeignKey(help_text='Identifier of the component type', on_delete=django.db.models.deletion.PROTECT, to='ned_app.component')),
-                ('reference', models.ForeignKey(help_text='ID of the published reference documenting this experimental observation.', on_delete=django.db.models.deletion.PROTECT, to='ned_app.reference')),
+                (
+                    'id',
+                    models.CharField(
+                        max_length=255,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='id',
+                    ),
+                ),
+                (
+                    'specimen',
+                    models.CharField(
+                        blank=True,
+                        help_text='ID or name of the specimen as recorded in the reference.',
+                        max_length=255,
+                        verbose_name='specimen',
+                    ),
+                ),
+                (
+                    'specimen_inspection_sequence',
+                    models.CharField(
+                        blank=True,
+                        help_text='The ith test of this specimen.',
+                        max_length=255,
+                        verbose_name='specimen inspection sequence',
+                    ),
+                ),
+                (
+                    'reviewer',
+                    models.CharField(
+                        blank=True,
+                        help_text='Individual or institution repsonsible for documenting this particular fragility in the database.',
+                        max_length=50,
+                        verbose_name='reviewer',
+                    ),
+                ),
+                (
+                    'comp_detail',
+                    models.CharField(
+                        blank=True,
+                        help_text='Classification or short description of the component attachement detailing.',
+                        max_length=100,
+                        verbose_name='component detail tag',
+                    ),
+                ),
+                (
+                    'material',
+                    models.CharField(
+                        blank=True,
+                        help_text='Classification or short description of the component material (if applicable).',
+                        max_length=100,
+                        verbose_name='material classification tag',
+                    ),
+                ),
+                (
+                    'size_class',
+                    models.CharField(
+                        blank=True,
+                        help_text='Classification or short description of the general size of this paticular components compared to others of the same type (if applicable).',
+                        max_length=100,
+                        verbose_name='size classification tag',
+                    ),
+                ),
+                (
+                    'test_type',
+                    models.CharField(
+                        choices=[
+                            ('Dynamic, uniaxial', 'Dyna 1D'),
+                            ('Dynamic, bi-directional', 'Dyna 2D'),
+                            ('Dynamic, horizontal and vertical', 'Dyna 2D Vert'),
+                            ('Dynamic, 3D', 'Dyna 3D'),
+                            ('Monotonic, compression', 'Mono C'),
+                            ('Monotonic, tension', 'Mono T'),
+                            ('Monotonic, bending', 'Mono M'),
+                            ('Monotonic, lateral', 'Mono L'),
+                            ('Quasi-static Cyclic, uniaxial', 'Quasi 1D'),
+                            ('Quasi-static Cyclic, bi-directional', 'Quasi 2D'),
+                        ],
+                        help_text='The type of test generally describing the condition under which the specimen was loaded.',
+                        max_length=50,
+                        verbose_name='test type',
+                    ),
+                ),
+                (
+                    'loading_protocol',
+                    models.TextField(
+                        blank=True,
+                        help_text='Name, ID, or general description of the ground motion or loading protocol used in the test.',
+                        verbose_name='loading protocol',
+                    ),
+                ),
+                (
+                    'peak_test_amplitude',
+                    models.CharField(
+                        blank=True,
+                        help_text='The maximum amplitude to which this test was performed.',
+                        max_length=255,
+                        verbose_name='peak test amplitute',
+                    ),
+                ),
+                (
+                    'location',
+                    models.CharField(
+                        blank=True,
+                        help_text='The location where the specimen was conducted.',
+                        max_length=255,
+                        verbose_name='location',
+                    ),
+                ),
+                (
+                    'governing_design_standard',
+                    models.CharField(
+                        blank=True,
+                        help_text='Name of the standard governing the design of the specimen, if applicable.',
+                        max_length=255,
+                        verbose_name='governing design standard',
+                    ),
+                ),
+                (
+                    'design_objective',
+                    models.TextField(
+                        blank=True,
+                        help_text='General description of the performance level to which the specimen was designed, e.g., code compliant, common construciton practice, low-damage-design, or meeting a certain damage objective under a specific loading condition.',
+                        verbose_name='design objective',
+                    ),
+                ),
+                (
+                    'comp_description',
+                    models.TextField(
+                        help_text='Genearl description of the type of component.',
+                        verbose_name='component description',
+                    ),
+                ),
+                (
+                    'ds_description',
+                    models.TextField(
+                        help_text='Description of the damage being observed.',
+                        verbose_name='damage state description',
+                    ),
+                ),
+                (
+                    'prior_damage',
+                    models.TextField(
+                        blank=True,
+                        help_text='Description of any prior damage that was noted during a previous test of this specimen. Should also describe if and how the specimen was repaired prior to this test. Empty if no prior damage was noted.',
+                        verbose_name='prior damage',
+                    ),
+                ),
+                (
+                    'prior_damage_repaired',
+                    models.TextField(
+                        blank=True,
+                        help_text='TRUE if prior damage was noted and repaired prior to this test. FALSE if prior damage was noted and not repiared. Or, a general description of the previous damage that was repaired.',
+                        max_length=255,
+                        verbose_name='is prior damage repaired',
+                    ),
+                ),
+                (
+                    'edp_metric',
+                    models.CharField(
+                        choices=[
+                            ('Story Drift Ratio', 'Sdr'),
+                            ('Story Drift Ratio, bi-directional', 'Sdr 2D'),
+                            ('Peak Floor Acceleration, horizontal', 'Pfa H'),
+                            ('Peak Table Acceleration, horizontal', 'Pfa Table H'),
+                            ('Peak Floor Acceleration, vertical', 'Pfa V'),
+                            ('Peak Floor Velocity', 'Pfv'),
+                            ('Joint Rotation', 'Rot Joint'),
+                            ('Force, tension', 'Force T'),
+                            ('Force, compression', 'Force C'),
+                            ('Force, bending', 'Force M'),
+                            ('Force, lateral', 'Force V'),
+                            ('Custom', 'Custom'),
+                        ],
+                        help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.',
+                        max_length=50,
+                        verbose_name='edp metric',
+                    ),
+                ),
+                (
+                    'edp_unit',
+                    models.CharField(
+                        choices=[
+                            ('g', 'G'),
+                            ('Ratio', 'Ratio'),
+                            ('Radians', 'Rad'),
+                            ('Kips', 'Kip'),
+                            ('k-in', 'K In'),
+                            ('Meters Per Second', 'Mps'),
+                            ('Custom', 'Custom'),
+                        ],
+                        help_text='Unit of the engineering demand parameter.',
+                        max_length=50,
+                        verbose_name='edp unit',
+                    ),
+                ),
+                (
+                    'edp_value',
+                    models.DecimalField(
+                        decimal_places=6,
+                        help_text='Value of the engineering demand parameter recorded for this observation.',
+                        max_digits=12,
+                        null=True,
+                        verbose_name='edp value',
+                    ),
+                ),
+                (
+                    'alt_edp_metric',
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ('Story Drift Ratio', 'Sdr'),
+                            ('Story Drift Ratio, bi-directional', 'Sdr 2D'),
+                            ('Peak Floor Acceleration, horizontal', 'Pfa H'),
+                            ('Peak Table Acceleration, horizontal', 'Pfa Table H'),
+                            ('Peak Floor Acceleration, vertical', 'Pfa V'),
+                            ('Peak Floor Velocity', 'Pfv'),
+                            ('Joint Rotation', 'Rot Joint'),
+                            ('Force, tension', 'Force T'),
+                            ('Force, compression', 'Force C'),
+                            ('Force, bending', 'Force M'),
+                            ('Force, lateral', 'Force V'),
+                            ('Custom', 'Custom'),
+                        ],
+                        help_text='Secondary EDP metric.',
+                        max_length=50,
+                        verbose_name='alternative edp metric',
+                    ),
+                ),
+                (
+                    'alt_edp_unit',
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ('g', 'G'),
+                            ('Ratio', 'Ratio'),
+                            ('Radians', 'Rad'),
+                            ('Kips', 'Kip'),
+                            ('k-in', 'K In'),
+                            ('Meters Per Second', 'Mps'),
+                            ('Custom', 'Custom'),
+                        ],
+                        help_text='Secondary EDP unit.',
+                        max_length=50,
+                        verbose_name='alternative edp unit',
+                    ),
+                ),
+                (
+                    'alt_edp_value',
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=6,
+                        help_text='Secondary EDP value. ',
+                        max_digits=12,
+                        null=True,
+                        verbose_name='alternative edp value',
+                    ),
+                ),
+                (
+                    'ds_rank',
+                    models.IntegerField(
+                        blank=True,
+                        help_text='Integer rank ordering this observed damage with other damage observed in the same specimen.',
+                        null=True,
+                        verbose_name='damage state rank',
+                    ),
+                ),
+                (
+                    'ds_class',
+                    models.CharField(
+                        choices=[
+                            ('No damage', 'No Damage'),
+                            ('Inconsequential', 'Inconsequential'),
+                            ('Consequential', 'Consequential'),
+                            ('Unknown', 'Unknown'),
+                        ],
+                        help_text='General identification of damage as consequential or not.',
+                        max_length=50,
+                        verbose_name='damage state class',
+                    ),
+                ),
+                (
+                    'notes',
+                    models.TextField(
+                        blank=True,
+                        help_text='Additional notes providing context for damage observations.',
+                        verbose_name='notes',
+                    ),
+                ),
+                (
+                    'component',
+                    models.ForeignKey(
+                        help_text='Identifier of the component type',
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to='ned_app.component',
+                    ),
+                ),
+                (
+                    'reference',
+                    models.ForeignKey(
+                        help_text='ID of the published reference documenting this experimental observation.',
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to='ned_app.reference',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'Experiment',
@@ -104,13 +505,66 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FragilityModel',
             fields=[
-                ('id', models.CharField(max_length=255, primary_key=True, serialize=False, verbose_name='id')),
-                ('p58_fragility', models.CharField(blank=True, help_text='P-58 fragility id associated with this fragility model, if applicable.', max_length=50, verbose_name='FEMA P-58 fragility id')),
-                ('comp_detail', models.CharField(blank=True, help_text='Classification or short description of the component attachement detailing.', max_length=100, verbose_name='component detail tag')),
-                ('material', models.CharField(blank=True, help_text='Classification or short description of the component material (if applicable).', max_length=100, verbose_name='material classification tag')),
-                ('size_class', models.CharField(blank=True, help_text='Classification or short description of the general size of this paticular components compared to others of the same type (if applicable).', max_length=100, verbose_name='size classification tag')),
-                ('comp_description', models.TextField(help_text='Genearl description of the type of component.', verbose_name='component description')),
-                ('component', models.ForeignKey(help_text='Identifier of the component type.', on_delete=django.db.models.deletion.PROTECT, to='ned_app.component')),
+                (
+                    'id',
+                    models.CharField(
+                        max_length=255,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='id',
+                    ),
+                ),
+                (
+                    'p58_fragility',
+                    models.CharField(
+                        blank=True,
+                        help_text='P-58 fragility id associated with this fragility model, if applicable.',
+                        max_length=50,
+                        verbose_name='FEMA P-58 fragility id',
+                    ),
+                ),
+                (
+                    'comp_detail',
+                    models.CharField(
+                        blank=True,
+                        help_text='Classification or short description of the component attachement detailing.',
+                        max_length=100,
+                        verbose_name='component detail tag',
+                    ),
+                ),
+                (
+                    'material',
+                    models.CharField(
+                        blank=True,
+                        help_text='Classification or short description of the component material (if applicable).',
+                        max_length=100,
+                        verbose_name='material classification tag',
+                    ),
+                ),
+                (
+                    'size_class',
+                    models.CharField(
+                        blank=True,
+                        help_text='Classification or short description of the general size of this paticular components compared to others of the same type (if applicable).',
+                        max_length=100,
+                        verbose_name='size classification tag',
+                    ),
+                ),
+                (
+                    'comp_description',
+                    models.TextField(
+                        help_text='Genearl description of the type of component.',
+                        verbose_name='component description',
+                    ),
+                ),
+                (
+                    'component',
+                    models.ForeignKey(
+                        help_text='Identifier of the component type.',
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to='ned_app.component',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'Fragility Model',
@@ -120,9 +574,31 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ExperimentFragilityModelBridge',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('experiment', models.ForeignKey(help_text='Experiment model ID', on_delete=django.db.models.deletion.PROTECT, to='ned_app.experiment')),
-                ('fragility_model', models.ForeignKey(help_text='fragility model ID', on_delete=django.db.models.deletion.PROTECT, to='ned_app.fragilitymodel')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'experiment',
+                    models.ForeignKey(
+                        help_text='Experiment model ID',
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to='ned_app.experiment',
+                    ),
+                ),
+                (
+                    'fragility_model',
+                    models.ForeignKey(
+                        help_text='fragility model ID',
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to='ned_app.fragilitymodel',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'Experiment - Fragility Pair',
@@ -132,9 +608,34 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='NistirIndivElement',
             fields=[
-                ('id', models.CharField(max_length=255, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Classification of the specific element of interest within the group.', max_length=1024, verbose_name='name')),
-                ('group_element', models.ForeignKey(blank=True, help_text='3-digit alphanumeric indentifier of the group.', on_delete=django.db.models.deletion.CASCADE, related_name='indiv_elements', to='ned_app.nistirgroupelement', verbose_name='NISTIR Group')),
+                (
+                    'id',
+                    models.CharField(
+                        max_length=255,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'name',
+                    models.CharField(
+                        help_text='Classification of the specific element of interest within the group.',
+                        max_length=1024,
+                        verbose_name='name',
+                    ),
+                ),
+                (
+                    'group_element',
+                    models.ForeignKey(
+                        blank=True,
+                        help_text='3-digit alphanumeric indentifier of the group.',
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name='indiv_elements',
+                        to='ned_app.nistirgroupelement',
+                        verbose_name='NISTIR Group',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'NISTIR Individual Element',
@@ -144,14 +645,46 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='nistirgroupelement',
             name='major_group_element',
-            field=models.ForeignKey(blank=True, help_text='1-digit alphabetical indentifier of the major group.', on_delete=django.db.models.deletion.CASCADE, related_name='group_elements', to='ned_app.nistirmajorgroupelement', verbose_name='NISTIR Major Group'),
+            field=models.ForeignKey(
+                blank=True,
+                help_text='1-digit alphabetical indentifier of the major group.',
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='group_elements',
+                to='ned_app.nistirmajorgroupelement',
+                verbose_name='NISTIR Major Group',
+            ),
         ),
         migrations.CreateModel(
             name='NistirSubElement',
             fields=[
-                ('id', models.CharField(max_length=255, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Sub-element classification of a specific type of element within a given element class.', max_length=1024, verbose_name='name')),
-                ('indiv_element', models.ForeignKey(blank=True, help_text='5-digit alphanumeric indentifier of the NISTIR element.', on_delete=django.db.models.deletion.CASCADE, related_name='sub_elements', to='ned_app.nistirindivelement', verbose_name='NISTIR Indiv. Element')),
+                (
+                    'id',
+                    models.CharField(
+                        max_length=255,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'name',
+                    models.CharField(
+                        help_text='Sub-element classification of a specific type of element within a given element class.',
+                        max_length=1024,
+                        verbose_name='name',
+                    ),
+                ),
+                (
+                    'indiv_element',
+                    models.ForeignKey(
+                        blank=True,
+                        help_text='5-digit alphanumeric indentifier of the NISTIR element.',
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name='sub_elements',
+                        to='ned_app.nistirindivelement',
+                        verbose_name='NISTIR Indiv. Element',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'NISTIR Sub Element',
@@ -161,25 +694,168 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='component',
             name='nistir_subelement',
-            field=models.ForeignKey(help_text='NISTIR taxonomy subelement classification', on_delete=django.db.models.deletion.PROTECT, to='ned_app.nistirsubelement', verbose_name='NISTIR Sub Element'),
+            field=models.ForeignKey(
+                help_text='NISTIR taxonomy subelement classification',
+                on_delete=django.db.models.deletion.PROTECT,
+                to='ned_app.nistirsubelement',
+                verbose_name='NISTIR Sub Element',
+            ),
         ),
         migrations.CreateModel(
             name='FragilityCurve',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('reviewer', models.CharField(blank=True, help_text='Person or party resposible for uploading this fragility curve to the database.', max_length=255, verbose_name='reviewer')),
-                ('source', models.CharField(blank=True, help_text='Source of the fragility data.', max_length=255, verbose_name='source')),
-                ('basis', models.CharField(blank=True, choices=[('Experiment', 'Experiment'), ('Historical Event', 'Recon'), ('Analytical Study', 'Analytical'), ('Lit Review', 'Lit Review'), ('Other', 'Other')], help_text='Observational basis of the underying data comprising the fragility curve.', max_length=50, verbose_name='basis')),
-                ('num_observations', models.IntegerField(blank=True, help_text='Number of observations that form the basis of the fragility curve.', null=True, verbose_name='number of observations')),
-                ('edp_metric', models.CharField(choices=[('Story Drift Ratio', 'Sdr'), ('Story Drift Ratio, bi-directional', 'Sdr 2D'), ('Peak Floor Acceleration, horizontal', 'Pfa H'), ('Peak Floor Acceleration, vertical', 'Pfa V'), ('Peak Floor Velocity', 'Pfv'), ('Joint Rotation', 'Rot Joint'), ('Force, tension', 'Force T'), ('Force, compression', 'Force C'), ('Force, bending', 'Force M'), ('Force, lateral', 'Force V'), ('Custom', 'Custom')], help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.', max_length=255, verbose_name='edp metric')),
-                ('edp_unit', models.CharField(choices=[('g', 'G'), ('Ratio', 'Ratio'), ('Radians', 'Rad'), ('Kips', 'Kip'), ('k-in', 'K In'), ('Meters Per Second', 'Mps'), ('Custom', 'Custom')], help_text='Unit of the engineering demand parameter.', max_length=255, verbose_name='edp unit')),
-                ('ds_rank', models.IntegerField(blank=True, help_text='Integer rank ordering this fragility curve with other curves in the fragility model.', null=True, verbose_name='damage state rank')),
-                ('ds_description', models.TextField(help_text='Description of the damage being modeled.', verbose_name='damage state description')),
-                ('median', models.DecimalField(decimal_places=4, help_text='Median point of the fragility curve.', max_digits=9, null=True, verbose_name='median')),
-                ('beta', models.DecimalField(decimal_places=3, help_text='Lognormal dispersion.', max_digits=4, null=True, verbose_name='beta')),
-                ('probability', models.DecimalField(decimal_places=2, help_text='Mutually exclusive probability of this damage state.', max_digits=3, null=True, verbose_name='probability')),
-                ('fragility_model', models.ForeignKey(help_text='Id of the fragility model this fragility belongs to.', on_delete=django.db.models.deletion.PROTECT, to='ned_app.fragilitymodel')),
-                ('reference', models.ForeignKey(help_text='ID of the published reference documenting.', on_delete=django.db.models.deletion.PROTECT, to='ned_app.reference')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'reviewer',
+                    models.CharField(
+                        blank=True,
+                        help_text='Person or party resposible for uploading this fragility curve to the database.',
+                        max_length=255,
+                        verbose_name='reviewer',
+                    ),
+                ),
+                (
+                    'source',
+                    models.CharField(
+                        blank=True,
+                        help_text='Source of the fragility data.',
+                        max_length=255,
+                        verbose_name='source',
+                    ),
+                ),
+                (
+                    'basis',
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ('Experiment', 'Experiment'),
+                            ('Historical Event', 'Recon'),
+                            ('Analytical Study', 'Analytical'),
+                            ('Lit Review', 'Lit Review'),
+                            ('Other', 'Other'),
+                        ],
+                        help_text='Observational basis of the underying data comprising the fragility curve.',
+                        max_length=50,
+                        verbose_name='basis',
+                    ),
+                ),
+                (
+                    'num_observations',
+                    models.IntegerField(
+                        blank=True,
+                        help_text='Number of observations that form the basis of the fragility curve.',
+                        null=True,
+                        verbose_name='number of observations',
+                    ),
+                ),
+                (
+                    'edp_metric',
+                    models.CharField(
+                        choices=[
+                            ('Story Drift Ratio', 'Sdr'),
+                            ('Story Drift Ratio, bi-directional', 'Sdr 2D'),
+                            ('Peak Floor Acceleration, horizontal', 'Pfa H'),
+                            ('Peak Floor Acceleration, vertical', 'Pfa V'),
+                            ('Peak Floor Velocity', 'Pfv'),
+                            ('Joint Rotation', 'Rot Joint'),
+                            ('Force, tension', 'Force T'),
+                            ('Force, compression', 'Force C'),
+                            ('Force, bending', 'Force M'),
+                            ('Force, lateral', 'Force V'),
+                            ('Custom', 'Custom'),
+                        ],
+                        help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.',
+                        max_length=255,
+                        verbose_name='edp metric',
+                    ),
+                ),
+                (
+                    'edp_unit',
+                    models.CharField(
+                        choices=[
+                            ('g', 'G'),
+                            ('Ratio', 'Ratio'),
+                            ('Radians', 'Rad'),
+                            ('Kips', 'Kip'),
+                            ('k-in', 'K In'),
+                            ('Meters Per Second', 'Mps'),
+                            ('Custom', 'Custom'),
+                        ],
+                        help_text='Unit of the engineering demand parameter.',
+                        max_length=255,
+                        verbose_name='edp unit',
+                    ),
+                ),
+                (
+                    'ds_rank',
+                    models.IntegerField(
+                        blank=True,
+                        help_text='Integer rank ordering this fragility curve with other curves in the fragility model.',
+                        null=True,
+                        verbose_name='damage state rank',
+                    ),
+                ),
+                (
+                    'ds_description',
+                    models.TextField(
+                        help_text='Description of the damage being modeled.',
+                        verbose_name='damage state description',
+                    ),
+                ),
+                (
+                    'median',
+                    models.DecimalField(
+                        decimal_places=4,
+                        help_text='Median point of the fragility curve.',
+                        max_digits=9,
+                        null=True,
+                        verbose_name='median',
+                    ),
+                ),
+                (
+                    'beta',
+                    models.DecimalField(
+                        decimal_places=3,
+                        help_text='Lognormal dispersion.',
+                        max_digits=4,
+                        null=True,
+                        verbose_name='beta',
+                    ),
+                ),
+                (
+                    'probability',
+                    models.DecimalField(
+                        decimal_places=2,
+                        help_text='Mutually exclusive probability of this damage state.',
+                        max_digits=3,
+                        null=True,
+                        verbose_name='probability',
+                    ),
+                ),
+                (
+                    'fragility_model',
+                    models.ForeignKey(
+                        help_text='Id of the fragility model this fragility belongs to.',
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to='ned_app.fragilitymodel',
+                    ),
+                ),
+                (
+                    'reference',
+                    models.ForeignKey(
+                        help_text='ID of the published reference documenting.',
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to='ned_app.reference',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'Fragility Curve',

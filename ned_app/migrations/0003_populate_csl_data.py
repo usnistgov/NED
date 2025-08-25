@@ -21,11 +21,11 @@ def parse_single_author_name(name_string):
     if len(words) >= 2:
         family = words[-1]
         given = ' '.join(words[:-1])
-        return {"family": family, "given": given}
+        return {'family': family, 'given': given}
     elif len(words) == 1:
-        return {"family": name_string}
+        return {'family': name_string}
     else:
-        return {"family": name_string}  # Fallback for empty strings
+        return {'family': name_string}  # Fallback for empty strings
 
 
 def parse_authors(author_string):
@@ -36,9 +36,9 @@ def parse_authors(author_string):
     authors = []
 
     # Handle "et al." cases
-    if "et al." in author_string:
+    if 'et al.' in author_string:
         # Extract the first author before "et al."
-        first_author = author_string.split("et al.")[0].strip()
+        first_author = author_string.split('et al.')[0].strip()
         if first_author.endswith(','):
             first_author = first_author[:-1].strip()
 
@@ -62,7 +62,7 @@ def parse_authors(author_string):
             # Simple "Last, First" format
             family = comma_parts[0].strip()
             given = comma_parts[1].strip()
-            authors.append({"family": family, "given": given})
+            authors.append({'family': family, 'given': given})
         elif len(comma_parts) > 2:
             # Multiple authors separated by commas
             # Try to pair them as "First Last, First Last, ..."
@@ -95,7 +95,7 @@ def extract_authors_from_citation(citation):
     year_match = re.search(r'\((\d{4})\)', citation)
     if year_match:
         # Extract text before the year
-        author_text = citation[:year_match.start()].strip()
+        author_text = citation[: year_match.start()].strip()
 
         # Remove trailing punctuation
         author_text = re.sub(r'[.,;:]+$', '', author_text)
@@ -181,8 +181,8 @@ def parse_journal_details(citation, pub_type):
     # Pattern: "Journal Name, Volume, Pages" or "Journal Name. Volume. Pages"
     journal_patterns = [
         r'([^,.]+)[.,]\s*(\d+)\((\d+)\)[.,]\s*(\d+(?:-\d+)?)',  # Journal[.,] Vol(Issue)[.,] Pages
-        r'([^,.]+)[.,]\s*(\d+)[.,]\s*(\d+(?:-\d+)?)',           # Journal[.,] Vol[.,] Pages
-        r'([^,.]+)[.,]\s*(\d+)\((\d+)\):\s*(\d+(?:-\d+)?)',     # Journal[.,] Vol(Issue): Pages
+        r'([^,.]+)[.,]\s*(\d+)[.,]\s*(\d+(?:-\d+)?)',  # Journal[.,] Vol[.,] Pages
+        r'([^,.]+)[.,]\s*(\d+)\((\d+)\):\s*(\d+(?:-\d+)?)',  # Journal[.,] Vol(Issue): Pages
     ]
 
     for pattern in journal_patterns:
@@ -313,12 +313,16 @@ def forwards_func(apps, schema_editor):
     Reference = apps.get_model('ned_app', 'Reference')
 
     # Load CSL schema for validation - fail if not available
-    schema_path = os.path.join(settings.BASE_DIR, 'ned_app', 'schemas', 'csl-data.json')
+    schema_path = os.path.join(
+        settings.BASE_DIR, 'ned_app', 'schemas', 'csl-data.json'
+    )
     try:
         with open(schema_path, 'r') as f:
             csl_schema = json.load(f)
     except FileNotFoundError:
-        raise FileNotFoundError(f"CSL schema not found at {schema_path}. Migration cannot proceed without schema validation.")
+        raise FileNotFoundError(
+            f'CSL schema not found at {schema_path}. Migration cannot proceed without schema validation.'
+        )
 
     processed_count = 0
     error_count = 0
@@ -330,34 +334,40 @@ def forwards_func(apps, schema_editor):
 
             # Construct CSL-JSON dictionary
             csl_data = {
-                "type": pub_type,
-                "id": ref.id,
-                "title": ref.name,
+                'type': pub_type,
+                'id': ref.id,
+                'title': ref.name,
             }
 
             # Enhanced author parsing - compare field vs citation authors
             field_authors = parse_authors(ref.author) if ref.author else []
-            citation_authors = extract_authors_from_citation(ref.citation) if ref.citation else []
+            citation_authors = (
+                extract_authors_from_citation(ref.citation) if ref.citation else []
+            )
 
             # Choose the richer author source
-            final_authors = compare_and_choose_authors(field_authors, citation_authors)
+            final_authors = compare_and_choose_authors(
+                field_authors, citation_authors
+            )
             if final_authors:
-                csl_data["author"] = final_authors
+                csl_data['author'] = final_authors
 
             # Add year if available
             if ref.year:
-                csl_data["issued"] = {"date-parts": [[ref.year]]}
+                csl_data['issued'] = {'date-parts': [[ref.year]]}
 
             # Add DOI if available
             if ref.doi:
-                csl_data["DOI"] = ref.doi
-                csl_data["URL"] = ref.doi
+                csl_data['DOI'] = ref.doi
+                csl_data['URL'] = ref.doi
 
             # Type-specific data extraction from citation
             if ref.citation:
                 # Conference papers
                 if pub_type == 'paper-conference':
-                    conference_details = parse_conference_details(ref.citation, pub_type)
+                    conference_details = parse_conference_details(
+                        ref.citation, pub_type
+                    )
                     csl_data.update(conference_details)
 
                 # Journal articles
@@ -377,14 +387,14 @@ def forwards_func(apps, schema_editor):
 
             # Always store original citation in note field for reversibility
             if ref.citation:
-                csl_data["note"] = ref.citation
+                csl_data['note'] = ref.citation
 
             # Validate against schema
             try:
                 # Wrap in array as schema expects array of items
                 jsonschema.validate([csl_data], csl_schema)
             except jsonschema.ValidationError as e:
-                print(f"Warning: Validation failed for reference {ref.id}: {e}")
+                print(f'Warning: Validation failed for reference {ref.id}: {e}')
                 error_count += 1
                 continue
 
@@ -394,10 +404,12 @@ def forwards_func(apps, schema_editor):
             processed_count += 1
 
         except Exception as e:
-            print(f"Error processing reference {ref.id}: {e}")
+            print(f'Error processing reference {ref.id}: {e}')
             error_count += 1
 
-    print(f"Data migration completed. Processed: {processed_count}, Errors: {error_count}")
+    print(
+        f'Data migration completed. Processed: {processed_count}, Errors: {error_count}'
+    )
 
 
 def reverse_func(apps, schema_editor):
@@ -432,7 +444,9 @@ def reverse_func(apps, schema_editor):
                 author_strings = []
                 for author in authors:
                     if 'given' in author and 'family' in author:
-                        author_strings.append(f"{author['given']} {author['family']}")
+                        author_strings.append(
+                            f'{author["given"]} {author["family"]}'
+                        )
                     elif 'family' in author:
                         author_strings.append(author['family'])
                 ref.author = ', '.join(author_strings)
@@ -447,20 +461,26 @@ def reverse_func(apps, schema_editor):
             if 'DOI' in csl_data:
                 ref.doi = csl_data['DOI']
 
-            ref.save(update_fields=[
-                'id', 'name', 'publication_type', 'citation', 'author', 'year',
-                'doi'
-            ])
+            ref.save(
+                update_fields=[
+                    'id',
+                    'name',
+                    'publication_type',
+                    'citation',
+                    'author',
+                    'year',
+                    'doi',
+                ]
+            )
             restored_count += 1
 
         except Exception as e:
-            print(f"Error restoring reference {ref.id}: {e}")
+            print(f'Error restoring reference {ref.id}: {e}')
 
-    print(f"Reverse migration completed. Restored: {restored_count} references")
+    print(f'Reverse migration completed. Restored: {restored_count} references')
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ned_app', '0002_reference_csl_data'),
     ]
