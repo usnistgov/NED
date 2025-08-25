@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ned_app', '0005_synchronize_denormalized_fields'),
     ]
@@ -13,12 +12,21 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='reference',
             name='csl_data',
-            field=models.JSONField(default={}, help_text='Reference data in CSL-JSON format.', verbose_name='csl data'),
+            field=models.JSONField(
+                default={},
+                help_text='Reference data in CSL-JSON format.',
+                verbose_name='csl data',
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='reference',
             name='title',
-            field=models.CharField(editable=False, help_text='The title of paper or manuscript.', max_length=255, verbose_name='title'),
+            field=models.CharField(
+                editable=False,
+                help_text='The title of paper or manuscript.',
+                max_length=255,
+                verbose_name='title',
+            ),
         ),
     ]

@@ -50,9 +50,15 @@ source venv/bin/activate # (On Mac) activate your virtual environment
 
 ### Installing the Required Packages
 Be sure that all packages below have been installed in your virtual or global environment.
+
+**For production dependencies:**
 ```
-pip install Django
-pip install djangorestframework
+pip install -r requirements.txt
+```
+
+**For development dependencies (includes ruff for code quality):**
+```
+pip install -r requirements-dev.txt
 ```
 
 ### Adding Data to the Database
@@ -85,19 +91,128 @@ python manage.py migrate
 ```
 
 ### Code quality assurance
-We use automated checks at every commit to maintain a high-quality codebase. Please ensure the following tests pass before committing new code.
+We use automated checks at every commit to maintain a high-quality codebase. Our CI pipeline runs four types of tests that must all pass before code can be merged. Please ensure all of the following tests pass before committing new code.
 
-#### Spell checking with Codespell
-Codespell can catch spelling mistakes in text files. Add any words that generate false positives to the `ignore_words.txt` to skip them. Entire files can be skipped by adding to the `skip` list in the `pyproject.toml` file. Run the spell check with the following command:
+#### 1. Code Linting with Ruff
+Ruff checks your Python code for style issues, potential bugs, and code quality problems. It enforces consistent coding standards across the project.
+
+**To run locally:**
+```bash
+ruff check
 ```
+
+**To fix auto-fixable issues:**
+```bash
+ruff check --fix
+```
+
+**Common issues and fixes:**
+- **Unused imports**: Remove any imports that aren't used in your code
+- **Unused variables**: Remove variables that are assigned but never used
+- **Line too long**: Break long lines to stay under 85 characters
+- **Missing docstrings**: Add Google-style docstrings to functions and classes
+
+**Configuration**: Ruff settings are defined in `pyproject.toml`.
+
+#### 2. Code Formatting with Ruff
+Ruff format ensures consistent code formatting across the entire codebase. It automatically formats your Python code to match the project's style guidelines.
+
+**To check formatting without making changes:**
+```bash
+ruff format --check
+```
+
+**To automatically format your code:**
+```bash
+ruff format
+```
+
+**Key formatting rules:**
+- **Single quotes**: Use single quotes for strings (e.g., `'hello'` not `"hello"`)
+- **Line length**: Maximum 85 characters per line
+- **Indentation**: 4 spaces (no tabs)
+- **Import sorting**: Imports are automatically organized
+
+#### 3. Spell Checking with Codespell
+Codespell catches spelling mistakes in text files, comments, and docstrings. This helps maintain professional documentation and code comments.
+
+**To run locally:**
+```bash
 codespell .
 ```
 
-#### Unit Tests
-Unit tests are included in this repository, but are not automatically run in github. Please run the unit test prior to committing changes with the following command:
+**Handling false positives:**
+- Add words to `ignore_words.txt` if they generate false positives
+- Skip entire files by adding them to the `skip` list in `pyproject.toml`
+- Common technical terms and abbreviations are already in the ignore list
+
+**What it checks:**
+- Python code comments and docstrings
+- Markdown files (like this README)
+- Configuration files
+- Excludes: Jupyter notebooks, resources/, and visualization_tools/ directories
+
+#### 4. Unit Tests with Django Test Suite
+The project includes comprehensive unit tests that verify the functionality of models, serializers, and data processing components. All tests must pass to ensure your changes don't break existing functionality.
+
+**To run all tests:**
+```bash
+python manage.py test ned_app.tests
 ```
-python manage.py test ned_app
+
+**To run specific test files:**
+```bash
+python manage.py test ned_app.tests.test_models
+python manage.py test ned_app.tests.test_serializers
+python manage.py test ned_app.tests.test_data_processor
 ```
+
+**To run a specific test method:**
+```bash
+python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_csl_data_validation
+```
+
+**Understanding test output:**
+- **OK**: All tests passed
+- **FAIL**: A test failed - check the error message for details
+- **ERROR**: A test couldn't run due to an error in the test setup
+
+**Common test failure causes:**
+- **Database issues**: Make sure you haven't changed model fields without creating migrations
+- **Missing test data**: Ensure test fixtures and sample data are properly set up
+- **Import errors**: Check that all required dependencies are installed with `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
+
+**Test coverage**: The project has 41 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
+
+#### Running All Quality Checks Locally
+To run all quality checks that the CI pipeline will run, use these commands in sequence:
+
+```bash
+# 1. Check code formatting
+ruff format --check
+
+# 2. Run linting
+ruff check
+
+# 3. Check spelling
+codespell .
+
+# 4. Run unit tests
+python manage.py test ned_app.tests
+```
+
+#### Installing Development Dependencies
+To run these tools locally, make sure you have all dependencies installed:
+
+```bash
+# Install production dependencies
+pip install -r requirements.txt
+
+# Install development dependencies
+pip install -r requirements-dev.txt
+```
+
+This installs all required packages including Django, djangorestframework, jsonschema, and ruff for code quality checks.
 
 ---
 
