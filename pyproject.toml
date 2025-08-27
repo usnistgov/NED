@@ -6,6 +6,7 @@ skip = [
     "*/ned_proj/*",
     "*/resources/*",
     "*/visualization_tools/*",
+    "*/venv/*",
     'fair-software.md'
 ]
 check-filenames = true

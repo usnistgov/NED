@@ -20,7 +20,7 @@ from ned_app.models import (
 @admin.register(Reference)
 class ReferenceAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('id', 'title', 'author', 'year')
+    list_display = ('id', 'title', 'author', 'year', 'study_type', 'comp_type')
 
 
 @admin.register(Experiment)
