@@ -121,7 +121,6 @@ class DataFilesProcessorTest(TestCase):
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
     )
     @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
-    @patch('ned_app.serialization.data_files_processor.PROCESS_NISTIRS', False)
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', True)
     def test_import_avail_data_success_with_csl_data(self):
         """Test that import_avail_data successfully processes data with csl_data."""
@@ -165,7 +164,6 @@ class DataFilesProcessorTest(TestCase):
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
     )
     @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
-    @patch('ned_app.serialization.data_files_processor.PROCESS_NISTIRS', False)
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', True)
     def test_import_avail_data_missing_csl_data_field(self):
         """Test that import_avail_data raises error when csl_data field is missing."""
@@ -204,7 +202,6 @@ class DataFilesProcessorTest(TestCase):
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
     )
     @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
-    @patch('ned_app.serialization.data_files_processor.PROCESS_NISTIRS', False)
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', True)
     def test_import_avail_data_missing_id_field(self):
         """Test that import_avail_data handles missing id field gracefully."""
@@ -242,7 +239,6 @@ class DataFilesProcessorTest(TestCase):
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
     )
     @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
-    @patch('ned_app.serialization.data_files_processor.PROCESS_NISTIRS', False)
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', True)
     def test_import_avail_data_serializer_validation_error(self):
         """Test that import_avail_data handles serializer validation errors."""
@@ -278,7 +274,6 @@ class DataFilesProcessorTest(TestCase):
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
     )
     @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
-    @patch('ned_app.serialization.data_files_processor.PROCESS_NISTIRS', False)
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', False)
     def test_import_avail_data_references_processing_disabled(self):
         """Test that import_avail_data skips processing when PROCESS_REFERENCES is False."""
@@ -306,7 +301,6 @@ class DataFilesProcessorTest(TestCase):
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
     )
     @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
-    @patch('ned_app.serialization.data_files_processor.PROCESS_NISTIRS', False)
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', True)
     def test_import_avail_data_with_complex_csl_data(self):
         """Test import_avail_data with complex CSL data structures."""
@@ -378,7 +372,6 @@ class DataFilesProcessorTest(TestCase):
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
     )
     @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
-    @patch('ned_app.serialization.data_files_processor.PROCESS_NISTIRS', False)
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', True)
     def test_import_avail_data_empty_csl_data(self):
         """Test that import_avail_data handles empty csl_data."""
@@ -422,7 +415,6 @@ class DataFilesProcessorTest(TestCase):
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
     )
     @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
-    @patch('ned_app.serialization.data_files_processor.PROCESS_NISTIRS', False)
     @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', True)
     def test_import_avail_data_integration_with_real_serializer(self):
         """Integration test with real ReferenceSerializer."""
@@ -465,7 +457,6 @@ class DataFilesProcessorTest(TestCase):
         'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
     )
     @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
-    @patch('ned_app.serialization.data_files_processor.PROCESS_NISTIRS', False)
     def test_csl_data_field_requirement_enforcement(self):
         """Test that the csl_data field requirement is properly enforced."""
         test_cases = [

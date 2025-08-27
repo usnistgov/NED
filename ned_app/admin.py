@@ -31,8 +31,6 @@ class ComponentAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
 
-
-
 @admin.register(FragilityCurve)
 class FragilityCurveAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data

@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ned_app', '0007_remove_component_nistir_subelement_and_more'),
     ]
