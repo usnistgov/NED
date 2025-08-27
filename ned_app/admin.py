@@ -9,10 +9,6 @@ from ned_app.models import (
     FragilityCurve,
     FragilityModel,
     ExperimentFragilityModelBridge,
-    NistirMajorGroupElement,
-    NistirGroupElement,
-    NistirIndivElement,
-    NistirSubElement,
 )
 
 
@@ -35,28 +31,6 @@ class ComponentAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
 
-@admin.register(NistirMajorGroupElement)
-class NistIrMajorGroupElementAdmin(admin.ModelAdmin):
-    # how column data is displayed in the report for all entered data
-    list_display = ('id', 'name')
-
-
-@admin.register(NistirGroupElement)
-class NistIrGroupElementAdmin(admin.ModelAdmin):
-    # how column data is displayed in the report for all entered data
-    list_display = ('id', 'name')
-
-
-@admin.register(NistirIndivElement)
-class NistIrIndivElementAdmin(admin.ModelAdmin):
-    # how column data is displayed in the report for all entered data
-    list_display = ('id', 'name')
-
-
-@admin.register(NistirSubElement)
-class NistirSubElementAdmin(admin.ModelAdmin):
-    # how column data is displayed in the report for all entered data
-    list_display = ('id', 'name')
 
 
 @admin.register(FragilityCurve)
