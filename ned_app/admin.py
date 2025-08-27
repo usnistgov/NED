@@ -32,7 +32,7 @@ class ExperimentAdmin(admin.ModelAdmin):
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('id', 'name', 'nistir_subelement')
+    list_display = ('id', 'name')
 
 
 @admin.register(NistirMajorGroupElement)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
+from ned_app.validators import validate_nistir_component_id
 
 
 # Create your models here.
@@ -632,24 +633,21 @@ class Component(models.Model):
     A model representing an individual type of building component with specific attachment or material details.
 
     Attributes:
+        id (str): NISTIR component ID with validation.
         name (str): Name of the individual type of building component.
-        nistir_subelement (id): NISTIR taxonomy subelement classification
     """
 
     id = models.CharField(
-        _('id'), primary_key=True, max_length=10
+        _('id'),
+        primary_key=True,
+        max_length=10,
+        validators=[validate_nistir_component_id],
     )  # NOTE: had to bump this up from 5
     name = models.CharField(
         _('component type name'),
         max_length=255,
         blank=False,
         help_text='Name of the individual type of building component.',
-    )
-    nistir_subelement = models.ForeignKey(
-        'NistirSubElement',
-        on_delete=models.PROTECT,
-        verbose_name='NISTIR Sub Element',
-        help_text='NISTIR taxonomy subelement classification',
     )
 
     class Meta:

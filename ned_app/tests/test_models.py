@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-from ned_app.models import Reference
+from ned_app.models import Reference, Component
 
 
 class ReferenceModelTest(TestCase):
@@ -279,3 +279,103 @@ class ReferenceModelTest(TestCase):
     def tearDown(self):
         """Clean up test data after each test."""
         Reference.objects.filter(id__startswith='test-').delete()
+
+
+class ComponentModelTest(TestCase):
+    """Test cases for the Component model."""
+
+    def test_successful_component_creation(self):
+        """Test that a Component can be successfully created with valid id and name."""
+        component = Component(id='A1011', name='Wall Foundations')
+        component.full_clean()  # This will run validation
+        component.save()
+
+        # Verify the component was saved correctly
+        self.assertEqual(component.id, 'A1011')
+        self.assertEqual(component.name, 'Wall Foundations')
+
+        # Verify it can be retrieved from database
+        saved_component = Component.objects.get(id='A1011')
+        self.assertEqual(saved_component.name, 'Wall Foundations')
+
+    def test_invalid_component_id_raises_validation_error(self):
+        """Test that creating a Component with invalid id raises ValidationError."""
+        component = Component(id='Z9999', name='Invalid Component')
+
+        with self.assertRaises(ValidationError) as context:
+            component.full_clean()
+
+        # Check that the error message mentions the invalid ID
+        error_message = str(context.exception)
+        self.assertIn('Z9999', error_message)
+        self.assertIn('not found in NISTIR taxonomy', error_message)
+
+    def test_component_id_too_short_raises_validation_error(self):
+        """Test that Component with ID shorter than 5 characters raises ValidationError."""
+        component = Component(id='A10', name='Short ID Component')
+
+        with self.assertRaises(ValidationError) as context:
+            component.full_clean()
+
+        error_message = str(context.exception)
+        self.assertIn('must be at least 5 characters long', error_message)
+
+    def test_component_str_method_returns_id(self):
+        """Test that __str__ method returns the component ID."""
+        component = Component(id='A1011', name='Wall Foundations')
+        self.assertEqual(str(component), 'A1011')
+
+    def test_component_name_required(self):
+        """Test that Component name field is required."""
+        component = Component(id='A1011', name='')
+
+        with self.assertRaises(ValidationError) as context:
+            component.full_clean()
+
+        error_message = str(context.exception)
+        self.assertIn('name', error_message)
+
+    def test_multiple_valid_component_ids(self):
+        """Test creation of multiple components with different valid NISTIR IDs."""
+        valid_components = [
+            ('A1011', 'Wall Foundations'),
+            ('A1012', 'Column Foundations & Pile Caps'),
+            ('B1011', 'Suspended Basement Floors Construction'),
+            ('C1011', 'Fixed Partitions'),
+        ]
+
+        for component_id, name in valid_components:
+            with self.subTest(component_id=component_id):
+                component = Component(id=component_id, name=name)
+                component.full_clean()  # Should not raise ValidationError
+                component.save()
+
+                # Verify it was saved correctly
+                saved_component = Component.objects.get(id=component_id)
+                self.assertEqual(saved_component.name, name)
+
+    def test_component_id_validation_levels(self):
+        """Test that validation fails at different hierarchical levels."""
+        invalid_ids_and_expected_errors = [
+            ('X1011', 'first character'),  # Invalid major group
+            ('A9011', 'group element'),  # Invalid group element
+            ('A1091', 'individual element'),  # Invalid individual element
+            ('A1019', 'sub-element'),  # Invalid sub-element
+        ]
+
+        for invalid_id, expected_error_type in invalid_ids_and_expected_errors:
+            with self.subTest(invalid_id=invalid_id):
+                component = Component(id=invalid_id, name='Test Component')
+
+                with self.assertRaises(ValidationError) as context:
+                    component.full_clean()
+
+                error_message = str(context.exception)
+                self.assertIn(expected_error_type, error_message)
+                self.assertIn('not found in NISTIR taxonomy', error_message)
+
+    def tearDown(self):
+        """Clean up test data after each test."""
+        Component.objects.filter(
+            id__in=['A1011', 'A1012', 'B1011', 'C1011']
+        ).delete()
