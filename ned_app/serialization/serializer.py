@@ -93,9 +93,26 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
 
 class ComponentSerializer(serializers.ModelSerializer):
+    # Make component_id required and writeable
+    component_id = serializers.CharField(required=True)
+    # Make id and hierarchy fields read-only since they're auto-populated by the model
+    id = serializers.CharField(read_only=True)
+    major_group = serializers.CharField(read_only=True)
+    group = serializers.CharField(read_only=True)
+    element = serializers.CharField(read_only=True)
+    subelement = serializers.CharField(read_only=True)
+
     class Meta:
         model = Component
-        fields = ['id', 'name']
+        fields = [
+            'id',
+            'name',
+            'component_id',
+            'major_group',
+            'group',
+            'element',
+            'subelement',
+        ]
 
 
 class FragilityModelSerializer(serializers.ModelSerializer):

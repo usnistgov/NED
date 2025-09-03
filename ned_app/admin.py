@@ -29,6 +29,13 @@ class ExperimentAdmin(admin.ModelAdmin):
 class ComponentAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
     list_display = ('id', 'name')
+    readonly_fields = (
+        'component_id',
+        'major_group',
+        'group',
+        'element',
+        'subelement',
+    )
 
 
 @admin.register(FragilityCurve)

@@ -6,12 +6,13 @@ from ned_app.serialization.data_files_processor import (
     load_data,
     import_avail_data,
     REFERENCES_DATA_FILENAME,
+    COMPONENTS_DATA_FILENAME,
 )
 from ned_app.serialization.custom_exceptions import (
     DataFileLoadError,
     DataFileDeserializationError,
 )
-from ned_app.models import Reference
+from ned_app.models import Reference, Component
 
 
 class DataFilesProcessorTest(TestCase):
@@ -48,6 +49,17 @@ class DataFilesProcessorTest(TestCase):
                     ],
                     'issued': {'date-parts': [[2022]]},
                 },
+            },
+        ]
+
+        self.valid_component_data = [
+            {
+                'component_id': 'A.10.1.1',
+                'name': 'Test Wall Foundations',
+            },
+            {
+                'component_id': 'B.20.1.1.A',
+                'name': 'Test CFS Exterior Walls',
             },
         ]
 
@@ -528,6 +540,153 @@ class DataFilesProcessorTest(TestCase):
                                         # Should not raise an exception
                                         import_avail_data()
 
+    # Component data processing tests
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_CURVES', False
+    )
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_EXPERIMENT_FRAGILITY_PAIRS',
+        False,
+    )
+    @patch('ned_app.serialization.data_files_processor.PROCESS_EXPERIMENTS', False)
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
+    )
+    @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', False)
+    @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', True)
+    def test_import_avail_data_success_with_component_data(self):
+        """Test that import_avail_data successfully processes Component data."""
+        with patch(
+            'ned_app.serialization.data_files_processor.load_data'
+        ) as mock_load:
+            mock_load.return_value = self.valid_component_data
+
+            with patch(
+                'ned_app.serialization.data_files_processor.ComponentSerializer'
+            ) as mock_serializer_class:
+                # Mock serializer instance
+                mock_serializer = MagicMock()
+                mock_serializer.is_valid.return_value = True
+                mock_component = MagicMock()
+                mock_component.id = 'A1011'
+                mock_serializer.save.return_value = mock_component
+                mock_serializer_class.return_value = mock_serializer
+
+                import_avail_data()
+
+                # Verify that serializer was called for each component
+                self.assertEqual(mock_serializer_class.call_count, 2)
+                self.assertEqual(mock_serializer.is_valid.call_count, 2)
+                self.assertEqual(mock_serializer.save.call_count, 2)
+
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_CURVES', False
+    )
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_EXPERIMENT_FRAGILITY_PAIRS',
+        False,
+    )
+    @patch('ned_app.serialization.data_files_processor.PROCESS_EXPERIMENTS', False)
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
+    )
+    @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', False)
+    @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', True)
+    def test_import_avail_data_component_validation_error(self):
+        """Test that import_avail_data handles Component validation errors."""
+        with patch(
+            'ned_app.serialization.data_files_processor.load_data'
+        ) as mock_load:
+            mock_load.return_value = self.valid_component_data
+
+            with patch(
+                'ned_app.serialization.data_files_processor.ComponentSerializer'
+            ) as mock_serializer_class:
+                # Mock serializer with validation error
+                mock_serializer = MagicMock()
+                mock_serializer.is_valid.return_value = False
+                mock_serializer.errors = {'component_id': ['Invalid component ID']}
+                mock_serializer_class.return_value = mock_serializer
+
+                with self.assertRaises(DataFileDeserializationError) as context:
+                    import_avail_data()
+
+                self.assertIn('validation error', str(context.exception))
+                self.assertIn('components data file', str(context.exception))
+
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_CURVES', False
+    )
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_EXPERIMENT_FRAGILITY_PAIRS',
+        False,
+    )
+    @patch('ned_app.serialization.data_files_processor.PROCESS_EXPERIMENTS', False)
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
+    )
+    @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', False)
+    @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', True)
+    def test_import_avail_data_component_missing_required_field(self):
+        """Test that import_avail_data handles missing required Component fields."""
+        invalid_component_data = [
+            {
+                'name': 'Test Component Without ID',
+                # Missing component_id field
+            }
+        ]
+
+        with patch(
+            'ned_app.serialization.data_files_processor.load_data'
+        ) as mock_load:
+            mock_load.return_value = invalid_component_data
+
+            with patch(
+                'ned_app.serialization.data_files_processor.ComponentSerializer'
+            ) as mock_serializer_class:
+                # Mock serializer with validation error for missing field
+                mock_serializer = MagicMock()
+                mock_serializer.is_valid.return_value = False
+                mock_serializer.errors = {
+                    'component_id': ['This field is required.']
+                }
+                mock_serializer_class.return_value = mock_serializer
+
+                with self.assertRaises(DataFileDeserializationError) as context:
+                    import_avail_data()
+
+                self.assertIn('validation error', str(context.exception))
+                self.assertIn('components data file', str(context.exception))
+
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_CURVES', False
+    )
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_EXPERIMENT_FRAGILITY_PAIRS',
+        False,
+    )
+    @patch('ned_app.serialization.data_files_processor.PROCESS_EXPERIMENTS', False)
+    @patch(
+        'ned_app.serialization.data_files_processor.PROCESS_FRAGILITY_MODELS', False
+    )
+    @patch('ned_app.serialization.data_files_processor.PROCESS_REFERENCES', False)
+    @patch('ned_app.serialization.data_files_processor.PROCESS_COMPONENTS', False)
+    def test_import_avail_data_components_processing_disabled(self):
+        """Test that component processing is skipped when disabled."""
+        with patch(
+            'ned_app.serialization.data_files_processor.load_data'
+        ) as mock_load:
+            with patch(
+                'ned_app.serialization.data_files_processor.ComponentSerializer'
+            ) as mock_serializer_class:
+                import_avail_data()
+
+                # Verify that load_data was not called for components
+                mock_load.assert_not_called()
+                # Verify that ComponentSerializer was not instantiated
+                mock_serializer_class.assert_not_called()
+
     def tearDown(self):
         """Clean up test data after each test."""
         Reference.objects.filter(id__startswith='test-').delete()
+        Component.objects.filter(name__startswith='Test ').delete()

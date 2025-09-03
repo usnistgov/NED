@@ -1,17 +1,14 @@
 [
     {
-        "id": "B2011.A",
-        "name": "CFS Exterior Walls",
-        "nistir_subelement": "B2011"
+        "component_id": "B.20.1.1.A",
+        "name": "CFS Exterior Walls"
     },
     {
-        "id": "B2011.B",
-        "name": "Light-framed Wood Exterior Walls",
-        "nistir_subelement": "B2011"
+        "component_id": "B.20.1.1.B",
+        "name": "Light-framed Wood Exterior Walls"
     },
     {
-        "id": "D2022.A",
-        "name": "Domestic Water Piping - Horizontal Mains and Branches",
-        "nistir_subelement": "D2022"
+        "component_id": "D.20.2.2.A",
+        "name": "Domestic Water Piping - Horizontal Mains and Branches"
     }
 ]

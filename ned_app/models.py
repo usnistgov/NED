@@ -291,6 +291,7 @@ class Experiment(models.Model):
     component = models.ForeignKey(
         'Component',
         on_delete=models.PROTECT,
+        to_field='component_id',
         help_text='Identifier of the component type',
     )
     comp_detail = models.CharField(
@@ -460,6 +461,7 @@ class FragilityModel(models.Model):
     component = models.ForeignKey(
         'Component',
         on_delete=models.PROTECT,
+        to_field='component_id',
         help_text='Identifier of the component type.',
     )
     comp_detail = models.CharField(
@@ -733,8 +735,29 @@ class Component(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        """Override save to automatically populate NISTIR fields from component_id."""
+        """Override save to automatically populate NISTIR fields and generate ID from component_id."""
         if self.component_id:
+            # Generate primary key from component_id if not already set
+            if not self.id:
+                # Convert dotted notation to concatenated format
+                # e.g., 'B.20.1.1.A' -> 'B2011.A'
+                parts = self.component_id.split('.')
+                if len(parts) >= 4:
+                    # First 4 parts are NISTIR levels, the rest are suffixes
+                    l1 = parts[0]  # 'B'
+                    l2 = parts[1]  # '20'
+                    l3 = parts[2]  # '1'
+                    l4 = parts[3]  # '1'
+                    suffix = '.'.join(parts[4:]) if len(parts) > 4 else ''
+
+                    # Generate concatenated ID
+                    old_style_id = f'{l1}{l2}{l3}{l4}'
+                    if suffix:
+                        old_style_id += f'.{suffix}'
+
+                    # Set the ID as the primary key
+                    self.id = old_style_id
+
             # Load the NISTIR labels
             labels = _load_nistir_labels()
 
