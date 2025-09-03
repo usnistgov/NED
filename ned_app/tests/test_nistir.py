@@ -64,26 +64,35 @@ class NistirConfigurationTest(TestCase):
             len(labels_keys), 0, 'Labels should contain at least one key'
         )
 
-    def _extract_all_keys_from_schema(self, schema_dict, keys_set=None):
+    def _extract_all_keys_from_schema(
+        self, schema_dict, keys_set=None, path_parts=None
+    ):
         """
-        Recursively extract all keys from the nested schema structure.
+        Recursively extract all dotted keys from the schema structure.
 
         Args:
             schema_dict (dict): The schema dictionary to traverse
             keys_set (set): Accumulator for keys (used in recursion)
+            path_parts (list): Current path components for building dotted keys
 
         Returns:
-            set: All keys found in the nested structure
+            set: All dotted keys found in the nested structure
         """
         if keys_set is None:
             keys_set = set()
+        if path_parts is None:
+            path_parts = []
 
         for key, value in schema_dict.items():
-            # Add the current key to our set
-            keys_set.add(key)
+            # Build the current path
+            current_path = path_parts + [key]
+
+            # Create dotted key from current path
+            dotted_key = '.'.join(current_path)
+            keys_set.add(dotted_key)
 
             # If the value is a dictionary, recursively process it
             if isinstance(value, dict) and value:
-                self._extract_all_keys_from_schema(value, keys_set)
+                self._extract_all_keys_from_schema(value, keys_set, current_path)
 
         return keys_set

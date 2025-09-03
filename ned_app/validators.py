@@ -41,14 +41,12 @@ def validate_nistir_component_id(component_id):
     """
     Validate a NISTIR component ID against the hierarchical schema.
 
-    The validation follows this specific hierarchical logic:
-    1. The first character must exist as a top-level key
-    2. The first three characters must exist as a key within the first level's object
-    3. The first four characters plus a "0" must exist as a key within the second level's object
-    4. The first five characters must exist as a key within the third level's object
+    The validator parses the 4-level NISTIR portion of a dotted ID string and
+    traverses the NISTIR schema structure. For example, from 'B.20.1.1.A',
+    it isolates the parts ['B', '20', '1', '1'] and validates each level exists.
 
     Args:
-        component_id (str): The component ID to validate
+        component_id (str): The component ID to validate (e.g., 'A.10.1.1')
 
     Raises:
         ValidationError: If the component ID is invalid at any hierarchical level
@@ -56,42 +54,49 @@ def validate_nistir_component_id(component_id):
     if not isinstance(component_id, str):
         raise ValidationError('Component ID must be a string')
 
-    if len(component_id) < 5:
+    # Parse the dotted ID to get the 4-level NISTIR parts
+    parts = component_id.split('.')
+
+    # We need at least 4 parts for a complete NISTIR ID
+    if len(parts) < 4:
         raise ValidationError(
-            f'Component ID "{component_id}" must be at least 5 characters long'
+            f'Component ID "{component_id}" must have at least 4 NISTIR levels (e.g., A.10.1.1)'
         )
+
+    # Extract the first 4 parts (NISTIR hierarchy)
+    nistir_parts = parts[:4]
 
     # Load the schema
     schema = _load_nistir_schema()
 
-    # Step 1: Check first character (top-level key)
-    first_char = component_id[0]
-    if first_char not in schema:
+    # Step 1: Check Level 1 (major group, e.g., 'A')
+    level1_key = nistir_parts[0]
+    if level1_key not in schema:
         raise ValidationError(
             f'Invalid component ID "{component_id}": '
-            f'first character "{first_char}" not found in NISTIR taxonomy'
+            f'major group "{level1_key}" not found in NISTIR taxonomy'
         )
 
-    # Step 2: Check first three characters (second level)
-    first_three = component_id[:3]
-    if first_three not in schema[first_char]:
+    # Step 2: Check Level 2 (group, e.g., '10')
+    level2_key = nistir_parts[1]
+    if level2_key not in schema[level1_key]:
         raise ValidationError(
             f'Invalid component ID "{component_id}": '
-            f'group element "{first_three}" not found in NISTIR taxonomy'
+            f'group "{level2_key}" not found under major group "{level1_key}" in NISTIR taxonomy'
         )
 
-    # Step 3: Check first four characters plus "0" (third level)
-    first_four_plus_zero = component_id[:4] + '0'
-    if first_four_plus_zero not in schema[first_char][first_three]:
+    # Step 3: Check Level 3 (element, e.g., '1')
+    level3_key = nistir_parts[2]
+    if level3_key not in schema[level1_key][level2_key]:
         raise ValidationError(
             f'Invalid component ID "{component_id}": '
-            f'individual element "{first_four_plus_zero}" not found in NISTIR taxonomy'
+            f'element "{level3_key}" not found under group "{level1_key}.{level2_key}" in NISTIR taxonomy'
         )
 
-    # Step 4: Check first five characters (fourth level)
-    first_five = component_id[:5]
-    if first_five not in schema[first_char][first_three][first_four_plus_zero]:
+    # Step 4: Check Level 4 (subelement, e.g., '1')
+    level4_key = nistir_parts[3]
+    if level4_key not in schema[level1_key][level2_key][level3_key]:
         raise ValidationError(
             f'Invalid component ID "{component_id}": '
-            f'sub-element "{first_five}" not found in NISTIR taxonomy'
+            f'subelement "{level4_key}" not found under element "{level1_key}.{level2_key}.{level3_key}" in NISTIR taxonomy'
         )

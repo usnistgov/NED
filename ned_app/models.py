@@ -1,7 +1,39 @@
+import json
+import os
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
 from ned_app.validators import validate_nistir_component_id
+
+
+# Global variable to cache the NISTIR labels for efficiency
+_nistir_labels = None
+
+
+def _load_nistir_labels():
+    """
+    Load the NISTIR labels from disk. Cache it globally for efficiency.
+
+    Returns:
+        dict: The NISTIR labels dictionary
+    """
+    global _nistir_labels
+
+    if _nistir_labels is None:
+        labels_path = os.path.join(
+            settings.BASE_DIR, 'ned_app', 'data', 'nistir_labels.json'
+        )
+
+        try:
+            with open(labels_path, 'r') as f:
+                _nistir_labels = json.load(f)
+        except FileNotFoundError:
+            raise ValidationError(f'NISTIR labels file not found at {labels_path}')
+        except json.JSONDecodeError as e:
+            raise ValidationError(f'Invalid JSON in NISTIR labels file: {e}')
+
+    return _nistir_labels
 
 
 # Create your models here.
@@ -633,8 +665,13 @@ class Component(models.Model):
     A model representing an individual type of building component with specific attachment or material details.
 
     Attributes:
-        id (str): NISTIR component ID with validation.
+        id (str): Component ID - will be replaced with an integer in a future update.
         name (str): Name of the individual type of building component.
+        component_id (str): Component ID including NISTIR identifiers.
+        major_group (str): NISTIR major group ID and description.
+        group (str): NISTIR group ID and description.
+        element (str): NISTIR element ID and description.
+        subelement (str): NISTIR subelement ID and description.
     """
 
     id = models.CharField(
@@ -649,6 +686,86 @@ class Component(models.Model):
         blank=False,
         help_text='Name of the individual type of building component.',
     )
+    component_id = models.CharField(
+        _('component id'),
+        max_length=20,
+        unique=True,
+        null=True,
+        blank=True,
+        validators=[validate_nistir_component_id],
+        help_text='Component ID including NISTIR identifiers (e.g., A.10.1.1).',
+    )
+    major_group = models.CharField(
+        _('major group'),
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+        db_index=True,
+        help_text='NISTIR major group ID and description.',
+    )
+    group = models.CharField(
+        _('group'),
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+        db_index=True,
+        help_text='NISTIR group ID and description.',
+    )
+    element = models.CharField(
+        _('element'),
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+        db_index=True,
+        help_text='NISTIR element ID and description.',
+    )
+    subelement = models.CharField(
+        _('subelement'),
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+        db_index=True,
+        help_text='NISTIR subelement ID and description.',
+    )
+
+    def save(self, *args, **kwargs):
+        """Override save to automatically populate NISTIR fields from component_id."""
+        if self.component_id:
+            # Load the NISTIR labels
+            labels = _load_nistir_labels()
+
+            # Parse the component_id to get individual parts
+            parts = self.component_id.split('.')
+
+            if len(parts) >= 1:
+                # Level 1: Major Group (e.g., 'A')
+                major_group_key = parts[0]
+                if major_group_key in labels:
+                    self.major_group = f'{parts[0]} - {labels[major_group_key]}'
+
+            if len(parts) >= 2:
+                # Level 2: Group (e.g., 'A.10')
+                group_key = f'{parts[0]}.{parts[1]}'
+                if group_key in labels:
+                    self.group = f'{parts[1]} - {labels[group_key]}'
+
+            if len(parts) >= 3:
+                # Level 3: Element (e.g., 'A.10.1')
+                element_key = f'{parts[0]}.{parts[1]}.{parts[2]}'
+                if element_key in labels:
+                    self.element = f'{parts[2]} - {labels[element_key]}'
+
+            if len(parts) >= 4:
+                # Level 4: Subelement (e.g., 'A.10.1.1')
+                subelement_key = f'{parts[0]}.{parts[1]}.{parts[2]}.{parts[3]}'
+                if subelement_key in labels:
+                    self.subelement = f'{parts[3]} - {labels[subelement_key]}'
+
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Component'
