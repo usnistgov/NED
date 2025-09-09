@@ -7,7 +7,7 @@ This repository provides remote hosting and version control for the development 
 ## Database Architecture
 The goal of this project is to develop a robust and scalable database of fragility and consequence models of nonstructural building elements for seismic performance evaluation. Data is organized in a way such that each data table represents an abstract portion of the fragility model, e.g., separating observations of component performance from an experimental test from that of a fragility model and repair costs consequence models. In that way, that data is both nimble/scalable with new information and can be clearly linked back to original source data and models through explicit relational keys. The outcomes of this project will expand the applicability of performance- and recovery-based earthquake assessments, resulting in a publicly available database to support current research and building design. The figure below outlines the current portions of the database under development and future development plans.
 
-<img width="859" height="1918" alt="ned_ERD" src="https://github.com/user-attachments/assets/ba00a466-9ce4-454d-b671-b5bcc5b4d75c" />
+<img width="950" height="1232" alt="ned_erd" src="https://github.com/user-attachments/assets/52debba8-324a-43c4-9f27-7906e7200c7c" />
 
 ## Repository Organization
 - **db.sqlite3** - SQL implementation of the NED database.
