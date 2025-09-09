@@ -2,7 +2,7 @@
     {
         "id": "B2011.001a",
         "p58_fragility": "B2011.001a",
-        "component": "B2011.A",
+        "component": "B.20.1.1.A",
         "comp_detail": "",
         "material": "",
         "size_class": "",
@@ -11,7 +11,7 @@
     {
         "id": "B2011.001b",
         "p58_fragility": "B2011.001b",
-        "component": "B2011.A",
+        "component": "B.20.1.1.A",
         "comp_detail": "",
         "material": "",
         "size_class": "",

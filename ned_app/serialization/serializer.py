@@ -10,10 +10,6 @@ from ned_app.models import (
     Experiment,
     ExperimentFragilityModelBridge,
     FragilityCurve,
-    NistirMajorGroupElement,
-    NistirGroupElement,
-    NistirIndivElement,
-    NistirSubElement,
 )
 
 
@@ -97,16 +93,26 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
 
 class ComponentSerializer(serializers.ModelSerializer):
+    # Make component_id required and writeable
+    component_id = serializers.CharField(required=True)
+    # Make id and hierarchy fields read-only since they're auto-populated by the model
+    id = serializers.CharField(read_only=True)
+    major_group = serializers.CharField(read_only=True)
+    group = serializers.CharField(read_only=True)
+    element = serializers.CharField(read_only=True)
+    subelement = serializers.CharField(read_only=True)
+
     class Meta:
         model = Component
-        fields = '__all__'
-
-    # create the Component record in the database via the framework
-    def create(self, json_data) -> Component:
-        # 'json_data' is simply seen as a kwargs input...
-        component: Component = Component.objects.create(**json_data)
-
-        return component
+        fields = [
+            'id',
+            'name',
+            'component_id',
+            'major_group',
+            'group',
+            'element',
+            'subelement',
+        ]
 
 
 class FragilityModelSerializer(serializers.ModelSerializer):
@@ -159,99 +165,3 @@ class FragilityCurveSerializer(serializers.ModelSerializer):
         curve: FragilityCurve = FragilityCurve.objects.create(**json_data)
 
         return curve
-
-
-class NistirSubElementSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = NistirSubElement
-        # fields = '__all__'
-        fields = ['id', 'name']
-
-    def create(self, validated_data) -> NistirIndivElement:
-        # 'validated_data' is simply seen as a kwargs input...
-        sub_element: NistirSubElement = NistirSubElement.objects.create(
-            **validated_data
-        )
-
-        return sub_element
-
-
-class NistirIndivElementSerializer(serializers.ModelSerializer):
-    sub_elements = NistirSubElementSerializer(
-        many=True, read_only=False, required=False
-    )  # NOTE: not requiring that all sub-elements be present in the JSON data
-
-    class Meta:
-        model = NistirIndivElement
-        # fields = '__all__'
-        fields = ['id', 'name', 'sub_elements']
-
-    def create(self, validated_data) -> NistirIndivElement:
-        # 'validated_data' is simply seen as a kwargs input...
-        indiv_element: NistirIndivElement = NistirIndivElement.objects.create(
-            **validated_data
-        )
-
-        return indiv_element
-
-
-class NistirGroupElementSerializer(serializers.ModelSerializer):
-    # adding as its of field ensures the serializer picks up and deserializes the indiv_elements content
-    indiv_elements = NistirIndivElementSerializer(many=True, read_only=False)
-
-    class Meta:
-        model = NistirGroupElement
-        # fields = '__all__'
-        fields = ['id', 'name', 'indiv_elements']
-
-    def create(self, validated_data) -> NistirGroupElement:
-        # 'validated_data' is simply seen as a kwargs input...
-        group_element: NistirGroupElement = NistirGroupElement.objects.create(
-            **validated_data
-        )
-
-        return group_element
-
-
-class NistirMajorGroupElementSerializer(serializers.ModelSerializer):
-    group_elements = NistirGroupElementSerializer(many=True, read_only=False)
-
-    class Meta:
-        model = NistirMajorGroupElement
-        fields = '__all__'  # includes the declared "group_elements" field above
-        fields = ['id', 'name', 'group_elements']
-
-    # create the NISTIR record in the database via the framework
-    def create(self, validated_data) -> NistirMajorGroupElement:
-        group_elements_data = validated_data.pop('group_elements')
-        major_group_element: NistirMajorGroupElement = (
-            NistirMajorGroupElement.objects.create(**validated_data)
-        )
-
-        for group_element_data in group_elements_data:
-            indiv_elements_data = group_element_data.pop('indiv_elements')
-            group_element: NistirGroupElement = NistirGroupElement.objects.create(
-                major_group_element=major_group_element, **group_element_data
-            )
-
-            for indiv_element_data in indiv_elements_data:
-                if 'sub_elements' in indiv_element_data:
-                    sub_elements_data = indiv_element_data.pop('sub_elements')
-                    indiv_element: NistirIndivElement = (
-                        NistirIndivElement.objects.create(
-                            group_element=group_element, **indiv_element_data
-                        )
-                    )
-
-                    for sub_element_data in sub_elements_data:
-                        NistirSubElement.objects.create(
-                            indiv_element=indiv_element, **sub_element_data
-                        )
-                else:
-                    indiv_element: NistirIndivElement = (
-                        NistirIndivElement.objects.create(
-                            group_element=group_element, **indiv_element_data
-                        )
-                    )
-
-        return major_group_element

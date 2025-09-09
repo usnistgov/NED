@@ -14,7 +14,6 @@ from ned_app.serialization.serializer import (
     FragilityModelSerializer,
     ExperimentFragilityModelBridgeSerializer,
     FragilityCurveSerializer,
-    NistirMajorGroupElementSerializer,
     ExperimentSerializer,
 )
 from ned_app.models import (
@@ -22,14 +21,12 @@ from ned_app.models import (
     Component,
     FragilityModel,
     ExperimentFragilityModelBridge,
-    NistirMajorGroupElement,
     Experiment,
     FragilityCurve,
 )
 
 REFERENCES_DATA_FILENAME = 'reference.json'
 COMPONENTS_DATA_FILENAME = 'component.json'
-NISTIR_DATA_FILENAME = 'nistir.json'
 FRAGILITY_MODEL_DATA_FILENAME = 'fragility_model.json'
 EXPERIMENT_DATA_FILENAME = 'experiment.json'
 EXPERIMENT_FRAGILITY_BRIDGE_DATA_FILENAME = 'experiment_fragility_bridge.json'
@@ -37,7 +34,6 @@ FRAGILITY_CURVE_DATA_FILENAME = 'fragility_curve.json'
 
 PROCESS_REFERENCES = True
 PROCESS_COMPONENTS = True
-PROCESS_NISTIRS = True
 PROCESS_FRAGILITY_MODELS = True
 PROCESS_EXPERIMENTS = True
 PROCESS_EXPERIMENT_FRAGILITY_PAIRS = True
@@ -95,26 +91,6 @@ def import_avail_data() -> None:
                     raise DataFileDeserializationError(err_msg)
     else:
         print('processing references bypassed')
-
-    if PROCESS_NISTIRS:
-        # process NISTIR data
-        print('processing JSON NISTR data...')
-        loaded_data = load_data(NISTIR_DATA_FILENAME)
-        if loaded_data:
-            for item in loaded_data:
-                nistir_serializer = NistirMajorGroupElementSerializer(data=item)
-                if nistir_serializer.is_valid():
-                    nistir_major_group: NistirMajorGroupElement = (
-                        nistir_serializer.save()
-                    )  # creates and saves
-                    print(
-                        f"NISTIR Major Group Element ID '{nistir_major_group.id}' successfully ingested"
-                    )
-                else:
-                    err_msg = f'There was a least one validation error on NISTIRs data file deserialization: {nistir_serializer.errors}'
-                    raise DataFileDeserializationError(err_msg)
-    else:
-        print('processing NISTIRS bypassed')
 
     if PROCESS_COMPONENTS:
         # process Components data

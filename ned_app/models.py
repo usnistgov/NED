@@ -1,6 +1,39 @@
+import json
+import os
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
+from ned_app.validators import validate_nistir_component_id
+
+
+# Global variable to cache the NISTIR labels for efficiency
+_nistir_labels = None
+
+
+def _load_nistir_labels():
+    """
+    Load the NISTIR labels from disk. Cache it globally for efficiency.
+
+    Returns:
+        dict: The NISTIR labels dictionary
+    """
+    global _nistir_labels
+
+    if _nistir_labels is None:
+        labels_path = os.path.join(
+            settings.BASE_DIR, 'ned_app', 'data', 'nistir_labels.json'
+        )
+
+        try:
+            with open(labels_path, 'r') as f:
+                _nistir_labels = json.load(f)
+        except FileNotFoundError:
+            raise ValidationError(f'NISTIR labels file not found at {labels_path}')
+        except json.JSONDecodeError as e:
+            raise ValidationError(f'Invalid JSON in NISTIR labels file: {e}')
+
+    return _nistir_labels
 
 
 # Create your models here.
@@ -258,6 +291,7 @@ class Experiment(models.Model):
     component = models.ForeignKey(
         'Component',
         on_delete=models.PROTECT,
+        to_field='component_id',
         help_text='Identifier of the component type',
     )
     comp_detail = models.CharField(
@@ -427,6 +461,7 @@ class FragilityModel(models.Model):
     component = models.ForeignKey(
         'Component',
         on_delete=models.PROTECT,
+        to_field='component_id',
         help_text='Identifier of the component type.',
     )
     comp_detail = models.CharField(
@@ -632,12 +667,20 @@ class Component(models.Model):
     A model representing an individual type of building component with specific attachment or material details.
 
     Attributes:
+        id (str): Component ID - will be replaced with an integer in a future update.
         name (str): Name of the individual type of building component.
-        nistir_subelement (id): NISTIR taxonomy subelement classification
+        component_id (str): Component ID including NISTIR identifiers.
+        major_group (str): NISTIR major group ID and description.
+        group (str): NISTIR group ID and description.
+        element (str): NISTIR element ID and description.
+        subelement (str): NISTIR subelement ID and description.
     """
 
     id = models.CharField(
-        _('id'), primary_key=True, max_length=10
+        _('id'),
+        primary_key=True,
+        max_length=10,
+        validators=[validate_nistir_component_id],
     )  # NOTE: had to bump this up from 5
     name = models.CharField(
         _('component type name'),
@@ -645,12 +688,107 @@ class Component(models.Model):
         blank=False,
         help_text='Name of the individual type of building component.',
     )
-    nistir_subelement = models.ForeignKey(
-        'NistirSubElement',
-        on_delete=models.PROTECT,
-        verbose_name='NISTIR Sub Element',
-        help_text='NISTIR taxonomy subelement classification',
+    component_id = models.CharField(
+        _('component id'),
+        max_length=20,
+        unique=True,
+        null=True,
+        blank=True,
+        validators=[validate_nistir_component_id],
+        help_text='Component ID including NISTIR identifiers (e.g., A.10.1.1).',
     )
+    major_group = models.CharField(
+        _('major group'),
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+        db_index=True,
+        help_text='NISTIR major group ID and description.',
+    )
+    group = models.CharField(
+        _('group'),
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+        db_index=True,
+        help_text='NISTIR group ID and description.',
+    )
+    element = models.CharField(
+        _('element'),
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+        db_index=True,
+        help_text='NISTIR element ID and description.',
+    )
+    subelement = models.CharField(
+        _('subelement'),
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+        db_index=True,
+        help_text='NISTIR subelement ID and description.',
+    )
+
+    def save(self, *args, **kwargs):
+        """Override save to automatically populate NISTIR fields and generate ID from component_id."""
+        if self.component_id:
+            # Generate primary key from component_id if not already set
+            if not self.id:
+                # Convert dotted notation to concatenated format
+                # e.g., 'B.20.1.1.A' -> 'B2011.A'
+                parts = self.component_id.split('.')
+                if len(parts) >= 4:
+                    # First 4 parts are NISTIR levels, the rest are suffixes
+                    l1 = parts[0]  # 'B'
+                    l2 = parts[1]  # '20'
+                    l3 = parts[2]  # '1'
+                    l4 = parts[3]  # '1'
+                    suffix = '.'.join(parts[4:]) if len(parts) > 4 else ''
+
+                    # Generate concatenated ID
+                    old_style_id = f'{l1}{l2}{l3}{l4}'
+                    if suffix:
+                        old_style_id += f'.{suffix}'
+
+                    # Set the ID as the primary key
+                    self.id = old_style_id
+
+            # Load the NISTIR labels
+            labels = _load_nistir_labels()
+
+            # Parse the component_id to get individual parts
+            parts = self.component_id.split('.')
+
+            if len(parts) >= 1:
+                # Level 1: Major Group (e.g., 'A')
+                major_group_key = parts[0]
+                if major_group_key in labels:
+                    self.major_group = f'{parts[0]} - {labels[major_group_key]}'
+
+            if len(parts) >= 2:
+                # Level 2: Group (e.g., 'A.10')
+                group_key = f'{parts[0]}.{parts[1]}'
+                if group_key in labels:
+                    self.group = f'{parts[1]} - {labels[group_key]}'
+
+            if len(parts) >= 3:
+                # Level 3: Element (e.g., 'A.10.1')
+                element_key = f'{parts[0]}.{parts[1]}.{parts[2]}'
+                if element_key in labels:
+                    self.element = f'{parts[2]} - {labels[element_key]}'
+
+            if len(parts) >= 4:
+                # Level 4: Subelement (e.g., 'A.10.1.1')
+                subelement_key = f'{parts[0]}.{parts[1]}.{parts[2]}.{parts[3]}'
+                if subelement_key in labels:
+                    self.subelement = f'{parts[3]} - {labels[subelement_key]}'
+
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Component'
@@ -658,132 +796,3 @@ class Component(models.Model):
 
     def __str__(self):
         return self.id
-
-
-class NistirMajorGroupElement(models.Model):
-    """
-    A model representing major division in building component types
-
-    Attributes:
-        name (str): Broad category of buildng's component categorization.
-    """
-
-    id = models.CharField(primary_key=True, max_length=255, verbose_name='ID')
-    name = models.CharField(
-        _('name'),
-        max_length=1024,
-        blank=False,
-        help_text="Broad category of buildng's component categorization.",
-    )
-
-    class Meta:
-        verbose_name = 'NISTIR Major Group Element'
-        verbose_name_plural = 'NISTIR Major Group Elements'
-
-    def __str__(self):
-        return self.name
-
-
-class NistirGroupElement(models.Model):
-    """
-    A model representing an Sub-group classification in the NISTIR building component taxonomy.
-
-    Attributes:
-        name (str): Sub-group classification of the major grouping.
-        major_group_element (id): 1-digit alphabetical indentifier of the major group.
-    """
-
-    id = models.CharField(primary_key=True, max_length=255, verbose_name='ID')
-    name = models.CharField(
-        _('name'),
-        max_length=1024,
-        blank=False,
-        help_text='Sub-group classification of the major grouping.',
-    )
-    # NOTE: "blank = True" is required for the serializer.is_valid() method to NOT throw a data validation exception.  Note this does not suggest
-    # the field in the database will be configured as nullable - unless otherwise specified, the foreign-key remains non nullable when migrations are performed
-    major_group_element = models.ForeignKey(
-        NistirMajorGroupElement,
-        on_delete=models.CASCADE,
-        verbose_name='NISTIR Major Group',
-        related_name='group_elements',
-        blank=True,
-        help_text='1-digit alphabetical indentifier of the major group.',
-    )
-
-    class Meta:
-        verbose_name = 'NISTIR Group Element'
-        verbose_name_plural = 'NISTIR Group Elements'
-
-    def __str__(self):
-        return self.name
-
-
-class NistirIndivElement(models.Model):
-    """
-    A model representing an building element in the NISTIR building component taxonomy.
-
-    Attributes:
-        name (str): Classification of the specific element of interest within the group.
-        group_element (id): 3-digit alphanumeric indentifier of the group.
-    """
-
-    id = models.CharField(primary_key=True, max_length=255, verbose_name='ID')
-    name = models.CharField(
-        _('name'),
-        max_length=1024,
-        blank=False,
-        help_text='Classification of the specific element of interest within the group.',
-    )
-    # NOTE: "blank = True" is required for the serializer.is_valid() method to NOT throw a data validation exception.  Note this does not suggest
-    # the field in the database will be configured as nullable - unless otherwise specified, the foreign-key remains non nullable when migrations are performed
-    group_element = models.ForeignKey(
-        NistirGroupElement,
-        on_delete=models.CASCADE,
-        verbose_name='NISTIR Group',
-        related_name='indiv_elements',
-        blank=True,
-        help_text='3-digit alphanumeric indentifier of the group.',
-    )
-
-    class Meta:
-        verbose_name = 'NISTIR Individual Element'
-        verbose_name_plural = 'NISTIR Individual Elements'
-
-    def __str__(self):
-        return self.name
-
-
-class NistirSubElement(models.Model):
-    """
-    A model representing a subcategorization of an element in the NISTIR building component taxonomy.
-
-    Attributes:
-        name (str): Sub-element classification of a specific type of element within a given element class.
-        indiv_element (id): 5-digit alphanumeric indentifier of the NISTIR element.
-    """
-
-    id = models.CharField(primary_key=True, max_length=255, verbose_name='ID')
-    name = models.CharField(
-        _('name'),
-        max_length=1024,
-        blank=False,
-        help_text='Sub-element classification of a specific type of element within a given element class.',
-    )
-    # NOTE: "blank = True" is required for the serializer.is_valid() method to NOT throw a data validation exception.  Note this does not suggest
-    # the field in the database will be configured as nullable - unless otherwise specified, the foreign-key remains non nullable when migrations are performed
-    indiv_element = models.ForeignKey(
-        NistirIndivElement,
-        on_delete=models.CASCADE,
-        verbose_name='NISTIR Indiv. Element',
-        related_name='sub_elements',
-        blank=True,
-        help_text='5-digit alphanumeric indentifier of the NISTIR element.',
-    )
-
-    class Meta:
-        verbose_name = 'NISTIR Sub Element'
-        verbose_name_plural = 'NISTIR Sub Elements'
-
-    def __str__(self):
-        return self.name
