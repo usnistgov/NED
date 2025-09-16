@@ -8,10 +8,10 @@ from typing import Any, Dict, Iterable
 
 # Hardcoded paths relative to this file's repository root
 REPO_ROOT = Path(__file__).resolve().parents[1]
-INPUT_PATH = REPO_ROOT / "resources" / "data" / "nistir.json"
-OUTPUT_PATH = REPO_ROOT / "ned_app" / "schemas" / "nistir_labels.json"
+INPUT_PATH = REPO_ROOT / 'resources' / 'data' / 'nistir.json'
+OUTPUT_PATH = REPO_ROOT / 'ned_app' / 'schemas' / 'nistir_labels.json'
 
-CHILD_KEYS: tuple[str, ...] = ("group_elements", "indiv_elements", "sub_elements")
+CHILD_KEYS: tuple[str, ...] = ('group_elements', 'indiv_elements', 'sub_elements')
 
 
 def transform_id(compact_id: str) -> str:
@@ -30,7 +30,7 @@ def transform_id(compact_id: str) -> str:
         return compact_id
 
     if not compact_id:
-        raise ValueError("Empty ID encountered")
+        raise ValueError('Empty ID encountered')
 
     prefix = compact_id[0]
     digits = compact_id[1:]
@@ -51,14 +51,14 @@ def transform_id(compact_id: str) -> str:
         rest = list(digits[2:])
 
         # Trim trailing zeros from the rest
-        while rest and rest[-1] == "0":
+        while rest and rest[-1] == '0':
             rest.pop()
 
         # Each remaining digit becomes its own segment
         for d in rest:
             parts.append(str(int(d)))  # normalize to no leading zeros
 
-    return ".".join(parts)
+    return '.'.join(parts)
 
 
 def _iter_children(node: dict[str, Any]) -> Iterable[dict[str, Any]]:
@@ -75,8 +75,8 @@ def build_label_map(data: Any) -> Dict[str, str]:
     labels: Dict[str, str] = {}
 
     def visit(node: dict[str, Any]) -> None:
-        cid = node.get("id")
-        name = node.get("name")
+        cid = node.get('id')
+        name = node.get('name')
         if isinstance(cid, str) and isinstance(name, str):
             tid = transform_id(cid)
             labels[tid] = name
@@ -90,22 +90,24 @@ def build_label_map(data: Any) -> Dict[str, str]:
     elif isinstance(data, dict):
         visit(data)
     else:
-        raise ValueError("Unexpected JSON structure for NISTIR data: expected list or dict root")
+        raise ValueError(
+            'Unexpected JSON structure for NISTIR data: expected list or dict root'
+        )
 
     return labels
 
 
 def main() -> None:
-    with INPUT_PATH.open("r", encoding="utf-8") as f:
+    with INPUT_PATH.open('r', encoding='utf-8') as f:
         data = json.load(f)
 
     labels = build_label_map(data)
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with OUTPUT_PATH.open("w", encoding="utf-8") as f:
+    with OUTPUT_PATH.open('w', encoding='utf-8') as f:
         json.dump(labels, f, indent=2, ensure_ascii=False)
-        f.write("\n")  # newline at end of file
+        f.write('\n')  # newline at end of file
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

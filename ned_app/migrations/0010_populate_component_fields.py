@@ -16,7 +16,7 @@ def populate_new_component_fields(apps, schema_editor):
 
     # Load the NISTIR labels data
     labels_path = os.path.join(
-        settings.BASE_DIR, 'ned_app', 'data', 'nistir_labels.json'
+        settings.BASE_DIR, 'ned_app', 'schemas', 'nistir_labels.json'
     )
 
     try:

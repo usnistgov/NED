@@ -32,7 +32,9 @@ class NistirConfigurationTest(TestCase):
         labels_keys = set(labels_data.keys())
 
         # Ensure we have at least one key
-        self.assertGreater(len(labels_keys), 0, 'Labels should contain at least one key')
+        self.assertGreater(
+            len(labels_keys), 0, 'Labels should contain at least one key'
+        )
 
         # For each key, validate that all ancestor keys exist
         for key in labels_keys:
