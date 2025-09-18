@@ -305,10 +305,12 @@ class ComponentModelTest(TestCase):
         with self.assertRaises(ValidationError) as context:
             component.full_clean()
 
-        # Check that the error message mentions the invalid ID
-        error_message = str(context.exception)
-        self.assertIn('Z.99.9.9', error_message)
-        self.assertIn('not found in NISTIR taxonomy', error_message)
+        # Check for the new generic error message format
+        error_dict = context.exception.message_dict
+        self.assertIn('id', error_dict)
+
+        expected_msg = 'Invalid component ID: The NISTIR ID "Z.99.9.9" was not found in the taxonomy.'
+        self.assertIn(expected_msg, error_dict['id'])
 
     def test_component_id_too_short_raises_validation_error(self):
         """Test that Component with ID with fewer than 4 NISTIR levels raises ValidationError."""
@@ -355,24 +357,25 @@ class ComponentModelTest(TestCase):
                 self.assertEqual(saved_component.name, name)
 
     def test_component_id_validation_levels(self):
-        """Test that validation fails at different hierarchical levels."""
-        invalid_ids_and_expected_errors = [
-            ('X.10.1.1', 'major group'),  # Invalid major group
-            ('A.90.1.1', 'group'),  # Invalid group
-            ('A.10.9.1', 'element'),  # Invalid element
-            ('A.10.1.9', 'subelement'),  # Invalid subelement
+        """Test that validation fails correctly for various invalid hierarchical levels."""
+        invalid_ids = [
+            'X.10.1.1',  # Invalid major group
+            'A.90.1.1',  # Invalid group
+            'A.10.9.1',  # Invalid element
+            'A.10.1.9',  # Invalid subelement
         ]
 
-        for invalid_id, expected_error_type in invalid_ids_and_expected_errors:
+        for invalid_id in invalid_ids:
             with self.subTest(invalid_id=invalid_id):
                 component = Component(id=invalid_id, name='Test Component')
 
                 with self.assertRaises(ValidationError) as context:
                     component.full_clean()
 
-                error_message = str(context.exception)
-                self.assertIn(expected_error_type, error_message)
-                self.assertIn('not found', error_message)
+                error_dict = context.exception.message_dict
+                self.assertIn('id', error_dict)
+                expected_msg = f'Invalid component ID: The NISTIR ID "{invalid_id}" was not found in the taxonomy.'
+                self.assertIn(expected_msg, error_dict['id'])
 
     def test_save_method_populates_hierarchy_fields(self):
         """Test that the save() method correctly populates hierarchy fields from component_id."""

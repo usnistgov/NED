@@ -61,8 +61,8 @@ class NistirComponentIdValidatorTest(TestCase):
                     validate_nistir_component_id(component_id)
 
                 error_message = str(cm.exception)
-                self.assertIn('major group', error_message)
-                self.assertIn('not found in NISTIR taxonomy', error_message)
+                expected_message = f'Invalid component ID: The NISTIR ID "{component_id}" was not found in the taxonomy.'
+                self.assertIn(expected_message, error_message)
 
     def test_invalid_second_level(self):
         """
@@ -80,8 +80,8 @@ class NistirComponentIdValidatorTest(TestCase):
                     validate_nistir_component_id(component_id)
 
                 error_message = str(cm.exception)
-                self.assertIn('group', error_message)
-                self.assertIn('not found under major group', error_message)
+                expected_message = f'Invalid component ID: The NISTIR ID "{component_id}" was not found in the taxonomy.'
+                self.assertIn(expected_message, error_message)
 
     def test_invalid_third_level(self):
         """
@@ -102,8 +102,8 @@ class NistirComponentIdValidatorTest(TestCase):
                     validate_nistir_component_id(component_id)
 
                 error_message = str(cm.exception)
-                self.assertIn('element', error_message)
-                self.assertIn('not found under group', error_message)
+                expected_message = f'Invalid component ID: The NISTIR ID "{component_id}" was not found in the taxonomy.'
+                self.assertIn(expected_message, error_message)
 
     def test_invalid_fourth_level(self):
         """
@@ -125,8 +125,8 @@ class NistirComponentIdValidatorTest(TestCase):
                     validate_nistir_component_id(component_id)
 
                 error_message = str(cm.exception)
-                self.assertIn('subelement', error_message)
-                self.assertIn('not found under element', error_message)
+                expected_message = f'Invalid component ID: The NISTIR ID "{component_id}" was not found in the taxonomy.'
+                self.assertIn(expected_message, error_message)
 
     def test_non_string_input(self):
         """
@@ -186,6 +186,19 @@ class NistirComponentIdValidatorTest(TestCase):
                 with self.assertRaises(ValidationError) as cm:
                     validate_nistir_component_id(component_id)
 
-                # Should raise ValidationError for malformed patterns
                 error_message = str(cm.exception)
+                # For malformed patterns, ensure they're rejected with a validation error
+                # We just need to make sure it's not empty, as the actual ID may be processed differently
+                # in the new implementation
                 self.assertTrue(len(error_message) > 0)
+
+                # Some will match the standardized error, depending on how they're processed
+                # Double dots and spaces will likely cause a different ID to be checked
+                hierarchical_id = component_id.split('.')[:4]
+                if (
+                    len(hierarchical_id) >= 4
+                    and '' not in hierarchical_id
+                    and ' ' not in ''.join(hierarchical_id)
+                ):
+                    expected_message = f'Invalid component ID: The NISTIR ID "{".".join(hierarchical_id)}" was not found in the taxonomy.'
+                    self.assertIn(expected_message, error_message)

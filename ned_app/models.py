@@ -22,7 +22,7 @@ def _load_nistir_labels():
 
     if _nistir_labels is None:
         labels_path = os.path.join(
-            settings.BASE_DIR, 'ned_app', 'data', 'nistir_labels.json'
+            settings.BASE_DIR, 'ned_app', 'schemas', 'nistir_labels.json'
         )
 
         try:

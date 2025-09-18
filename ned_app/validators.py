@@ -8,95 +8,66 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 
 
-# Global variable to cache the schema for efficiency
-_nistir_schema = None
+# Global variable to cache the labels for efficiency
+_nistir_labels = None
 
 
-def _load_nistir_schema():
+def _load_nistir_labels():
     """
-    Load the NISTIR schema from disk. Cache it globally for efficiency.
+    Load the NISTIR labels from disk. Cache it globally for efficiency.
 
     Returns:
-        dict: The NISTIR schema dictionary
+        dict: The NISTIR labels dictionary
     """
-    global _nistir_schema
+    global _nistir_labels
 
-    if _nistir_schema is None:
-        schema_path = os.path.join(
-            settings.BASE_DIR, 'ned_app', 'schemas', 'nistir_schema.json'
+    if _nistir_labels is None:
+        labels_path = os.path.join(
+            settings.BASE_DIR, 'ned_app', 'schemas', 'nistir_labels.json'
         )
 
         try:
-            with open(schema_path, 'r') as f:
-                _nistir_schema = json.load(f)
+            with open(labels_path, 'r') as f:
+                _nistir_labels = json.load(f)
         except FileNotFoundError:
-            raise ValidationError(f'NISTIR schema file not found at {schema_path}')
+            raise ValidationError(f'NISTIR labels file not found at {labels_path}')
         except json.JSONDecodeError as e:
-            raise ValidationError(f'Invalid JSON in NISTIR schema file: {e}')
+            raise ValidationError(f'Invalid JSON in NISTIR labels file: {e}')
 
-    return _nistir_schema
+    return _nistir_labels
 
 
 def validate_nistir_component_id(component_id):
     """
-    Validate a NISTIR component ID against the hierarchical schema.
+    Validate a NISTIR component ID against the flat labels dictionary.
 
-    The validator parses the 4-level NISTIR portion of a dotted ID string and
-    traverses the NISTIR schema structure. For example, from 'B.20.1.1.A',
-    it isolates the parts ['B', '20', '1', '1'] and validates each level exists.
+    The validator checks if the 4-level hierarchical portion of a component ID
+    (e.g., 'B.20.1.1') exists as a key in the labels dictionary.
 
     Args:
-        component_id (str): The component ID to validate (e.g., 'A.10.1.1')
+        component_id (str): The component ID to validate (e.g., 'A.10.1.1' or 'A.10.1.1.A')
 
     Raises:
-        ValidationError: If the component ID is invalid at any hierarchical level
+        ValidationError: If the hierarchical ID is not found in the labels dictionary.
     """
     if not isinstance(component_id, str):
         raise ValidationError('Component ID must be a string')
 
-    # Parse the dotted ID to get the 4-level NISTIR parts
     parts = component_id.split('.')
 
-    # We need at least 4 parts for a complete NISTIR ID
     if len(parts) < 4:
         raise ValidationError(
             f'Component ID "{component_id}" must have at least 4 NISTIR levels (e.g., A.10.1.1)'
         )
 
-    # Extract the first 4 parts (NISTIR hierarchy)
-    nistir_parts = parts[:4]
+    # Construct the 4-level ID to check against the labels
+    hierarchical_id = '.'.join(parts[:4])
 
-    # Load the schema
-    schema = _load_nistir_schema()
+    # Load the labels from the cache
+    labels = _load_nistir_labels()
 
-    # Step 1: Check Level 1 (major group, e.g., 'A')
-    level1_key = nistir_parts[0]
-    if level1_key not in schema:
+    # Perform a single, efficient check for the key's existence
+    if hierarchical_id not in labels:
         raise ValidationError(
-            f'Invalid component ID "{component_id}": '
-            f'major group "{level1_key}" not found in NISTIR taxonomy'
-        )
-
-    # Step 2: Check Level 2 (group, e.g., '10')
-    level2_key = nistir_parts[1]
-    if level2_key not in schema[level1_key]:
-        raise ValidationError(
-            f'Invalid component ID "{component_id}": '
-            f'group "{level2_key}" not found under major group "{level1_key}" in NISTIR taxonomy'
-        )
-
-    # Step 3: Check Level 3 (element, e.g., '1')
-    level3_key = nistir_parts[2]
-    if level3_key not in schema[level1_key][level2_key]:
-        raise ValidationError(
-            f'Invalid component ID "{component_id}": '
-            f'element "{level3_key}" not found under group "{level1_key}.{level2_key}" in NISTIR taxonomy'
-        )
-
-    # Step 4: Check Level 4 (subelement, e.g., '1')
-    level4_key = nistir_parts[3]
-    if level4_key not in schema[level1_key][level2_key][level3_key]:
-        raise ValidationError(
-            f'Invalid component ID "{component_id}": '
-            f'subelement "{level4_key}" not found under element "{level1_key}.{level2_key}.{level3_key}" in NISTIR taxonomy'
+            f'Invalid component ID: The NISTIR ID "{hierarchical_id}" was not found in the taxonomy.'
         )
