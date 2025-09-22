@@ -2,7 +2,7 @@
 > "Turning data into resilience one function at a time" - J.B.
 
 #### Nonstructural Element Database
-This repository provides remote hosting and version control for the development of NED, the Nonstructural Element Database. NED is a relational database that collects information from experimental, analytical, and historic performance observations of nonstructural building elements into seismic fragilities and consequence models to support building-specific seismic performance research and assessments. Currently, the project is still in its early development phase and does not yet have consequence models or data from historical events, but has collected over 1500 experimental data points and compiled a fragility data set that includes and expands upon the full FEMA P-58 nonstructural database. The experimental test data and seismic fragility are explicitly related through primary and foreign key architecture within the database to promote data transparency and reuse. Once completed, NED will be hosted on a stable and scalable web-based backend framework with restful API access points and a stand-alone GUI for use by engineers and researchers.
+This repository provides remote hosting and version control for the development of NED, the Nonstructural Element Database. NED is a relational database that collects information from experimental, analytical, and historic performance observations of nonstructural building elements into seismic fragilities and consequence models to support building-specific seismic performance research and assessments. Currently, the project is still in its active development and does not yet have consequence models or data from historical events, but has collected over 2000 experimental data points and compiled a fragility data set that includes and expands upon the full FEMA P-58 nonstructural database. The experimental test data and seismic fragility are explicitly related through primary and foreign key architecture within the database to promote data transparency and reuse.
 
 ## Database Architecture
 The goal of this project is to develop a robust and scalable database of fragility and consequence models of nonstructural building elements for seismic performance evaluation. Data is organized in a way such that each data table represents an abstract portion of the fragility model, e.g., separating observations of component performance from an experimental test from that of a fragility model and repair costs consequence models. In that way, that data is both nimble/scalable with new information and can be clearly linked back to original source data and models through explicit relational keys. The outcomes of this project will expand the applicability of performance- and recovery-based earthquake assessments, resulting in a publicly available database to support current research and building design. The figure below outlines the current portions of the database under development and future development plans.
@@ -91,7 +91,7 @@ python manage.py migrate
 ```
 
 ### Code quality assurance
-We use automated checks at every commit to maintain a high-quality codebase. Our CI pipeline runs four types of tests that must all pass before code can be merged. Please ensure all of the following tests pass before committing new code.
+We use automated checks at every commit to maintain a high-quality codebase. Our contiuous integration (CI) pipeline runs four types of tests that must all pass before code can be merged. Please ensure all of the following tests pass before committing new code.
 
 #### 1. Code Linting with Ruff
 Ruff checks your Python code for style issues, potential bugs, and code quality problems. It enforces consistent coding standards across the project.
@@ -185,7 +185,7 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_csl_data
 **Test coverage**: The project has 41 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
 
 #### Running All Quality Checks Locally
-To run all quality checks that the CI pipeline will run, use these commands in sequence:
+To run all quality checks that the countinous integration (CI) pipeline will run, use these commands in sequence:
 
 ```bash
 # 1. Check code formatting
