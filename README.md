@@ -91,7 +91,7 @@ python manage.py migrate
 ```
 
 ### Code quality assurance
-We use automated checks at every commit to maintain a high-quality codebase. Our contiuous integration (CI) pipeline runs four types of tests that must all pass before code can be merged. Please ensure all of the following tests pass before committing new code.
+We use automated checks at every commit to maintain a high-quality codebase. Our continuous integration (CI) pipeline runs four types of tests that must all pass before code can be merged. Please ensure all of the following tests pass before committing new code.
 
 #### 1. Code Linting with Ruff
 Ruff checks your Python code for style issues, potential bugs, and code quality problems. It enforces consistent coding standards across the project.
