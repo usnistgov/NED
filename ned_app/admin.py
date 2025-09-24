@@ -28,7 +28,7 @@ class ExperimentAdmin(admin.ModelAdmin):
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'component_id')
     readonly_fields = (
         'component_id',
         'major_group',

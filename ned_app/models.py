@@ -659,7 +659,7 @@ class FragilityCurve(models.Model):
         verbose_name_plural = 'Fragility Curves'
 
     def __str__(self):
-        return self.name
+        return f'{self.fragility_model}_{self.ds_rank}'
 
 
 class Component(models.Model):
