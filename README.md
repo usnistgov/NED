@@ -40,6 +40,27 @@ The purpose of the DS Class attribute is to provide a first-pass structured grou
 
 All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
 
+## Visualization Tools
+Several jupyter-notebook-based database user interface tools are provided in the `visualization_tools` subdirectory. These tools allow users to interact with data in the SQL database, query specific data views, and download cvs files without the need to code. 
+
+Two predefiend workflows are provided:
+- **visualization_tools/view_experemints.ipynb** - Queury experimental tests of nonstructural compoents in the database by component type and component detail, download data, and plot distributions of peak test demands at the occurance of various damage states.
+- **visualization_tools/view_experemints.ipynb** - Queury fragility models of nonstructural compoents in the database by component type and component detail, download data, and plot fragility curves for various damage states.
+
+### Running the Notebook
+Prior to running a notebook, first ensure that all required packages have been installed by running the following command:
+```
+pip install -r visualization_tools/requirements.txt
+```
+
+Once all required packages have been installed, open the Jupyter Notbeook by running the following command:
+```
+Jupter Notebook
+```
+
+For additional instructions please see the Juptyer Notebook installation instructions: https://jupyter.org/install
+
+
 ## Contributors Guide
 
 ### Setting up a Virtual Environment (optional but recommended)
