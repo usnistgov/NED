@@ -43,9 +43,9 @@ All observations of damage in the database are assigned into one of the three af
 ## Visualization Tools
 Several jupyter-notebook-based database user interface tools are provided in the `visualization_tools` subdirectory. These tools allow users to interact with data in the SQL database, query specific data views, and download cvs files without the need to code. 
 
-Two predefiend workflows are provided:
-- **visualization_tools/view_experemints.ipynb** - Queury experimental tests of nonstructural compoents in the database by component type and component detail, download data, and plot distributions of peak test demands at the occurance of various damage states.
-- **visualization_tools/view_experemints.ipynb** - Queury fragility models of nonstructural compoents in the database by component type and component detail, download data, and plot fragility curves for various damage states.
+Two predefined workflows are provided:
+- **visualization_tools/view_experemints.ipynb** - Queury experimental tests of nonstructural components in the database by component type and component detail, download data, and plot distributions of peak test demands at the occurrence of various damage states.
+- **visualization_tools/view_experemints.ipynb** - Queury fragility models of nonstructural components in the database by component type and component detail, download data, and plot fragility curves for various damage states.
 
 ### Running the Notebook
 Prior to running a notebook, first ensure that all required packages have been installed by running the following command:
