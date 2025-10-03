@@ -14,6 +14,7 @@ from ned_app.models import (
 
 class DecimalEncoder(json.JSONEncoder):
     """Custom JSON encoder to handle Decimal objects."""
+
     def default(self, obj):
         if isinstance(obj, Decimal):
             return float(obj)
@@ -33,10 +34,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         output_dir = options['output_dir']
-        
+
         # Create output directory if it doesn't exist
         os.makedirs(output_dir, exist_ok=True)
-        
+
         # Export data for each model
         self.export_reference_data(output_dir)
         self.export_component_data(output_dir)
@@ -44,14 +45,14 @@ class Command(BaseCommand):
         self.export_fragility_model_data(output_dir)
         self.export_experiment_fragility_bridge_data(output_dir)
         self.export_fragility_curve_data(output_dir)
-        
+
         self.stdout.write(self.style.SUCCESS('Data export completed successfully!'))
-    
+
     def export_reference_data(self, output_dir):
         """Export Reference model data, excluding auto-populated fields."""
         self.stdout.write('Exporting Reference data...')
         references = Reference.objects.all()
-        
+
         # Include only source-of-truth fields, excluding denormalized fields
         data = []
         for ref in references:
@@ -64,17 +65,17 @@ class Command(BaseCommand):
                 'csl_data': ref.csl_data,
             }
             data.append(ref_data)
-        
+
         # Write to JSON file with indentation and sorted keys
         file_path = os.path.join(output_dir, 'reference.json')
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
-    
+
     def export_component_data(self, output_dir):
         """Export Component model data, excluding auto-populated fields."""
         self.stdout.write('Exporting Component data...')
         components = Component.objects.all()
-        
+
         # Include only source-of-truth fields
         data = []
         for comp in components:
@@ -85,17 +86,17 @@ class Command(BaseCommand):
                 'component_id': comp.component_id,
             }
             data.append(comp_data)
-        
+
         # Write to JSON file with indentation and sorted keys
         file_path = os.path.join(output_dir, 'component.json')
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
-    
+
     def export_experiment_data(self, output_dir):
         """Export Experiment model data."""
         self.stdout.write('Exporting Experiment data...')
         experiments = Experiment.objects.all()
-        
+
         data = []
         for exp in experiments:
             # For consistency with test expectations
@@ -130,17 +131,17 @@ class Command(BaseCommand):
                 'notes': exp.notes,
             }
             data.append(exp_data)
-        
+
         # Write to JSON file with indentation and sorted keys
         file_path = os.path.join(output_dir, 'experiment.json')
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
-    
+
     def export_fragility_model_data(self, output_dir):
         """Export FragilityModel model data."""
         self.stdout.write('Exporting FragilityModel data...')
         fragility_models = FragilityModel.objects.all()
-        
+
         data = []
         for fm in fragility_models:
             # Use component.component_id as required by the test
@@ -154,17 +155,17 @@ class Command(BaseCommand):
                 'comp_description': fm.comp_description,
             }
             data.append(fm_data)
-        
+
         # Write to JSON file with indentation and sorted keys
         file_path = os.path.join(output_dir, 'fragility_model.json')
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
-    
+
     def export_experiment_fragility_bridge_data(self, output_dir):
         """Export ExperimentFragilityModelBridge model data."""
         self.stdout.write('Exporting ExperimentFragilityModelBridge data...')
         bridges = ExperimentFragilityModelBridge.objects.all()
-        
+
         data = []
         for bridge in bridges:
             bridge_data = {
@@ -172,17 +173,19 @@ class Command(BaseCommand):
                 'fragility_model': bridge.fragility_model_id,
             }
             data.append(bridge_data)
-        
+
         # Write to JSON file with indentation and sorted keys
-        file_path = os.path.join(output_dir, 'experiment_fragility_model_bridge.json')
+        file_path = os.path.join(
+            output_dir, 'experiment_fragility_model_bridge.json'
+        )
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
-    
+
     def export_fragility_curve_data(self, output_dir):
         """Export FragilityCurve model data."""
         self.stdout.write('Exporting FragilityCurve data...')
         fragility_curves = FragilityCurve.objects.all()
-        
+
         data = []
         for curve in fragility_curves:
             curve_data = {
@@ -201,7 +204,7 @@ class Command(BaseCommand):
                 'probability': curve.probability,
             }
             data.append(curve_data)
-        
+
         # Write to JSON file with indentation and sorted keys
         file_path = os.path.join(output_dir, 'fragility_curve.json')
         with open(file_path, 'w') as f:
