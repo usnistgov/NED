@@ -102,6 +102,8 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
 
 class ComponentSerializer(serializers.ModelSerializer):
+    # Make sure the id is not sought by the serializer
+    id = serializers.CharField(read_only=True)
     # Make component_id required and writeable
     component_id = serializers.CharField(required=True)
 
@@ -119,9 +121,9 @@ class ComponentSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Create or update a Component using update_or_create for idempotency."""
-        lookup_id = self.initial_data.get('id')
+        lookup_component_id = validated_data.pop('component_id')
         instance, created = Component.objects.update_or_create(
-            id=lookup_id, defaults=validated_data
+            component_id=lookup_component_id, defaults=validated_data
         )
         return instance, created
 

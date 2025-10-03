@@ -80,10 +80,10 @@ class Command(BaseCommand):
         data = []
         for comp in components:
             # Exclude auto-populated fields (major_group, group, element, subelement)
+            # Use natural key (component_id) instead of database primary key (id)
             comp_data = {
-                'id': comp.id,
-                'name': comp.name,
                 'component_id': comp.component_id,
+                'name': comp.name,
             }
             data.append(comp_data)
 
