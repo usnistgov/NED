@@ -22,8 +22,16 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reference
-        fields = '__all__'
-        # exclude = ('field_abc',)  # useful if there are any exclusions to consider
+        fields = [
+            'id',
+            'title',
+            'author',
+            'year',
+            'study_type',
+            'comp_type',
+            'pdf_saved',
+            'csl_data',
+        ]
 
     def validate_csl_data(self, value):
         """Validate csl_data against CSL-JSON schema and required fields."""
@@ -84,23 +92,18 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
         return value
 
-    # create the Reference record in the database via the framework
-    def create(self, json_data) -> Reference:
-        # 'json_data' is simply seen as a kwargs input...
-        reference: Reference = Reference.objects.create(**json_data)
-
-        return reference
+    def create(self, validated_data):
+        """Create or update a Reference using update_or_create for idempotency."""
+        lookup_id = self.initial_data.get('id')
+        instance, created = Reference.objects.update_or_create(
+            id=lookup_id, defaults=validated_data
+        )
+        return instance, created
 
 
 class ComponentSerializer(serializers.ModelSerializer):
     # Make component_id required and writeable
     component_id = serializers.CharField(required=True)
-    # Make id and hierarchy fields read-only since they're auto-populated by the model
-    id = serializers.CharField(read_only=True)
-    major_group = serializers.CharField(read_only=True)
-    group = serializers.CharField(read_only=True)
-    element = serializers.CharField(read_only=True)
-    subelement = serializers.CharField(read_only=True)
 
     class Meta:
         model = Component
@@ -113,6 +116,14 @@ class ComponentSerializer(serializers.ModelSerializer):
             'element',
             'subelement',
         ]
+
+    def create(self, validated_data):
+        """Create or update a Component using update_or_create for idempotency."""
+        lookup_id = self.initial_data.get('id')
+        instance, created = Component.objects.update_or_create(
+            id=lookup_id, defaults=validated_data
+        )
+        return instance, created
 
 
 class FragilityModelSerializer(serializers.ModelSerializer):
