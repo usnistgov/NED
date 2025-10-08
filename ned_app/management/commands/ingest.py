@@ -11,7 +11,14 @@ from ned_app.models import (
     FragilityCurve,
 )
 from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
-from ned_app.serialization.serializer import ReferenceSerializer, ComponentSerializer
+from ned_app.serialization.serializer import (
+    ReferenceSerializer,
+    ComponentSerializer,
+    FragilityModelSerializer,
+    ExperimentSerializer,
+    ExperimentFragilityModelBridgeSerializer,
+    FragilityCurveSerializer,
+)
 
 
 class Command(BaseCommand):
@@ -24,7 +31,10 @@ class Command(BaseCommand):
             (Component, 'component.json'),
             (FragilityModel, 'fragility_model.json'),
             (Experiment, 'experiment.json'),
-            (ExperimentFragilityModelBridge, 'experiment_fragility_bridge.json'),
+            (
+                ExperimentFragilityModelBridge,
+                'experiment_fragility_model_bridge.json',
+            ),
             (FragilityCurve, 'fragility_curve.json'),
         ]
 
@@ -36,6 +46,14 @@ class Command(BaseCommand):
                 self._process_references(data_file)
             elif model_class == Component:
                 self._process_components(data_file)
+            elif model_class == FragilityModel:
+                self._process_fragility_models(data_file)
+            elif model_class == Experiment:
+                self._process_experiments(data_file)
+            elif model_class == ExperimentFragilityModelBridge:
+                self._process_experiment_fragility_model_bridges(data_file)
+            elif model_class == FragilityCurve:
+                self._process_fragility_curves(data_file)
 
         # Print final success message
         self.stdout.write(
@@ -168,6 +186,266 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS(
                 f'\nComponent processing complete: '
+                f'{created_count} created, {updated_count} updated, {failed_count} failed'
+            )
+        )
+
+    def _process_fragility_models(self, data_file):
+        """Process FragilityModel model data with idempotency, validation, and error handling."""
+        data_filepath = build_json_data_file_path(data_file)
+
+        # Initialize counters for summary reporting
+        created_count = 0
+        updated_count = 0
+        failed_count = 0
+
+        # Check if file exists
+        if not os.path.exists(data_filepath):
+            self.stdout.write(self.style.WARNING(f'File not found: {data_filepath}'))
+            return
+
+        # Load JSON data
+        try:
+            with open(data_filepath, 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            self.stderr.write(f'Error: File not found: {data_filepath}')
+            return
+        except json.JSONDecodeError as ex:
+            self.stderr.write(f'Error: Invalid JSON in {data_filepath}: {ex}')
+            return
+
+        # Process each record
+        for item in data:
+            try:
+                serializer = FragilityModelSerializer(data=item)
+                if serializer.is_valid():
+                    instance, created = serializer.save()
+                    if created:
+                        created_count += 1
+                        self.stdout.write(
+                            f"FragilityModel ID '{instance.id}' successfully created"
+                        )
+                    else:
+                        updated_count += 1
+                        self.stdout.write(
+                            f"FragilityModel ID '{instance.id}' successfully updated"
+                        )
+                else:
+                    raise ValidationError(serializer.errors)
+
+            except ValidationError as ex:
+                failed_count += 1
+                record_id = item.get('id', 'unknown')
+                self.stderr.write(
+                    f"Error processing FragilityModel ID '{record_id}': {ex}"
+                )
+            except Exception as ex:
+                failed_count += 1
+                record_id = item.get('id', 'unknown')
+                self.stderr.write(
+                    f"Error processing FragilityModel ID '{record_id}': {ex}"
+                )
+
+        # Print summary report
+        self.stdout.write(
+            self.style.SUCCESS(
+                f'\nFragilityModel processing complete: '
+                f'{created_count} created, {updated_count} updated, {failed_count} failed'
+            )
+        )
+
+    def _process_experiments(self, data_file):
+        """Process Experiment model data with idempotency, validation, and error handling."""
+        data_filepath = build_json_data_file_path(data_file)
+
+        # Initialize counters for summary reporting
+        created_count = 0
+        updated_count = 0
+        failed_count = 0
+
+        # Check if file exists
+        if not os.path.exists(data_filepath):
+            self.stdout.write(self.style.WARNING(f'File not found: {data_filepath}'))
+            return
+
+        # Load JSON data
+        try:
+            with open(data_filepath, 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            self.stderr.write(f'Error: File not found: {data_filepath}')
+            return
+        except json.JSONDecodeError as ex:
+            self.stderr.write(f'Error: Invalid JSON in {data_filepath}: {ex}')
+            return
+
+        # Process each record
+        for item in data:
+            try:
+                serializer = ExperimentSerializer(data=item)
+                if serializer.is_valid():
+                    instance, created = serializer.save()
+                    if created:
+                        created_count += 1
+                        self.stdout.write(
+                            f"Experiment ID '{instance.id}' successfully created"
+                        )
+                    else:
+                        updated_count += 1
+                        self.stdout.write(
+                            f"Experiment ID '{instance.id}' successfully updated"
+                        )
+                else:
+                    raise ValidationError(serializer.errors)
+
+            except ValidationError as ex:
+                failed_count += 1
+                record_id = item.get('id', 'unknown')
+                self.stderr.write(
+                    f"Error processing Experiment ID '{record_id}': {ex}"
+                )
+            except Exception as ex:
+                failed_count += 1
+                record_id = item.get('id', 'unknown')
+                self.stderr.write(
+                    f"Error processing Experiment ID '{record_id}': {ex}"
+                )
+
+        # Print summary report
+        self.stdout.write(
+            self.style.SUCCESS(
+                f'\nExperiment processing complete: '
+                f'{created_count} created, {updated_count} updated, {failed_count} failed'
+            )
+        )
+
+    def _process_experiment_fragility_model_bridges(self, data_file):
+        """Process ExperimentFragilityModelBridge model data with idempotency, validation, and error handling."""
+        data_filepath = build_json_data_file_path(data_file)
+
+        # Initialize counters for summary reporting
+        created_count = 0
+        updated_count = 0
+        failed_count = 0
+
+        # Check if file exists
+        if not os.path.exists(data_filepath):
+            self.stdout.write(self.style.WARNING(f'File not found: {data_filepath}'))
+            return
+
+        # Load JSON data
+        try:
+            with open(data_filepath, 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            self.stderr.write(f'Error: File not found: {data_filepath}')
+            return
+        except json.JSONDecodeError as ex:
+            self.stderr.write(f'Error: Invalid JSON in {data_filepath}: {ex}')
+            return
+
+        # Process each record
+        for item in data:
+            try:
+                serializer = ExperimentFragilityModelBridgeSerializer(data=item)
+                if serializer.is_valid():
+                    instance, created = serializer.save()
+                    if created:
+                        created_count += 1
+                        self.stdout.write(
+                            f"ExperimentFragilityModelBridge ID '{instance.id}' successfully created"
+                        )
+                    else:
+                        updated_count += 1
+                        self.stdout.write(
+                            f"ExperimentFragilityModelBridge ID '{instance.id}' successfully updated"
+                        )
+                else:
+                    raise ValidationError(serializer.errors)
+
+            except ValidationError as ex:
+                failed_count += 1
+                record_id = item.get('id', 'unknown')
+                self.stderr.write(
+                    f"Error processing ExperimentFragilityModelBridge ID '{record_id}': {ex}"
+                )
+            except Exception as ex:
+                failed_count += 1
+                record_id = item.get('id', 'unknown')
+                self.stderr.write(
+                    f"Error processing ExperimentFragilityModelBridge ID '{record_id}': {ex}"
+                )
+
+        # Print summary report
+        self.stdout.write(
+            self.style.SUCCESS(
+                f'\nExperimentFragilityModelBridge processing complete: '
+                f'{created_count} created, {updated_count} updated, {failed_count} failed'
+            )
+        )
+
+    def _process_fragility_curves(self, data_file):
+        """Process FragilityCurve model data with idempotency, validation, and error handling."""
+        data_filepath = build_json_data_file_path(data_file)
+
+        # Initialize counters for summary reporting
+        created_count = 0
+        updated_count = 0
+        failed_count = 0
+
+        # Check if file exists
+        if not os.path.exists(data_filepath):
+            self.stdout.write(self.style.WARNING(f'File not found: {data_filepath}'))
+            return
+
+        # Load JSON data
+        try:
+            with open(data_filepath, 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            self.stderr.write(f'Error: File not found: {data_filepath}')
+            return
+        except json.JSONDecodeError as ex:
+            self.stderr.write(f'Error: Invalid JSON in {data_filepath}: {ex}')
+            return
+
+        # Process each record
+        for item in data:
+            try:
+                serializer = FragilityCurveSerializer(data=item)
+                if serializer.is_valid():
+                    instance, created = serializer.save()
+                    if created:
+                        created_count += 1
+                        self.stdout.write(
+                            f"FragilityCurve ID '{instance.id}' successfully created"
+                        )
+                    else:
+                        updated_count += 1
+                        self.stdout.write(
+                            f"FragilityCurve ID '{instance.id}' successfully updated"
+                        )
+                else:
+                    raise ValidationError(serializer.errors)
+
+            except ValidationError as ex:
+                failed_count += 1
+                record_id = item.get('id', 'unknown')
+                self.stderr.write(
+                    f"Error processing FragilityCurve ID '{record_id}': {ex}"
+                )
+            except Exception as ex:
+                failed_count += 1
+                record_id = item.get('id', 'unknown')
+                self.stderr.write(
+                    f"Error processing FragilityCurve ID '{record_id}': {ex}"
+                )
+
+        # Print summary report
+        self.stdout.write(
+            self.style.SUCCESS(
+                f'\nFragilityCurve processing complete: '
                 f'{created_count} created, {updated_count} updated, {failed_count} failed'
             )
         )

@@ -129,52 +129,140 @@ class ComponentSerializer(serializers.ModelSerializer):
 
 
 class FragilityModelSerializer(serializers.ModelSerializer):
+    component = serializers.SlugRelatedField(
+        slug_field='component_id', queryset=Component.objects.all()
+    )
+
     class Meta:
         model = FragilityModel
-        fields = '__all__'
+        fields = [
+            'id',
+            'p58_fragility',
+            'component',
+            'comp_detail',
+            'material',
+            'size_class',
+            'comp_description',
+        ]
 
-    # create the Fragility Model record in the database via the framework
-    def create(self, json_data) -> FragilityModel:
-        # 'json_data' is simply seen as a kwargs input...
-        fragility_model: FragilityModel = FragilityModel.objects.create(**json_data)
-
-        return fragility_model
+    def create(self, validated_data):
+        """Create or update a FragilityModel using update_or_create for idempotency."""
+        lookup_id = self.initial_data.get('id')
+        instance, created = FragilityModel.objects.update_or_create(
+            id=lookup_id, defaults=validated_data
+        )
+        return instance, created
 
 
 class ExperimentSerializer(serializers.ModelSerializer):
+    reference = serializers.SlugRelatedField(
+        slug_field='id', queryset=Reference.objects.all()
+    )
+    component = serializers.SlugRelatedField(
+        slug_field='component_id', queryset=Component.objects.all()
+    )
+
     class Meta:
         model = Experiment
-        fields = '__all__'
+        fields = [
+            'id',
+            'reference',
+            'specimen',
+            'specimen_inspection_sequence',
+            'reviewer',
+            'component',
+            'comp_detail',
+            'material',
+            'size_class',
+            'test_type',
+            'loading_protocol',
+            'peak_test_amplitude',
+            'location',
+            'governing_design_standard',
+            'design_objective',
+            'comp_description',
+            'ds_description',
+            'prior_damage',
+            'prior_damage_repaired',
+            'edp_metric',
+            'edp_unit',
+            'edp_value',
+            'alt_edp_metric',
+            'alt_edp_unit',
+            'alt_edp_value',
+            'ds_rank',
+            'ds_class',
+            'notes',
+        ]
 
-    # create the Experiment record in the database via the framework
-    def create(self, json_data) -> Experiment:
-        # 'json_data' is simply seen as a kwargs input...
-        experiment: Experiment = Experiment.objects.create(**json_data)
-
-        return experiment
+    def create(self, validated_data):
+        """Create or update an Experiment using update_or_create for idempotency."""
+        lookup_id = self.initial_data.get('id')
+        instance, created = Experiment.objects.update_or_create(
+            id=lookup_id, defaults=validated_data
+        )
+        return instance, created
 
 
 class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
+    experiment = serializers.SlugRelatedField(
+        slug_field='id', queryset=Experiment.objects.all()
+    )
+    fragility_model = serializers.SlugRelatedField(
+        slug_field='id', queryset=FragilityModel.objects.all()
+    )
+
     class Meta:
         model = ExperimentFragilityModelBridge
-        fields = '__all__'
+        fields = [
+            'id',
+            'experiment',
+            'fragility_model',
+        ]
 
-    def create(self, json_data) -> ExperimentFragilityModelBridge:
-        # 'json_data' is simply seen as a kwargs input...
-        bridge: ExperimentFragilityModelBridge = (
-            ExperimentFragilityModelBridge.objects.create(**json_data)
+    def create(self, validated_data):
+        """Create or update an ExperimentFragilityModelBridge using update_or_create for idempotency."""
+        lookup_experiment = validated_data.get('experiment')
+        lookup_fragility_model = validated_data.get('fragility_model')
+        instance, created = ExperimentFragilityModelBridge.objects.update_or_create(
+            experiment=lookup_experiment,
+            fragility_model=lookup_fragility_model,
+            defaults=validated_data,
         )
-
-        return bridge
+        return instance, created
 
 
 class FragilityCurveSerializer(serializers.ModelSerializer):
+    fragility_model = serializers.SlugRelatedField(
+        slug_field='id', queryset=FragilityModel.objects.all()
+    )
+    reference = serializers.SlugRelatedField(
+        slug_field='id', queryset=Reference.objects.all()
+    )
+
     class Meta:
         model = FragilityCurve
-        fields = '__all__'
+        fields = [
+            'id',
+            'fragility_model',
+            'reviewer',
+            'source',
+            'basis',
+            'num_observations',
+            'reference',
+            'edp_metric',
+            'edp_unit',
+            'ds_rank',
+            'ds_description',
+            'median',
+            'beta',
+            'probability',
+        ]
 
-    def create(self, json_data) -> FragilityCurve:
-        # 'json_data' is simply seen as a kwargs input...
-        curve: FragilityCurve = FragilityCurve.objects.create(**json_data)
-
-        return curve
+    def create(self, validated_data):
+        """Create or update a FragilityCurve using update_or_create for idempotency."""
+        lookup_id = self.initial_data.get('id')
+        instance, created = FragilityCurve.objects.update_or_create(
+            id=lookup_id, defaults=validated_data
+        )
+        return instance, created
