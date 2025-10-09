@@ -4,8 +4,22 @@ from unittest.mock import patch, mock_open
 from django.test import TestCase
 from django.conf import settings
 from rest_framework.exceptions import ValidationError
-from ned_app.serialization.serializer import ReferenceSerializer
-from ned_app.models import Reference
+from ned_app.serialization.serializer import (
+    ReferenceSerializer,
+    ComponentSerializer,
+    FragilityModelSerializer,
+    ExperimentSerializer,
+    ExperimentFragilityModelBridgeSerializer,
+    FragilityCurveSerializer,
+)
+from ned_app.models import (
+    Reference,
+    Component,
+    FragilityModel,
+    Experiment,
+    ExperimentFragilityModelBridge,
+    FragilityCurve,
+)
 
 
 class ReferenceSerializerTest(TestCase):
@@ -260,6 +274,462 @@ class ReferenceSerializerTest(TestCase):
         # Check that csl_data field is required
         self.assertTrue(serializer.fields['csl_data'].required)
 
+    def test_validate_csl_data_rejects_missing_title(self):
+        """Test that serializer rejects csl_data without title field."""
+        invalid_data = self.valid_reference_data.copy()
+        invalid_data['csl_data'] = {
+            'type': 'article-journal',
+            'id': 'test-no-title',
+            'author': [{'family': 'Smith', 'given': 'John'}],
+            'issued': {'date-parts': [[2023]]},
+        }
+
+        serializer = ReferenceSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('csl_data', serializer.errors)
+
+    def test_validate_csl_data_rejects_empty_title(self):
+        """Test that serializer rejects csl_data with empty title string."""
+        invalid_data = self.valid_reference_data.copy()
+        invalid_data['csl_data'] = {
+            'type': 'article-journal',
+            'id': 'test-empty-title',
+            'title': '',
+            'author': [{'family': 'Smith', 'given': 'John'}],
+            'issued': {'date-parts': [[2023]]},
+        }
+
+        serializer = ReferenceSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('csl_data', serializer.errors)
+
+    def test_validate_csl_data_rejects_missing_author(self):
+        """Test that serializer rejects csl_data without author field."""
+        invalid_data = self.valid_reference_data.copy()
+        invalid_data['csl_data'] = {
+            'type': 'article-journal',
+            'id': 'test-no-author',
+            'title': 'Test Article',
+            'issued': {'date-parts': [[2023]]},
+        }
+
+        serializer = ReferenceSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('csl_data', serializer.errors)
+
+    def test_validate_csl_data_rejects_missing_issued(self):
+        """Test that serializer rejects csl_data without issued field."""
+        invalid_data = self.valid_reference_data.copy()
+        invalid_data['csl_data'] = {
+            'type': 'article-journal',
+            'id': 'test-no-issued',
+            'title': 'Test Article',
+            'author': [{'family': 'Smith', 'given': 'John'}],
+        }
+
+        serializer = ReferenceSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('csl_data', serializer.errors)
+
+    def test_validate_csl_data_rejects_invalid_issued_structure(self):
+        """Test that serializer rejects csl_data with issued missing date-parts."""
+        invalid_data = self.valid_reference_data.copy()
+        invalid_data['csl_data'] = {
+            'type': 'article-journal',
+            'id': 'test-invalid-issued',
+            'title': 'Test Article',
+            'author': [{'family': 'Smith', 'given': 'John'}],
+            'issued': {'raw': '2023'},
+        }
+
+        serializer = ReferenceSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('csl_data', serializer.errors)
+
     def tearDown(self):
         """Clean up test data after each test."""
         Reference.objects.filter(id__startswith='test-').delete()
+
+
+class ComponentSerializerTest(TestCase):
+    """Test cases for the ComponentSerializer, focusing on validation and ID auto-generation."""
+
+    def test_serializer_creates_component_with_auto_generated_id(self):
+        """Test that serializer creates a component with auto-generated ID from component_id."""
+        valid_data = {
+            'component_id': 'A.10.1.1',
+            'name': 'Test Component',
+        }
+
+        serializer = ComponentSerializer(data=valid_data)
+
+        self.assertTrue(serializer.is_valid())
+        component = serializer.save()
+
+        self.assertIsNotNone(component)
+        self.assertEqual(component.component_id, 'A.10.1.1')
+        self.assertEqual(component.name, 'Test Component')
+        self.assertEqual(component.id, 'A1011')
+
+    def test_serializer_rejects_missing_component_id(self):
+        """Test that serializer rejects data missing the required component_id field."""
+        invalid_data = {
+            'name': 'Test Component',
+        }
+
+        serializer = ComponentSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('component_id', serializer.errors)
+
+        with self.assertRaises(ValidationError):
+            if not serializer.is_valid():
+                raise ValidationError(serializer.errors)
+
+    def test_serializer_rejects_invalid_component_id_format(self):
+        """Test that serializer rejects component_id with invalid NISTIR format."""
+        invalid_data = {
+            'component_id': 'A.10.1',
+            'name': 'Test Component',
+        }
+
+        serializer = ComponentSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('component_id', serializer.errors)
+
+        with self.assertRaises(ValidationError):
+            if not serializer.is_valid():
+                raise ValidationError(serializer.errors)
+
+    def test_serializer_populates_denormalized_nistir_fields(self):
+        """Test that serializer correctly populates denormalized NISTIR fields from nistir_labels.json."""
+        valid_data = {
+            'component_id': 'D.30.3.2.B',
+            'name': 'Test Water Heater',
+        }
+
+        serializer = ComponentSerializer(data=valid_data)
+
+        self.assertTrue(serializer.is_valid())
+        component = serializer.save()
+
+        # Verify denormalized fields are populated correctly
+        self.assertEqual(component.major_group, 'D - Services')
+        self.assertEqual(component.group, '30 - HVAC')
+        self.assertEqual(component.element, '3 - Cooling Generating Systems')
+        self.assertEqual(component.subelement, '2 - Direct Expansion Systems')
+
+
+class FragilityModelSerializerTest(TestCase):
+    """Test cases for the FragilityModelSerializer, focusing on foreign key validation."""
+
+    def setUp(self):
+        """Set up test data."""
+        # Create a Component for linking
+        self.component = Component.objects.create(
+            component_id='A.10.1.1',
+            name='Test Component',
+        )
+
+    def test_serializer_creates_fragility_model_with_valid_component(self):
+        """Test that serializer successfully validates and saves with a valid component ID."""
+        valid_data = {
+            'id': 'test-fm-001',
+            'component': 'A.10.1.1',
+            'comp_description': 'Test fragility model description',
+        }
+
+        serializer = FragilityModelSerializer(data=valid_data)
+
+        self.assertTrue(serializer.is_valid())
+        fragility_model = serializer.save()
+
+        self.assertIsNotNone(fragility_model)
+        self.assertEqual(fragility_model.id, 'test-fm-001')
+        self.assertEqual(fragility_model.component.component_id, 'A.10.1.1')
+
+    def test_serializer_rejects_nonexistent_component(self):
+        """Test that serializer rejects data with a non-existent component ID."""
+        invalid_data = {
+            'id': 'test-fm-002',
+            'component': 'Z.99.9.9',
+            'comp_description': 'Test fragility model description',
+        }
+
+        serializer = FragilityModelSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('component', serializer.errors)
+
+    def tearDown(self):
+        """Clean up test data after each test."""
+        FragilityModel.objects.filter(id__startswith='test-fm-').delete()
+        Component.objects.filter(component_id='A.10.1.1').delete()
+
+
+class ExperimentSerializerTest(TestCase):
+    """Test cases for the ExperimentSerializer, focusing on foreign key validation."""
+
+    def setUp(self):
+        """Set up test data."""
+        # Create a Component for linking
+        self.component = Component.objects.create(
+            component_id='A.10.1.1',
+            name='Test Component',
+        )
+
+        # Create a Reference for linking
+        self.reference = Reference.objects.create(
+            id='test-ref-001',
+            csl_data={
+                'type': 'article-journal',
+                'id': 'test-ref-001',
+                'title': 'Test Reference',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2023]]},
+            },
+        )
+
+    def test_serializer_creates_experiment_with_valid_foreign_keys(self):
+        """Test that serializer successfully validates and saves with valid component and reference IDs."""
+        valid_data = {
+            'id': 'test-exp-001',
+            'reference': 'test-ref-001',
+            'component': 'A.10.1.1',
+            'test_type': 'Quasi-static Cyclic, uniaxial',
+            'comp_description': 'Test component description',
+            'ds_description': 'Test damage state description',
+            'edp_metric': 'Story Drift Ratio',
+            'edp_unit': 'Ratio',
+            'ds_class': 'Consequential',
+        }
+
+        serializer = ExperimentSerializer(data=valid_data)
+
+        self.assertTrue(serializer.is_valid())
+        experiment = serializer.save()
+
+        self.assertIsNotNone(experiment)
+        self.assertEqual(experiment.id, 'test-exp-001')
+        self.assertEqual(experiment.reference.id, 'test-ref-001')
+        self.assertEqual(experiment.component.component_id, 'A.10.1.1')
+
+    def test_serializer_rejects_nonexistent_reference(self):
+        """Test that serializer rejects data with a non-existent reference ID."""
+        invalid_data = {
+            'id': 'test-exp-002',
+            'reference': 'nonexistent-ref',
+            'component': 'A.10.1.1',
+        }
+
+        serializer = ExperimentSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('reference', serializer.errors)
+
+    def test_serializer_rejects_nonexistent_component(self):
+        """Test that serializer rejects data with a non-existent component ID."""
+        invalid_data = {
+            'id': 'test-exp-003',
+            'reference': 'test-ref-001',
+            'component': 'Z.99.9.9',
+        }
+
+        serializer = ExperimentSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('component', serializer.errors)
+
+    def tearDown(self):
+        """Clean up test data after each test."""
+        Experiment.objects.filter(id__startswith='test-exp-').delete()
+        Reference.objects.filter(id__startswith='test-ref-').delete()
+        Component.objects.filter(component_id='A.10.1.1').delete()
+
+
+class ExperimentFragilityModelBridgeSerializerTest(TestCase):
+    """Test cases for the ExperimentFragilityModelBridgeSerializer, focusing on foreign key validation."""
+
+    def setUp(self):
+        """Set up test data."""
+        # Create a Component for linking
+        self.component = Component.objects.create(
+            component_id='A.10.1.1',
+            name='Test Component',
+        )
+
+        # Create a Reference for linking
+        self.reference = Reference.objects.create(
+            id='test-ref-001',
+            csl_data={
+                'type': 'article-journal',
+                'id': 'test-ref-001',
+                'title': 'Test Reference',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2023]]},
+            },
+        )
+
+        # Create an Experiment for linking
+        self.experiment = Experiment.objects.create(
+            id='test-exp-001',
+            reference=self.reference,
+            component=self.component,
+        )
+
+        # Create a FragilityModel for linking
+        self.fragility_model = FragilityModel.objects.create(
+            id='test-fm-001',
+            component=self.component,
+            comp_description='Test fragility model',
+        )
+
+    def test_serializer_creates_bridge_with_valid_foreign_keys(self):
+        """Test that serializer successfully validates and saves with valid experiment and fragility_model IDs."""
+        valid_data = {
+            'experiment': 'test-exp-001',
+            'fragility_model': 'test-fm-001',
+        }
+
+        serializer = ExperimentFragilityModelBridgeSerializer(data=valid_data)
+
+        self.assertTrue(serializer.is_valid())
+        bridge = serializer.save()
+
+        self.assertIsNotNone(bridge)
+        self.assertEqual(bridge.experiment.id, 'test-exp-001')
+        self.assertEqual(bridge.fragility_model.id, 'test-fm-001')
+
+    def test_serializer_rejects_nonexistent_experiment(self):
+        """Test that serializer rejects data with a non-existent experiment ID."""
+        invalid_data = {
+            'experiment': 'nonexistent-exp',
+            'fragility_model': 'test-fm-001',
+        }
+
+        serializer = ExperimentFragilityModelBridgeSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('experiment', serializer.errors)
+
+    def test_serializer_rejects_nonexistent_fragility_model(self):
+        """Test that serializer rejects data with a non-existent fragility_model ID."""
+        invalid_data = {
+            'experiment': 'test-exp-001',
+            'fragility_model': 'nonexistent-fm',
+        }
+
+        serializer = ExperimentFragilityModelBridgeSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('fragility_model', serializer.errors)
+
+    def tearDown(self):
+        """Clean up test data after each test."""
+        ExperimentFragilityModelBridge.objects.all().delete()
+        FragilityModel.objects.filter(id__startswith='test-fm-').delete()
+        Experiment.objects.filter(id__startswith='test-exp-').delete()
+        Reference.objects.filter(id__startswith='test-ref-').delete()
+        Component.objects.filter(component_id='A.10.1.1').delete()
+
+
+class FragilityCurveSerializerTest(TestCase):
+    """Test cases for the FragilityCurveSerializer, focusing on foreign key validation."""
+
+    def setUp(self):
+        """Set up test data."""
+        # Create a Component for linking
+        self.component = Component.objects.create(
+            component_id='A.10.1.1',
+            name='Test Component',
+        )
+
+        # Create a Reference for linking
+        self.reference = Reference.objects.create(
+            id='test-ref-001',
+            csl_data={
+                'type': 'article-journal',
+                'id': 'test-ref-001',
+                'title': 'Test Reference',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2023]]},
+            },
+        )
+
+        # Create a FragilityModel for linking
+        self.fragility_model = FragilityModel.objects.create(
+            id='test-fm-001',
+            component=self.component,
+            comp_description='Test fragility model',
+        )
+
+    def test_serializer_creates_fragility_curve_with_valid_foreign_keys(self):
+        """Test that serializer successfully validates and saves with valid fragility_model and reference IDs."""
+        valid_data = {
+            'fragility_model': 'test-fm-001',
+            'reference': 'test-ref-001',
+            'edp_metric': 'Story Drift Ratio',
+            'edp_unit': 'Ratio',
+            'ds_description': 'Test damage state description',
+            'median': 0.01,
+            'beta': 0.5,
+            'probability': 0.8,
+        }
+
+        serializer = FragilityCurveSerializer(data=valid_data)
+
+        self.assertTrue(serializer.is_valid())
+        fragility_curve = serializer.save()
+
+        self.assertIsNotNone(fragility_curve)
+        self.assertEqual(fragility_curve.fragility_model.id, 'test-fm-001')
+        self.assertEqual(fragility_curve.reference.id, 'test-ref-001')
+
+    def test_serializer_rejects_nonexistent_fragility_model(self):
+        """Test that serializer rejects data with a non-existent fragility_model ID."""
+        invalid_data = {
+            'fragility_model': 'nonexistent-fm',
+            'reference': 'test-ref-001',
+            'edp_metric': 'Story Drift Ratio',
+            'edp_unit': 'Ratio',
+            'ds_description': 'Test damage state description',
+            'median': 0.01,
+            'beta': 0.5,
+            'probability': 0.8,
+        }
+
+        serializer = FragilityCurveSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('fragility_model', serializer.errors)
+
+    def test_serializer_rejects_nonexistent_reference(self):
+        """Test that serializer rejects data with a non-existent reference ID."""
+        invalid_data = {
+            'fragility_model': 'test-fm-001',
+            'reference': 'nonexistent-ref',
+            'edp_metric': 'Story Drift Ratio',
+            'edp_unit': 'Ratio',
+            'ds_description': 'Test damage state description',
+            'median': 0.01,
+            'beta': 0.5,
+            'probability': 0.8,
+        }
+
+        serializer = FragilityCurveSerializer(data=invalid_data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('reference', serializer.errors)
+
+    def tearDown(self):
+        """Clean up test data after each test."""
+        FragilityCurve.objects.all().delete()
+        FragilityModel.objects.filter(id__startswith='test-fm-').delete()
+        Reference.objects.filter(id__startswith='test-ref-').delete()
+        Component.objects.filter(component_id='A.10.1.1').delete()

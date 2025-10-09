@@ -7,7 +7,7 @@ import tempfile
 import json
 from io import StringIO
 from unittest.mock import patch
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.core.management import call_command
 from django.conf import settings
 from ned_app.models import (
@@ -20,7 +20,7 @@ from ned_app.models import (
 )
 
 
-class IngestCommandTests(TestCase):
+class IngestCommandTests(TransactionTestCase):
     """Test cases for the ingest management command."""
 
     def test_full_ingestion_success(self):

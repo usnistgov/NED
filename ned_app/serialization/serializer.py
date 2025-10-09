@@ -11,6 +11,7 @@ from ned_app.models import (
     ExperimentFragilityModelBridge,
     FragilityCurve,
 )
+from ned_app.validators import validate_nistir_component_id
 
 
 class ReferenceSerializer(serializers.ModelSerializer):
@@ -97,7 +98,9 @@ class ComponentSerializer(serializers.ModelSerializer):
     # Make sure the id is not sought by the serializer
     id = serializers.CharField(read_only=True)
     # Make component_id required and writeable
-    component_id = serializers.CharField(required=True)
+    component_id = serializers.CharField(
+        required=True, validators=[validate_nistir_component_id]
+    )
 
     class Meta:
         model = Component
