@@ -1,8 +1,9 @@
+import json
 import os
 import tempfile
 from unittest.mock import patch
 from django.core.management import call_command
-from django.test import TestCase, tag
+from django.test import TransactionTestCase, tag
 from ned_app.models import (
     Reference,
     Component,
@@ -14,7 +15,7 @@ from ned_app.models import (
 
 
 @tag('integrity')
-class DataIntegrityTests(TestCase):
+class DataIntegrityTests(TransactionTestCase):
     fixtures = ['initial_data.json']
 
     def setUp(self):
@@ -144,3 +145,62 @@ class DataIntegrityTests(TestCase):
                 k: v for k, v in final_curve.__dict__.items() if k != '_state'
             }
             self.assertEqual(initial_dict, final_dict)
+
+    def test_json_to_db_to_json_round_trip_is_lossless(self):
+        # Create a temporary directory for exported JSON files
+        temp_export_dir = tempfile.mkdtemp()
+
+        try:
+            # Step 1: Ingest canonical JSON files into the database
+            call_command('ingest')
+
+            # Step 2: Export data to temporary directory
+            call_command('export_data', output_dir=temp_export_dir)
+
+            # Step 3: Compare each canonical JSON file with its exported version
+            canonical_data_dir = 'resources/data'
+
+            # Map each JSON file to its sort key function
+            # For tables with composite keys, use tuple sorting
+            json_files = {
+                'reference.json': lambda x: x['id'],
+                'component.json': lambda x: x['component_id'],
+                'fragility_model.json': lambda x: x['id'],
+                'experiment.json': lambda x: x['id'],
+                'experiment_fragility_model_bridge.json': lambda x: (
+                    x['experiment'],
+                    x['fragility_model'],
+                ),
+                'fragility_curve.json': lambda x: (
+                    x['fragility_model'],
+                    x['ds_rank'],
+                ),
+            }
+
+            for json_file, sort_func in json_files.items():
+                # Load canonical JSON file
+                canonical_path = os.path.join(canonical_data_dir, json_file)
+                with open(canonical_path, 'r') as f:
+                    canonical_data = json.load(f)
+
+                # Load exported JSON file
+                exported_path = os.path.join(temp_export_dir, json_file)
+                with open(exported_path, 'r') as f:
+                    exported_data = json.load(f)
+
+                # Sort both datasets by their key(s) to ensure order-independent comparison
+                canonical_data_sorted = sorted(canonical_data, key=sort_func)
+                exported_data_sorted = sorted(exported_data, key=sort_func)
+
+                # Assert that the content is identical
+                self.assertEqual(
+                    canonical_data_sorted,
+                    exported_data_sorted,
+                    f'Mismatch in {json_file}: canonical and exported data differ',
+                )
+
+        finally:
+            # Clean up temporary directory
+            import shutil
+
+            shutil.rmtree(temp_export_dir)
