@@ -34,31 +34,37 @@ class Command(BaseCommand):
                 'model': Reference,
                 'serializer': ReferenceSerializer,
                 'file': 'reference.json',
+                'lookup_field': ['id'],
             },
             {
                 'model': Component,
                 'serializer': ComponentSerializer,
                 'file': 'component.json',
+                'lookup_field': ['component_id'],
             },
             {
                 'model': FragilityModel,
                 'serializer': FragilityModelSerializer,
                 'file': 'fragility_model.json',
+                'lookup_field': ['id'],
             },
             {
                 'model': Experiment,
                 'serializer': ExperimentSerializer,
                 'file': 'experiment.json',
+                'lookup_field': ['id'],
             },
             {
                 'model': ExperimentFragilityModelBridge,
                 'serializer': ExperimentFragilityModelBridgeSerializer,
                 'file': 'experiment_fragility_model_bridge.json',
+                'lookup_field': ['experiment', 'fragility_model'],
             },
             {
                 'model': FragilityCurve,
                 'serializer': FragilityCurveSerializer,
                 'file': 'fragility_curve.json',
+                'lookup_field': ['fragility_model', 'ds_rank'],
             },
         ]
 
@@ -67,15 +73,16 @@ class Command(BaseCommand):
                 model_class=config['model'],
                 serializer_class=config['serializer'],
                 data_file=config['file'],
+                lookup_field=config['lookup_field'],
             )
 
         self.stdout.write(
             self.style.SUCCESS('\nAll data ingestion tasks completed successfully.')
         )
 
-        print("Just to see if ruff works")
-
-    def _process_data_file(self, model_class, serializer_class, data_file):
+    def _process_data_file(
+        self, model_class, serializer_class, data_file, lookup_field
+    ):
         """
         A generic function to process a JSON data file for a given model.
         It handles file reading, data validation, serialization, and reporting.
@@ -104,15 +111,31 @@ class Command(BaseCommand):
         # Process each record in the data file
         for item in data:
             try:
-                serializer = serializer_class(data=item)
+                # Build a dictionary of lookup parameters from the config
+                # e.g., {'experiment': 'exp-001', 'fragility_model': 'fm-001'}
+                lookup_params = {field: item.get(field) for field in lookup_field}
+                instance = None
+
+                # Proceed only if all key values were found in the data
+                if all(lookup_params.values()):
+                    try:
+                        instance = model_class.objects.get(**lookup_params)
+                    except model_class.DoesNotExist:
+                        instance = None
+
+                if instance:
+                    serializer = serializer_class(instance, data=item)
+                else:
+                    serializer = serializer_class(data=item)
+
                 # Use raise_exception=True to simplify error handling
                 serializer.is_valid(raise_exception=True)
-                instance, created = serializer.save()
+                serializer.save()
 
-                if created:
-                    created_count += 1
-                else:
+                if instance:
                     updated_count += 1
+                else:
+                    created_count += 1
 
             except (ValidationError, Exception) as ex:
                 failed_count += 1
@@ -121,6 +144,7 @@ class Command(BaseCommand):
                 self.stderr.write(
                     f"Error processing {model_name} record '{record_id}': {ex}"
                 )
+                # raise ex
 
         # Print summary report for the current model
         self.stdout.write(

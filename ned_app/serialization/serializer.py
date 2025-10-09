@@ -92,14 +92,6 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
         return value
 
-    def create(self, validated_data):
-        """Create or update a Reference using update_or_create for idempotency."""
-        lookup_id = self.initial_data.get('id')
-        instance, created = Reference.objects.update_or_create(
-            id=lookup_id, defaults=validated_data
-        )
-        return instance, created
-
 
 class ComponentSerializer(serializers.ModelSerializer):
     # Make sure the id is not sought by the serializer
@@ -119,14 +111,6 @@ class ComponentSerializer(serializers.ModelSerializer):
             'subelement',
         ]
 
-    def create(self, validated_data):
-        """Create or update a Component using update_or_create for idempotency."""
-        lookup_component_id = validated_data.pop('component_id')
-        instance, created = Component.objects.update_or_create(
-            component_id=lookup_component_id, defaults=validated_data
-        )
-        return instance, created
-
 
 class FragilityModelSerializer(serializers.ModelSerializer):
     component = serializers.SlugRelatedField(
@@ -144,14 +128,6 @@ class FragilityModelSerializer(serializers.ModelSerializer):
             'size_class',
             'comp_description',
         ]
-
-    def create(self, validated_data):
-        """Create or update a FragilityModel using update_or_create for idempotency."""
-        lookup_id = self.initial_data.get('id')
-        instance, created = FragilityModel.objects.update_or_create(
-            id=lookup_id, defaults=validated_data
-        )
-        return instance, created
 
 
 class ExperimentSerializer(serializers.ModelSerializer):
@@ -195,14 +171,6 @@ class ExperimentSerializer(serializers.ModelSerializer):
             'notes',
         ]
 
-    def create(self, validated_data):
-        """Create or update an Experiment using update_or_create for idempotency."""
-        lookup_id = self.initial_data.get('id')
-        instance, created = Experiment.objects.update_or_create(
-            id=lookup_id, defaults=validated_data
-        )
-        return instance, created
-
 
 class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
     experiment = serializers.SlugRelatedField(
@@ -220,17 +188,6 @@ class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
             'fragility_model',
         ]
 
-    def create(self, validated_data):
-        """Create or update an ExperimentFragilityModelBridge using update_or_create for idempotency."""
-        lookup_experiment = validated_data.get('experiment')
-        lookup_fragility_model = validated_data.get('fragility_model')
-        instance, created = ExperimentFragilityModelBridge.objects.update_or_create(
-            experiment=lookup_experiment,
-            fragility_model=lookup_fragility_model,
-            defaults=validated_data,
-        )
-        return instance, created
-
 
 class FragilityCurveSerializer(serializers.ModelSerializer):
     fragility_model = serializers.SlugRelatedField(
@@ -243,7 +200,6 @@ class FragilityCurveSerializer(serializers.ModelSerializer):
     class Meta:
         model = FragilityCurve
         fields = [
-            'id',
             'fragility_model',
             'reviewer',
             'source',
@@ -258,11 +214,3 @@ class FragilityCurveSerializer(serializers.ModelSerializer):
             'beta',
             'probability',
         ]
-
-    def create(self, validated_data):
-        """Create or update a FragilityCurve using update_or_create for idempotency."""
-        lookup_id = self.initial_data.get('id')
-        instance, created = FragilityCurve.objects.update_or_create(
-            id=lookup_id, defaults=validated_data
-        )
-        return instance, created
