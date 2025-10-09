@@ -1,357 +1,286 @@
 [
     {
-        "id":"B2011.A",
-        "name":"CFS Exterior walls",
-        "nistir_subelement":"B2011"
+        "component_id": "B.20.1.1.A",
+        "name": "CFS Exterior walls"
     },
     {
-        "id":"B2011.B",
-        "name":"Light-framed wood exterior walls",
-        "nistir_subelement":"B2011"
+        "component_id": "B.20.1.1.B",
+        "name": "Light-framed wood exterior walls"
     },
     {
-        "id":"B2011.C",
-        "name":"Precast concrete cladding panels",
-        "nistir_subelement":"B2011"
+        "component_id": "B.20.1.1.C",
+        "name": "Precast concrete cladding panels"
     },
     {
-        "id":"B2012.A",
-        "name":"Unreinforced Masonry Parapet",
-        "nistir_subelement":"B2012"
+        "component_id": "B.20.1.2.A",
+        "name": "Unreinforced Masonry Parapet"
     },
     {
-        "id":"B2012.B",
-        "name":"Masonry Chimney",
-        "nistir_subelement":"B2012"
+        "component_id": "B.20.1.2.B",
+        "name": "Masonry Chimney"
     },
     {
-        "id":"B2022.A",
-        "name":"Dry-glazed stick built curtain walls",
-        "nistir_subelement":"B2022"
+        "component_id": "B.20.2.2.A",
+        "name": "Dry-glazed stick built curtain walls"
     },
     {
-        "id":"B2022.B",
-        "name":"Semi-unitized curtain walls",
-        "nistir_subelement":"B2022"
+        "component_id": "B.20.2.2.B",
+        "name": "Semi-unitized curtain walls"
     },
     {
-        "id":"B2022.C",
-        "name":"Unitized curtain walls",
-        "nistir_subelement":"B2022"
+        "component_id": "B.20.2.2.C",
+        "name": "Unitized curtain walls"
     },
     {
-        "id":"B2023.A",
-        "name":"Dry-glazed stick built storefronts",
-        "nistir_subelement":"B2023"
+        "component_id": "B.20.2.3.A",
+        "name": "Dry-glazed stick built storefronts"
     },
     {
-        "id":"B2031.A",
-        "name":"Exterior Glazed Doors & Entrances - Swinging",
-        "nistir_subelement":"B2031"
+        "component_id": "B.20.3.1.A",
+        "name": "Exterior Glazed Doors & Entrances - Swinging"
     },
     {
-        "id":"B2032.A",
-        "name":"Exterior Solid Doors - Swinging",
-        "nistir_subelement":"B2032"
+        "component_id": "B.20.3.2.A",
+        "name": "Exterior Solid Doors - Swinging"
     },
     {
-        "id":"B2034.A",
-        "name":"Exterior doors - Roll-up\/Slide-up",
-        "nistir_subelement":"B2034"
+        "component_id": "B.20.3.4.A",
+        "name": "Exterior doors - Roll-up/Slide-up"
     },
     {
-        "id":"B3011.A",
-        "name":"Concrete tile roof",
-        "nistir_subelement":"B3011"
+        "component_id": "B.30.1.1.A",
+        "name": "Concrete tile roof"
     },
     {
-        "id":"B3011.B",
-        "name":"Clay tile roof",
-        "nistir_subelement":"B3011"
+        "component_id": "B.30.1.1.B",
+        "name": "Clay tile roof"
     },
     {
-        "id":"C1011.A",
-        "name":"CFS interior partition",
-        "nistir_subelement":"C1011"
+        "component_id": "C.10.1.1.A",
+        "name": "CFS interior partition"
     },
     {
-        "id":"C1011.B",
-        "name":"Wood light framed interior partition",
-        "nistir_subelement":"C1011"
+        "component_id": "C.10.1.1.B",
+        "name": "Wood light framed interior partition"
     },
     {
-        "id":"C1011.C",
-        "name":"Masonry interior partition walls",
-        "nistir_subelement":"C1011"
+        "component_id": "C.10.1.1.C",
+        "name": "Masonry interior partition walls"
     },
     {
-        "id":"C1021.A",
-        "name":"Interior doors - Swinging",
-        "nistir_subelement":"C1021"
+        "component_id": "C.10.2.1.A",
+        "name": "Interior doors - Swinging"
     },
     {
-        "id":"C1021.B",
-        "name":"Interior doors - Sliding\/folding",
-        "nistir_subelement":"C1021"
+        "component_id": "C.10.2.1.B",
+        "name": "Interior doors - Sliding/folding"
     },
     {
-        "id":"C2011.A",
-        "name":"Prefabricated Steel Stairs",
-        "nistir_subelement":"C2011"
+        "component_id": "C.20.1.1.A",
+        "name": "Prefabricated Steel Stairs"
     },
     {
-        "id":"C2011.B",
-        "name":"Precast Concrete Stairs",
-        "nistir_subelement":"C2011"
+        "component_id": "C.20.1.1.B",
+        "name": "Precast Concrete Stairs"
     },
     {
-        "id":"C2011.C",
-        "name":"Monolithic Cast in Place concrete Stairs",
-        "nistir_subelement":"C2011"
+        "component_id": "C.20.1.1.C",
+        "name": "Monolithic Cast in Place concrete Stairs"
     },
     {
-        "id":"C2011.D",
-        "name":"Hybrid Stair (steel stringers and concrete treads)",
-        "nistir_subelement":"C2011"
+        "component_id": "C.20.1.1.D",
+        "name": "Hybrid Stair (steel stringers and concrete treads)"
     },
     {
-        "id":"C3011.A",
-        "name":"Interior Wall Finish",
-        "nistir_subelement":"C3011"
+        "component_id": "C.30.1.1.A",
+        "name": "Interior Wall Finish"
     },
     {
-        "id":"C3012.A",
-        "name":"Interior Wall Finish",
-        "nistir_subelement":"C3012"
+        "component_id": "C.30.1.2.A",
+        "name": "Interior Wall Finish"
     },
     {
-        "id":"C3021.A",
-        "name":"Generic Floor Covering",
-        "nistir_subelement":"C3021"
+        "component_id": "C.30.2.1.A",
+        "name": "Generic Floor Covering"
     },
     {
-        "id":"C3027.A",
-        "name":"Raised access floor",
-        "nistir_subelement":"C3027"
+        "component_id": "C.30.2.7.A",
+        "name": "Raised access floor"
     },
     {
-        "id":"C3031.A",
-        "name":"Hard mounted ceilings ",
-        "nistir_subelement":"C3031"
+        "component_id": "C.30.3.1.A",
+        "name": "Hard mounted ceilings"
     },
     {
-        "id":"C3032.A",
-        "name":"Suspended ceilings",
-        "nistir_subelement":"C3032"
+        "component_id": "C.30.3.2.A",
+        "name": "Suspended ceilings"
     },
     {
-        "id":"D1011.A",
-        "name":"Traction Elevators",
-        "nistir_subelement":"D1011"
+        "component_id": "D.10.1.1.A",
+        "name": "Traction Elevators"
     },
     {
-        "id":"D1011.B",
-        "name":"Hydraulic Elevators",
-        "nistir_subelement":"D1011"
+        "component_id": "D.10.1.1.B",
+        "name": "Hydraulic Elevators"
     },
     {
-        "id":"D2021.A",
-        "name":"Domestic Water Piping - Horizontal Mains and Branches",
-        "nistir_subelement":"D2021"
+        "component_id": "D.20.2.1.A",
+        "name": "Domestic Water Piping - Horizontal Mains and Branches"
     },
     {
-        "id":"D2022.A",
-        "name":"Domestic Water Piping - Horizontal Mains and Branches",
-        "nistir_subelement":"D2022"
+        "component_id": "D.20.2.2.A",
+        "name": "Domestic Water Piping - Horizontal Mains and Branches"
     },
     {
-        "id":"D2031.A",
-        "name":"Sanitary Waste Piping",
-        "nistir_subelement":"D2031"
+        "component_id": "D.20.3.1.A",
+        "name": "Sanitary Waste Piping"
     },
     {
-        "id":"D2091.A",
-        "name":"Gas piping - Horizontal Mains and Branches",
-        "nistir_subelement":"D2091"
+        "component_id": "D.20.9.1.A",
+        "name": "Gas piping - Horizontal Mains and Branches"
     },
     {
-        "id":"D3031.A",
-        "name":"Chiller",
-        "nistir_subelement":"D3031"
+        "component_id": "D.30.3.1.A",
+        "name": "Chiller"
     },
     {
-        "id":"D3031.B",
-        "name":"Cooling Towers",
-        "nistir_subelement":"D3031"
+        "component_id": "D.30.3.1.B",
+        "name": "Cooling Towers"
     },
     {
-        "id":"D3032.A",
-        "name":"Cooling System Direct Expansion Compressor",
-        "nistir_subelement":"D3032"
+        "component_id": "D.30.3.2.A",
+        "name": "Cooling System Direct Expansion Compressor"
     },
     {
-        "id":"D3041.A",
-        "name":"HVAC Ducting",
-        "nistir_subelement":"D3041"
+        "component_id": "D.30.4.1.A",
+        "name": "HVAC Ducting"
     },
     {
-        "id":"D3041.B",
-        "name":"HVAC Drop\/Diffuser",
-        "nistir_subelement":"D3041"
+        "component_id": "D.30.4.1.B",
+        "name": "HVAC Drop/Diffuser"
     },
     {
-        "id":"D3041.C",
-        "name":"HVAC in-line fan",
-        "nistir_subelement":"D3041"
+        "component_id": "D.30.4.1.C",
+        "name": "HVAC in-line fan"
     },
     {
-        "id":"D3041.D",
-        "name":"HVAC VAV Box",
-        "nistir_subelement":"D3041"
+        "component_id": "D.30.4.1.D",
+        "name": "HVAC VAV Box"
     },
     {
-        "id":"D3042.A",
-        "name":"Exhaust Fan",
-        "nistir_subelement":"D3042"
+        "component_id": "D.30.4.2.A",
+        "name": "Exhaust Fan"
     },
     {
-        "id":"D3043.A",
-        "name":"Steam piping - Horizontal Mains and Branches",
-        "nistir_subelement":"D3043"
+        "component_id": "D.30.4.3.A",
+        "name": "Steam piping - Horizontal Mains and Branches"
     },
     {
-        "id":"D3044.A",
-        "name":"HVAC hot water piping - Horizontal Mains and Branches",
-        "nistir_subelement":"D3044"
+        "component_id": "D.30.4.4.A",
+        "name": "HVAC hot water piping - Horizontal Mains and Branches"
     },
     {
-        "id":"D3045.A",
-        "name":"HVAC chilled water piping - Horizontal Mains and Branches",
-        "nistir_subelement":"D3045"
+        "component_id": "D.30.4.5.A",
+        "name": "HVAC chilled water piping - Horizontal Mains and Branches"
     },
     {
-        "id":"D3052.A",
-        "name":"Air Handling Unit",
-        "nistir_subelement":"D3052"
+        "component_id": "D.30.5.2.A",
+        "name": "Air Handling Unit"
     },
     {
-        "id":"D3067.A",
-        "name":"HVAC Control Panel",
-        "nistir_subelement":"D3067"
+        "component_id": "D.30.6.7.A",
+        "name": "HVAC Control Panel"
     },
     {
-        "id":"D4011.A",
-        "name":"Fire Sprinkler Water Piping - Horizontal Mains and Branches",
-        "nistir_subelement":"D4011"
+        "component_id": "D.40.1.1.A",
+        "name": "Fire Sprinkler Water Piping - Horizontal Mains and Branches"
     },
     {
-        "id":"D4011.B",
-        "name":"Fire Sprinkler Drop Standard Threaded Steel",
-        "nistir_subelement":"D4011"
+        "component_id": "D.40.1.1.B",
+        "name": "Fire Sprinkler Drop Standard Threaded Steel"
     },
     {
-        "id":"D4011.C",
-        "name":"Fire sprinkler piping Tee-joint",
-        "nistir_subelement":"D4011"
+        "component_id": "D.40.1.1.C",
+        "name": "Fire sprinkler piping Tee-joint"
     },
     {
-        "id":"D4011.D",
-        "name":"Fire sprinkler piping straight joint",
-        "nistir_subelement":"D4011"
+        "component_id": "D.40.1.1.D",
+        "name": "Fire sprinkler piping straight joint"
     },
     {
-        "id":"D4011.E",
-        "name":"Fire sprinkler piping elbow joint",
-        "nistir_subelement":"D4011"
+        "component_id": "D.40.1.1.E",
+        "name": "Fire sprinkler piping elbow joint"
     },
     {
-        "id":"D4011.F",
-        "name":"Fire sprinkler wire brace",
-        "nistir_subelement":"D4011"
+        "component_id": "D.40.1.1.F",
+        "name": "Fire sprinkler wire brace"
     },
     {
-        "id":"D4011.G",
-        "name":"Fire sprinkler threaded hanger rods",
-        "nistir_subelement":"D4011"
+        "component_id": "D.40.1.1.G",
+        "name": "Fire sprinkler threaded hanger rods"
     },
     {
-        "id":"D4011.H",
-        "name":"Fire sprinkler structural braces",
-        "nistir_subelement":"D4011"
+        "component_id": "D.40.1.1.H",
+        "name": "Fire sprinkler structural braces"
     },
     {
-        "id":"D5011.A",
-        "name":"Transformer",
-        "nistir_subelement":"D5011"
+        "component_id": "D.50.1.1.A",
+        "name": "Transformer"
     },
     {
-        "id":"D5012.A",
-        "name":"Motor control center",
-        "nistir_subelement":"D5012"
+        "component_id": "D.50.1.2.A",
+        "name": "Motor control center"
     },
     {
-        "id":"D5012.B",
-        "name":"Low Voltage Switchgears",
-        "nistir_subelement":"D5012"
+        "component_id": "D.50.1.2.B",
+        "name": "Low Voltage Switchgears"
     },
     {
-        "id":"D5012.C",
-        "name":"Distribution Panel",
-        "nistir_subelement":"D5012"
+        "component_id": "D.50.1.2.C",
+        "name": "Distribution Panel"
     },
     {
-        "id":"D5012.D",
-        "name":"Cable trays",
-        "nistir_subelement":"D5012"
+        "component_id": "D.50.1.2.D",
+        "name": "Cable trays"
     },
     {
-        "id":"D5022.A",
-        "name":"Pendant Lighting",
-        "nistir_subelement":"D5022"
+        "component_id": "D.50.2.2.A",
+        "name": "Pendant Lighting"
     },
     {
-        "id":"D5092.A",
-        "name":"Battery Rack",
-        "nistir_subelement":"D5092"
+        "component_id": "D.50.9.2.A",
+        "name": "Battery Rack"
     },
     {
-        "id":"D5092.B",
-        "name":"Battery Charger",
-        "nistir_subelement":"D5092"
+        "component_id": "D.50.9.2.B",
+        "name": "Battery Charger"
     },
     {
-        "id":"D5092.C",
-        "name":"Diesel Generator",
-        "nistir_subelement":"D5092"
+        "component_id": "D.50.9.2.C",
+        "name": "Diesel Generator"
     },
     {
-        "id":"E2022.A",
-        "name":"Modular Office Work Stations",
-        "nistir_subelement":"E2022"
+        "component_id": "E.20.2.2.A",
+        "name": "Modular Office Work Stations"
     },
     {
-        "id":"E2022.B",
-        "name":"Content on Shelves",
-        "nistir_subelement":"E2022"
+        "component_id": "E.20.2.2.B",
+        "name": "Content on Shelves"
     },
     {
-        "id":"E2022.C",
-        "name":"Electronic Equipment",
-        "nistir_subelement":"E2022"
+        "component_id": "E.20.2.2.C",
+        "name": "Electronic Equipment"
     },
     {
-        "id":"E2022.D",
-        "name":"Bookcase",
-        "nistir_subelement":"E2022"
+        "component_id": "E.20.2.2.D",
+        "name": "Bookcase"
     },
     {
-        "id":"E2022.E",
-        "name":"Filing cabinet",
-        "nistir_subelement":"E2022"
+        "component_id": "E.20.2.2.E",
+        "name": "Filing cabinet"
     },
     {
-        "id":"F1012.A",
-        "name":"Storage racks",
-        "nistir_subelement":"F1012"
+        "component_id": "F.10.1.2.A",
+        "name": "Storage racks"
     }
 ]
