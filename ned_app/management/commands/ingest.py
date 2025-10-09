@@ -22,12 +22,25 @@ from ned_app.serialization.serializer import (
 
 
 class Command(BaseCommand):
+    """
+    Django management command to ingest data from canonical JSON files.
+
+    This command reads JSON files for all models and creates or updates
+    database records using serializers for validation and idempotent processing.
+    """
+
     help = 'Ingests data from JSON files using a generic, configurable processor.'
 
     def handle(self, *args, **options):
         """
-        Main entry point for the command. Defines the ingestion configuration
-        and iterates through it, calling the generic processor.
+        Execute the ingestion command.
+
+        Processes all configured JSON data files in sequence, creating or updating
+        database records as needed.
+
+        Args:
+            *args: Positional arguments (unused).
+            **options: Command options (unused).
         """
         processing_config = [
             {
@@ -84,8 +97,16 @@ class Command(BaseCommand):
         self, model_class, serializer_class, data_file, lookup_field
     ):
         """
-        A generic function to process a JSON data file for a given model.
-        It handles file reading, data validation, serialization, and reporting.
+        Process a JSON data file for a given model.
+
+        Handles file reading, data validation, idempotent create/update operations,
+        and result reporting.
+
+        Args:
+            model_class: The Django model class to process.
+            serializer_class: The serializer class for validation and saving.
+            data_file (str): The name of the JSON file to process.
+            lookup_field (list): List of field names used to identify existing records.
         """
         model_name = model_class.__name__
         self.stdout.write(f'--- Processing {model_name} from {data_file} ---')
@@ -93,14 +114,12 @@ class Command(BaseCommand):
         data_filepath = build_json_data_file_path(data_file)
         created_count, updated_count, failed_count = 0, 0, 0
 
-        # Check for file existence
         if not os.path.exists(data_filepath):
             self.stdout.write(
                 self.style.WARNING(f'File not found, skipping: {data_filepath}')
             )
             return
 
-        # Load and parse JSON data
         try:
             with open(data_filepath, 'r') as file:
                 data = json.load(file)
@@ -108,15 +127,11 @@ class Command(BaseCommand):
             self.stderr.write(f'Error: Invalid JSON in {data_filepath}: {ex}')
             return
 
-        # Process each record in the data file
         for item in data:
             try:
-                # Build a dictionary of lookup parameters from the config
-                # e.g., {'experiment': 'exp-001', 'fragility_model': 'fm-001'}
                 lookup_params = {field: item.get(field) for field in lookup_field}
                 instance = None
 
-                # Proceed only if all key values were found in the data
                 if all(lookup_params.values()):
                     try:
                         instance = model_class.objects.get(**lookup_params)
@@ -128,7 +143,6 @@ class Command(BaseCommand):
                 else:
                     serializer = serializer_class(data=item)
 
-                # Use raise_exception=True to simplify error handling
                 serializer.is_valid(raise_exception=True)
                 serializer.save()
 
@@ -139,14 +153,11 @@ class Command(BaseCommand):
 
             except (ValidationError, Exception) as ex:
                 failed_count += 1
-                # Attempt to get a meaningful identifier for the failing record for logging
                 record_id = item.get('id') or item.get('component_id') or 'unknown'
                 self.stderr.write(
                     f"Error processing {model_name} record '{record_id}': {ex}"
                 )
-                # raise ex
 
-        # Print summary report for the current model
         self.stdout.write(
             self.style.SUCCESS(
                 f'{model_name} processing complete: '

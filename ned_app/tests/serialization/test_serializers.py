@@ -144,14 +144,12 @@ class ReferenceSerializerTest(TestCase):
                 self.assertEqual(reference.id, 'test-serializer-001')
                 self.assertEqual(reference.csl_data, self.valid_csl_data)
 
-                # Check that fields are auto-populated from csl_data
                 self.assertEqual(reference.title, 'Test Article for Serializer')
                 self.assertEqual(reference.author, 'Smith and Doe')
                 self.assertEqual(reference.year, 2023)
 
     def test_serializer_handles_optional_fields(self):
         """Test that serializer handles optional auto-populated fields correctly."""
-        # Test data with required fields
         minimal_data = {
             'id': 'test-serializer-002',
             'csl_data': {
@@ -192,7 +190,6 @@ class ReferenceSerializerTest(TestCase):
                 self.assertTrue(serializer.is_valid())
                 reference = serializer.save()
 
-                # The model's save() method should override with csl_data title
                 self.assertEqual(reference.title, 'Test Article for Serializer')
 
     def test_serializer_with_complex_csl_data(self):
@@ -240,10 +237,8 @@ class ReferenceSerializerTest(TestCase):
         """Test serializer validation against the actual CSL schema."""
         serializer = ReferenceSerializer(data=self.valid_reference_data)
 
-        # This should work with the real schema
         self.assertTrue(serializer.is_valid())
 
-        # Test with invalid data against real schema
         invalid_data = self.valid_reference_data.copy()
         invalid_data['csl_data'] = {
             'type': 'invalid-type',  # This should fail real schema validation
@@ -257,21 +252,17 @@ class ReferenceSerializerTest(TestCase):
         """Test that serializer Meta configuration is correct."""
         serializer = ReferenceSerializer()
 
-        # Check that the serializer is configured for the Reference model
         self.assertEqual(serializer.Meta.model, Reference)
 
-        # Check that required fields are properly configured
         self.assertIn('csl_data', serializer.fields)
         self.assertIn('title', serializer.fields)
         self.assertIn('author', serializer.fields)
         self.assertIn('year', serializer.fields)
 
-        # Check that auto-populated fields are optional
         self.assertFalse(serializer.fields['title'].required)
         self.assertFalse(serializer.fields['author'].required)
         self.assertFalse(serializer.fields['year'].required)
 
-        # Check that csl_data field is required
         self.assertTrue(serializer.fields['csl_data'].required)
 
     def test_validate_csl_data_rejects_missing_title(self):
@@ -419,7 +410,6 @@ class ComponentSerializerTest(TestCase):
         self.assertTrue(serializer.is_valid())
         component = serializer.save()
 
-        # Verify denormalized fields are populated correctly
         self.assertEqual(component.major_group, 'D - Services')
         self.assertEqual(component.group, '30 - HVAC')
         self.assertEqual(component.element, '3 - Cooling Generating Systems')
@@ -431,7 +421,6 @@ class FragilityModelSerializerTest(TestCase):
 
     def setUp(self):
         """Set up test data."""
-        # Create a Component for linking
         self.component = Component.objects.create(
             component_id='A.10.1.1',
             name='Test Component',
@@ -478,13 +467,11 @@ class ExperimentSerializerTest(TestCase):
 
     def setUp(self):
         """Set up test data."""
-        # Create a Component for linking
         self.component = Component.objects.create(
             component_id='A.10.1.1',
             name='Test Component',
         )
 
-        # Create a Reference for linking
         self.reference = Reference.objects.create(
             id='test-ref-001',
             csl_data={
@@ -558,13 +545,11 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
 
     def setUp(self):
         """Set up test data."""
-        # Create a Component for linking
         self.component = Component.objects.create(
             component_id='A.10.1.1',
             name='Test Component',
         )
 
-        # Create a Reference for linking
         self.reference = Reference.objects.create(
             id='test-ref-001',
             csl_data={
@@ -576,14 +561,12 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
             },
         )
 
-        # Create an Experiment for linking
         self.experiment = Experiment.objects.create(
             id='test-exp-001',
             reference=self.reference,
             component=self.component,
         )
 
-        # Create a FragilityModel for linking
         self.fragility_model = FragilityModel.objects.create(
             id='test-fm-001',
             component=self.component,
@@ -644,13 +627,11 @@ class FragilityCurveSerializerTest(TestCase):
 
     def setUp(self):
         """Set up test data."""
-        # Create a Component for linking
         self.component = Component.objects.create(
             component_id='A.10.1.1',
             name='Test Component',
         )
 
-        # Create a Reference for linking
         self.reference = Reference.objects.create(
             id='test-ref-001',
             csl_data={
@@ -662,7 +643,6 @@ class FragilityCurveSerializerTest(TestCase):
             },
         )
 
-        # Create a FragilityModel for linking
         self.fragility_model = FragilityModel.objects.create(
             id='test-fm-001',
             component=self.component,

@@ -15,8 +15,14 @@ from ned_app.validators import validate_nistir_component_id
 
 
 class ReferenceSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Reference model with CSL-JSON validation.
+
+    Auto-populated fields (title, author, year) are optional during deserialization
+    as they are populated by the model's save() method from csl_data.
+    """
+
     csl_data = serializers.JSONField()
-    # Make auto-populated fields optional since they'll be set by the model's save() method
     title = serializers.CharField(required=False, allow_blank=True)
     author = serializers.CharField(required=False, allow_blank=True)
     year = serializers.IntegerField(required=False, allow_null=True)
@@ -35,11 +41,21 @@ class ReferenceSerializer(serializers.ModelSerializer):
         ]
 
     def validate_csl_data(self, value):
-        """Validate csl_data against CSL-JSON schema and required fields."""
+        """
+        Validate csl_data against CSL-JSON schema and required fields.
+
+        Args:
+            value (dict): The csl_data dictionary to validate.
+
+        Returns:
+            dict: The validated csl_data.
+
+        Raises:
+            serializers.ValidationError: If validation fails.
+        """
         if not value:
             raise serializers.ValidationError('csl_data is required')
 
-        # Check for required keys and non-empty values
         if 'title' not in value or not value['title']:
             raise serializers.ValidationError(
                 "csl_data must contain a non-empty 'title' field"
@@ -50,7 +66,6 @@ class ReferenceSerializer(serializers.ModelSerializer):
                 "csl_data must contain a non-empty 'author' field"
             )
 
-        # Check for valid issued year
         if 'issued' not in value:
             raise serializers.ValidationError(
                 "csl_data must contain an 'issued' field"
@@ -74,7 +89,6 @@ class ReferenceSerializer(serializers.ModelSerializer):
                 "csl_data 'issued' field must contain a valid year"
             )
 
-        # Load CSL schema for validation
         schema_path = os.path.join(
             settings.BASE_DIR, 'ned_app', 'schemas', 'csl-data.json'
         )
@@ -95,9 +109,14 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
 
 class ComponentSerializer(serializers.ModelSerializer):
-    # Make sure the id is not sought by the serializer
+    """
+    Serializer for Component model with NISTIR validation.
+
+    The id field is read-only as it's auto-generated from component_id.
+    NISTIR hierarchy fields are auto-populated by the model's save() method.
+    """
+
     id = serializers.CharField(read_only=True)
-    # Make component_id required and writeable
     component_id = serializers.CharField(
         required=True, validators=[validate_nistir_component_id]
     )
@@ -116,6 +135,12 @@ class ComponentSerializer(serializers.ModelSerializer):
 
 
 class FragilityModelSerializer(serializers.ModelSerializer):
+    """
+    Serializer for FragilityModel with component relationship.
+
+    Uses component_id as the slug field for component lookups.
+    """
+
     component = serializers.SlugRelatedField(
         slug_field='component_id', queryset=Component.objects.all()
     )
@@ -134,6 +159,12 @@ class FragilityModelSerializer(serializers.ModelSerializer):
 
 
 class ExperimentSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Experiment with reference and component relationships.
+
+    Uses natural keys for foreign key lookups: reference.id and component.component_id.
+    """
+
     reference = serializers.SlugRelatedField(
         slug_field='id', queryset=Reference.objects.all()
     )
@@ -176,6 +207,12 @@ class ExperimentSerializer(serializers.ModelSerializer):
 
 
 class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for ExperimentFragilityModelBridge relationship.
+
+    Manages the many-to-many relationship between experiments and fragility models.
+    """
+
     experiment = serializers.SlugRelatedField(
         slug_field='id', queryset=Experiment.objects.all()
     )
@@ -193,6 +230,12 @@ class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
 
 
 class FragilityCurveSerializer(serializers.ModelSerializer):
+    """
+    Serializer for FragilityCurve with fragility model and reference relationships.
+
+    Uses natural keys for foreign key lookups.
+    """
+
     fragility_model = serializers.SlugRelatedField(
         slug_field='id', queryset=FragilityModel.objects.all()
     )

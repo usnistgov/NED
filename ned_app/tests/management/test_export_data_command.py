@@ -19,15 +19,12 @@ class ExportDataCommandTest(TestCase):
 
     def setUp(self):
         """Set up test data for all models."""
-        # Create a temporary directory for output files
         self.temp_dir = tempfile.mkdtemp()
 
-        # Create Component
         self.component = Component.objects.create(
             id='B2011.A', component_id='B.20.1.1.A', name='Test Exterior Walls'
         )
 
-        # Create Reference
         self.reference = Reference.objects.create(
             id='test-ref-001',
             study_type='Experiment',
@@ -46,7 +43,6 @@ class ExportDataCommandTest(TestCase):
             },
         )
 
-        # Create Experiment
         self.experiment = Experiment.objects.create(
             id='test-exp-001',
             reference=self.reference,
@@ -78,7 +74,6 @@ class ExportDataCommandTest(TestCase):
             notes='Test notes about the experiment.',
         )
 
-        # Create FragilityModel
         self.fragility_model = FragilityModel.objects.create(
             id='test-fm-001',
             component=self.component,
@@ -89,12 +84,10 @@ class ExportDataCommandTest(TestCase):
             comp_description='Test fragility model description',
         )
 
-        # Create ExperimentFragilityModelBridge
         self.bridge = ExperimentFragilityModelBridge.objects.create(
             experiment=self.experiment, fragility_model=self.fragility_model
         )
 
-        # Create FragilityCurve
         self.fragility_curve = FragilityCurve.objects.create(
             fragility_model=self.fragility_model,
             reference=self.reference,
@@ -113,10 +106,8 @@ class ExportDataCommandTest(TestCase):
 
     def test_export_data_command(self):
         """Test that export_data command exports JSON files for all models."""
-        # Call the export_data command with the temp_dir as output directory
         call_command('export_data', output_dir=self.temp_dir)
 
-        # Check that JSON files were created for each model
         expected_files = [
             'reference.json',
             'component.json',
@@ -129,18 +120,15 @@ class ExportDataCommandTest(TestCase):
         for filename in expected_files:
             file_path = os.path.join(self.temp_dir, filename)
 
-            # Assert file exists
             self.assertTrue(
                 os.path.exists(file_path),
                 f'Expected file {filename} was not created',
             )
 
-            # Assert file is not empty
             self.assertGreater(
                 os.path.getsize(file_path), 0, f'File {filename} is empty'
             )
 
-            # Load and verify the file contents
             with open(file_path, 'r') as f:
                 data = json.load(f)
                 self.assertIsInstance(
@@ -148,13 +136,11 @@ class ExportDataCommandTest(TestCase):
                 )
                 self.assertGreater(len(data), 0, f'No data in {filename}')
 
-        # Verify reference data (source-of-truth fields)
         with open(os.path.join(self.temp_dir, 'reference.json'), 'r') as f:
             reference_data = json.load(f)
             self.assertEqual(len(reference_data), 1)
             ref_data = reference_data[0]
 
-            # Positive assertions - required source-of-truth fields
             self.assertEqual(ref_data['id'], 'test-ref-001')
             self.assertIn('study_type', ref_data)
             self.assertEqual(ref_data['study_type'], 'Experiment')
@@ -176,46 +162,38 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('author', ref_data['csl_data'])
             self.assertIn('issued', ref_data['csl_data'])
 
-            # Negative assertions - denormalized fields should be absent
             self.assertNotIn('author', ref_data)
             self.assertNotIn('year', ref_data)
             self.assertNotIn('title', ref_data)
 
-        # Verify component data (source-of-truth fields)
         with open(os.path.join(self.temp_dir, 'component.json'), 'r') as f:
             component_data = json.load(f)
             self.assertEqual(len(component_data), 1)
             comp_data = component_data[0]
 
-            # Positive assertions - required source-of-truth fields
             self.assertIn('component_id', comp_data)
             self.assertEqual(comp_data['component_id'], 'B.20.1.1.A')
             self.assertIn('name', comp_data)
             self.assertEqual(comp_data['name'], 'Test Exterior Walls')
 
-            # Negative assertions - denormalized fields should be absent
             self.assertNotIn('id', comp_data)
             self.assertNotIn('major_group', comp_data)
             self.assertNotIn('group', comp_data)
             self.assertNotIn('element', comp_data)
             self.assertNotIn('subelement', comp_data)
 
-        # Verify experiment data
         with open(os.path.join(self.temp_dir, 'experiment.json'), 'r') as f:
             experiment_data = json.load(f)
             self.assertEqual(len(experiment_data), 1)
             exp_data = experiment_data[0]
 
-            # Positive assertions - required source-of-truth fields
             self.assertIn('id', exp_data)
             self.assertEqual(exp_data['id'], 'test-exp-001')
             self.assertIn('reference', exp_data)
             self.assertEqual(exp_data['reference'], 'test-ref-001')
             self.assertIn('component', exp_data)
-            # Component should use component_id string value, not id
             self.assertEqual(exp_data['component'], 'B.20.1.1.A')
 
-            # Verify all experiment fields are present
             self.assertIn('specimen', exp_data)
             self.assertEqual(exp_data['specimen'], 'Test specimen')
             self.assertIn('specimen_inspection_sequence', exp_data)
@@ -275,20 +253,16 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('notes', exp_data)
             self.assertEqual(exp_data['notes'], 'Test notes about the experiment.')
 
-        # Verify fragility model data
         with open(os.path.join(self.temp_dir, 'fragility_model.json'), 'r') as f:
             fragility_model_data = json.load(f)
             self.assertEqual(len(fragility_model_data), 1)
             fm_data = fragility_model_data[0]
 
-            # Positive assertions - required source-of-truth fields
             self.assertIn('id', fm_data)
             self.assertEqual(fm_data['id'], 'test-fm-001')
             self.assertIn('component', fm_data)
-            # Foreign key should use component_id string value, not id
             self.assertEqual(fm_data['component'], 'B.20.1.1.A')
 
-            # Verify all FragilityModel fields
             self.assertIn('p58_fragility', fm_data)
             self.assertEqual(fm_data['p58_fragility'], 'B2011.001')
             self.assertIn('comp_detail', fm_data)
@@ -302,7 +276,6 @@ class ExportDataCommandTest(TestCase):
                 fm_data['comp_description'], 'Test fragility model description'
             )
 
-        # Verify bridge data
         with open(
             os.path.join(self.temp_dir, 'experiment_fragility_model_bridge.json'),
             'r',
@@ -311,27 +284,22 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(len(bridge_data), 1)
             bridge = bridge_data[0]
 
-            # Positive assertions - required source-of-truth fields
-            # Bridge model has just two fields: experiment and fragility_model
             self.assertIn('experiment', bridge)
             self.assertEqual(bridge['experiment'], 'test-exp-001')
             self.assertIn('fragility_model', bridge)
             self.assertEqual(bridge['fragility_model'], 'test-fm-001')
 
-            # Check that there are only these two fields
             self.assertEqual(
                 len(bridge.keys()),
                 2,
                 'ExperimentFragilityModelBridge should only have 2 fields',
             )
 
-        # Verify fragility curve data
         with open(os.path.join(self.temp_dir, 'fragility_curve.json'), 'r') as f:
             curve_data = json.load(f)
             self.assertEqual(len(curve_data), 1)
             curve = curve_data[0]
 
-            # Positive assertions - required source-of-truth fields
             self.assertIn('fragility_model', curve)
             self.assertEqual(curve['fragility_model'], 'test-fm-001')
             self.assertIn('reference', curve)
@@ -363,7 +331,6 @@ class ExportDataCommandTest(TestCase):
 
     def tearDown(self):
         """Clean up test data and temporary files."""
-        # Delete test records
         FragilityCurve.objects.all().delete()
         ExperimentFragilityModelBridge.objects.all().delete()
         FragilityModel.objects.all().delete()
@@ -371,7 +338,6 @@ class ExportDataCommandTest(TestCase):
         Reference.objects.all().delete()
         Component.objects.all().delete()
 
-        # Clean up temporary directory
         import shutil
 
         shutil.rmtree(self.temp_dir, ignore_errors=True)

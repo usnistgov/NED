@@ -1,43 +1,21 @@
 [
-    {
-        "id": "ARA-2012-EXP",
-        "study_type": "Experiment",
-        "comp_type": "Hospital Piping Assembly",
-        "pdf_saved": "True",
-        "csl_data": {
-            "type": "document",
-            "id": "ARA-2012-EXP",
-            "title": "Experimental and Analytical Studies of Hospital Piping Assemblies Subjected to Seismic Loading",
-            "author": [
-                {"family": "Zaghi", "given": "Arash E."},
-                {"family": "Maragakis", "given": "E."},
-                {"family": "Itani", "given": "Ahmad"},
-                {"family": "Goodwin", "given": "Elliot"}
-            ],
-            "issued": {"date-parts": [[2012]]},
-            "DOI": "https://doi.org/10.1193/1.3672911",
-            "URL": "https://doi.org/10.1193/1.3672911"
-        }
-    },
-    {
-        "id": "ARA-2012-NOV",
-        "study_type": "Experiment",
-        "comp_type": "Partition Walls",
-        "pdf_saved": "True",
-        "csl_data": {
-            "type": "paper-conference",
-            "id": "ARA-2012-NOV",
-            "title": "Novel Sliding/frictional Connections for Improved Seismic Performance of Gypsum Wallboard Partitions",
-            "author": [
-                {"family": "Araya-Letelier"},
-                {"family": "Miranda"}
-            ],
-            "issued": {"date-parts": [[2012]]},
-            "DOI": "https://doi.org/10.1193/1.3672911",
-            "URL": "https://doi.org/10.1193/1.3672911",
-            "event-title": "15th World Conference on Earthquake Engineering",
-            "event-place": "Lisbon, Portugal",
-            "note": "Araya-Letelier, Gerardo and Miranda, Eduardo. (2012). Novel Sliding/Frictional Connections for Improved Seismic Performance of Gypsum Wallboard Partitions. 15th World Conference on Earthquake Engineering, Lisbon, Portugal."
-        }
+  {
+    "_comment": "This is an example for a Reference object. The csl_data field contains Citation Style Language (CSL) JSON format citation metadata.",
+    "id": "SMITH-2020-EXP",
+    "study_type": "Experiment",
+    "comp_type": "Example Component Type Description",
+    "pdf_saved": "True",
+    "csl_data": {
+      "type": "article-journal",
+      "id": "SMITH-2020-EXP",
+      "title": "Example Study Title",
+      "author": [
+        {"family": "Smith", "given": "John"},
+        {"family": "Doe", "given": "Jane"}
+      ],
+      "issued": {"date-parts": [[2020]]},
+      "DOI": "https://doi.org/10.1234/example.doi",
+      "URL": "https://example.com/paper"
     }
+  }
 ]

@@ -115,10 +115,20 @@ class Reference(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        """Override save to automatically populate fields from csl_data."""
-        # Validate required keys in csl_data before populating denormalized fields
+        """
+        Override save to validate csl_data and auto-populate denormalized fields.
+
+        Validates that csl_data contains required fields (title, author, issued)
+        and populates title, author, and year fields from the CSL-JSON data.
+
+        Args:
+            *args: Positional arguments to pass to parent save method.
+            **kwargs: Keyword arguments to pass to parent save method.
+
+        Raises:
+            ValidationError: If csl_data is missing or lacks required fields.
+        """
         if self.csl_data:
-            # Check for required keys and non-empty values
             if 'title' not in self.csl_data or not self.csl_data['title']:
                 raise ValidationError(
                     "csl_data must contain a non-empty 'title' field"
@@ -129,7 +139,6 @@ class Reference(models.Model):
                     "csl_data must contain a non-empty 'author' field"
                 )
 
-            # Check for valid issued year
             if 'issued' not in self.csl_data:
                 raise ValidationError("csl_data must contain an 'issued' field")
 
@@ -154,17 +163,14 @@ class Reference(models.Model):
             raise ValidationError('csl_data is required and cannot be empty')
 
         if self.csl_data:
-            # Populate title field from csl_data title
             if 'title' in self.csl_data:
                 self.title = self.csl_data['title']
 
-            # Populate year field from csl_data issued date-parts
             if 'issued' in self.csl_data and 'date-parts' in self.csl_data['issued']:
                 date_parts = self.csl_data['issued']['date-parts']
                 if date_parts and len(date_parts) > 0 and len(date_parts[0]) > 0:
                     self.year = date_parts[0][0]
 
-            # Populate author field with formatted string from csl_data authors
             if 'author' in self.csl_data:
                 authors = self.csl_data['author']
                 if authors:
@@ -191,7 +197,7 @@ class Reference(models.Model):
 
 class Experiment(models.Model):
     """
-    A model representing a person.
+    A model representing an experimental observation of component damage.
 
     Attributes:
         reference (id): ID of the published reference documenting this experimental observation.
@@ -440,7 +446,7 @@ class Experiment(models.Model):
 
 class FragilityModel(models.Model):
     """
-    A model representing a person.
+    A model representing a fragility model for a specific component configuration.
 
     Attributes:
         p58_fragility (str): P-58 fragility id associated with this fragility model, if applicable.
@@ -735,7 +741,17 @@ class Component(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        """Override save to automatically populate NISTIR fields and generate ID from component_id."""
+        """
+        Override save to auto-populate NISTIR hierarchy fields and generate primary key.
+
+        Converts dotted component_id notation (e.g., 'B.20.1.1.A') to concatenated
+        format for the primary key (e.g., 'B2011.A'). Populates major_group, group,
+        element, and subelement fields from the NISTIR taxonomy labels.
+
+        Args:
+            *args: Positional arguments to pass to parent save method.
+            **kwargs: Keyword arguments to pass to parent save method.
+        """
         if self.component_id:
             # Generate primary key from component_id if not already set
             if not self.id:
@@ -750,18 +766,13 @@ class Component(models.Model):
                     l4 = parts[3]  # '1'
                     suffix = '.'.join(parts[4:]) if len(parts) > 4 else ''
 
-                    # Generate concatenated ID
                     old_style_id = f'{l1}{l2}{l3}{l4}'
                     if suffix:
                         old_style_id += f'.{suffix}'
 
-                    # Set the ID as the primary key
                     self.id = old_style_id
 
-            # Load the NISTIR labels
             labels = _load_nistir_labels()
-
-            # Parse the component_id to get individual parts
             parts = self.component_id.split('.')
 
             if len(parts) >= 1:
