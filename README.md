@@ -61,38 +61,6 @@ Jupter Notebook
 
 For additional instructions please see the Juptyer Notebook installation instructions: https://jupyter.org/install
 
-## Contributing Data
-
-NED uses a **"Git-as-Source"** data model, meaning the canonical source of truth for all database content lives in the JSON files within the `resources/data/` directory. This approach ensures data integrity, version control, and transparency in the contribution process.
-
-### How to Contribute Your Data
-
-If you have experimental data, fragility models, or other relevant information to add to NED, please follow this workflow:
-
-1. **Fork the repository**: Create your own fork of the NED repository on GitHub.
-
-2. **Create a new branch**: Create a dedicated branch for your contribution (e.g., `add-ceiling-tile-data`).
-
-3. **Add or edit JSON data files**: 
-   - Navigate to the `resources/data/` directory
-   - Use the template files in `resources/example_data/` as a guide for proper structure and formatting
-   - Add your new data or edit existing JSON files following the established schema
-   - Common data types include: `component.json`, `experiment.json`, `fragility_model.json`, and `reference.json`
-
-4. **Validate your changes locally**:
-   - Install the project dependencies: `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
-   - Build the database from your updated JSON files: `python manage.py migrate` then `python manage.py ingest`
-   - Run the validation tests: `python manage.py test`
-   - Ensure all tests pass before proceeding
-
-5. **Commit and push your changes**: Commit your JSON file changes with a descriptive message and push to your fork.
-
-6. **Open a Pull Request**: Submit a Pull Request to the main NED repository with a clear description of:
-   - What data you're adding
-   - The source of the data
-   - Any relevant context or notes for reviewers
-
-Your contribution will be reviewed by the maintainers, who will check for data quality, schema compliance, and consistency with existing data. Once approved, your data will be merged into the canonical dataset.
 
 ## Contributors Guide
 
@@ -131,14 +99,102 @@ python manage.py ingest
 
 The `ingest` command reads all JSON files from `resources/data/` and populates the SQLite database. This step is mandatory for local development, as the `db.sqlite3` file is not tracked in version control—it's a disposable build artifact generated from the JSON source data.
 
-### Adding Data to the Database
-Data can be added to the database locally by either of the two methods
-1) Launch the Django server and add data using the Django admin interface
-2) Configure the json files in `resources/data` and run the following command:
-```
+### How to Add New Data
+
+We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data involves working directly with the JSON files that serve as our single source of truth.
+
+Follow this step-by-step guide to contribute:
+
+#### 1. Fork and Branch
+Create your own fork of the repository and start a new feature branch for your specific contribution (e.g., `data/add-ucsd-experiments`).
+
+#### 2. Add Your Data
+Directly edit the JSON files in the `resources/data/` directory.
+*   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
+*   **Templates:** Check `resources/example_data/` for examples of proper formatting.
+*   **Common Files:**
+    *   `experiments.json`: For new experimental results.
+    *   `references.json`: For new bibliographic references.
+    *   `fragility_model.json`: For new fragility functions.
+
+#### 3. Validate Locally (Recommended)
+Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
+
+**Setup your local DB:**
+```bash
+python manage.py migrate
 python manage.py ingest
 ```
->Example json files can be found in `resources/example_data`
+
+**Run the integrity check:**
+```bash
+python manage.py test ned_app.tests
+```
+*   *What this checks:* It verifies that all Foreign Keys match (e.g., every experiment points to a valid component ID) and that Primary Keys are unique.
+
+#### 4. Submit a Pull Request
+Commit your changes and open a Pull Request (PR) to the `main` branch. 
+
+**In your PR description, please include:**
+*   A summary of what data you are adding.
+*   The source of the data (citations, reports).
+*   Any context notes that would help the reviewer.
+
+#### What Happens Next? (The Review Process)
+A project maintainer will review your PR. They will check the "JSON Diff" to see exactly what data is entering the system and ensure the automated tests pass. Once approved and merged, your data is effectively "published" and will be live on the next deployment!
+
+### How to Modify the Database Structure
+
+**For Developers:** If you need to change the database schema (e.g., adding a new field like `data_source_type`, renaming a column, or creating a new table), you must follow a strict "Round-Trip" protocol. This ensures that the mapping between our JSON source of truth and the runtime database remains perfectly synced.
+
+#### Step 1: Prepare Your Workspace
+Start with a fresh local database state:
+```bash
+python manage.py migrate
+python manage.py ingest
+```
+
+#### Step 2: Implement Schema Change & Data Migration
+Modify `models.py` and create your migrations.
+*   **Critical:** If your schema change affects existing data (e.g., adding a required field), your migration file must also include the logic to migrate the existing data.
+*   *Example:* Use `RunPython` operations or default values in the migration to ensure all 2000+ existing rows remain valid.
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+#### Step 3: Update the Pipelines
+You must update the two commands that bridge the gap between JSON and DB:
+*   **`ingest` command:** Update the logic to map JSON keys to your new DB fields.
+*   **`export_data` command:** Update the logic to serialize your new DB fields back to JSON.
+*   *Constraint:* The loop `Export(Ingest(Source))` must be idempotent (lossless).
+
+#### Step 4: Verification ( The "Round-Trip" Protocol)
+Run these commands in order to prove that data can flow safely in both directions:
+
+**1. Capture the new DB state:**
+```bash
+python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+```
+
+**2. Test Export (DB -> JSON):**
+```bash
+python manage.py test ned_app.tests.test_data_integrity.DataIntegrityTests.test_db_round_trip
+```
+
+**3. Update Source Files (Propagate changes to JSON):**
+This is the moment your schema change actually updates the canonical data files.
+```bash
+python manage.py export_data
+```
+
+**4. Test Ingest (JSON -> DB):**
+```bash
+python manage.py test ned_app.tests.test_data_integrity.DataIntegrityTests.test_json_to_db_to_json_round_trip_is_lossless
+```
+
+#### Step 5: Finalize and Commit
+Update `README.md` and templates in `resources/example_data/` if your change affects the user-facing data structure. Then, commit all changed files (models, migrations, updated JSONs, scripts, and fixtures) and open your PR.
 
 ### Launch the Django Admin
 To launch and take advantage of the administrative interface, run the web server:
@@ -194,13 +250,6 @@ JSON Files (resources/data/)
 
 This bidirectional pipeline enables both programmatic data entry (via JSON) and manual curation (via Django admin), while maintaining JSON as the canonical source.
 
-### Making Changes to the Schema (not recommended)
-Changing the Django model may cause data corruption and validations issue with the existing data. After making changes, run the following commands to apply the changes to the sql db.
-```
-python manage.py makemigrations
-python manage.py migrate
-python manage.py ingest  # Rebuild database from JSON after schema changes
-```
 
 ### Code quality assurance
 We use automated checks at every commit to maintain a high-quality codebase. Our continuous integration (CI) pipeline runs four types of tests that must all pass before code can be merged. Please ensure all of the following tests pass before committing new code.
