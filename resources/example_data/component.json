@@ -1,14 +1,7 @@
 [
-    {
-        "component_id": "B.20.1.1.A",
-        "name": "CFS Exterior Walls"
-    },
-    {
-        "component_id": "B.20.1.1.B",
-        "name": "Light-framed Wood Exterior Walls"
-    },
-    {
-        "component_id": "D.20.2.2.A",
-        "name": "Domestic Water Piping - Horizontal Mains and Branches"
-    }
+  {
+    "_comment": "This is an example for a Component object. The component_id must follow the NISTIR dotted notation format (e.g., A.10.1.1.A).",
+    "component_id": "A.10.1.1.A",
+    "name": "Example Component Name e.g., Steel-Framed Gypsum Partition Wall"
+  }
 ]

@@ -15,6 +15,7 @@ NoSQL
 # Domain-specific terms
 multistory
 ned
+tread
 
 # Common technical terms
 config
@@ -33,3 +34,6 @@ toml
 json
 csv
 xlsx
+
+# Exceptions for csl_data.json
+annote

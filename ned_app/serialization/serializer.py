@@ -11,26 +11,51 @@ from ned_app.models import (
     ExperimentFragilityModelBridge,
     FragilityCurve,
 )
+from ned_app.validators import validate_nistir_component_id
 
 
 class ReferenceSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Reference model with CSL-JSON validation.
+
+    Auto-populated fields (title, author, year) are optional during deserialization
+    as they are populated by the model's save() method from csl_data.
+    """
+
     csl_data = serializers.JSONField()
-    # Make auto-populated fields optional since they'll be set by the model's save() method
     title = serializers.CharField(required=False, allow_blank=True)
     author = serializers.CharField(required=False, allow_blank=True)
     year = serializers.IntegerField(required=False, allow_null=True)
 
     class Meta:
         model = Reference
-        fields = '__all__'
-        # exclude = ('field_abc',)  # useful if there are any exclusions to consider
+        fields = [
+            'id',
+            'title',
+            'author',
+            'year',
+            'study_type',
+            'comp_type',
+            'pdf_saved',
+            'csl_data',
+        ]
 
     def validate_csl_data(self, value):
-        """Validate csl_data against CSL-JSON schema and required fields."""
+        """
+        Validate csl_data against CSL-JSON schema and required fields.
+
+        Args:
+            value (dict): The csl_data dictionary to validate.
+
+        Returns:
+            dict: The validated csl_data.
+
+        Raises:
+            serializers.ValidationError: If validation fails.
+        """
         if not value:
             raise serializers.ValidationError('csl_data is required')
 
-        # Check for required keys and non-empty values
         if 'title' not in value or not value['title']:
             raise serializers.ValidationError(
                 "csl_data must contain a non-empty 'title' field"
@@ -41,7 +66,6 @@ class ReferenceSerializer(serializers.ModelSerializer):
                 "csl_data must contain a non-empty 'author' field"
             )
 
-        # Check for valid issued year
         if 'issued' not in value:
             raise serializers.ValidationError(
                 "csl_data must contain an 'issued' field"
@@ -65,7 +89,6 @@ class ReferenceSerializer(serializers.ModelSerializer):
                 "csl_data 'issued' field must contain a valid year"
             )
 
-        # Load CSL schema for validation
         schema_path = os.path.join(
             settings.BASE_DIR, 'ned_app', 'schemas', 'csl-data.json'
         )
@@ -84,23 +107,19 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
         return value
 
-    # create the Reference record in the database via the framework
-    def create(self, json_data) -> Reference:
-        # 'json_data' is simply seen as a kwargs input...
-        reference: Reference = Reference.objects.create(**json_data)
-
-        return reference
-
 
 class ComponentSerializer(serializers.ModelSerializer):
-    # Make component_id required and writeable
-    component_id = serializers.CharField(required=True)
-    # Make id and hierarchy fields read-only since they're auto-populated by the model
+    """
+    Serializer for Component model with NISTIR validation.
+
+    The id field is read-only as it's auto-generated from component_id.
+    NISTIR hierarchy fields are auto-populated by the model's save() method.
+    """
+
     id = serializers.CharField(read_only=True)
-    major_group = serializers.CharField(read_only=True)
-    group = serializers.CharField(read_only=True)
-    element = serializers.CharField(read_only=True)
-    subelement = serializers.CharField(read_only=True)
+    component_id = serializers.CharField(
+        required=True, validators=[validate_nistir_component_id]
+    )
 
     class Meta:
         model = Component
@@ -116,52 +135,128 @@ class ComponentSerializer(serializers.ModelSerializer):
 
 
 class FragilityModelSerializer(serializers.ModelSerializer):
+    """
+    Serializer for FragilityModel with component relationship.
+
+    Uses component_id as the slug field for component lookups.
+    """
+
+    component = serializers.SlugRelatedField(
+        slug_field='component_id', queryset=Component.objects.all()
+    )
+
     class Meta:
         model = FragilityModel
-        fields = '__all__'
-
-    # create the Fragility Model record in the database via the framework
-    def create(self, json_data) -> FragilityModel:
-        # 'json_data' is simply seen as a kwargs input...
-        fragility_model: FragilityModel = FragilityModel.objects.create(**json_data)
-
-        return fragility_model
+        fields = [
+            'id',
+            'p58_fragility',
+            'component',
+            'comp_detail',
+            'material',
+            'size_class',
+            'comp_description',
+        ]
 
 
 class ExperimentSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Experiment with reference and component relationships.
+
+    Uses natural keys for foreign key lookups: reference.id and component.component_id.
+    """
+
+    reference = serializers.SlugRelatedField(
+        slug_field='id', queryset=Reference.objects.all()
+    )
+    component = serializers.SlugRelatedField(
+        slug_field='component_id', queryset=Component.objects.all()
+    )
+
     class Meta:
         model = Experiment
-        fields = '__all__'
-
-    # create the Experiment record in the database via the framework
-    def create(self, json_data) -> Experiment:
-        # 'json_data' is simply seen as a kwargs input...
-        experiment: Experiment = Experiment.objects.create(**json_data)
-
-        return experiment
+        fields = [
+            'id',
+            'reference',
+            'specimen',
+            'specimen_inspection_sequence',
+            'reviewer',
+            'component',
+            'comp_detail',
+            'material',
+            'size_class',
+            'test_type',
+            'loading_protocol',
+            'peak_test_amplitude',
+            'location',
+            'governing_design_standard',
+            'design_objective',
+            'comp_description',
+            'ds_description',
+            'prior_damage',
+            'prior_damage_repaired',
+            'edp_metric',
+            'edp_unit',
+            'edp_value',
+            'alt_edp_metric',
+            'alt_edp_unit',
+            'alt_edp_value',
+            'ds_rank',
+            'ds_class',
+            'notes',
+        ]
 
 
 class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for ExperimentFragilityModelBridge relationship.
+
+    Manages the many-to-many relationship between experiments and fragility models.
+    """
+
+    experiment = serializers.SlugRelatedField(
+        slug_field='id', queryset=Experiment.objects.all()
+    )
+    fragility_model = serializers.SlugRelatedField(
+        slug_field='id', queryset=FragilityModel.objects.all()
+    )
+
     class Meta:
         model = ExperimentFragilityModelBridge
-        fields = '__all__'
-
-    def create(self, json_data) -> ExperimentFragilityModelBridge:
-        # 'json_data' is simply seen as a kwargs input...
-        bridge: ExperimentFragilityModelBridge = (
-            ExperimentFragilityModelBridge.objects.create(**json_data)
-        )
-
-        return bridge
+        fields = [
+            'id',
+            'experiment',
+            'fragility_model',
+        ]
 
 
 class FragilityCurveSerializer(serializers.ModelSerializer):
+    """
+    Serializer for FragilityCurve with fragility model and reference relationships.
+
+    Uses natural keys for foreign key lookups.
+    """
+
+    fragility_model = serializers.SlugRelatedField(
+        slug_field='id', queryset=FragilityModel.objects.all()
+    )
+    reference = serializers.SlugRelatedField(
+        slug_field='id', queryset=Reference.objects.all()
+    )
+
     class Meta:
         model = FragilityCurve
-        fields = '__all__'
-
-    def create(self, json_data) -> FragilityCurve:
-        # 'json_data' is simply seen as a kwargs input...
-        curve: FragilityCurve = FragilityCurve.objects.create(**json_data)
-
-        return curve
+        fields = [
+            'fragility_model',
+            'reviewer',
+            'source',
+            'basis',
+            'num_observations',
+            'reference',
+            'edp_metric',
+            'edp_unit',
+            'ds_rank',
+            'ds_description',
+            'median',
+            'beta',
+            'probability',
+        ]

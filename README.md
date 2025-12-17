@@ -10,12 +10,13 @@ The goal of this project is to develop a robust and scalable database of fragili
 <img width="950" height="1232" alt="ned_erd" src="https://github.com/user-attachments/assets/52debba8-324a-43c4-9f27-7906e7200c7c" />
 
 ## Repository Organization
-- **db.sqlite3** - SQL implementation of the NED database.
-- **ned_app** - Django application (python) facilitating database management (e.g., model definition, etc).
+- **resources/data/** - Canonical JSON data files serving as the single source of truth for the database.
+- **ned_app** - Django application (python) facilitating database management (e.g., model definition, serializers, management commands).
 - **ned_proj** - Django project settings.
-- **resources** - General project data resources, including formatted JSON example files for data ingest into sqlite database.
+- **resources/example_data/** - Template JSON files for contributors to use when adding new data.
 - **scripts** - General project scripts that are outside the Django application management process.
 - **visualization_tools** - Jupyter notebook workflows that interact with the NED database to illustrate backend interactions via python.
+- **db.sqlite3** - SQLite database file (disposable build artifact, generated from JSON data via `python manage.py ingest`).
 
 ### Data Schema
 Model and field descriptions are provided in the docstrings in ned_app/models.py. The overview below provides a brief description of two of the fields found in the experiment model.
@@ -84,14 +85,116 @@ pip install -r requirements.txt
 pip install -r requirements-dev.txt
 ```
 
-### Adding Data to the Database
-Data can be added to the database locally by either of the two methods
-1) Launch the Django server and add data using the Django admin interface
-2) Configure the json files in `resources/data` and run the following command:
-```
+### Local Development Setup
+
+After installing dependencies, you must set up the local database:
+
+```bash
+# 1. Apply database migrations
+python manage.py migrate
+
+# 2. Build the database from canonical JSON data (REQUIRED)
 python manage.py ingest
 ```
->Example json files can be found in `resources/example_data`
+
+The `ingest` command reads all JSON files from `resources/data/` and populates the SQLite database. This step is mandatory for local development, as the `db.sqlite3` file is not tracked in version control—it's a disposable build artifact generated from the JSON source data.
+
+### How to Add New Data
+
+We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data involves working directly with the JSON files that serve as our single source of truth.
+
+Follow this step-by-step guide to contribute:
+
+#### 1. Fork and Branch
+Create your own fork of the repository and start a new feature branch for your specific contribution (e.g., `data/add-ucsd-experiments`).
+
+#### 2. Add Your Data
+Directly edit the JSON files in the `resources/data/` directory.
+*   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
+*   **Templates:** Check `resources/example_data/` for examples of proper formatting.
+*   **Common Files:**
+    *   `experiments.json`: For new experimental results.
+    *   `references.json`: For new bibliographic references.
+    *   `fragility_model.json`: For new fragility functions.
+
+#### 3. Validate Locally (Recommended)
+Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
+
+**Setup your local DB:**
+```bash
+python manage.py migrate
+python manage.py ingest
+```
+
+**Run the integrity check:**
+```bash
+python manage.py test ned_app.tests
+```
+*   *What this checks:* It verifies that all Foreign Keys match (e.g., every experiment points to a valid component ID) and that Primary Keys are unique.
+
+#### 4. Submit a Pull Request
+Commit your changes and open a Pull Request (PR) to the `main` branch. 
+
+**In your PR description, please include:**
+*   A summary of what data you are adding.
+*   The source of the data (citations, reports).
+*   Any context notes that would help the reviewer.
+
+#### What Happens Next? (The Review Process)
+A project maintainer will review your PR. They will check the "JSON Diff" to see exactly what data is entering the system and ensure the automated tests pass. Once approved and merged, your data is effectively "published" and will be live on the next deployment!
+
+### How to Modify the Database Structure
+
+**For Developers:** If you need to change the database schema (e.g., adding a new field like `data_source_type`, renaming a column, or creating a new table), you must follow a strict "Round-Trip" protocol. This ensures that the mapping between our JSON source of truth and the runtime database remains perfectly synced.
+
+#### Step 1: Prepare Your Workspace
+Start with a fresh local database state:
+```bash
+python manage.py migrate
+python manage.py ingest
+```
+
+#### Step 2: Implement Schema Change & Data Migration
+Modify `models.py` and create your migrations.
+*   **Critical:** If your schema change affects existing data (e.g., adding a required field), your migration file must also include the logic to migrate the existing data.
+*   *Example:* Use `RunPython` operations or default values in the migration to ensure all 2000+ existing rows remain valid.
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+#### Step 3: Update the Pipelines
+You must update the two commands that bridge the gap between JSON and DB:
+*   **`ingest` command:** Update the logic to map JSON keys to your new DB fields.
+*   **`export_data` command:** Update the logic to serialize your new DB fields back to JSON.
+*   *Constraint:* The loop `Export(Ingest(Source))` must be idempotent (lossless).
+
+#### Step 4: Verification ( The "Round-Trip" Protocol)
+Run these commands in order to prove that data can flow safely in both directions:
+
+**1. Capture the new DB state:**
+```bash
+python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+```
+
+**2. Test Export (DB -> JSON):**
+```bash
+python manage.py test ned_app.tests.test_data_integrity.DataIntegrityTests.test_db_round_trip
+```
+
+**3. Update Source Files (Propagate changes to JSON):**
+This is the moment your schema change actually updates the canonical data files.
+```bash
+python manage.py export_data
+```
+
+**4. Test Ingest (JSON -> DB):**
+```bash
+python manage.py test ned_app.tests.test_data_integrity.DataIntegrityTests.test_json_to_db_to_json_round_trip_is_lossless
+```
+
+#### Step 5: Finalize and Commit
+Update `README.md` and templates in `resources/example_data/` if your change affects the user-facing data structure. Then, commit all changed files (models, migrations, updated JSONs, scripts, and fixtures) and open your PR.
 
 ### Launch the Django Admin
 To launch and take advantage of the administrative interface, run the web server:
@@ -106,12 +209,47 @@ Then, in a browser, launch the URL: http://localhost:8000/admin/
 python manage.py createsuperuser
 ```
 
-### Making Changes to the Schema (not recommended)
-Changing the Django model may cause data corruption and validations issue with the existing data. After making changes, run the following commands to apply the changes to the sql db.
+## Architecture Overview
+
+NED implements a **"Git-as-Source"** data pipeline where JSON files serve as the single source of truth for all database content. This architecture ensures data integrity, version control, and reproducibility.
+
+### Key Components
+
+**1. Canonical Data Source (`resources/data/`)**
+- All authoritative data lives in JSON files within the `resources/data/` directory
+- These files are version-controlled and serve as the definitive source of truth
+- Changes to the database must be preserved eventually by updating these JSON files
+
+**2. Database as Build Artifact (`db.sqlite3`)**
+- The SQLite database file is a disposable build artifact, not tracked in version control
+- It is generated from the JSON source files and can be rebuilt at any time
+- Think of it like compiled code: it's derived from the source (JSON) and can be regenerated
+
+**3. Ingestion Pipeline (`python manage.py ingest`)**
+- Reads JSON files from `resources/data/`
+- Validates data against defined schemas
+- Populates the SQLite database using Django models and serializers
+- Implements idempotent operations (can be run multiple times safely)
+- This command must be run after `migrate` to build a working local database
+
+**4. Export Pipeline (`python manage.py export_data`)**
+- Reads data from the database
+- Serializes models back to JSON format
+- Writes canonical JSON files to `resources/data/`
+- Used to generate the authoritative JSON after making changes via Django admin or code
+
+### Data Flow
+
 ```
-python manage.py makemigrations
-python manage.py migrate
+JSON Files (resources/data/) 
+    ↓ [python manage.py ingest]
+SQLite Database (db.sqlite3)
+    ↓ [python manage.py export_data]
+JSON Files (resources/data/)
 ```
+
+This bidirectional pipeline enables both programmatic data entry (via JSON) and manual curation (via Django admin), while maintaining JSON as the canonical source.
+
 
 ### Code quality assurance
 We use automated checks at every commit to maintain a high-quality codebase. Our continuous integration (CI) pipeline runs four types of tests that must all pass before code can be merged. Please ensure all of the following tests pass before committing new code.
@@ -205,10 +343,16 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_csl_data
 - **Missing test data**: Ensure test fixtures and sample data are properly set up
 - **Import errors**: Check that all required dependencies are installed with `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
 
-**Test coverage**: The project has 41 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
+**Test coverage**: The project has 81 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
+
+**Data Integrity Tests**: The test suite includes critical end-to-end validation tests that ensure the integrity of the Git-as-Source data pipeline:
+- `test_db_round_trip`: Validates that data can be exported from the database and re-ingested without loss
+- `test_json_to_db_to_json_round_trip_is_lossless`: Ensures complete round-trip fidelity between JSON source files and the database
+
+These tests are essential for maintaining data quality and ensuring that the `ingest` and `export_data` commands work correctly together.
 
 #### Running All Quality Checks Locally
-To run all quality checks that the countinous integration (CI) pipeline will run, use these commands in sequence:
+To run all quality checks that the continuous integration (CI) pipeline will run, use these commands in sequence:
 
 ```bash
 # 1. Check code formatting

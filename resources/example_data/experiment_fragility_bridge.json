@@ -1,6 +1,7 @@
 [
-    {
-        "experiment": "exp1502a",
-        "fragility_model": "B2011.001a"
-    }
+  {
+    "_comment": "This is an example for an ExperimentFragilityModelBridge object. It links an Experiment (by id) to a FragilityModel (by id).",
+    "experiment": "exp001",
+    "fragility_model": "FM001"
+  }
 ]
