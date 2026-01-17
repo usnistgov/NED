@@ -68,8 +68,12 @@ For additional instructions please see the Juptyer Notebook installation instruc
 Setting up a virtual environment helps to ensure you are able to setup an isolated project for using the NED database locally and avoid conflicts with other dependencies. While there are many ways to setup a virtual environment, below is an example using Python's built in `venv` module.
 ```
 python -m venv venv      # create a virtual environment called "venv"
-venv\Scripts\activate     # (On Windows) activate your virtual environment
-source venv/bin/activate # (On Mac) activate your virtual environment
+# Activate on Windows (Command Prompt / PowerShell)
+venv\Scripts\activate
+# Activate on Git Bash / Bash on Windows
+source venv/Scripts/activate
+# Activate on macOS / Linux / WSL
+source venv/bin/activate
 ```
 
 ### Installing the Required Packages
@@ -143,6 +147,67 @@ Commit your changes and open a Pull Request (PR) to the `main` branch.
 #### What Happens Next? (The Review Process)
 A project maintainer will review your PR. They will check the "JSON Diff" to see exactly what data is entering the system and ensure the automated tests pass. Once approved and merged, your data is effectively "published" and will be live on the next deployment!
 
+### How to Modify Existing Data
+
+For corrections, updates, or refinements to existing records (e.g., spelling fixes, value corrections, updated references), follow this streamlined process:
+
+#### 1. Fork and Branch
+Create your own fork of the repository and start a new feature branch for your specific modification (e.g., `data/fix-fragility-spelling`).
+
+#### 2. Edit Your Data
+Directly edit the JSON files in the `resources/data/` directory.
+*   **Important:** Only modify field values; do not change the structure or schema.
+*   **Examples of valid modifications:**
+    *   Correcting spelling or grammar in descriptions
+    *   Updating numeric values or material classifications
+    *   Adding or refining component details
+    *   Correcting references or citations
+
+#### 3. Validate Locally
+Before submitting, validate that your changes are reflected correctly in the database and pass all integrity checks.
+
+**Setup your local DB:**
+```bash
+python manage.py migrate
+python manage.py ingest
+```
+
+**Regenerate the fixture snapshot:**
+
+On Windows and macOS/Linux, use these commands respectively:
+
+**Windows (PowerShell):**
+```powershell
+$env:PYTHONIOENCODING = "utf-8"
+python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+```
+
+**macOS/Linux/WSL (Bash):**
+```bash
+export PYTHONIOENCODING=utf-8
+python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+```
+
+*   *Why:* The fixture is a snapshot of the expected database state. Your data modifications must be captured in it so tests pass. The `PYTHONIOENCODING` environment variable ensures that Unicode characters in your data (e.g., special hyphens, non-ASCII characters) are properly serialized on all platforms.
+
+**Run the integrity check:**
+```bash
+python manage.py test ned_app.tests
+```
+*   *What it checks:* It verifies that all Foreign Keys match, Primary Keys are unique, and the round-trip pipeline (JSON → DB → JSON) remains lossless.
+
+#### 4. Submit a Pull Request
+Commit your changes and open a Pull Request (PR) to the `main` branch. 
+
+**In your PR description, please include:**
+*   A clear summary of what data was modified and why.
+*   The specific records or fields that changed.
+*   The rationale for the change (e.g., "Corrected spelling to match FEMA P-58 terminology").
+*   Any citations or references that support the modification.
+
+#### What Happens Next? (The Review Process)
+A project maintainer will review your PR. They will inspect the "JSON Diff" to see exactly what changed and ensure the automated tests pass. Once approved and merged, your corrections are live on the next deployment!
+
 ### How to Modify the Database Structure
 
 **For Developers:** If you need to change the database schema (e.g., adding a new field like `data_source_type`, renaming a column, or creating a new table), you must follow a strict "Round-Trip" protocol. This ensures that the mapping between our JSON source of truth and the runtime database remains perfectly synced.
@@ -173,7 +238,16 @@ You must update the two commands that bridge the gap between JSON and DB:
 Run these commands in order to prove that data can flow safely in both directions:
 
 **1. Capture the new DB state:**
+
+On Windows (PowerShell):
+```powershell
+$env:PYTHONIOENCODING = "utf-8"
+python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+```
+
+On macOS/Linux/WSL (Bash):
 ```bash
+export PYTHONIOENCODING=utf-8
 python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
 ```
 
