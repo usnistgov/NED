@@ -2899,7 +2899,7 @@
     },
     {
         "comp_description": "Fire Sprinkler Drop Standard Threaded Steel - Dropping into braced lay-in tile SOFT ceiling - 6 ft. long drop maximum, SDC D, E, or F - Costing per 100 units, Standard threaded steel drop, 6 ft. long drop maximum",
-        "comp_detail": "SDC D/E/F - brahed - soft ceiling",
+        "comp_detail": "SDC D/E/F - braced - soft ceiling",
         "component": "D.40.1.1.B",
         "id": "D4011.053a",
         "material": "",
@@ -2962,7 +2962,7 @@
     },
     {
         "comp_description": "Fire Sprinkler Drop Standard Threaded Steel - No Ceiling - 6 ft. long drop maximum, SDC D, E, or F (OSHPD or sim) - Costing per 100 units, Standard threaded steel drop, 6 ft. long drop maximum",
-        "comp_detail": "SDC D/E/F hospital - hard ceiling",
+        "comp_detail": "SDC D/E/F hospital - no ceiling",
         "component": "D.40.1.1.B",
         "id": "D4011.074a",
         "material": "",
