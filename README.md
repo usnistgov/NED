@@ -61,6 +61,102 @@ Jupter Notebook
 
 For additional instructions please see the Juptyer Notebook installation instructions: https://jupyter.org/install
 
+## Exporting Data to CSV
+
+The NED database includes a management command for simple table queries and exporting results to CSV files. The command does not currenlty handle more complex table queries such as filtering by partial strings or joining results across tables.
+
+### Using the `query_to_csv` Command
+
+The `query_to_csv` management command allows you to export any database table to CSV format with optional filtering and field selection.
+
+#### Basic Usage
+
+**Export all records from a table:**
+```bash
+python manage.py query_to_csv --model Experiment --output_file exports/all_experiments.csv
+```
+
+This exports all fields from the Experiment table to a CSV file. The output directory will be created automatically if it doesn't exist.
+
+#### Available Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--model` | Yes | Model name to query (e.g., `Experiment`, `Reference`, `Component`, `FragilityModel`) |
+| `--output_file` | Yes | Path where the CSV file will be saved |
+| `--fields` | No | Comma-separated list of specific fields to export (default: all fields) |
+| `--filter` | No | Comma-separated key=value pairs to filter results |
+
+#### Examples
+
+**Export specific fields only:**
+```bash
+python manage.py query_to_csv --model Experiment \
+  --output_file exports/experiment_summary.csv \
+  --fields id,specimen,material,test_type
+```
+
+**Export with filters (AND logic):**
+```bash
+python manage.py query_to_csv --model Experiment \
+  --output_file exports/steel_tensile_tests.csv \
+  --filter material=Steel,test_type=Tensile
+```
+
+**Combine field selection and filtering:**
+```bash
+python manage.py query_to_csv --model Experiment \
+  --output_file exports/filtered_data.csv \
+  --fields id,specimen,material,peak_demand \
+  --filter reviewer=John,ds_class=Consequential
+```
+
+#### Available Models
+To see all available models in the database, run:
+
+```bash
+python manage.py query_to_csv --list-models
+```
+
+This will display a complete list of queryable models. Use the exact model name (case-sensitive) when specifying the `--model` argument.
+
+#### Tips and Best Practices
+
+- **Filter logic**: Multiple filters use AND logic (all conditions must match). For complex queries, consider using the Django shell
+- **Large exports**: For tables with thousands of records, specify `--fields` to reduce file size
+- **Dates and special characters**: The CSV output uses UTF-8 encoding to properly handle special characters common in engineering data
+- **Verify output**: Open the CSV file in your preferred spreadsheet application (Excel, Google Sheets, etc.) to verify the export
+
+#### Troubleshooting
+
+**"Model not found" error:**
+```bash
+# Ensure the model name matches exactly (case-sensitive)
+python manage.py query_to_csv --model experiment  # ❌ Wrong (lowercase)
+python manage.py query_to_csv --model Experiment  # ✅ Correct
+```
+
+**No data exported:**
+Check your filter conditions. If a filter returns no results, the command will report "No data found matching criteria."
+
+```bash
+# Debug: Export all records first to see what values exist
+python manage.py query_to_csv --model Experiment --output_file test.csv
+
+# Then apply filters based on actual values in the data
+python manage.py query_to_csv --model Experiment --output_file filtered.csv --filter material=Steel
+```
+
+**File path issues on Windows:**
+Use forward slashes or raw strings in PowerShell:
+```powershell
+# Using forward slashes
+python manage.py query_to_csv --model Experiment --output_file exports/data.csv
+
+# Or escape backslashes
+python manage.py query_to_csv --model Experiment --output_file exports\\data.csv
+```
+
 
 ## Contributors Guide
 
