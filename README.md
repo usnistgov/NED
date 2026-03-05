@@ -63,7 +63,7 @@ For additional instructions please see the Juptyer Notebook installation instruc
 
 ## Exporting Data to CSV
 
-The NED database includes a management command for simple table queries and exporting results to CSV files. The command does not currenlty handle more complex table queries such as filtering by partial strings or joining results across tables.
+The NED database includes a management command for simple table queries and exporting results to CSV files. The command does not currently handle more complex table queries such as filtering by partial strings or joining results across tables.
 
 ### Using the `query_to_csv` Command
 

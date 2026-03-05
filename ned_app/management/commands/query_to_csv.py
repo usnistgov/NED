@@ -38,12 +38,12 @@ class Command(BaseCommand):
             default=None,
             help='Filter query as key=value pairs, comma-separated (e.g., reviewer=John,material=Steel)',
         )
-    
+
     def get_available_models(self):
         """Return list of all available models in ned_app"""
         app_config = apps.get_app_config('ned_app')
         return sorted([model.__name__ for model in app_config.get_models()])
-        
+
     def handle(self, *args, **options):
         # Handle --list-models flag
         if options['list_models']:
@@ -58,7 +58,9 @@ class Command(BaseCommand):
 
         # Validate required arguments
         if not model_name or not output_file:
-            self.stderr.write('Error: --model and --output_file are required (use --list-models to see available models)')
+            self.stderr.write(
+                'Error: --model and --output_file are required (use --list-models to see available models)'
+            )
             return
 
         fields = options['fields'].split(',') if options['fields'] else None
@@ -94,8 +96,10 @@ class Command(BaseCommand):
                 field_names = fields
             else:
                 field_names = [
-                    f.name for f in model._meta.get_fields()
-                    if not isinstance(f, ManyToOneRel) and not isinstance(f, ManyToManyField)
+                    f.name
+                    for f in model._meta.get_fields()
+                    if not isinstance(f, ManyToOneRel)
+                    and not isinstance(f, ManyToManyField)
                 ]
 
             writer = csv.DictWriter(f, fieldnames=field_names)
@@ -104,25 +108,29 @@ class Command(BaseCommand):
             for obj in queryset:
                 row = {}
                 for field_name in field_names:
-                   # Get the field definition to check if it's a ForeignKey
-                   try:
-                       field_obj = model._meta.get_field(field_name)
-                   except Exception:
-                       row[field_name] = ''
-                       continue
-                   
-                   # Get the field value from the object
-                   field_value = getattr(obj, field_name, None)
-                   
-                   # If it's a ForeignKey, get the primary key of the related object
-                   if hasattr(field_obj, 'related_model') and field_obj.related_model is not None and field_value is not None:
-                       row[field_name] = getattr(field_value, field_obj.related_model._meta.pk.name)
-                   else:
-                       row[field_name] = field_value
+                    # Get the field definition to check if it's a ForeignKey
+                    try:
+                        field_obj = model._meta.get_field(field_name)
+                    except Exception:
+                        row[field_name] = ''
+                        continue
+
+                    # Get the field value from the object
+                    field_value = getattr(obj, field_name, None)
+
+                    # If it's a ForeignKey, get the primary key of the related object
+                    if (
+                        hasattr(field_obj, 'related_model')
+                        and field_obj.related_model is not None
+                        and field_value is not None
+                    ):
+                        row[field_name] = getattr(
+                            field_value, field_obj.related_model._meta.pk.name
+                        )
+                    else:
+                        row[field_name] = field_value
                 writer.writerow(row)
 
         self.stdout.write(
-            self.style.SUCCESS(
-                f'Exported {queryset.count()} rows to {output_file}'
-            )
+            self.style.SUCCESS(f'Exported {queryset.count()} rows to {output_file}')
         )
