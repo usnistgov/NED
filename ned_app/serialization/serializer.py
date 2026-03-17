@@ -9,6 +9,7 @@ from ned_app.models import (
     FragilityModel,
     Experiment,
     ExperimentFragilityModelBridge,
+    ComponentFragilityModelBridge,
     FragilityCurve,
 )
 from ned_app.validators import validate_nistir_component_id
@@ -136,21 +137,16 @@ class ComponentSerializer(serializers.ModelSerializer):
 
 class FragilityModelSerializer(serializers.ModelSerializer):
     """
-    Serializer for FragilityModel with component relationship.
+    Serializer for FragilityModel.
 
-    Uses component_id as the slug field for component lookups.
+    The component relationship is now managed through ComponentFragilityModelBridge.
     """
-
-    component = serializers.SlugRelatedField(
-        slug_field='component_id', queryset=Component.objects.all()
-    )
 
     class Meta:
         model = FragilityModel
         fields = [
             'id',
             'p58_fragility',
-            'component',
             'comp_detail',
             'material',
             'size_class',
@@ -225,6 +221,29 @@ class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'experiment',
+            'fragility_model',
+        ]
+
+
+class ComponentFragilityModelBridgeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for ComponentFragilityModelBridge relationship.
+
+    Manages the many-to-many relationship between components and fragility models.
+    """
+
+    component = serializers.SlugRelatedField(
+        slug_field='component_id', queryset=Component.objects.all()
+    )
+    fragility_model = serializers.SlugRelatedField(
+        slug_field='id', queryset=FragilityModel.objects.all()
+    )
+
+    class Meta:
+        model = ComponentFragilityModelBridge
+        fields = [
+            'id',
+            'component',
             'fragility_model',
         ]
 

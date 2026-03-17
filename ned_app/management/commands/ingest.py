@@ -8,6 +8,7 @@ from ned_app.models import (
     FragilityModel,
     Experiment,
     ExperimentFragilityModelBridge,
+    ComponentFragilityModelBridge,
     FragilityCurve,
 )
 from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
@@ -17,6 +18,7 @@ from ned_app.serialization.serializer import (
     FragilityModelSerializer,
     ExperimentSerializer,
     ExperimentFragilityModelBridgeSerializer,
+    ComponentFragilityModelBridgeSerializer,
     FragilityCurveSerializer,
 )
 
@@ -60,6 +62,12 @@ class Command(BaseCommand):
                 'serializer': FragilityModelSerializer,
                 'file': 'fragility_model.json',
                 'lookup_field': ['id'],
+            },
+            {
+                'model': ComponentFragilityModelBridge,
+                'serializer': ComponentFragilityModelBridgeSerializer,
+                'file': 'component_fragility_model_bridge.json',
+                'lookup_field': ['component', 'fragility_model'],
             },
             {
                 'model': Experiment,

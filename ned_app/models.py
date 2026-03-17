@@ -450,7 +450,6 @@ class FragilityModel(models.Model):
 
     Attributes:
         p58_fragility (str): P-58 fragility id associated with this fragility model, if applicable.
-        component (id): Identifier of the component type.
         comp_detail (str): Classification or short description of the component attachment detailing.
         material (str): Classification or short description of the component material (if applicable).
         size_class (str): Classification or short description of the general size of this particular components compared to others of the same type (if applicable).
@@ -463,12 +462,6 @@ class FragilityModel(models.Model):
         max_length=50,
         blank=True,
         help_text='P-58 fragility id associated with this fragility model, if applicable.',
-    )
-    component = models.ForeignKey(
-        'Component',
-        on_delete=models.PROTECT,
-        to_field='component_id',
-        help_text='Identifier of the component type.',
     )
     comp_detail = models.CharField(
         _('component detail tag'),
@@ -524,6 +517,35 @@ class ExperimentFragilityModelBridge(models.Model):
 
     def __str__(self):
         return f'{self.experiment}_{self.fragility_model}'
+
+
+class ComponentFragilityModelBridge(models.Model):
+    """
+    A bridge model facilitating a many-to-many relationship between components and fragility models.
+
+    Attributes:
+        component (str): Component ID (component_id).
+        fragility_model (str): Fragility model ID.
+    """
+
+    component = models.ForeignKey(
+        'Component',
+        on_delete=models.PROTECT,
+        to_field='component_id',
+        help_text='Component ID (component_id)',
+    )
+    fragility_model = models.ForeignKey(
+        'FragilityModel',
+        on_delete=models.PROTECT,
+        help_text='Fragility model ID',
+    )
+
+    class Meta:
+        verbose_name = 'Component - Fragility Pair'
+        verbose_name_plural = 'Component - Fragility Pairs'
+
+    def __str__(self):
+        return f'{self.component}_{self.fragility_model}'
 
 
 class FragilityCurve(models.Model):
