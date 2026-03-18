@@ -183,7 +183,7 @@ python manage.py migrate
 Export the migrated database to generate the updated canonical JSON files and fixture:
 ```bash
 python manage.py export_data --output_dir resources/data/
-python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+python manage.py dumpdata --indent 2 --exclude contenttypes --exclude auth.permission -o ned_app/fixtures/initial_data.json
 ```
 
 #### Step 6: Verification (The "Round-Trip" Protocol)
