@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 'model': Reference,
                 'serializer': ReferenceSerializer,
                 'file': 'reference.json',
-                'lookup_field': ['id'],
+                'lookup_field': ['reference_id'],
             },
             {
                 'model': Component,

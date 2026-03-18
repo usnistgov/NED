@@ -31,7 +31,7 @@ class ReferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reference
         fields = [
-            'id',
+            'reference_id',
             'title',
             'author',
             'year',
@@ -158,11 +158,11 @@ class ExperimentSerializer(serializers.ModelSerializer):
     """
     Serializer for Experiment with reference and component relationships.
 
-    Uses natural keys for foreign key lookups: reference.id and component.component_id.
+    Uses natural keys for foreign key lookups: reference.reference_id and component.component_id.
     """
 
     reference = serializers.SlugRelatedField(
-        slug_field='id', queryset=Reference.objects.all()
+        slug_field='reference_id', queryset=Reference.objects.all()
     )
     component = serializers.SlugRelatedField(
         slug_field='component_id', queryset=Component.objects.all()
@@ -259,7 +259,7 @@ class FragilityCurveSerializer(serializers.ModelSerializer):
         slug_field='id', queryset=FragilityModel.objects.all()
     )
     reference = serializers.SlugRelatedField(
-        slug_field='id', queryset=Reference.objects.all()
+        slug_field='reference_id', queryset=Reference.objects.all()
     )
 
     class Meta:

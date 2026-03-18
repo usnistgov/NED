@@ -58,7 +58,12 @@ class Reference(models.Model):
         LIT_REVIEW = 'Lit Review'
         OTHER = 'Other'
 
-    id = models.CharField(_('id'), primary_key=True, max_length=255)
+    reference_id = models.CharField(
+        _('reference id'),
+        max_length=255,
+        unique=True,
+        help_text='Unique identifier for the reference.',
+    )
     title = models.CharField(
         _('title'),
         max_length=255,
@@ -112,7 +117,7 @@ class Reference(models.Model):
         verbose_name_plural = 'References'
 
     def __str__(self):
-        return self.title
+        return self.reference_id
 
     def save(self, *args, **kwargs):
         """
@@ -274,6 +279,7 @@ class Experiment(models.Model):
     reference = models.ForeignKey(
         'Reference',
         on_delete=models.PROTECT,
+        to_field='reference_id',
         help_text='ID of the published reference documenting this experimental observation.',
     )
     specimen = models.CharField(
@@ -630,6 +636,7 @@ class FragilityCurve(models.Model):
     reference = models.ForeignKey(
         'Reference',
         on_delete=models.PROTECT,
+        to_field='reference_id',
         help_text='ID of the published reference documenting.',
     )
     edp_metric = models.CharField(
