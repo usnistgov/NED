@@ -16,6 +16,7 @@ from ned_app.models import (
     Experiment,
     FragilityModel,
     ExperimentFragilityModelBridge,
+    ComponentFragilityModelBridge,
     FragilityCurve,
 )
 
@@ -72,7 +73,6 @@ class IngestCommandTests(TransactionTestCase):
             fragility_model_data = [
                 {
                     'id': 'fm-001',
-                    'component': 'B.20.1.1.A',
                     'p58_fragility': 'B2011.001',
                     'comp_detail': 'Standard attachment',
                     'material': 'Steel',
@@ -80,11 +80,21 @@ class IngestCommandTests(TransactionTestCase):
                 },
                 {
                     'id': 'fm-002',
-                    'component': 'D.30.3.2.B',
                     'p58_fragility': '',
                     'comp_detail': 'Anchored',
                     'material': 'Steel tank',
                     'comp_description': 'Residential water heater',
+                },
+            ]
+
+            component_fragility_bridge_data = [
+                {
+                    'component': 'B.20.1.1.A',
+                    'fragility_model': 'fm-001',
+                },
+                {
+                    'component': 'D.30.3.2.B',
+                    'fragility_model': 'fm-002',
                 },
             ]
 
@@ -180,6 +190,7 @@ class IngestCommandTests(TransactionTestCase):
                 'reference.json': reference_data,
                 'component.json': component_data,
                 'fragility_model.json': fragility_model_data,
+                'component_fragility_model_bridge.json': component_fragility_bridge_data,
                 'experiment.json': experiment_data,
                 'experiment_fragility_model_bridge.json': bridge_data,
                 'fragility_curve.json': fragility_curve_data,
@@ -202,6 +213,7 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(Reference.objects.count(), 2)
             self.assertEqual(Component.objects.count(), 2)
             self.assertEqual(FragilityModel.objects.count(), 2)
+            self.assertEqual(ComponentFragilityModelBridge.objects.count(), 2)
             self.assertEqual(Experiment.objects.count(), 2)
             self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 2)
             self.assertEqual(FragilityCurve.objects.count(), 3)
@@ -214,11 +226,23 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(exp_002.reference.id, 'ref-001')
             self.assertEqual(exp_002.component.component_id, 'D.30.3.2.B')
 
-            fm_001 = FragilityModel.objects.get(id='fm-001')
-            self.assertEqual(fm_001.component.component_id, 'B.20.1.1.A')
+            cfm_bridge_1 = ComponentFragilityModelBridge.objects.get(
+                component__component_id='B.20.1.1.A',
+                fragility_model__id='fm-001',
+            )
+            self.assertEqual(
+                cfm_bridge_1.component.component_id, 'B.20.1.1.A'
+            )
+            self.assertEqual(cfm_bridge_1.fragility_model.id, 'fm-001')
 
-            fm_002 = FragilityModel.objects.get(id='fm-002')
-            self.assertEqual(fm_002.component.component_id, 'D.30.3.2.B')
+            cfm_bridge_2 = ComponentFragilityModelBridge.objects.get(
+                component__component_id='D.30.3.2.B',
+                fragility_model__id='fm-002',
+            )
+            self.assertEqual(
+                cfm_bridge_2.component.component_id, 'D.30.3.2.B'
+            )
+            self.assertEqual(cfm_bridge_2.fragility_model.id, 'fm-002')
 
             bridge_1 = ExperimentFragilityModelBridge.objects.get(
                 experiment__id='exp-001', fragility_model__id='fm-001'
@@ -539,8 +563,14 @@ class IngestCommandTests(TransactionTestCase):
             fragility_model_data = [
                 {
                     'id': 'fm-idem',
-                    'component': 'A.10.1.1',
                     'comp_description': 'Original FM Description',
+                }
+            ]
+
+            component_fragility_bridge_data = [
+                {
+                    'component': 'A.10.1.1',
+                    'fragility_model': 'fm-idem',
                 }
             ]
 
@@ -578,6 +608,7 @@ class IngestCommandTests(TransactionTestCase):
                 'reference.json': reference_data,
                 'component.json': component_data,
                 'fragility_model.json': fragility_model_data,
+                'component_fragility_model_bridge.json': component_fragility_bridge_data,
                 'experiment.json': experiment_data,
                 'experiment_fragility_model_bridge.json': bridge_data,
                 'fragility_curve.json': fragility_curve_data,
@@ -601,6 +632,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(Reference.objects.count(), 1)
                 self.assertEqual(Component.objects.count(), 1)
                 self.assertEqual(FragilityModel.objects.count(), 1)
+                self.assertEqual(ComponentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(Experiment.objects.count(), 1)
                 self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
@@ -631,6 +663,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(Reference.objects.count(), 1)
                 self.assertEqual(Component.objects.count(), 1)
                 self.assertEqual(FragilityModel.objects.count(), 1)
+                self.assertEqual(ComponentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(Experiment.objects.count(), 1)
                 self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
@@ -655,6 +688,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(Reference.objects.count(), 1)
                 self.assertEqual(Component.objects.count(), 1)
                 self.assertEqual(FragilityModel.objects.count(), 1)
+                self.assertEqual(ComponentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(Experiment.objects.count(), 1)
                 self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
