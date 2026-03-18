@@ -150,6 +150,10 @@ class DataIntegrityTests(TransactionTestCase):
                 'component.json': lambda x: x['component_id'],
                 'fragility_model.json': lambda x: x['id'],
                 'experiment.json': lambda x: x['id'],
+                'component_fragility_model_bridge.json': lambda x: (
+                    x['component'],
+                    x['fragility_model'],
+                ),
                 'experiment_fragility_model_bridge.json': lambda x: (
                     x['experiment'],
                     x['fragility_model'],
