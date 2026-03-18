@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ned_app', '0016_populate_component_fragility_bridge'),
     ]

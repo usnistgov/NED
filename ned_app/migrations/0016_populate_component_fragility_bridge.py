@@ -44,7 +44,6 @@ def reverse_bridge(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ned_app', '0015_componentfragilitymodelbridge'),
     ]

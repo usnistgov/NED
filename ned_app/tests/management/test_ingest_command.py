@@ -230,18 +230,14 @@ class IngestCommandTests(TransactionTestCase):
                 component__component_id='B.20.1.1.A',
                 fragility_model__id='fm-001',
             )
-            self.assertEqual(
-                cfm_bridge_1.component.component_id, 'B.20.1.1.A'
-            )
+            self.assertEqual(cfm_bridge_1.component.component_id, 'B.20.1.1.A')
             self.assertEqual(cfm_bridge_1.fragility_model.id, 'fm-001')
 
             cfm_bridge_2 = ComponentFragilityModelBridge.objects.get(
                 component__component_id='D.30.3.2.B',
                 fragility_model__id='fm-002',
             )
-            self.assertEqual(
-                cfm_bridge_2.component.component_id, 'D.30.3.2.B'
-            )
+            self.assertEqual(cfm_bridge_2.component.component_id, 'D.30.3.2.B')
             self.assertEqual(cfm_bridge_2.fragility_model.id, 'fm-002')
 
             bridge_1 = ExperimentFragilityModelBridge.objects.get(

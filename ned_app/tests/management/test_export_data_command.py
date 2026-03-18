@@ -284,9 +284,7 @@ class ExportDataCommandTest(TestCase):
             )
 
         with open(
-            os.path.join(
-                self.temp_dir, 'component_fragility_model_bridge.json'
-            ),
+            os.path.join(self.temp_dir, 'component_fragility_model_bridge.json'),
             'r',
         ) as f:
             cfm_bridge_data = json.load(f)

@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ned_app', '0014_alter_component_component_id_alter_component_id_and_more'),
     ]

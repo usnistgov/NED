@@ -228,9 +228,7 @@ class Command(BaseCommand):
             }
             data.append(bridge_data)
 
-        file_path = os.path.join(
-            output_dir, 'component_fragility_model_bridge.json'
-        )
+        file_path = os.path.join(output_dir, 'component_fragility_model_bridge.json')
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
 
