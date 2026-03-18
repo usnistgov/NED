@@ -9,6 +9,7 @@ from ned_app.models import (
     FragilityCurve,
     FragilityModel,
     ExperimentFragilityModelBridge,
+    ComponentFragilityModelBridge,
 )
 
 
@@ -16,7 +17,14 @@ from ned_app.models import (
 @admin.register(Reference)
 class ReferenceAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('id', 'title', 'author', 'year', 'study_type', 'comp_type')
+    list_display = (
+        'reference_id',
+        'title',
+        'author',
+        'year',
+        'study_type',
+        'comp_type',
+    )
 
 
 @admin.register(Experiment)
@@ -47,10 +55,16 @@ class FragilityCurveAdmin(admin.ModelAdmin):
 @admin.register(FragilityModel)
 class FragilityModelAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('id', 'component')
+    list_display = ('id',)
 
 
 @admin.register(ExperimentFragilityModelBridge)
 class ExperimentFragilityModelBridgeAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
     list_display = ('experiment', 'fragility_model')
+
+
+@admin.register(ComponentFragilityModelBridge)
+class ComponentFragilityModelBridgeAdmin(admin.ModelAdmin):
+    # how column data is displayed in the report for all entered data
+    list_display = ('component', 'fragility_model')

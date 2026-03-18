@@ -1,9 +1,8 @@
 [
   {
-    "_comment": "This is an example for a FragilityModel object. The id should be unique, component references a component_id, and p58_fragility is the FEMA P-58 fragility identifier.",
+    "_comment": "This is an example for a FragilityModel object. The id should be unique and p58_fragility is the FEMA P-58 fragility identifier. Component relationships are managed through component_fragility_model_bridge.json.",
     "id": "FM001",
     "p58_fragility": "B2011.001a",
-    "component": "A.10.1.1.A",
     "comp_detail": "Brief component detail description",
     "material": "Steel",
     "size_class": "Medium",

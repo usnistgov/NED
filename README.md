@@ -148,10 +148,12 @@ A project maintainer will review your PR. They will check the "JSON Diff" to see
 **For Developers:** If you need to change the database schema (e.g., adding a new field like `data_source_type`, renaming a column, or creating a new table), you must follow a strict "Round-Trip" protocol. This ensures that the mapping between our JSON source of truth and the runtime database remains perfectly synced.
 
 #### Step 1: Prepare Your Workspace
-Start with a fresh local database state:
+Start with a fresh local database populated with the current canonical data. **Keep a copy of this database** — you will need it later to apply your new migrations.
 ```bash
+rm -f db.sqlite3
 python manage.py migrate
 python manage.py ingest
+cp db.sqlite3 db_before_changes.sqlite3
 ```
 
 #### Step 2: Implement Schema Change & Data Migration
@@ -160,41 +162,45 @@ Modify `models.py` and create your migrations.
 *   *Example:* Use `RunPython` operations or default values in the migration to ensure all 2000+ existing rows remain valid.
 ```bash
 python manage.py makemigrations
-python manage.py migrate
 ```
 
 #### Step 3: Update the Pipelines
-You must update the two commands that bridge the gap between JSON and DB:
+Update the remaining code to match the **new** schema:
+*   **`serializer.py`:** Update serializer fields and classes to reflect the new model structure.
 *   **`ingest` command:** Update the logic to map JSON keys to your new DB fields.
 *   **`export_data` command:** Update the logic to serialize your new DB fields back to JSON.
+*   **`admin.py`:** Register any new models and update existing admin classes as needed.
 *   *Constraint:* The loop `Export(Ingest(Source))` must be idempotent (lossless).
 
-#### Step 4: Verification ( The "Round-Trip" Protocol)
-Run these commands in order to prove that data can flow safely in both directions:
-
-**1. Capture the new DB state:**
+#### Step 4: Apply Migrations to the Saved Database
+Restore the database you saved in Step 1 and apply your new migrations to it. This transforms the data **through the migration**, ensuring correctness without relying on the updated serializers (which expect the new schema).
 ```bash
-python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+cp db_before_changes.sqlite3 db.sqlite3
+python manage.py migrate
 ```
 
-**2. Test Export (DB -> JSON):**
+#### Step 5: Export Updated Canonical Data
+Export the migrated database to generate the updated canonical JSON files and fixture:
+```bash
+python manage.py export_data --output_dir resources/data/
+python manage.py dumpdata --indent 2 --exclude contenttypes --exclude auth.permission -o ned_app/fixtures/initial_data.json
+```
+
+#### Step 6: Verification (The "Round-Trip" Protocol)
+Run these tests to prove that data flows safely in both directions:
 ```bash
 python manage.py test ned_app.tests.test_data_integrity.DataIntegrityTests.test_db_round_trip
-```
-
-**3. Update Source Files (Propagate changes to JSON):**
-This is the moment your schema change actually updates the canonical data files.
-```bash
-python manage.py export_data
-```
-
-**4. Test Ingest (JSON -> DB):**
-```bash
 python manage.py test ned_app.tests.test_data_integrity.DataIntegrityTests.test_json_to_db_to_json_round_trip_is_lossless
 ```
 
-#### Step 5: Finalize and Commit
-Update `README.md` and templates in `resources/example_data/` if your change affects the user-facing data structure. Then, commit all changed files (models, migrations, updated JSONs, scripts, and fixtures) and open your PR.
+#### Step 7: Update and Run Unit Tests
+Review and update existing unit tests to match the new schema, and add tests for any new models, serializers, or commands. Ensure the full test suite passes:
+```bash
+python manage.py test ned_app.tests
+```
+
+#### Step 8: Finalize and Commit
+Update `README.md` and templates in `resources/example_data/` if your change affects the user-facing data structure. Commit all changed files (models, migrations, updated JSONs, scripts, and fixtures) and open your PR.
 
 ### Launch the Django Admin
 To launch and take advantage of the administrative interface, run the web server:

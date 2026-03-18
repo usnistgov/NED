@@ -58,7 +58,12 @@ class Reference(models.Model):
         LIT_REVIEW = 'Lit Review'
         OTHER = 'Other'
 
-    id = models.CharField(_('id'), primary_key=True, max_length=255)
+    reference_id = models.CharField(
+        _('reference id'),
+        max_length=255,
+        unique=True,
+        help_text='Unique identifier for the reference.',
+    )
     title = models.CharField(
         _('title'),
         max_length=255,
@@ -112,7 +117,7 @@ class Reference(models.Model):
         verbose_name_plural = 'References'
 
     def __str__(self):
-        return self.title
+        return self.reference_id
 
     def save(self, *args, **kwargs):
         """
@@ -274,6 +279,7 @@ class Experiment(models.Model):
     reference = models.ForeignKey(
         'Reference',
         on_delete=models.PROTECT,
+        to_field='reference_id',
         help_text='ID of the published reference documenting this experimental observation.',
     )
     specimen = models.CharField(
@@ -450,7 +456,6 @@ class FragilityModel(models.Model):
 
     Attributes:
         p58_fragility (str): P-58 fragility id associated with this fragility model, if applicable.
-        component (id): Identifier of the component type.
         comp_detail (str): Classification or short description of the component attachment detailing.
         material (str): Classification or short description of the component material (if applicable).
         size_class (str): Classification or short description of the general size of this particular components compared to others of the same type (if applicable).
@@ -463,12 +468,6 @@ class FragilityModel(models.Model):
         max_length=50,
         blank=True,
         help_text='P-58 fragility id associated with this fragility model, if applicable.',
-    )
-    component = models.ForeignKey(
-        'Component',
-        on_delete=models.PROTECT,
-        to_field='component_id',
-        help_text='Identifier of the component type.',
     )
     comp_detail = models.CharField(
         _('component detail tag'),
@@ -524,6 +523,35 @@ class ExperimentFragilityModelBridge(models.Model):
 
     def __str__(self):
         return f'{self.experiment}_{self.fragility_model}'
+
+
+class ComponentFragilityModelBridge(models.Model):
+    """
+    A bridge model facilitating a many-to-many relationship between components and fragility models.
+
+    Attributes:
+        component (str): Component ID (component_id).
+        fragility_model (str): Fragility model ID.
+    """
+
+    component = models.ForeignKey(
+        'Component',
+        on_delete=models.PROTECT,
+        to_field='component_id',
+        help_text='Component ID (component_id)',
+    )
+    fragility_model = models.ForeignKey(
+        'FragilityModel',
+        on_delete=models.PROTECT,
+        help_text='Fragility model ID',
+    )
+
+    class Meta:
+        verbose_name = 'Component - Fragility Pair'
+        verbose_name_plural = 'Component - Fragility Pairs'
+
+    def __str__(self):
+        return f'{self.component}_{self.fragility_model}'
 
 
 class FragilityCurve(models.Model):
@@ -608,6 +636,7 @@ class FragilityCurve(models.Model):
     reference = models.ForeignKey(
         'Reference',
         on_delete=models.PROTECT,
+        to_field='reference_id',
         help_text='ID of the published reference documenting.',
     )
     edp_metric = models.CharField(
