@@ -664,7 +664,9 @@ class IngestCommandTests(TransactionTestCase):
                 comp = Component.objects.get(component_id='A.10.1.1')
                 self.assertEqual(comp.name, 'Original Name')
 
-                fm = FragilityModel.objects.get(fragility_model_id='ref-idem|fm-idem')
+                fm = FragilityModel.objects.get(
+                    fragility_model_id='ref-idem|fm-idem'
+                )
                 self.assertEqual(fm.comp_description, 'Original FM Description')
 
                 exp = Experiment.objects.get(id='exp-idem')
@@ -723,7 +725,9 @@ class IngestCommandTests(TransactionTestCase):
                 comp.refresh_from_db()
                 self.assertEqual(comp.name, 'Updated Name')
 
-                fm = FragilityModel.objects.get(fragility_model_id='ref-idem|fm-idem')
+                fm = FragilityModel.objects.get(
+                    fragility_model_id='ref-idem|fm-idem'
+                )
                 fm.refresh_from_db()
                 self.assertEqual(fm.comp_description, 'Updated FM Description')
 

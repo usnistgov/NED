@@ -52,9 +52,9 @@ def populate_fragility_model_fields(apps, schema_editor):
     assert FragilityModel.objects.filter(model_id__isnull=True).count() == 0, (
         'Some FragilityModels still have null model_id'
     )
-    assert FragilityModel.objects.filter(fragility_model_id__isnull=True).count() == 0, (
-        'Some FragilityModels still have null fragility_model_id'
-    )
+    assert (
+        FragilityModel.objects.filter(fragility_model_id__isnull=True).count() == 0
+    ), 'Some FragilityModels still have null fragility_model_id'
 
 
 class Migration(migrations.Migration):

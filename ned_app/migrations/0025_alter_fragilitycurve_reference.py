@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ned_app', '0024_swap_fragilitymodel_pk'),
     ]
@@ -14,6 +13,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='fragilitycurve',
             name='reference',
-            field=models.ForeignKey(help_text='ID of the published reference documenting.', on_delete=django.db.models.deletion.PROTECT, to='ned_app.reference', to_field='reference_id'),
+            field=models.ForeignKey(
+                help_text='ID of the published reference documenting.',
+                on_delete=django.db.models.deletion.PROTECT,
+                to='ned_app.reference',
+                to_field='reference_id',
+            ),
         ),
     ]

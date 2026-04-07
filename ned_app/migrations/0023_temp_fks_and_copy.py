@@ -17,9 +17,7 @@ def copy_fragility_model_fks(apps, schema_editor):
     FragilityModel = apps.get_model('ned_app', 'FragilityModel')
 
     # Build lookup from old PK to new fragility_model_id
-    fm_lookup = dict(
-        FragilityModel.objects.values_list('id', 'fragility_model_id')
-    )
+    fm_lookup = dict(FragilityModel.objects.values_list('id', 'fragility_model_id'))
 
     # Copy ExperimentFragilityModelBridge
     exp_bridges = ExperimentFragilityModelBridge.objects.all()
@@ -29,9 +27,12 @@ def copy_fragility_model_fks(apps, schema_editor):
         )
         bridge.fragility_model_new = new_fm
         bridge.save()
-    assert ExperimentFragilityModelBridge.objects.filter(
-        fragility_model_new__isnull=True
-    ).count() == 0, 'Some ExperimentFragilityModelBridges have null fragility_model_new'
+    assert (
+        ExperimentFragilityModelBridge.objects.filter(
+            fragility_model_new__isnull=True
+        ).count()
+        == 0
+    ), 'Some ExperimentFragilityModelBridges have null fragility_model_new'
 
     # Copy ComponentFragilityModelBridge
     comp_bridges = ComponentFragilityModelBridge.objects.all()
@@ -41,9 +42,12 @@ def copy_fragility_model_fks(apps, schema_editor):
         )
         bridge.fragility_model_new = new_fm
         bridge.save()
-    assert ComponentFragilityModelBridge.objects.filter(
-        fragility_model_new__isnull=True
-    ).count() == 0, 'Some ComponentFragilityModelBridges have null fragility_model_new'
+    assert (
+        ComponentFragilityModelBridge.objects.filter(
+            fragility_model_new__isnull=True
+        ).count()
+        == 0
+    ), 'Some ComponentFragilityModelBridges have null fragility_model_new'
 
     # Copy FragilityCurve
     curves = FragilityCurve.objects.all()
@@ -53,9 +57,9 @@ def copy_fragility_model_fks(apps, schema_editor):
         )
         curve.fragility_model_new = new_fm
         curve.save()
-    assert FragilityCurve.objects.filter(
-        fragility_model_new__isnull=True
-    ).count() == 0, 'Some FragilityCurves have null fragility_model_new'
+    assert (
+        FragilityCurve.objects.filter(fragility_model_new__isnull=True).count() == 0
+    ), 'Some FragilityCurves have null fragility_model_new'
 
 
 class Migration(migrations.Migration):

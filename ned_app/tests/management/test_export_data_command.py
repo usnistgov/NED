@@ -298,7 +298,9 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('component', cfm_bridge)
             self.assertEqual(cfm_bridge['component'], 'B.20.1.1.A')
             self.assertIn('fragility_model', cfm_bridge)
-            self.assertEqual(cfm_bridge['fragility_model'], 'test-ref-001|test-fm-001')
+            self.assertEqual(
+                cfm_bridge['fragility_model'], 'test-ref-001|test-fm-001'
+            )
 
             self.assertEqual(
                 len(cfm_bridge.keys()),

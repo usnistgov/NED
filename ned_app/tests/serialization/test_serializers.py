@@ -448,7 +448,9 @@ class FragilityModelSerializerTest(TestCase):
         fragility_model = serializer.save()
 
         self.assertIsNotNone(fragility_model)
-        self.assertEqual(fragility_model.fragility_model_id, 'test-ref-fm-001|test-fm-001')
+        self.assertEqual(
+            fragility_model.fragility_model_id, 'test-ref-fm-001|test-fm-001'
+        )
 
     def test_serializer_creates_fragility_model_without_reference(self):
         """Test that serializer handles null reference for legacy models."""
