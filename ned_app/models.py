@@ -455,6 +455,9 @@ class FragilityModel(models.Model):
     A model representing a fragility model for a specific component configuration.
 
     Attributes:
+        fragility_model_id (str): Auto-generated unique identifier (reference_id|model_id).
+        reference (Reference): Identifier of a Reference documenting this fragility model.
+        model_id (str): Model identifier, unique within a given reference.
         p58_fragility (str): P-58 fragility id associated with this fragility model, if applicable.
         comp_detail (str): Classification or short description of the component attachment detailing.
         material (str): Classification or short description of the component material (if applicable).
@@ -462,7 +465,25 @@ class FragilityModel(models.Model):
         comp_description (str): General description of the type of component.
     """
 
-    id = models.CharField(_('id'), primary_key=True, max_length=255)
+    fragility_model_id = models.CharField(
+        _('fragility model id'),
+        max_length=255,
+        unique=True,
+        help_text='Auto-generated unique identifier (reference_id|model_id).',
+    )
+    reference = models.ForeignKey(
+        'Reference',
+        on_delete=models.PROTECT,
+        to_field='reference_id',
+        null=True,
+        blank=True,
+        help_text='Identifier of a Reference documenting this fragility model.',
+    )
+    model_id = models.CharField(
+        _('model id'),
+        max_length=255,
+        help_text='Model identifier, unique within a given reference.',
+    )
     p58_fragility = models.CharField(
         _('FEMA P-58 fragility id'),
         max_length=50,
@@ -496,9 +517,28 @@ class FragilityModel(models.Model):
     class Meta:
         verbose_name = 'Fragility Model'
         verbose_name_plural = 'Fragility Models'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['reference', 'model_id'],
+                condition=models.Q(reference__isnull=False),
+                name='unique_ref_model',
+            ),
+            models.UniqueConstraint(
+                fields=['model_id'],
+                condition=models.Q(reference__isnull=True),
+                name='unique_legacy_model',
+            ),
+        ]
+
+    def save(self, *args, **kwargs):
+        if self.reference_id:
+            self.fragility_model_id = f'{self.reference_id}|{self.model_id}'
+        else:
+            self.fragility_model_id = self.model_id
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.id
+        return self.fragility_model_id
 
 
 class ExperimentFragilityModelBridge(models.Model):
@@ -514,7 +554,10 @@ class ExperimentFragilityModelBridge(models.Model):
         'Experiment', on_delete=models.PROTECT, help_text='Experiment model ID'
     )
     fragility_model = models.ForeignKey(
-        'FragilityModel', on_delete=models.PROTECT, help_text='fragility model ID'
+        'FragilityModel',
+        on_delete=models.PROTECT,
+        to_field='fragility_model_id',
+        help_text='Fragility model ID',
     )
 
     class Meta:
@@ -543,6 +586,7 @@ class ComponentFragilityModelBridge(models.Model):
     fragility_model = models.ForeignKey(
         'FragilityModel',
         on_delete=models.PROTECT,
+        to_field='fragility_model_id',
         help_text='Fragility model ID',
     )
 
@@ -606,6 +650,7 @@ class FragilityCurve(models.Model):
     fragility_model = models.ForeignKey(
         'FragilityModel',
         on_delete=models.PROTECT,
+        to_field='fragility_model_id',
         help_text='Id of the fragility model this fragility belongs to.',
     )
     reviewer = models.CharField(

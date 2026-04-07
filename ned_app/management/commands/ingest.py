@@ -61,7 +61,7 @@ class Command(BaseCommand):
                 'model': FragilityModel,
                 'serializer': FragilityModelSerializer,
                 'file': 'fragility_model.json',
-                'lookup_field': ['id'],
+                'lookup_field': ['reference', 'model_id'],
             },
             {
                 'model': ComponentFragilityModelBridge,
@@ -140,7 +140,7 @@ class Command(BaseCommand):
                 lookup_params = {field: item.get(field) for field in lookup_field}
                 instance = None
 
-                if all(lookup_params.values()):
+                if all(field in item for field in lookup_field):
                     try:
                         instance = model_class.objects.get(**lookup_params)
                     except model_class.DoesNotExist:
@@ -165,6 +165,7 @@ class Command(BaseCommand):
                     item.get('id')
                     or item.get('reference_id')
                     or item.get('component_id')
+                    or item.get('model_id')
                     or 'unknown'
                 )
                 self.stderr.write(
