@@ -1,63 +1,63 @@
 [
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1001"
+        "fragility_model": "TIA-2012-EXP|fra1001"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1002"
+        "fragility_model": "TIA-2012-EXP|fra1002"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1003"
+        "fragility_model": "TIA-2012-EXP|fra1003"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1004"
+        "fragility_model": "TIA-2012-EXP|fra1004"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1005"
+        "fragility_model": "TIA-2012-EXP|fra1005"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1006"
+        "fragility_model": "TIA-2012-EXP|fra1006"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1007"
+        "fragility_model": "TIA-2012-EXP|fra1007"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1008"
+        "fragility_model": "TIA-2012-EXP|fra1008"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1009"
+        "fragility_model": "TIA-2012-EXP|fra1009"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1010"
+        "fragility_model": "TIA-2012-EXP|fra1010"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1011"
+        "fragility_model": "TIA-2012-EXP|fra1011"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1012"
+        "fragility_model": "TIA-2012-EXP|fra1012"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1013"
+        "fragility_model": "TAO-2019-EXP|fra1013"
     },
     {
         "component": "D.40.1.1.C",
-        "fragility_model": "fra1014"
+        "fragility_model": "TAO-2019-EXP|fra1014"
     },
     {
         "component": "D.40.1.1.E",
-        "fragility_model": "fra1015"
+        "fragility_model": "TAO-2019-EXP|fra1015"
     },
     {
         "component": "C.10.1.1.A",
@@ -109,1938 +109,1938 @@
     },
     {
         "component": "D.40.1.1.F",
-        "fragility_model": "fra1028"
+        "fragility_model": "GOO-2004-EXP|fra1028"
     },
     {
         "component": "D.40.1.1.G",
-        "fragility_model": "fra1029"
+        "fragility_model": "GOO-2004-EXP|fra1029"
     },
     {
         "component": "D.40.1.1.F",
-        "fragility_model": "fra1030"
+        "fragility_model": "SOR-2013-ANA|fra1030"
     },
     {
         "component": "B.20.1.1.A",
-        "fragility_model": "B2011.001a"
+        "fragility_model": "FEM-2018-SEI|B2011.001a"
     },
     {
         "component": "B.20.1.1.A",
-        "fragility_model": "B2011.001b"
+        "fragility_model": "FEM-2018-SEI|B2011.001b"
     },
     {
         "component": "B.20.1.1.A",
-        "fragility_model": "B2011.011a"
+        "fragility_model": "FEM-2018-SEI|B2011.011a"
     },
     {
         "component": "B.20.1.1.A",
-        "fragility_model": "B2011.011b"
+        "fragility_model": "FEM-2018-SEI|B2011.011b"
     },
     {
         "component": "B.20.1.1.A",
-        "fragility_model": "B2011.021a"
+        "fragility_model": "FEM-2018-SEI|B2011.021a"
     },
     {
         "component": "B.20.1.1.A",
-        "fragility_model": "B2011.021b"
+        "fragility_model": "FEM-2018-SEI|B2011.021b"
     },
     {
         "component": "B.20.1.1.B",
-        "fragility_model": "B2011.101"
+        "fragility_model": "FEM-2018-SEI|B2011.101"
     },
     {
         "component": "B.20.1.1.B",
-        "fragility_model": "B2011.102"
+        "fragility_model": "FEM-2018-SEI|B2011.102"
     },
     {
         "component": "B.20.1.1.B",
-        "fragility_model": "B2011.111"
+        "fragility_model": "FEM-2018-SEI|B2011.111"
     },
     {
         "component": "B.20.1.1.B",
-        "fragility_model": "B2011.121"
+        "fragility_model": "FEM-2018-SEI|B2011.121"
     },
     {
         "component": "B.20.1.1.B",
-        "fragility_model": "B2011.131"
+        "fragility_model": "FEM-2018-SEI|B2011.131"
     },
     {
         "component": "B.20.1.1.C",
-        "fragility_model": "B2011.201a"
+        "fragility_model": "FEM-2018-SEI|B2011.201a"
     },
     {
         "component": "B.20.1.1.C",
-        "fragility_model": "B2011.201b"
+        "fragility_model": "FEM-2018-SEI|B2011.201b"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.001"
+        "fragility_model": "FEM-2018-SEI|B2022.001"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.002"
+        "fragility_model": "FEM-2018-SEI|B2022.002"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.011"
+        "fragility_model": "FEM-2018-SEI|B2022.011"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.021"
+        "fragility_model": "FEM-2018-SEI|B2022.021"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.022"
+        "fragility_model": "FEM-2018-SEI|B2022.022"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.023"
+        "fragility_model": "FEM-2018-SEI|B2022.023"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.031"
+        "fragility_model": "FEM-2018-SEI|B2022.031"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.032"
+        "fragility_model": "FEM-2018-SEI|B2022.032"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.033"
+        "fragility_model": "FEM-2018-SEI|B2022.033"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.034"
+        "fragility_model": "FEM-2018-SEI|B2022.034"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.035"
+        "fragility_model": "FEM-2018-SEI|B2022.035"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.036"
+        "fragility_model": "FEM-2018-SEI|B2022.036"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.037"
+        "fragility_model": "FEM-2018-SEI|B2022.037"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.038"
+        "fragility_model": "FEM-2018-SEI|B2022.038"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.039"
+        "fragility_model": "FEM-2018-SEI|B2022.039"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.040"
+        "fragility_model": "FEM-2018-SEI|B2022.040"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.041"
+        "fragility_model": "FEM-2018-SEI|B2022.041"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.051"
+        "fragility_model": "FEM-2018-SEI|B2022.051"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.052"
+        "fragility_model": "FEM-2018-SEI|B2022.052"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.053"
+        "fragility_model": "FEM-2018-SEI|B2022.053"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.054"
+        "fragility_model": "FEM-2018-SEI|B2022.054"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.061"
+        "fragility_model": "FEM-2018-SEI|B2022.061"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.071"
+        "fragility_model": "FEM-2018-SEI|B2022.071"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.072"
+        "fragility_model": "FEM-2018-SEI|B2022.072"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.081"
+        "fragility_model": "FEM-2018-SEI|B2022.081"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.082"
+        "fragility_model": "FEM-2018-SEI|B2022.082"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.083"
+        "fragility_model": "FEM-2018-SEI|B2022.083"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.084"
+        "fragility_model": "FEM-2018-SEI|B2022.084"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.091"
+        "fragility_model": "FEM-2018-SEI|B2022.091"
     },
     {
         "component": "B.20.2.2.A",
-        "fragility_model": "B2022.101"
+        "fragility_model": "FEM-2018-SEI|B2022.101"
     },
     {
         "component": "B.20.2.2.C",
-        "fragility_model": "B2022.201"
+        "fragility_model": "FEM-2018-SEI|B2022.201"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.001"
+        "fragility_model": "FEM-2018-SEI|B2023.001"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.002"
+        "fragility_model": "FEM-2018-SEI|B2023.002"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.011"
+        "fragility_model": "FEM-2018-SEI|B2023.011"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.021"
+        "fragility_model": "FEM-2018-SEI|B2023.021"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.031"
+        "fragility_model": "FEM-2018-SEI|B2023.031"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.032"
+        "fragility_model": "FEM-2018-SEI|B2023.032"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.033"
+        "fragility_model": "FEM-2018-SEI|B2023.033"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.034"
+        "fragility_model": "FEM-2018-SEI|B2023.034"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.041"
+        "fragility_model": "FEM-2018-SEI|B2023.041"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.051"
+        "fragility_model": "FEM-2018-SEI|B2023.051"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.052"
+        "fragility_model": "FEM-2018-SEI|B2023.052"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.053"
+        "fragility_model": "FEM-2018-SEI|B2023.053"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.054"
+        "fragility_model": "FEM-2018-SEI|B2023.054"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.055"
+        "fragility_model": "FEM-2018-SEI|B2023.055"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.056"
+        "fragility_model": "FEM-2018-SEI|B2023.056"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.057"
+        "fragility_model": "FEM-2018-SEI|B2023.057"
     },
     {
         "component": "B.20.2.3.A",
-        "fragility_model": "B2023.058"
+        "fragility_model": "FEM-2018-SEI|B2023.058"
     },
     {
         "component": "B.30.1.1.A",
-        "fragility_model": "B3011.011"
+        "fragility_model": "FEM-2018-SEI|B3011.011"
     },
     {
         "component": "B.30.1.1.B",
-        "fragility_model": "B3011.012"
+        "fragility_model": "FEM-2018-SEI|B3011.012"
     },
     {
         "component": "B.30.1.1.A",
-        "fragility_model": "B3011.013"
+        "fragility_model": "FEM-2018-SEI|B3011.013"
     },
     {
         "component": "B.30.1.1.B",
-        "fragility_model": "B3011.014"
+        "fragility_model": "FEM-2018-SEI|B3011.014"
     },
     {
         "component": "B.20.1.2.A",
-        "fragility_model": "B3031.001a"
+        "fragility_model": "FEM-2018-SEI|B3031.001a"
     },
     {
         "component": "B.20.1.2.A",
-        "fragility_model": "B3031.001b"
+        "fragility_model": "FEM-2018-SEI|B3031.001b"
     },
     {
         "component": "B.20.1.2.A",
-        "fragility_model": "B3031.001c"
+        "fragility_model": "FEM-2018-SEI|B3031.001c"
     },
     {
         "component": "B.20.1.2.A",
-        "fragility_model": "B3031.002a"
+        "fragility_model": "FEM-2018-SEI|B3031.002a"
     },
     {
         "component": "B.20.1.2.A",
-        "fragility_model": "B3031.002b"
+        "fragility_model": "FEM-2018-SEI|B3031.002b"
     },
     {
         "component": "B.20.1.2.A",
-        "fragility_model": "B3031.002c"
+        "fragility_model": "FEM-2018-SEI|B3031.002c"
     },
     {
         "component": "B.20.1.2.A",
-        "fragility_model": "B3041.001"
+        "fragility_model": "FEM-2018-SEI|B3041.001"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "C1011.001a"
+        "fragility_model": "FEM-2018-SEI|C1011.001a"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "C1011.001b"
+        "fragility_model": "FEM-2018-SEI|C1011.001b"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "C1011.001c"
+        "fragility_model": "FEM-2018-SEI|C1011.001c"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "C1011.001d"
+        "fragility_model": "FEM-2018-SEI|C1011.001d"
     },
     {
         "component": "C.10.1.1.B",
-        "fragility_model": "C1011.011a"
+        "fragility_model": "FEM-2018-SEI|C1011.011a"
     },
     {
         "component": "C.20.1.1.A",
-        "fragility_model": "C2011.001a"
+        "fragility_model": "FEM-2018-SEI|C2011.001a"
     },
     {
         "component": "C.20.1.1.A",
-        "fragility_model": "C2011.001b"
+        "fragility_model": "FEM-2018-SEI|C2011.001b"
     },
     {
         "component": "C.20.1.1.B",
-        "fragility_model": "C2011.011a"
+        "fragility_model": "FEM-2018-SEI|C2011.011a"
     },
     {
         "component": "C.20.1.1.B",
-        "fragility_model": "C2011.011b"
+        "fragility_model": "FEM-2018-SEI|C2011.011b"
     },
     {
         "component": "C.20.1.1.C",
-        "fragility_model": "C2011.021a"
+        "fragility_model": "FEM-2018-SEI|C2011.021a"
     },
     {
         "component": "C.20.1.1.C",
-        "fragility_model": "C2011.021b"
+        "fragility_model": "FEM-2018-SEI|C2011.021b"
     },
     {
         "component": "C.20.1.1.C",
-        "fragility_model": "C2011.021c"
+        "fragility_model": "FEM-2018-SEI|C2011.021c"
     },
     {
         "component": "C.20.1.1.C",
-        "fragility_model": "C2011.021d"
+        "fragility_model": "FEM-2018-SEI|C2011.021d"
     },
     {
         "component": "C.20.1.1.D",
-        "fragility_model": "C2011.031a"
+        "fragility_model": "FEM-2018-SEI|C2011.031a"
     },
     {
         "component": "C.20.1.1.D",
-        "fragility_model": "C2011.031b"
+        "fragility_model": "FEM-2018-SEI|C2011.031b"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.001a"
+        "fragility_model": "FEM-2018-SEI|C3011.001a"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.001b"
+        "fragility_model": "FEM-2018-SEI|C3011.001b"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.001c"
+        "fragility_model": "FEM-2018-SEI|C3011.001c"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.001d"
+        "fragility_model": "FEM-2018-SEI|C3011.001d"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.002a"
+        "fragility_model": "FEM-2018-SEI|C3011.002a"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.002b"
+        "fragility_model": "FEM-2018-SEI|C3011.002b"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.002c"
+        "fragility_model": "FEM-2018-SEI|C3011.002c"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.002d"
+        "fragility_model": "FEM-2018-SEI|C3011.002d"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.003a"
+        "fragility_model": "FEM-2018-SEI|C3011.003a"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.003b"
+        "fragility_model": "FEM-2018-SEI|C3011.003b"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.003c"
+        "fragility_model": "FEM-2018-SEI|C3011.003c"
     },
     {
         "component": "C.30.1.2.A",
-        "fragility_model": "C3011.003d"
+        "fragility_model": "FEM-2018-SEI|C3011.003d"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001a"
+        "fragility_model": "FEM-2018-SEI|C3021.001a"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001b"
+        "fragility_model": "FEM-2018-SEI|C3021.001b"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001c"
+        "fragility_model": "FEM-2018-SEI|C3021.001c"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001d"
+        "fragility_model": "FEM-2018-SEI|C3021.001d"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001e"
+        "fragility_model": "FEM-2018-SEI|C3021.001e"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001f"
+        "fragility_model": "FEM-2018-SEI|C3021.001f"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001g"
+        "fragility_model": "FEM-2018-SEI|C3021.001g"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001h"
+        "fragility_model": "FEM-2018-SEI|C3021.001h"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001i"
+        "fragility_model": "FEM-2018-SEI|C3021.001i"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001j"
+        "fragility_model": "FEM-2018-SEI|C3021.001j"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001k"
+        "fragility_model": "FEM-2018-SEI|C3021.001k"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001l"
+        "fragility_model": "FEM-2018-SEI|C3021.001l"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001m"
+        "fragility_model": "FEM-2018-SEI|C3021.001m"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001n"
+        "fragility_model": "FEM-2018-SEI|C3021.001n"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001o"
+        "fragility_model": "FEM-2018-SEI|C3021.001o"
     },
     {
         "component": "C.30.2.1.A",
-        "fragility_model": "C3021.001p"
+        "fragility_model": "FEM-2018-SEI|C3021.001p"
     },
     {
         "component": "C.30.2.7.A",
-        "fragility_model": "C3027.001"
+        "fragility_model": "FEM-2018-SEI|C3027.001"
     },
     {
         "component": "C.30.2.7.A",
-        "fragility_model": "C3027.002"
+        "fragility_model": "FEM-2018-SEI|C3027.002"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.001a"
+        "fragility_model": "FEM-2018-SEI|C3032.001a"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.001b"
+        "fragility_model": "FEM-2018-SEI|C3032.001b"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.001c"
+        "fragility_model": "FEM-2018-SEI|C3032.001c"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.001d"
+        "fragility_model": "FEM-2018-SEI|C3032.001d"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.003a"
+        "fragility_model": "FEM-2018-SEI|C3032.003a"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.003b"
+        "fragility_model": "FEM-2018-SEI|C3032.003b"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.003c"
+        "fragility_model": "FEM-2018-SEI|C3032.003c"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.003d"
+        "fragility_model": "FEM-2018-SEI|C3032.003d"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.004a"
+        "fragility_model": "FEM-2018-SEI|C3032.004a"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.004b"
+        "fragility_model": "FEM-2018-SEI|C3032.004b"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.004c"
+        "fragility_model": "FEM-2018-SEI|C3032.004c"
     },
     {
         "component": "C.30.3.2.A",
-        "fragility_model": "C3032.004d"
+        "fragility_model": "FEM-2018-SEI|C3032.004d"
     },
     {
         "component": "D.50.2.2.A",
-        "fragility_model": "C3034.001"
+        "fragility_model": "FEM-2018-SEI|C3034.001"
     },
     {
         "component": "D.50.2.2.A",
-        "fragility_model": "C3034.002"
+        "fragility_model": "FEM-2018-SEI|C3034.002"
     },
     {
         "component": "D.10.1.1.A",
-        "fragility_model": "D1014.011"
+        "fragility_model": "FEM-2018-SEI|D1014.011"
     },
     {
         "component": "D.10.1.1.A",
-        "fragility_model": "D1014.012"
+        "fragility_model": "FEM-2018-SEI|D1014.012"
     },
     {
         "component": "D.10.1.1.B",
-        "fragility_model": "D1014.021"
+        "fragility_model": "FEM-2018-SEI|D1014.021"
     },
     {
         "component": "D.10.1.1.B",
-        "fragility_model": "D1014.022"
+        "fragility_model": "FEM-2018-SEI|D1014.022"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.023a"
+        "fragility_model": "FEM-2018-SEI|D2061.023a"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.023b"
+        "fragility_model": "FEM-2018-SEI|D2061.023b"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.024a"
+        "fragility_model": "FEM-2018-SEI|D2061.024a"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.024b"
+        "fragility_model": "FEM-2018-SEI|D2061.024b"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.011a"
+        "fragility_model": "FEM-2018-SEI|D3031.011a"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.011b"
+        "fragility_model": "FEM-2018-SEI|D3031.011b"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.011c"
+        "fragility_model": "FEM-2018-SEI|D3031.011c"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.011d"
+        "fragility_model": "FEM-2018-SEI|D3031.011d"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012a"
+        "fragility_model": "FEM-2018-SEI|D3031.012a"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012b"
+        "fragility_model": "FEM-2018-SEI|D3031.012b"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012c"
+        "fragility_model": "FEM-2018-SEI|D3031.012c"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012d"
+        "fragility_model": "FEM-2018-SEI|D3031.012d"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012e"
+        "fragility_model": "FEM-2018-SEI|D3031.012e"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012f"
+        "fragility_model": "FEM-2018-SEI|D3031.012f"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012g"
+        "fragility_model": "FEM-2018-SEI|D3031.012g"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012h"
+        "fragility_model": "FEM-2018-SEI|D3031.012h"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012i"
+        "fragility_model": "FEM-2018-SEI|D3031.012i"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012j"
+        "fragility_model": "FEM-2018-SEI|D3031.012j"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012k"
+        "fragility_model": "FEM-2018-SEI|D3031.012k"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.012l"
+        "fragility_model": "FEM-2018-SEI|D3031.012l"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013a"
+        "fragility_model": "FEM-2018-SEI|D3031.013a"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013b"
+        "fragility_model": "FEM-2018-SEI|D3031.013b"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013c"
+        "fragility_model": "FEM-2018-SEI|D3031.013c"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013d"
+        "fragility_model": "FEM-2018-SEI|D3031.013d"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013e"
+        "fragility_model": "FEM-2018-SEI|D3031.013e"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013f"
+        "fragility_model": "FEM-2018-SEI|D3031.013f"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013g"
+        "fragility_model": "FEM-2018-SEI|D3031.013g"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013h"
+        "fragility_model": "FEM-2018-SEI|D3031.013h"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013i"
+        "fragility_model": "FEM-2018-SEI|D3031.013i"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013j"
+        "fragility_model": "FEM-2018-SEI|D3031.013j"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013k"
+        "fragility_model": "FEM-2018-SEI|D3031.013k"
     },
     {
         "component": "D.30.3.1.A",
-        "fragility_model": "D3031.013l"
+        "fragility_model": "FEM-2018-SEI|D3031.013l"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.021a"
+        "fragility_model": "FEM-2018-SEI|D3031.021a"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.021b"
+        "fragility_model": "FEM-2018-SEI|D3031.021b"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.021c"
+        "fragility_model": "FEM-2018-SEI|D3031.021c"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.021d"
+        "fragility_model": "FEM-2018-SEI|D3031.021d"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022a"
+        "fragility_model": "FEM-2018-SEI|D3031.022a"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022b"
+        "fragility_model": "FEM-2018-SEI|D3031.022b"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022c"
+        "fragility_model": "FEM-2018-SEI|D3031.022c"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022d"
+        "fragility_model": "FEM-2018-SEI|D3031.022d"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022e"
+        "fragility_model": "FEM-2018-SEI|D3031.022e"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022f"
+        "fragility_model": "FEM-2018-SEI|D3031.022f"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022g"
+        "fragility_model": "FEM-2018-SEI|D3031.022g"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022h"
+        "fragility_model": "FEM-2018-SEI|D3031.022h"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022i"
+        "fragility_model": "FEM-2018-SEI|D3031.022i"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022j"
+        "fragility_model": "FEM-2018-SEI|D3031.022j"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022k"
+        "fragility_model": "FEM-2018-SEI|D3031.022k"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.022l"
+        "fragility_model": "FEM-2018-SEI|D3031.022l"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023a"
+        "fragility_model": "FEM-2018-SEI|D3031.023a"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023b"
+        "fragility_model": "FEM-2018-SEI|D3031.023b"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023c"
+        "fragility_model": "FEM-2018-SEI|D3031.023c"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023d"
+        "fragility_model": "FEM-2018-SEI|D3031.023d"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023e"
+        "fragility_model": "FEM-2018-SEI|D3031.023e"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023f"
+        "fragility_model": "FEM-2018-SEI|D3031.023f"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023g"
+        "fragility_model": "FEM-2018-SEI|D3031.023g"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023h"
+        "fragility_model": "FEM-2018-SEI|D3031.023h"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023i"
+        "fragility_model": "FEM-2018-SEI|D3031.023i"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023j"
+        "fragility_model": "FEM-2018-SEI|D3031.023j"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023k"
+        "fragility_model": "FEM-2018-SEI|D3031.023k"
     },
     {
         "component": "D.30.3.1.B",
-        "fragility_model": "D3031.023l"
+        "fragility_model": "FEM-2018-SEI|D3031.023l"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.011a"
+        "fragility_model": "FEM-2018-SEI|D3032.011a"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.011b"
+        "fragility_model": "FEM-2018-SEI|D3032.011b"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.011c"
+        "fragility_model": "FEM-2018-SEI|D3032.011c"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.011d"
+        "fragility_model": "FEM-2018-SEI|D3032.011d"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012a"
+        "fragility_model": "FEM-2018-SEI|D3032.012a"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012b"
+        "fragility_model": "FEM-2018-SEI|D3032.012b"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012c"
+        "fragility_model": "FEM-2018-SEI|D3032.012c"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012d"
+        "fragility_model": "FEM-2018-SEI|D3032.012d"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012e"
+        "fragility_model": "FEM-2018-SEI|D3032.012e"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012f"
+        "fragility_model": "FEM-2018-SEI|D3032.012f"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012g"
+        "fragility_model": "FEM-2018-SEI|D3032.012g"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012h"
+        "fragility_model": "FEM-2018-SEI|D3032.012h"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012i"
+        "fragility_model": "FEM-2018-SEI|D3032.012i"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012j"
+        "fragility_model": "FEM-2018-SEI|D3032.012j"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012k"
+        "fragility_model": "FEM-2018-SEI|D3032.012k"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.012l"
+        "fragility_model": "FEM-2018-SEI|D3032.012l"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013a"
+        "fragility_model": "FEM-2018-SEI|D3032.013a"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013b"
+        "fragility_model": "FEM-2018-SEI|D3032.013b"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013c"
+        "fragility_model": "FEM-2018-SEI|D3032.013c"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013d"
+        "fragility_model": "FEM-2018-SEI|D3032.013d"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013e"
+        "fragility_model": "FEM-2018-SEI|D3032.013e"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013f"
+        "fragility_model": "FEM-2018-SEI|D3032.013f"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013g"
+        "fragility_model": "FEM-2018-SEI|D3032.013g"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013h"
+        "fragility_model": "FEM-2018-SEI|D3032.013h"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013i"
+        "fragility_model": "FEM-2018-SEI|D3032.013i"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013j"
+        "fragility_model": "FEM-2018-SEI|D3032.013j"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013k"
+        "fragility_model": "FEM-2018-SEI|D3032.013k"
     },
     {
         "component": "D.30.3.2.A",
-        "fragility_model": "D3032.013l"
+        "fragility_model": "FEM-2018-SEI|D3032.013l"
     },
     {
         "component": "D.30.4.1.C",
-        "fragility_model": "D3041.001a"
+        "fragility_model": "FEM-2018-SEI|D3041.001a"
     },
     {
         "component": "D.30.4.1.C",
-        "fragility_model": "D3041.001b"
+        "fragility_model": "FEM-2018-SEI|D3041.001b"
     },
     {
         "component": "D.30.4.1.C",
-        "fragility_model": "D3041.001c"
+        "fragility_model": "FEM-2018-SEI|D3041.001c"
     },
     {
         "component": "D.30.4.1.C",
-        "fragility_model": "D3041.001d"
+        "fragility_model": "FEM-2018-SEI|D3041.001d"
     },
     {
         "component": "D.30.4.1.C",
-        "fragility_model": "D3041.002a"
+        "fragility_model": "FEM-2018-SEI|D3041.002a"
     },
     {
         "component": "D.30.4.1.C",
-        "fragility_model": "D3041.002b"
+        "fragility_model": "FEM-2018-SEI|D3041.002b"
     },
     {
         "component": "D.30.4.1.C",
-        "fragility_model": "D3041.002c"
+        "fragility_model": "FEM-2018-SEI|D3041.002c"
     },
     {
         "component": "D.30.4.1.C",
-        "fragility_model": "D3041.002d"
+        "fragility_model": "FEM-2018-SEI|D3041.002d"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.011a"
+        "fragility_model": "FEM-2018-SEI|D3041.011a"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.011b"
+        "fragility_model": "FEM-2018-SEI|D3041.011b"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.011c"
+        "fragility_model": "FEM-2018-SEI|D3041.011c"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.011d"
+        "fragility_model": "FEM-2018-SEI|D3041.011d"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.012a"
+        "fragility_model": "FEM-2018-SEI|D3041.012a"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.012b"
+        "fragility_model": "FEM-2018-SEI|D3041.012b"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.012c"
+        "fragility_model": "FEM-2018-SEI|D3041.012c"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.012d"
+        "fragility_model": "FEM-2018-SEI|D3041.012d"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.021a"
+        "fragility_model": "FEM-2018-SEI|D3041.021a"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.021b"
+        "fragility_model": "FEM-2018-SEI|D3041.021b"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.021c"
+        "fragility_model": "FEM-2018-SEI|D3041.021c"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.021d"
+        "fragility_model": "FEM-2018-SEI|D3041.021d"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.022a"
+        "fragility_model": "FEM-2018-SEI|D3041.022a"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.022b"
+        "fragility_model": "FEM-2018-SEI|D3041.022b"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.022c"
+        "fragility_model": "FEM-2018-SEI|D3041.022c"
     },
     {
         "component": "D.30.4.1.A",
-        "fragility_model": "D3041.022d"
+        "fragility_model": "FEM-2018-SEI|D3041.022d"
     },
     {
         "component": "D.30.4.1.B",
-        "fragility_model": "D3041.031a"
+        "fragility_model": "FEM-2018-SEI|D3041.031a"
     },
     {
         "component": "D.30.4.1.B",
-        "fragility_model": "D3041.031b"
+        "fragility_model": "FEM-2018-SEI|D3041.031b"
     },
     {
         "component": "D.30.4.1.B",
-        "fragility_model": "D3041.032a"
+        "fragility_model": "FEM-2018-SEI|D3041.032a"
     },
     {
         "component": "D.30.4.1.B",
-        "fragility_model": "D3041.032b"
+        "fragility_model": "FEM-2018-SEI|D3041.032b"
     },
     {
         "component": "D.30.4.1.B",
-        "fragility_model": "D3041.032c"
+        "fragility_model": "FEM-2018-SEI|D3041.032c"
     },
     {
         "component": "D.30.4.1.B",
-        "fragility_model": "D3041.032d"
+        "fragility_model": "FEM-2018-SEI|D3041.032d"
     },
     {
         "component": "D.30.4.1.D",
-        "fragility_model": "D3041.041a"
+        "fragility_model": "FEM-2018-SEI|D3041.041a"
     },
     {
         "component": "D.30.4.1.D",
-        "fragility_model": "D3041.041b"
+        "fragility_model": "FEM-2018-SEI|D3041.041b"
     },
     {
         "component": "D.30.4.2.A",
-        "fragility_model": "D3041.101a"
+        "fragility_model": "FEM-2018-SEI|D3041.101a"
     },
     {
         "component": "D.30.4.2.A",
-        "fragility_model": "D3041.102a"
+        "fragility_model": "FEM-2018-SEI|D3041.102a"
     },
     {
         "component": "D.30.4.2.A",
-        "fragility_model": "D3041.102b"
+        "fragility_model": "FEM-2018-SEI|D3041.102b"
     },
     {
         "component": "D.30.4.2.A",
-        "fragility_model": "D3041.102c"
+        "fragility_model": "FEM-2018-SEI|D3041.102c"
     },
     {
         "component": "D.30.4.2.A",
-        "fragility_model": "D3041.103a"
+        "fragility_model": "FEM-2018-SEI|D3041.103a"
     },
     {
         "component": "D.30.4.2.A",
-        "fragility_model": "D3041.103b"
+        "fragility_model": "FEM-2018-SEI|D3041.103b"
     },
     {
         "component": "D.30.4.2.A",
-        "fragility_model": "D3041.103c"
+        "fragility_model": "FEM-2018-SEI|D3041.103c"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.011a"
+        "fragility_model": "FEM-2018-SEI|D3052.011a"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.011b"
+        "fragility_model": "FEM-2018-SEI|D3052.011b"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.011c"
+        "fragility_model": "FEM-2018-SEI|D3052.011c"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.011d"
+        "fragility_model": "FEM-2018-SEI|D3052.011d"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013a"
+        "fragility_model": "FEM-2018-SEI|D3052.013a"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013b"
+        "fragility_model": "FEM-2018-SEI|D3052.013b"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013c"
+        "fragility_model": "FEM-2018-SEI|D3052.013c"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013d"
+        "fragility_model": "FEM-2018-SEI|D3052.013d"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013e"
+        "fragility_model": "FEM-2018-SEI|D3052.013e"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013f"
+        "fragility_model": "FEM-2018-SEI|D3052.013f"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013g"
+        "fragility_model": "FEM-2018-SEI|D3052.013g"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013h"
+        "fragility_model": "FEM-2018-SEI|D3052.013h"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013i"
+        "fragility_model": "FEM-2018-SEI|D3052.013i"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013j"
+        "fragility_model": "FEM-2018-SEI|D3052.013j"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013k"
+        "fragility_model": "FEM-2018-SEI|D3052.013k"
     },
     {
         "component": "D.30.5.2.A",
-        "fragility_model": "D3052.013l"
+        "fragility_model": "FEM-2018-SEI|D3052.013l"
     },
     {
         "component": "D.30.6.7.A",
-        "fragility_model": "D3067.011a"
+        "fragility_model": "FEM-2018-SEI|D3067.011a"
     },
     {
         "component": "D.30.6.7.A",
-        "fragility_model": "D3067.012a"
+        "fragility_model": "FEM-2018-SEI|D3067.012a"
     },
     {
         "component": "D.30.6.7.A",
-        "fragility_model": "D3067.012b"
+        "fragility_model": "FEM-2018-SEI|D3067.012b"
     },
     {
         "component": "D.30.6.7.A",
-        "fragility_model": "D3067.012c"
+        "fragility_model": "FEM-2018-SEI|D3067.012c"
     },
     {
         "component": "D.40.1.1.A",
-        "fragility_model": "D4011.021a"
+        "fragility_model": "FEM-2018-SEI|D4011.021a"
     },
     {
         "component": "D.40.1.1.A",
-        "fragility_model": "D4011.022a"
+        "fragility_model": "FEM-2018-SEI|D4011.022a"
     },
     {
         "component": "D.40.1.1.A",
-        "fragility_model": "D4011.023a"
+        "fragility_model": "FEM-2018-SEI|D4011.023a"
     },
     {
         "component": "D.40.1.1.A",
-        "fragility_model": "D4011.024a"
+        "fragility_model": "FEM-2018-SEI|D4011.024a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.031a"
+        "fragility_model": "FEM-2018-SEI|D4011.031a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.032a"
+        "fragility_model": "FEM-2018-SEI|D4011.032a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.033a"
+        "fragility_model": "FEM-2018-SEI|D4011.033a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.034a"
+        "fragility_model": "FEM-2018-SEI|D4011.034a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.041a"
+        "fragility_model": "FEM-2018-SEI|D4011.041a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.042a"
+        "fragility_model": "FEM-2018-SEI|D4011.042a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.053a"
+        "fragility_model": "FEM-2018-SEI|D4011.053a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.054a"
+        "fragility_model": "FEM-2018-SEI|D4011.054a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.063a"
+        "fragility_model": "FEM-2018-SEI|D4011.063a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.064a"
+        "fragility_model": "FEM-2018-SEI|D4011.064a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.071a"
+        "fragility_model": "FEM-2018-SEI|D4011.071a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.072a"
+        "fragility_model": "FEM-2018-SEI|D4011.072a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.073a"
+        "fragility_model": "FEM-2018-SEI|D4011.073a"
     },
     {
         "component": "D.40.1.1.B",
-        "fragility_model": "D4011.074a"
+        "fragility_model": "FEM-2018-SEI|D4011.074a"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.011a"
+        "fragility_model": "FEM-2018-SEI|D5011.011a"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.011b"
+        "fragility_model": "FEM-2018-SEI|D5011.011b"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.011c"
+        "fragility_model": "FEM-2018-SEI|D5011.011c"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.011d"
+        "fragility_model": "FEM-2018-SEI|D5011.011d"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013a"
+        "fragility_model": "FEM-2018-SEI|D5011.013a"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013b"
+        "fragility_model": "FEM-2018-SEI|D5011.013b"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013c"
+        "fragility_model": "FEM-2018-SEI|D5011.013c"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013d"
+        "fragility_model": "FEM-2018-SEI|D5011.013d"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013e"
+        "fragility_model": "FEM-2018-SEI|D5011.013e"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013f"
+        "fragility_model": "FEM-2018-SEI|D5011.013f"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013g"
+        "fragility_model": "FEM-2018-SEI|D5011.013g"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013h"
+        "fragility_model": "FEM-2018-SEI|D5011.013h"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013i"
+        "fragility_model": "FEM-2018-SEI|D5011.013i"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013j"
+        "fragility_model": "FEM-2018-SEI|D5011.013j"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013k"
+        "fragility_model": "FEM-2018-SEI|D5011.013k"
     },
     {
         "component": "D.50.1.1.A",
-        "fragility_model": "D5011.013l"
+        "fragility_model": "FEM-2018-SEI|D5011.013l"
     },
     {
         "component": "D.50.1.2.A",
-        "fragility_model": "D5012.013a"
+        "fragility_model": "FEM-2018-SEI|D5012.013a"
     },
     {
         "component": "D.50.1.2.A",
-        "fragility_model": "D5012.013b"
+        "fragility_model": "FEM-2018-SEI|D5012.013b"
     },
     {
         "component": "D.50.1.2.A",
-        "fragility_model": "D5012.013c"
+        "fragility_model": "FEM-2018-SEI|D5012.013c"
     },
     {
         "component": "D.50.1.2.A",
-        "fragility_model": "D5012.013d"
+        "fragility_model": "FEM-2018-SEI|D5012.013d"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.021a"
+        "fragility_model": "FEM-2018-SEI|D5012.021a"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.021b"
+        "fragility_model": "FEM-2018-SEI|D5012.021b"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.021c"
+        "fragility_model": "FEM-2018-SEI|D5012.021c"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.021d"
+        "fragility_model": "FEM-2018-SEI|D5012.021d"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023a"
+        "fragility_model": "FEM-2018-SEI|D5012.023a"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023b"
+        "fragility_model": "FEM-2018-SEI|D5012.023b"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023c"
+        "fragility_model": "FEM-2018-SEI|D5012.023c"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023d"
+        "fragility_model": "FEM-2018-SEI|D5012.023d"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023e"
+        "fragility_model": "FEM-2018-SEI|D5012.023e"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023f"
+        "fragility_model": "FEM-2018-SEI|D5012.023f"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023g"
+        "fragility_model": "FEM-2018-SEI|D5012.023g"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023h"
+        "fragility_model": "FEM-2018-SEI|D5012.023h"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023i"
+        "fragility_model": "FEM-2018-SEI|D5012.023i"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023j"
+        "fragility_model": "FEM-2018-SEI|D5012.023j"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023k"
+        "fragility_model": "FEM-2018-SEI|D5012.023k"
     },
     {
         "component": "D.50.1.2.B",
-        "fragility_model": "D5012.023l"
+        "fragility_model": "FEM-2018-SEI|D5012.023l"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.031a"
+        "fragility_model": "FEM-2018-SEI|D5012.031a"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.031b"
+        "fragility_model": "FEM-2018-SEI|D5012.031b"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.031c"
+        "fragility_model": "FEM-2018-SEI|D5012.031c"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.031d"
+        "fragility_model": "FEM-2018-SEI|D5012.031d"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033a"
+        "fragility_model": "FEM-2018-SEI|D5012.033a"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033b"
+        "fragility_model": "FEM-2018-SEI|D5012.033b"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033c"
+        "fragility_model": "FEM-2018-SEI|D5012.033c"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033d"
+        "fragility_model": "FEM-2018-SEI|D5012.033d"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033e"
+        "fragility_model": "FEM-2018-SEI|D5012.033e"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033f"
+        "fragility_model": "FEM-2018-SEI|D5012.033f"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033g"
+        "fragility_model": "FEM-2018-SEI|D5012.033g"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033h"
+        "fragility_model": "FEM-2018-SEI|D5012.033h"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033i"
+        "fragility_model": "FEM-2018-SEI|D5012.033i"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033j"
+        "fragility_model": "FEM-2018-SEI|D5012.033j"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033k"
+        "fragility_model": "FEM-2018-SEI|D5012.033k"
     },
     {
         "component": "D.50.1.2.C",
-        "fragility_model": "D5012.033l"
+        "fragility_model": "FEM-2018-SEI|D5012.033l"
     },
     {
         "component": "D.50.9.2.A",
-        "fragility_model": "D5092.011a"
+        "fragility_model": "FEM-2018-SEI|D5092.011a"
     },
     {
         "component": "D.50.9.2.A",
-        "fragility_model": "D5092.013a"
+        "fragility_model": "FEM-2018-SEI|D5092.013a"
     },
     {
         "component": "D.50.9.2.A",
-        "fragility_model": "D5092.013b"
+        "fragility_model": "FEM-2018-SEI|D5092.013b"
     },
     {
         "component": "D.50.9.2.A",
-        "fragility_model": "D5092.013c"
+        "fragility_model": "FEM-2018-SEI|D5092.013c"
     },
     {
         "component": "D.50.9.2.B",
-        "fragility_model": "D5092.021a"
+        "fragility_model": "FEM-2018-SEI|D5092.021a"
     },
     {
         "component": "D.50.9.2.B",
-        "fragility_model": "D5092.023a"
+        "fragility_model": "FEM-2018-SEI|D5092.023a"
     },
     {
         "component": "D.50.9.2.B",
-        "fragility_model": "D5092.023b"
+        "fragility_model": "FEM-2018-SEI|D5092.023b"
     },
     {
         "component": "D.50.9.2.B",
-        "fragility_model": "D5092.023c"
+        "fragility_model": "FEM-2018-SEI|D5092.023c"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.031a"
+        "fragility_model": "FEM-2018-SEI|D5092.031a"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.031b"
+        "fragility_model": "FEM-2018-SEI|D5092.031b"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.031c"
+        "fragility_model": "FEM-2018-SEI|D5092.031c"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.031d"
+        "fragility_model": "FEM-2018-SEI|D5092.031d"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032a"
+        "fragility_model": "FEM-2018-SEI|D5092.032a"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032b"
+        "fragility_model": "FEM-2018-SEI|D5092.032b"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032c"
+        "fragility_model": "FEM-2018-SEI|D5092.032c"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032d"
+        "fragility_model": "FEM-2018-SEI|D5092.032d"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032e"
+        "fragility_model": "FEM-2018-SEI|D5092.032e"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032f"
+        "fragility_model": "FEM-2018-SEI|D5092.032f"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032g"
+        "fragility_model": "FEM-2018-SEI|D5092.032g"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032h"
+        "fragility_model": "FEM-2018-SEI|D5092.032h"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032i"
+        "fragility_model": "FEM-2018-SEI|D5092.032i"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032j"
+        "fragility_model": "FEM-2018-SEI|D5092.032j"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032k"
+        "fragility_model": "FEM-2018-SEI|D5092.032k"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.032l"
+        "fragility_model": "FEM-2018-SEI|D5092.032l"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033a"
+        "fragility_model": "FEM-2018-SEI|D5092.033a"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033b"
+        "fragility_model": "FEM-2018-SEI|D5092.033b"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033c"
+        "fragility_model": "FEM-2018-SEI|D5092.033c"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033d"
+        "fragility_model": "FEM-2018-SEI|D5092.033d"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033e"
+        "fragility_model": "FEM-2018-SEI|D5092.033e"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033f"
+        "fragility_model": "FEM-2018-SEI|D5092.033f"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033g"
+        "fragility_model": "FEM-2018-SEI|D5092.033g"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033h"
+        "fragility_model": "FEM-2018-SEI|D5092.033h"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033i"
+        "fragility_model": "FEM-2018-SEI|D5092.033i"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033j"
+        "fragility_model": "FEM-2018-SEI|D5092.033j"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033k"
+        "fragility_model": "FEM-2018-SEI|D5092.033k"
     },
     {
         "component": "D.50.9.2.C",
-        "fragility_model": "D5092.033l"
+        "fragility_model": "FEM-2018-SEI|D5092.033l"
     },
     {
         "component": "E.20.2.2.A",
-        "fragility_model": "E2022.001"
+        "fragility_model": "FEM-2018-SEI|E2022.001"
     },
     {
         "component": "E.20.2.2.B",
-        "fragility_model": "E2022.010"
+        "fragility_model": "FEM-2018-SEI|E2022.010"
     },
     {
         "component": "E.20.2.2.B",
-        "fragility_model": "E2022.011"
+        "fragility_model": "FEM-2018-SEI|E2022.011"
     },
     {
         "component": "E.20.2.2.B",
-        "fragility_model": "E2022.012"
+        "fragility_model": "FEM-2018-SEI|E2022.012"
     },
     {
         "component": "E.20.2.2.B",
-        "fragility_model": "E2022.013"
+        "fragility_model": "FEM-2018-SEI|E2022.013"
     },
     {
         "component": "E.20.2.2.C",
-        "fragility_model": "E2022.020"
+        "fragility_model": "FEM-2018-SEI|E2022.020"
     },
     {
         "component": "E.20.2.2.C",
-        "fragility_model": "E2022.021"
+        "fragility_model": "FEM-2018-SEI|E2022.021"
     },
     {
         "component": "E.20.2.2.C",
-        "fragility_model": "E2022.022"
+        "fragility_model": "FEM-2018-SEI|E2022.022"
     },
     {
         "component": "E.20.2.2.C",
-        "fragility_model": "E2022.023"
+        "fragility_model": "FEM-2018-SEI|E2022.023"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.102a"
+        "fragility_model": "FEM-2018-SEI|E2022.102a"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.102b"
+        "fragility_model": "FEM-2018-SEI|E2022.102b"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.103a"
+        "fragility_model": "FEM-2018-SEI|E2022.103a"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.103b"
+        "fragility_model": "FEM-2018-SEI|E2022.103b"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.104a"
+        "fragility_model": "FEM-2018-SEI|E2022.104a"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.104b"
+        "fragility_model": "FEM-2018-SEI|E2022.104b"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.105a"
+        "fragility_model": "FEM-2018-SEI|E2022.105a"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.105b"
+        "fragility_model": "FEM-2018-SEI|E2022.105b"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.106a"
+        "fragility_model": "FEM-2018-SEI|E2022.106a"
     },
     {
         "component": "E.20.2.2.D",
-        "fragility_model": "E2022.106b"
+        "fragility_model": "FEM-2018-SEI|E2022.106b"
     },
     {
         "component": "E.20.2.2.E",
-        "fragility_model": "E2022.112a"
+        "fragility_model": "FEM-2018-SEI|E2022.112a"
     },
     {
         "component": "E.20.2.2.E",
-        "fragility_model": "E2022.112b"
+        "fragility_model": "FEM-2018-SEI|E2022.112b"
     },
     {
         "component": "E.20.2.2.E",
-        "fragility_model": "E2022.114a"
+        "fragility_model": "FEM-2018-SEI|E2022.114a"
     },
     {
         "component": "E.20.2.2.E",
-        "fragility_model": "E2022.114b"
+        "fragility_model": "FEM-2018-SEI|E2022.114b"
     },
     {
         "component": "E.20.2.2.E",
-        "fragility_model": "E2022.124a"
+        "fragility_model": "FEM-2018-SEI|E2022.124a"
     },
     {
         "component": "E.20.2.2.E",
-        "fragility_model": "E2022.124b"
+        "fragility_model": "FEM-2018-SEI|E2022.124b"
     },
     {
         "component": "E.20.2.2.E",
-        "fragility_model": "E2022.125a"
+        "fragility_model": "FEM-2018-SEI|E2022.125a"
     },
     {
         "component": "E.20.2.2.E",
-        "fragility_model": "E2022.125b"
+        "fragility_model": "FEM-2018-SEI|E2022.125b"
     },
     {
         "component": "F.10.1.2.A",
-        "fragility_model": "F1012.001"
+        "fragility_model": "FEM-2018-SEI|F1012.001"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.011a"
+        "fragility_model": "FEM-2018-SEI|D2021.011a"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.011b"
+        "fragility_model": "FEM-2018-SEI|D2021.011b"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.012a"
+        "fragility_model": "FEM-2018-SEI|D2021.012a"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.012b"
+        "fragility_model": "FEM-2018-SEI|D2021.012b"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.013a"
+        "fragility_model": "FEM-2018-SEI|D2021.013a"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.013b"
+        "fragility_model": "FEM-2018-SEI|D2021.013b"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.014a"
+        "fragility_model": "FEM-2018-SEI|D2021.014a"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.014b"
+        "fragility_model": "FEM-2018-SEI|D2021.014b"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.021a"
+        "fragility_model": "FEM-2018-SEI|D2021.021a"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.022a"
+        "fragility_model": "FEM-2018-SEI|D2021.022a"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.023a"
+        "fragility_model": "FEM-2018-SEI|D2021.023a"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.023b"
+        "fragility_model": "FEM-2018-SEI|D2021.023b"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.024a"
+        "fragility_model": "FEM-2018-SEI|D2021.024a"
     },
     {
         "component": "D.20.2.2.A",
-        "fragility_model": "D2021.024b"
+        "fragility_model": "FEM-2018-SEI|D2021.024b"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.011a"
+        "fragility_model": "FEM-2018-SEI|D2022.011a"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.011b"
+        "fragility_model": "FEM-2018-SEI|D2022.011b"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.012a"
+        "fragility_model": "FEM-2018-SEI|D2022.012a"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.012b"
+        "fragility_model": "FEM-2018-SEI|D2022.012b"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.013a"
+        "fragility_model": "FEM-2018-SEI|D2022.013a"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.013b"
+        "fragility_model": "FEM-2018-SEI|D2022.013b"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.014a"
+        "fragility_model": "FEM-2018-SEI|D2022.014a"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.014b"
+        "fragility_model": "FEM-2018-SEI|D2022.014b"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.021a"
+        "fragility_model": "FEM-2018-SEI|D2022.021a"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.022a"
+        "fragility_model": "FEM-2018-SEI|D2022.022a"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.023a"
+        "fragility_model": "FEM-2018-SEI|D2022.023a"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.023b"
+        "fragility_model": "FEM-2018-SEI|D2022.023b"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.024a"
+        "fragility_model": "FEM-2018-SEI|D2022.024a"
     },
     {
         "component": "D.30.4.4.A",
-        "fragility_model": "D2022.024b"
+        "fragility_model": "FEM-2018-SEI|D2022.024b"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.011b"
+        "fragility_model": "FEM-2018-SEI|D2031.011b"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.012b"
+        "fragility_model": "FEM-2018-SEI|D2031.012b"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.013b"
+        "fragility_model": "FEM-2018-SEI|D2031.013b"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.014b"
+        "fragility_model": "FEM-2018-SEI|D2031.014b"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.021a"
+        "fragility_model": "FEM-2018-SEI|D2031.021a"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.021b"
+        "fragility_model": "FEM-2018-SEI|D2031.021b"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.022a"
+        "fragility_model": "FEM-2018-SEI|D2031.022a"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.022b"
+        "fragility_model": "FEM-2018-SEI|D2031.022b"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.023a"
+        "fragility_model": "FEM-2018-SEI|D2031.023a"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.023b"
+        "fragility_model": "FEM-2018-SEI|D2031.023b"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.024a"
+        "fragility_model": "FEM-2018-SEI|D2031.024a"
     },
     {
         "component": "D.20.3.1.A",
-        "fragility_model": "D2031.024b"
+        "fragility_model": "FEM-2018-SEI|D2031.024b"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.011a"
+        "fragility_model": "FEM-2018-SEI|D2051.011a"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.011b"
+        "fragility_model": "FEM-2018-SEI|D2051.011b"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.012a"
+        "fragility_model": "FEM-2018-SEI|D2051.012a"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.012b"
+        "fragility_model": "FEM-2018-SEI|D2051.012b"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.013a"
+        "fragility_model": "FEM-2018-SEI|D2051.013a"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.013b"
+        "fragility_model": "FEM-2018-SEI|D2051.013b"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.014a"
+        "fragility_model": "FEM-2018-SEI|D2051.014a"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.014b"
+        "fragility_model": "FEM-2018-SEI|D2051.014b"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.021a"
+        "fragility_model": "FEM-2018-SEI|D2051.021a"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.021b"
+        "fragility_model": "FEM-2018-SEI|D2051.021b"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.022a"
+        "fragility_model": "FEM-2018-SEI|D2051.022a"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.023a"
+        "fragility_model": "FEM-2018-SEI|D2051.023a"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.023b"
+        "fragility_model": "FEM-2018-SEI|D2051.023b"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.024a"
+        "fragility_model": "FEM-2018-SEI|D2051.024a"
     },
     {
         "component": "D.30.4.5.A",
-        "fragility_model": "D2051.024b"
+        "fragility_model": "FEM-2018-SEI|D2051.024b"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.011a"
+        "fragility_model": "FEM-2018-SEI|D2061.011a"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.011b"
+        "fragility_model": "FEM-2018-SEI|D2061.011b"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.012a"
+        "fragility_model": "FEM-2018-SEI|D2061.012a"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.012b"
+        "fragility_model": "FEM-2018-SEI|D2061.012b"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.013a"
+        "fragility_model": "FEM-2018-SEI|D2061.013a"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.013b"
+        "fragility_model": "FEM-2018-SEI|D2061.013b"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.014a"
+        "fragility_model": "FEM-2018-SEI|D2061.014a"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.014b"
+        "fragility_model": "FEM-2018-SEI|D2061.014b"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.021a"
+        "fragility_model": "FEM-2018-SEI|D2061.021a"
     },
     {
         "component": "D.30.4.3.A",
-        "fragility_model": "D2061.022a"
+        "fragility_model": "FEM-2018-SEI|D2061.022a"
     }
 ]

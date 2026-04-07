@@ -1,7 +1,7 @@
 [
   {
-    "_comment": "This is an example for a FragilityCurve object. The fragility_model references a FragilityModel id, and reference references a Reference id. Use null for optional numeric fields.",
-    "fragility_model": "FM001",
+    "_comment": "This is an example for a FragilityCurve object. The fragility_model references a FragilityModel by fragility_model_id (reference_id|model_id), and reference references a Reference by reference_id. Use null for optional numeric fields.",
+    "fragility_model": "SMITH-2020-EXP|FM001",
     "reviewer": "Example Reviewer Name",
     "source": "Literature",
     "basis": "Experiment",
