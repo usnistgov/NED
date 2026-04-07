@@ -72,14 +72,16 @@ class IngestCommandTests(TransactionTestCase):
 
             fragility_model_data = [
                 {
-                    'id': 'fm-001',
+                    'reference': 'ref-001',
+                    'model_id': 'fm-001',
                     'p58_fragility': 'B2011.001',
                     'comp_detail': 'Standard attachment',
                     'material': 'Steel',
                     'comp_description': 'Cold-formed steel exterior wall system',
                 },
                 {
-                    'id': 'fm-002',
+                    'reference': 'ref-002',
+                    'model_id': 'fm-002',
                     'p58_fragility': '',
                     'comp_detail': 'Anchored',
                     'material': 'Steel tank',
@@ -90,11 +92,11 @@ class IngestCommandTests(TransactionTestCase):
             component_fragility_bridge_data = [
                 {
                     'component': 'B.20.1.1.A',
-                    'fragility_model': 'fm-001',
+                    'fragility_model': 'ref-001|fm-001',
                 },
                 {
                     'component': 'D.30.3.2.B',
-                    'fragility_model': 'fm-002',
+                    'fragility_model': 'ref-002|fm-002',
                 },
             ]
 
@@ -130,17 +132,17 @@ class IngestCommandTests(TransactionTestCase):
             bridge_data = [
                 {
                     'experiment': 'exp-001',
-                    'fragility_model': 'fm-001',
+                    'fragility_model': 'ref-001|fm-001',
                 },
                 {
                     'experiment': 'exp-002',
-                    'fragility_model': 'fm-002',
+                    'fragility_model': 'ref-002|fm-002',
                 },
             ]
 
             fragility_curve_data = [
                 {
-                    'fragility_model': 'fm-001',
+                    'fragility_model': 'ref-001|fm-001',
                     'reference': 'ref-001',
                     'reviewer': 'Test Reviewer',
                     'source': 'Laboratory Testing',
@@ -155,7 +157,7 @@ class IngestCommandTests(TransactionTestCase):
                     'probability': '0.5',
                 },
                 {
-                    'fragility_model': 'fm-001',
+                    'fragility_model': 'ref-001|fm-001',
                     'reference': 'ref-002',
                     'reviewer': 'Test Reviewer',
                     'source': 'Analytical Model',
@@ -170,7 +172,7 @@ class IngestCommandTests(TransactionTestCase):
                     'probability': '0.5',
                 },
                 {
-                    'fragility_model': 'fm-002',
+                    'fragility_model': 'ref-002|fm-002',
                     'reference': 'ref-002',
                     'reviewer': 'Test Reviewer',
                     'source': 'Field Observation',
@@ -228,46 +230,62 @@ class IngestCommandTests(TransactionTestCase):
 
             cfm_bridge_1 = ComponentFragilityModelBridge.objects.get(
                 component__component_id='B.20.1.1.A',
-                fragility_model__id='fm-001',
+                fragility_model__fragility_model_id='ref-001|fm-001',
             )
             self.assertEqual(cfm_bridge_1.component.component_id, 'B.20.1.1.A')
-            self.assertEqual(cfm_bridge_1.fragility_model.id, 'fm-001')
+            self.assertEqual(
+                cfm_bridge_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
+            )
 
             cfm_bridge_2 = ComponentFragilityModelBridge.objects.get(
                 component__component_id='D.30.3.2.B',
-                fragility_model__id='fm-002',
+                fragility_model__fragility_model_id='ref-002|fm-002',
             )
             self.assertEqual(cfm_bridge_2.component.component_id, 'D.30.3.2.B')
-            self.assertEqual(cfm_bridge_2.fragility_model.id, 'fm-002')
+            self.assertEqual(
+                cfm_bridge_2.fragility_model.fragility_model_id, 'ref-002|fm-002'
+            )
 
             bridge_1 = ExperimentFragilityModelBridge.objects.get(
-                experiment__id='exp-001', fragility_model__id='fm-001'
+                experiment__id='exp-001',
+                fragility_model__fragility_model_id='ref-001|fm-001',
             )
             self.assertEqual(bridge_1.experiment.id, 'exp-001')
-            self.assertEqual(bridge_1.fragility_model.id, 'fm-001')
+            self.assertEqual(
+                bridge_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
+            )
 
             bridge_2 = ExperimentFragilityModelBridge.objects.get(
-                experiment__id='exp-002', fragility_model__id='fm-002'
+                experiment__id='exp-002',
+                fragility_model__fragility_model_id='ref-002|fm-002',
             )
             self.assertEqual(bridge_2.experiment.id, 'exp-002')
-            self.assertEqual(bridge_2.fragility_model.id, 'fm-002')
+            self.assertEqual(
+                bridge_2.fragility_model.fragility_model_id, 'ref-002|fm-002'
+            )
 
             fc_1 = FragilityCurve.objects.get(
-                fragility_model__id='fm-001', ds_rank=1
+                fragility_model__fragility_model_id='ref-001|fm-001', ds_rank=1
             )
-            self.assertEqual(fc_1.fragility_model.id, 'fm-001')
+            self.assertEqual(
+                fc_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
+            )
             self.assertEqual(fc_1.reference.reference_id, 'ref-001')
 
             fc_2 = FragilityCurve.objects.get(
-                fragility_model__id='fm-001', ds_rank=2
+                fragility_model__fragility_model_id='ref-001|fm-001', ds_rank=2
             )
-            self.assertEqual(fc_2.fragility_model.id, 'fm-001')
+            self.assertEqual(
+                fc_2.fragility_model.fragility_model_id, 'ref-001|fm-001'
+            )
             self.assertEqual(fc_2.reference.reference_id, 'ref-002')
 
             fc_3 = FragilityCurve.objects.get(
-                fragility_model__id='fm-002', ds_rank=1
+                fragility_model__fragility_model_id='ref-002|fm-002', ds_rank=1
             )
-            self.assertEqual(fc_3.fragility_model.id, 'fm-002')
+            self.assertEqual(
+                fc_3.fragility_model.fragility_model_id, 'ref-002|fm-002'
+            )
             self.assertEqual(fc_3.reference.reference_id, 'ref-002')
 
     def test_ingest_component_id_generation(self):
@@ -562,7 +580,8 @@ class IngestCommandTests(TransactionTestCase):
 
             fragility_model_data = [
                 {
-                    'id': 'fm-idem',
+                    'reference': 'ref-idem',
+                    'model_id': 'fm-idem',
                     'comp_description': 'Original FM Description',
                 }
             ]
@@ -570,7 +589,7 @@ class IngestCommandTests(TransactionTestCase):
             component_fragility_bridge_data = [
                 {
                     'component': 'A.10.1.1',
-                    'fragility_model': 'fm-idem',
+                    'fragility_model': 'ref-idem|fm-idem',
                 }
             ]
 
@@ -589,11 +608,13 @@ class IngestCommandTests(TransactionTestCase):
                 }
             ]
 
-            bridge_data = [{'experiment': 'exp-idem', 'fragility_model': 'fm-idem'}]
+            bridge_data = [
+                {'experiment': 'exp-idem', 'fragility_model': 'ref-idem|fm-idem'}
+            ]
 
             fragility_curve_data = [
                 {
-                    'fragility_model': 'fm-idem',
+                    'fragility_model': 'ref-idem|fm-idem',
                     'reference': 'ref-idem',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
@@ -643,7 +664,7 @@ class IngestCommandTests(TransactionTestCase):
                 comp = Component.objects.get(component_id='A.10.1.1')
                 self.assertEqual(comp.name, 'Original Name')
 
-                fm = FragilityModel.objects.get(id='fm-idem')
+                fm = FragilityModel.objects.get(fragility_model_id='ref-idem|fm-idem')
                 self.assertEqual(fm.comp_description, 'Original FM Description')
 
                 exp = Experiment.objects.get(id='exp-idem')
@@ -702,7 +723,7 @@ class IngestCommandTests(TransactionTestCase):
                 comp.refresh_from_db()
                 self.assertEqual(comp.name, 'Updated Name')
 
-                fm = FragilityModel.objects.get(id='fm-idem')
+                fm = FragilityModel.objects.get(fragility_model_id='ref-idem|fm-idem')
                 fm.refresh_from_db()
                 self.assertEqual(fm.comp_description, 'Updated FM Description')
 
@@ -711,7 +732,8 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(exp.ds_description, 'Updated EXP Description')
 
                 fc = FragilityCurve.objects.get(
-                    fragility_model__id='fm-idem', ds_rank=1
+                    fragility_model__fragility_model_id='ref-idem|fm-idem',
+                    ds_rank=1,
                 )
                 fc.refresh_from_db()
                 self.assertEqual(fc.ds_description, 'Updated FC Description')

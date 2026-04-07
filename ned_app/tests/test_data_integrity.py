@@ -148,7 +148,10 @@ class DataIntegrityTests(TransactionTestCase):
             json_files = {
                 'reference.json': lambda x: x['reference_id'],
                 'component.json': lambda x: x['component_id'],
-                'fragility_model.json': lambda x: x['id'],
+                'fragility_model.json': lambda x: (
+                    x['reference'] or '',
+                    x['model_id'],
+                ),
                 'experiment.json': lambda x: x['id'],
                 'component_fragility_model_bridge.json': lambda x: (
                     x['component'],
