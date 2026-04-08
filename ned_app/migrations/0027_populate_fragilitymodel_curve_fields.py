@@ -22,7 +22,9 @@ def populate_curve_fields(apps, schema_editor):
             # Verify consistency: all curves must share the same values
             distinct_reviewers = curves.values_list('reviewer', flat=True).distinct()
             distinct_sources = curves.values_list('source', flat=True).distinct()
-            distinct_edp_metrics = curves.values_list('edp_metric', flat=True).distinct()
+            distinct_edp_metrics = curves.values_list(
+                'edp_metric', flat=True
+            ).distinct()
             distinct_edp_units = curves.values_list('edp_unit', flat=True).distinct()
 
             assert list(distinct_reviewers).__len__() == 1, (

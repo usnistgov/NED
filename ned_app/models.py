@@ -581,7 +581,8 @@ class FragilityModel(models.Model):
                 name='unique_legacy_model',
             ),
             models.CheckConstraint(
-                condition=models.Q(reference__isnull=True) | ~models.Q(edp_metric=''),
+                condition=models.Q(reference__isnull=True)
+                | ~models.Q(edp_metric=''),
                 name='non_legacy_requires_edp_metric',
             ),
             models.CheckConstraint(

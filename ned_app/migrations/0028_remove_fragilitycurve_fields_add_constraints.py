@@ -32,7 +32,8 @@ class Migration(migrations.Migration):
         migrations.AddConstraint(
             model_name='fragilitymodel',
             constraint=models.CheckConstraint(
-                condition=models.Q(reference__isnull=True) | ~models.Q(edp_metric=''),
+                condition=models.Q(reference__isnull=True)
+                | ~models.Q(edp_metric=''),
                 name='non_legacy_requires_edp_metric',
             ),
         ),

@@ -183,7 +183,7 @@ python manage.py migrate
 Export the migrated database to generate the updated canonical JSON files and fixture:
 ```bash
 python manage.py export_data --output_dir resources/data/
-python manage.py dumpdata --indent 2 --exclude contenttypes --exclude auth.permission -o ned_app/fixtures/initial_data.json
+python manage.py dumpdata ned_app --indent 2 --exclude contenttypes --exclude auth.permission -o ned_app/fixtures/initial_data.json
 ```
 
 #### Step 6: Verification (The "Round-Trip" Protocol)
@@ -349,7 +349,7 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_csl_data
 - **Missing test data**: Ensure test fixtures and sample data are properly set up
 - **Import errors**: Check that all required dependencies are installed with `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
 
-**Test coverage**: The project has 85 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
+**Test coverage**: The project has 84 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
 
 **Data Integrity Tests**: The test suite includes critical end-to-end validation tests that ensure the integrity of the Git-as-Source data pipeline:
 - `test_db_round_trip`: Validates that data can be exported from the database and re-ingested without loss
