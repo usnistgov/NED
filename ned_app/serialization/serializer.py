@@ -161,6 +161,10 @@ class FragilityModelSerializer(serializers.ModelSerializer):
             'material',
             'size_class',
             'comp_description',
+            'reviewer',
+            'source',
+            'edp_metric',
+            'edp_unit',
         ]
 
 
@@ -260,7 +264,7 @@ class ComponentFragilityModelBridgeSerializer(serializers.ModelSerializer):
 
 class FragilityCurveSerializer(serializers.ModelSerializer):
     """
-    Serializer for FragilityCurve with fragility model and reference relationships.
+    Serializer for FragilityCurve with fragility model relationship.
 
     Uses natural keys for foreign key lookups.
     """
@@ -268,21 +272,13 @@ class FragilityCurveSerializer(serializers.ModelSerializer):
     fragility_model = serializers.SlugRelatedField(
         slug_field='fragility_model_id', queryset=FragilityModel.objects.all()
     )
-    reference = serializers.SlugRelatedField(
-        slug_field='reference_id', queryset=Reference.objects.all()
-    )
 
     class Meta:
         model = FragilityCurve
         fields = [
             'fragility_model',
-            'reviewer',
-            'source',
             'basis',
             'num_observations',
-            'reference',
-            'edp_metric',
-            'edp_unit',
             'ds_rank',
             'ds_description',
             'median',
