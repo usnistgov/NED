@@ -440,6 +440,8 @@ class FragilityModelSerializerTest(TestCase):
             'reference': 'test-ref-fm-001',
             'model_id': 'test-fm-001',
             'comp_description': 'Test fragility model description',
+            'edp_metric': 'Story Drift Ratio',
+            'edp_unit': 'Ratio',
         }
 
         serializer = FragilityModelSerializer(data=valid_data)
@@ -590,6 +592,8 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
             reference=self.reference,
             model_id='test-fm-001',
             comp_description='Test fragility model',
+            edp_metric='Story Drift Ratio',
+            edp_unit='Ratio',
         )
 
     def test_serializer_creates_bridge_with_valid_foreign_keys(self):
@@ -670,6 +674,8 @@ class ComponentFragilityModelBridgeSerializerTest(TestCase):
             reference=self.reference,
             model_id='test-fm-001',
             comp_description='Test fragility model',
+            edp_metric='Story Drift Ratio',
+            edp_unit='Ratio',
         )
 
     def test_serializer_creates_bridge_with_valid_foreign_keys(self):
@@ -744,15 +750,14 @@ class FragilityCurveSerializerTest(TestCase):
             reference=self.reference,
             model_id='test-fm-001',
             comp_description='Test fragility model',
+            edp_metric='Story Drift Ratio',
+            edp_unit='Ratio',
         )
 
     def test_serializer_creates_fragility_curve_with_valid_foreign_keys(self):
-        """Test that serializer successfully validates and saves with valid fragility_model and reference IDs."""
+        """Test that serializer successfully validates and saves with valid fragility_model ID."""
         valid_data = {
             'fragility_model': 'test-ref-001|test-fm-001',
-            'reference': 'test-ref-001',
-            'edp_metric': 'Story Drift Ratio',
-            'edp_unit': 'Ratio',
             'ds_description': 'Test damage state description',
             'median': 0.01,
             'beta': 0.5,
@@ -769,15 +774,11 @@ class FragilityCurveSerializerTest(TestCase):
             fragility_curve.fragility_model.fragility_model_id,
             'test-ref-001|test-fm-001',
         )
-        self.assertEqual(fragility_curve.reference.reference_id, 'test-ref-001')
 
     def test_serializer_rejects_nonexistent_fragility_model(self):
         """Test that serializer rejects data with a non-existent fragility_model ID."""
         invalid_data = {
             'fragility_model': 'nonexistent-fm',
-            'reference': 'test-ref-001',
-            'edp_metric': 'Story Drift Ratio',
-            'edp_unit': 'Ratio',
             'ds_description': 'Test damage state description',
             'median': 0.01,
             'beta': 0.5,
@@ -788,24 +789,6 @@ class FragilityCurveSerializerTest(TestCase):
 
         self.assertFalse(serializer.is_valid())
         self.assertIn('fragility_model', serializer.errors)
-
-    def test_serializer_rejects_nonexistent_reference(self):
-        """Test that serializer rejects data with a non-existent reference ID."""
-        invalid_data = {
-            'fragility_model': 'test-ref-001|test-fm-001',
-            'reference': 'nonexistent-ref',
-            'edp_metric': 'Story Drift Ratio',
-            'edp_unit': 'Ratio',
-            'ds_description': 'Test damage state description',
-            'median': 0.01,
-            'beta': 0.5,
-            'probability': 0.8,
-        }
-
-        serializer = FragilityCurveSerializer(data=invalid_data)
-
-        self.assertFalse(serializer.is_valid())
-        self.assertIn('reference', serializer.errors)
 
     def tearDown(self):
         """Clean up test data after each test."""
