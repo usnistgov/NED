@@ -779,6 +779,183 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(Reference.objects.count(), 0)
             self.assertEqual(Component.objects.count(), 0)
 
+    def test_ingest_rejects_invalid_choice_in_fragility_model(self):
+        """
+        Verify that ingestion rejects a FragilityModel with an invalid
+        edp_metric while still persisting a sibling valid FragilityModel
+        in the same file.
+
+        This is the negative-path counterpart to the systematic
+        ChoicesValidationTest in test_serializers.py — it confirms that
+        the choice-validation enforced by the serializer also takes
+        effect when records are being processed by the ingest command.
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            reference_data = [
+                {
+                    'reference_id': 'ref-001',
+                    'study_type': 'Experiment',
+                    'csl_data': {
+                        'type': 'article-journal',
+                        'id': 'ref-001',
+                        'title': 'Choices Test Reference',
+                        'author': [{'family': 'Smith', 'given': 'John'}],
+                        'issued': {'date-parts': [[2020]]},
+                    },
+                },
+            ]
+
+            fragility_model_data = [
+                {
+                    'reference': 'ref-001',
+                    'model_id': 'fm-good',
+                    'comp_description': 'Valid fragility model',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
+                },
+                {
+                    'reference': 'ref-001',
+                    'model_id': 'fm-bad',
+                    'comp_description': 'Invalid fragility model',
+                    'edp_metric': '__INVALID_METRIC__',
+                    'edp_unit': 'Ratio',
+                },
+            ]
+
+            files_data = {
+                'reference.json': reference_data,
+                'fragility_model.json': fragility_model_data,
+            }
+
+            for filename, data in files_data.items():
+                filepath = os.path.join(temp_dir, filename)
+                with open(filepath, 'w') as f:
+                    json.dump(data, f)
+
+            def mock_build_path(filename):
+                return os.path.join(temp_dir, filename)
+
+            stdout = StringIO()
+            stderr = StringIO()
+
+            with patch(
+                'ned_app.management.commands.ingest.build_json_data_file_path',
+                side_effect=mock_build_path,
+            ):
+                call_command('ingest', stdout=stdout, stderr=stderr)
+
+            stderr_value = stderr.getvalue()
+
+            # The bad record was reported as failed.
+            self.assertIn('Error processing FragilityModel', stderr_value)
+            self.assertIn('fm-bad', stderr_value)
+
+            # Only the valid FragilityModel was persisted.
+            self.assertEqual(FragilityModel.objects.count(), 1)
+            self.assertTrue(
+                FragilityModel.objects.filter(
+                    fragility_model_id='ref-001|fm-good'
+                ).exists()
+            )
+            self.assertFalse(
+                FragilityModel.objects.filter(
+                    fragility_model_id='ref-001|fm-bad'
+                ).exists()
+            )
+
+    def test_ingest_rejects_invalid_choice_in_experiment(self):
+        """
+        Verify that ingestion rejects an Experiment with an invalid
+        test_type while still persisting a sibling valid Experiment in
+        the same file.
+
+        Complements test_ingest_rejects_invalid_choice_in_fragility_model
+        by exercising a different choice field (test_type, backed by
+        TestTypeChoices) on a different model.
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            reference_data = [
+                {
+                    'reference_id': 'ref-001',
+                    'study_type': 'Experiment',
+                    'csl_data': {
+                        'type': 'article-journal',
+                        'id': 'ref-001',
+                        'title': 'Choices Test Reference',
+                        'author': [{'family': 'Smith', 'given': 'John'}],
+                        'issued': {'date-parts': [[2020]]},
+                    },
+                },
+            ]
+
+            component_data = [
+                {
+                    'component_id': 'B.20.1.1.A',
+                    'name': 'CFS Exterior Walls',
+                },
+            ]
+
+            experiment_data = [
+                {
+                    'id': 'exp-good',
+                    'reference': 'ref-001',
+                    'component': 'B.20.1.1.A',
+                    'test_type': 'Quasi-static Cyclic, uniaxial',
+                    'comp_description': 'Valid experiment',
+                    'ds_description': 'Cracking',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
+                    'edp_value': '0.025',
+                    'ds_class': 'Consequential',
+                },
+                {
+                    'id': 'exp-bad',
+                    'reference': 'ref-001',
+                    'component': 'B.20.1.1.A',
+                    'test_type': '__INVALID_TEST_TYPE__',
+                    'comp_description': 'Invalid experiment',
+                    'ds_description': 'Cracking',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
+                    'edp_value': '0.025',
+                    'ds_class': 'Consequential',
+                },
+            ]
+
+            files_data = {
+                'reference.json': reference_data,
+                'component.json': component_data,
+                'experiment.json': experiment_data,
+            }
+
+            for filename, data in files_data.items():
+                filepath = os.path.join(temp_dir, filename)
+                with open(filepath, 'w') as f:
+                    json.dump(data, f)
+
+            def mock_build_path(filename):
+                return os.path.join(temp_dir, filename)
+
+            stdout = StringIO()
+            stderr = StringIO()
+
+            with patch(
+                'ned_app.management.commands.ingest.build_json_data_file_path',
+                side_effect=mock_build_path,
+            ):
+                call_command('ingest', stdout=stdout, stderr=stderr)
+
+            stderr_value = stderr.getvalue()
+
+            # The bad record was reported as failed.
+            self.assertIn('Error processing Experiment', stderr_value)
+            self.assertIn('exp-bad', stderr_value)
+
+            # Only the valid Experiment was persisted.
+            self.assertEqual(Experiment.objects.count(), 1)
+            self.assertTrue(Experiment.objects.filter(id='exp-good').exists())
+            self.assertFalse(Experiment.objects.filter(id='exp-bad').exists())
+
     def test_ingest_handles_empty_data_directory(self):
         """Test that the command handles empty data directory (no files found) gracefully."""
         with tempfile.TemporaryDirectory() as temp_dir:
