@@ -41,7 +41,7 @@ class ReferenceSerializerTest(TestCase):
         }
 
         self.valid_reference_data = {
-            'id': 'test-serializer-001',
+            'reference_id': 'test-serializer-001',
             'csl_data': self.valid_csl_data,
             'study_type': 'Experiment',
             'comp_type': 'Test Component',
@@ -143,7 +143,7 @@ class ReferenceSerializerTest(TestCase):
                 reference = serializer.save()
 
                 self.assertIsInstance(reference, Reference)
-                self.assertEqual(reference.id, 'test-serializer-001')
+                self.assertEqual(reference.reference_id, 'test-serializer-001')
                 self.assertEqual(reference.csl_data, self.valid_csl_data)
 
                 self.assertEqual(reference.title, 'Test Article for Serializer')
@@ -153,7 +153,7 @@ class ReferenceSerializerTest(TestCase):
     def test_serializer_handles_optional_fields(self):
         """Test that serializer handles optional auto-populated fields correctly."""
         minimal_data = {
-            'id': 'test-serializer-002',
+            'reference_id': 'test-serializer-002',
             'csl_data': {
                 'type': 'article-journal',
                 'id': 'test-serializer-002',
@@ -216,7 +216,7 @@ class ReferenceSerializerTest(TestCase):
         }
 
         complex_data = {
-            'id': 'test-complex-001',
+            'reference_id': 'test-complex-001',
             'csl_data': complex_csl_data,
             'study_type': 'Experiment',
         }
@@ -346,7 +346,7 @@ class ReferenceSerializerTest(TestCase):
 
     def tearDown(self):
         """Clean up test data after each test."""
-        Reference.objects.filter(id__startswith='test-').delete()
+        Reference.objects.filter(reference_id__startswith='test-').delete()
 
 
 class ComponentSerializerTest(TestCase):
@@ -457,7 +457,7 @@ class ExperimentSerializerTest(TestCase):
         )
 
         self.reference = Reference.objects.create(
-            id='test-ref-001',
+            reference_id='test-ref-001',
             csl_data={
                 'type': 'article-journal',
                 'id': 'test-ref-001',
@@ -488,7 +488,7 @@ class ExperimentSerializerTest(TestCase):
 
         self.assertIsNotNone(experiment)
         self.assertEqual(experiment.id, 'test-exp-001')
-        self.assertEqual(experiment.reference.id, 'test-ref-001')
+        self.assertEqual(experiment.reference.reference_id, 'test-ref-001')
         self.assertEqual(experiment.component.component_id, 'A.10.1.1')
 
     def test_serializer_rejects_nonexistent_reference(self):
@@ -520,7 +520,7 @@ class ExperimentSerializerTest(TestCase):
     def tearDown(self):
         """Clean up test data after each test."""
         Experiment.objects.filter(id__startswith='test-exp-').delete()
-        Reference.objects.filter(id__startswith='test-ref-').delete()
+        Reference.objects.filter(reference_id__startswith='test-ref-').delete()
         Component.objects.filter(component_id='A.10.1.1').delete()
 
 
@@ -535,7 +535,7 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
         )
 
         self.reference = Reference.objects.create(
-            id='test-ref-001',
+            reference_id='test-ref-001',
             csl_data={
                 'type': 'article-journal',
                 'id': 'test-ref-001',
@@ -601,7 +601,7 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
         ExperimentFragilityModelBridge.objects.all().delete()
         FragilityModel.objects.filter(id__startswith='test-fm-').delete()
         Experiment.objects.filter(id__startswith='test-exp-').delete()
-        Reference.objects.filter(id__startswith='test-ref-').delete()
+        Reference.objects.filter(reference_id__startswith='test-ref-').delete()
         Component.objects.filter(component_id='A.10.1.1').delete()
 
 
@@ -673,7 +673,7 @@ class FragilityCurveSerializerTest(TestCase):
     def setUp(self):
         """Set up test data."""
         self.reference = Reference.objects.create(
-            id='test-ref-001',
+            reference_id='test-ref-001',
             csl_data={
                 'type': 'article-journal',
                 'id': 'test-ref-001',
@@ -708,7 +708,7 @@ class FragilityCurveSerializerTest(TestCase):
 
         self.assertIsNotNone(fragility_curve)
         self.assertEqual(fragility_curve.fragility_model.id, 'test-fm-001')
-        self.assertEqual(fragility_curve.reference.id, 'test-ref-001')
+        self.assertEqual(fragility_curve.reference.reference_id, 'test-ref-001')
 
     def test_serializer_rejects_nonexistent_fragility_model(self):
         """Test that serializer rejects data with a non-existent fragility_model ID."""
@@ -750,4 +750,4 @@ class FragilityCurveSerializerTest(TestCase):
         """Clean up test data after each test."""
         FragilityCurve.objects.all().delete()
         FragilityModel.objects.filter(id__startswith='test-fm-').delete()
-        Reference.objects.filter(id__startswith='test-ref-').delete()
+        Reference.objects.filter(reference_id__startswith='test-ref-').delete()

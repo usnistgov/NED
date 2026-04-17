@@ -99,7 +99,7 @@ class Command(BaseCommand):
         data = []
         for ref in references:
             ref_data = {
-                'id': ref.id,
+                'reference_id': ref.reference_id,
                 'study_type': ref.study_type,
                 'comp_type': ref.comp_type,
                 'pdf_saved': ref.pdf_saved,

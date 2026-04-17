@@ -27,7 +27,7 @@ class ExportDataCommandTest(TestCase):
         )
 
         self.reference = Reference.objects.create(
-            id='test-ref-001',
+            reference_id='test-ref-001',
             study_type='Experiment',
             comp_type='Test Component Type',
             pdf_saved=True,
@@ -149,7 +149,7 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(len(reference_data), 1)
             ref_data = reference_data[0]
 
-            self.assertEqual(ref_data['id'], 'test-ref-001')
+            self.assertEqual(ref_data['reference_id'], 'test-ref-001')
             self.assertIn('study_type', ref_data)
             self.assertEqual(ref_data['study_type'], 'Experiment')
             self.assertIn('comp_type', ref_data)

@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 'model': Reference,
                 'serializer': ReferenceSerializer,
                 'file': 'reference.json',
-                'lookup_field': ['id'],
+                'lookup_field': ['reference_id'],
             },
             {
                 'model': Component,
@@ -161,7 +161,12 @@ class Command(BaseCommand):
 
             except (ValidationError, Exception) as ex:
                 failed_count += 1
-                record_id = item.get('id') or item.get('component_id') or 'unknown'
+                record_id = (
+                    item.get('id')
+                    or item.get('reference_id')
+                    or item.get('component_id')
+                    or 'unknown'
+                )
                 self.stderr.write(
                     f"Error processing {model_name} record '{record_id}': {ex}"
                 )
