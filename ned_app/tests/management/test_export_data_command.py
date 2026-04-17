@@ -10,6 +10,7 @@ from ned_app.models import (
     Experiment,
     FragilityModel,
     ExperimentFragilityModelBridge,
+    ComponentFragilityModelBridge,
     FragilityCurve,
 )
 
@@ -76,12 +77,18 @@ class ExportDataCommandTest(TestCase):
 
         self.fragility_model = FragilityModel.objects.create(
             id='test-fm-001',
-            component=self.component,
             p58_fragility='B2011.001',
             comp_detail='Steel connection',
             material='Cold-formed steel',
             size_class='Medium',
             comp_description='Test fragility model description',
+        )
+
+        self.component_fragility_bridge = (
+            ComponentFragilityModelBridge.objects.create(
+                component=self.component,
+                fragility_model=self.fragility_model,
+            )
         )
 
         self.bridge = ExperimentFragilityModelBridge.objects.create(
@@ -113,6 +120,7 @@ class ExportDataCommandTest(TestCase):
             'component.json',
             'experiment.json',
             'fragility_model.json',
+            'component_fragility_model_bridge.json',
             'experiment_fragility_model_bridge.json',
             'fragility_curve.json',
         ]
@@ -260,8 +268,7 @@ class ExportDataCommandTest(TestCase):
 
             self.assertIn('id', fm_data)
             self.assertEqual(fm_data['id'], 'test-fm-001')
-            self.assertIn('component', fm_data)
-            self.assertEqual(fm_data['component'], 'B.20.1.1.A')
+            self.assertNotIn('component', fm_data)
 
             self.assertIn('p58_fragility', fm_data)
             self.assertEqual(fm_data['p58_fragility'], 'B2011.001')
@@ -274,6 +281,25 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('comp_description', fm_data)
             self.assertEqual(
                 fm_data['comp_description'], 'Test fragility model description'
+            )
+
+        with open(
+            os.path.join(self.temp_dir, 'component_fragility_model_bridge.json'),
+            'r',
+        ) as f:
+            cfm_bridge_data = json.load(f)
+            self.assertEqual(len(cfm_bridge_data), 1)
+            cfm_bridge = cfm_bridge_data[0]
+
+            self.assertIn('component', cfm_bridge)
+            self.assertEqual(cfm_bridge['component'], 'B.20.1.1.A')
+            self.assertIn('fragility_model', cfm_bridge)
+            self.assertEqual(cfm_bridge['fragility_model'], 'test-fm-001')
+
+            self.assertEqual(
+                len(cfm_bridge.keys()),
+                2,
+                'ComponentFragilityModelBridge should only have 2 fields',
             )
 
         with open(
@@ -333,6 +359,7 @@ class ExportDataCommandTest(TestCase):
         """Clean up test data and temporary files."""
         FragilityCurve.objects.all().delete()
         ExperimentFragilityModelBridge.objects.all().delete()
+        ComponentFragilityModelBridge.objects.all().delete()
         FragilityModel.objects.all().delete()
         Experiment.objects.all().delete()
         Reference.objects.all().delete()

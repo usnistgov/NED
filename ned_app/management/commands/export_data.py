@@ -8,6 +8,7 @@ from ned_app.models import (
     Experiment,
     FragilityModel,
     ExperimentFragilityModelBridge,
+    ComponentFragilityModelBridge,
     FragilityCurve,
 )
 
@@ -76,6 +77,7 @@ class Command(BaseCommand):
         self.export_component_data(output_dir)
         self.export_experiment_data(output_dir)
         self.export_fragility_model_data(output_dir)
+        self.export_component_fragility_bridge_data(output_dir)
         self.export_experiment_fragility_bridge_data(output_dir)
         self.export_fragility_curve_data(output_dir)
 
@@ -197,7 +199,6 @@ class Command(BaseCommand):
             fm_data = {
                 'id': fm.id,
                 'p58_fragility': fm.p58_fragility,
-                'component': fm.component.component_id,
                 'comp_detail': fm.comp_detail,
                 'material': fm.material,
                 'size_class': fm.size_class,
@@ -206,6 +207,28 @@ class Command(BaseCommand):
             data.append(fm_data)
 
         file_path = os.path.join(output_dir, 'fragility_model.json')
+        with open(file_path, 'w') as f:
+            json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
+
+    def export_component_fragility_bridge_data(self, output_dir):
+        """
+        Export ComponentFragilityModelBridge model data to JSON file.
+
+        Args:
+            output_dir (str): Directory where the JSON file will be saved.
+        """
+        self.stdout.write('Exporting ComponentFragilityModelBridge data...')
+        bridges = ComponentFragilityModelBridge.objects.all()
+
+        data = []
+        for bridge in bridges:
+            bridge_data = {
+                'component': bridge.component.component_id,
+                'fragility_model': bridge.fragility_model_id,
+            }
+            data.append(bridge_data)
+
+        file_path = os.path.join(output_dir, 'component_fragility_model_bridge.json')
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
 
