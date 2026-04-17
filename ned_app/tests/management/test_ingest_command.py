@@ -78,6 +78,10 @@ class IngestCommandTests(TransactionTestCase):
                     'comp_detail': 'Standard attachment',
                     'material': 'Steel',
                     'comp_description': 'Cold-formed steel exterior wall system',
+                    'reviewer': 'Test Reviewer',
+                    'source': 'Laboratory Testing',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
                 },
                 {
                     'reference': 'ref-002',
@@ -86,6 +90,10 @@ class IngestCommandTests(TransactionTestCase):
                     'comp_detail': 'Anchored',
                     'material': 'Steel tank',
                     'comp_description': 'Residential water heater',
+                    'reviewer': 'Test Reviewer',
+                    'source': 'Field Observation',
+                    'edp_metric': 'Peak Floor Acceleration, horizontal',
+                    'edp_unit': 'g',
                 },
             ]
 
@@ -143,13 +151,8 @@ class IngestCommandTests(TransactionTestCase):
             fragility_curve_data = [
                 {
                     'fragility_model': 'ref-001|fm-001',
-                    'reference': 'ref-001',
-                    'reviewer': 'Test Reviewer',
-                    'source': 'Laboratory Testing',
                     'basis': 'Experiment',
                     'num_observations': 10,
-                    'edp_metric': 'Story Drift Ratio',
-                    'edp_unit': 'Ratio',
                     'ds_rank': 1,
                     'ds_description': 'Minor cracking',
                     'median': '0.005',
@@ -158,13 +161,8 @@ class IngestCommandTests(TransactionTestCase):
                 },
                 {
                     'fragility_model': 'ref-001|fm-001',
-                    'reference': 'ref-002',
-                    'reviewer': 'Test Reviewer',
-                    'source': 'Analytical Model',
                     'basis': 'Analytical Study',
                     'num_observations': 5,
-                    'edp_metric': 'Story Drift Ratio',
-                    'edp_unit': 'Ratio',
                     'ds_rank': 2,
                     'ds_description': 'Severe damage',
                     'median': '0.02',
@@ -173,13 +171,8 @@ class IngestCommandTests(TransactionTestCase):
                 },
                 {
                     'fragility_model': 'ref-002|fm-002',
-                    'reference': 'ref-002',
-                    'reviewer': 'Test Reviewer',
-                    'source': 'Field Observation',
                     'basis': 'Historical Event',
                     'num_observations': 15,
-                    'edp_metric': 'Peak Floor Acceleration, horizontal',
-                    'edp_unit': 'g',
                     'ds_rank': 1,
                     'ds_description': 'Leakage',
                     'median': '0.8',
@@ -270,7 +263,6 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(
                 fc_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
             )
-            self.assertEqual(fc_1.reference.reference_id, 'ref-001')
 
             fc_2 = FragilityCurve.objects.get(
                 fragility_model__fragility_model_id='ref-001|fm-001', ds_rank=2
@@ -278,7 +270,6 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(
                 fc_2.fragility_model.fragility_model_id, 'ref-001|fm-001'
             )
-            self.assertEqual(fc_2.reference.reference_id, 'ref-002')
 
             fc_3 = FragilityCurve.objects.get(
                 fragility_model__fragility_model_id='ref-002|fm-002', ds_rank=1
@@ -286,7 +277,6 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(
                 fc_3.fragility_model.fragility_model_id, 'ref-002|fm-002'
             )
-            self.assertEqual(fc_3.reference.reference_id, 'ref-002')
 
     def test_ingest_component_id_generation(self):
         """Test that Component id field is auto-generated from component_id."""
@@ -583,6 +573,10 @@ class IngestCommandTests(TransactionTestCase):
                     'reference': 'ref-idem',
                     'model_id': 'fm-idem',
                     'comp_description': 'Original FM Description',
+                    'reviewer': 'Test Reviewer',
+                    'source': 'Laboratory Testing',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
                 }
             ]
 
@@ -615,9 +609,6 @@ class IngestCommandTests(TransactionTestCase):
             fragility_curve_data = [
                 {
                     'fragility_model': 'ref-idem|fm-idem',
-                    'reference': 'ref-idem',
-                    'edp_metric': 'Story Drift Ratio',
-                    'edp_unit': 'Ratio',
                     'ds_rank': 1,
                     'ds_description': 'Original FC Description',
                     'median': '0.01',

@@ -83,6 +83,10 @@ class ExportDataCommandTest(TestCase):
             material='Cold-formed steel',
             size_class='Medium',
             comp_description='Test fragility model description',
+            reviewer='Test reviewer',
+            source='Experimental data',
+            edp_metric='Story Drift Ratio',
+            edp_unit='Ratio',
         )
 
         self.component_fragility_bridge = (
@@ -98,13 +102,8 @@ class ExportDataCommandTest(TestCase):
 
         self.fragility_curve = FragilityCurve.objects.create(
             fragility_model=self.fragility_model,
-            reference=self.reference,
-            reviewer='Test reviewer',
-            source='Experimental data',
             basis='Experiment',
             num_observations=15,
-            edp_metric='Story Drift Ratio',
-            edp_unit='Ratio',
             ds_rank=1,
             ds_description='Test damage state description',
             median=Decimal('0.02'),
@@ -286,6 +285,14 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(
                 fm_data['comp_description'], 'Test fragility model description'
             )
+            self.assertIn('reviewer', fm_data)
+            self.assertEqual(fm_data['reviewer'], 'Test reviewer')
+            self.assertIn('source', fm_data)
+            self.assertEqual(fm_data['source'], 'Experimental data')
+            self.assertIn('edp_metric', fm_data)
+            self.assertEqual(fm_data['edp_metric'], 'Story Drift Ratio')
+            self.assertIn('edp_unit', fm_data)
+            self.assertEqual(fm_data['edp_unit'], 'Ratio')
 
         with open(
             os.path.join(self.temp_dir, 'component_fragility_model_bridge.json'),
@@ -334,20 +341,10 @@ class ExportDataCommandTest(TestCase):
 
             self.assertIn('fragility_model', curve)
             self.assertEqual(curve['fragility_model'], 'test-ref-001|test-fm-001')
-            self.assertIn('reference', curve)
-            self.assertEqual(curve['reference'], 'test-ref-001')
-            self.assertIn('reviewer', curve)
-            self.assertEqual(curve['reviewer'], 'Test reviewer')
-            self.assertIn('source', curve)
-            self.assertEqual(curve['source'], 'Experimental data')
             self.assertIn('basis', curve)
             self.assertEqual(curve['basis'], 'Experiment')
             self.assertIn('num_observations', curve)
             self.assertEqual(curve['num_observations'], 15)
-            self.assertIn('edp_metric', curve)
-            self.assertEqual(curve['edp_metric'], 'Story Drift Ratio')
-            self.assertIn('edp_unit', curve)
-            self.assertEqual(curve['edp_unit'], 'Ratio')
             self.assertIn('ds_rank', curve)
             self.assertEqual(curve['ds_rank'], 1)
             self.assertIn('ds_description', curve)
@@ -360,6 +357,13 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(float(curve['beta']), 0.5)
             self.assertIn('probability', curve)
             self.assertEqual(float(curve['probability']), 0.75)
+
+            # Verify moved fields are NOT in curve export
+            self.assertNotIn('reviewer', curve)
+            self.assertNotIn('source', curve)
+            self.assertNotIn('edp_metric', curve)
+            self.assertNotIn('edp_unit', curve)
+            self.assertNotIn('reference', curve)
 
     def tearDown(self):
         """Clean up test data and temporary files."""
