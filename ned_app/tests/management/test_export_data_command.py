@@ -76,7 +76,8 @@ class ExportDataCommandTest(TestCase):
         )
 
         self.fragility_model = FragilityModel.objects.create(
-            id='test-fm-001',
+            reference=self.reference,
+            model_id='test-fm-001',
             p58_fragility='B2011.001',
             comp_detail='Steel connection',
             material='Cold-formed steel',
@@ -266,9 +267,12 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(len(fragility_model_data), 1)
             fm_data = fragility_model_data[0]
 
-            self.assertIn('id', fm_data)
-            self.assertEqual(fm_data['id'], 'test-fm-001')
+            self.assertIn('reference', fm_data)
+            self.assertEqual(fm_data['reference'], 'test-ref-001')
+            self.assertIn('model_id', fm_data)
+            self.assertEqual(fm_data['model_id'], 'test-fm-001')
             self.assertNotIn('component', fm_data)
+            self.assertNotIn('fragility_model_id', fm_data)
 
             self.assertIn('p58_fragility', fm_data)
             self.assertEqual(fm_data['p58_fragility'], 'B2011.001')
@@ -294,7 +298,9 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('component', cfm_bridge)
             self.assertEqual(cfm_bridge['component'], 'B.20.1.1.A')
             self.assertIn('fragility_model', cfm_bridge)
-            self.assertEqual(cfm_bridge['fragility_model'], 'test-fm-001')
+            self.assertEqual(
+                cfm_bridge['fragility_model'], 'test-ref-001|test-fm-001'
+            )
 
             self.assertEqual(
                 len(cfm_bridge.keys()),
@@ -313,7 +319,7 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('experiment', bridge)
             self.assertEqual(bridge['experiment'], 'test-exp-001')
             self.assertIn('fragility_model', bridge)
-            self.assertEqual(bridge['fragility_model'], 'test-fm-001')
+            self.assertEqual(bridge['fragility_model'], 'test-ref-001|test-fm-001')
 
             self.assertEqual(
                 len(bridge.keys()),
@@ -327,7 +333,7 @@ class ExportDataCommandTest(TestCase):
             curve = curve_data[0]
 
             self.assertIn('fragility_model', curve)
-            self.assertEqual(curve['fragility_model'], 'test-fm-001')
+            self.assertEqual(curve['fragility_model'], 'test-ref-001|test-fm-001')
             self.assertIn('reference', curve)
             self.assertEqual(curve['reference'], 'test-ref-001')
             self.assertIn('reviewer', curve)

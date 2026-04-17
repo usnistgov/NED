@@ -1,7 +1,7 @@
 [
   {
-    "_comment": "This is an example for a ComponentFragilityModelBridge object. It links a Component (by component_id) to a FragilityModel (by id).",
+    "_comment": "This is an example for a ComponentFragilityModelBridge object. It links a Component (by component_id) to a FragilityModel (by fragility_model_id).",
     "component": "A.10.1.1.A",
-    "fragility_model": "FM001"
+    "fragility_model": "SMITH-2020-EXP|FM001"
   }
 ]

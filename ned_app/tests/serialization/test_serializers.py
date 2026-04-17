@@ -421,10 +421,24 @@ class ComponentSerializerTest(TestCase):
 class FragilityModelSerializerTest(TestCase):
     """Test cases for the FragilityModelSerializer."""
 
+    def setUp(self):
+        """Set up test data."""
+        self.reference = Reference.objects.create(
+            reference_id='test-ref-fm-001',
+            csl_data={
+                'type': 'article-journal',
+                'id': 'test-ref-fm-001',
+                'title': 'Test Reference',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2023]]},
+            },
+        )
+
     def test_serializer_creates_fragility_model(self):
         """Test that serializer successfully validates and saves a fragility model."""
         valid_data = {
-            'id': 'test-fm-001',
+            'reference': 'test-ref-fm-001',
+            'model_id': 'test-fm-001',
             'comp_description': 'Test fragility model description',
         }
 
@@ -434,7 +448,25 @@ class FragilityModelSerializerTest(TestCase):
         fragility_model = serializer.save()
 
         self.assertIsNotNone(fragility_model)
-        self.assertEqual(fragility_model.id, 'test-fm-001')
+        self.assertEqual(
+            fragility_model.fragility_model_id, 'test-ref-fm-001|test-fm-001'
+        )
+
+    def test_serializer_creates_fragility_model_without_reference(self):
+        """Test that serializer handles null reference for legacy models."""
+        valid_data = {
+            'reference': None,
+            'model_id': 'test-fm-legacy',
+            'comp_description': 'Legacy fragility model',
+        }
+
+        serializer = FragilityModelSerializer(data=valid_data)
+
+        self.assertTrue(serializer.is_valid())
+        fragility_model = serializer.save()
+
+        self.assertIsNotNone(fragility_model)
+        self.assertEqual(fragility_model.fragility_model_id, 'test-fm-legacy')
 
     def test_serializer_excludes_component_field(self):
         """Test that the serializer does not include a component field."""
@@ -443,7 +475,10 @@ class FragilityModelSerializerTest(TestCase):
 
     def tearDown(self):
         """Clean up test data after each test."""
-        FragilityModel.objects.filter(id__startswith='test-fm-').delete()
+        FragilityModel.objects.filter(
+            fragility_model_id__startswith='test-'
+        ).delete()
+        Reference.objects.filter(reference_id__startswith='test-ref-fm-').delete()
 
 
 class ExperimentSerializerTest(TestCase):
@@ -552,7 +587,8 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
         )
 
         self.fragility_model = FragilityModel.objects.create(
-            id='test-fm-001',
+            reference=self.reference,
+            model_id='test-fm-001',
             comp_description='Test fragility model',
         )
 
@@ -560,7 +596,7 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
         """Test that serializer successfully validates and saves with valid experiment and fragility_model IDs."""
         valid_data = {
             'experiment': 'test-exp-001',
-            'fragility_model': 'test-fm-001',
+            'fragility_model': 'test-ref-001|test-fm-001',
         }
 
         serializer = ExperimentFragilityModelBridgeSerializer(data=valid_data)
@@ -570,13 +606,15 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
 
         self.assertIsNotNone(bridge)
         self.assertEqual(bridge.experiment.id, 'test-exp-001')
-        self.assertEqual(bridge.fragility_model.id, 'test-fm-001')
+        self.assertEqual(
+            bridge.fragility_model.fragility_model_id, 'test-ref-001|test-fm-001'
+        )
 
     def test_serializer_rejects_nonexistent_experiment(self):
         """Test that serializer rejects data with a non-existent experiment ID."""
         invalid_data = {
             'experiment': 'nonexistent-exp',
-            'fragility_model': 'test-fm-001',
+            'fragility_model': 'test-ref-001|test-fm-001',
         }
 
         serializer = ExperimentFragilityModelBridgeSerializer(data=invalid_data)
@@ -599,7 +637,9 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
     def tearDown(self):
         """Clean up test data after each test."""
         ExperimentFragilityModelBridge.objects.all().delete()
-        FragilityModel.objects.filter(id__startswith='test-fm-').delete()
+        FragilityModel.objects.filter(
+            fragility_model_id__startswith='test-ref-001|test-fm-'
+        ).delete()
         Experiment.objects.filter(id__startswith='test-exp-').delete()
         Reference.objects.filter(reference_id__startswith='test-ref-').delete()
         Component.objects.filter(component_id='A.10.1.1').delete()
@@ -615,8 +655,20 @@ class ComponentFragilityModelBridgeSerializerTest(TestCase):
             name='Test Component',
         )
 
+        self.reference = Reference.objects.create(
+            reference_id='test-ref-001',
+            csl_data={
+                'type': 'article-journal',
+                'id': 'test-ref-001',
+                'title': 'Test Reference',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2023]]},
+            },
+        )
+
         self.fragility_model = FragilityModel.objects.create(
-            id='test-fm-001',
+            reference=self.reference,
+            model_id='test-fm-001',
             comp_description='Test fragility model',
         )
 
@@ -624,7 +676,7 @@ class ComponentFragilityModelBridgeSerializerTest(TestCase):
         """Test that serializer successfully validates and saves with valid component and fragility_model IDs."""
         valid_data = {
             'component': 'A.10.1.1',
-            'fragility_model': 'test-fm-001',
+            'fragility_model': 'test-ref-001|test-fm-001',
         }
 
         serializer = ComponentFragilityModelBridgeSerializer(data=valid_data)
@@ -634,13 +686,15 @@ class ComponentFragilityModelBridgeSerializerTest(TestCase):
 
         self.assertIsNotNone(bridge)
         self.assertEqual(bridge.component.component_id, 'A.10.1.1')
-        self.assertEqual(bridge.fragility_model.id, 'test-fm-001')
+        self.assertEqual(
+            bridge.fragility_model.fragility_model_id, 'test-ref-001|test-fm-001'
+        )
 
     def test_serializer_rejects_nonexistent_component(self):
         """Test that serializer rejects data with a non-existent component ID."""
         invalid_data = {
             'component': 'Z.99.9.9',
-            'fragility_model': 'test-fm-001',
+            'fragility_model': 'test-ref-001|test-fm-001',
         }
 
         serializer = ComponentFragilityModelBridgeSerializer(data=invalid_data)
@@ -663,7 +717,10 @@ class ComponentFragilityModelBridgeSerializerTest(TestCase):
     def tearDown(self):
         """Clean up test data after each test."""
         ComponentFragilityModelBridge.objects.all().delete()
-        FragilityModel.objects.filter(id__startswith='test-fm-').delete()
+        FragilityModel.objects.filter(
+            fragility_model_id__startswith='test-ref-001|test-fm-'
+        ).delete()
+        Reference.objects.filter(reference_id__startswith='test-ref-').delete()
         Component.objects.filter(component_id='A.10.1.1').delete()
 
 
@@ -684,14 +741,15 @@ class FragilityCurveSerializerTest(TestCase):
         )
 
         self.fragility_model = FragilityModel.objects.create(
-            id='test-fm-001',
+            reference=self.reference,
+            model_id='test-fm-001',
             comp_description='Test fragility model',
         )
 
     def test_serializer_creates_fragility_curve_with_valid_foreign_keys(self):
         """Test that serializer successfully validates and saves with valid fragility_model and reference IDs."""
         valid_data = {
-            'fragility_model': 'test-fm-001',
+            'fragility_model': 'test-ref-001|test-fm-001',
             'reference': 'test-ref-001',
             'edp_metric': 'Story Drift Ratio',
             'edp_unit': 'Ratio',
@@ -707,7 +765,10 @@ class FragilityCurveSerializerTest(TestCase):
         fragility_curve = serializer.save()
 
         self.assertIsNotNone(fragility_curve)
-        self.assertEqual(fragility_curve.fragility_model.id, 'test-fm-001')
+        self.assertEqual(
+            fragility_curve.fragility_model.fragility_model_id,
+            'test-ref-001|test-fm-001',
+        )
         self.assertEqual(fragility_curve.reference.reference_id, 'test-ref-001')
 
     def test_serializer_rejects_nonexistent_fragility_model(self):
@@ -731,7 +792,7 @@ class FragilityCurveSerializerTest(TestCase):
     def test_serializer_rejects_nonexistent_reference(self):
         """Test that serializer rejects data with a non-existent reference ID."""
         invalid_data = {
-            'fragility_model': 'test-fm-001',
+            'fragility_model': 'test-ref-001|test-fm-001',
             'reference': 'nonexistent-ref',
             'edp_metric': 'Story Drift Ratio',
             'edp_unit': 'Ratio',
@@ -749,5 +810,7 @@ class FragilityCurveSerializerTest(TestCase):
     def tearDown(self):
         """Clean up test data after each test."""
         FragilityCurve.objects.all().delete()
-        FragilityModel.objects.filter(id__startswith='test-fm-').delete()
+        FragilityModel.objects.filter(
+            fragility_model_id__startswith='test-ref-001|test-fm-'
+        ).delete()
         Reference.objects.filter(reference_id__startswith='test-ref-').delete()
