@@ -150,10 +150,10 @@ A project maintainer will review your PR. They will check the "JSON Diff" to see
 #### Step 1: Prepare Your Workspace
 Start with a fresh local database populated with the current canonical data. **Keep a copy of this database** — you will need it later to apply your new migrations.
 ```bash
+cp db.sqlite3 db_before_changes.sqlite3
 rm -f db.sqlite3
 python manage.py migrate
 python manage.py ingest
-cp db.sqlite3 db_before_changes.sqlite3
 ```
 
 #### Step 2: Implement Schema Change & Data Migration
