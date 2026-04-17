@@ -1,11 +1,42 @@
 [
-  {
-    "_comment": "This is an example for a FragilityModel object. The id should be unique and p58_fragility is the FEMA P-58 fragility identifier. Component relationships are managed through component_fragility_model_bridge.json.",
-    "id": "FM001",
-    "p58_fragility": "B2011.001a",
-    "comp_detail": "Brief component detail description",
-    "material": "Steel",
-    "size_class": "Medium",
-    "comp_description": "Detailed description of the fragility model component"
-  }
+    {
+        "_comment": "This is an example for a FragilityModel object. The reference field links to a Reference (by reference_id) and combines with model_id to form the unique fragility_model_id (e.g., 'TIA-2012-EXP|fra1001'). Component relationships are managed through component_fragility_model_bridge.json. For non-legacy models (those with a reference), edp_metric and edp_unit are required.",
+        "comp_description": "Component level - Tee joint - Black Iron with Threaded Joints - Pipe size 6 inches, 40 psi",
+        "comp_detail": "Threaded joint",
+        "edp_metric": "Joint Rotation",
+        "edp_unit": "Radians",
+        "material": "Black Iron",
+        "model_id": "fra1001",
+        "p58_fragility": "",
+        "reference": "TIA-2012-EXP",
+        "reviewer": "NIST",
+        "size_class": "6 inch diameter",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "Component level - Tee joint - Black Iron with Threaded Joints - Pipe size 4 inches, 40 psi",
+        "comp_detail": "Threaded joint",
+        "edp_metric": "Joint Rotation",
+        "edp_unit": "Radians",
+        "material": "Black Iron",
+        "model_id": "fra1002",
+        "p58_fragility": "",
+        "reference": "TIA-2012-EXP",
+        "reviewer": "NIST",
+        "size_class": "4 inch diameter",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "Component level - Tee joint - Black Iron with Threaded Joints - Pipe size 2 inches, 40 psi",
+        "comp_detail": "Threaded joint",
+        "edp_metric": "Joint Rotation",
+        "edp_unit": "Radians",
+        "material": "Black Iron",
+        "model_id": "fra1003",
+        "p58_fragility": "",
+        "reference": "TIA-2012-EXP",
+        "reviewer": "NIST",
+        "size_class": "2 inch diameter",
+        "source": "Literature"
+    }
 ]

@@ -197,12 +197,17 @@ class Command(BaseCommand):
         data = []
         for fm in fragility_models:
             fm_data = {
-                'id': fm.id,
+                'reference': fm.reference.reference_id if fm.reference else None,
+                'model_id': fm.model_id,
                 'p58_fragility': fm.p58_fragility,
                 'comp_detail': fm.comp_detail,
                 'material': fm.material,
                 'size_class': fm.size_class,
                 'comp_description': fm.comp_description,
+                'reviewer': fm.reviewer,
+                'source': fm.source,
+                'edp_metric': fm.edp_metric,
+                'edp_unit': fm.edp_unit,
             }
             data.append(fm_data)
 
@@ -270,13 +275,8 @@ class Command(BaseCommand):
         for curve in fragility_curves:
             curve_data = {
                 'fragility_model': curve.fragility_model_id,
-                'reviewer': curve.reviewer,
-                'source': curve.source,
                 'basis': curve.basis,
                 'num_observations': curve.num_observations,
-                'reference': curve.reference_id,
-                'edp_metric': curve.edp_metric,
-                'edp_unit': curve.edp_unit,
                 'ds_rank': curve.ds_rank,
                 'ds_description': curve.ds_description,
                 'median': curve.median,

@@ -140,17 +140,31 @@ class FragilityModelSerializer(serializers.ModelSerializer):
     Serializer for FragilityModel.
 
     The component relationship is now managed through ComponentFragilityModelBridge.
+    The fragility_model_id field is auto-generated on save() and excluded from
+    serialization. The reference field uses SlugRelatedField for natural key lookup.
     """
+
+    reference = serializers.SlugRelatedField(
+        slug_field='reference_id',
+        queryset=Reference.objects.all(),
+        required=False,
+        allow_null=True,
+    )
 
     class Meta:
         model = FragilityModel
         fields = [
-            'id',
+            'reference',
+            'model_id',
             'p58_fragility',
             'comp_detail',
             'material',
             'size_class',
             'comp_description',
+            'reviewer',
+            'source',
+            'edp_metric',
+            'edp_unit',
         ]
 
 
@@ -213,7 +227,7 @@ class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
         slug_field='id', queryset=Experiment.objects.all()
     )
     fragility_model = serializers.SlugRelatedField(
-        slug_field='id', queryset=FragilityModel.objects.all()
+        slug_field='fragility_model_id', queryset=FragilityModel.objects.all()
     )
 
     class Meta:
@@ -236,7 +250,7 @@ class ComponentFragilityModelBridgeSerializer(serializers.ModelSerializer):
         slug_field='component_id', queryset=Component.objects.all()
     )
     fragility_model = serializers.SlugRelatedField(
-        slug_field='id', queryset=FragilityModel.objects.all()
+        slug_field='fragility_model_id', queryset=FragilityModel.objects.all()
     )
 
     class Meta:
@@ -250,29 +264,21 @@ class ComponentFragilityModelBridgeSerializer(serializers.ModelSerializer):
 
 class FragilityCurveSerializer(serializers.ModelSerializer):
     """
-    Serializer for FragilityCurve with fragility model and reference relationships.
+    Serializer for FragilityCurve with fragility model relationship.
 
     Uses natural keys for foreign key lookups.
     """
 
     fragility_model = serializers.SlugRelatedField(
-        slug_field='id', queryset=FragilityModel.objects.all()
-    )
-    reference = serializers.SlugRelatedField(
-        slug_field='reference_id', queryset=Reference.objects.all()
+        slug_field='fragility_model_id', queryset=FragilityModel.objects.all()
     )
 
     class Meta:
         model = FragilityCurve
         fields = [
             'fragility_model',
-            'reviewer',
-            'source',
             'basis',
             'num_observations',
-            'reference',
-            'edp_metric',
-            'edp_unit',
             'ds_rank',
             'ds_description',
             'median',
