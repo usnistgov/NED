@@ -36,6 +36,68 @@ def _load_nistir_labels():
     return _nistir_labels
 
 
+# ---------------------------------------------------------------------------
+# Shared choice vocabularies
+#
+# These TextChoices classes are defined at module scope so that the same
+# vocabulary can be reused by multiple fields without duplication. Class names
+# follow the PEP 8 `PascalCaseChoices` convention used by the Django ecosystem
+# ---------------------------------------------------------------------------
+
+
+class StudyTypeChoices(models.TextChoices):
+    EXPERIMENT = 'Experiment'
+    RECON = 'Historical Event'
+    ANALYTICAL = 'Analytical Study'
+    LIT_REVIEW = 'Lit Review'
+    OTHER = 'Other'
+
+
+class TestTypeChoices(models.TextChoices):
+    DYNA_1D = 'Dynamic, uniaxial'
+    DYNA_2D = 'Dynamic, bi-directional'
+    DYNA_2D_VERT = 'Dynamic, horizontal and vertical'
+    DYNA_3D = 'Dynamic, 3D'
+    MONO_C = 'Monotonic, compression'
+    MONO_T = 'Monotonic, tension'
+    MONO_M = 'Monotonic, bending'
+    MONO_L = 'Monotonic, lateral'
+    QUASI_1D = 'Quasi-static Cyclic, uniaxial'
+    QUASI_2D = 'Quasi-static Cyclic, bi-directional'
+
+
+class EDPMetricChoices(models.TextChoices):
+    SDR = 'Story Drift Ratio'
+    SDR_2D = 'Story Drift Ratio, bi-directional'
+    PFA_H = 'Peak Floor Acceleration, horizontal'
+    PFA_TABLE_H = 'Peak Table Acceleration, horizontal'
+    PFA_V = 'Peak Floor Acceleration, vertical'
+    PFV = 'Peak Floor Velocity'
+    ROT_JOINT = 'Joint Rotation'
+    FORCE_T = 'Force, tension'
+    FORCE_C = 'Force, compression'
+    FORCE_M = 'Force, bending'
+    FORCE_V = 'Force, lateral'
+    CUSTOM = 'Custom'
+
+
+class EDPUnitChoices(models.TextChoices):
+    G = 'g'
+    RATIO = 'Ratio'
+    RAD = 'Radians'
+    KIP = 'Kips'
+    K_IN = 'k-in'
+    MPS = 'Meters Per Second'
+    CUSTOM = 'Custom'
+
+
+class DSClassChoices(models.TextChoices):
+    NO_DAMAGE = 'No damage'
+    INCONSEQUENTIAL = 'Inconsequential'
+    CONSEQUENTIAL = 'Consequential'
+    UNKNOWN = 'Unknown'
+
+
 # Create your models here.
 class Reference(models.Model):
     """
@@ -50,13 +112,6 @@ class Reference(models.Model):
         pdf_saved (bool): Is a pdf saved in the archive repository.
         csl_data (dict): Reference data in CSL-JSON format.
     """
-
-    class studytypeChoices(models.TextChoices):
-        EXPERIMENT = 'Experiment'
-        RECON = 'Historical Event'
-        ANALYTICAL = 'Analytical Study'
-        LIT_REVIEW = 'Lit Review'
-        OTHER = 'Other'
 
     reference_id = models.CharField(
         _('reference id'),
@@ -90,8 +145,8 @@ class Reference(models.Model):
     study_type = models.CharField(
         _('study type'),
         max_length=50,
-        choices=studytypeChoices.choices,
-        default=studytypeChoices.OTHER,
+        choices=StudyTypeChoices.choices,
+        default=StudyTypeChoices.OTHER,
         help_text='A classification of the type of study conducted.',
     )
     comp_type = models.CharField(
@@ -234,47 +289,6 @@ class Experiment(models.Model):
         notes (str): Additional notes providing context for damage observations.
     """
 
-    class testtypeChoices(models.TextChoices):
-        DYNA_1D = 'Dynamic, uniaxial'
-        DYNA_2D = 'Dynamic, bi-directional'
-        DYNA_2D_vert = 'Dynamic, horizontal and vertical'
-        DYNA_3D = 'Dynamic, 3D'
-        MONO_C = 'Monotonic, compression'
-        MONO_T = 'Monotonic, tension'
-        MONO_M = 'Monotonic, bending'
-        MONO_L = 'Monotonic, lateral'
-        QUASI_1D = 'Quasi-static Cyclic, uniaxial'
-        QUASI_2D = 'Quasi-static Cyclic, bi-directional'
-
-    class edpmetricChoices(models.TextChoices):
-        SDR = 'Story Drift Ratio'
-        SDR_2D = 'Story Drift Ratio, bi-directional'
-        PFA_H = 'Peak Floor Acceleration, horizontal'
-        PFA_TABLE_H = 'Peak Table Acceleration, horizontal'
-        PFA_V = 'Peak Floor Acceleration, vertical'
-        PFV = 'Peak Floor Velocity'
-        ROT_JOINT = 'Joint Rotation'
-        FORCE_T = 'Force, tension'
-        FORCE_C = 'Force, compression'
-        FORCE_M = 'Force, bending'
-        FORCE_V = 'Force, lateral'
-        CUSTOM = 'Custom'
-
-    class edpunitChoices(models.TextChoices):
-        G = 'g'
-        RATIO = 'Ratio'
-        RAD = 'Radians'
-        KIP = 'Kips'
-        K_IN = 'k-in'
-        MPS = 'Meters Per Second'
-        CUSTOM = 'Custom'
-
-    class dsclassChoices(models.TextChoices):
-        NO_DAMAGE = 'No damage'
-        INCONSEQUENTIAL = 'Inconsequential'
-        CONSEQUENTIAL = 'Consequential'
-        UNKNOWN = 'Unknown'
-
     id = models.CharField(_('id'), primary_key=True, max_length=255)
     reference = models.ForeignKey(
         'Reference',
@@ -327,7 +341,7 @@ class Experiment(models.Model):
     test_type = models.CharField(
         _('test type'),
         max_length=50,
-        choices=testtypeChoices.choices,
+        choices=TestTypeChoices.choices,
         help_text='The type of test generally describing the condition under which the specimen was loaded.',
     )
     loading_protocol = models.TextField(
@@ -382,14 +396,14 @@ class Experiment(models.Model):
     edp_metric = models.CharField(
         _('edp metric'),
         max_length=50,
-        choices=edpmetricChoices.choices,
+        choices=EDPMetricChoices.choices,
         blank=False,
         help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.',
     )
     edp_unit = models.CharField(
         _('edp unit'),
         max_length=50,
-        choices=edpunitChoices.choices,
+        choices=EDPUnitChoices.choices,
         blank=False,
         help_text='Unit of the engineering demand parameter.',
     )
@@ -404,14 +418,14 @@ class Experiment(models.Model):
     alt_edp_metric = models.CharField(
         _('alternative edp metric'),
         max_length=50,
-        choices=edpmetricChoices.choices,
+        choices=EDPMetricChoices.choices,
         blank=True,
         help_text='Secondary EDP metric.',
     )
     alt_edp_unit = models.CharField(
         _('alternative edp unit'),
         max_length=50,
-        choices=edpunitChoices.choices,
+        choices=EDPUnitChoices.choices,
         blank=True,
         help_text='Secondary EDP unit.',
     )
@@ -432,7 +446,7 @@ class Experiment(models.Model):
     ds_class = models.CharField(
         _('damage state class'),
         max_length=50,
-        choices=dsclassChoices.choices,
+        choices=DSClassChoices.choices,
         blank=False,
         help_text='General identification of damage as consequential or not.',
     )
@@ -468,28 +482,6 @@ class FragilityModel(models.Model):
         edp_metric (str): Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.
         edp_unit (str): Unit of the engineering demand parameter.
     """
-
-    class edpmetricChoices(models.TextChoices):
-        SDR = 'Story Drift Ratio'
-        SDR_2D = 'Story Drift Ratio, bi-directional'
-        PFA_H = 'Peak Floor Acceleration, horizontal'
-        PFA_V = 'Peak Floor Acceleration, vertical'
-        PFV = 'Peak Floor Velocity'
-        ROT_JOINT = 'Joint Rotation'
-        FORCE_T = 'Force, tension'
-        FORCE_C = 'Force, compression'
-        FORCE_M = 'Force, bending'
-        FORCE_V = 'Force, lateral'
-        CUSTOM = 'Custom'
-
-    class edpunitChoices(models.TextChoices):
-        G = 'g'
-        RATIO = 'Ratio'
-        RAD = 'Radians'
-        KIP = 'Kips'
-        K_IN = 'k-in'
-        MPS = 'Meters Per Second'
-        CUSTOM = 'Custom'
 
     fragility_model_id = models.CharField(
         _('fragility model id'),
@@ -554,14 +546,14 @@ class FragilityModel(models.Model):
     edp_metric = models.CharField(
         _('edp metric'),
         max_length=255,
-        choices=edpmetricChoices.choices,
+        choices=EDPMetricChoices.choices,
         blank=True,
         help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.',
     )
     edp_unit = models.CharField(
         _('edp unit'),
         max_length=255,
-        choices=edpunitChoices.choices,
+        choices=EDPUnitChoices.choices,
         blank=True,
         help_text='Unit of the engineering demand parameter.',
     )
@@ -674,13 +666,6 @@ class FragilityCurve(models.Model):
         probability (float): Mutually exclusive probability of this damage state.
     """
 
-    class basisChoices(models.TextChoices):
-        EXPERIMENT = 'Experiment'
-        RECON = 'Historical Event'
-        ANALYTICAL = 'Analytical Study'
-        LIT_REVIEW = 'Lit Review'
-        OTHER = 'Other'
-
     fragility_model = models.ForeignKey(
         'FragilityModel',
         on_delete=models.PROTECT,
@@ -689,7 +674,7 @@ class FragilityCurve(models.Model):
     )
     basis = models.CharField(
         _('basis'),
-        choices=basisChoices.choices,
+        choices=StudyTypeChoices.choices,
         max_length=50,
         blank=True,
         help_text='Observational basis of the underlying data comprising the fragility curve.',

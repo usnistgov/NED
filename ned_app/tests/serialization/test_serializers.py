@@ -797,3 +797,183 @@ class FragilityCurveSerializerTest(TestCase):
             fragility_model_id__startswith='test-ref-001|test-fm-'
         ).delete()
         Reference.objects.filter(reference_id__startswith='test-ref-').delete()
+
+
+class ChoicesValidationTest(TestCase):
+    """
+    Systematically verify that every serializer choice field rejects invalid
+    values.
+
+    The choice vocabularies live in module-level TextChoices classes in
+    ned_app.models (StudyTypeChoices, TestTypeChoices, EDPMetricChoices,
+    EDPUnitChoices, DSClassChoices). DRF's ModelSerializer automatically
+    maps a model field's `choices=...` to a serializer ChoiceField, which
+    rejects unknown values during validation. These tests act as a
+    regression guard ensuring that wiring stays in place for every choice
+    field on every serializer.
+    """
+
+    INVALID = '__INVALID_CHOICE__'
+
+    def setUp(self):
+        """Set up shared test fixtures."""
+        self.reference = Reference.objects.create(
+            reference_id='test-choices-ref-001',
+            csl_data={
+                'type': 'article-journal',
+                'id': 'test-choices-ref-001',
+                'title': 'Choices Validation Reference',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2023]]},
+            },
+        )
+        self.component = Component.objects.create(
+            component_id='A.10.1.1',
+            name='Test Component',
+        )
+        self.fragility_model = FragilityModel.objects.create(
+            reference=self.reference,
+            model_id='test-choices-fm-001',
+            comp_description='Choices Validation Fragility Model',
+            edp_metric='Story Drift Ratio',
+            edp_unit='Ratio',
+        )
+
+    # ------------------------------------------------------------------
+    # Reference.study_type → StudyTypeChoices
+    # ------------------------------------------------------------------
+    def test_reference_rejects_invalid_study_type(self):
+        """ReferenceSerializer must reject an invalid study_type value."""
+        data = {
+            'reference_id': 'test-choices-ref-002',
+            'study_type': self.INVALID,
+            'csl_data': {
+                'type': 'article-journal',
+                'id': 'test-choices-ref-002',
+                'title': 'Another Reference',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2023]]},
+            },
+        }
+
+        serializer = ReferenceSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('study_type', serializer.errors)
+
+    # ------------------------------------------------------------------
+    # Experiment → TestTypeChoices, EDPMetricChoices, EDPUnitChoices,
+    # DSClassChoices
+    # ------------------------------------------------------------------
+    def _valid_experiment_data(self):
+        return {
+            'id': 'test-choices-exp-001',
+            'reference': 'test-choices-ref-001',
+            'component': 'A.10.1.1',
+            'test_type': 'Quasi-static Cyclic, uniaxial',
+            'comp_description': 'Test component description',
+            'ds_description': 'Test damage state description',
+            'edp_metric': 'Story Drift Ratio',
+            'edp_unit': 'Ratio',
+            'ds_class': 'Consequential',
+        }
+
+    def test_experiment_rejects_invalid_test_type(self):
+        """ExperimentSerializer must reject an invalid test_type value."""
+        data = self._valid_experiment_data()
+        data['test_type'] = self.INVALID
+
+        serializer = ExperimentSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('test_type', serializer.errors)
+
+    def test_experiment_rejects_invalid_edp_metric(self):
+        """ExperimentSerializer must reject an invalid edp_metric value."""
+        data = self._valid_experiment_data()
+        data['edp_metric'] = self.INVALID
+
+        serializer = ExperimentSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('edp_metric', serializer.errors)
+
+    def test_experiment_rejects_invalid_edp_unit(self):
+        """ExperimentSerializer must reject an invalid edp_unit value."""
+        data = self._valid_experiment_data()
+        data['edp_unit'] = self.INVALID
+
+        serializer = ExperimentSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('edp_unit', serializer.errors)
+
+    def test_experiment_rejects_invalid_ds_class(self):
+        """ExperimentSerializer must reject an invalid ds_class value."""
+        data = self._valid_experiment_data()
+        data['ds_class'] = self.INVALID
+
+        serializer = ExperimentSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('ds_class', serializer.errors)
+
+    # ------------------------------------------------------------------
+    # FragilityModel → EDPMetricChoices, EDPUnitChoices
+    # ------------------------------------------------------------------
+    def _valid_fragility_model_data(self):
+        return {
+            'reference': 'test-choices-ref-001',
+            'model_id': 'test-choices-fm-002',
+            'comp_description': 'Test fragility model description',
+            'edp_metric': 'Story Drift Ratio',
+            'edp_unit': 'Ratio',
+        }
+
+    def test_fragility_model_rejects_invalid_edp_metric(self):
+        """FragilityModelSerializer must reject an invalid edp_metric value."""
+        data = self._valid_fragility_model_data()
+        data['edp_metric'] = self.INVALID
+
+        serializer = FragilityModelSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('edp_metric', serializer.errors)
+
+    def test_fragility_model_rejects_invalid_edp_unit(self):
+        """FragilityModelSerializer must reject an invalid edp_unit value."""
+        data = self._valid_fragility_model_data()
+        data['edp_unit'] = self.INVALID
+
+        serializer = FragilityModelSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('edp_unit', serializer.errors)
+
+    # ------------------------------------------------------------------
+    # FragilityCurve.basis → StudyTypeChoices
+    # ------------------------------------------------------------------
+    def test_fragility_curve_rejects_invalid_basis(self):
+        """FragilityCurveSerializer must reject an invalid basis value."""
+        data = {
+            'fragility_model': 'test-choices-ref-001|test-choices-fm-001',
+            'basis': self.INVALID,
+            'ds_description': 'Test damage state description',
+            'median': 0.01,
+            'beta': 0.5,
+            'probability': 0.8,
+        }
+
+        serializer = FragilityCurveSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('basis', serializer.errors)
+
+    def tearDown(self):
+        """Clean up test data after each test."""
+        FragilityCurve.objects.all().delete()
+        FragilityModel.objects.filter(
+            fragility_model_id__startswith='test-choices-'
+        ).delete()
+        Component.objects.filter(component_id='A.10.1.1').delete()
+        Reference.objects.filter(reference_id__startswith='test-choices-').delete()
