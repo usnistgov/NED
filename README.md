@@ -99,9 +99,9 @@ python manage.py ingest
 
 The `ingest` command reads all JSON files from `resources/data/` and populates the SQLite database. This step is mandatory for local development, as the `db.sqlite3` file is not tracked in version control—it's a disposable build artifact generated from the JSON source data.
 
-### How to Add New Data
+### How to Add New Data or Modify Existing Data
 
-We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data involves working directly with the JSON files that serve as our single source of truth.
+We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data involves working directly with the JSON files that serve as our single source of truth. Follow a similar process for corrections, updates, or refinements to existing records (e.g., spelling fixes, value corrections, updated references).
 
 Follow this step-by-step guide to contribute:
 
@@ -116,6 +116,7 @@ Directly edit the JSON files in the `resources/data/` directory.
     *   `experiments.json`: For new experimental results.
     *   `references.json`: For new bibliographic references.
     *   `fragility_model.json`: For new fragility functions.
+*   **Editing Existing Records:** Only modify field values; do **not** change the data structure or schema.    
 
 #### 3. Validate Locally (Recommended)
 Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
@@ -124,6 +125,21 @@ Before submitting, we strongly recommend building the database locally to catch 
 ```bash
 python manage.py migrate
 python manage.py ingest
+```
+
+**If modifying existing records, regenerate the fixture snapshots**
+*   *Why:* The fixture is a snapshot of the expected database state. Your data modifications must be captured in it so tests pass. The `PYTHONIOENCODING` environment variable ensures that Unicode characters in your data (e.g., special hyphens, non-ASCII characters) are properly serialized on all platforms.
+
+**Windows (PowerShell):**
+```powershell
+$env:PYTHONIOENCODING = "utf-8"
+python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+```
+
+**macOS/Linux/WSL (Bash):**
+```bash
+export PYTHONIOENCODING=utf-8
+python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
 ```
 
 **Run the integrity check:**
@@ -136,7 +152,7 @@ python manage.py test ned_app.tests
 Commit your changes and open a Pull Request (PR) to the `main` branch. 
 
 **In your PR description, please include:**
-*   A summary of what data you are adding.
+*   A summary of what data you are adding or what data was modified and why.
 *   The source of the data (citations, reports).
 *   Any context notes that would help the reviewer.
 
@@ -374,18 +390,6 @@ codespell .
 python manage.py test ned_app.tests
 ```
 
-#### Installing Development Dependencies
-To run these tools locally, make sure you have all dependencies installed:
-
-```bash
-# Install production dependencies
-pip install -r requirements.txt
-
-# Install development dependencies
-pip install -r requirements-dev.txt
-```
-
-This installs all required packages including Django, djangorestframework, jsonschema, and ruff for code quality checks.
 
 ---
 
