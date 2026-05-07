@@ -49,13 +49,19 @@ class ComponentAdmin(admin.ModelAdmin):
 @admin.register(FragilityCurve)
 class FragilityCurveAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('fragility_model', 'reviewer', 'reference')
+    list_display = ('fragility_model', 'ds_rank', 'ds_description')
 
 
 @admin.register(FragilityModel)
 class FragilityModelAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('fragility_model_id', 'reference', 'model_id')
+    list_display = (
+        'fragility_model_id',
+        'reference',
+        'model_id',
+        'reviewer',
+        'source',
+    )
 
 
 @admin.register(ExperimentFragilityModelBridge)

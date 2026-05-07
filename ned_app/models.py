@@ -463,7 +463,33 @@ class FragilityModel(models.Model):
         material (str): Classification or short description of the component material (if applicable).
         size_class (str): Classification or short description of the general size of this particular components compared to others of the same type (if applicable).
         comp_description (str): General description of the type of component.
+        reviewer (str): Person or party responsible for uploading this fragility model to the database.
+        source (str): Source of the fragility data.
+        edp_metric (str): Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.
+        edp_unit (str): Unit of the engineering demand parameter.
     """
+
+    class edpmetricChoices(models.TextChoices):
+        SDR = 'Story Drift Ratio'
+        SDR_2D = 'Story Drift Ratio, bi-directional'
+        PFA_H = 'Peak Floor Acceleration, horizontal'
+        PFA_V = 'Peak Floor Acceleration, vertical'
+        PFV = 'Peak Floor Velocity'
+        ROT_JOINT = 'Joint Rotation'
+        FORCE_T = 'Force, tension'
+        FORCE_C = 'Force, compression'
+        FORCE_M = 'Force, bending'
+        FORCE_V = 'Force, lateral'
+        CUSTOM = 'Custom'
+
+    class edpunitChoices(models.TextChoices):
+        G = 'g'
+        RATIO = 'Ratio'
+        RAD = 'Radians'
+        KIP = 'Kips'
+        K_IN = 'k-in'
+        MPS = 'Meters Per Second'
+        CUSTOM = 'Custom'
 
     fragility_model_id = models.CharField(
         _('fragility model id'),
@@ -513,6 +539,32 @@ class FragilityModel(models.Model):
         blank=False,
         help_text='General description of the type of component.',
     )
+    reviewer = models.CharField(
+        _('reviewer'),
+        max_length=255,
+        blank=True,
+        help_text='Person or party responsible for uploading this fragility model to the database.',
+    )
+    source = models.CharField(
+        _('source'),
+        max_length=255,
+        blank=True,
+        help_text='Source of the fragility data.',
+    )
+    edp_metric = models.CharField(
+        _('edp metric'),
+        max_length=255,
+        choices=edpmetricChoices.choices,
+        blank=True,
+        help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.',
+    )
+    edp_unit = models.CharField(
+        _('edp unit'),
+        max_length=255,
+        choices=edpunitChoices.choices,
+        blank=True,
+        help_text='Unit of the engineering demand parameter.',
+    )
 
     class Meta:
         verbose_name = 'Fragility Model'
@@ -527,6 +579,15 @@ class FragilityModel(models.Model):
                 fields=['model_id'],
                 condition=models.Q(reference__isnull=True),
                 name='unique_legacy_model',
+            ),
+            models.CheckConstraint(
+                condition=models.Q(reference__isnull=True)
+                | ~models.Q(edp_metric=''),
+                name='non_legacy_requires_edp_metric',
+            ),
+            models.CheckConstraint(
+                condition=models.Q(reference__isnull=True) | ~models.Q(edp_unit=''),
+                name='non_legacy_requires_edp_unit',
             ),
         ]
 
@@ -604,13 +665,8 @@ class FragilityCurve(models.Model):
 
     Attributes:
         fragility_model (id): Id of the fragility model this fragility belongs to.
-        reviewer (str): Person or party responsible for uploading this fragility curve to the database.
-        source (str): Source of the fragility data.
         basis (str): Observational basis of the underlying data comprising the fragility curve.
         num_observations (int): Number of observations that form the basis of the fragility curve.
-        reference (id): ID of the published reference documenting this fragility.
-        edp_metric (str): Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.
-        edp_unit (str): Unit of the engineering demand parameter.
         ds_rank (int): Integer rank ordering this fragility curve with other curves in the fragility model.
         ds_description (str): Description of the damage being modeled.
         median (float): Median point of the fragility curve.
@@ -625,45 +681,11 @@ class FragilityCurve(models.Model):
         LIT_REVIEW = 'Lit Review'
         OTHER = 'Other'
 
-    class edpmetricChoices(models.TextChoices):
-        SDR = 'Story Drift Ratio'
-        SDR_2D = 'Story Drift Ratio, bi-directional'
-        PFA_H = 'Peak Floor Acceleration, horizontal'
-        PFA_V = 'Peak Floor Acceleration, vertical'
-        PFV = 'Peak Floor Velocity'
-        ROT_JOINT = 'Joint Rotation'
-        FORCE_T = 'Force, tension'
-        FORCE_C = 'Force, compression'
-        FORCE_M = 'Force, bending'
-        FORCE_V = 'Force, lateral'
-        CUSTOM = 'Custom'
-
-    class edpunitChoices(models.TextChoices):
-        G = 'g'
-        RATIO = 'Ratio'
-        RAD = 'Radians'
-        KIP = 'Kips'
-        K_IN = 'k-in'
-        MPS = 'Meters Per Second'
-        CUSTOM = 'Custom'
-
     fragility_model = models.ForeignKey(
         'FragilityModel',
         on_delete=models.PROTECT,
         to_field='fragility_model_id',
         help_text='Id of the fragility model this fragility belongs to.',
-    )
-    reviewer = models.CharField(
-        _('reviewer'),
-        max_length=255,
-        blank=True,
-        help_text='Person or party responsible for uploading this fragility curve to the database.',
-    )
-    source = models.CharField(
-        _('source'),
-        max_length=255,
-        blank=True,
-        help_text='Source of the fragility data.',
     )
     basis = models.CharField(
         _('basis'),
@@ -677,26 +699,6 @@ class FragilityCurve(models.Model):
         null=True,
         blank=True,
         help_text='Number of observations that form the basis of the fragility curve.',
-    )
-    reference = models.ForeignKey(
-        'Reference',
-        on_delete=models.PROTECT,
-        to_field='reference_id',
-        help_text='ID of the published reference documenting.',
-    )
-    edp_metric = models.CharField(
-        _('edp metric'),
-        choices=edpmetricChoices.choices,
-        max_length=255,
-        blank=False,
-        help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.',
-    )
-    edp_unit = models.CharField(
-        _('edp unit'),
-        choices=edpunitChoices.choices,
-        max_length=255,
-        blank=False,
-        help_text='Unit of the engineering demand parameter.',
     )
     ds_rank = models.IntegerField(
         _('damage state rank'),
