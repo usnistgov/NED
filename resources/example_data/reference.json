@@ -1,7 +1,7 @@
 [
   {
     "_comment": "This is an example for a Reference object. The csl_data field contains Citation Style Language (CSL) JSON format citation metadata.",
-    "id": "SMITH-2020-EXP",
+    "reference_id": "SMITH-2020-EXP",
     "study_type": "Experiment",
     "comp_type": "Example Component Type Description",
     "pdf_saved": "True",

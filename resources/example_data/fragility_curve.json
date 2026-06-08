@@ -1,18 +1,33 @@
 [
-  {
-    "_comment": "This is an example for a FragilityCurve object. The fragility_model references a FragilityModel id, and reference references a Reference id. Use null for optional numeric fields.",
-    "fragility_model": "FM001",
-    "reviewer": "Example Reviewer Name",
-    "source": "Literature",
-    "basis": "Experiment",
-    "num_observations": 10,
-    "reference": "SMITH-2020-EXP",
-    "edp_metric": "Story Drift Ratio",
-    "edp_unit": "Ratio",
-    "ds_rank": 1,
-    "ds_description": "Description of the damage state",
-    "median": 0.015,
-    "beta": 0.4,
-    "probability": null
-  }
+    {
+        "_comment": "This is an example for a FragilityCurve object. The fragility_model field references a FragilityModel by its derived fragility_model_id (formatted as 'reference_id|model_id', e.g., 'TIA-2012-EXP|fra1001'). Use null for optional numeric fields like num_observations and probability when not applicable.",
+        "basis": "Experiment",
+        "beta": 0.204,
+        "ds_description": "First leakage",
+        "ds_rank": 1,
+        "fragility_model": "TIA-2012-EXP|fra1001",
+        "median": 0.006,
+        "num_observations": null,
+        "probability": null
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.216,
+        "ds_description": "First leakage",
+        "ds_rank": 1,
+        "fragility_model": "TIA-2012-EXP|fra1002",
+        "median": 0.01,
+        "num_observations": null,
+        "probability": null
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.094,
+        "ds_description": "First leakage",
+        "ds_rank": 1,
+        "fragility_model": "TIA-2012-EXP|fra1003",
+        "median": 0.014,
+        "num_observations": null,
+        "probability": null
+    }
 ]

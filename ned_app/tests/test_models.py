@@ -16,7 +16,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-001', csl_data=csl_data)
+        ref = Reference(reference_id='test-001', csl_data=csl_data)
         ref.save()
 
         self.assertEqual(ref.title, 'Test Article Title')
@@ -31,7 +31,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2022]]},
         }
 
-        ref = Reference(id='test-002', csl_data=csl_data)
+        ref = Reference(reference_id='test-002', csl_data=csl_data)
         ref.save()
 
         self.assertEqual(ref.year, 2022)
@@ -46,7 +46,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-003', csl_data=csl_data)
+        ref = Reference(reference_id='test-003', csl_data=csl_data)
         ref.save()
 
         self.assertEqual(ref.author, 'Johnson')
@@ -64,7 +64,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-004', csl_data=csl_data)
+        ref = Reference(reference_id='test-004', csl_data=csl_data)
         ref.save()
 
         self.assertEqual(ref.author, 'Smith and Doe')
@@ -84,7 +84,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-005', csl_data=csl_data)
+        ref = Reference(reference_id='test-005', csl_data=csl_data)
         ref.save()
 
         self.assertEqual(ref.author, 'Smith et al.')
@@ -99,7 +99,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-006', csl_data=csl_data)
+        ref = Reference(reference_id='test-006', csl_data=csl_data)
         ref.save()
 
         # Should extract last word from literal name
@@ -119,7 +119,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-007', csl_data=csl_data)
+        ref = Reference(reference_id='test-007', csl_data=csl_data)
         ref.save()
 
         # Should use "et al." for 3+ authors
@@ -127,7 +127,7 @@ class ReferenceModelTest(TestCase):
 
     def test_save_handles_missing_csl_data(self):
         """Test that save() raises ValidationError for missing csl_data."""
-        ref = Reference(id='test-008')
+        ref = Reference(reference_id='test-008')
 
         with self.assertRaises(ValidationError) as context:
             ref.save()
@@ -138,7 +138,7 @@ class ReferenceModelTest(TestCase):
 
     def test_save_handles_empty_csl_data(self):
         """Test that save() raises ValidationError for empty csl_data."""
-        ref = Reference(id='test-009', csl_data={})
+        ref = Reference(reference_id='test-009', csl_data={})
 
         with self.assertRaises(ValidationError) as context:
             ref.save()
@@ -156,7 +156,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-010', csl_data=csl_data)
+        ref = Reference(reference_id='test-010', csl_data=csl_data)
 
         with self.assertRaises(ValidationError) as context:
             ref.save()
@@ -174,7 +174,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-011', csl_data=csl_data)
+        ref = Reference(reference_id='test-011', csl_data=csl_data)
 
         with self.assertRaises(ValidationError) as context:
             ref.save()
@@ -194,7 +194,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-012', csl_data=csl_data)
+        ref = Reference(reference_id='test-012', csl_data=csl_data)
 
         with self.assertRaises(ValidationError) as context:
             ref.save()
@@ -214,7 +214,7 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[]]},  # Empty date parts
         }
 
-        ref = Reference(id='test-013', csl_data=csl_data)
+        ref = Reference(reference_id='test-013', csl_data=csl_data)
 
         with self.assertRaises(ValidationError) as context:
             ref.save()
@@ -233,7 +233,7 @@ class ReferenceModelTest(TestCase):
             'author': [{'family': 'Smith', 'given': 'John'}],
         }
 
-        ref = Reference(id='test-014', csl_data=csl_data)
+        ref = Reference(reference_id='test-014', csl_data=csl_data)
 
         with self.assertRaises(ValidationError) as context:
             ref.save()
@@ -255,14 +255,14 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-015', csl_data=csl_data)
+        ref = Reference(reference_id='test-015', csl_data=csl_data)
         ref.save()
 
         # Should only use authors with family names
         self.assertEqual(ref.author, 'Smith')
 
-    def test_str_method_returns_title(self):
-        """Test that __str__ method returns the title field."""
+    def test_str_method_returns_reference_id(self):
+        """Test that __str__ method returns the reference_id field."""
         csl_data = {
             'type': 'article-journal',
             'id': 'test-016',
@@ -271,14 +271,14 @@ class ReferenceModelTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        ref = Reference(id='test-016', csl_data=csl_data)
+        ref = Reference(reference_id='test-016', csl_data=csl_data)
         ref.save()
 
-        self.assertEqual(str(ref), 'Test String Representation')
+        self.assertEqual(str(ref), 'test-016')
 
     def tearDown(self):
         """Clean up test data after each test."""
-        Reference.objects.filter(id__startswith='test-').delete()
+        Reference.objects.filter(reference_id__startswith='test-').delete()
 
 
 class ComponentModelTest(TestCase):

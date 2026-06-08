@@ -1,7 +1,7 @@
 [
   {
-    "_comment": "This is an example for an ExperimentFragilityModelBridge object. It links an Experiment (by id) to a FragilityModel (by id).",
+    "_comment": "This is an example for an ExperimentFragilityModelBridge object. It links an Experiment (by id) to a FragilityModel (by fragility_model_id).",
     "experiment": "exp001",
-    "fragility_model": "FM001"
+    "fragility_model": "SMITH-2020-EXP|FM001"
   }
 ]

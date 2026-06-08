@@ -16,6 +16,7 @@ from ned_app.models import (
     Experiment,
     FragilityModel,
     ExperimentFragilityModelBridge,
+    ComponentFragilityModelBridge,
     FragilityCurve,
 )
 
@@ -28,7 +29,7 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'id': 'ref-001',
+                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
                     'pdf_saved': True,
@@ -41,7 +42,7 @@ class IngestCommandTests(TransactionTestCase):
                     },
                 },
                 {
-                    'id': 'ref-002',
+                    'reference_id': 'ref-002',
                     'study_type': 'Analytical Study',
                     'comp_type': 'Mechanical Component',
                     'pdf_saved': False,
@@ -71,20 +72,39 @@ class IngestCommandTests(TransactionTestCase):
 
             fragility_model_data = [
                 {
-                    'id': 'fm-001',
-                    'component': 'B.20.1.1.A',
+                    'reference': 'ref-001',
+                    'model_id': 'fm-001',
                     'p58_fragility': 'B2011.001',
                     'comp_detail': 'Standard attachment',
                     'material': 'Steel',
                     'comp_description': 'Cold-formed steel exterior wall system',
+                    'reviewer': 'Test Reviewer',
+                    'source': 'Laboratory Testing',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
                 },
                 {
-                    'id': 'fm-002',
-                    'component': 'D.30.3.2.B',
+                    'reference': 'ref-002',
+                    'model_id': 'fm-002',
                     'p58_fragility': '',
                     'comp_detail': 'Anchored',
                     'material': 'Steel tank',
                     'comp_description': 'Residential water heater',
+                    'reviewer': 'Test Reviewer',
+                    'source': 'Field Observation',
+                    'edp_metric': 'Peak Floor Acceleration, horizontal',
+                    'edp_unit': 'g',
+                },
+            ]
+
+            component_fragility_bridge_data = [
+                {
+                    'component': 'B.20.1.1.A',
+                    'fragility_model': 'ref-001|fm-001',
+                },
+                {
+                    'component': 'D.30.3.2.B',
+                    'fragility_model': 'ref-002|fm-002',
                 },
             ]
 
@@ -120,24 +140,19 @@ class IngestCommandTests(TransactionTestCase):
             bridge_data = [
                 {
                     'experiment': 'exp-001',
-                    'fragility_model': 'fm-001',
+                    'fragility_model': 'ref-001|fm-001',
                 },
                 {
                     'experiment': 'exp-002',
-                    'fragility_model': 'fm-002',
+                    'fragility_model': 'ref-002|fm-002',
                 },
             ]
 
             fragility_curve_data = [
                 {
-                    'fragility_model': 'fm-001',
-                    'reference': 'ref-001',
-                    'reviewer': 'Test Reviewer',
-                    'source': 'Laboratory Testing',
+                    'fragility_model': 'ref-001|fm-001',
                     'basis': 'Experiment',
                     'num_observations': 10,
-                    'edp_metric': 'Story Drift Ratio',
-                    'edp_unit': 'Ratio',
                     'ds_rank': 1,
                     'ds_description': 'Minor cracking',
                     'median': '0.005',
@@ -145,14 +160,9 @@ class IngestCommandTests(TransactionTestCase):
                     'probability': '0.5',
                 },
                 {
-                    'fragility_model': 'fm-001',
-                    'reference': 'ref-002',
-                    'reviewer': 'Test Reviewer',
-                    'source': 'Analytical Model',
+                    'fragility_model': 'ref-001|fm-001',
                     'basis': 'Analytical Study',
                     'num_observations': 5,
-                    'edp_metric': 'Story Drift Ratio',
-                    'edp_unit': 'Ratio',
                     'ds_rank': 2,
                     'ds_description': 'Severe damage',
                     'median': '0.02',
@@ -160,14 +170,9 @@ class IngestCommandTests(TransactionTestCase):
                     'probability': '0.5',
                 },
                 {
-                    'fragility_model': 'fm-002',
-                    'reference': 'ref-002',
-                    'reviewer': 'Test Reviewer',
-                    'source': 'Field Observation',
+                    'fragility_model': 'ref-002|fm-002',
                     'basis': 'Historical Event',
                     'num_observations': 15,
-                    'edp_metric': 'Peak Floor Acceleration, horizontal',
-                    'edp_unit': 'g',
                     'ds_rank': 1,
                     'ds_description': 'Leakage',
                     'median': '0.8',
@@ -180,6 +185,7 @@ class IngestCommandTests(TransactionTestCase):
                 'reference.json': reference_data,
                 'component.json': component_data,
                 'fragility_model.json': fragility_model_data,
+                'component_fragility_model_bridge.json': component_fragility_bridge_data,
                 'experiment.json': experiment_data,
                 'experiment_fragility_model_bridge.json': bridge_data,
                 'fragility_curve.json': fragility_curve_data,
@@ -202,53 +208,75 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(Reference.objects.count(), 2)
             self.assertEqual(Component.objects.count(), 2)
             self.assertEqual(FragilityModel.objects.count(), 2)
+            self.assertEqual(ComponentFragilityModelBridge.objects.count(), 2)
             self.assertEqual(Experiment.objects.count(), 2)
             self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 2)
             self.assertEqual(FragilityCurve.objects.count(), 3)
 
             exp_001 = Experiment.objects.get(id='exp-001')
-            self.assertEqual(exp_001.reference.id, 'ref-001')
+            self.assertEqual(exp_001.reference.reference_id, 'ref-001')
             self.assertEqual(exp_001.component.component_id, 'B.20.1.1.A')
 
             exp_002 = Experiment.objects.get(id='exp-002')
-            self.assertEqual(exp_002.reference.id, 'ref-001')
+            self.assertEqual(exp_002.reference.reference_id, 'ref-001')
             self.assertEqual(exp_002.component.component_id, 'D.30.3.2.B')
 
-            fm_001 = FragilityModel.objects.get(id='fm-001')
-            self.assertEqual(fm_001.component.component_id, 'B.20.1.1.A')
+            cfm_bridge_1 = ComponentFragilityModelBridge.objects.get(
+                component__component_id='B.20.1.1.A',
+                fragility_model__fragility_model_id='ref-001|fm-001',
+            )
+            self.assertEqual(cfm_bridge_1.component.component_id, 'B.20.1.1.A')
+            self.assertEqual(
+                cfm_bridge_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
+            )
 
-            fm_002 = FragilityModel.objects.get(id='fm-002')
-            self.assertEqual(fm_002.component.component_id, 'D.30.3.2.B')
+            cfm_bridge_2 = ComponentFragilityModelBridge.objects.get(
+                component__component_id='D.30.3.2.B',
+                fragility_model__fragility_model_id='ref-002|fm-002',
+            )
+            self.assertEqual(cfm_bridge_2.component.component_id, 'D.30.3.2.B')
+            self.assertEqual(
+                cfm_bridge_2.fragility_model.fragility_model_id, 'ref-002|fm-002'
+            )
 
             bridge_1 = ExperimentFragilityModelBridge.objects.get(
-                experiment__id='exp-001', fragility_model__id='fm-001'
+                experiment__id='exp-001',
+                fragility_model__fragility_model_id='ref-001|fm-001',
             )
             self.assertEqual(bridge_1.experiment.id, 'exp-001')
-            self.assertEqual(bridge_1.fragility_model.id, 'fm-001')
+            self.assertEqual(
+                bridge_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
+            )
 
             bridge_2 = ExperimentFragilityModelBridge.objects.get(
-                experiment__id='exp-002', fragility_model__id='fm-002'
+                experiment__id='exp-002',
+                fragility_model__fragility_model_id='ref-002|fm-002',
             )
             self.assertEqual(bridge_2.experiment.id, 'exp-002')
-            self.assertEqual(bridge_2.fragility_model.id, 'fm-002')
+            self.assertEqual(
+                bridge_2.fragility_model.fragility_model_id, 'ref-002|fm-002'
+            )
 
             fc_1 = FragilityCurve.objects.get(
-                fragility_model__id='fm-001', ds_rank=1
+                fragility_model__fragility_model_id='ref-001|fm-001', ds_rank=1
             )
-            self.assertEqual(fc_1.fragility_model.id, 'fm-001')
-            self.assertEqual(fc_1.reference.id, 'ref-001')
+            self.assertEqual(
+                fc_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
+            )
 
             fc_2 = FragilityCurve.objects.get(
-                fragility_model__id='fm-001', ds_rank=2
+                fragility_model__fragility_model_id='ref-001|fm-001', ds_rank=2
             )
-            self.assertEqual(fc_2.fragility_model.id, 'fm-001')
-            self.assertEqual(fc_2.reference.id, 'ref-002')
+            self.assertEqual(
+                fc_2.fragility_model.fragility_model_id, 'ref-001|fm-001'
+            )
 
             fc_3 = FragilityCurve.objects.get(
-                fragility_model__id='fm-002', ds_rank=1
+                fragility_model__fragility_model_id='ref-002|fm-002', ds_rank=1
             )
-            self.assertEqual(fc_3.fragility_model.id, 'fm-002')
-            self.assertEqual(fc_3.reference.id, 'ref-002')
+            self.assertEqual(
+                fc_3.fragility_model.fragility_model_id, 'ref-002|fm-002'
+            )
 
     def test_ingest_component_id_generation(self):
         """Test that Component id field is auto-generated from component_id."""
@@ -282,7 +310,7 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'id': 'ref-001',
+                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
                     'pdf_saved': True,
@@ -309,7 +337,7 @@ class IngestCommandTests(TransactionTestCase):
             ):
                 call_command('ingest')
 
-            reference = Reference.objects.get(id='ref-001')
+            reference = Reference.objects.get(reference_id='ref-001')
 
             self.assertEqual(
                 reference.title, 'Experimental Study of Building Components'
@@ -322,7 +350,7 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'id': 'ref-001',
+                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
                     'pdf_saved': True,
@@ -407,7 +435,7 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'id': 'ref-001',
+                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
                     'pdf_saved': True,
@@ -420,7 +448,7 @@ class IngestCommandTests(TransactionTestCase):
                     },
                 },
                 {
-                    'id': 'ref-002',
+                    'reference_id': 'ref-002',
                     'study_type': 'Analytical Study',
                     'comp_type': 'Mechanical Component',
                     'pdf_saved': False,
@@ -455,8 +483,12 @@ class IngestCommandTests(TransactionTestCase):
             self.assertIn('ref-002', stderr_value)
 
             self.assertEqual(Reference.objects.count(), 1)
-            self.assertTrue(Reference.objects.filter(id='ref-001').exists())
-            self.assertFalse(Reference.objects.filter(id='ref-002').exists())
+            self.assertTrue(
+                Reference.objects.filter(reference_id='ref-001').exists()
+            )
+            self.assertFalse(
+                Reference.objects.filter(reference_id='ref-002').exists()
+            )
 
     def test_ingest_handles_invalid_foreign_key(self):
         """Test that the command handles invalid foreign key references gracefully."""
@@ -522,7 +554,7 @@ class IngestCommandTests(TransactionTestCase):
             # --- 1. Initial Data Setup ---
             reference_data = [
                 {
-                    'id': 'ref-idem',
+                    'reference_id': 'ref-idem',
                     'study_type': 'Experiment',
                     'csl_data': {
                         'type': 'article-journal',
@@ -538,9 +570,20 @@ class IngestCommandTests(TransactionTestCase):
 
             fragility_model_data = [
                 {
-                    'id': 'fm-idem',
-                    'component': 'A.10.1.1',
+                    'reference': 'ref-idem',
+                    'model_id': 'fm-idem',
                     'comp_description': 'Original FM Description',
+                    'reviewer': 'Test Reviewer',
+                    'source': 'Laboratory Testing',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
+                }
+            ]
+
+            component_fragility_bridge_data = [
+                {
+                    'component': 'A.10.1.1',
+                    'fragility_model': 'ref-idem|fm-idem',
                 }
             ]
 
@@ -559,14 +602,13 @@ class IngestCommandTests(TransactionTestCase):
                 }
             ]
 
-            bridge_data = [{'experiment': 'exp-idem', 'fragility_model': 'fm-idem'}]
+            bridge_data = [
+                {'experiment': 'exp-idem', 'fragility_model': 'ref-idem|fm-idem'}
+            ]
 
             fragility_curve_data = [
                 {
-                    'fragility_model': 'fm-idem',
-                    'reference': 'ref-idem',
-                    'edp_metric': 'Story Drift Ratio',
-                    'edp_unit': 'Ratio',
+                    'fragility_model': 'ref-idem|fm-idem',
                     'ds_rank': 1,
                     'ds_description': 'Original FC Description',
                     'median': '0.01',
@@ -578,6 +620,7 @@ class IngestCommandTests(TransactionTestCase):
                 'reference.json': reference_data,
                 'component.json': component_data,
                 'fragility_model.json': fragility_model_data,
+                'component_fragility_model_bridge.json': component_fragility_bridge_data,
                 'experiment.json': experiment_data,
                 'experiment_fragility_model_bridge.json': bridge_data,
                 'fragility_curve.json': fragility_curve_data,
@@ -601,17 +644,20 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(Reference.objects.count(), 1)
                 self.assertEqual(Component.objects.count(), 1)
                 self.assertEqual(FragilityModel.objects.count(), 1)
+                self.assertEqual(ComponentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(Experiment.objects.count(), 1)
                 self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
 
-                ref = Reference.objects.get(id='ref-idem')
+                ref = Reference.objects.get(reference_id='ref-idem')
                 self.assertEqual(ref.title, 'Original Title')
 
                 comp = Component.objects.get(component_id='A.10.1.1')
                 self.assertEqual(comp.name, 'Original Name')
 
-                fm = FragilityModel.objects.get(id='fm-idem')
+                fm = FragilityModel.objects.get(
+                    fragility_model_id='ref-idem|fm-idem'
+                )
                 self.assertEqual(fm.comp_description, 'Original FM Description')
 
                 exp = Experiment.objects.get(id='exp-idem')
@@ -631,6 +677,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(Reference.objects.count(), 1)
                 self.assertEqual(Component.objects.count(), 1)
                 self.assertEqual(FragilityModel.objects.count(), 1)
+                self.assertEqual(ComponentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(Experiment.objects.count(), 1)
                 self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
@@ -655,12 +702,13 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(Reference.objects.count(), 1)
                 self.assertEqual(Component.objects.count(), 1)
                 self.assertEqual(FragilityModel.objects.count(), 1)
+                self.assertEqual(ComponentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(Experiment.objects.count(), 1)
                 self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
 
                 # --- 6. Verify Updates in Database ---
-                ref = Reference.objects.get(id='ref-idem')
+                ref = Reference.objects.get(reference_id='ref-idem')
                 ref.refresh_from_db()
                 self.assertEqual(ref.title, 'Updated Title')
 
@@ -668,7 +716,9 @@ class IngestCommandTests(TransactionTestCase):
                 comp.refresh_from_db()
                 self.assertEqual(comp.name, 'Updated Name')
 
-                fm = FragilityModel.objects.get(id='fm-idem')
+                fm = FragilityModel.objects.get(
+                    fragility_model_id='ref-idem|fm-idem'
+                )
                 fm.refresh_from_db()
                 self.assertEqual(fm.comp_description, 'Updated FM Description')
 
@@ -677,7 +727,8 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(exp.ds_description, 'Updated EXP Description')
 
                 fc = FragilityCurve.objects.get(
-                    fragility_model__id='fm-idem', ds_rank=1
+                    fragility_model__fragility_model_id='ref-idem|fm-idem',
+                    ds_rank=1,
                 )
                 fc.refresh_from_db()
                 self.assertEqual(fc.ds_description, 'Updated FC Description')
@@ -727,6 +778,183 @@ class IngestCommandTests(TransactionTestCase):
 
             self.assertEqual(Reference.objects.count(), 0)
             self.assertEqual(Component.objects.count(), 0)
+
+    def test_ingest_rejects_invalid_choice_in_fragility_model(self):
+        """
+        Verify that ingestion rejects a FragilityModel with an invalid
+        edp_metric while still persisting a sibling valid FragilityModel
+        in the same file.
+
+        This is the negative-path counterpart to the systematic
+        ChoicesValidationTest in test_serializers.py — it confirms that
+        the choice-validation enforced by the serializer also takes
+        effect when records are being processed by the ingest command.
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            reference_data = [
+                {
+                    'reference_id': 'ref-001',
+                    'study_type': 'Experiment',
+                    'csl_data': {
+                        'type': 'article-journal',
+                        'id': 'ref-001',
+                        'title': 'Choices Test Reference',
+                        'author': [{'family': 'Smith', 'given': 'John'}],
+                        'issued': {'date-parts': [[2020]]},
+                    },
+                },
+            ]
+
+            fragility_model_data = [
+                {
+                    'reference': 'ref-001',
+                    'model_id': 'fm-good',
+                    'comp_description': 'Valid fragility model',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
+                },
+                {
+                    'reference': 'ref-001',
+                    'model_id': 'fm-bad',
+                    'comp_description': 'Invalid fragility model',
+                    'edp_metric': '__INVALID_METRIC__',
+                    'edp_unit': 'Ratio',
+                },
+            ]
+
+            files_data = {
+                'reference.json': reference_data,
+                'fragility_model.json': fragility_model_data,
+            }
+
+            for filename, data in files_data.items():
+                filepath = os.path.join(temp_dir, filename)
+                with open(filepath, 'w') as f:
+                    json.dump(data, f)
+
+            def mock_build_path(filename):
+                return os.path.join(temp_dir, filename)
+
+            stdout = StringIO()
+            stderr = StringIO()
+
+            with patch(
+                'ned_app.management.commands.ingest.build_json_data_file_path',
+                side_effect=mock_build_path,
+            ):
+                call_command('ingest', stdout=stdout, stderr=stderr)
+
+            stderr_value = stderr.getvalue()
+
+            # The bad record was reported as failed.
+            self.assertIn('Error processing FragilityModel', stderr_value)
+            self.assertIn('fm-bad', stderr_value)
+
+            # Only the valid FragilityModel was persisted.
+            self.assertEqual(FragilityModel.objects.count(), 1)
+            self.assertTrue(
+                FragilityModel.objects.filter(
+                    fragility_model_id='ref-001|fm-good'
+                ).exists()
+            )
+            self.assertFalse(
+                FragilityModel.objects.filter(
+                    fragility_model_id='ref-001|fm-bad'
+                ).exists()
+            )
+
+    def test_ingest_rejects_invalid_choice_in_experiment(self):
+        """
+        Verify that ingestion rejects an Experiment with an invalid
+        test_type while still persisting a sibling valid Experiment in
+        the same file.
+
+        Complements test_ingest_rejects_invalid_choice_in_fragility_model
+        by exercising a different choice field (test_type, backed by
+        TestTypeChoices) on a different model.
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            reference_data = [
+                {
+                    'reference_id': 'ref-001',
+                    'study_type': 'Experiment',
+                    'csl_data': {
+                        'type': 'article-journal',
+                        'id': 'ref-001',
+                        'title': 'Choices Test Reference',
+                        'author': [{'family': 'Smith', 'given': 'John'}],
+                        'issued': {'date-parts': [[2020]]},
+                    },
+                },
+            ]
+
+            component_data = [
+                {
+                    'component_id': 'B.20.1.1.A',
+                    'name': 'CFS Exterior Walls',
+                },
+            ]
+
+            experiment_data = [
+                {
+                    'id': 'exp-good',
+                    'reference': 'ref-001',
+                    'component': 'B.20.1.1.A',
+                    'test_type': 'Quasi-static Cyclic, uniaxial',
+                    'comp_description': 'Valid experiment',
+                    'ds_description': 'Cracking',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
+                    'edp_value': '0.025',
+                    'ds_class': 'Consequential',
+                },
+                {
+                    'id': 'exp-bad',
+                    'reference': 'ref-001',
+                    'component': 'B.20.1.1.A',
+                    'test_type': '__INVALID_TEST_TYPE__',
+                    'comp_description': 'Invalid experiment',
+                    'ds_description': 'Cracking',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
+                    'edp_value': '0.025',
+                    'ds_class': 'Consequential',
+                },
+            ]
+
+            files_data = {
+                'reference.json': reference_data,
+                'component.json': component_data,
+                'experiment.json': experiment_data,
+            }
+
+            for filename, data in files_data.items():
+                filepath = os.path.join(temp_dir, filename)
+                with open(filepath, 'w') as f:
+                    json.dump(data, f)
+
+            def mock_build_path(filename):
+                return os.path.join(temp_dir, filename)
+
+            stdout = StringIO()
+            stderr = StringIO()
+
+            with patch(
+                'ned_app.management.commands.ingest.build_json_data_file_path',
+                side_effect=mock_build_path,
+            ):
+                call_command('ingest', stdout=stdout, stderr=stderr)
+
+            stderr_value = stderr.getvalue()
+
+            # The bad record was reported as failed.
+            self.assertIn('Error processing Experiment', stderr_value)
+            self.assertIn('exp-bad', stderr_value)
+
+            # Only the valid Experiment was persisted.
+            self.assertEqual(Experiment.objects.count(), 1)
+            self.assertTrue(Experiment.objects.filter(id='exp-good').exists())
+            self.assertFalse(Experiment.objects.filter(id='exp-bad').exists())
 
     def test_ingest_handles_empty_data_directory(self):
         """Test that the command handles empty data directory (no files found) gracefully."""
