@@ -301,16 +301,17 @@ python manage.py ingest
 
 The `ingest` command reads all JSON files from `resources/data/` and populates the SQLite database. This step is mandatory for local development, as the `db.sqlite3` file is not tracked in version control—it's a disposable build artifact generated from the JSON source data.
 
-### How to Add New Data
+### How to Add New Data or Modify Existing Data
 
-We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data involves working directly with the JSON files that serve as our single source of truth.
+We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data, or correctinng existing records involves working directly with the JSON files that serve as our single source of truth.
 
 Follow this step-by-step guide to contribute:
 
 #### 1. Fork and Branch
 Create your own fork of the repository and start a new feature branch for your specific contribution (e.g., `data/add-ucsd-experiments`).
 
-#### 2. Add Your Data
+
+#### 2. Add Your Data or Edit existing data
 You have two options for adding data:
 
 **Option A — Edit JSON directly** (recommended for small additions or when working in a code editor):
@@ -329,41 +330,7 @@ See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
     *   `references.json`: For new bibliographic references.
     *   `fragility_model.json`: For new fragility functions.
 
-#### 3. Validate Locally (Recommended)
-Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
-
-**Setup your local DB:**
-```bash
-python manage.py migrate
-python manage.py ingest
-```
-
-**Run the integrity check:**
-```bash
-python manage.py test ned_app.tests
-```
-*   *What this checks:* It verifies that all Foreign Keys match (e.g., every experiment points to a valid component ID) and that Primary Keys are unique.
-
-#### 4. Submit a Pull Request
-Commit your changes and open a Pull Request (PR) to the `main` branch. 
-
-**In your PR description, please include:**
-*   A summary of what data you are adding.
-*   The source of the data (citations, reports).
-*   Any context notes that would help the reviewer.
-
-#### What Happens Next? (The Review Process)
-A project maintainer will review your PR. They will check the "JSON Diff" to see exactly what data is entering the system and ensure the automated tests pass. Once approved and merged, your data is effectively "published" and will be live on the next deployment!
-
-### How to Modify Existing Data
-
-For corrections, updates, or refinements to existing records (e.g., spelling fixes, value corrections, updated references), follow this streamlined process:
-
-#### 1. Fork and Branch
-Create your own fork of the repository and start a new feature branch for your specific modification (e.g., `data/fix-fragility-spelling`).
-
-#### 2. Edit Your Data
-Directly edit the JSON files in the `resources/data/` directory.
+If modifying existing data:
 *   **Important:** Only modify field values; do not change the structure or schema.
 *   **Examples of valid modifications:**
     *   Correcting spelling or grammar in descriptions
@@ -371,8 +338,8 @@ Directly edit the JSON files in the `resources/data/` directory.
     *   Adding or refining component details
     *   Correcting references or citations
 
-#### 3. Validate Locally
-Before submitting, validate that your changes are reflected correctly in the database and pass all integrity checks.
+#### 3. Validate Locally (Recommended)
+Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
 
 **Setup your local DB:**
 ```bash
@@ -402,19 +369,20 @@ python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.jso
 ```bash
 python manage.py test ned_app.tests
 ```
-*   *What it checks:* It verifies that all Foreign Keys match, Primary Keys are unique, and the round-trip pipeline (JSON → DB → JSON) remains lossless.
+*   *What this checks:* It verifies that all Foreign Keys match (e.g., every experiment points to a valid component ID) and that Primary Keys are unique.
 
 #### 4. Submit a Pull Request
 Commit your changes and open a Pull Request (PR) to the `main` branch. 
 
 **In your PR description, please include:**
-*   A clear summary of what data was modified and why.
-*   The specific records or fields that changed.
-*   The rationale for the change (e.g., "Corrected spelling to match FEMA P-58 terminology").
-*   Any citations or references that support the modification.
+*   A summary of what data you are adding, or what data was modified and why
+*   The specific records or fields that changed, if any and the rationale for the change (e.g., "Corrected spelling to match FEMA P-58 terminology").
+*   The source of the data (citations, reports) or any citations or references that support the changes made.
+*   Any context notes that would help the reviewer.
 
 #### What Happens Next? (The Review Process)
-A project maintainer will review your PR. They will inspect the "JSON Diff" to see exactly what changed and ensure the automated tests pass. Once approved and merged, your corrections are live on the next deployment!
+A project maintainer will review your PR. They will check the "JSON Diff" to see exactly what data is entering the system or what data changed and ensure the automated tests pass. Once approved and merged, your data is effectively "published" and will be live on the next deployment!
+
 
 ### How to Modify the Database Structure
 
