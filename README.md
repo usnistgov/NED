@@ -158,6 +158,108 @@ python manage.py query_to_csv --model Experiment --output_file exports\\data.csv
 ```
 
 
+## Importing Data from CSV
+
+The NED database includes a management command for importing new records from CSV files directly into the canonical JSON source data. This provides an alternative to manually editing JSON files, which may be preferable for contributors working primarily in spreadsheet tools.
+
+> **Important:** This command appends to the JSON source files only. After importing, you must run `python manage.py ingest` to load the new records into the local database.
+
+### Using the `import_from_csv` Command
+
+#### Basic Usage
+
+```bash
+python manage.py import_from_csv --model Experiment --input_file my_data.csv
+```
+
+#### Available Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--model` | Yes | Model name to import (e.g., `Experiment`, `FragilityModel`, `Reference`) |
+| `--input_file` | Yes | Path to the CSV file containing new records |
+| `--dry_run` | No | Validate the CSV and report results without writing any changes |
+| `--list-models` | No | Show all models that support CSV import |
+
+#### Templates
+
+CSV templates with example rows are provided in `resources/import_templates/`. Copy the relevant template, replace the example row(s) with your data, and remove any rows you do not wish to import.
+
+#### CSV Conventions
+
+- **Foreign key columns** accept natural key values, not numeric IDs:
+  - `reference` → the `reference_id` string (e.g., `SMITH-2020-EXP`)
+  - `component` → the `component_id` string (e.g., `D.50.2.1.A`)
+  - `fragility_model` → the full `fragility_model_id` string (e.g., `SMITH-2020-EXP|fra001`)
+  - `experiment` → the experiment `id` string
+- **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
+- **Optional numeric fields** (e.g., `alt_edp_value`, `probability`) may be left blank; they will be stored as `null`.
+- **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
+- Files should be **UTF-8** encoded.
+- Because the `Reference` model stores citation data as nested CSL-JSON, the CSV template uses flattened `csl_*` columns that the command reconstructs internally:
+
+
+#### Examples
+
+**Validate a CSV without writing changes:**
+```bash
+python manage.py import_from_csv --model Experiment \
+  --input_file my_experiments.csv \
+  --dry_run
+```
+
+**Import experiments:**
+```bash
+python manage.py import_from_csv --model Experiment \
+  --input_file my_experiments.csv
+```
+
+**Import fragility models then their curves:**
+```bash
+python manage.py import_from_csv --model FragilityModel \
+  --input_file my_fragility_models.csv
+
+python manage.py import_from_csv --model FragilityCurve \
+  --input_file my_fragility_curves.csv
+```
+
+**Rebuild the database after importing:**
+```bash
+python manage.py ingest
+```
+
+#### Validation and Error Handling
+
+The command validates every row before writing anything. If any row contains an error, **no records are imported** and the errors are reported so you can fix your CSV and retry:
+
+```
+Found 2 row(s) with validation errors:
+  Row 3:
+    - Missing required field 'comp_description'
+    - Invalid value 'SDR' for 'edp_metric'. Valid values: ['Story Drift Ratio', ...]
+  Row 5:
+    - FK 'reference' value 'UNKNOWN-REF' not found in existing records.
+
+No records were imported. Fix validation errors and retry.
+```
+
+Duplicate records (matching an existing primary key in the JSON) are skipped with a warning rather than causing an abort:
+
+```
+Skipped 1 duplicate(s) (already present in experiment.json):
+  Row 4: exp001
+```
+
+#### Tips
+
+- **Import order matters for foreign keys.** Import `Reference` and `Component` records before `Experiment` or `FragilityModel` records that reference them. Import `FragilityModel` records before `FragilityCurve` or bridge records.
+- **Use `--dry_run` first** to catch errors before committing changes to the JSON files.
+- **Large batches**: All records are validated before writing. Fixing errors row-by-row is easiest when you run `--dry_run` on the full file first.
+- **Windows path syntax**: Use forward slashes or quoted backslashes in PowerShell:
+  ```powershell
+  python manage.py import_from_csv --model Experiment --input_file exports/my_data.csv
+  ```
+
 ## Contributors Guide
 
 ### Setting up a Virtual Environment (optional but recommended)
@@ -209,9 +311,19 @@ Follow this step-by-step guide to contribute:
 Create your own fork of the repository and start a new feature branch for your specific contribution (e.g., `data/add-ucsd-experiments`).
 
 #### 2. Add Your Data
+You have two options for adding data:
+
+**Option A — Edit JSON directly** (recommended for small additions or when working in a code editor):
 Directly edit the JSON files in the `resources/data/` directory.
 *   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
 *   **Templates:** Check `resources/example_data/` for examples of proper formatting.
+
+**Option B — Import from CSV** (useful for larger datasets or contributors who prefer spreadsheet tools):
+Populate a CSV template from `resources/csv_templates/` and use the import command:
+```bash
+python manage.py import_from_csv --model Experiment --input_file my_data.csv
+```
+See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
 *   **Common Files:**
     *   `experiments.json`: For new experimental results.
     *   `references.json`: For new bibliographic references.
