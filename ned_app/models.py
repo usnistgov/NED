@@ -50,6 +50,7 @@ class StudyTypeChoices(models.TextChoices):
     RECON = 'Historical Event'
     ANALYTICAL = 'Analytical Study'
     LIT_REVIEW = 'Lit Review'
+    JUDGMENT = 'Judgment'
     OTHER = 'Other'
 
 

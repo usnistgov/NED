@@ -351,7 +351,7 @@
         "source": ""
     },
     {
-        "comp_description": "\u215b-inch diameter galvanized 7 x 19 (number of strands x wires per strand) aircraft-grade steel with a specified minimum break strength of 1700 pounds,\nThe cable support was threaded, and a screw was clamped on top.",
+        "comp_description": "⅛-inch diameter galvanized 7 x 19 (number of strands x wires per strand) aircraft-grade steel with a specified minimum break strength of 1700 pounds,\nThe cable support was threaded, and a screw was clamped on top.",
         "comp_detail": "",
         "edp_metric": "Force, tension",
         "edp_unit": "Kips",
@@ -520,7 +520,7 @@
         "source": "FEMA P-58"
     },
     {
-        "comp_description": "Exterior Wall - Wood walls with diagonal let-in bracing - Costing for each 100 ft^2 Wall Panel. Assumed framing: Stud wall framing consists of 2 x 4\u2019s at 16 inches on center with double top plates and single sill plate. Diagonal bracing includes 2 forms. Block-bracing consists of diagonal blocking between studs that extends from the top of one edge of the panel to the bottom of the opposite edge. Diagonal bracing may also consist of let-in bracing for which a 1x or 2x brace (with same inclination as described for block-bracing) is recessed into studs. Walls may be sheathed with horizontal or vertical lumber siding.",
+        "comp_description": "Exterior Wall - Wood walls with diagonal let-in bracing - Costing for each 100 ft^2 Wall Panel. Assumed framing: Stud wall framing consists of 2 x 4’s at 16 inches on center with double top plates and single sill plate. Diagonal bracing includes 2 forms. Block-bracing consists of diagonal blocking between studs that extends from the top of one edge of the panel to the bottom of the opposite edge. Diagonal bracing may also consist of let-in bracing for which a 1x or 2x brace (with same inclination as described for block-bracing) is recessed into studs. Walls may be sheathed with horizontal or vertical lumber siding.",
         "comp_detail": "Let-in-bracing",
         "edp_metric": "Story Drift Ratio",
         "edp_unit": "Ratio",
@@ -6641,5 +6641,135 @@
         "reviewer": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler systems, including horizontal mains, branches, and bracing. Bracing typical of SDC D/E/F.",
+        "comp_detail": "SDC D/E/F Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "Steel pipes",
+        "model_id": "1",
+        "p58_fragility": "D4011.023a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler systems, including horizontal mains, branches, and bracing. Bracing typical of special regulations such as ASCE 7 risk category IV or OSHPD requirements for california hospitals.",
+        "comp_detail": "RCIV Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "Steel pipes",
+        "model_id": "2",
+        "p58_fragility": "D4011.024a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler drops into unbraced lay-in-tile ceiling. Fire sprinkler bracing typical of SDC D/E/F.",
+        "comp_detail": "SDC D/E/F Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "Unbraced lay-in-tile ceiling",
+        "model_id": "3",
+        "p58_fragility": "D4011.033a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler drops into unbraced lay-in-tile ceiling. Fire sprinkler bracing typical of special regulations such as ASCE 7 risk category IV or OSHPD requirements for california hospitals.",
+        "comp_detail": "RCIV Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "Unbraced lay-in-tile ceiling",
+        "model_id": "4",
+        "p58_fragility": "D4011.034a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler drops into braced lay-in-tile ceiling. Fire sprinkler bracing typical of SDC D/E/F.",
+        "comp_detail": "SDC D/E/F Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "Braced lay-in-tile ceiling",
+        "model_id": "5",
+        "p58_fragility": "D4011.053a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler drops into braced lay-in-tile ceiling. Fire sprinkler bracing typical of special regulations such as ASCE 7 risk category IV or OSHPD requirements for california hospitals.",
+        "comp_detail": "RCIV Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "Braced lay-in-tile ceiling",
+        "model_id": "6",
+        "p58_fragility": "D4011.054a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler drops into hard ceiling. Fire sprinkler bracing typical of SDC D/E/F.",
+        "comp_detail": "SDC D/E/F Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "Hard ceiling",
+        "model_id": "7",
+        "p58_fragility": "D4011.063a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler drops into hard ceiling. Fire sprinkler bracing typical of special regulations such as ASCE 7 risk category IV or OSHPD requirements for california hospitals.",
+        "comp_detail": "RCIV Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "Hard ceiling",
+        "model_id": "8",
+        "p58_fragility": "D4011.064a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler drops. No ceiling. Fire sprinkler bracing typical of SDC D/E/F.",
+        "comp_detail": "SDC D/E/F Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "No ceiling",
+        "model_id": "9",
+        "p58_fragility": "D4011.073a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
+    },
+    {
+        "comp_description": "NFPA-13 and NZS-4541 compliant fire sprinkler drops. No ceiling. Fire sprinkler bracing typical of special regulations such as ASCE 7 risk category IV or OSHPD requirements for california hospitals.",
+        "comp_detail": "RCIV Bracing",
+        "edp_metric": "Peak Floor Acceleration, horizontal",
+        "edp_unit": "g",
+        "material": "No ceiling",
+        "model_id": "10",
+        "p58_fragility": "D4011.074a",
+        "reference": "BHA-2026-DEV",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "Literature"
     }
 ]

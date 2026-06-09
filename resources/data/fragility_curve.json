@@ -10078,5 +10078,225 @@
         "median": 2.6,
         "num_observations": null,
         "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.6,
+        "ds_description": "Minor repairs. No leakage. Examples of minor repairs damage include permanent deformation (without failure or fracture) of hangers, minor yeilding of bracing or brace connections, or tearing of fire-stop material at wall or floor penetrations. Around one occurance of damage per 1000 ft of pipe. Damage does not immediately affect the functionality of the system but likely requires repairs for long term maintainence and reliability.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|1",
+        "median": 1.76,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at joints. 1 leak per 1000 ft of pipe.",
+        "ds_rank": 2,
+        "fragility_model": "BHA-2026-DEV|1",
+        "median": 2.42,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Major leaks. Joint breaks. 1 rupture per 1000 ft of pipe.",
+        "ds_rank": 3,
+        "fragility_model": "BHA-2026-DEV|1",
+        "median": 2.6,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.6,
+        "ds_description": "Minor repairs. No leakage. Examples of minor repairs damage include permanent deformation (without failure or fracture) of hangers, minor yeilding of bracing or brace connections, or tearing of fire-stop material at wall or floor penetrations. Around one occurance of damage per 1000 ft of pipe. Damage does not immediately affect the functionality of the system but likely requires repairs for long term maintainence and reliability.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|2",
+        "median": 1.76,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at joints. 1 leak per 1000 ft of pipe.",
+        "ds_rank": 2,
+        "fragility_model": "BHA-2026-DEV|2",
+        "median": 2.42,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Major leaks. Joint breaks. 1 rupture per 1000 ft of pipe.",
+        "ds_rank": 3,
+        "fragility_model": "BHA-2026-DEV|2",
+        "median": 3.4,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at drops. 1 leak per 100 drops.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|3",
+        "median": 0.95,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at drops. 1 leak per 100 drops.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|4",
+        "median": 1.3,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.6,
+        "ds_description": "Minor repairs. No leakage. Examples of minor repairs damage pounding interaction with ceiling tiles. Damage does not immediately affect the functionality of the system.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|5",
+        "median": 1.76,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at drops. 1 leak per 100 drops.",
+        "ds_rank": 2,
+        "fragility_model": "BHA-2026-DEV|5",
+        "median": 1.9,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Major leaks. Joint breaks. 1 rupture per 100 drops.",
+        "ds_rank": 3,
+        "fragility_model": "BHA-2026-DEV|5",
+        "median": 2.25,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.6,
+        "ds_description": "Minor repairs. No leakage. Examples of minor repairs damage pounding interaction with ceilin tiles. Damage does not immediately affect the functionality of the system.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|6",
+        "median": 1.76,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at drops. 1 leak per 100 drops.",
+        "ds_rank": 2,
+        "fragility_model": "BHA-2026-DEV|6",
+        "median": 1.9,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Major leaks. Joint breaks. 1 rupture per 100 drops.",
+        "ds_rank": 3,
+        "fragility_model": "BHA-2026-DEV|6",
+        "median": 3.0,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at drops. 1 leak per 100 drops.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|7",
+        "median": 0.55,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Major leaks. Joint breaks. 1 rupture per 100 drops.",
+        "ds_rank": 2,
+        "fragility_model": "BHA-2026-DEV|7",
+        "median": 1.3,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at drops. 1 leak per 100 drops.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|8",
+        "median": 1.1,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Major leaks. Joint breaks. 1 rupture per 100 drops.",
+        "ds_rank": 2,
+        "fragility_model": "BHA-2026-DEV|8",
+        "median": 2.25,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at drops. 1 leak per 100 drops.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|9",
+        "median": 2.6,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Major leaks. Joint breaks. 1 rupture per 100 drops.",
+        "ds_rank": 2,
+        "fragility_model": "BHA-2026-DEV|9",
+        "median": 3.0,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Minor leaks. Spraying & dripping at drops. 1 leak per 100 drops.",
+        "ds_rank": 1,
+        "fragility_model": "BHA-2026-DEV|10",
+        "median": 3.75,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Judgment",
+        "beta": 0.4,
+        "ds_description": "Major leaks. Joint breaks. 1 rupture per 100 drops.",
+        "ds_rank": 2,
+        "fragility_model": "BHA-2026-DEV|10",
+        "median": 4.5,
+        "num_observations": null,
+        "probability": 1.0
     }
 ]
