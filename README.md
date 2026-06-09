@@ -349,21 +349,18 @@ python manage.py ingest
 
 **Regenerate the fixture snapshot:**
 
-On Windows and macOS/Linux, use these commands respectively:
-
 **Windows (PowerShell):**
 ```powershell
-$env:PYTHONIOENCODING = "utf-8"
-python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+$env:PYTHONUTF8 = "1"
+python manage.py dumpdata ned_app --indent 2 --output ned_app/fixtures/initial_data.json
 ```
 
-**macOS/Linux/WSL (Bash):**
+**macOS/Linux/WSL:**
 ```bash
-export PYTHONIOENCODING=utf-8
-python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+PYTHONUTF8=1 python manage.py dumpdata ned_app --indent 2 --output ned_app/fixtures/initial_data.json
 ```
 
-*   *Why:* The fixture is a snapshot of the expected database state. Your data modifications must be captured in it so tests pass. The `PYTHONIOENCODING` environment variable ensures that Unicode characters in your data (e.g., special hyphens, non-ASCII characters) are properly serialized on all platforms.
+*   *Why:* The fixture is a snapshot of the expected database state. Your data modifications must be captured in it so tests pass. Always use `--output` (or `-o`) rather than shell redirection (`>`). On Windows, also set `PYTHONUTF8=1` so Python's entire I/O stack uses UTF-8 — without it, Django's serializer will fail or corrupt any non-ASCII characters (e.g., Unicode fractions, special hyphens) when the Windows system code page is active.
 
 **Run the integrity check:**
 ```bash

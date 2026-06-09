@@ -37,7 +37,7 @@ class DataIntegrityTests(TransactionTestCase):
             return os.path.join(self.temp_dir_path, filename)
 
         with patch(
-            'ned_app.serialization.file_and_path_utiles.build_json_data_file_path',
+            'ned_app.management.commands.ingest.build_json_data_file_path',
             side_effect=mock_build_json_data_file_path,
         ):
             call_command('ingest')
