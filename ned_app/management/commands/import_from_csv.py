@@ -427,7 +427,7 @@ class Command(BaseCommand):
         """
         filepath = build_json_data_file_path(filename)
         with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=4, sort_keys=True, ensure_ascii=False)
+            json.dump(data, f, indent=4, sort_keys=True, ensure_ascii=True)
             f.write('\n')
 
     def _build_pk_set(self, records, pk_fields):
@@ -575,7 +575,7 @@ class Command(BaseCommand):
         if model_name == 'Reference':
             record = {}
             for key, val in row.items():
-                if key in _CSL_COLUMNS:
+                if not key or key in _CSL_COLUMNS:
                     continue
                 record[key] = val.strip() if isinstance(val, str) else val
             record['csl_data'] = _build_csl_data(row)
@@ -583,6 +583,8 @@ class Command(BaseCommand):
 
         record = {}
         for key, val in row.items():
+            if not key:  # skip empty column names from trailing commas
+                continue
             if isinstance(val, str):
                 val = val.strip()
             record[key] = _coerce_value(key, val)
