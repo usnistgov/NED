@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ned_app', '0029_alter_fragilitymodel_edp_metric'),
     ]
@@ -13,11 +12,37 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='fragilitycurve',
             name='basis',
-            field=models.CharField(blank=True, choices=[('Experiment', 'Experiment'), ('Historical Event', 'Recon'), ('Analytical Study', 'Analytical'), ('Lit Review', 'Lit Review'), ('Judgment', 'Judgment'), ('Other', 'Other')], help_text='Observational basis of the underlying data comprising the fragility curve.', max_length=50, verbose_name='basis'),
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ('Experiment', 'Experiment'),
+                    ('Historical Event', 'Recon'),
+                    ('Analytical Study', 'Analytical'),
+                    ('Lit Review', 'Lit Review'),
+                    ('Judgment', 'Judgment'),
+                    ('Other', 'Other'),
+                ],
+                help_text='Observational basis of the underlying data comprising the fragility curve.',
+                max_length=50,
+                verbose_name='basis',
+            ),
         ),
         migrations.AlterField(
             model_name='reference',
             name='study_type',
-            field=models.CharField(choices=[('Experiment', 'Experiment'), ('Historical Event', 'Recon'), ('Analytical Study', 'Analytical'), ('Lit Review', 'Lit Review'), ('Judgment', 'Judgment'), ('Other', 'Other')], default='Other', help_text='A classification of the type of study conducted.', max_length=50, verbose_name='study type'),
+            field=models.CharField(
+                choices=[
+                    ('Experiment', 'Experiment'),
+                    ('Historical Event', 'Recon'),
+                    ('Analytical Study', 'Analytical'),
+                    ('Lit Review', 'Lit Review'),
+                    ('Judgment', 'Judgment'),
+                    ('Other', 'Other'),
+                ],
+                default='Other',
+                help_text='A classification of the type of study conducted.',
+                max_length=50,
+                verbose_name='study type',
+            ),
         ),
     ]
