@@ -33,45 +33,6 @@ _MODEL_CONFIG = {
         'choice_fields': {'study_type': StudyTypeChoices},
         'fk_fields': {},
     },
-    'Component': {
-        'json_file': 'component.json',
-        'pk_fields': ['component_id'],
-        'required_fields': ['name', 'component_id'],
-        'choice_fields': {},
-        'fk_fields': {},
-    },
-    'FragilityModel': {
-        'json_file': 'fragility_model.json',
-        'pk_fields': ['reference', 'model_id'],
-        'required_fields': [
-            'model_id',
-            'comp_description',
-            'edp_metric',
-            'edp_unit',
-        ],
-        'choice_fields': {
-            'edp_metric': EDPMetricChoices,
-            'edp_unit': EDPUnitChoices,
-        },
-        'fk_fields': {
-            'reference': ('reference.json', 'reference_id'),
-        },
-    },
-    'FragilityCurve': {
-        'json_file': 'fragility_curve.json',
-        'pk_fields': ['fragility_model', 'ds_rank'],
-        'required_fields': [
-            'fragility_model',
-            'ds_description',
-            'median',
-            'beta',
-            'probability',
-        ],
-        'choice_fields': {'basis': StudyTypeChoices},
-        'fk_fields': {
-            'fragility_model': ('fragility_model.json', '_fragility_model_id'),
-        },
-    },
     'Experiment': {
         'json_file': 'experiment.json',
         'pk_fields': ['id'],
@@ -106,16 +67,6 @@ _MODEL_CONFIG = {
         'choice_fields': {},
         'fk_fields': {
             'experiment': ('experiment.json', 'id'),
-            'fragility_model': ('fragility_model.json', '_fragility_model_id'),
-        },
-    },
-    'ComponentFragilityModelBridge': {
-        'json_file': 'component_fragility_model_bridge.json',
-        'pk_fields': ['component', 'fragility_model'],
-        'required_fields': ['component', 'fragility_model'],
-        'choice_fields': {},
-        'fk_fields': {
-            'component': ('component.json', 'component_id'),
             'fragility_model': ('fragility_model.json', '_fragility_model_id'),
         },
     },
@@ -261,7 +212,7 @@ class Command(BaseCommand):
             type=str,
             required=False,
             help=(
-                'Model name to import (e.g., Experiment, FragilityModel). '
+                'Model name to import (e.g., Experiment, Reference). '
                 'Use --list-models to see all importable models.'
             ),
         )
