@@ -85,9 +85,7 @@ def build_fk_set(json_file, key):
             model_id = rec.get('model_id', '')
             result.add(f'{ref}|{model_id}' if ref else model_id)
         return result
-    return {
-        str(rec[key]) for rec in records if '_comment' not in rec and key in rec
-    }
+    return {str(rec[key]) for rec in records if '_comment' not in rec and key in rec}
 
 
 def read_csv(filepath):

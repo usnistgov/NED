@@ -29,8 +29,17 @@ _CURVE_CHOICE_FIELDS = {
 }
 
 _MODEL_FIELDS = [
-    'reference', 'model_id', 'comp_description', 'comp_detail', 'edp_metric',
-    'edp_unit', 'p58_fragility', 'material', 'size_class', 'reviewer', 'source',
+    'reference',
+    'model_id',
+    'comp_description',
+    'comp_detail',
+    'edp_metric',
+    'edp_unit',
+    'p58_fragility',
+    'material',
+    'size_class',
+    'reviewer',
+    'source',
 ]
 
 # All model-scoped columns — must be identical across every row sharing (reference, model_id)
@@ -47,12 +56,15 @@ def _validate_row(row, row_num):
         if not row.get(field, '').strip():
             errors.append(f"Row {row_num}: missing required field '{field}'")
 
-    for field, choices_class in {**_MODEL_CHOICE_FIELDS, **_CURVE_CHOICE_FIELDS}.items():
+    for field, choices_class in {
+        **_MODEL_CHOICE_FIELDS,
+        **_CURVE_CHOICE_FIELDS,
+    }.items():
         val = row.get(field, '').strip()
         if val and val not in choices_class.values:
             errors.append(
                 f"Row {row_num}: invalid value '{val}' for '{field}'. "
-                f"Valid: {list(choices_class.values)}"
+                f'Valid: {list(choices_class.values)}'
             )
 
     for field in _FLOAT_CURVE:
@@ -61,7 +73,9 @@ def _validate_row(row, row_num):
             try:
                 float(val)
             except ValueError:
-                errors.append(f"Row {row_num}: '{field}' must be a number, got '{val}'")
+                errors.append(
+                    f"Row {row_num}: '{field}' must be a number, got '{val}'"
+                )
 
     for field in _INT_CURVE:
         val = row.get(field, '').strip()
@@ -69,7 +83,9 @@ def _validate_row(row, row_num):
             try:
                 int(val)
             except ValueError:
-                errors.append(f"Row {row_num}: '{field}' must be an integer, got '{val}'")
+                errors.append(
+                    f"Row {row_num}: '{field}' must be an integer, got '{val}'"
+                )
 
     return errors
 
@@ -127,9 +143,7 @@ class Command(BaseCommand):
             key = (row.get('reference', '').strip(), row.get('model_id', '').strip())
             groups[key].append((row_num, row))
 
-        self.stdout.write(
-            f'Found {len(groups)} unique fragility model(s) in CSV.'
-        )
+        self.stdout.write(f'Found {len(groups)} unique fragility model(s) in CSV.')
 
         # ------------------------------------------------------------------
         # Pass 3: consistency check — model-scoped fields must be identical
@@ -164,7 +178,8 @@ class Command(BaseCommand):
             load_json('fragility_curve.json'), ['fragility_model', 'ds_rank']
         )
         existing_bridge_pks = build_pk_set(
-            load_json('component_fragility_model_bridge.json'), ['component', 'fragility_model']
+            load_json('component_fragility_model_bridge.json'),
+            ['component', 'fragility_model'],
         )
 
         seen_fm_pks = set(existing_fm_pks)
@@ -196,7 +211,8 @@ class Command(BaseCommand):
             else:
                 seen_fm_pks.add(fm_pk)
                 model_record = {
-                    field: first_row.get(field, '').strip() for field in _MODEL_FIELDS
+                    field: first_row.get(field, '').strip()
+                    for field in _MODEL_FIELDS
                 }
                 new_models.append(model_record)
 
@@ -209,7 +225,7 @@ class Command(BaseCommand):
                 if comp_id not in existing_component_ids:
                     all_errors.append(
                         f"Component '{comp_id}' (model '{fm_id}') "
-                        f"not found in component.json"
+                        f'not found in component.json'
                     )
                     continue
                 bridge_pk = (comp_id, fm_id)
@@ -217,7 +233,10 @@ class Command(BaseCommand):
                     skipped_bridges.append(bridge_pk)
                 else:
                     seen_bridge_pks.add(bridge_pk)
-                    new_bridges.append({'component': comp_id, 'fragility_model': fm_id})
+                    new_bridges.append({
+                        'component': comp_id,
+                        'fragility_model': fm_id,
+                    })
 
             # Curve records (one per row in the group)
             for _, row in group_rows:
@@ -232,12 +251,17 @@ class Command(BaseCommand):
                         'fragility_model': fm_id,
                         'ds_rank': ds_rank,
                         'ds_description': row.get('ds_description', '').strip(),
-                        'median': coerce_value('median', row.get('median', '').strip()),
+                        'median': coerce_value(
+                            'median', row.get('median', '').strip()
+                        ),
                         'beta': coerce_value('beta', row.get('beta', '').strip()),
-                        'probability': coerce_value('probability', row.get('probability', '').strip()),
+                        'probability': coerce_value(
+                            'probability', row.get('probability', '').strip()
+                        ),
                         'basis': row.get('basis', '').strip(),
                         'num_observations': coerce_value(
-                            'num_observations', row.get('num_observations', '').strip()
+                            'num_observations',
+                            row.get('num_observations', '').strip(),
                         ),
                     })
 
@@ -316,4 +340,6 @@ class Command(BaseCommand):
         self.stderr.write(f'\nFound {len(errors)} error(s):')
         for err in errors:
             self.stderr.write(f'  - {err}')
-        self.stderr.write('\nNo records were imported. Fix the errors above and retry.')
+        self.stderr.write(
+            '\nNo records were imported. Fix the errors above and retry.'
+        )
