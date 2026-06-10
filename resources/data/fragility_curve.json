@@ -10298,5 +10298,25 @@
         "median": 4.5,
         "num_observations": null,
         "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.9,
+        "ds_description": "Door gets jammed and cannot be opened",
+        "ds_rank": 1,
+        "fragility_model": "FEM-2018-SEI|door1",
+        "median": 0.0023,
+        "num_observations": 3,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.4,
+        "ds_description": "Damage is produced to the door lock and/or hinges",
+        "ds_rank": 2,
+        "fragility_model": "FEM-2018-SEI|door1",
+        "median": 0.0056,
+        "num_observations": 5,
+        "probability": 1.0
     }
 ]

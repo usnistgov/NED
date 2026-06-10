@@ -70,6 +70,7 @@ class TestTypeChoices(models.TextChoices):
 class EDPMetricChoices(models.TextChoices):
     SDR = 'Story Drift Ratio'
     SDR_2D = 'Story Drift Ratio, bi-directional'
+    RSDR = "Residual Story Drift Ratio"
     PFA_H = 'Peak Floor Acceleration, horizontal'
     PFA_TABLE_H = 'Peak Table Acceleration, horizontal'
     PFA_V = 'Peak Floor Acceleration, vertical'

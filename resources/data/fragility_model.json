@@ -520,7 +520,7 @@
         "source": "FEMA P-58"
     },
     {
-        "comp_description": "Exterior Wall - Wood walls with diagonal let-in bracing - Costing for each 100 ft^2 Wall Panel. Assumed framing: Stud wall framing consists of 2 x 4’s at 16 inches on center with double top plates and single sill plate. Diagonal bracing includes 2 forms. Block-bracing consists of diagonal blocking between studs that extends from the top of one edge of the panel to the bottom of the opposite edge. Diagonal bracing may also consist of let-in bracing for which a 1x or 2x brace (with same inclination as described for block-bracing) is recessed into studs. Walls may be sheathed with horizontal or vertical lumber siding.",
+        "comp_description": "Exterior Wall - Wood walls with diagonal let-in bracing - Costing for each 100 ft^2 Wall Panel. Assumed framing: Stud wall framing consists of 2 x 4\u2019s at 16 inches on center with double top plates and single sill plate. Diagonal bracing includes 2 forms. Block-bracing consists of diagonal blocking between studs that extends from the top of one edge of the panel to the bottom of the opposite edge. Diagonal bracing may also consist of let-in bracing for which a 1x or 2x brace (with same inclination as described for block-bracing) is recessed into studs. Walls may be sheathed with horizontal or vertical lumber siding.",
         "comp_detail": "Let-in-bracing",
         "edp_metric": "Story Drift Ratio",
         "edp_unit": "Ratio",
@@ -6771,5 +6771,18 @@
         "reviewer": "NIST",
         "size_class": "",
         "source": "Literature"
+    },
+    {
+        "comp_description": "Interior swinging door within wood or metal framed gypsum partition wall",
+        "comp_detail": "Interior door",
+        "edp_metric": "Residual Story Drift Ratio",
+        "edp_unit": "Ratio",
+        "material": "CPVC",
+        "model_id": "door1",
+        "p58_fragility": "",
+        "reference": "FEM-2018-SEI",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "FEMA P-58"
     }
 ]

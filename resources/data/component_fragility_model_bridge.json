@@ -2082,5 +2082,9 @@
     {
         "component": "D.40.1.1.B",
         "fragility_model": "BHA-2026-DEV|10"
+    },
+    {
+        "component": "C.10.2.1.A",
+        "fragility_model": "FEM-2018-SEI|door1"
     }
 ]

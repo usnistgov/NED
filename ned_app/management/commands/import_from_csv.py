@@ -1,9 +1,15 @@
-import csv
-import json
-import os
-
 from django.core.management.base import BaseCommand
 
+from ned_app.management.import_utils import (
+    _FLOAT_FIELDS,
+    _INT_FIELDS,
+    build_fk_set,
+    build_pk_set,
+    coerce_value,
+    load_json,
+    read_csv,
+    write_json,
+)
 from ned_app.models import (
     DSClassChoices,
     EDPMetricChoices,
@@ -11,11 +17,6 @@ from ned_app.models import (
     StudyTypeChoices,
     TestTypeChoices,
 )
-from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
-
-
-_INT_FIELDS = {'ds_rank', 'num_observations'}
-_FLOAT_FIELDS = {'edp_value', 'alt_edp_value', 'median', 'beta', 'probability'}
 
 _MODEL_CONFIG = {
     'Reference': {
@@ -146,19 +147,6 @@ _CSL_OPTIONAL_MAP = {
 
 
 def _parse_authors(authors_str):
-    """
-    Parse a semicolon-separated author string into a CSL author list.
-
-    Each author should be formatted as 'Family, Given'. Authors without
-    a comma are stored as a literal name.
-
-    Args:
-        authors_str (str): Semicolon-separated author entries, e.g.
-            'Smith, John; Doe, Jane'.
-
-    Returns:
-        list[dict]: CSL-JSON author objects.
-    """
     authors = []
     for part in authors_str.split(';'):
         part = part.strip()
@@ -173,15 +161,6 @@ def _parse_authors(authors_str):
 
 
 def _build_csl_data(row):
-    """
-    Reconstruct a csl_data dict from flat CSV columns.
-
-    Args:
-        row (dict): A CSV row containing csl_* columns.
-
-    Returns:
-        dict: A CSL-JSON compatible citation object.
-    """
     csl_data = {
         'type': row.get('csl_type', '').strip(),
         'id': row.get('reference_id', '').strip(),
@@ -196,56 +175,82 @@ def _build_csl_data(row):
     return csl_data
 
 
-def _coerce_value(field, val):
-    """
-    Coerce a CSV string value to the appropriate Python type for JSON.
+def _validate_row(row, config, fk_sets):
+    errors = []
 
-    Args:
-        field (str): The field name.
-        val (str): The raw string value from the CSV.
+    for field in config['required_fields']:
+        if not row.get(field, '').strip():
+            errors.append(f"Missing required field '{field}'")
 
-    Returns:
-        int | float | str | None: The coerced value.
-    """
-    if val == '' or val is None:
-        if field in _INT_FIELDS or field in _FLOAT_FIELDS:
-            return None
-        return val
-    if field in _INT_FIELDS:
-        try:
-            return int(val)
-        except ValueError:
-            return val
-    if field in _FLOAT_FIELDS:
-        try:
-            return float(val)
-        except ValueError:
-            return val
-    return val
+    for field, choices_class in config['choice_fields'].items():
+        val = row.get(field, '').strip()
+        if val and val not in choices_class.values:
+            errors.append(
+                f"Invalid value '{val}' for '{field}'. "
+                f'Valid values: {list(choices_class.values)}'
+            )
+
+    for fk_field, fk_set in fk_sets.items():
+        val = row.get(fk_field, '').strip()
+        if val and val not in fk_set:
+            errors.append(
+                f"FK '{fk_field}' value '{val}' not found in existing records."
+            )
+
+    for field in _INT_FIELDS:
+        val = row.get(field, '').strip()
+        if val:
+            try:
+                int(val)
+            except ValueError:
+                errors.append(f"'{field}' must be an integer, got '{val}'")
+
+    for field in _FLOAT_FIELDS:
+        val = row.get(field, '').strip()
+        if val:
+            try:
+                float(val)
+            except ValueError:
+                errors.append(f"'{field}' must be a number, got '{val}'")
+
+    if 'csl_year' in row:
+        val = row.get('csl_year', '').strip()
+        if val:
+            try:
+                int(val)
+            except ValueError:
+                errors.append(f"'csl_year' must be an integer, got '{val}'")
+
+    return errors
+
+
+def _row_to_record(row, model_name):
+    if model_name == 'Reference':
+        record = {}
+        for key, val in row.items():
+            if not key or key in _CSL_COLUMNS:
+                continue
+            record[key] = val.strip() if isinstance(val, str) else val
+        record['csl_data'] = _build_csl_data(row)
+        return record
+
+    record = {}
+    for key, val in row.items():
+        if not key:
+            continue
+        if isinstance(val, str):
+            val = val.strip()
+        record[key] = coerce_value(key, val)
+    return record
 
 
 class Command(BaseCommand):
-    """
-    Django management command to import new records from a CSV file.
-
-    Appends validated records to the canonical JSON source files in
-    resources/data/. Performs duplicate detection and FK validation
-    before writing. Does not ingest into the database — run
-    `python manage.py ingest` after importing.
-    """
-
     help = (
         'Import new records from a CSV file and append them to the '
         'canonical JSON source data in resources/data/.'
     )
 
     def add_arguments(self, parser):
-        """
-        Define command-line arguments.
-
-        Args:
-            parser: The argument parser instance.
-        """
         parser.add_argument(
             '--list-models',
             action='store_true',
@@ -276,13 +281,6 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        """
-        Execute the import command.
-
-        Args:
-            *args: Positional arguments (unused).
-            **options: Parsed command-line options.
-        """
         if options['list_models']:
             self.stdout.write(self.style.SUCCESS('Models that support CSV import:'))
             for name in sorted(_MODEL_CONFIG):
@@ -307,15 +305,15 @@ class Command(BaseCommand):
 
         config = _MODEL_CONFIG[model_name]
 
-        existing_records = self._load_json(config['json_file'])
-        existing_pk_set = self._build_pk_set(existing_records, config['pk_fields'])
+        existing_records = load_json(config['json_file'])
+        existing_pk_set = build_pk_set(existing_records, config['pk_fields'])
 
         fk_sets = {}
         for fk_field, (fk_file, fk_key) in config['fk_fields'].items():
-            fk_sets[fk_field] = self._build_fk_set(fk_file, fk_key)
+            fk_sets[fk_field] = build_fk_set(fk_file, fk_key)
 
         try:
-            rows = self._read_csv(input_file)
+            rows = read_csv(input_file)
         except FileNotFoundError:
             self.stderr.write(f"CSV file not found: '{input_file}'")
             return
@@ -330,12 +328,12 @@ class Command(BaseCommand):
         seen_pks = set(existing_pk_set)
 
         for row_num, row in enumerate(rows, start=2):
-            row_errors = self._validate_row(row, config, fk_sets)
+            row_errors = _validate_row(row, config, fk_sets)
             if row_errors:
                 all_errors.append((row_num, row_errors))
                 continue
 
-            record = self._row_to_record(row, model_name)
+            record = _row_to_record(row, model_name)
             pk_tuple = tuple(
                 str(record.get(f, '') or '') for f in config['pk_fields']
             )
@@ -387,7 +385,7 @@ class Command(BaseCommand):
             return
 
         existing_records.extend(valid_records)
-        self._write_json(config['json_file'], existing_records)
+        write_json(config['json_file'], existing_records)
         self.stdout.write(
             self.style.SUCCESS(
                 f'\nSuccessfully appended {len(valid_records)} record(s) '
@@ -395,197 +393,3 @@ class Command(BaseCommand):
                 'Run `python manage.py ingest` to load them into the database.'
             )
         )
-
-    # ------------------------------------------------------------------
-    # Private helpers
-    # ------------------------------------------------------------------
-
-    def _load_json(self, filename):
-        """
-        Load the contents of a canonical JSON data file.
-
-        Args:
-            filename (str): JSON filename within resources/data/.
-
-        Returns:
-            list[dict]: Parsed records, or an empty list if the file
-                does not exist.
-        """
-        filepath = build_json_data_file_path(filename)
-        if not os.path.exists(filepath):
-            return []
-        with open(filepath, 'r', encoding='utf-8') as f:
-            return json.load(f)
-
-    def _write_json(self, filename, data):
-        """
-        Write records back to a canonical JSON data file.
-
-        Args:
-            filename (str): JSON filename within resources/data/.
-            data (list[dict]): Records to serialize.
-        """
-        filepath = build_json_data_file_path(filename)
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=4, sort_keys=True, ensure_ascii=True)
-            f.write('\n')
-
-    def _build_pk_set(self, records, pk_fields):
-        """
-        Build a set of existing primary-key tuples from loaded JSON records.
-
-        Args:
-            records (list[dict]): Existing JSON records.
-            pk_fields (list[str]): Field names composing the primary key.
-
-        Returns:
-            set[tuple[str, ...]]: Set of primary key tuples.
-        """
-        pk_set = set()
-        for rec in records:
-            if '_comment' in rec:
-                continue
-            pk_tuple = tuple(str(rec.get(f, '') or '') for f in pk_fields)
-            pk_set.add(pk_tuple)
-        return pk_set
-
-    def _build_fk_set(self, json_file, key):
-        """
-        Build a set of valid foreign key values from a JSON reference file.
-
-        The special sentinel key '_fragility_model_id' derives the
-        auto-generated fragility_model_id by combining the reference and
-        model_id fields (e.g. 'REF-2020|fra001'), matching the value
-        stored in dependent JSON files.
-
-        Args:
-            json_file (str): JSON filename within resources/data/.
-            key (str): Field name to extract, or '_fragility_model_id'.
-
-        Returns:
-            set[str]: Set of valid key values.
-        """
-        records = self._load_json(json_file)
-        if key == '_fragility_model_id':
-            result = set()
-            for rec in records:
-                if '_comment' in rec:
-                    continue
-                ref = rec.get('reference', '')
-                model_id = rec.get('model_id', '')
-                result.add(f'{ref}|{model_id}' if ref else model_id)
-            return result
-        return {
-            str(rec[key]) for rec in records if '_comment' not in rec and key in rec
-        }
-
-    def _read_csv(self, filepath):
-        """
-        Read all rows from a CSV file.
-
-        Args:
-            filepath (str): Path to the CSV file.
-
-        Returns:
-            list[dict]: Rows as dicts keyed by header column names.
-
-        Raises:
-            FileNotFoundError: If the CSV file does not exist.
-        """
-        with open(filepath, 'r', encoding='utf-8-sig', newline='') as f:
-            reader = csv.DictReader(f)
-            return list(reader)
-
-    def _validate_row(self, row, config, fk_sets):
-        """
-        Validate a single CSV row against required fields, choices, and FKs.
-
-        Also validates that integer and float fields contain parseable values.
-
-        Args:
-            row (dict): A single CSV row.
-            config (dict): Model config entry from _MODEL_CONFIG.
-            fk_sets (dict[str, set[str]]): Pre-loaded FK lookup sets.
-
-        Returns:
-            list[str]: Validation error messages; empty list if the row is valid.
-        """
-        errors = []
-
-        for field in config['required_fields']:
-            if not row.get(field, '').strip():
-                errors.append(f"Missing required field '{field}'")
-
-        for field, choices_class in config['choice_fields'].items():
-            val = row.get(field, '').strip()
-            if val and val not in choices_class.values:
-                errors.append(
-                    f"Invalid value '{val}' for '{field}'. "
-                    f'Valid values: {list(choices_class.values)}'
-                )
-
-        for fk_field, fk_set in fk_sets.items():
-            val = row.get(fk_field, '').strip()
-            if val and val not in fk_set:
-                errors.append(
-                    f"FK '{fk_field}' value '{val}' not found in existing records."
-                )
-
-        for field in _INT_FIELDS:
-            val = row.get(field, '').strip()
-            if val:
-                try:
-                    int(val)
-                except ValueError:
-                    errors.append(f"'{field}' must be an integer, got '{val}'")
-
-        for field in _FLOAT_FIELDS:
-            val = row.get(field, '').strip()
-            if val:
-                try:
-                    float(val)
-                except ValueError:
-                    errors.append(f"'{field}' must be a number, got '{val}'")
-
-        if 'csl_year' in row:
-            val = row.get('csl_year', '').strip()
-            if val:
-                try:
-                    int(val)
-                except ValueError:
-                    errors.append(f"'csl_year' must be an integer, got '{val}'")
-
-        return errors
-
-    def _row_to_record(self, row, model_name):
-        """
-        Convert a validated CSV row to a JSON-compatible record dict.
-
-        For Reference records, strips csl_* columns and reconstructs the
-        nested csl_data object. For all other models, passes fields through
-        with appropriate type coercion for numeric fields.
-
-        Args:
-            row (dict): A validated CSV row.
-            model_name (str): The model name being imported.
-
-        Returns:
-            dict: Record ready to be appended to the JSON data file.
-        """
-        if model_name == 'Reference':
-            record = {}
-            for key, val in row.items():
-                if not key or key in _CSL_COLUMNS:
-                    continue
-                record[key] = val.strip() if isinstance(val, str) else val
-            record['csl_data'] = _build_csl_data(row)
-            return record
-
-        record = {}
-        for key, val in row.items():
-            if not key:  # skip empty column names from trailing commas
-                continue
-            if isinstance(val, str):
-                val = val.strip()
-            record[key] = _coerce_value(key, val)
-        return record
