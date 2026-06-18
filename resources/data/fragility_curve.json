@@ -10313,8 +10313,8 @@
         "basis": "Experiment",
         "beta": 0.4,
         "ds_description": "Damage is produced to the door lock and/or hinges",
-        "ds_rank": 2,
-        "fragility_model": "FEM-2018-SEI|door1",
+        "ds_rank": 1,
+        "fragility_model": "FEM-2018-SEI|door2",
         "median": 0.0056,
         "num_observations": 5,
         "probability": 1.0
