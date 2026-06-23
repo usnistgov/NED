@@ -6773,12 +6773,25 @@
         "source": "Literature"
     },
     {
-        "comp_description": "Interior swinging door within wood or metal framed gypsum partition wall",
-        "comp_detail": "Interior door",
+        "comp_description": "Interior swinging door within wood or metal framed gypsum partition wall. Fragility model for door jamming subjected to in-plane residual drifts.",
+        "comp_detail": "Swinging door",
         "edp_metric": "Residual Story Drift Ratio",
         "edp_unit": "Ratio",
-        "material": "CPVC",
+        "material": "Wood or metal door",
         "model_id": "door1",
+        "p58_fragility": "",
+        "reference": "FEM-2018-SEI",
+        "reviewer": "NIST",
+        "size_class": "",
+        "source": "FEMA P-58"
+    },
+    {
+        "comp_description": "Interior swinging door within wood or metal framed gypsum partition wall. Fragility model for door damage subjected to in-plane peak story drifts.",
+        "comp_detail": "Swinging door",
+        "edp_metric": "Story Drift Ratio",
+        "edp_unit": "Ratio",
+        "material": "Wood or metal door",
+        "model_id": "door2",
         "p58_fragility": "",
         "reference": "FEM-2018-SEI",
         "reviewer": "NIST",
