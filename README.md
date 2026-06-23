@@ -302,8 +302,8 @@ python manage.py ingest
 The `ingest` command reads all JSON files from `resources/data/` and populates the SQLite database. This step is mandatory for local development, as the `db.sqlite3` file is not tracked in version control—it's a disposable build artifact generated from the JSON source data.
 
 ### How to Add New Data or Modify Existing Data
-
 We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data, or correctinng existing records involves working directly with the JSON files that serve as our single source of truth.
+
 
 Follow this step-by-step guide to contribute:
 
@@ -329,6 +329,7 @@ See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
     *   `experiments.json`: For new experimental results.
     *   `references.json`: For new bibliographic references.
     *   `fragility_model.json`: For new fragility functions.
+*   **Editing Existing Records:** Only modify field values; do **not** change the data structure or schema.    
 
 If modifying existing data:
 *   **Important:** Only modify field values; do not change the structure or schema.
@@ -612,18 +613,6 @@ codespell .
 python manage.py test ned_app.tests
 ```
 
-#### Installing Development Dependencies
-To run these tools locally, make sure you have all dependencies installed:
-
-```bash
-# Install production dependencies
-pip install -r requirements.txt
-
-# Install development dependencies
-pip install -r requirements-dev.txt
-```
-
-This installs all required packages including Django, djangorestframework, jsonschema, and ruff for code quality checks.
 
 ---
 

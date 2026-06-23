@@ -61,51 +61,51 @@
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1016"
+        "fragility_model": "PAL-2018-INP|fra1016"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1017"
+        "fragility_model": "PAL-2018-INP|fra1017"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1018"
+        "fragility_model": "PAL-2018-INP|fra1018"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1019"
+        "fragility_model": "PAL-2018-INP|fra1019"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1020"
+        "fragility_model": "DAV-2011-EXP|fra1020"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1021"
+        "fragility_model": "DAV-2011-EXP|fra1021"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1022"
+        "fragility_model": "DAV-2011-EXP|fra1022"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1023"
+        "fragility_model": "DAV-2011-EXP|fra1023"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1024"
+        "fragility_model": "DAV-2011-EXP|fra1024"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1025"
+        "fragility_model": "DAV-2011-EXP|fra1025"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1026"
+        "fragility_model": "DAV-2011-EXP|fra1026"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "fra1027"
+        "fragility_model": "DAV-2011-EXP|fra1027"
     },
     {
         "component": "D.40.1.1.F",
