@@ -10078,5 +10078,335 @@
         "median": 2.6,
         "num_observations": null,
         "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.51,
+        "ds_description": "Drop of gypsum dust, Detachment of joint tape, Crack in joints, Detachment between indoor partition walls and surrounding structural elements (<5 mm).",
+        "ds_rank": 1,
+        "fragility_model": "PAL-2018-INP|fra1016",
+        "median": 0.37,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.29,
+        "ds_description": "Detachment between indoor partition walls and surrounding structural elements (>5 mm), Crack in panels, Corner crushing of panels, Local plastic deformations of studs, Rupture of panel portions (<50 cm2), Collapse of panel-to-frame fixings (<5%), Collapse of dowels (<5%).",
+        "ds_rank": 2,
+        "fragility_model": "PAL-2018-INP|fra1016",
+        "median": 1.05,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.29,
+        "ds_description": "Rupture of panel portions (>50 cm2), Collapse of panel?to?frame fixings (>5%), Collapse of dowels (>5%), Detachment between indoor partition walls and outdoor facade walls, Out-of-plane collapse of panels,  Wall out-of-plane collapse.",
+        "ds_rank": 3,
+        "fragility_model": "PAL-2018-INP|fra1016",
+        "median": 1.49,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.28,
+        "ds_description": "Drop of gypsum dust, Detachment of joint tape, Crack in joints, Detachment between indoor partition walls and surrounding structural elements (<5 mm).",
+        "ds_rank": 1,
+        "fragility_model": "PAL-2018-INP|fra1017",
+        "median": 1.27,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.25,
+        "ds_description": "Detachment between indoor partition walls and surrounding structural elements (>5 mm), Crack in panels, Corner crushing of panels, Local plastic deformations of studs, Rupture of panel portions (<50 cm2), Collapse of panel-to-frame fixings (<5%), Collapse of dowels (<5%).",
+        "ds_rank": 2,
+        "fragility_model": "PAL-2018-INP|fra1017",
+        "median": 1.52,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.25,
+        "ds_description": "Rupture of panel portions (>50 cm2), Collapse of panel?to?frame fixings (>5%), Collapse of dowels (>5%), Detachment between indoor partition walls and outdoor facade walls, Out-of-plane collapse of panels,  Wall out-of-plane collapse.",
+        "ds_rank": 3,
+        "fragility_model": "PAL-2018-INP|fra1017",
+        "median": 2.1,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.35,
+        "ds_description": "Drop of gypsum dust, Detachment of joint tape, Crack in joints, Detachment between indoor partition walls and surrounding structural elements (<5 mm).",
+        "ds_rank": 1,
+        "fragility_model": "PAL-2018-INP|fra1018",
+        "median": 0.78,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.28,
+        "ds_description": "Detachment between indoor partition walls and surrounding structural elements (>5 mm), Crack in panels, Corner crushing of panels, Local plastic deformations of studs, Rupture of panel portions (<50 cm2), Collapse of panel-to-frame fixings (<5%), Collapse of dowels (<5%).",
+        "ds_rank": 2,
+        "fragility_model": "PAL-2018-INP|fra1018",
+        "median": 1.18,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.39,
+        "ds_description": "Rupture of panel portions (>50 cm2), Collapse of panel?to?frame fixings (>5%), Collapse of dowels (>5%), Detachment between indoor partition walls and outdoor facade walls, Out-of-plane collapse of panels,  Wall out-of-plane collapse.",
+        "ds_rank": 3,
+        "fragility_model": "PAL-2018-INP|fra1018",
+        "median": 1.44,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.39,
+        "ds_description": "Drop of gypsum dust, Detachment of joint tape, Crack in joints, Detachment between indoor partition walls and surrounding structural elements (<5 mm).",
+        "ds_rank": 1,
+        "fragility_model": "PAL-2018-INP|fra1019",
+        "median": 0.7,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.25,
+        "ds_description": "Detachment between indoor partition walls and surrounding structural elements (>5 mm), Crack in panels, Corner crushing of panels, Local plastic deformations of studs, Rupture of panel portions (<50 cm2), Collapse of panel-to-frame fixings (<5%), Collapse of dowels (<5%).",
+        "ds_rank": 2,
+        "fragility_model": "PAL-2018-INP|fra1019",
+        "median": 1.01,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.29,
+        "ds_description": "Rupture of panel portions (>50 cm2), Collapse of panel?to?frame fixings (>5%), Collapse of dowels (>5%), Detachment between indoor partition walls and outdoor facade walls, Out-of-plane collapse of panels,  Wall out-of-plane collapse.",
+        "ds_rank": 3,
+        "fragility_model": "PAL-2018-INP|fra1019",
+        "median": 1.2,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.45,
+        "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
+        "ds_rank": 1,
+        "fragility_model": "DAV-2011-EXP|fra1020",
+        "median": 0.26,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.33,
+        "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
+        "ds_rank": 2,
+        "fragility_model": "DAV-2011-EXP|fra1020",
+        "median": 0.68,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.36,
+        "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
+        "ds_rank": 3,
+        "fragility_model": "DAV-2011-EXP|fra1020",
+        "median": 0.75,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.45,
+        "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
+        "ds_rank": 1,
+        "fragility_model": "DAV-2011-EXP|fra1021",
+        "median": 0.27,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.42,
+        "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
+        "ds_rank": 2,
+        "fragility_model": "DAV-2011-EXP|fra1021",
+        "median": 0.61,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.59,
+        "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
+        "ds_rank": 3,
+        "fragility_model": "DAV-2011-EXP|fra1021",
+        "median": 1.2,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.44,
+        "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
+        "ds_rank": 1,
+        "fragility_model": "DAV-2011-EXP|fra1022",
+        "median": 0.27,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.38,
+        "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
+        "ds_rank": 2,
+        "fragility_model": "DAV-2011-EXP|fra1022",
+        "median": 0.64,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.55,
+        "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
+        "ds_rank": 3,
+        "fragility_model": "DAV-2011-EXP|fra1022",
+        "median": 0.99,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.62,
+        "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
+        "ds_rank": 1,
+        "fragility_model": "DAV-2011-EXP|fra1023",
+        "median": 0.37,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.35,
+        "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
+        "ds_rank": 2,
+        "fragility_model": "DAV-2011-EXP|fra1023",
+        "median": 0.79,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.33,
+        "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
+        "ds_rank": 3,
+        "fragility_model": "DAV-2011-EXP|fra1023",
+        "median": 0.88,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.25,
+        "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
+        "ds_rank": 1,
+        "fragility_model": "DAV-2011-EXP|fra1024",
+        "median": 0.4,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.46,
+        "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
+        "ds_rank": 2,
+        "fragility_model": "DAV-2011-EXP|fra1024",
+        "median": 0.63,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.36,
+        "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
+        "ds_rank": 3,
+        "fragility_model": "DAV-2011-EXP|fra1024",
+        "median": 0.93,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.38,
+        "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
+        "ds_rank": 1,
+        "fragility_model": "DAV-2011-EXP|fra1025",
+        "median": 0.39,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.43,
+        "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
+        "ds_rank": 2,
+        "fragility_model": "DAV-2011-EXP|fra1025",
+        "median": 0.68,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.29,
+        "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
+        "ds_rank": 1,
+        "fragility_model": "DAV-2011-EXP|fra1026",
+        "median": 0.74,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.33,
+        "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
+        "ds_rank": 2,
+        "fragility_model": "DAV-2011-EXP|fra1026",
+        "median": 1.0,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.28,
+        "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
+        "ds_rank": 3,
+        "fragility_model": "DAV-2011-EXP|fra1026",
+        "median": 1.79,
+        "num_observations": null,
+        "probability": 1.0
+    },
+    {
+        "basis": "Experiment",
+        "beta": 0.8,
+        "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
+        "ds_rank": 1,
+        "fragility_model": "DAV-2011-EXP|fra1027",
+        "median": 0.36,
+        "num_observations": null,
+        "probability": 1.0
     }
 ]
