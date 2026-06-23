@@ -1,74 +1,34 @@
 from django.core.management.base import BaseCommand
 
 from ned_app.management.import_utils import (
-    _FLOAT_FIELDS,
-    _INT_FIELDS,
-    build_fk_set,
-    build_pk_set,
     coerce_value,
+    find_unknown_columns,
     load_json,
     read_csv,
     write_json,
+    build_pk_set,
 )
-from ned_app.models import (
-    DSClassChoices,
-    EDPMetricChoices,
-    EDPUnitChoices,
-    StudyTypeChoices,
-    TestTypeChoices,
+from ned_app.serialization.serializer import (
+    ReferenceSerializer,
+    ExperimentSerializer,
+    ExperimentFragilityModelBridgeSerializer,
 )
 
 _MODEL_CONFIG = {
     'Reference': {
         'json_file': 'reference.json',
         'pk_fields': ['reference_id'],
-        'required_fields': [
-            'reference_id',
-            'study_type',
-            'csl_type',
-            'csl_title',
-            'csl_year',
-            'csl_authors',
-        ],
-        'choice_fields': {'study_type': StudyTypeChoices},
-        'fk_fields': {},
+        'serializer': ReferenceSerializer,
     },
     'Experiment': {
         'json_file': 'experiment.json',
         'pk_fields': ['id'],
-        'required_fields': [
-            'id',
-            'reference',
-            'component',
-            'test_type',
-            'comp_description',
-            'ds_description',
-            'edp_metric',
-            'edp_unit',
-            'ds_class',
-        ],
-        'choice_fields': {
-            'test_type': TestTypeChoices,
-            'edp_metric': EDPMetricChoices,
-            'edp_unit': EDPUnitChoices,
-            'alt_edp_metric': EDPMetricChoices,
-            'alt_edp_unit': EDPUnitChoices,
-            'ds_class': DSClassChoices,
-        },
-        'fk_fields': {
-            'reference': ('reference.json', 'reference_id'),
-            'component': ('component.json', 'component_id'),
-        },
+        'serializer': ExperimentSerializer,
     },
     'ExperimentFragilityModelBridge': {
         'json_file': 'experiment_fragility_model_bridge.json',
         'pk_fields': ['experiment', 'fragility_model'],
-        'required_fields': ['experiment', 'fragility_model'],
-        'choice_fields': {},
-        'fk_fields': {
-            'experiment': ('experiment.json', 'id'),
-            'fragility_model': ('fragility_model.json', '_fragility_model_id'),
-        },
+        'serializer': ExperimentFragilityModelBridgeSerializer,
     },
 }
 
@@ -98,6 +58,16 @@ _CSL_OPTIONAL_MAP = {
 
 
 def _parse_authors(authors_str):
+    """
+    Parse a semicolon-delimited author string into CSL author objects.
+
+    Args:
+        authors_str (str): Authors separated by ';', each optionally
+            'Family, Given'.
+
+    Returns:
+        list[dict]: CSL-JSON author entries.
+    """
     authors = []
     for part in authors_str.split(';'):
         part = part.strip()
@@ -112,6 +82,15 @@ def _parse_authors(authors_str):
 
 
 def _build_csl_data(row):
+    """
+    Reconstruct nested CSL-JSON from the flattened csl_* CSV columns.
+
+    Args:
+        row (dict): A CSV row.
+
+    Returns:
+        dict: CSL-JSON citation data.
+    """
     csl_data = {
         'type': row.get('csl_type', '').strip(),
         'id': row.get('reference_id', '').strip(),
@@ -126,62 +105,29 @@ def _build_csl_data(row):
     return csl_data
 
 
-def _validate_row(row, config, fk_sets):
-    errors = []
-
-    for field in config['required_fields']:
-        if not row.get(field, '').strip():
-            errors.append(f"Missing required field '{field}'")
-
-    for field, choices_class in config['choice_fields'].items():
-        val = row.get(field, '').strip()
-        if val and val not in choices_class.values:
-            errors.append(
-                f"Invalid value '{val}' for '{field}'. "
-                f'Valid values: {list(choices_class.values)}'
-            )
-
-    for fk_field, fk_set in fk_sets.items():
-        val = row.get(fk_field, '').strip()
-        if val and val not in fk_set:
-            errors.append(
-                f"FK '{fk_field}' value '{val}' not found in existing records."
-            )
-
-    for field in _INT_FIELDS:
-        val = row.get(field, '').strip()
-        if val:
-            try:
-                int(val)
-            except ValueError:
-                errors.append(f"'{field}' must be an integer, got '{val}'")
-
-    for field in _FLOAT_FIELDS:
-        val = row.get(field, '').strip()
-        if val:
-            try:
-                float(val)
-            except ValueError:
-                errors.append(f"'{field}' must be a number, got '{val}'")
-
-    if 'csl_year' in row:
-        val = row.get('csl_year', '').strip()
-        if val:
-            try:
-                int(val)
-            except ValueError:
-                errors.append(f"'csl_year' must be an integer, got '{val}'")
-
-    return errors
-
-
 def _row_to_record(row, model_name):
+    """
+    Convert a CSV row into a canonical JSON record.
+
+    For Reference, the flattened csl_* columns are reconstructed into nested
+    csl_data and the remaining columns are type-coerced. For all other models,
+    every column is type-coerced.
+
+    Args:
+        row (dict): A CSV row.
+        model_name (str): The model being imported.
+
+    Returns:
+        dict: A record ready to append to the canonical JSON file.
+    """
     if model_name == 'Reference':
         record = {}
         for key, val in row.items():
             if not key or key in _CSL_COLUMNS:
                 continue
-            record[key] = val.strip() if isinstance(val, str) else val
+            if isinstance(val, str):
+                val = val.strip()
+            record[key] = coerce_value(key, val)
         record['csl_data'] = _build_csl_data(row)
         return record
 
@@ -195,10 +141,34 @@ def _row_to_record(row, model_name):
     return record
 
 
+def _expected_columns(model_name, serializer_class):
+    """
+    Build the set of CSV columns accepted for a model.
+
+    Derived from the serializer's fields (the single source of truth) so it
+    cannot drift from the model. Reference is special-cased because its nested
+    csl_data is supplied via flattened csl_* columns.
+
+    Args:
+        model_name (str): The model being imported.
+        serializer_class: The DRF serializer for the model.
+
+    Returns:
+        set[str]: Accepted column names.
+    """
+    fields = set(serializer_class().fields)
+    if model_name == 'Reference':
+        fields -= {'csl_data', 'title', 'author', 'year'}
+        fields |= _CSL_COLUMNS
+    return fields
+
+
 class Command(BaseCommand):
     help = (
         'Import new records from a CSV file and append them to the '
-        'canonical JSON source data in resources/data/.'
+        'canonical JSON source data in resources/data/. The data is not '
+        'validated here; run `python manage.py ingest` and the test suite '
+        'afterwards to validate the new records.'
     )
 
     def add_arguments(self, parser):
@@ -226,8 +196,8 @@ class Command(BaseCommand):
             '--dry_run',
             action='store_true',
             help=(
-                'Validate the CSV and report results without writing '
-                'any changes to the JSON files.'
+                'Report what would be appended without writing any changes '
+                'to the JSON files.'
             ),
         )
 
@@ -259,12 +229,8 @@ class Command(BaseCommand):
         existing_records = load_json(config['json_file'])
         existing_pk_set = build_pk_set(existing_records, config['pk_fields'])
 
-        fk_sets = {}
-        for fk_field, (fk_file, fk_key) in config['fk_fields'].items():
-            fk_sets[fk_field] = build_fk_set(fk_file, fk_key)
-
         try:
-            rows = read_csv(input_file)
+            columns, rows = read_csv(input_file)
         except FileNotFoundError:
             self.stderr.write(f"CSV file not found: '{input_file}'")
             return
@@ -273,17 +239,23 @@ class Command(BaseCommand):
             self.stdout.write('No data rows found in CSV file.')
             return
 
-        valid_records = []
+        unknown = find_unknown_columns(
+            columns, _expected_columns(model_name, config['serializer'])
+        )
+        if unknown:
+            self.stdout.write(
+                self.style.WARNING(
+                    f'Warning: unrecognized column(s) in CSV header: {unknown}.\n'
+                    'These columns will be ignored. Check for typos against the '
+                    'template.'
+                )
+            )
+
+        new_records = []
         skipped_duplicates = []
-        all_errors = []
         seen_pks = set(existing_pk_set)
 
         for row_num, row in enumerate(rows, start=2):
-            row_errors = _validate_row(row, config, fk_sets)
-            if row_errors:
-                all_errors.append((row_num, row_errors))
-                continue
-
             record = _row_to_record(row, model_name)
             pk_tuple = tuple(
                 str(record.get(f, '') or '') for f in config['pk_fields']
@@ -294,7 +266,7 @@ class Command(BaseCommand):
                 continue
 
             seen_pks.add(pk_tuple)
-            valid_records.append(record)
+            new_records.append(record)
 
         if skipped_duplicates:
             self.stdout.write(
@@ -307,40 +279,26 @@ class Command(BaseCommand):
                 pk_str = ' | '.join(pk)
                 self.stdout.write(f'  Row {row_num}: {pk_str}')
 
-        if all_errors:
-            self.stderr.write(
-                f'\nFound {len(all_errors)} row(s) with validation errors:'
-            )
-            for row_num, errors in all_errors:
-                self.stderr.write(f'  Row {row_num}:')
-                for err in errors:
-                    self.stderr.write(f'    - {err}')
-            self.stderr.write(
-                '\nNo records were imported. Fix validation errors and retry.'
-            )
-            return
-
-        if not valid_records:
-            self.stdout.write(
-                'No new records to add (all rows were duplicates or invalid).'
-            )
+        if not new_records:
+            self.stdout.write('No new records to add (all rows were duplicates).')
             return
 
         if dry_run:
             self.stdout.write(
                 self.style.SUCCESS(
-                    f'\n[DRY RUN] {len(valid_records)} record(s) would be '
+                    f'\n[DRY RUN] {len(new_records)} record(s) would be '
                     f'appended to {config["json_file"]}. No changes written.'
                 )
             )
             return
 
-        existing_records.extend(valid_records)
+        existing_records.extend(new_records)
         write_json(config['json_file'], existing_records)
         self.stdout.write(
             self.style.SUCCESS(
-                f'\nSuccessfully appended {len(valid_records)} record(s) '
+                f'\nAppended {len(new_records)} record(s) '
                 f'to {config["json_file"]}.\n'
-                'Run `python manage.py ingest` to load them into the database.'
+                'Run `python manage.py ingest` and the test suite to validate '
+                'the new records.'
             )
         )

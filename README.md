@@ -162,7 +162,7 @@ python manage.py query_to_csv --model Experiment --output_file exports\\data.csv
 
 The NED database includes a management command for importing new records from CSV files directly into the canonical JSON source data. This provides an alternative to manually editing JSON files, which may be preferable for contributors working primarily in spreadsheet tools.
 
-> **Important:** This command appends to the JSON source files only. After importing, you must run `python manage.py ingest` to load the new records into the local database.
+> **Important:** The import commands only convert your CSV into JSON and append it to the source files — they do **not** validate the data. After importing, you must (1) check JSON files in the `resources/data/` directory to ensure what has been appended to the source files is correct, (2) the run `python manage.py ingest` to load the new records into the database, and (3) run `python manage.py test` to validate them.
 
 ### Using the `import_model` Command
 
@@ -180,83 +180,8 @@ python manage.py import_model --model Experiment --input_file my_data.csv
 |-----------|----------|-------------|
 | `--model` | Yes | Model name to import (`Reference`, `Experiment`, or `ExperimentFragilityModelBridge`) |
 | `--input_file` | Yes | Path to the CSV file containing new records |
-| `--dry_run` | No | Validate the CSV and report results without writing any changes |
+| `--dry_run` | No | Report what would be appended without writing any changes |
 | `--list-models` | No | Show all models that support CSV import |
-
-#### Templates
-
-CSV templates with example rows are provided in `resources/import_templates/`. Copy the relevant template, replace the example row(s) with your data, and remove any rows you do not wish to import.
-
-#### CSV Conventions
-
-- **Foreign key columns** accept natural key values, not numeric IDs:
-  - `reference` → the `reference_id` string (e.g., `SMITH-2020-EXP`)
-  - `component` → the `component_id` string (e.g., `D.50.2.1.A`)
-  - `fragility_model` → the full `fragility_model_id` string (e.g., `SMITH-2020-EXP|fra001`)
-  - `experiment` → the experiment `id` string
-- **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
-- **Optional numeric fields** (e.g., `alt_edp_value`) may be left blank; they will be stored as `null`.
-- **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
-- Files should be **UTF-8** encoded.
-- Because the `Reference` model stores citation data as nested CSL-JSON, the CSV template uses flattened `csl_*` columns that the command reconstructs internally.
-
-#### Examples
-
-**Validate a CSV without writing changes:**
-```bash
-python manage.py import_model --model Experiment \
-  --input_file my_experiments.csv \
-  --dry_run
-```
-
-**Import references:**
-```bash
-python manage.py import_model --model Reference \
-  --input_file my_references.csv
-```
-
-**Import experiments:**
-```bash
-python manage.py import_model --model Experiment \
-  --input_file my_experiments.csv
-```
-
-**Rebuild the database after importing:**
-```bash
-python manage.py ingest
-```
-
-#### Validation and Error Handling
-
-The command validates every row before writing anything. If any row contains an error, **no records are imported** and the errors are reported so you can fix your CSV and retry:
-
-```
-Found 2 row(s) with validation errors:
-  Row 3:
-    - Missing required field 'comp_description'
-    - Invalid value 'SDR' for 'edp_metric'. Valid values: ['Story Drift Ratio', ...]
-  Row 5:
-    - FK 'reference' value 'UNKNOWN-REF' not found in existing records.
-
-No records were imported. Fix validation errors and retry.
-```
-
-Duplicate records (matching an existing primary key in the JSON) are skipped with a warning rather than causing an abort:
-
-```
-Skipped 1 duplicate(s) (already present in experiment.json):
-  Row 4: exp001
-```
-
-#### Tips
-
-- **Import order matters for foreign keys.** Import `Reference` records before `Experiment` records that reference them.
-- **Use `--dry_run` first** to catch errors before committing changes to the JSON files.
-- **Large batches**: All records are validated before writing. Fixing errors row-by-row is easiest when you run `--dry_run` on the full file first.
-- **Windows path syntax**: Use forward slashes or quoted backslashes in PowerShell:
-  ```powershell
-  python manage.py import_model --model Experiment --input_file exports/my_data.csv
-  ```
 
 ### Using the `import_fragility` Command
 
@@ -277,64 +202,60 @@ python manage.py import_fragility --input_file my_fragilities.csv
 | `--input_file` | Yes | Path to the fragility import CSV file |
 | `--dry_run` | No | Validate and report results without writing any changes |
 
-#### CSV Format
 
-Use the template at `resources/import_templates/fragility_import_template.csv`. The columns are:
+### Templates
 
-| Column | Scope | Required | Notes |
-|--------|-------|----------|-------|
-| `reference` | Model | No | `reference_id` of the source reference (blank for legacy models) |
-| `model_id` | Model | Yes | Unique within a given reference |
-| `comp_description` | Model | Yes | General description of the component |
-| `comp_detail` | Model | No | Connection detail tag |
-| `material` | Model | No | Material classification tag |
-| `size_class` | Model | No | Size classification tag |
-| `edp_metric` | Model | Yes | Must match a valid `EDPMetricChoices` value |
-| `edp_unit` | Model | Yes | Must match a valid `EDPUnitChoices` value |
-| `p58_fragility` | Model | No | Associated FEMA P-58 fragility ID |
-| `reviewer` | Model | No | Person or institution responsible for the model |
-| `source` | Model | No | Source of the fragility data (e.g., `Literature`) |
-| `component_ids` | Model | No | Semicolon-separated `component_id` values to link (e.g., `A.40.1.1;A.40.1.2`) |
-| `ds_rank` | Curve | No | Integer rank ordering this damage state among others in the model |
-| `ds_description` | Curve | Yes | Description of the damage state |
-| `median` | Curve | Yes | Median of the lognormal fragility (float) |
-| `beta` | Curve | Yes | Lognormal dispersion (float) |
-| `probability` | Curve | Yes | Mutually exclusive probability of this damage state (float) |
-| `basis` | Curve | No | Must match a valid `StudyTypeChoices` value |
-| `num_observations` | Curve | No | Number of underlying observations (integer) |
+CSV templates with example rows are provided in `resources/import_templates/`. Copy the relevant template, replace the example row(s) with your data, and remove any rows you do not wish to import.
 
-**Model-scoped columns** (`reference` through `component_ids`) must be identical on every row that shares the same `(reference, model_id)` pair. The command enforces this strictly and aborts with a clear error if any field is inconsistent across rows for the same model.
+### CSV Conventions
 
-#### Validation and Error Handling
+- **Foreign key columns** accept natural key values, not numeric IDs:
+  - `reference` → the `reference_id` string (e.g., `SMITH-2020-EXP`)
+  - `component` → the `component_id` string (e.g., `D.50.2.1.A`)
+  - `fragility_model` → the full `fragility_model_id` string (e.g., `SMITH-2020-EXP|fra001`)
+  - `experiment` → the experiment `id` string
+- **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
+- **Optional numeric fields** (e.g., `alt_edp_value`) may be left blank; they will be stored as `null`.
+- **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
+- Files should be **UTF-8** encoded.
+- Because the `Reference` model stores citation data as nested CSL-JSON, the CSV template uses flattened `csl_*` columns that the command reconstructs internally.
 
-The command validates in three stages before writing anything:
+### Examples
 
-1. **Row-level**: required fields present, valid choice values, numeric types parseable.
-2. **Consistency check**: all model-scoped columns identical across rows for the same `(reference, model_id)`.
-3. **FK check**: `reference` exists in `reference.json`; each `component_id` in `component_ids` exists in `component.json`.
-
-As a sanity check, the command always prints the count of unique fragility models it found in the CSV before proceeding:
-
-```
-Found 3 unique fragility model(s) in CSV.
-```
-
-This helps catch accidental model ID typos that would split what should be one model into two.
-
-If any error is found across all three stages, **nothing is written** and all errors are reported together so you can fix and retry.
-
-#### Workflow
-
+**Preview an import without writing changes:**
 ```bash
-# 1. (Optional) Validate first
-python manage.py import_fragility --input_file my_fragilities.csv --dry_run
-
-# 2. Import
-python manage.py import_fragility --input_file my_fragilities.csv
-
-# 3. Load into the database
-python manage.py ingest
+python manage.py import_model --model Experiment \
+  --input_file my_experiments.csv \
+  --dry_run
 ```
+
+**Import references:**
+```bash
+python manage.py import_model --model Reference \
+  --input_file my_references.csv
+```
+
+**Import experiments:**
+```bash
+python manage.py import_model --model Experiment \
+  --input_file my_experiments.csv
+```
+
+**Import fragility model and curves:**
+```bash
+python manage.py import_fragility --input_file my_fragilities.csv
+```
+
+### Tips
+
+- **Import order matters for foreign keys.** Import `Reference` records before `Experiment` records that reference them; `ingest` resolves foreign keys by natural key, so the target records must already be present.
+- **Use `--dry_run` first** to preview which records would be appended (and surface the column warning) before changing the JSON files.
+- **Always run `ingest` and the test suite after importing** — they are where invalid values, choices, and foreign keys are caught.
+- **Windows path syntax**: Use forward slashes or quoted backslashes in PowerShell:
+  ```powershell
+  python manage.py import_model --model Experiment --input_file exports/my_data.csv
+  ```
+
 
 ## Contributors Guide
 
