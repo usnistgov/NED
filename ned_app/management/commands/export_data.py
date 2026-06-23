@@ -197,7 +197,7 @@ class Command(BaseCommand):
         data = []
         for fm in fragility_models:
             fm_data = {
-                'reference': fm.reference.reference_id if fm.reference else None,
+                'reference': fm.reference.reference_id,
                 'model_id': fm.model_id,
                 'p58_fragility': fm.p58_fragility,
                 'comp_detail': fm.comp_detail,

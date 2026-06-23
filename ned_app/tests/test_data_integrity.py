@@ -149,7 +149,7 @@ class DataIntegrityTests(TransactionTestCase):
                 'reference.json': lambda x: x['reference_id'],
                 'component.json': lambda x: x['component_id'],
                 'fragility_model.json': lambda x: (
-                    x['reference'] or '',
+                    x['reference'],
                     x['model_id'],
                 ),
                 'experiment.json': lambda x: x['id'],

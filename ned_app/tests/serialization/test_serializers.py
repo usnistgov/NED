@@ -454,22 +454,6 @@ class FragilityModelSerializerTest(TestCase):
             fragility_model.fragility_model_id, 'test-ref-fm-001|test-fm-001'
         )
 
-    def test_serializer_creates_fragility_model_without_reference(self):
-        """Test that serializer handles null reference for legacy models."""
-        valid_data = {
-            'reference': None,
-            'model_id': 'test-fm-legacy',
-            'comp_description': 'Legacy fragility model',
-        }
-
-        serializer = FragilityModelSerializer(data=valid_data)
-
-        self.assertTrue(serializer.is_valid())
-        fragility_model = serializer.save()
-
-        self.assertIsNotNone(fragility_model)
-        self.assertEqual(fragility_model.fragility_model_id, 'test-fm-legacy')
-
     def test_serializer_excludes_component_field(self):
         """Test that the serializer does not include a component field."""
         serializer = FragilityModelSerializer()

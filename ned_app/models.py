@@ -496,8 +496,6 @@ class FragilityModel(models.Model):
         'Reference',
         on_delete=models.PROTECT,
         to_field='reference_id',
-        null=True,
-        blank=True,
         help_text='Identifier of a Reference documenting this fragility model.',
     )
     model_id = models.CharField(
@@ -567,30 +565,20 @@ class FragilityModel(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['reference', 'model_id'],
-                condition=models.Q(reference__isnull=False),
                 name='unique_ref_model',
             ),
-            models.UniqueConstraint(
-                fields=['model_id'],
-                condition=models.Q(reference__isnull=True),
-                name='unique_legacy_model',
+            models.CheckConstraint(
+                condition=~models.Q(edp_metric=''),
+                name='requires_edp_metric',
             ),
             models.CheckConstraint(
-                condition=models.Q(reference__isnull=True)
-                | ~models.Q(edp_metric=''),
-                name='non_legacy_requires_edp_metric',
-            ),
-            models.CheckConstraint(
-                condition=models.Q(reference__isnull=True) | ~models.Q(edp_unit=''),
-                name='non_legacy_requires_edp_unit',
+                condition=~models.Q(edp_unit=''),
+                name='requires_edp_unit',
             ),
         ]
 
     def save(self, *args, **kwargs):
-        if self.reference_id:
-            self.fragility_model_id = f'{self.reference_id}|{self.model_id}'
-        else:
-            self.fragility_model_id = self.model_id
+        self.fragility_model_id = f'{self.reference_id}|{self.model_id}'
         super().save(*args, **kwargs)
 
     def __str__(self):

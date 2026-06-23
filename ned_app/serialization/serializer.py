@@ -147,8 +147,6 @@ class FragilityModelSerializer(serializers.ModelSerializer):
     reference = serializers.SlugRelatedField(
         slug_field='reference_id',
         queryset=Reference.objects.all(),
-        required=False,
-        allow_null=True,
     )
 
     class Meta:
