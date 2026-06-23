@@ -1,6 +1,7 @@
 import csv
 import os
 from django.core.management.base import BaseCommand
+from django.core.exceptions import FieldDoesNotExist, FieldError
 from django.apps import apps
 from django.db.models import ManyToOneRel, ManyToManyField
 
@@ -9,6 +10,12 @@ class Command(BaseCommand):
     help = 'Query any database table and export results to CSV'
 
     def add_arguments(self, parser):
+        """
+        Register command-line arguments.
+
+        Args:
+            parser: The argument parser to configure.
+        """
         parser.add_argument(
             '--list-models',
             action='store_true',
@@ -40,32 +47,46 @@ class Command(BaseCommand):
         )
 
     def get_available_models(self):
-        """Return list of all available models in ned_app"""
+        """
+        Return the names of all models defined in ned_app.
+
+        Returns:
+            list[str]: Sorted model class names.
+        """
         app_config = apps.get_app_config('ned_app')
         return sorted([model.__name__ for model in app_config.get_models()])
 
     def handle(self, *args, **options):
-        # Handle --list-models flag
+        """
+        Export a model's rows to CSV, optionally filtered and field-limited.
+
+        Foreign key columns are emitted as their natural key (the value stored
+        on the row via the FK's to_field), matching the identifiers used by
+        export_data and the import commands. The output file is only opened
+        once matching rows are confirmed, so a no-match query never truncates
+        an existing file.
+
+        Args:
+            *args: Positional arguments (unused).
+            **options: Command options (model, output_file, fields, filter,
+                list_models).
+        """
         if options['list_models']:
             models = self.get_available_models()
             self.stdout.write(self.style.SUCCESS('Available models in ned_app:'))
             for model in models:
-                self.stdout.write(f'  • {model}')
+                self.stdout.write(f'  - {model}')
             return
 
         model_name = options['model']
         output_file = options['output_file']
 
-        # Validate required arguments
         if not model_name or not output_file:
             self.stderr.write(
                 'Error: --model and --output_file are required (use --list-models to see available models)'
             )
             return
 
-        fields = options['fields'].split(',') if options['fields'] else None
-
-        # Get the model class
         try:
             model = apps.get_model('ned_app', model_name)
         except LookupError:
@@ -73,62 +94,72 @@ class Command(BaseCommand):
             self.stderr.write('Use --list-models to see available models')
             return
 
+        # Validate requested field names up front so a typo fails loudly
+        # rather than producing a silently-empty column.
+        fields = None
+        if options['fields']:
+            fields = [f.strip() for f in options['fields'].split(',')]
+            for field_name in fields:
+                try:
+                    model._meta.get_field(field_name)
+                except FieldDoesNotExist:
+                    self.stderr.write(
+                        f"Field '{field_name}' does not exist on model '{model_name}'."
+                    )
+                    return
+
         # Build queryset with filters
         queryset = model.objects.all()
         if options['filter']:
             filters = {}
             for pair in options['filter'].split(','):
-                key, value = pair.split('=')
+                if '=' not in pair:
+                    self.stderr.write(
+                        f"Invalid filter '{pair.strip()}'. Expected key=value format."
+                    )
+                    return
+                key, value = pair.split('=', 1)
                 filters[key.strip()] = value.strip()
-            queryset = queryset.filter(**filters)
-
-        # Create output directory
-        os.makedirs(os.path.dirname(output_file) or '.', exist_ok=True)
-
-        # Export to CSV
-        with open(output_file, 'w', newline='', encoding='utf-8') as f:
-            if not queryset.exists():
-                self.stdout.write('No data found matching criteria')
+            try:
+                queryset = model.objects.filter(**filters)
+            except FieldError as ex:
+                self.stderr.write(f'Invalid filter: {ex}')
                 return
 
-            # Get field names dynamically
-            if fields:
-                field_names = fields
-            else:
-                field_names = [
-                    f.name
-                    for f in model._meta.get_fields()
-                    if not isinstance(f, ManyToOneRel)
-                    and not isinstance(f, ManyToManyField)
-                ]
+        # Check for results BEFORE opening the file, so a no-match query does
+        # not truncate a pre-existing file at the output path.
+        if not queryset.exists():
+            self.stdout.write('No data found matching criteria')
+            return
 
+        # Get field names dynamically
+        if fields:
+            field_names = fields
+        else:
+            field_names = [
+                f.name
+                for f in model._meta.get_fields()
+                if not isinstance(f, ManyToOneRel)
+                and not isinstance(f, ManyToManyField)
+            ]
+
+        os.makedirs(os.path.dirname(output_file) or '.', exist_ok=True)
+
+        with open(output_file, 'w', newline='', encoding='utf-8') as f:
             writer = csv.DictWriter(f, fieldnames=field_names)
             writer.writeheader()
 
             for obj in queryset:
                 row = {}
                 for field_name in field_names:
-                    # Get the field definition to check if it's a ForeignKey
+                    # attname yields the value stored on the row: for a normal
+                    # field that is the field value; for a ForeignKey it is the
+                    # to_field natural key (e.g. reference_id, component_id).
                     try:
                         field_obj = model._meta.get_field(field_name)
-                    except Exception:
+                        row[field_name] = getattr(obj, field_obj.attname)
+                    except (FieldDoesNotExist, AttributeError):
                         row[field_name] = ''
-                        continue
-
-                    # Get the field value from the object
-                    field_value = getattr(obj, field_name, None)
-
-                    # If it's a ForeignKey, get the primary key of the related object
-                    if (
-                        hasattr(field_obj, 'related_model')
-                        and field_obj.related_model is not None
-                        and field_value is not None
-                    ):
-                        row[field_name] = getattr(
-                            field_value, field_obj.related_model._meta.pk.name
-                        )
-                    else:
-                        row[field_name] = field_value
                 writer.writerow(row)
 
         self.stdout.write(
