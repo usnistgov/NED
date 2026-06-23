@@ -105,7 +105,7 @@ def coerce_value(field, val):
     """
     Coerce a CSV string value to the appropriate Python type for JSON.
 
-    Unparseable numeric/boolean values are returned unchanged; producing valid
+    Unparsable numeric/boolean values are returned unchanged; producing valid
     JSON is the goal here, and any type errors surface when the data is ingested.
 
     Args:
