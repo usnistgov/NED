@@ -890,19 +890,23 @@
     {
         "comp_type": "Ceilings, piping, partitions",
         "csl_data": {
-            "DOI": "http://doi.org/10.1061/9780784413357.161",
-            "URL": "http://doi.org/10.1061/9780784413357.161",
+            "DOI": "https://doi.org/10.1061/9780784413357.161",
+            "URL": "https://doi.org/10.1061/9780784413357.161",
             "author": [
                 {
-                    "family": "Rahmanishamsi"
+                    "family": "Rahmanishamsi",
+                    "given": "Esmaeel"
                 },
                 {
-                    "family": "Soroushian"
+                    "family": "Soroushian",
+                    "given": "Siavash"
                 },
                 {
-                    "family": "Maragakis"
+                    "family": "Maragakis",
+                    "given": "Emmanuel M."
                 }
             ],
+            "container-title": "Structures Congress 2014",
             "id": "RAH-2014-SEI",
             "issued": {
                 "date-parts": [
@@ -911,7 +915,8 @@
                     ]
                 ]
             },
-            "title": "Seismic response of ceiling/piping/partition systems in NEESR-GC system-level experiments",
+            "publisher": "American Society of Civil Engineers",
+            "title": "Seismic Response of Ceiling/Piping/Partition Systems in NEESR-GC System-Level Experiments",
             "type": "paper-conference"
         },
         "pdf_saved": true,
@@ -921,19 +926,22 @@
     {
         "comp_type": "Ceilings, piping, partitions",
         "csl_data": {
-            "DOI": "https://doi.org/10.1061/9780784413357.161",
-            "URL": "https://doi.org/10.1061/9780784413357.161",
             "author": [
                 {
-                    "family": "Rahmanishamsi"
+                    "family": "Rahmanishamsi",
+                    "given": "Esmaeel"
                 },
                 {
-                    "family": "Soroushian"
+                    "family": "Soroushian",
+                    "given": "Siavash"
                 },
                 {
-                    "family": "Maragakis"
+                    "family": "Maragakis",
+                    "given": "Emmanuel M."
                 }
             ],
+            "container-title": "Proceedings of the 10th U.S. National Conference on Earthquake Engineering",
+            "event-place": "Anchorage, AK",
             "id": "RAH-2014-SYS",
             "issued": {
                 "date-parts": [
@@ -942,7 +950,8 @@
                     ]
                 ]
             },
-            "title": "Seismic Response of Ceiling/Piping/Partition Systems in NEESR-GC System-Level Experiments",
+            "publisher": "Earthquake Engineering Research Institute",
+            "title": "System-Level Experiments on Ceiling/Piping/Partition Systems at UNR-NEES Site",
             "type": "paper-conference"
         },
         "pdf_saved": true,
