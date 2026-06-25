@@ -6,9 +6,9 @@ from db import get_components
 def render() -> None:
     df_home = get_components()
 
-    st.markdown("---")
+    st.markdown('---')
 
-    st.markdown("## What is NED?")
+    st.markdown('## What is NED?')
     st.markdown(
         """
         The **Nonstructural Element Database (NED)** is a curated relational database collecting experimental,
@@ -22,12 +22,12 @@ def render() -> None:
     )
 
     m1, m2, _ = st.columns([1, 1, 4])
-    m1.metric("Experiments", f"{int(df_home['# Tests'].sum()):,}")
-    m2.metric("Fragility Models", f"{int(df_home['# Fragility Models'].sum()):,}")
+    m1.metric('Experiments', f'{int(df_home["# Tests"].sum()):,}')
+    m2.metric('Fragility Models', f'{int(df_home["# Fragility Models"].sum()):,}')
 
-    st.markdown("---")
+    st.markdown('---')
 
-    st.markdown("## Key Features")
+    st.markdown('## Key Features')
     col1, col2 = st.columns(2)
 
     with col1:
@@ -58,9 +58,9 @@ def render() -> None:
             """
         )
 
-    st.markdown("---")
+    st.markdown('---')
 
-    st.markdown("## Database Architecture")
+    st.markdown('## Database Architecture')
     st.markdown(
         """
         NED is a relational SQLite database with five core tables and two bridge tables
@@ -91,7 +91,7 @@ def render() -> None:
         """,
         use_container_width=True,
     )
-    st.caption("— solid arrow: one-to-many    · · · dashed arrow: many-to-many")
+    st.caption('— solid arrow: one-to-many    · · · dashed arrow: many-to-many')
 
     st.markdown(
         """
@@ -113,9 +113,9 @@ def render() -> None:
         """
     )
 
-    st.markdown("---")
+    st.markdown('---')
 
-    st.markdown("## Using This App")
+    st.markdown('## Using This App')
     st.markdown(
         """
         Use the **sidebar** to navigate between pages:
@@ -125,9 +125,9 @@ def render() -> None:
         """
     )
 
-    st.markdown("---")
+    st.markdown('---')
 
-    st.markdown("## Learn More")
+    st.markdown('## Learn More')
     st.markdown(
         """
         The full backend codebase — including the database schema, ingestion pipeline,

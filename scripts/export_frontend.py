@@ -32,37 +32,37 @@ import sys
 from pathlib import Path
 
 NED = Path(__file__).resolve().parent.parent
-UI = NED / "ui"
-DB = NED / "db.sqlite3"
+UI = NED / 'ui'
+DB = NED / 'db.sqlite3'
 
 # Paths NED owns and publishes to the front-end repo. Directories are replaced
 # wholesale (so deletions in ui/ propagate); files are overwritten in place.
 # This is the ONLY list to maintain, and it only changes when you add a new
 # top-level front-end code path -- i.e. your own code, never the deploy side.
 OWNS = [
-    "app.py",
-    "auth.py",
-    "db.py",
-    "styles.py",
-    "utils.py",
-    "requirements.txt",
-    "README.md",
-    "CLAUDE.md",
-    ".gitignore",
-    ".streamlit/config.toml",
-    "assets",
-    "views",
+    'app.py',
+    'auth.py',
+    'db.py',
+    'styles.py',
+    'utils.py',
+    'requirements.txt',
+    'README.md',
+    'CLAUDE.md',
+    '.gitignore',
+    '.streamlit/config.toml',
+    'assets',
+    'views',
 ]
 
 # Built into the front-end repo for deployment; gitignored / untracked in NED.
-DB_DEST = "backend/db.sqlite3"
+DB_DEST = 'backend/db.sqlite3'
 
 # Safety net: never publish anything that looks like a credential into the repo.
-_SECRET_HINTS = ("secret", ".env")
+_SECRET_HINTS = ('secret', '.env')
 
 
 def run(cmd: list[str], cwd: Path) -> None:
-    print("+", " ".join(str(c) for c in cmd))
+    print('+', ' '.join(str(c) for c in cmd))
     subprocess.run(cmd, cwd=cwd, check=True)
 
 
@@ -70,7 +70,7 @@ def _copy(src: Path, dst: Path) -> None:
     if src.is_dir():
         if dst.exists():
             shutil.rmtree(dst)
-        shutil.copytree(src, dst, ignore=shutil.ignore_patterns("__pycache__"))
+        shutil.copytree(src, dst, ignore=shutil.ignore_patterns('__pycache__'))
     else:
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
@@ -79,56 +79,58 @@ def _copy(src: Path, dst: Path) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument(
-        "--frontend",
+        '--frontend',
         required=True,
         type=Path,
-        help="path to a clone of the ned-frontend repo",
+        help='path to a clone of the ned-frontend repo',
     )
     ap.add_argument(
-        "--rebuild-db",
-        action="store_true",
-        help="run `manage.py migrate` + `ingest` before exporting",
+        '--rebuild-db',
+        action='store_true',
+        help='run `manage.py migrate` + `ingest` before exporting',
     )
     args = ap.parse_args()
 
     fe = args.frontend.resolve()
-    if not (fe / ".git").exists():
-        sys.exit(f"error: {fe} is not a git repository")
+    if not (fe / '.git').exists():
+        sys.exit(f'error: {fe} is not a git repository')
 
     for path in OWNS:
         if any(hint in path.lower() for hint in _SECRET_HINTS):
-            sys.exit(f"error: OWNS contains a secret-shaped path: {path!r}")
+            sys.exit(f'error: OWNS contains a secret-shaped path: {path!r}')
 
     if args.rebuild_db:
-        run([sys.executable, "manage.py", "migrate"], cwd=NED)
-        run([sys.executable, "manage.py", "ingest"], cwd=NED)
+        run([sys.executable, 'manage.py', 'migrate'], cwd=NED)
+        run([sys.executable, 'manage.py', 'ingest'], cwd=NED)
 
     if not DB.exists():
         sys.exit(
-            f"error: {DB} not found. Build it first "
-            "(`python manage.py migrate && python manage.py ingest`) "
-            "or pass --rebuild-db."
+            f'error: {DB} not found. Build it first '
+            '(`python manage.py migrate && python manage.py ingest`) '
+            'or pass --rebuild-db.'
         )
 
     # 1. Publish NED-owned code paths.
     for path in OWNS:
         src = UI / path
         if not src.exists():
-            sys.exit(f"error: ui/{path} is missing; cannot export an incomplete UI")
+            sys.exit(f'error: ui/{path} is missing; cannot export an incomplete UI')
         _copy(src, fe / path)
 
     # 2. Inject the database.
     _copy(DB, fe / DB_DEST)
 
-    sha = subprocess.check_output(
-        ["git", "rev-parse", "--short", "HEAD"], cwd=NED
-    ).decode().strip()
+    sha = (
+        subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'], cwd=NED)
+        .decode()
+        .strip()
+    )
     print(
-        f"\nDone. Wrote UI + db from NED @ {sha} into {fe}.\n"
-        "Review, stage, and commit the changes in the front-end repo manually."
+        f'\nDone. Wrote UI + db from NED @ {sha} into {fe}.\n'
+        'Review, stage, and commit the changes in the front-end repo manually.'
     )
     return 0
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     raise SystemExit(main())

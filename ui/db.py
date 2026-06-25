@@ -4,8 +4,10 @@ import sqlite3
 import pandas as pd
 import streamlit as st
 
-_DEFAULT_DB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "backend", "db.sqlite3")
-_DB_PATH = os.environ.get("DB_PATH", _DEFAULT_DB)
+_DEFAULT_DB = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'backend', 'db.sqlite3'
+)
+_DB_PATH = os.environ.get('DB_PATH', _DEFAULT_DB)
 
 _COMPONENTS_QUERY = """
 SELECT
@@ -34,26 +36,28 @@ def get_components() -> pd.DataFrame:
     finally:
         conn.close()
 
-    df["Element"] = df["Element"].str.split(" - ", n=1).str[-1].fillna("—")
-    df["major_group"] = df["major_group"].fillna("—")
+    df['Element'] = df['Element'].str.split(' - ', n=1).str[-1].fillna('—')
+    df['major_group'] = df['major_group'].fillna('—')
 
-    major_letter = df["major_group"].str.split(" - ", n=1).str[0]
-    group_split = df["Group"].str.split(" - ", n=1)
-    df["Group"] = (major_letter + group_split.str[0] + " - " + group_split.str[1]).fillna("—")
+    major_letter = df['major_group'].str.split(' - ', n=1).str[0]
+    group_split = df['Group'].str.split(' - ', n=1)
+    df['Group'] = (
+        major_letter + group_split.str[0] + ' - ' + group_split.str[1]
+    ).fillna('—')
 
     return df
 
 
 def get_major_groups() -> list[str]:
     df = get_components()
-    return sorted(df["major_group"].dropna().unique().tolist())
+    return sorted(df['major_group'].dropna().unique().tolist())
 
 
 def get_groups(major_group_filter: str | None = None) -> list[str]:
     df = get_components()
-    if major_group_filter and major_group_filter != "All groups":
-        df = df[df["major_group"] == major_group_filter]
-    groups = df["Group"].replace("—", pd.NA).dropna().unique().tolist()
+    if major_group_filter and major_group_filter != 'All groups':
+        df = df[df['major_group'] == major_group_filter]
+    groups = df['Group'].replace('—', pd.NA).dropna().unique().tolist()
     return sorted(groups)
 
 
@@ -63,7 +67,7 @@ def get_component_detail(component_id: str) -> pd.DataFrame:
     try:
         return pd.read_sql(
             'SELECT id, name, component_id, major_group, "group", element, subelement '
-            "FROM ned_app_component WHERE id = ?",
+            'FROM ned_app_component WHERE id = ?',
             conn,
             params=(component_id,),
         )
@@ -127,8 +131,8 @@ def get_reference(reference_id: str) -> pd.DataFrame:
     conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
     try:
         return pd.read_sql(
-            "SELECT reference_id, title, author, year, study_type, comp_type, csl_data "
-            "FROM ned_app_reference WHERE reference_id = ?",
+            'SELECT reference_id, title, author, year, study_type, comp_type, csl_data '
+            'FROM ned_app_reference WHERE reference_id = ?',
             conn,
             params=(reference_id,),
         )
@@ -141,10 +145,10 @@ def get_fragility_model_detail(fragility_model_id: str) -> pd.DataFrame:
     conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
     try:
         return pd.read_sql(
-            "SELECT fragility_model_id, model_id, reference_id, p58_fragility, "
-            "comp_detail, material, size_class, comp_description, "
-            "edp_metric, edp_unit, reviewer, source "
-            "FROM ned_app_fragilitymodel WHERE fragility_model_id = ?",
+            'SELECT fragility_model_id, model_id, reference_id, p58_fragility, '
+            'comp_detail, material, size_class, comp_description, '
+            'edp_metric, edp_unit, reviewer, source '
+            'FROM ned_app_fragilitymodel WHERE fragility_model_id = ?',
             conn,
             params=(fragility_model_id,),
         )
