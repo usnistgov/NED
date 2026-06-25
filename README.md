@@ -15,6 +15,7 @@ The goal of this project is to develop a robust and scalable database of fragili
 - **ned_proj** - Django project settings.
 - **resources/example_data/** - Template JSON files for contributors to use when adding new data.
 - **scripts** - General project scripts that are outside the Django application management process.
+- **ui** - The Streamlit front-end (browser UI). NED is the source of truth for this code; it is published to the separate deployment repo via `scripts/export_frontend.py` (see [Front-end (UI)](#front-end-ui)).
 - **visualization_tools** - Jupyter notebook workflows that interact with the NED database to illustrate backend interactions via python.
 - **db.sqlite3** - SQLite database file (disposable build artifact, generated from JSON data via `python manage.py ingest`).
 
@@ -60,6 +61,42 @@ Jupter Notebook
 ```
 
 For additional instructions please see the Juptyer Notebook installation instructions: https://jupyter.org/install
+
+
+## Front-end (UI)
+The `ui/` directory contains the Streamlit application that powers the browser-based NED interface. The deployed version is hosted from a **separate** repository so that deployment can be handed off independently of the database back end. To avoid two sources of truth, **the code is authored here, in `ui/`, and published outward**. The only handshake between the two repositories is the database (`db.sqlite3`), which is built from the canonical JSON data and injected into the front-end at publish time.
+
+### Running the UI locally
+The UI reads the database path from the `DB_PATH` environment variable, defaulting to a bundled copy. Point it at your locally built `db.sqlite3` so the UI reflects your back-end changes immediately:
+
+```
+# 1. From the project root, build the database from the canonical data
+python manage.py migrate
+python manage.py ingest
+
+# 2. Install the UI's dependencies (a separate, lightweight set)
+pip install -r ui/requirements.txt
+
+# 3. **Run the app from inside ui/,** pointed at your local database
+cd ui
+DB_PATH=../db.sqlite3 AUTH_ENABLED=false streamlit run app.py
+```
+On Windows PowerShell, step 3 is: `cd ui; $env:DB_PATH = "../db.sqlite3"; $env:AUTH_ENABLED = "false"; streamlit run app.py`.
+
+- Run from **inside `ui/`**. The app resolves its assets (`assets/logo.png`) and Streamlit config (`.streamlit/config.toml`) relative to the current directory, just as it does from the repo root when deployed. Running from elsewhere breaks those paths.
+- `DB_PATH` is resolved relative to the current directory (`ui/` here), so `../db.sqlite3` points at the database you built in the project root. It is required: without it the app looks for its bundled deployment copy at `backend/db.sqlite3`, which does not exist in a local checkout.
+- `AUTH_ENABLED=false` skips the login screen for local use. Authentication is on by default; the deployment supplies `APP_USERNAME` / `APP_PASSWORD`. To exercise the login flow locally instead, omit `AUTH_ENABLED` and set those two variables.
+
+Add data or change the schema, re-run `ingest`, refresh the browser, and the changes appear in the UI.
+
+### Push the UI to the deployment repo (maintainers)
+`scripts/export_frontend.py` pushes the front-end code and the freshly built database into a clone of `ned-frontend`. It is *non-destructive*: it writes only the NED-owned paths plus `backend/db.sqlite3`, leaving the deployment repo's own files (`deploy/`, `.streamlit/secrets.toml`, etc.) untouched.
+
+```
+# Rebuild the db, then write code + db into the deployment repo's working tree
+python scripts/export_frontend.py --frontend ../ned-frontend --rebuild-db
+```
+Useful flags: `--rebuild-db` (run `migrate` + `ingest` first). Run `python scripts/export_frontend.py --help` for details.
 
 
 ## Contributors Guide
