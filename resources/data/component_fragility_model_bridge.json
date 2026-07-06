@@ -2086,5 +2086,9 @@
     {
         "component": "C.10.2.1.A",
         "fragility_model": "FEM-2018-SEI|door1"
+    },
+    {
+        "component": "C.10.2.1.A",
+        "fragility_model": "FEM-2018-SEI|door2"
     }
 ]
