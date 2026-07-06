@@ -1,9 +1,10 @@
 import csv
+import json
 import os
 from django.core.management.base import BaseCommand
 from django.core.exceptions import FieldDoesNotExist, FieldError
 from django.apps import apps
-from django.db.models import ManyToOneRel, ManyToManyField
+from django.db.models import JSONField, ManyToOneRel, ManyToManyField
 
 
 class Command(BaseCommand):
@@ -145,7 +146,7 @@ class Command(BaseCommand):
 
         os.makedirs(os.path.dirname(output_file) or '.', exist_ok=True)
 
-        with open(output_file, 'w', newline='', encoding='utf-8') as f:
+        with open(output_file, 'w', newline='', encoding='utf-8-sig') as f:
             writer = csv.DictWriter(f, fieldnames=field_names)
             writer.writeheader()
 
@@ -157,7 +158,10 @@ class Command(BaseCommand):
                     # to_field natural key (e.g. reference_id, component_id).
                     try:
                         field_obj = model._meta.get_field(field_name)
-                        row[field_name] = getattr(obj, field_obj.attname)
+                        value = getattr(obj, field_obj.attname)
+                        if isinstance(field_obj, JSONField) and value is not None:
+                            value = json.dumps(value)
+                        row[field_name] = value
                     except (FieldDoesNotExist, AttributeError):
                         row[field_name] = ''
                 writer.writerow(row)

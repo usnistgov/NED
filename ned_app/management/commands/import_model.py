@@ -4,6 +4,7 @@ from ned_app.management.import_utils import (
     coerce_value,
     find_unknown_columns,
     load_json,
+    looks_semicolon_delimited,
     read_csv,
     write_json,
     build_pk_set,
@@ -238,6 +239,14 @@ class Command(BaseCommand):
             columns, rows = read_csv(input_file)
         except FileNotFoundError:
             self.stderr.write(f"CSV file not found: '{input_file}'")
+            return
+
+        if looks_semicolon_delimited(columns):
+            self.stderr.write(
+                'This CSV appears to be semicolon-delimited. Re-save it as a '
+                'comma-delimited CSV (in Excel: "CSV UTF-8 (Comma delimited)") '
+                'and try again.'
+            )
             return
 
         if not rows:

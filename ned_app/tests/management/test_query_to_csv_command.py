@@ -5,6 +5,7 @@ no-truncate-on-empty-result behavior.
 """
 
 import csv
+import json
 import os
 import shutil
 import tempfile
@@ -64,7 +65,8 @@ class QueryToCsvCommandTests(TestCase):
         )
 
     def _read_rows(self):
-        with open(self.output_file, 'r', encoding='utf-8', newline='') as f:
+        # utf-8-sig strips the BOM the command now writes for Excel.
+        with open(self.output_file, 'r', encoding='utf-8-sig', newline='') as f:
             return list(csv.DictReader(f))
 
     # -- the foreign-key fix -------------------------------------------
@@ -190,3 +192,30 @@ class QueryToCsvCommandTests(TestCase):
         call_command('query_to_csv', list_models=True, stdout=out)
         self.assertIn('Experiment', out.getvalue())
         self.assertIn('Reference', out.getvalue())
+
+    # -- JSONField encoding + Excel BOM --------------------------------
+
+    def test_jsonfield_exported_as_valid_json(self):
+        call_command(
+            'query_to_csv',
+            model='Reference',
+            output_file=self.output_file,
+            fields='reference_id,csl_data',
+            stdout=StringIO(),
+        )
+        row = self._read_rows()[0]
+        # Must be valid JSON (double-quoted), not a Python dict repr.
+        parsed = json.loads(row['csl_data'])
+        self.assertEqual(parsed['title'], 'A Title')
+        self.assertEqual(parsed['issued'], {'date-parts': [[2020]]})
+
+    def test_output_written_with_utf8_bom(self):
+        call_command(
+            'query_to_csv',
+            model='Experiment',
+            output_file=self.output_file,
+            fields='id',
+            stdout=StringIO(),
+        )
+        with open(self.output_file, 'rb') as f:
+            self.assertEqual(f.read(3), b'\xef\xbb\xbf')

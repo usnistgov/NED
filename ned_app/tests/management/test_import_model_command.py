@@ -232,3 +232,24 @@ class ImportModelCommandTests(TransactionTestCase):
 
         rec = self._read_json('reference.json')[0]
         self.assertEqual(rec['csl_data']['issued'], {'date-parts': [['in press']]})
+
+    def test_semicolon_delimited_csv_is_rejected(self):
+        # A semicolon-delimited CSV (common from non-US Excel) must be caught
+        # with guidance rather than silently importing garbage.
+        header = (
+            'reference_id;study_type;pdf_saved;csl_type;csl_title;'
+            'csl_year;csl_authors\n'
+        )
+        row = 'R1;Experiment;True;article-journal;A Title;2020;Smith\n'
+        path = self._write_csv('semicolon.csv', header + row)
+
+        err = StringIO()
+        call_command(
+            'import_model',
+            model='Reference',
+            input_file=path,
+            stdout=StringIO(),
+            stderr=err,
+        )
+        self.assertIn('semicolon-delimited', err.getvalue())
+        self.assertFalse(os.path.exists(self._json_path('reference.json')))

@@ -130,6 +130,24 @@ def read_csv(filepath):
         return reader.fieldnames or [], list(reader)
 
 
+def looks_semicolon_delimited(columns):
+    """
+    Heuristically detect a semicolon-delimited CSV.
+
+    Excel in some locales saves CSVs with ';' separators. Parsed as a normal
+    comma CSV, the entire header collapses into a single column whose name
+    contains the ';'-joined field names. Every importable model has more than
+    one field, so a lone ';'-bearing column is a reliable signal.
+
+    Args:
+        columns (list[str]): Header column names as parsed by read_csv.
+
+    Returns:
+        bool: True if the header looks semicolon-delimited.
+    """
+    return len(columns) == 1 and ';' in columns[0]
+
+
 def find_unknown_columns(actual_columns, expected_columns):
     """
     Return CSV header columns that are not recognized for the target model.

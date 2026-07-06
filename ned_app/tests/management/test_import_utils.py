@@ -329,3 +329,24 @@ class WriteJsonFilesTests(SimpleTestCase):
 
         self.assertEqual(self._read('a.json'), [{'x': 1}])
         self.assertFalse(os.path.exists(self._path('c.json')))
+
+
+class LooksSemicolonDelimitedTests(SimpleTestCase):
+    """Tests for import_utils.looks_semicolon_delimited detection."""
+
+    def test_semicolon_header_detected(self):
+        # A semicolon CSV read as comma collapses to one ';'-bearing column.
+        self.assertTrue(
+            import_utils.looks_semicolon_delimited(['reference_id;study_type'])
+        )
+
+    def test_comma_header_not_flagged(self):
+        self.assertFalse(
+            import_utils.looks_semicolon_delimited(['reference_id', 'study_type'])
+        )
+
+    def test_single_plain_column_not_flagged(self):
+        self.assertFalse(import_utils.looks_semicolon_delimited(['reference_id']))
+
+    def test_empty_header_not_flagged(self):
+        self.assertFalse(import_utils.looks_semicolon_delimited([]))
