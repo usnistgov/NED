@@ -1,6 +1,8 @@
 import csv
 import json
 import os
+import shutil
+import tempfile
 
 from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
 
@@ -27,18 +29,66 @@ def load_json(filename):
         return json.load(f)
 
 
+def _dump_json(filepath, data):
+    """
+    Serialize records to a single JSON file in canonical format.
+
+    Args:
+        filepath (str): Absolute path to write.
+        data (list[dict]): Records to serialize.
+    """
+    with open(filepath, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4, sort_keys=True, ensure_ascii=True)
+        f.write('\n')
+
+
 def write_json(filename, data):
     """
-    Write records to a canonical JSON data file.
+    Write records to a canonical JSON data file, crash-safely.
 
     Args:
         filename (str): JSON filename within resources/data/.
         data (list[dict]): Records to serialize.
     """
-    filepath = build_json_data_file_path(filename)
-    with open(filepath, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4, sort_keys=True, ensure_ascii=True)
-        f.write('\n')
+    write_json_files({filename: data})
+
+
+def write_json_files(file_data_map):
+    """
+    Write several canonical JSON files as an all-or-nothing batch.
+
+    Each target file that already exists is backed up first. If any write —
+    or an interruption such as Ctrl+C — fails partway through, every target
+    is rolled back to its original state (existing files restored, newly
+    created files removed) before the error propagates. This prevents a crash
+    mid-import from leaving the canonical files in a mutually inconsistent
+    state (e.g. fragility models written but their curves missing). Backups
+    are discarded once all writes succeed.
+
+    Args:
+        file_data_map (dict[str, list]): Maps each JSON filename (within
+            resources/data/) to the full record list to write.
+    """
+    paths = {name: build_json_data_file_path(name) for name in file_data_map}
+
+    with tempfile.TemporaryDirectory() as backup_dir:
+        backups = {}
+        for name, path in paths.items():
+            if os.path.exists(path):
+                backup_path = os.path.join(backup_dir, name)
+                shutil.copy2(path, backup_path)
+                backups[name] = backup_path
+
+        try:
+            for name, data in file_data_map.items():
+                _dump_json(paths[name], data)
+        except BaseException:
+            for name, path in paths.items():
+                if name in backups:
+                    shutil.copy2(backups[name], path)
+                elif os.path.exists(path):
+                    os.remove(path)
+            raise
 
 
 def build_pk_set(records, pk_fields):

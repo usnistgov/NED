@@ -3,8 +3,11 @@ Unit tests for the shared CSV-import helpers and the import_model
 conversion functions (Tier 2: pure functions, no database).
 """
 
+import json
 import os
+import shutil
 import tempfile
+from unittest.mock import patch
 
 from django.test import SimpleTestCase
 
@@ -183,6 +186,30 @@ class BuildCslDataTests(SimpleTestCase):
         csl = import_model._build_csl_data(row)
         self.assertNotIn('DOI', csl)
 
+    def test_non_numeric_year_passes_through(self):
+        # A bad year must not crash the conversion; it passes through so
+        # ingest's CSL validation can report it clearly.
+        row = {
+            'reference_id': 'R',
+            'csl_type': 'article-journal',
+            'csl_title': 'T',
+            'csl_year': 'in press',
+            'csl_authors': 'Smith, John',
+        }
+        csl = import_model._build_csl_data(row)
+        self.assertEqual(csl['issued'], {'date-parts': [['in press']]})
+
+    def test_blank_year_passes_through(self):
+        row = {
+            'reference_id': 'R',
+            'csl_type': 'article-journal',
+            'csl_title': 'T',
+            'csl_year': '',
+            'csl_authors': 'Smith, John',
+        }
+        csl = import_model._build_csl_data(row)
+        self.assertEqual(csl['issued'], {'date-parts': [['']]})
+
 
 class RowToRecordTests(SimpleTestCase):
     """Tests for import_model._row_to_record conversion."""
@@ -227,3 +254,78 @@ class ExpectedColumnsTests(SimpleTestCase):
         self.assertNotIn('csl_data', cols)
         self.assertNotIn('title', cols)
         self.assertNotIn('year', cols)
+
+
+class WriteJsonFilesTests(SimpleTestCase):
+    """Tests for import_utils.write_json_files transactional batch writes."""
+
+    def setUp(self):
+        self.temp_dir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, self.temp_dir, ignore_errors=True)
+        patcher = patch(
+            'ned_app.management.import_utils.build_json_data_file_path',
+            side_effect=lambda name: os.path.join(self.temp_dir, name),
+        )
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def _path(self, name):
+        return os.path.join(self.temp_dir, name)
+
+    def _read(self, name):
+        with open(self._path(name), encoding='utf-8') as f:
+            return json.load(f)
+
+    def test_writes_all_files_with_trailing_newline(self):
+        import_utils.write_json_files({'a.json': [{'x': 1}], 'b.json': [{'y': 2}]})
+        self.assertEqual(self._read('a.json'), [{'x': 1}])
+        self.assertEqual(self._read('b.json'), [{'y': 2}])
+        with open(self._path('a.json'), encoding='utf-8') as f:
+            self.assertTrue(f.read().endswith('\n'))
+
+    def test_failure_restores_existing_files(self):
+        # Seed two existing files, then fail on the second write. Both must
+        # roll back — including the first, which was already overwritten.
+        import_utils.write_json_files({'a.json': [{'x': 1}], 'b.json': [{'y': 1}]})
+
+        real_dump = import_utils._dump_json
+
+        def flaky(filepath, data):
+            if filepath.endswith('b.json'):
+                # a BaseException (Ctrl+C) must still trigger rollback
+                raise KeyboardInterrupt('interrupted')
+            real_dump(filepath, data)
+
+        with patch.object(import_utils, '_dump_json', side_effect=flaky):
+            with self.assertRaises(KeyboardInterrupt):
+                import_utils.write_json_files({
+                    'a.json': [{'x': 999}],
+                    'b.json': [{'y': 999}],
+                })
+
+        self.assertEqual(self._read('a.json'), [{'x': 1}])
+        self.assertEqual(self._read('b.json'), [{'y': 1}])
+
+    def test_failure_removes_newly_created_files(self):
+        # a.json pre-exists; c.json is new. A failure while writing c must
+        # restore a and leave no partial c behind.
+        import_utils.write_json_files({'a.json': [{'x': 1}]})
+
+        real_dump = import_utils._dump_json
+
+        def flaky(filepath, data):
+            if filepath.endswith('c.json'):
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    f.write('partial junk')
+                raise RuntimeError('boom')
+            real_dump(filepath, data)
+
+        with patch.object(import_utils, '_dump_json', side_effect=flaky):
+            with self.assertRaises(RuntimeError):
+                import_utils.write_json_files({
+                    'a.json': [{'x': 2}],
+                    'c.json': [{'z': 2}],
+                })
+
+        self.assertEqual(self._read('a.json'), [{'x': 1}])
+        self.assertFalse(os.path.exists(self._path('c.json')))

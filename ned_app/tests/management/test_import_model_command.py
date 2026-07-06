@@ -213,3 +213,22 @@ class ImportModelCommandTests(TransactionTestCase):
         call_command('import_model', model='Reference', input_file=path, stdout=out)
         self.assertIn('unrecognized column', out.getvalue())
         self.assertIn('edp_val', out.getvalue())
+
+    def test_non_numeric_csl_year_does_not_crash(self):
+        # A non-numeric csl_year must convert (passing the raw value through)
+        # rather than crashing; ingest's CSL validation reports it later.
+        header = (
+            'reference_id,study_type,pdf_saved,csl_type,csl_title,'
+            'csl_year,csl_authors\n'
+        )
+        row = (
+            'R-YEAR,Experiment,True,article-journal,A Title,in press,"Smith, John"\n'
+        )
+        path = self._write_csv('badyear.csv', header + row)
+
+        call_command(
+            'import_model', model='Reference', input_file=path, stdout=StringIO()
+        )
+
+        rec = self._read_json('reference.json')[0]
+        self.assertEqual(rec['csl_data']['issued'], {'date-parts': [['in press']]})

@@ -170,3 +170,24 @@ class ImportFragilityCommandTests(TransactionTestCase):
         # Only fra002 is appended; fra001 was already present.
         model_ids = [r['model_id'] for r in self._read_json('fragility_model.json')]
         self.assertEqual(sorted(model_ids), ['fra001', 'fra002'])
+
+    def test_non_numeric_ds_rank_does_not_crash(self):
+        # A non-numeric ds_rank must convert (passing the raw value through)
+        # rather than crashing; ingest reports the bad value later.
+        header = (
+            'reference,model_id,p58_fragility,comp_detail,material,size_class,'
+            'comp_description,reviewer,source,edp_metric,edp_unit,component_ids,'
+            'ds_rank,ds_description,median,beta,probability,basis,num_observations\n'
+        )
+        row = (
+            'SMITH-2020-EXP,fraX,,Braced,CPVC,2 inch,Desc,Rev,Lit,'
+            '"Peak Floor Acceleration, horizontal",g,A.40.1.1,'
+            'one,Leak,0.5,0.4,1.0,Experiment,30\n'
+        )
+        path = self._write_csv('badrank.csv', header + row)
+
+        call_command('import_fragility', input_file=path, stdout=StringIO())
+
+        curves = self._read_json('fragility_curve.json')
+        self.assertEqual(len(curves), 1)
+        self.assertEqual(curves[0]['ds_rank'], 'one')

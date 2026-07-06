@@ -91,11 +91,16 @@ def _build_csl_data(row):
     Returns:
         dict: CSL-JSON citation data.
     """
+    year_raw = row.get('csl_year', '').strip()
+    try:
+        year = int(year_raw)
+    except ValueError:
+        year = year_raw
     csl_data = {
         'type': row.get('csl_type', '').strip(),
         'id': row.get('reference_id', '').strip(),
         'title': row.get('csl_title', '').strip(),
-        'issued': {'date-parts': [[int(row['csl_year'])]]},
+        'issued': {'date-parts': [[year]]},
         'author': _parse_authors(row.get('csl_authors', '')),
     }
     for csv_col, csl_key in _CSL_OPTIONAL_MAP.items():

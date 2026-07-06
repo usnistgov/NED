@@ -9,7 +9,7 @@ from ned_app.management.import_utils import (
     fragility_model_id,
     load_json,
     read_csv,
-    write_json,
+    write_json_files,
 )
 from ned_app.serialization.serializer import (
     FragilityModelSerializer,
@@ -191,7 +191,7 @@ class Command(BaseCommand):
             # Curve records (one per row in the group)
             for _, row in group_rows:
                 ds_rank_raw = row.get('ds_rank', '').strip()
-                ds_rank = int(ds_rank_raw) if ds_rank_raw else None
+                ds_rank = coerce_value('ds_rank', ds_rank_raw)
                 curve_pk = (fm_id, str(ds_rank) if ds_rank is not None else '')
                 if curve_pk in seen_curve_pks:
                     skipped_curves.append(curve_pk)
@@ -258,19 +258,24 @@ class Command(BaseCommand):
             return
 
         # ------------------------------------------------------------------
-        # Write to all three JSON files
+        # Write to all three JSON files as an all-or-nothing batch, so a
+        # failure partway through cannot leave the canonical files in a
+        # mutually inconsistent state (e.g. models without their curves).
         # ------------------------------------------------------------------
         fm_data = load_json('fragility_model.json')
         fm_data.extend(new_models)
-        write_json('fragility_model.json', fm_data)
 
         curve_data = load_json('fragility_curve.json')
         curve_data.extend(new_curves)
-        write_json('fragility_curve.json', curve_data)
 
         bridge_data = load_json('component_fragility_model_bridge.json')
         bridge_data.extend(new_bridges)
-        write_json('component_fragility_model_bridge.json', bridge_data)
+
+        write_json_files({
+            'fragility_model.json': fm_data,
+            'fragility_curve.json': curve_data,
+            'component_fragility_model_bridge.json': bridge_data,
+        })
 
         self.stdout.write(
             self.style.SUCCESS(
