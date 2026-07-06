@@ -1,6 +1,6 @@
 import os
 import json
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ValidationError
 from ned_app.models import (
     Reference,
@@ -89,12 +89,19 @@ class Command(BaseCommand):
             },
         ]
 
+        total_failed = 0
         for config in processing_config:
-            self._process_data_file(
+            total_failed += self._process_data_file(
                 model_class=config['model'],
                 serializer_class=config['serializer'],
                 data_file=config['file'],
                 lookup_field=config['lookup_field'],
+            )
+
+        if total_failed:
+            raise CommandError(
+                f'\nIngestion finished with {total_failed} failure(s). See the '
+                'errors above, fix the source data in resources/data/, and re-run.'
             )
 
         self.stdout.write(
@@ -115,6 +122,10 @@ class Command(BaseCommand):
             serializer_class: The serializer class for validation and saving.
             data_file (str): The name of the JSON file to process.
             lookup_field (list): List of field names used to identify existing records.
+
+        Returns:
+            int: The number of failures (unreadable file or invalid records).
+                A missing file is not a failure.
         """
         model_name = model_class.__name__
         self.stdout.write(f'--- Processing {model_name} from {data_file} ---')
@@ -126,14 +137,14 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.WARNING(f'File not found, skipping: {data_filepath}')
             )
-            return
+            return 0
 
         try:
             with open(data_filepath, 'r') as file:
                 data = json.load(file)
         except json.JSONDecodeError as ex:
             self.stderr.write(f'Error: Invalid JSON in {data_filepath}: {ex}')
-            return
+            return 1
 
         for item in data:
             try:
@@ -161,15 +172,12 @@ class Command(BaseCommand):
 
             except (ValidationError, Exception) as ex:
                 failed_count += 1
-                record_id = (
-                    item.get('id')
-                    or item.get('reference_id')
-                    or item.get('component_id')
-                    or item.get('model_id')
+                record_label = (
+                    ', '.join(f'{f}={item.get(f)}' for f in lookup_field)
                     or 'unknown'
                 )
                 self.stderr.write(
-                    f"Error processing {model_name} record '{record_id}': {ex}"
+                    f'Error processing {model_name} [{record_label}]: {ex}'
                 )
 
         self.stdout.write(
@@ -178,3 +186,4 @@ class Command(BaseCommand):
                 f'{created_count} created, {updated_count} updated, {failed_count} failed.\n'
             )
         )
+        return failed_count

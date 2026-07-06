@@ -9,6 +9,7 @@ from io import StringIO
 from unittest.mock import patch
 from django.test import TransactionTestCase
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.conf import settings
 from ned_app.models import (
     Component,
@@ -421,7 +422,8 @@ class IngestCommandTests(TransactionTestCase):
                 'ned_app.management.commands.ingest.build_json_data_file_path',
                 side_effect=mock_build_path,
             ):
-                call_command('ingest', stdout=stdout, stderr=stderr)
+                with self.assertRaises(CommandError):
+                    call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -475,7 +477,8 @@ class IngestCommandTests(TransactionTestCase):
                 'ned_app.management.commands.ingest.build_json_data_file_path',
                 side_effect=mock_build_path,
             ):
-                call_command('ingest', stdout=stdout, stderr=stderr)
+                with self.assertRaises(CommandError):
+                    call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -534,7 +537,8 @@ class IngestCommandTests(TransactionTestCase):
                 'ned_app.management.commands.ingest.build_json_data_file_path',
                 side_effect=mock_build_path,
             ):
-                call_command('ingest', stdout=stdout, stderr=stderr)
+                with self.assertRaises(CommandError):
+                    call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -842,7 +846,8 @@ class IngestCommandTests(TransactionTestCase):
                 'ned_app.management.commands.ingest.build_json_data_file_path',
                 side_effect=mock_build_path,
             ):
-                call_command('ingest', stdout=stdout, stderr=stderr)
+                with self.assertRaises(CommandError):
+                    call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -943,7 +948,8 @@ class IngestCommandTests(TransactionTestCase):
                 'ned_app.management.commands.ingest.build_json_data_file_path',
                 side_effect=mock_build_path,
             ):
-                call_command('ingest', stdout=stdout, stderr=stderr)
+                with self.assertRaises(CommandError):
+                    call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -988,3 +994,47 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(Experiment.objects.count(), 0)
             self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 0)
             self.assertEqual(FragilityCurve.objects.count(), 0)
+
+    def test_ingest_fails_loudly_and_labels_records_by_lookup_field(self):
+        """
+        A failing record must make ingest raise CommandError (non-zero exit)
+        rather than reporting success, and the error line must identify the
+        record by its lookup fields — including bridge records.
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            component_data = [{'component_id': 'B.20.1.1.A', 'name': 'Wall'}]
+            # The bridge points at a component that does not exist, so it fails.
+            bridge_data = [{'component': 'Z.99.9.9.Z', 'fragility_model': 'ref|fm'}]
+
+            files_data = {
+                'component.json': component_data,
+                'component_fragility_model_bridge.json': bridge_data,
+            }
+            for filename, data in files_data.items():
+                with open(os.path.join(temp_dir, filename), 'w') as f:
+                    json.dump(data, f)
+
+            def mock_build_path(filename):
+                return os.path.join(temp_dir, filename)
+
+            stdout = StringIO()
+            stderr = StringIO()
+            with patch(
+                'ned_app.management.commands.ingest.build_json_data_file_path',
+                side_effect=mock_build_path,
+            ):
+                with self.assertRaises(CommandError):
+                    call_command('ingest', stdout=stdout, stderr=stderr)
+
+            stderr_value = stderr.getvalue()
+            self.assertIn(
+                'Error processing ComponentFragilityModelBridge', stderr_value
+            )
+            self.assertIn('component=Z.99.9.9.Z', stderr_value)
+            # The valid sibling still persisted; only the bad bridge failed.
+            self.assertEqual(Component.objects.count(), 1)
+            self.assertEqual(ComponentFragilityModelBridge.objects.count(), 0)
+            # Success banner must not appear when there were failures.
+            self.assertNotIn(
+                'All data ingestion tasks completed successfully', stdout.getvalue()
+            )
