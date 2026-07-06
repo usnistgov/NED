@@ -47,7 +47,6 @@ OWNS = [
     'utils.py',
     'requirements.txt',
     'README.md',
-    'CLAUDE.md',
     '.gitignore',
     '.streamlit/config.toml',
     'assets',
