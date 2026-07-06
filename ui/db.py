@@ -189,7 +189,8 @@ def get_component_experiments(component_id: str) -> pd.DataFrame:
             """
             SELECT
                 e.id                    AS "experiment_id",
-                e.specimen              AS "Specimen",
+                r.author || ', ' || r.year AS "Source",
+                json_extract(r.csl_data, '$.DOI') AS "doi",
                 e.test_type             AS "Test Type",
                 e.location              AS "Location",
                 e.design_objective      AS "Design Objective",
@@ -204,6 +205,7 @@ def get_component_experiments(component_id: str) -> pd.DataFrame:
                 c.subelement            AS "NISTIR Subelement"
             FROM ned_app_experiment e
             JOIN ned_app_component c ON c.component_id = e.component_id
+            JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE c.id = ?
             ORDER BY e.reference_id, e.specimen, e.ds_rank
             """,

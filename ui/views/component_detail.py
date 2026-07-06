@@ -5,7 +5,7 @@ from db import (
     get_component_experiments,
     get_component_fragility_models,
 )
-from utils import attr, csv_safe, esc, fmt, strip_prefix
+from utils import attr, csv_safe, doi_url, esc, fmt, strip_prefix
 
 
 def render() -> None:
@@ -124,7 +124,7 @@ def render() -> None:
     else:
         _EXP_WIDTHS = [1.5, 2, 1.5, 2, 1, 1.5, 1]
         _EXP_HEADERS = [
-            'Specimen',
+            'Source',
             'Test Type',
             'Location',
             'EDP Metric',
@@ -147,19 +147,23 @@ def render() -> None:
 
         for _, erow in df_exp.iterrows():
             c = st.columns(_EXP_WIDTHS)
+            source = esc(erow['Source'])
+            url = doi_url(erow['doi'])
+            if url:
+                source = f'<a href="{esc(url)}" target="_blank">{source}</a>'
             for ci, val in zip(
                 c[:6],
                 [
-                    erow['Specimen'],
-                    erow['Test Type'],
-                    erow['Location'],
-                    erow['EDP Metric'],
-                    erow['EDP Value'],
-                    erow['DS Class'],
+                    source,
+                    esc(erow['Test Type']),
+                    esc(erow['Location']),
+                    esc(erow['EDP Metric']),
+                    esc(erow['EDP Value']),
+                    esc(erow['DS Class']),
                 ],
             ):
                 ci.markdown(
-                    f"<span style='font-size:0.88rem;'>{esc(val)}</span>",
+                    f"<span style='font-size:0.88rem;'>{val}</span>",
                     unsafe_allow_html=True,
                 )
             if c[6].button('View', key=f'exp_{erow["experiment_id"]}'):
@@ -170,7 +174,9 @@ def render() -> None:
 
         st.download_button(
             'Download CSV',
-            csv_safe(df_exp.drop(columns=['experiment_id'])).to_csv(index=False),
+            csv_safe(df_exp.drop(columns=['experiment_id', 'doi'])).to_csv(
+                index=False
+            ),
             file_name=f'{component_id}_experiments.csv',
             mime='text/csv',
             key='exp_csv',

@@ -48,17 +48,24 @@ def _md_link(url: str, text: str | None = None) -> str:
     return f'[{_md_escape(text)}]({target})'
 
 
-def doi_link(doi) -> str | None:
-    """Return a safe markdown link for a DOI, or None if the value
+def doi_url(doi) -> str | None:
+    """Return a normalized http(s) URL for a DOI, or None if the value
     doesn't match a recognized DOI or http(s) URL form."""
     if not doi:
         return None
     s = str(doi).strip()
     if _DOI_RE.match(s):
-        return _md_link(f'https://doi.org/{s}')
+        return f'https://doi.org/{s}'
     if s.startswith(('http://', 'https://')) and ' ' not in s:
-        return _md_link(s)
+        return s
     return None
+
+
+def doi_link(doi) -> str | None:
+    """Return a safe markdown link for a DOI, or None if the value
+    doesn't match a recognized DOI or http(s) URL form."""
+    url = doi_url(doi)
+    return _md_link(url) if url else None
 
 
 def _format_author(a: dict) -> str:
