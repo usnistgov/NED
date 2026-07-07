@@ -2,9 +2,10 @@ import json
 import os
 from django.conf import settings
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
-from ned_app.validators import validate_nistir_component_id
+from ned_app.validators import validate_nistir_component_id, validate_positive
 
 
 # Global variable to cache the NISTIR labels for efficiency
@@ -704,6 +705,7 @@ class FragilityCurve(models.Model):
         decimal_places=4,
         null=True,
         blank=False,
+        validators=[validate_positive],
         help_text='Median point of the fragility curve.',
     )
     beta = models.DecimalField(
@@ -712,6 +714,7 @@ class FragilityCurve(models.Model):
         decimal_places=3,
         null=True,
         blank=False,
+        validators=[validate_positive],
         help_text='Lognormal dispersion.',
     )
     probability = models.DecimalField(
@@ -720,6 +723,7 @@ class FragilityCurve(models.Model):
         decimal_places=2,
         null=True,
         blank=False,
+        validators=[MinValueValidator(0), MaxValueValidator(1)],
         help_text='Mutually exclusive probability of this damage state.',
     )
 

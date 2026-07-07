@@ -790,6 +790,86 @@ class FragilityCurveSerializerTest(TestCase):
         self.assertFalse(serializer.is_valid())
         self.assertIn('fragility_model', serializer.errors)
 
+    def test_serializer_rejects_negative_beta(self):
+        """A negative lognormal dispersion is physically invalid and rejected."""
+        data = {
+            'fragility_model': 'test-ref-001|test-fm-001',
+            'ds_description': 'Test damage state description',
+            'median': 0.01,
+            'beta': -0.4,
+            'probability': 0.8,
+        }
+
+        serializer = FragilityCurveSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('beta', serializer.errors)
+
+    def test_serializer_rejects_zero_beta(self):
+        """A zero dispersion is a degenerate lognormal and is rejected."""
+        data = {
+            'fragility_model': 'test-ref-001|test-fm-001',
+            'ds_description': 'Test damage state description',
+            'median': 0.01,
+            'beta': 0,
+            'probability': 0.8,
+        }
+
+        serializer = FragilityCurveSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('beta', serializer.errors)
+
+    def test_serializer_rejects_non_positive_median(self):
+        """A fragility median must be strictly positive."""
+        for bad_median in (-0.5, 0):
+            with self.subTest(median=bad_median):
+                data = {
+                    'fragility_model': 'test-ref-001|test-fm-001',
+                    'ds_description': 'Test damage state description',
+                    'median': bad_median,
+                    'beta': 0.5,
+                    'probability': 0.8,
+                }
+
+                serializer = FragilityCurveSerializer(data=data)
+
+                self.assertFalse(serializer.is_valid())
+                self.assertIn('median', serializer.errors)
+
+    def test_serializer_rejects_out_of_range_probability(self):
+        """Probability must lie within [0, 1]."""
+        for bad_probability in (-0.1, 1.5):
+            with self.subTest(probability=bad_probability):
+                data = {
+                    'fragility_model': 'test-ref-001|test-fm-001',
+                    'ds_description': 'Test damage state description',
+                    'median': 0.5,
+                    'beta': 0.5,
+                    'probability': bad_probability,
+                }
+
+                serializer = FragilityCurveSerializer(data=data)
+
+                self.assertFalse(serializer.is_valid())
+                self.assertIn('probability', serializer.errors)
+
+    def test_serializer_accepts_boundary_probabilities(self):
+        """Probabilities at both bounds of [0, 1] are accepted."""
+        for good_probability in (0, 1.0):
+            with self.subTest(probability=good_probability):
+                data = {
+                    'fragility_model': 'test-ref-001|test-fm-001',
+                    'ds_description': 'Test damage state description',
+                    'median': 0.5,
+                    'beta': 0.5,
+                    'probability': good_probability,
+                }
+
+                serializer = FragilityCurveSerializer(data=data)
+
+                self.assertTrue(serializer.is_valid(), serializer.errors)
+
     def tearDown(self):
         """Clean up test data after each test."""
         FragilityCurve.objects.all().delete()

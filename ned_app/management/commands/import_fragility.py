@@ -1,32 +1,21 @@
 from collections import defaultdict
 
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 
 from ned_app.management.import_utils import (
-    build_fk_set,
     build_pk_set,
     coerce_value,
+    find_unknown_columns,
     fragility_model_id,
     load_json,
+    looks_semicolon_delimited,
     read_csv,
-    write_json,
+    write_json_files,
 )
-from ned_app.models import (
-    EDPMetricChoices,
-    EDPUnitChoices,
-    StudyTypeChoices,
+from ned_app.serialization.serializer import (
+    FragilityModelSerializer,
+    FragilityCurveSerializer,
 )
-
-_MODEL_REQUIRED = ['model_id', 'comp_description', 'edp_metric', 'edp_unit']
-_CURVE_REQUIRED = ['ds_description', 'median', 'beta', 'probability']
-
-_MODEL_CHOICE_FIELDS = {
-    'edp_metric': EDPMetricChoices,
-    'edp_unit': EDPUnitChoices,
-}
-_CURVE_CHOICE_FIELDS = {
-    'basis': StudyTypeChoices,
-}
 
 _MODEL_FIELDS = [
     'reference',
@@ -45,56 +34,32 @@ _MODEL_FIELDS = [
 # All model-scoped columns — must be identical across every row sharing (reference, model_id)
 _CONSISTENCY_FIELDS = _MODEL_FIELDS + ['component_ids']
 
-_FLOAT_CURVE = {'median', 'beta', 'probability'}
-_INT_CURVE = {'ds_rank', 'num_observations'}
 
+def _expected_columns():
+    """
+    Build the set of CSV columns accepted by the fragility import.
 
-def _validate_row(row, row_num):
-    errors = []
+    Derived from the model and curve serializers (the single source of truth)
+    plus the import-only 'component_ids' join column, so it cannot drift from
+    the models. The derived 'fragility_model' link is not a CSV column.
 
-    for field in _MODEL_REQUIRED + _CURVE_REQUIRED:
-        if not row.get(field, '').strip():
-            errors.append(f"Row {row_num}: missing required field '{field}'")
-
-    for field, choices_class in {
-        **_MODEL_CHOICE_FIELDS,
-        **_CURVE_CHOICE_FIELDS,
-    }.items():
-        val = row.get(field, '').strip()
-        if val and val not in choices_class.values:
-            errors.append(
-                f"Row {row_num}: invalid value '{val}' for '{field}'. "
-                f'Valid: {list(choices_class.values)}'
-            )
-
-    for field in _FLOAT_CURVE:
-        val = row.get(field, '').strip()
-        if val:
-            try:
-                float(val)
-            except ValueError:
-                errors.append(
-                    f"Row {row_num}: '{field}' must be a number, got '{val}'"
-                )
-
-    for field in _INT_CURVE:
-        val = row.get(field, '').strip()
-        if val:
-            try:
-                int(val)
-            except ValueError:
-                errors.append(
-                    f"Row {row_num}: '{field}' must be an integer, got '{val}'"
-                )
-
-    return errors
+    Returns:
+        set[str]: Accepted column names.
+    """
+    return (
+        set(FragilityModelSerializer().fields)
+        | set(FragilityCurveSerializer().fields)
+        | {'component_ids'}
+    ) - {'fragility_model'}
 
 
 class Command(BaseCommand):
     help = (
         'Import fragility models, curves, and component links from a flat '
         'join CSV and append them to the canonical JSON source data in '
-        'resources/data/. Run `python manage.py ingest` afterwards.'
+        'resources/data/. The data is not validated here; run '
+        '`python manage.py ingest` and the test suite afterwards to validate '
+        'the new records.'
     )
 
     def add_arguments(self, parser):
@@ -107,7 +72,7 @@ class Command(BaseCommand):
         parser.add_argument(
             '--dry_run',
             action='store_true',
-            help='Validate the CSV and report results without writing any changes.',
+            help='Report what would be appended without writing any changes.',
         )
 
     def handle(self, *args, **options):
@@ -115,28 +80,33 @@ class Command(BaseCommand):
         dry_run = options['dry_run']
 
         try:
-            rows = read_csv(input_file)
+            columns, rows = read_csv(input_file)
         except FileNotFoundError:
-            self.stderr.write(f"CSV file not found: '{input_file}'")
-            return
+            raise CommandError(f"CSV file not found: '{input_file}'")
+
+        if looks_semicolon_delimited(columns):
+            raise CommandError(
+                'This CSV appears to be semicolon-delimited. Re-save it as a '
+                'comma-delimited CSV (in Excel: "CSV UTF-8 (Comma delimited)") '
+                'and try again.'
+            )
 
         if not rows:
             self.stdout.write('No data rows found in CSV file.')
             return
 
-        # ------------------------------------------------------------------
-        # Pass 1: row-level validation
-        # ------------------------------------------------------------------
-        all_errors = []
-        for row_num, row in enumerate(rows, start=2):
-            all_errors.extend(_validate_row(row, row_num))
+        unknown = find_unknown_columns(columns, _expected_columns())
+        if unknown:
+            self.stdout.write(
+                self.style.WARNING(
+                    f'Warning: unrecognized column(s) in CSV header: {unknown}.\n'
+                    'These columns will be ignored. Check for typos against the '
+                    'template.'
+                )
+            )
 
-        if all_errors:
-            self._report_errors(all_errors)
-            return
-
         # ------------------------------------------------------------------
-        # Pass 2: group rows by (reference, model_id)
+        # Group rows by (reference, model_id)
         # ------------------------------------------------------------------
         groups = defaultdict(list)
         for row_num, row in enumerate(rows, start=2):
@@ -146,9 +116,12 @@ class Command(BaseCommand):
         self.stdout.write(f'Found {len(groups)} unique fragility model(s) in CSV.')
 
         # ------------------------------------------------------------------
-        # Pass 3: consistency check — model-scoped fields must be identical
-        #         across every row that shares the same (reference, model_id)
+        # Consistency check — model-scoped fields must be identical across
+        # every row that shares the same (reference, model_id). This is a
+        # CSV-shape invariant that ingest cannot detect: a mismatch would
+        # otherwise be silently resolved by taking the first row's values.
         # ------------------------------------------------------------------
+        all_errors = []
         for (ref, model_id), group_rows in groups.items():
             _, first_row = group_rows[0]
             for row_num, row in group_rows[1:]:
@@ -163,14 +136,13 @@ class Command(BaseCommand):
 
         if all_errors:
             self._report_errors(all_errors)
-            return
+            raise CommandError(
+                'No records were imported. Fix the errors above and retry.'
+            )
 
         # ------------------------------------------------------------------
-        # Pass 4: FK validation and duplicate detection
+        # Duplicate detection and record building
         # ------------------------------------------------------------------
-        existing_ref_ids = build_fk_set('reference.json', 'reference_id')
-        existing_component_ids = build_fk_set('component.json', 'component_id')
-
         existing_fm_pks = build_pk_set(
             load_json('fragility_model.json'), ['reference', 'model_id']
         )
@@ -197,13 +169,6 @@ class Command(BaseCommand):
             fm_id = fragility_model_id(ref, model_id)
             _, first_row = group_rows[0]
 
-            # FK: reference
-            if ref and ref not in existing_ref_ids:
-                all_errors.append(
-                    f"Reference '{ref}' (model '{model_id}') not found in reference.json"
-                )
-                continue
-
             # Duplicate fragility model
             fm_pk = (ref, model_id)
             if fm_pk in seen_fm_pks:
@@ -222,12 +187,6 @@ class Command(BaseCommand):
                 comp_id = comp_id.strip()
                 if not comp_id:
                     continue
-                if comp_id not in existing_component_ids:
-                    all_errors.append(
-                        f"Component '{comp_id}' (model '{fm_id}') "
-                        f'not found in component.json'
-                    )
-                    continue
                 bridge_pk = (comp_id, fm_id)
                 if bridge_pk in seen_bridge_pks:
                     skipped_bridges.append(bridge_pk)
@@ -241,7 +200,7 @@ class Command(BaseCommand):
             # Curve records (one per row in the group)
             for _, row in group_rows:
                 ds_rank_raw = row.get('ds_rank', '').strip()
-                ds_rank = int(ds_rank_raw) if ds_rank_raw else None
+                ds_rank = coerce_value('ds_rank', ds_rank_raw)
                 curve_pk = (fm_id, str(ds_rank) if ds_rank is not None else '')
                 if curve_pk in seen_curve_pks:
                     skipped_curves.append(curve_pk)
@@ -264,10 +223,6 @@ class Command(BaseCommand):
                             row.get('num_observations', '').strip(),
                         ),
                     })
-
-        if all_errors:
-            self._report_errors(all_errors)
-            return
 
         # ------------------------------------------------------------------
         # Report skipped duplicates
@@ -303,36 +258,42 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS(
                     f'\n[DRY RUN] Would append:\n'
-                    f'  {len(new_models)} fragility model(s) → fragility_model.json\n'
-                    f'  {len(new_curves)} fragility curve(s)  → fragility_curve.json\n'
-                    f'  {len(new_bridges)} component bridge(s)  → component_fragility_model_bridge.json\n'
+                    f'  {len(new_models)} fragility model(s) -> fragility_model.json\n'
+                    f'  {len(new_curves)} fragility curve(s)  -> fragility_curve.json\n'
+                    f'  {len(new_bridges)} component bridge(s)  -> component_fragility_model_bridge.json\n'
                     'No changes written.'
                 )
             )
             return
 
         # ------------------------------------------------------------------
-        # Atomic write to all three JSON files
+        # Write to all three JSON files as an all-or-nothing batch, so a
+        # failure partway through cannot leave the canonical files in a
+        # mutually inconsistent state (e.g. models without their curves).
         # ------------------------------------------------------------------
         fm_data = load_json('fragility_model.json')
         fm_data.extend(new_models)
-        write_json('fragility_model.json', fm_data)
 
         curve_data = load_json('fragility_curve.json')
         curve_data.extend(new_curves)
-        write_json('fragility_curve.json', curve_data)
 
         bridge_data = load_json('component_fragility_model_bridge.json')
         bridge_data.extend(new_bridges)
-        write_json('component_fragility_model_bridge.json', bridge_data)
+
+        write_json_files({
+            'fragility_model.json': fm_data,
+            'fragility_curve.json': curve_data,
+            'component_fragility_model_bridge.json': bridge_data,
+        })
 
         self.stdout.write(
             self.style.SUCCESS(
-                f'\nSuccessfully appended:\n'
-                f'  {len(new_models)} fragility model(s) → fragility_model.json\n'
-                f'  {len(new_curves)} fragility curve(s)  → fragility_curve.json\n'
-                f'  {len(new_bridges)} component bridge(s)  → component_fragility_model_bridge.json\n'
-                'Run `python manage.py ingest` to load them into the database.'
+                f'\nAppended:\n'
+                f'  {len(new_models)} fragility model(s) -> fragility_model.json\n'
+                f'  {len(new_curves)} fragility curve(s)  -> fragility_curve.json\n'
+                f'  {len(new_bridges)} component bridge(s)  -> component_fragility_model_bridge.json\n'
+                'Run `python manage.py ingest` and the test suite to validate '
+                'the new records.'
             )
         )
 
@@ -340,6 +301,3 @@ class Command(BaseCommand):
         self.stderr.write(f'\nFound {len(errors)} error(s):')
         for err in errors:
             self.stderr.write(f'  - {err}')
-        self.stderr.write(
-            '\nNo records were imported. Fix the errors above and retry.'
-        )
