@@ -1,11 +1,34 @@
+import json
+
+import pandas as pd
 import streamlit as st
 
 from db import (
     get_component_detail,
     get_component_experiments,
+    get_component_experiments_export,
     get_component_fragility_models,
 )
-from utils import attr, csv_safe, doi_url, esc, fmt, strip_prefix
+from utils import attr, build_citation, csv_safe, doi_url, esc, fmt, strip_prefix
+
+
+def _experiments_export(component_id: str) -> pd.DataFrame:
+    """Experiments export with the same fields shown on the Experiment view
+    page, including the reference citation and study type."""
+    df = get_component_experiments_export(component_id)
+
+    def citation(row: pd.Series) -> str:
+        try:
+            csl = json.loads(row['csl_data']) if row['csl_data'] else {}
+        except (ValueError, TypeError):
+            csl = {}
+        cite = build_citation(csl, markdown=False)
+        if not cite:
+            cite = f'{fmt(row["author"])} ({fmt(row["year"])}). {fmt(row["title"])}.'
+        return cite
+
+    df.insert(df.columns.get_loc('Study Type'), 'Reference', df.apply(citation, axis=1))
+    return df.drop(columns=['author', 'year', 'title', 'csl_data'])
 
 
 def render() -> None:
@@ -166,9 +189,7 @@ def render() -> None:
 
         st.download_button(
             'Download CSV',
-            csv_safe(df_exp.drop(columns=['experiment_id', 'doi'])).to_csv(
-                index=False
-            ),
+            csv_safe(_experiments_export(component_id)).to_csv(index=False),
             file_name=f'{component_id}_experiments.csv',
             mime='text/csv',
             key='exp_csv',

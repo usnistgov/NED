@@ -88,8 +88,9 @@ def _join_authors(names: list[str]) -> str:
     return ', '.join(names[:-1]) + ', & ' + names[-1]
 
 
-def build_citation(csl: dict) -> str:
-    """Build an APA-ish citation (as markdown) from a CSL-JSON dict.
+def build_citation(csl: dict, markdown: bool = True) -> str:
+    """Build an APA-ish citation from a CSL-JSON dict, as markdown by
+    default or plain text with markdown=False (e.g. for CSV export).
     Returns an empty string if there's nothing useful to render."""
     if not isinstance(csl, dict):
         return ''
@@ -125,11 +126,12 @@ def build_citation(csl: dict) -> str:
     if head:
         pieces.append(head + '.')
     if title:
-        pieces.append(_md_escape(title) + '.')
+        pieces.append((_md_escape(title) if markdown else title) + '.')
     if venue:
-        pieces.append(f'*{_md_escape(venue)}*.')
+        pieces.append(f'*{_md_escape(venue)}*.' if markdown else f'{venue}.')
 
-    doi = doi_link(csl.get('DOI') or csl.get('URL') or '')
+    raw_doi = csl.get('DOI') or csl.get('URL') or ''
+    doi = doi_link(raw_doi) if markdown else doi_url(raw_doi)
     if doi:
         pieces.append(doi)
 

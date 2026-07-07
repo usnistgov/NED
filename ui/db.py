@@ -217,6 +217,60 @@ def get_component_experiments(component_id: str) -> pd.DataFrame:
 
 
 @st.cache_data
+def get_component_experiments_export(component_id: str) -> pd.DataFrame:
+    """All experiments for a component with the full set of fields shown on
+    the Experiment view page, plus the reference columns needed to build the
+    citation ('author', 'year', 'title', 'csl_data')."""
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        return pd.read_sql(
+            """
+            SELECT
+                e.id                        AS "Experiment ID",
+                e.specimen                  AS "Specimen",
+                e.specimen_inspection_sequence AS "Inspection Sequence",
+                e.reviewer                  AS "Reviewer",
+                e.test_type                 AS "Test Type",
+                e.loading_protocol          AS "Loading Protocol",
+                e.peak_test_amplitude       AS "Peak Test Amplitude",
+                e.location                  AS "Location",
+                e.governing_design_standard AS "Governing Design Standard",
+                e.design_objective          AS "Design Objective",
+                e.comp_detail               AS "Component Detail",
+                e.material                  AS "Material",
+                e.size_class                AS "Size Class",
+                e.comp_description          AS "Component Description",
+                e.ds_description            AS "Damage Description",
+                e.ds_rank                   AS "DS Rank",
+                e.ds_class                  AS "DS Class",
+                e.edp_metric                AS "EDP Metric",
+                e.edp_unit                  AS "EDP Unit",
+                e.edp_value                 AS "EDP Value",
+                e.alt_edp_metric            AS "Alt EDP Metric",
+                e.alt_edp_unit              AS "Alt EDP Unit",
+                e.alt_edp_value             AS "Alt EDP Value",
+                e.prior_damage              AS "Prior Damage",
+                e.prior_damage_repaired     AS "Prior Damage Repaired",
+                e.notes                     AS "Notes",
+                r.author                    AS "author",
+                r.year                      AS "year",
+                r.title                     AS "title",
+                r.csl_data                  AS "csl_data",
+                r.study_type                AS "Study Type"
+            FROM ned_app_experiment e
+            JOIN ned_app_component c ON c.component_id = e.component_id
+            JOIN ned_app_reference r ON r.reference_id = e.reference_id
+            WHERE c.id = ?
+            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            """,
+            conn,
+            params=(component_id,),
+        )
+    finally:
+        conn.close()
+
+
+@st.cache_data
 def get_experiment_detail(experiment_id: str) -> pd.DataFrame:
     conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
     try:
