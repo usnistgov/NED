@@ -2042,5 +2042,53 @@
     {
         "component": "D.30.4.3.A",
         "fragility_model": "FEM-2018-SEI|D2061.022a"
+    },
+    {
+        "component": "D.40.1.1.A",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "component": "D.40.1.1.A",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "component": "D.40.1.1.B",
+        "fragility_model": "BHA-2026-DEV|3"
+    },
+    {
+        "component": "D.40.1.1.B",
+        "fragility_model": "BHA-2026-DEV|4"
+    },
+    {
+        "component": "D.40.1.1.B",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "component": "D.40.1.1.B",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "component": "D.40.1.1.B",
+        "fragility_model": "BHA-2026-DEV|7"
+    },
+    {
+        "component": "D.40.1.1.B",
+        "fragility_model": "BHA-2026-DEV|8"
+    },
+    {
+        "component": "D.40.1.1.B",
+        "fragility_model": "BHA-2026-DEV|9"
+    },
+    {
+        "component": "D.40.1.1.B",
+        "fragility_model": "BHA-2026-DEV|10"
+    },
+    {
+        "component": "C.10.2.1.A",
+        "fragility_model": "FEM-2018-SEI|door1"
+    },
+    {
+        "component": "C.10.2.1.A",
+        "fragility_model": "FEM-2018-SEI|door2"
     }
 ]

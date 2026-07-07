@@ -37,6 +37,24 @@ def _load_nistir_labels():
     return _nistir_labels
 
 
+def validate_positive(value):
+    """
+    Validate that a numeric value is strictly positive.
+
+    Intended for physical quantities that cannot be zero or negative, such as a
+    lognormal dispersion (beta). ``None`` is allowed so the check does not
+    interfere with optional fields.
+
+    Args:
+        value: The numeric value to validate.
+
+    Raises:
+        ValidationError: If the value is not strictly greater than zero.
+    """
+    if value is not None and value <= 0:
+        raise ValidationError(f'Value must be greater than zero, got {value}.')
+
+
 def validate_nistir_component_id(component_id):
     """
     Validate a NISTIR component ID against the flat labels dictionary.

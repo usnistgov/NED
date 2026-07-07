@@ -1,6 +1,6 @@
 import os
 import json
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ValidationError
 from ned_app.models import (
     Reference,
@@ -21,6 +21,63 @@ from ned_app.serialization.serializer import (
     ComponentFragilityModelBridgeSerializer,
     FragilityCurveSerializer,
 )
+
+
+def _flatten_detail(detail, field=None):
+    """
+    Flatten a DRF ValidationError detail into readable 'field: message' lines.
+
+    Args:
+        detail: A DRF error detail — a dict, a list, or a leaf ErrorDetail.
+        field (str | None): The field name currently in scope, if any.
+
+    Returns:
+        list[str]: One readable line per underlying error.
+    """
+    lines = []
+    if isinstance(detail, dict):
+        # NOTE: a nested dict (from a nested serializer) collapses to its
+        # innermost key here — the outer field name is dropped. NED's
+        # serializers are flat today, so this is fine; revisit this to emit
+        # dotted paths (e.g. 'csl_data.issued') if nested serializers appear.
+        for key, value in detail.items():
+            lines.extend(_flatten_detail(value, field=key))
+    elif isinstance(detail, list):
+        for item in detail:
+            lines.extend(_flatten_detail(item, field=field))
+    elif field and field != 'non_field_errors':
+        lines.append(f'{field}: {detail}')
+    else:
+        lines.append(str(detail))
+    return lines
+
+
+def _format_errors(exc):
+    """
+    Convert a caught ingest exception into human-readable error lines.
+
+    Handles the three shapes ingest can raise: a DRF ValidationError (a dict
+    or list of ErrorDetail), a Django ValidationError (a list of messages),
+    and any other exception (its string). This keeps raw ErrorDetail reprs out
+    of the reported output.
+
+    Args:
+        exc (Exception): The exception raised while processing a record.
+
+    Returns:
+        list[str]: Readable error messages.
+    """
+    detail = getattr(exc, 'detail', None)
+    if detail is not None:
+        return _flatten_detail(detail)
+    # NOTE: .messages flattens a Django ValidationError's field names away
+    # (a message_dict-style error loses its keys). Django validation errors
+    # in ingest today are single, non-field messages, so this is fine; use
+    # .message_dict here if field-keyed Django errors ever need labelling.
+    messages = getattr(exc, 'messages', None)
+    if messages:
+        return list(messages)
+    return [str(exc)]
 
 
 class Command(BaseCommand):
@@ -89,12 +146,19 @@ class Command(BaseCommand):
             },
         ]
 
+        total_failed = 0
         for config in processing_config:
-            self._process_data_file(
+            total_failed += self._process_data_file(
                 model_class=config['model'],
                 serializer_class=config['serializer'],
                 data_file=config['file'],
                 lookup_field=config['lookup_field'],
+            )
+
+        if total_failed:
+            raise CommandError(
+                f'\nIngestion finished with {total_failed} failure(s). See the '
+                'errors above, fix the source data in resources/data/, and re-run.'
             )
 
         self.stdout.write(
@@ -115,6 +179,10 @@ class Command(BaseCommand):
             serializer_class: The serializer class for validation and saving.
             data_file (str): The name of the JSON file to process.
             lookup_field (list): List of field names used to identify existing records.
+
+        Returns:
+            int: The number of failures (unreadable file or invalid records).
+                A missing file is not a failure.
         """
         model_name = model_class.__name__
         self.stdout.write(f'--- Processing {model_name} from {data_file} ---')
@@ -126,14 +194,14 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.WARNING(f'File not found, skipping: {data_filepath}')
             )
-            return
+            return 0
 
         try:
             with open(data_filepath, 'r') as file:
                 data = json.load(file)
         except json.JSONDecodeError as ex:
             self.stderr.write(f'Error: Invalid JSON in {data_filepath}: {ex}')
-            return
+            return 1
 
         for item in data:
             try:
@@ -161,16 +229,13 @@ class Command(BaseCommand):
 
             except (ValidationError, Exception) as ex:
                 failed_count += 1
-                record_id = (
-                    item.get('id')
-                    or item.get('reference_id')
-                    or item.get('component_id')
-                    or item.get('model_id')
+                record_label = (
+                    ', '.join(f'{f}={item.get(f)}' for f in lookup_field)
                     or 'unknown'
                 )
-                self.stderr.write(
-                    f"Error processing {model_name} record '{record_id}': {ex}"
-                )
+                self.stderr.write(f'Error processing {model_name} [{record_label}]:')
+                for line in _format_errors(ex):
+                    self.stderr.write(f'    - {line}')
 
         self.stdout.write(
             self.style.SUCCESS(
@@ -178,3 +243,4 @@ class Command(BaseCommand):
                 f'{created_count} created, {updated_count} updated, {failed_count} failed.\n'
             )
         )
+        return failed_count

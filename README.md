@@ -62,6 +62,221 @@ Jupter Notebook
 
 For additional instructions please see the Juptyer Notebook installation instructions: https://jupyter.org/install
 
+## Exporting Data to CSV
+
+The NED database includes a management command for simple table queries and exporting results to CSV files. The command does not currently handle more complex table queries such as filtering by partial strings or joining results across tables.
+
+### Using the `query_to_csv` Command
+
+The `query_to_csv` management command allows you to export any database table to CSV format with optional filtering and field selection.
+
+#### Basic Usage
+
+**Export all records from a table:**
+```bash
+python manage.py query_to_csv --model Experiment --output_file exports/all_experiments.csv
+```
+
+This exports all fields from the Experiment table to a CSV file. The output directory will be created automatically if it doesn't exist.
+
+#### Available Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--model` | Yes | Model name to query (e.g., `Experiment`, `Reference`, `Component`, `FragilityModel`) |
+| `--output_file` | Yes | Path where the CSV file will be saved |
+| `--fields` | No | Comma-separated list of specific fields to export (default: all fields) |
+| `--filter` | No | Comma-separated key=value pairs to filter results |
+
+#### Examples
+
+**Export specific fields only:**
+```bash
+python manage.py query_to_csv --model Experiment \
+  --output_file exports/experiment_summary.csv \
+  --fields id,specimen,material,test_type
+```
+
+**Export with filters (AND logic):**
+```bash
+python manage.py query_to_csv --model Experiment \
+  --output_file exports/steel_tensile_tests.csv \
+  --filter material=Steel,test_type=Tensile
+```
+
+**Combine field selection and filtering:**
+```bash
+python manage.py query_to_csv --model Experiment \
+  --output_file exports/filtered_data.csv \
+  --fields id,specimen,material,peak_demand \
+  --filter reviewer=John,ds_class=Consequential
+```
+
+#### Available Models
+To see all available models in the database, run:
+
+```bash
+python manage.py query_to_csv --list-models
+```
+
+This will display a complete list of queryable models. Use the exact model name (case-sensitive) when specifying the `--model` argument.
+
+#### Tips and Best Practices
+
+- **Filter logic**: Multiple filters use AND logic (all conditions must match). For complex queries, consider using the Django shell
+- **Large exports**: For tables with thousands of records, specify `--fields` to reduce file size
+- **Dates and special characters**: The CSV output uses UTF-8 encoding to properly handle special characters common in engineering data
+- **Verify output**: Open the CSV file in your preferred spreadsheet application (Excel, Google Sheets, etc.) to verify the export
+
+#### Troubleshooting
+
+**"Model not found" error:**
+```bash
+# Ensure the model name matches exactly (case-sensitive)
+python manage.py query_to_csv --model experiment  # ❌ Wrong (lowercase)
+python manage.py query_to_csv --model Experiment  # ✅ Correct
+```
+
+**No data exported:**
+Check your filter conditions. If a filter returns no results, the command will report "No data found matching criteria."
+
+```bash
+# Debug: Export all records first to see what values exist
+python manage.py query_to_csv --model Experiment --output_file test.csv
+
+# Then apply filters based on actual values in the data
+python manage.py query_to_csv --model Experiment --output_file filtered.csv --filter material=Steel
+```
+
+**File path issues on Windows:**
+Use forward slashes or raw strings in PowerShell:
+```powershell
+# Using forward slashes
+python manage.py query_to_csv --model Experiment --output_file exports/data.csv
+
+# Or escape backslashes
+python manage.py query_to_csv --model Experiment --output_file exports\\data.csv
+```
+
+
+## Importing Data from CSV
+
+The NED database includes a management command for importing new records from CSV files directly into the canonical JSON source data. This provides an alternative to manually editing JSON files, which may be preferable for contributors working primarily in spreadsheet tools.
+
+> **Important:** The import commands only convert your CSV into JSON and append it to the source files — they do **not** validate the data. After importing, you must (1) check JSON files in the `resources/data/` directory to ensure what has been appended to the source files is correct, (2) run `python manage.py ingest` to load the new records into the database, and (3) run `python manage.py test` to validate them. `ingest` reports any invalid records and exits with a non-zero status if any fail.
+
+### Using the `import_model` Command
+
+Use `import_model` to import **Reference**, **Experiment**, or **ExperimentFragilityModelBridge** records from a CSV. For fragility models, curves, and component links, use [`import_fragility`](#using-the-import_fragility-command) instead.
+
+#### Basic Usage
+
+```bash
+python manage.py import_model --model Experiment --input_file my_data.csv
+```
+
+#### Available Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--model` | Yes | Model name to import (`Reference`, `Experiment`, or `ExperimentFragilityModelBridge`) |
+| `--input_file` | Yes | Path to the CSV file containing new records |
+| `--dry_run` | No | Report what would be appended without writing any changes |
+| `--list-models` | No | Show all models that support CSV import |
+
+### Using the `import_fragility` Command
+
+The `import_fragility` command imports fragility models, their damage-state curves, and component links all at once from a single flat join CSV. This is the recommended workflow for adding new fragility models.
+
+Each row in the CSV represents one damage state (one `FragilityCurve`). Multiple rows sharing the same `reference` and `model_id` belong to the same fragility model and must repeat the model-level fields identically.
+
+#### Basic Usage
+
+```bash
+python manage.py import_fragility --input_file my_fragilities.csv
+```
+
+#### Available Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--input_file` | Yes | Path to the fragility import CSV file |
+| `--dry_run` | No | Report what would be appended without writing any changes |
+
+
+### Templates
+
+CSV templates with example rows are provided in `resources/import_templates/`. Copy the relevant template, replace the example row(s) with your data, and remove any rows you do not wish to import.
+
+### CSV Conventions
+
+- **Foreign key columns** accept natural key values, not numeric IDs:
+  - `reference` → the `reference_id` string (e.g., `SMITH-2020-EXP`)
+  - `component` → the `component_id` string (e.g., `D.50.2.1.A`)
+  - `fragility_model` → the full `fragility_model_id` string (e.g., `SMITH-2020-EXP|fra001`)
+  - `experiment` → the experiment `id` string
+- **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
+- **Optional numeric fields** (e.g., `alt_edp_value`) may be left blank; they will be stored as `null`.
+- **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
+- Files should be **UTF-8** encoded and **comma-delimited**. Some non-US Excel versions save semicolon-delimited CSVs; if the importer reports this, re-save as *CSV UTF-8 (Comma delimited)*.
+- Because the `Reference` model stores citation data as nested CSL-JSON, the CSV template uses flattened `csl_*` columns that the command reconstructs internally.
+
+### Examples
+
+**Preview an import without writing changes:**
+```bash
+python manage.py import_model --model Experiment \
+  --input_file my_experiments.csv \
+  --dry_run
+```
+
+**Import references:**
+```bash
+python manage.py import_model --model Reference \
+  --input_file my_references.csv
+```
+
+**Import experiments:**
+```bash
+python manage.py import_model --model Experiment \
+  --input_file my_experiments.csv
+```
+
+**Import fragility model and curves:**
+```bash
+python manage.py import_fragility --input_file my_fragilities.csv
+```
+
+### Tips
+
+- **Import order matters for foreign keys.** Import `Reference` records before `Experiment` records that reference them; `ingest` resolves foreign keys by natural key, so the target records must already be present.
+- **Use `--dry_run` first** to preview which records would be appended (and surface the column warning) before changing the JSON files.
+- **Always run `ingest` and the test suite after importing** — they are where invalid values, choices, and foreign keys are caught.
+- **Commit after each successful batch.** Once `ingest` and the tests pass, commit before starting the next import. Each commit is a safe checkpoint: if a later batch fails validation, you can restore to it without losing the batches you already verified.
+- **Windows path syntax**: Use forward slashes or quoted backslashes in PowerShell:
+  ```powershell
+  python manage.py import_model --model Experiment --input_file exports/my_data.csv
+  ```
+
+### Recovering from a failed import
+
+If `ingest` reports errors, **stop before committing.** The invalid records are already in the canonical JSON files, because the import step only converts and appends without validating. `ingest` also applies records one at a time without a wrapping transaction, so the database now holds whatever it created before the failure. Since `ingest` never deletes, restoring the JSON is not enough on its own; you must also rebuild the database.
+
+Assuming your last good batch is already committed (see the tip above), recover in two steps:
+
+1. **Discard the appended JSON**, which reverts only the failed batch:
+   ```bash
+   git restore resources/data/
+   ```
+2. **Rebuild the database** from the restored source, so it no longer contains the partially-applied records:
+   ```bash
+   rm -f db.sqlite3
+   python manage.py migrate
+   python manage.py ingest
+   ```
+
+Then fix the CSV and import again.
+
 
 ## Front-end (UI)
 The `ui/` directory contains the Streamlit application that powers the browser-based NED interface. The deployed version is hosted from a **separate** repository so that deployment can be handed off independently of the database back end. To avoid two sources of truth, **the code is authored here, in `ui/`, and published outward**. The only handshake between the two repositories is the database (`db.sqlite3`), which is built from the canonical JSON data and injected into the front-end at publish time.
@@ -105,8 +320,12 @@ Useful flags: `--rebuild-db` (run `migrate` + `ingest` first). Run `python scrip
 Setting up a virtual environment helps to ensure you are able to setup an isolated project for using the NED database locally and avoid conflicts with other dependencies. While there are many ways to setup a virtual environment, below is an example using Python's built in `venv` module.
 ```
 python -m venv venv      # create a virtual environment called "venv"
-venv\Scripts\activate     # (On Windows) activate your virtual environment
-source venv/bin/activate # (On Mac) activate your virtual environment
+# Activate on Windows (Command Prompt / PowerShell)
+venv\Scripts\activate
+# Activate on Git Bash / Bash on Windows
+source venv/Scripts/activate
+# Activate on macOS / Linux / WSL
+source venv/bin/activate
 ```
 
 ### Installing the Required Packages
@@ -137,23 +356,46 @@ python manage.py ingest
 The `ingest` command reads all JSON files from `resources/data/` and populates the SQLite database. This step is mandatory for local development, as the `db.sqlite3` file is not tracked in version control—it's a disposable build artifact generated from the JSON source data.
 
 ### How to Add New Data or Modify Existing Data
+We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data, or correctinng existing records involves working directly with the JSON files that serve as our single source of truth.
 
-We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data involves working directly with the JSON files that serve as our single source of truth. Follow a similar process for corrections, updates, or refinements to existing records (e.g., spelling fixes, value corrections, updated references).
 
 Follow this step-by-step guide to contribute:
 
 #### 1. Fork and Branch
 Create your own fork of the repository and start a new feature branch for your specific contribution (e.g., `data/add-ucsd-experiments`).
 
-#### 2. Add Your Data
+
+#### 2. Add Your Data or Edit existing data
+You have two options for adding data:
+
+**Option A — Edit JSON directly** (recommended for small additions or when working in a code editor):
 Directly edit the JSON files in the `resources/data/` directory.
 *   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
 *   **Templates:** Check `resources/example_data/` for examples of proper formatting.
+
+**Option B — Import from CSV** (useful for larger datasets or contributors who prefer spreadsheet tools):
+Populate a CSV template from `resources/import_templates/` and use the appropriate import command:
+```bash
+# References, experiments, and experiment-fragility links
+python manage.py import_model --model Experiment --input_file my_data.csv
+
+# Fragility models, curves, and component links (all in one flat CSV)
+python manage.py import_fragility --input_file my_fragilities.csv
+```
+See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
 *   **Common Files:**
     *   `experiments.json`: For new experimental results.
     *   `references.json`: For new bibliographic references.
     *   `fragility_model.json`: For new fragility functions.
 *   **Editing Existing Records:** Only modify field values; do **not** change the data structure or schema.    
+
+If modifying existing data:
+*   **Important:** Only modify field values; do not change the structure or schema.
+*   **Examples of valid modifications:**
+    *   Correcting spelling or grammar in descriptions
+    *   Updating numeric values or material classifications
+    *   Adding or refining component details
+    *   Correcting references or citations
 
 #### 3. Validate Locally (Recommended)
 Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
@@ -164,20 +406,20 @@ python manage.py migrate
 python manage.py ingest
 ```
 
-**If modifying existing records, regenerate the fixture snapshots**
-*   *Why:* The fixture is a snapshot of the expected database state. Your data modifications must be captured in it so tests pass. The `PYTHONIOENCODING` environment variable ensures that Unicode characters in your data (e.g., special hyphens, non-ASCII characters) are properly serialized on all platforms.
+**Regenerate the fixture snapshot:**
 
 **Windows (PowerShell):**
 ```powershell
-$env:PYTHONIOENCODING = "utf-8"
-python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+$env:PYTHONUTF8 = "1"
+python manage.py dumpdata ned_app --indent 2 --output ned_app/fixtures/initial_data.json
 ```
 
-**macOS/Linux/WSL (Bash):**
+**macOS/Linux/WSL:**
 ```bash
-export PYTHONIOENCODING=utf-8
-python manage.py dumpdata ned_app --indent 2 > ned_app/fixtures/initial_data.json
+PYTHONUTF8=1 python manage.py dumpdata ned_app --indent 2 --output ned_app/fixtures/initial_data.json
 ```
+
+*   *Why:* The fixture is a snapshot of the expected database state. Your data modifications must be captured in it so tests pass. Always use `--output` (or `-o`) rather than shell redirection (`>`). On Windows, also set `PYTHONUTF8=1` so Python's entire I/O stack uses UTF-8 — without it, Django's serializer will fail or corrupt any non-ASCII characters (e.g., Unicode fractions, special hyphens) when the Windows system code page is active.
 
 **Run the integrity check:**
 ```bash
@@ -189,12 +431,14 @@ python manage.py test ned_app.tests
 Commit your changes and open a Pull Request (PR) to the `main` branch. 
 
 **In your PR description, please include:**
-*   A summary of what data you are adding or what data was modified and why.
-*   The source of the data (citations, reports).
+*   A summary of what data you are adding, or what data was modified and why
+*   The specific records or fields that changed, if any and the rationale for the change (e.g., "Corrected spelling to match FEMA P-58 terminology").
+*   The source of the data (citations, reports) or any citations or references that support the changes made.
 *   Any context notes that would help the reviewer.
 
 #### What Happens Next? (The Review Process)
-A project maintainer will review your PR. They will check the "JSON Diff" to see exactly what data is entering the system and ensure the automated tests pass. Once approved and merged, your data is effectively "published" and will be live on the next deployment!
+A project maintainer will review your PR. They will check the "JSON Diff" to see exactly what data is entering the system or what data changed and ensure the automated tests pass. Once approved and merged, your data is effectively "published" and will be live on the next deployment!
+
 
 ### How to Modify the Database Structure
 

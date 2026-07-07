@@ -5170,5 +5170,581 @@
     {
         "experiment": "exp3547a",
         "fragility_model": "FEM-2018-SEI|C1011.001d"
+    },
+    {
+        "experiment": "exp1102a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1103a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1158a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1159a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1160a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1310a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1313a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1321b",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1321c",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1317a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1318a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1511a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1525b",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1516a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1525c",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1521a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1526a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1527a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1528a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1531a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1532a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1533a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2362a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2363a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2364a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2366a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2367b",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2367a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2446a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2447a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2448a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2449a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2450a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2451a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2452a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2453a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2464b",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2454a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2455a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2456a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2457a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2458a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2459a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2460a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2461a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2462a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2463a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2464a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2465a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp2466a",
+        "fragility_model": "BHA-2026-DEV|1"
+    },
+    {
+        "experiment": "exp1102a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1103a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1158a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1159a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1160a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1310a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1313a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1321b",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1321c",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1317a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1318a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1511a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1525b",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1516a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1525c",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1521a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1526a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1527a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1528a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1531a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1532a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1533a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2362a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2363a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2364a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2366a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2367b",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2367a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2446a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2447a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2448a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2449a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2450a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2451a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2452a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2453a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2464b",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2454a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2455a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2456a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2457a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2458a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2459a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2460a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2461a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2462a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2463a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2464a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2465a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp2466a",
+        "fragility_model": "BHA-2026-DEV|2"
+    },
+    {
+        "experiment": "exp1313a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1321c",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1318a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1158a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1159a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1160a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1526a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1527a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1528a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1531a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1532a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1533a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp2465a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp2466a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp2362a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp2363a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp2364a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1511a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1516a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1521a",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1525b",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1525c",
+        "fragility_model": "BHA-2026-DEV|5"
+    },
+    {
+        "experiment": "exp1313a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1321c",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1318a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1158a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1159a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1160a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1526a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1527a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1528a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1531a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1532a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1533a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp2465a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp2466a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp2362a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp2363a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp2364a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1511a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1516a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1521a",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1525b",
+        "fragility_model": "BHA-2026-DEV|6"
+    },
+    {
+        "experiment": "exp1525c",
+        "fragility_model": "BHA-2026-DEV|6"
     }
 ]
