@@ -10412,7 +10412,7 @@
     {
         "basis": "Experiment",
         "beta": 0.6,
-        "ds_description": "Minor repairs. No leakage. Examples of minor repairs damage include permanent deformation (without failure or fracture) of hangers, minor yeilding of bracing or brace connections, or tearing of fire-stop material at wall or floor penetrations. Around one occurance of damage per 1000 ft of pipe. Damage does not immediately affect the functionality of the system but likely requires repairs for long term maintainence and reliability.",
+        "ds_description": "Minor repairs. No leakage. Examples of minor repairs damage include permanent deformation (without failure or fracture) of hangers, minor yielding of bracing or brace connections, or tearing of fire-stop material at wall or floor penetrations. Around one occurrence of damage per 1000 ft of pipe. Damage does not immediately affect the functionality of the system but likely requires repairs for long term maintenance and reliability.",
         "ds_rank": 1,
         "fragility_model": "BHA-2026-DEV|1",
         "median": 1.76,
@@ -10442,7 +10442,7 @@
     {
         "basis": "Experiment",
         "beta": 0.6,
-        "ds_description": "Minor repairs. No leakage. Examples of minor repairs damage include permanent deformation (without failure or fracture) of hangers, minor yeilding of bracing or brace connections, or tearing of fire-stop material at wall or floor penetrations. Around one occurance of damage per 1000 ft of pipe. Damage does not immediately affect the functionality of the system but likely requires repairs for long term maintainence and reliability.",
+        "ds_description": "Minor repairs. No leakage. Examples of minor repairs damage include permanent deformation (without failure or fracture) of hangers, minor yielding of bracing or brace connections, or tearing of fire-stop material at wall or floor penetrations. Around one occurrence of damage per 1000 ft of pipe. Damage does not immediately affect the functionality of the system but likely requires repairs for long term maintenance and reliability.",
         "ds_rank": 1,
         "fragility_model": "BHA-2026-DEV|2",
         "median": 1.76,
