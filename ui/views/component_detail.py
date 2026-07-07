@@ -32,19 +32,11 @@ def render() -> None:
     st.markdown('---')
 
     attr('Id', fmt(row['id']))
-    attr(
-        'Component type name',
-        fmt(row['name']),
-        'Name of the individual type of building component.',
-    )
+    attr('Component type name', fmt(row['name']))
     attr('Major Group', strip_prefix(row['major_group']))
     attr('Group', strip_prefix(row['group']))
     attr('Element', strip_prefix(row['element']))
-    attr(
-        'NISTIR Sub Element',
-        strip_prefix(row['subelement']),
-        'NISTIR taxonomy subelement classification.',
-    )
+    attr('NISTIR Sub Element', strip_prefix(row['subelement']))
 
     st.markdown('---')
 
