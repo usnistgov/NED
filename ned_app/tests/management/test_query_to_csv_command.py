@@ -13,6 +13,7 @@ from decimal import Decimal
 from io import StringIO
 
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TestCase
 
 from ned_app.models import Component, Experiment, Reference
@@ -126,39 +127,39 @@ class QueryToCsvCommandTests(TestCase):
     # -- friendly error handling ---------------------------------------
 
     def test_invalid_filter_field_reports_friendly_error(self):
-        err = StringIO()
-        call_command(
-            'query_to_csv',
-            model='Experiment',
-            output_file=self.output_file,
-            filter='bogus_field=x',
-            stderr=err,
-        )
-        self.assertIn('Invalid filter', err.getvalue())
+        with self.assertRaises(CommandError) as cm:
+            call_command(
+                'query_to_csv',
+                model='Experiment',
+                output_file=self.output_file,
+                filter='bogus_field=x',
+                stderr=StringIO(),
+            )
+        self.assertIn('Invalid filter', str(cm.exception))
         self.assertFalseFileWritten()
 
     def test_invalid_field_name_reports_friendly_error(self):
-        err = StringIO()
-        call_command(
-            'query_to_csv',
-            model='Experiment',
-            output_file=self.output_file,
-            fields='id,bogus_field',
-            stderr=err,
-        )
-        self.assertIn("Field 'bogus_field' does not exist", err.getvalue())
+        with self.assertRaises(CommandError) as cm:
+            call_command(
+                'query_to_csv',
+                model='Experiment',
+                output_file=self.output_file,
+                fields='id,bogus_field',
+                stderr=StringIO(),
+            )
+        self.assertIn("Field 'bogus_field' does not exist", str(cm.exception))
         self.assertFalseFileWritten()
 
     def test_malformed_filter_reports_friendly_error(self):
-        err = StringIO()
-        call_command(
-            'query_to_csv',
-            model='Experiment',
-            output_file=self.output_file,
-            filter='no_equals_sign',
-            stderr=err,
-        )
-        self.assertIn('Invalid filter', err.getvalue())
+        with self.assertRaises(CommandError) as cm:
+            call_command(
+                'query_to_csv',
+                model='Experiment',
+                output_file=self.output_file,
+                filter='no_equals_sign',
+                stderr=StringIO(),
+            )
+        self.assertIn('Invalid filter', str(cm.exception))
         self.assertFalseFileWritten()
 
     def assertFalseFileWritten(self):

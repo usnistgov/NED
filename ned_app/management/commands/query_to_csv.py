@@ -1,7 +1,7 @@
 import csv
 import json
 import os
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import FieldDoesNotExist, FieldError
 from django.apps import apps
 from django.db.models import JSONField, ManyToOneRel, ManyToManyField
@@ -83,17 +83,18 @@ class Command(BaseCommand):
         output_file = options['output_file']
 
         if not model_name or not output_file:
-            self.stderr.write(
-                'Error: --model and --output_file are required (use --list-models to see available models)'
+            raise CommandError(
+                '--model and --output_file are required '
+                '(use --list-models to see available models)'
             )
-            return
 
         try:
             model = apps.get_model('ned_app', model_name)
         except LookupError:
-            self.stderr.write(f'Model {model_name} not found in ned_app')
-            self.stderr.write('Use --list-models to see available models')
-            return
+            raise CommandError(
+                f'Model {model_name} not found in ned_app. '
+                'Use --list-models to see available models.'
+            )
 
         # Validate requested field names up front so a typo fails loudly
         # rather than producing a silently-empty column.
@@ -104,10 +105,10 @@ class Command(BaseCommand):
                 try:
                     model._meta.get_field(field_name)
                 except FieldDoesNotExist:
-                    self.stderr.write(
-                        f"Field '{field_name}' does not exist on model '{model_name}'."
+                    raise CommandError(
+                        f"Field '{field_name}' does not exist on model "
+                        f"'{model_name}'."
                     )
-                    return
 
         # Build queryset with filters
         queryset = model.objects.all()
@@ -115,17 +116,16 @@ class Command(BaseCommand):
             filters = {}
             for pair in options['filter'].split(','):
                 if '=' not in pair:
-                    self.stderr.write(
-                        f"Invalid filter '{pair.strip()}'. Expected key=value format."
+                    raise CommandError(
+                        f"Invalid filter '{pair.strip()}'. "
+                        'Expected key=value format.'
                     )
-                    return
                 key, value = pair.split('=', 1)
                 filters[key.strip()] = value.strip()
             try:
                 queryset = model.objects.filter(**filters)
             except FieldError as ex:
-                self.stderr.write(f'Invalid filter: {ex}')
-                return
+                raise CommandError(f'Invalid filter: {ex}')
 
         # Check for results BEFORE opening the file, so a no-match query does
         # not truncate a pre-existing file at the output path.

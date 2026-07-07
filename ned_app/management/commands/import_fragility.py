@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 
 from ned_app.management.import_utils import (
     build_pk_set,
@@ -82,16 +82,14 @@ class Command(BaseCommand):
         try:
             columns, rows = read_csv(input_file)
         except FileNotFoundError:
-            self.stderr.write(f"CSV file not found: '{input_file}'")
-            return
+            raise CommandError(f"CSV file not found: '{input_file}'")
 
         if looks_semicolon_delimited(columns):
-            self.stderr.write(
+            raise CommandError(
                 'This CSV appears to be semicolon-delimited. Re-save it as a '
                 'comma-delimited CSV (in Excel: "CSV UTF-8 (Comma delimited)") '
                 'and try again.'
             )
-            return
 
         if not rows:
             self.stdout.write('No data rows found in CSV file.')
@@ -138,7 +136,9 @@ class Command(BaseCommand):
 
         if all_errors:
             self._report_errors(all_errors)
-            return
+            raise CommandError(
+                'No records were imported. Fix the errors above and retry.'
+            )
 
         # ------------------------------------------------------------------
         # Duplicate detection and record building
@@ -301,6 +301,3 @@ class Command(BaseCommand):
         self.stderr.write(f'\nFound {len(errors)} error(s):')
         for err in errors:
             self.stderr.write(f'  - {err}')
-        self.stderr.write(
-            '\nNo records were imported. Fix the errors above and retry.'
-        )

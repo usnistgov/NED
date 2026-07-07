@@ -14,6 +14,7 @@ from io import StringIO
 from unittest.mock import patch
 
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TransactionTestCase
 
 from ned_app.management import import_utils
@@ -138,9 +139,11 @@ class ImportFragilityCommandTests(TransactionTestCase):
         path = self._write_csv('inconsistent.csv', header + row1 + row2)
 
         err = StringIO()
-        call_command(
-            'import_fragility', input_file=path, stdout=StringIO(), stderr=err
-        )
+        with self.assertRaises(CommandError):
+            call_command(
+                'import_fragility', input_file=path, stdout=StringIO(), stderr=err
+            )
+        # The per-row detail is still written to stderr before the abort.
         self.assertIn('inconsistent', err.getvalue())
         # Nothing written for any of the three target files.
         self.assertFalse(os.path.exists(self._json_path('fragility_model.json')))

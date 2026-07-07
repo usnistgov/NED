@@ -15,6 +15,7 @@ from io import StringIO
 from unittest.mock import patch
 
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TransactionTestCase
 
 from ned_app.management import import_utils
@@ -243,13 +244,13 @@ class ImportModelCommandTests(TransactionTestCase):
         row = 'R1;Experiment;True;article-journal;A Title;2020;Smith\n'
         path = self._write_csv('semicolon.csv', header + row)
 
-        err = StringIO()
-        call_command(
-            'import_model',
-            model='Reference',
-            input_file=path,
-            stdout=StringIO(),
-            stderr=err,
-        )
-        self.assertIn('semicolon-delimited', err.getvalue())
+        with self.assertRaises(CommandError) as cm:
+            call_command(
+                'import_model',
+                model='Reference',
+                input_file=path,
+                stdout=StringIO(),
+                stderr=StringIO(),
+            )
+        self.assertIn('semicolon-delimited', str(cm.exception))
         self.assertFalse(os.path.exists(self._json_path('reference.json')))

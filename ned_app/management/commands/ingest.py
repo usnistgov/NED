@@ -36,6 +36,10 @@ def _flatten_detail(detail, field=None):
     """
     lines = []
     if isinstance(detail, dict):
+        # NOTE: a nested dict (from a nested serializer) collapses to its
+        # innermost key here — the outer field name is dropped. NED's
+        # serializers are flat today, so this is fine; revisit this to emit
+        # dotted paths (e.g. 'csl_data.issued') if nested serializers appear.
         for key, value in detail.items():
             lines.extend(_flatten_detail(value, field=key))
     elif isinstance(detail, list):
@@ -66,6 +70,10 @@ def _format_errors(exc):
     detail = getattr(exc, 'detail', None)
     if detail is not None:
         return _flatten_detail(detail)
+    # NOTE: .messages flattens a Django ValidationError's field names away
+    # (a message_dict-style error loses its keys). Django validation errors
+    # in ingest today are single, non-field messages, so this is fine; use
+    # .message_dict here if field-keyed Django errors ever need labelling.
     messages = getattr(exc, 'messages', None)
     if messages:
         return list(messages)

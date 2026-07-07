@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 
 from ned_app.management.import_utils import (
     coerce_value,
@@ -219,16 +219,16 @@ class Command(BaseCommand):
         dry_run = options['dry_run']
 
         if not model_name or not input_file:
-            self.stderr.write(
-                'Error: --model and --input_file are required. '
+            raise CommandError(
+                '--model and --input_file are required. '
                 'Use --list-models to see available models.'
             )
-            return
 
         if model_name not in _MODEL_CONFIG:
-            self.stderr.write(f"Model '{model_name}' does not support CSV import.")
-            self.stderr.write('Use --list-models to see all importable models.')
-            return
+            raise CommandError(
+                f"Model '{model_name}' does not support CSV import. "
+                'Use --list-models to see all importable models.'
+            )
 
         config = _MODEL_CONFIG[model_name]
 
@@ -238,16 +238,14 @@ class Command(BaseCommand):
         try:
             columns, rows = read_csv(input_file)
         except FileNotFoundError:
-            self.stderr.write(f"CSV file not found: '{input_file}'")
-            return
+            raise CommandError(f"CSV file not found: '{input_file}'")
 
         if looks_semicolon_delimited(columns):
-            self.stderr.write(
+            raise CommandError(
                 'This CSV appears to be semicolon-delimited. Re-save it as a '
                 'comma-delimited CSV (in Excel: "CSV UTF-8 (Comma delimited)") '
                 'and try again.'
             )
-            return
 
         if not rows:
             self.stdout.write('No data rows found in CSV file.')
