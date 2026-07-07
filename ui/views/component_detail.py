@@ -8,29 +8,46 @@ from db import (
     get_component_experiments,
     get_component_experiments_export,
     get_component_fragility_models,
+    get_component_fragility_models_export,
 )
 from utils import attr, build_citation, csv_safe, doi_url, esc, fmt, strip_prefix
+
+
+def _plain_citation(row: pd.Series) -> str:
+    """Plain-text citation from a row carrying 'csl_data', 'author', 'year',
+    and 'title' columns, matching the citation shown on the detail pages."""
+    try:
+        csl = json.loads(row['csl_data']) if row['csl_data'] else {}
+    except (ValueError, TypeError):
+        csl = {}
+    cite = build_citation(csl, markdown=False)
+    if not cite and not (pd.isna(row['author']) and pd.isna(row['title'])):
+        cite = f'{fmt(row["author"])} ({fmt(row["year"])}). {fmt(row["title"])}.'
+    return cite
+
+
+def _with_reference(df: pd.DataFrame) -> pd.DataFrame:
+    """Replace the raw reference columns with a 'Reference' citation column
+    placed just before 'Study Type'."""
+    df.insert(
+        df.columns.get_loc('Study Type'),
+        'Reference',
+        df.apply(_plain_citation, axis=1),
+    )
+    return df.drop(columns=['author', 'year', 'title', 'csl_data'])
 
 
 def _experiments_export(component_id: str) -> pd.DataFrame:
     """Experiments export with the same fields shown on the Experiment view
     page, including the reference citation and study type."""
-    df = get_component_experiments_export(component_id)
+    return _with_reference(get_component_experiments_export(component_id))
 
-    def citation(row: pd.Series) -> str:
-        try:
-            csl = json.loads(row['csl_data']) if row['csl_data'] else {}
-        except (ValueError, TypeError):
-            csl = {}
-        cite = build_citation(csl, markdown=False)
-        if not cite:
-            cite = f'{fmt(row["author"])} ({fmt(row["year"])}). {fmt(row["title"])}.'
-        return cite
 
-    df.insert(
-        df.columns.get_loc('Study Type'), 'Reference', df.apply(citation, axis=1)
-    )
-    return df.drop(columns=['author', 'year', 'title', 'csl_data'])
+def _fragilities_export(component_id: str) -> pd.DataFrame:
+    """Fragility models export with the same fields shown on the Fragility
+    Model view page, including the reference citation and study type — one
+    row per fragility curve (damage state)."""
+    return _with_reference(get_component_fragility_models_export(component_id))
 
 
 def render() -> None:
@@ -123,8 +140,8 @@ def render() -> None:
                 st.rerun()
 
         st.download_button(
-            'Download CSV',
-            csv_safe(df_fm.drop(columns=['fragility_model_id'])).to_csv(index=False),
+            'Download Fragilities as CSV',
+            csv_safe(_fragilities_export(component_id)).to_csv(index=False),
             file_name=f'{component_id}_fragility_models.csv',
             mime='text/csv',
             key='fm_csv',
@@ -190,7 +207,7 @@ def render() -> None:
                 st.rerun()
 
         st.download_button(
-            'Download CSV',
+            'Download Experiments as CSV',
             csv_safe(_experiments_export(component_id)).to_csv(index=False),
             file_name=f'{component_id}_experiments.csv',
             mime='text/csv',

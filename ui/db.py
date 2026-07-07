@@ -103,6 +103,55 @@ def get_component_fragility_models(component_id: str) -> pd.DataFrame:
 
 
 @st.cache_data
+def get_component_fragility_models_export(component_id: str) -> pd.DataFrame:
+    """All fragility models for a component with the full set of fields shown
+    on the Fragility Model view page — one row per fragility curve (damage
+    state), with model attributes repeated. Includes the reference columns
+    needed to build the citation ('author', 'year', 'title', 'csl_data')."""
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        return pd.read_sql(
+            """
+            SELECT
+                fm.fragility_model_id   AS "Fragility Model ID",
+                fm.model_id             AS "Model ID",
+                fm.p58_fragility        AS "P-58 Fragility",
+                fm.comp_detail          AS "Component Detail",
+                fm.material             AS "Material",
+                fm.size_class           AS "Size Class",
+                fm.comp_description     AS "Component Description",
+                fm.edp_metric           AS "EDP Metric",
+                fm.edp_unit             AS "EDP Unit",
+                fm.reviewer             AS "Reviewer",
+                fm.source               AS "Source",
+                r.author                AS "author",
+                r.year                  AS "year",
+                r.title                 AS "title",
+                r.csl_data              AS "csl_data",
+                r.study_type            AS "Study Type",
+                fc.ds_rank              AS "DS Rank",
+                fc.ds_description       AS "DS Description",
+                fc.basis                AS "Basis",
+                fc.num_observations     AS "# Observations",
+                fc.median               AS "Median",
+                fc.beta                 AS "Beta",
+                fc.probability          AS "Probability"
+            FROM ned_app_componentfragilitymodelbridge b
+            JOIN ned_app_fragilitymodel fm ON fm.fragility_model_id = b.fragility_model_id
+            JOIN ned_app_component c ON c.component_id = b.component_id
+            LEFT JOIN ned_app_reference r ON r.reference_id = fm.reference_id
+            LEFT JOIN ned_app_fragilitycurve fc ON fc.fragility_model_id = fm.fragility_model_id
+            WHERE c.id = ?
+            ORDER BY fm.fragility_model_id, fc.ds_rank
+            """,
+            conn,
+            params=(component_id,),
+        )
+    finally:
+        conn.close()
+
+
+@st.cache_data
 def get_fragility_models() -> pd.DataFrame:
     """All fragility models paired with the (human-readable) component id they
     belong to, so the list can be filtered by component/taxonomy/search."""
