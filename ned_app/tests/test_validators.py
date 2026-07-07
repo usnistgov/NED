@@ -2,9 +2,10 @@
 Unit tests for the NED application validators.
 """
 
+from decimal import Decimal
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-from ned_app.validators import validate_nistir_component_id
+from ned_app.validators import validate_nistir_component_id, validate_positive
 
 
 class NistirComponentIdValidatorTest(TestCase):
@@ -202,3 +203,25 @@ class NistirComponentIdValidatorTest(TestCase):
                 ):
                     expected_message = f'Invalid component ID: The NISTIR ID "{".".join(hierarchical_id)}" was not found in the taxonomy.'
                     self.assertIn(expected_message, error_message)
+
+
+class PositiveValidatorTest(TestCase):
+    """Test case for the validate_positive validator function."""
+
+    def test_positive_values_pass(self):
+        # Should not raise for strictly positive numbers.
+        validate_positive(0.4)
+        validate_positive(Decimal('0.001'))
+        validate_positive(19)
+
+    def test_none_passes(self):
+        # None is allowed so optional fields are not forced to have a value.
+        validate_positive(None)
+
+    def test_zero_raises(self):
+        with self.assertRaises(ValidationError):
+            validate_positive(0)
+
+    def test_negative_raises(self):
+        with self.assertRaises(ValidationError):
+            validate_positive(Decimal('-0.4'))
