@@ -23,6 +23,55 @@ from ned_app.serialization.serializer import (
 )
 
 
+def _flatten_detail(detail, field=None):
+    """
+    Flatten a DRF ValidationError detail into readable 'field: message' lines.
+
+    Args:
+        detail: A DRF error detail — a dict, a list, or a leaf ErrorDetail.
+        field (str | None): The field name currently in scope, if any.
+
+    Returns:
+        list[str]: One readable line per underlying error.
+    """
+    lines = []
+    if isinstance(detail, dict):
+        for key, value in detail.items():
+            lines.extend(_flatten_detail(value, field=key))
+    elif isinstance(detail, list):
+        for item in detail:
+            lines.extend(_flatten_detail(item, field=field))
+    elif field and field != 'non_field_errors':
+        lines.append(f'{field}: {detail}')
+    else:
+        lines.append(str(detail))
+    return lines
+
+
+def _format_errors(exc):
+    """
+    Convert a caught ingest exception into human-readable error lines.
+
+    Handles the three shapes ingest can raise: a DRF ValidationError (a dict
+    or list of ErrorDetail), a Django ValidationError (a list of messages),
+    and any other exception (its string). This keeps raw ErrorDetail reprs out
+    of the reported output.
+
+    Args:
+        exc (Exception): The exception raised while processing a record.
+
+    Returns:
+        list[str]: Readable error messages.
+    """
+    detail = getattr(exc, 'detail', None)
+    if detail is not None:
+        return _flatten_detail(detail)
+    messages = getattr(exc, 'messages', None)
+    if messages:
+        return list(messages)
+    return [str(exc)]
+
+
 class Command(BaseCommand):
     """
     Django management command to ingest data from canonical JSON files.
@@ -176,9 +225,9 @@ class Command(BaseCommand):
                     ', '.join(f'{f}={item.get(f)}' for f in lookup_field)
                     or 'unknown'
                 )
-                self.stderr.write(
-                    f'Error processing {model_name} [{record_label}]: {ex}'
-                )
+                self.stderr.write(f'Error processing {model_name} [{record_label}]:')
+                for line in _format_errors(ex):
+                    self.stderr.write(f'    - {line}')
 
         self.stdout.write(
             self.style.SUCCESS(

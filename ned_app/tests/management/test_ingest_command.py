@@ -7,10 +7,13 @@ import tempfile
 import json
 from io import StringIO
 from unittest.mock import patch
-from django.test import TransactionTestCase
+from django.test import SimpleTestCase, TransactionTestCase
 from django.core.management import call_command
 from django.core.management.base import CommandError
+from django.core.exceptions import ValidationError as DjangoValidationError
 from django.conf import settings
+from rest_framework.exceptions import ValidationError as DRFValidationError
+from ned_app.management.commands.ingest import _format_errors
 from ned_app.models import (
     Component,
     Reference,
@@ -1038,3 +1041,90 @@ class IngestCommandTests(TransactionTestCase):
             self.assertNotIn(
                 'All data ingestion tasks completed successfully', stdout.getvalue()
             )
+
+    def test_ingest_error_messages_are_human_readable(self):
+        """
+        Validation failures are reported as 'field: message' lines rather than
+        a raw DRF ErrorDetail repr.
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            reference_data = [
+                {
+                    'reference_id': 'ref-001',
+                    'study_type': 'Experiment',
+                    'csl_data': {
+                        'type': 'article-journal',
+                        'id': 'ref-001',
+                        'title': 'T',
+                        'author': [{'family': 'Smith', 'given': 'John'}],
+                        'issued': {'date-parts': [[2020]]},
+                    },
+                }
+            ]
+            component_data = [{'component_id': 'B.20.1.1.A', 'name': 'Wall'}]
+            experiment_data = [
+                {
+                    'id': 'exp-bad',
+                    'reference': 'ref-001',
+                    'component': 'B.20.1.1.A',
+                    'test_type': '__INVALID_TEST_TYPE__',
+                    'comp_description': 'x',
+                    'ds_description': 'y',
+                    'edp_metric': 'Story Drift Ratio',
+                    'edp_unit': 'Ratio',
+                    'edp_value': '0.1',
+                    'ds_class': 'Consequential',
+                }
+            ]
+
+            files_data = {
+                'reference.json': reference_data,
+                'component.json': component_data,
+                'experiment.json': experiment_data,
+            }
+            for filename, data in files_data.items():
+                with open(os.path.join(temp_dir, filename), 'w') as f:
+                    json.dump(data, f)
+
+            def mock_build_path(filename):
+                return os.path.join(temp_dir, filename)
+
+            stderr = StringIO()
+            with patch(
+                'ned_app.management.commands.ingest.build_json_data_file_path',
+                side_effect=mock_build_path,
+            ):
+                with self.assertRaises(CommandError):
+                    call_command('ingest', stdout=StringIO(), stderr=stderr)
+
+            stderr_value = stderr.getvalue()
+            self.assertIn('Error processing Experiment [id=exp-bad]:', stderr_value)
+            self.assertIn('test_type:', stderr_value)
+            self.assertIn('is not a valid choice', stderr_value)
+            # The raw ErrorDetail wrapper must not leak through.
+            self.assertNotIn('ErrorDetail', stderr_value)
+
+
+class FormatErrorsTests(SimpleTestCase):
+    """Unit tests for ingest._format_errors and _flatten_detail."""
+
+    def test_drf_field_errors_are_prefixed(self):
+        exc = DRFValidationError({
+            'test_type': ['"X" is not a valid choice.'],
+            'component': ['Object with component_id=Z does not exist.'],
+        })
+        lines = _format_errors(exc)
+        self.assertIn('test_type: "X" is not a valid choice.', lines)
+        self.assertIn('component: Object with component_id=Z does not exist.', lines)
+        self.assertFalse(any('ErrorDetail' in line for line in lines))
+
+    def test_drf_non_field_error_has_no_prefix(self):
+        exc = DRFValidationError(['Something is wrong.'])
+        self.assertEqual(_format_errors(exc), ['Something is wrong.'])
+
+    def test_django_validation_error_uses_messages(self):
+        exc = DjangoValidationError('csl_data is required.')
+        self.assertEqual(_format_errors(exc), ['csl_data is required.'])
+
+    def test_generic_exception_uses_str(self):
+        self.assertEqual(_format_errors(ValueError('boom')), ['boom'])
