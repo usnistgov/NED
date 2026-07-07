@@ -162,7 +162,7 @@ python manage.py query_to_csv --model Experiment --output_file exports\\data.csv
 
 The NED database includes a management command for importing new records from CSV files directly into the canonical JSON source data. This provides an alternative to manually editing JSON files, which may be preferable for contributors working primarily in spreadsheet tools.
 
-> **Important:** The import commands only convert your CSV into JSON and append it to the source files — they do **not** validate the data. After importing, you must (1) check JSON files in the `resources/data/` directory to ensure what has been appended to the source files is correct, (2) the run `python manage.py ingest` to load the new records into the database, and (3) run `python manage.py test` to validate them.
+> **Important:** The import commands only convert your CSV into JSON and append it to the source files — they do **not** validate the data. After importing, you must (1) check JSON files in the `resources/data/` directory to ensure what has been appended to the source files is correct, (2) run `python manage.py ingest` to load the new records into the database, and (3) run `python manage.py test` to validate them. `ingest` reports any invalid records and exits with a non-zero status if any fail.
 
 ### Using the `import_model` Command
 
@@ -200,7 +200,7 @@ python manage.py import_fragility --input_file my_fragilities.csv
 | Parameter | Required | Description |
 |-----------|----------|-------------|
 | `--input_file` | Yes | Path to the fragility import CSV file |
-| `--dry_run` | No | Validate and report results without writing any changes |
+| `--dry_run` | No | Report what would be appended without writing any changes |
 
 
 ### Templates
@@ -217,7 +217,7 @@ CSV templates with example rows are provided in `resources/import_templates/`. C
 - **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
 - **Optional numeric fields** (e.g., `alt_edp_value`) may be left blank; they will be stored as `null`.
 - **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
-- Files should be **UTF-8** encoded.
+- Files should be **UTF-8** encoded and **comma-delimited**. Some non-US Excel versions save semicolon-delimited CSVs; if the importer reports this, re-save as *CSV UTF-8 (Comma delimited)*.
 - Because the `Reference` model stores citation data as nested CSL-JSON, the CSV template uses flattened `csl_*` columns that the command reconstructs internally.
 
 ### Examples
@@ -251,10 +251,30 @@ python manage.py import_fragility --input_file my_fragilities.csv
 - **Import order matters for foreign keys.** Import `Reference` records before `Experiment` records that reference them; `ingest` resolves foreign keys by natural key, so the target records must already be present.
 - **Use `--dry_run` first** to preview which records would be appended (and surface the column warning) before changing the JSON files.
 - **Always run `ingest` and the test suite after importing** — they are where invalid values, choices, and foreign keys are caught.
+- **Commit after each successful batch.** Once `ingest` and the tests pass, commit before starting the next import. Each commit is a safe checkpoint: if a later batch fails validation, you can restore to it without losing the batches you already verified.
 - **Windows path syntax**: Use forward slashes or quoted backslashes in PowerShell:
   ```powershell
   python manage.py import_model --model Experiment --input_file exports/my_data.csv
   ```
+
+### Recovering from a failed import
+
+If `ingest` reports errors, **stop before committing.** The invalid records are already in the canonical JSON files, because the import step only converts and appends without validating. `ingest` also applies records one at a time without a wrapping transaction, so the database now holds whatever it created before the failure. Since `ingest` never deletes, restoring the JSON is not enough on its own; you must also rebuild the database.
+
+Assuming your last good batch is already committed (see the tip above), recover in two steps:
+
+1. **Discard the appended JSON**, which reverts only the failed batch:
+   ```bash
+   git restore resources/data/
+   ```
+2. **Rebuild the database** from the restored source, so it no longer contains the partially-applied records:
+   ```bash
+   rm -f db.sqlite3
+   python manage.py migrate
+   python manage.py ingest
+   ```
+
+Then fix the CSV and import again.
 
 
 ## Contributors Guide
