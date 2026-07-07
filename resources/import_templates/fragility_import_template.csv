@@ -1,0 +1,4 @@
+reference,model_id,p58_fragility,comp_detail,material,size_class,comp_description,reviewer,source,edp_metric,edp_unit,component_ids,ds_rank,ds_description,median,beta,probability,basis,num_observations
+SMITH-2020-EXP,fra001,,Back-braced,CPVC,2 inch diameter,CPVC sprinkler pipe with back-brace at 12 ft intervals,Reviewer Name,Literature,"Peak Floor Acceleration, horizontal",g,A.40.1.1;A.40.1.2,1,Minor leakage at joint,0.5,0.4,1.0,Experiment,30
+SMITH-2020-EXP,fra001,,Back-braced,CPVC,2 inch diameter,CPVC sprinkler pipe with back-brace at 12 ft intervals,Reviewer Name,Literature,"Peak Floor Acceleration, horizontal",g,A.40.1.1;A.40.1.2,2,Pipe separation,1.2,0.5,1.0,Experiment,30
+SMITH-2020-EXP,fra002,,Unbraced,CPVC,2 inch diameter,CPVC sprinkler pipe without bracing,Reviewer Name,Literature,"Peak Floor Acceleration, horizontal",g,A.40.1.1,1,Pipe separation,0.8,0.4,1.0,Experiment,15

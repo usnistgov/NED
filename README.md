@@ -164,19 +164,21 @@ The NED database includes a management command for importing new records from CS
 
 > **Important:** This command appends to the JSON source files only. After importing, you must run `python manage.py ingest` to load the new records into the local database.
 
-### Using the `import_from_csv` Command
+### Using the `import_model` Command
+
+Use `import_model` to import **Reference**, **Experiment**, or **ExperimentFragilityModelBridge** records from a CSV. For fragility models, curves, and component links, use [`import_fragility`](#using-the-import_fragility-command) instead.
 
 #### Basic Usage
 
 ```bash
-python manage.py import_from_csv --model Experiment --input_file my_data.csv
+python manage.py import_model --model Experiment --input_file my_data.csv
 ```
 
 #### Available Parameters
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `--model` | Yes | Model name to import (e.g., `Experiment`, `FragilityModel`, `Reference`) |
+| `--model` | Yes | Model name to import (`Reference`, `Experiment`, or `ExperimentFragilityModelBridge`) |
 | `--input_file` | Yes | Path to the CSV file containing new records |
 | `--dry_run` | No | Validate the CSV and report results without writing any changes |
 | `--list-models` | No | Show all models that support CSV import |
@@ -193,34 +195,30 @@ CSV templates with example rows are provided in `resources/import_templates/`. C
   - `fragility_model` → the full `fragility_model_id` string (e.g., `SMITH-2020-EXP|fra001`)
   - `experiment` → the experiment `id` string
 - **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
-- **Optional numeric fields** (e.g., `alt_edp_value`, `probability`) may be left blank; they will be stored as `null`.
+- **Optional numeric fields** (e.g., `alt_edp_value`) may be left blank; they will be stored as `null`.
 - **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
 - Files should be **UTF-8** encoded.
-- Because the `Reference` model stores citation data as nested CSL-JSON, the CSV template uses flattened `csl_*` columns that the command reconstructs internally:
-
+- Because the `Reference` model stores citation data as nested CSL-JSON, the CSV template uses flattened `csl_*` columns that the command reconstructs internally.
 
 #### Examples
 
 **Validate a CSV without writing changes:**
 ```bash
-python manage.py import_from_csv --model Experiment \
+python manage.py import_model --model Experiment \
   --input_file my_experiments.csv \
   --dry_run
 ```
 
-**Import experiments:**
+**Import references:**
 ```bash
-python manage.py import_from_csv --model Experiment \
-  --input_file my_experiments.csv
+python manage.py import_model --model Reference \
+  --input_file my_references.csv
 ```
 
-**Import fragility models then their curves:**
+**Import experiments:**
 ```bash
-python manage.py import_from_csv --model FragilityModel \
-  --input_file my_fragility_models.csv
-
-python manage.py import_from_csv --model FragilityCurve \
-  --input_file my_fragility_curves.csv
+python manage.py import_model --model Experiment \
+  --input_file my_experiments.csv
 ```
 
 **Rebuild the database after importing:**
@@ -252,13 +250,91 @@ Skipped 1 duplicate(s) (already present in experiment.json):
 
 #### Tips
 
-- **Import order matters for foreign keys.** Import `Reference` and `Component` records before `Experiment` or `FragilityModel` records that reference them. Import `FragilityModel` records before `FragilityCurve` or bridge records.
+- **Import order matters for foreign keys.** Import `Reference` records before `Experiment` records that reference them.
 - **Use `--dry_run` first** to catch errors before committing changes to the JSON files.
 - **Large batches**: All records are validated before writing. Fixing errors row-by-row is easiest when you run `--dry_run` on the full file first.
 - **Windows path syntax**: Use forward slashes or quoted backslashes in PowerShell:
   ```powershell
-  python manage.py import_from_csv --model Experiment --input_file exports/my_data.csv
+  python manage.py import_model --model Experiment --input_file exports/my_data.csv
   ```
+
+### Using the `import_fragility` Command
+
+The `import_fragility` command imports fragility models, their damage-state curves, and component links all at once from a single flat join CSV. This is the recommended workflow for adding new fragility models.
+
+Each row in the CSV represents one damage state (one `FragilityCurve`). Multiple rows sharing the same `reference` and `model_id` belong to the same fragility model and must repeat the model-level fields identically.
+
+#### Basic Usage
+
+```bash
+python manage.py import_fragility --input_file my_fragilities.csv
+```
+
+#### Available Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--input_file` | Yes | Path to the fragility import CSV file |
+| `--dry_run` | No | Validate and report results without writing any changes |
+
+#### CSV Format
+
+Use the template at `resources/import_templates/fragility_import_template.csv`. The columns are:
+
+| Column | Scope | Required | Notes |
+|--------|-------|----------|-------|
+| `reference` | Model | No | `reference_id` of the source reference (blank for legacy models) |
+| `model_id` | Model | Yes | Unique within a given reference |
+| `comp_description` | Model | Yes | General description of the component |
+| `comp_detail` | Model | No | Connection detail tag |
+| `material` | Model | No | Material classification tag |
+| `size_class` | Model | No | Size classification tag |
+| `edp_metric` | Model | Yes | Must match a valid `EDPMetricChoices` value |
+| `edp_unit` | Model | Yes | Must match a valid `EDPUnitChoices` value |
+| `p58_fragility` | Model | No | Associated FEMA P-58 fragility ID |
+| `reviewer` | Model | No | Person or institution responsible for the model |
+| `source` | Model | No | Source of the fragility data (e.g., `Literature`) |
+| `component_ids` | Model | No | Semicolon-separated `component_id` values to link (e.g., `A.40.1.1;A.40.1.2`) |
+| `ds_rank` | Curve | No | Integer rank ordering this damage state among others in the model |
+| `ds_description` | Curve | Yes | Description of the damage state |
+| `median` | Curve | Yes | Median of the lognormal fragility (float) |
+| `beta` | Curve | Yes | Lognormal dispersion (float) |
+| `probability` | Curve | Yes | Mutually exclusive probability of this damage state (float) |
+| `basis` | Curve | No | Must match a valid `StudyTypeChoices` value |
+| `num_observations` | Curve | No | Number of underlying observations (integer) |
+
+**Model-scoped columns** (`reference` through `component_ids`) must be identical on every row that shares the same `(reference, model_id)` pair. The command enforces this strictly and aborts with a clear error if any field is inconsistent across rows for the same model.
+
+#### Validation and Error Handling
+
+The command validates in three stages before writing anything:
+
+1. **Row-level**: required fields present, valid choice values, numeric types parseable.
+2. **Consistency check**: all model-scoped columns identical across rows for the same `(reference, model_id)`.
+3. **FK check**: `reference` exists in `reference.json`; each `component_id` in `component_ids` exists in `component.json`.
+
+As a sanity check, the command always prints the count of unique fragility models it found in the CSV before proceeding:
+
+```
+Found 3 unique fragility model(s) in CSV.
+```
+
+This helps catch accidental model ID typos that would split what should be one model into two.
+
+If any error is found across all three stages, **nothing is written** and all errors are reported together so you can fix and retry.
+
+#### Workflow
+
+```bash
+# 1. (Optional) Validate first
+python manage.py import_fragility --input_file my_fragilities.csv --dry_run
+
+# 2. Import
+python manage.py import_fragility --input_file my_fragilities.csv
+
+# 3. Load into the database
+python manage.py ingest
+```
 
 ## Contributors Guide
 
@@ -320,9 +396,13 @@ Directly edit the JSON files in the `resources/data/` directory.
 *   **Templates:** Check `resources/example_data/` for examples of proper formatting.
 
 **Option B — Import from CSV** (useful for larger datasets or contributors who prefer spreadsheet tools):
-Populate a CSV template from `resources/csv_templates/` and use the import command:
+Populate a CSV template from `resources/import_templates/` and use the appropriate import command:
 ```bash
-python manage.py import_from_csv --model Experiment --input_file my_data.csv
+# References, experiments, and experiment-fragility links
+python manage.py import_model --model Experiment --input_file my_data.csv
+
+# Fragility models, curves, and component links (all in one flat CSV)
+python manage.py import_fragility --input_file my_fragilities.csv
 ```
 See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
 *   **Common Files:**
