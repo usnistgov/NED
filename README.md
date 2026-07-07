@@ -316,6 +316,18 @@ Useful flags: `--rebuild-db` (run `migrate` + `ingest` first). Run `python scrip
 
 ## Contributors Guide
 
+### Quick Setup (one-click scripts)
+If you are new to Python or just want the fastest path to a working local environment, double-click the setup script for your operating system in the project root:
+
+- **Windows:** `setup_workshop_windows.bat`
+- **macOS:** `setup_workshop_mac.command` — if macOS blocks it ("cannot be opened because it is from an unidentified developer"), right-click the file and choose **Open** instead.
+
+The script installs the [uv](https://docs.astral.sh/uv/) Python manager into your user folder (no admin rights required), creates a private Python 3.12 environment in `./venv`, installs the pinned dependency set from `requirements-workshop.txt`, and builds the local database (`migrate` + `ingest`). When it finishes, the window becomes a ready-to-use terminal with the project environment already activated — you can type `python manage.py ...` commands directly. Re-running the script is safe and is the easiest way to open a new project terminal later.
+
+To open the NED web app locally, double-click `start_app_windows.bat` (Windows) or `start_app_mac.command` (macOS). A browser tab pointing at your local database opens automatically.
+
+If you prefer to manage your own environment, follow the manual steps below instead.
+
 ### Setting up a Virtual Environment (optional but recommended)
 Setting up a virtual environment helps to ensure you are able to setup an isolated project for using the NED database locally and avoid conflicts with other dependencies. While there are many ways to setup a virtual environment, below is an example using Python's built in `venv` module.
 ```

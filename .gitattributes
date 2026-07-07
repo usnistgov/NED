@@ -1,0 +1,7 @@
+# macOS shell scripts must keep LF endings even when checked out on Windows;
+# CRLF breaks the shebang line ("bad interpreter: /bin/bash^M").
+*.command text eol=lf
+*.sh text eol=lf
+
+# Windows batch files are safest with CRLF endings.
+*.bat text eol=crlf
