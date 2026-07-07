@@ -27,7 +27,9 @@ def _experiments_export(component_id: str) -> pd.DataFrame:
             cite = f'{fmt(row["author"])} ({fmt(row["year"])}). {fmt(row["title"])}.'
         return cite
 
-    df.insert(df.columns.get_loc('Study Type'), 'Reference', df.apply(citation, axis=1))
+    df.insert(
+        df.columns.get_loc('Study Type'), 'Reference', df.apply(citation, axis=1)
+    )
     return df.drop(columns=['author', 'year', 'title', 'csl_data'])
 
 
