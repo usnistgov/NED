@@ -170,6 +170,7 @@
         },
         "pdf_saved": true,
         "reference_id": "BUS-2015-SEI",
+        "reference_label": "Ju_ThreadedTee",
         "study_type": "Experiment"
     },
     {
@@ -346,7 +347,7 @@
                     ]
                 ]
             },
-            "title": "Seismic response evaluation of medical gas and fire-protection pipelines\u2019 Tee-Joints",
+            "title": "Seismic response evaluation of medical gas and fire-protection pipelines' Tee-Joints",
             "type": "document"
         },
         "pdf_saved": true,
@@ -378,6 +379,7 @@
         },
         "pdf_saved": true,
         "reference_id": "GOO-2004-EXP",
+        "reference_label": "Goodwin_HospitalPipingThesis",
         "study_type": "Experiment"
     },
     {
@@ -447,6 +449,7 @@
         },
         "pdf_saved": true,
         "reference_id": "HIG-2009-PRE",
+        "reference_label": "Higgins_PrefabSteelStairs",
         "study_type": "Experiment"
     },
     {
@@ -529,6 +532,7 @@
         },
         "pdf_saved": true,
         "reference_id": "JIT-2022-CYC",
+        "reference_label": "Bhatta_TwoStoryCladding",
         "study_type": "Experiment"
     },
     {
@@ -563,11 +567,12 @@
                     ]
                 ]
             },
-            "title": "Low-Damage Rocking Precast Concrete Cladding Panels: Design\nApproach and Experimental Validation",
+            "title": "Low-Damage Rocking Precast Concrete Cladding Panels: Design Approach and Experimental Validation",
             "type": "article-journal"
         },
         "pdf_saved": true,
         "reference_id": "JIT-2022-LOW",
+        "reference_label": "Bhatta_CladdingDesign",
         "study_type": "Experiment"
     },
     {
@@ -603,6 +608,7 @@
         },
         "pdf_saved": true,
         "reference_id": "JIT-2022-SEI",
+        "reference_label": "Bhatta_CladdingCyclic",
         "study_type": "Experiment"
     },
     {
@@ -638,6 +644,7 @@
         },
         "pdf_saved": true,
         "reference_id": "JIT-2023-SEI",
+        "reference_label": "Bhatta_DualSlotPartition",
         "study_type": "Experiment"
     },
     {
@@ -668,11 +675,12 @@
                     ]
                 ]
             },
-            "title": "Seismic Performance of \u2018Rocking\u2019 Dual-slot Track Internal Partition Walls with Concealed Joints under Lateral Cyclic Drift Demands",
+            "title": "Seismic Performance of 'Rocking' Dual-slot Track Internal Partition Walls with Concealed Joints under Lateral Cyclic Drift Demands",
             "type": "article-journal"
         },
         "pdf_saved": true,
         "reference_id": "JIT-2023-SEI-2",
+        "reference_label": "Bhatta_ConcealedJoint",
         "study_type": "Experiment"
     },
     {
@@ -716,6 +724,7 @@
         },
         "pdf_saved": true,
         "reference_id": "JIT-2023-SEI-3",
+        "reference_label": "Bhatta_SlottedBracketPartition",
         "study_type": "Experiment"
     },
     {
@@ -767,6 +776,7 @@
         },
         "pdf_saved": true,
         "reference_id": "KUR-2012-RES",
+        "reference_label": "McMullin_BNCSCladding",
         "study_type": "Experiment"
     },
     {
@@ -840,6 +850,7 @@
         },
         "pdf_saved": true,
         "reference_id": "MCM-2002-SEI",
+        "reference_label": "McMullin_GypsumWallsCUREE",
         "study_type": "Experiment"
     },
     {
@@ -893,6 +904,7 @@
         },
         "pdf_saved": true,
         "reference_id": "PAN-2016-SEI",
+        "reference_label": "Pantoli_APC_PanelsAndConnections",
         "study_type": "Experiment"
     },
     {
@@ -929,6 +941,7 @@
         },
         "pdf_saved": true,
         "reference_id": "RAH-2014-SEI",
+        "reference_label": "Rahmanishamsi_CPP_DamageStates",
         "study_type": "Analytical Study"
     },
     {
@@ -964,6 +977,7 @@
         },
         "pdf_saved": true,
         "reference_id": "RAH-2014-SYS",
+        "reference_label": "Rahmanishamsi_CPP_TestBed",
         "study_type": "Experiment"
     },
     {
@@ -1137,6 +1151,7 @@
         },
         "pdf_saved": true,
         "reference_id": "SOR-2013-ANA",
+        "reference_label": "Soroushian_FireSprinklerPipingFragility",
         "study_type": "Experiment"
     },
     {
@@ -1176,6 +1191,7 @@
         },
         "pdf_saved": true,
         "reference_id": "SOR-2018-FRA",
+        "reference_label": "Soroushian_SuspendedCeilingFragility",
         "study_type": "Experiment"
     },
     {
@@ -1252,6 +1268,7 @@
         },
         "pdf_saved": true,
         "reference_id": "TAO-2019-EXP",
+        "reference_label": "Wang_GroovedPiping",
         "study_type": "Experiment"
     },
     {
@@ -1320,7 +1337,7 @@
                     ]
                 ]
             },
-            "title": "In\u2010plane quasi\u2010static cyclic tests of nonstructural\nlightweight steel drywall partitions for seismic performance\nevaluation",
+            "title": "In\u2010plane quasi\u2010static cyclic tests of nonstructural lightweight steel drywall partitions for seismic performance evaluation",
             "type": "article-journal"
         },
         "pdf_saved": true,
@@ -1376,6 +1393,7 @@
         },
         "pdf_saved": true,
         "reference_id": "WAN-2016-SHA",
+        "reference_label": "Wang_ElevatorSystem",
         "study_type": "Experiment"
     },
     {
@@ -1410,6 +1428,7 @@
         },
         "pdf_saved": true,
         "reference_id": "YUA-2015-SEI",
+        "reference_label": "Tian_SprinklerPipingUB_NCS",
         "study_type": "Experiment"
     },
     {
@@ -1561,6 +1580,7 @@
         },
         "pdf_saved": true,
         "reference_id": "CHA-2022-EXP",
+        "reference_label": "He_GISBushings",
         "study_type": "Experiment"
     },
     {
@@ -1601,12 +1621,13 @@
                     ]
                 ]
             },
-            "note": "Wang, X., Hutchinson, T. C., Hegemier, G., Gunisetty, S., Kamath, P., & Meacham, B. (2018).Earthquake and fire performance of a mid-rise cold-formed steel framed building \u2013 test program and test results: Final Report (SSRP-2016/08). San Diego, CA.",
-            "title": "Earthquake and fire performance of a mid-rise cold-formed steel framed building \u2013 test program and test results: Final Report",
+            "note": "Wang, X., Hutchinson, T. C., Hegemier, G., Gunisetty, S., Kamath, P., & Meacham, B. (2018).Earthquake and fire performance of a mid-rise cold-formed steel framed building - test program and test results: Final Report (SSRP-2016/08). San Diego, CA.",
+            "title": "Earthquake and fire performance of a mid-rise cold-formed steel framed building - test program and test results: Final Report",
             "type": "report"
         },
         "pdf_saved": true,
         "reference_id": "WAN-2018-EAR",
+        "reference_label": "Wang_CFS_Report",
         "study_type": "Experiment"
     },
     {
@@ -1671,12 +1692,13 @@
                     ]
                 ]
             },
-            "note": "Pantoli, E., Chen, M. C., Wang, X., Astroza, R., Ebrahimian, H., Mintz, S., Hutchinson, T. C., Conte, J., Restrepo, J., Meacham, B., Kim, J. K., & Park, J. (2013).Pantoli, E., Full-scale structural and nonstructural building system performance during earthquakes and post-earthquake fire \u2013 test results. (SSRP-2013/10). San Diego, CA.",
-            "title": "Full-scale structural and nonstructural building system performance during earthquakes and post-earthquake fire \u2013 test results",
+            "note": "Pantoli, E., Chen, M. C., Wang, X., Astroza, R., Ebrahimian, H., Mintz, S., Hutchinson, T. C., Conte, J., Restrepo, J., Meacham, B., Kim, J. K., & Park, J. (2013).Pantoli, E., Full-scale structural and nonstructural building system performance during earthquakes and post-earthquake fire - test results. (SSRP-2013/10). San Diego, CA.",
+            "title": "Full-scale structural and nonstructural building system performance during earthquakes and post-earthquake fire - test results",
             "type": "report"
         },
         "pdf_saved": true,
         "reference_id": "PAN-2013-FUL",
+        "reference_label": "Pantoli_BNCS_Report2",
         "study_type": "Experiment"
     },
     {
@@ -1751,11 +1773,12 @@
                     ]
                 ]
             },
-            "title": "Full-Scale Structural and Nonstructural Building System Performance during Earthquakes: Part II \u2013 NCS Damage States",
+            "title": "Full-Scale Structural and Nonstructural Building System Performance during Earthquakes: Part II - NCS Damage States",
             "type": "article-journal"
         },
         "pdf_saved": true,
         "reference_id": "PAN-2016-FUL",
+        "reference_label": "Pantoli_NCS_DamageStates",
         "study_type": "Experiment"
     },
     {
@@ -1803,6 +1826,7 @@
         },
         "pdf_saved": true,
         "reference_id": "ZHA-2024-SEI",
+        "reference_label": "Zhang_StairSlidingJoint",
         "study_type": "Experiment"
     },
     {
@@ -1850,6 +1874,7 @@
         },
         "pdf_saved": true,
         "reference_id": "ZHA-2023-SEI",
+        "reference_label": "Zhang_StairHDRBearings",
         "study_type": "Experiment"
     },
     {
@@ -2004,6 +2029,7 @@
         },
         "pdf_saved": true,
         "reference_id": "TIA-2012-EXP",
+        "reference_label": "Tian_SprinklerTeeJoints",
         "study_type": "Experiment"
     },
     {
@@ -2050,6 +2076,7 @@
         },
         "pdf_saved": true,
         "reference_id": "JIT-2024-SEI",
+        "reference_label": "Bhatta_NHERIFireSprinkler",
         "study_type": "Experiment"
     },
     {
@@ -2086,6 +2113,7 @@
         },
         "pdf_saved": true,
         "reference_id": "GOO-2007-EXP",
+        "reference_label": "Goodwin_PipingWeldedThreaded",
         "study_type": "Experiment"
     },
     {
@@ -2125,6 +2153,7 @@
         },
         "pdf_saved": true,
         "reference_id": "MEM-2003-SEI",
+        "reference_label": "Memari_CurtainWallIGU",
         "study_type": "Experiment"
     },
     {
@@ -2136,7 +2165,7 @@
                     "given": "Ali"
                 },
                 {
-                    "family": "O\u2019Brien",
+                    "family": "O'Brien",
                     "given": "William"
                 },
                 {
@@ -2165,6 +2194,7 @@
         },
         "pdf_saved": true,
         "reference_id": "MEM-2011-ARC",
+        "reference_label": "Memari_ArchGlassFragility",
         "study_type": "Experiment"
     },
     {
@@ -2205,6 +2235,7 @@
         },
         "pdf_saved": true,
         "reference_id": "MEM-2006-SEI",
+        "reference_label": "Memari_SiliconeGlazing",
         "study_type": "Experiment"
     },
     {
@@ -2244,6 +2275,7 @@
         },
         "pdf_saved": true,
         "reference_id": "MEM-2006-ARC",
+        "reference_label": "Memari_RoundedCorners",
         "study_type": "Experiment"
     },
     {
@@ -2294,6 +2326,7 @@
         },
         "pdf_saved": false,
         "reference_id": "FEM-2018-SEI",
+        "reference_label": "FEMA_P58",
         "study_type": "Other"
     },
     {
@@ -2318,6 +2351,7 @@
         },
         "pdf_saved": true,
         "reference_id": "HIG-2011-SEI",
+        "reference_label": "Higgins_StairFragilityFunctions",
         "study_type": "Experiment"
     },
     {
@@ -2420,6 +2454,7 @@
         },
         "pdf_saved": true,
         "reference_id": "BHA-2026-DEV",
+        "reference_label": "Bhatta_SprinklerFragilityFunctions",
         "study_type": "Experiment"
     }
 ]

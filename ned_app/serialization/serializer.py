@@ -12,7 +12,10 @@ from ned_app.models import (
     ComponentFragilityModelBridge,
     FragilityCurve,
 )
-from ned_app.validators import validate_nistir_component_id
+from ned_app.validators import (
+    validate_nistir_component_id,
+    validate_reference_label,
+)
 
 
 class ReferenceSerializer(serializers.ModelSerializer):
@@ -27,11 +30,15 @@ class ReferenceSerializer(serializers.ModelSerializer):
     title = serializers.CharField(required=False, allow_blank=True)
     author = serializers.CharField(required=False, allow_blank=True)
     year = serializers.IntegerField(required=False, allow_null=True)
+    reference_label = serializers.CharField(
+        required=False, allow_blank=True, validators=[validate_reference_label]
+    )
 
     class Meta:
         model = Reference
         fields = [
             'reference_id',
+            'reference_label',
             'title',
             'author',
             'year',

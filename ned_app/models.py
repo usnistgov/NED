@@ -5,7 +5,11 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
-from ned_app.validators import validate_nistir_component_id, validate_positive
+from ned_app.validators import (
+    validate_nistir_component_id,
+    validate_positive,
+    validate_reference_label,
+)
 
 
 # Global variable to cache the NISTIR labels for efficiency
@@ -121,6 +125,16 @@ class Reference(models.Model):
         max_length=255,
         unique=True,
         help_text='Unique identifier for the reference.',
+    )
+    reference_label = models.CharField(
+        _('reference label'),
+        max_length=100,
+        blank=True,
+        validators=[validate_reference_label],
+        help_text=(
+            'Optional label used in place of the first-author surname when '
+            'building the reference id (e.g. "FEMA_P58" -> FEMA_P58-<year>).'
+        ),
     )
     title = models.CharField(
         _('title'),

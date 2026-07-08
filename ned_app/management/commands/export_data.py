@@ -105,6 +105,9 @@ class Command(BaseCommand):
                 'pdf_saved': ref.pdf_saved,
                 'csl_data': ref.csl_data,
             }
+            # Only emit reference_label when set, to keep unlabeled records clean.
+            if ref.reference_label:
+                ref_data['reference_label'] = ref.reference_label
             data.append(ref_data)
 
         file_path = os.path.join(output_dir, 'reference.json')
