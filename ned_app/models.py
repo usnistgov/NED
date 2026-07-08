@@ -230,6 +230,8 @@ class Reference(models.Model):
                 self.title = self.csl_data['title']
 
             if 'issued' in self.csl_data and 'date-parts' in self.csl_data['issued']:
+                # Policy: csl_data 'issued' holds the online-first / first-available
+                # year, not the later print-volume year, when the two differ.
                 date_parts = self.csl_data['issued']['date-parts']
                 if date_parts and len(date_parts) > 0 and len(date_parts[0]) > 0:
                     self.year = date_parts[0][0]

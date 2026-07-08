@@ -61,7 +61,7 @@
                 ]
             },
             "note": "Araya-Letelier, Gerardo and Miranda, Eduardo. (2012). Novel Sliding/Frictional Connections for Improved Seismic Performance of Gypsum Wallboard Partitions. 15th World Conference on Earthquake Engineering, Lisbon, Portugal.",
-            "title": "Novel Sliding/frictional Connections for Improved Seismic Performance of Gypsum Wallboard Partitions",
+            "title": "Novel Sliding/Frictional Connections for Improved Seismic Performance of Gypsum Wallboard Partitions",
             "type": "paper-conference"
         },
         "pdf_saved": true,
@@ -99,6 +99,7 @@
                     "given": "Joel"
                 }
             ],
+            "container-title": "Earthquake Spectra",
             "id": "AST-2015-EXP",
             "issued": {
                 "date-parts": [
@@ -107,8 +108,8 @@
                     ]
                 ]
             },
-            "title": "Experimental Evaluation of the Seismic Response of a Rooftop_x0002_-Mounted Cooling Tower",
-            "type": "document"
+            "title": "Experimental Evaluation of the Seismic Response of a Rooftop-Mounted Cooling Tower",
+            "type": "article-journal"
         },
         "pdf_saved": true,
         "reference_id": "AST-2015-EXP",
@@ -155,6 +156,7 @@
                     "given": "Abhinav"
                 }
             ],
+            "container-title": "International Journal of Pressure Vessels and Piping",
             "id": "BUS-2015-SEI",
             "issued": {
                 "date-parts": [
@@ -164,7 +166,7 @@
                 ]
             },
             "title": "Seismic fragility of threaded Tee-joint connections in piping systems",
-            "type": "document"
+            "type": "article-journal"
         },
         "pdf_saved": true,
         "reference_id": "BUS-2015-SEI",
@@ -193,6 +195,7 @@
                     "given": "E"
                 }
             ],
+            "container-title": "Journal of Earthquake Engineering",
             "id": "CRA-2016-EXP",
             "issued": {
                 "date-parts": [
@@ -202,7 +205,7 @@
                 ]
             },
             "title": "Experimental Fragility Analysis of Pressurized Fire Sprinkler Piping Systems",
-            "type": "document"
+            "type": "article-journal"
         },
         "pdf_saved": true,
         "reference_id": "CRA-2016-EXP",
@@ -231,6 +234,7 @@
                     "given": "Gaetano"
                 }
             ],
+            "container-title": "Bulletin of the New Zealand Society for Earthquake Engineering",
             "id": "CRE-2016-OUT",
             "issued": {
                 "date-parts": [
@@ -251,26 +255,20 @@
         "csl_data": {
             "author": [
                 {
-                    "family": "Davies"
+                    "family": "Davies",
+                    "given": "Ryan D."
                 },
                 {
-                    "family": "R."
+                    "family": "Retamales",
+                    "given": "Rodrigo"
                 },
                 {
-                    "family": "Retamales"
-                },
-                {
-                    "family": "R."
-                },
-                {
-                    "family": "Mosqueda"
-                },
-                {
-                    "family": "G."
+                    "family": "Mosqueda",
+                    "given": "Gilberto"
                 },
                 {
                     "family": "Filiatrault",
-                    "given": "A"
+                    "given": "Andre"
                 }
             ],
             "genre": "NEES Nonstructural Technical Report MCEER-11-0005",
@@ -284,7 +282,7 @@
             },
             "note": "Davies, R., Retamales, R., Mosqueda, G., and Filiatrault, A. (2012) Experimental Seismic Evaluation, Model Parameterization, and Effects of Cold-formed Steel-framed Gypsum Partition Walls on the Seismic Performance of an Essential Facility. NEES Nonstructural Technical Report MCEER-11-0005, October 12, 2011.",
             "publisher": "October 12",
-            "title": "Experimental Seismic Evaluation, Model Parameterization and Effects of Cold-Formed Steel-Framed Gypsum Partition Walls on the Seismic Performance of an Essential Facility",
+            "title": "Experimental Seismic Evaluation, Model Parameterization, and Effects of Cold-Formed Steel-Framed Gypsum Partition Walls on the Seismic Performance of an Essential Facility",
             "type": "report"
         },
         "pdf_saved": true,
@@ -409,6 +407,7 @@
                     "given": "Yuxi"
                 }
             ],
+            "container-title": "Engineering Structures",
             "id": "HET-2021-CYC",
             "issued": {
                 "date-parts": [
@@ -481,6 +480,7 @@
                     "given": "Frank"
                 }
             ],
+            "container-title": "Bulletin of the New Zealand Society for Earthquake Engineering",
             "id": "JIT-2021-THE",
             "issued": {
                 "date-parts": [
@@ -515,6 +515,7 @@
                     "given": "Timothy"
                 }
             ],
+            "container-title": "Journal of Earthquake Engineering",
             "id": "JIT-2022-CYC",
             "issued": {
                 "date-parts": [
@@ -553,6 +554,7 @@
                     "given": "Mark"
                 }
             ],
+            "container-title": "Journal of Earthquake Engineering",
             "id": "JIT-2022-LOW",
             "issued": {
                 "date-parts": [
@@ -587,6 +589,7 @@
                     "given": "Timothy"
                 }
             ],
+            "container-title": "Journal of Earthquake Engineering",
             "id": "JIT-2022-SEI",
             "issued": {
                 "date-parts": [
@@ -621,6 +624,7 @@
                     "given": "Timothy"
                 }
             ],
+            "container-title": "Journal of Earthquake Engineering",
             "id": "JIT-2023-SEI",
             "issued": {
                 "date-parts": [
@@ -655,6 +659,7 @@
                     "given": "Timothy"
                 }
             ],
+            "container-title": "Journal of Earthquake Engineering",
             "id": "JIT-2023-SEI-2",
             "issued": {
                 "date-parts": [
@@ -697,6 +702,7 @@
                     "given": "Glen"
                 }
             ],
+            "container-title": "Journal of Earthquake Engineering",
             "id": "JIT-2023-SEI-3",
             "issued": {
                 "date-parts": [
@@ -747,6 +753,7 @@
                     "given": "Bob"
                 }
             ],
+            "container-title": "Structures Congress 2012",
             "id": "KUR-2012-RES",
             "issued": {
                 "date-parts": [
@@ -756,7 +763,7 @@
                 ]
             },
             "title": "Response of Exterior Precast Concrete Cladding Panels in NEES-TIPS/NEES-GC/E-Defense Tests on a Full Scale 5-story Building",
-            "type": "article-journal"
+            "type": "paper-conference"
         },
         "pdf_saved": true,
         "reference_id": "KUR-2012-RES",
@@ -789,6 +796,7 @@
                     "given": "Masayoshi"
                 }
             ],
+            "container-title": "Earthquake Engineering & Structural Dynamics",
             "id": "LEE-2007-SEI",
             "issued": {
                 "date-parts": [
@@ -797,8 +805,8 @@
                     ]
                 ]
             },
-            "title": "Seismic Performance Evaluation of Nonstructural Components: Drywall Partitions",
-            "type": "document"
+            "title": "Seismic performance evaluation of non-structural components: Drywall partitions",
+            "type": "article-journal"
         },
         "pdf_saved": true,
         "reference_id": "LEE-2007-SEI",
@@ -1088,6 +1096,7 @@
                     "given": "Andrei"
                 }
             ],
+            "container-title": "Journal of Earthquake Engineering",
             "id": "RYU-2019-EXP",
             "issued": {
                 "date-parts": [
@@ -1141,18 +1150,19 @@
                     "given": "Siavash"
                 },
                 {
-                    "family": "Rahmanishamsi,",
+                    "family": "Rahmanishamsi",
                     "given": "Esmaeel"
                 },
                 {
-                    "family": "Jenkins,",
+                    "family": "Jenkins",
                     "given": "Craig"
                 },
                 {
-                    "family": "Maragakis,",
+                    "family": "Maragakis",
                     "given": "E. Manos"
                 }
             ],
+            "container-title": "Journal of Structural Engineering",
             "id": "SOR-2018-FRA",
             "issued": {
                 "date-parts": [
@@ -1263,8 +1273,9 @@
                     ]
                 ]
             },
-            "title": "Damage Mitigation Strategies for Non-Structural Infill Walls (PhD Thesis)",
-            "type": "document"
+            "publisher": "University of Canterbury",
+            "title": "Damage Mitigation Strategies for Non-Structural Infill Walls",
+            "type": "thesis"
         },
         "pdf_saved": true,
         "reference_id": "TAS-2014-DAM",
@@ -1351,6 +1362,7 @@
                     "given": "Waldir"
                 }
             ],
+            "container-title": "Earthquake Engineering & Structural Dynamics",
             "id": "WAN-2016-SHA",
             "issued": {
                 "date-parts": [
@@ -1453,10 +1465,11 @@
                     "given": "Wensheng"
                 },
                 {
-                    "family": "Mosalam,",
-                    "given": "Khalid"
+                    "family": "Mosalam",
+                    "given": "Khalid M."
                 }
             ],
+            "container-title": "Journal of Performance of Constructed Facilities",
             "id": "BAO-2017-SHA",
             "issued": {
                 "date-parts": [
@@ -1499,6 +1512,7 @@
                     "given": "Dong-Uk"
                 }
             ],
+            "container-title": "Nuclear Engineering and Technology",
             "id": "SUN-2021-EVA",
             "issued": {
                 "date-parts": [
@@ -1533,6 +1547,7 @@
                     "given": "Qiang"
                 }
             ],
+            "container-title": "Materials",
             "id": "CHA-2022-EXP",
             "issued": {
                 "date-parts": [
@@ -1551,46 +1566,31 @@
     {
         "comp_type": "Doors",
         "csl_data": {
-            "DOI": "https://chei.ucsd.edu/cfs/resources/CFS_Report2-Final.pdf",
             "URL": "https://chei.ucsd.edu/cfs/resources/CFS_Report2-Final.pdf",
             "author": [
                 {
-                    "family": "Wang"
+                    "family": "Wang",
+                    "given": "Xiang"
                 },
                 {
-                    "family": "X."
+                    "family": "Hutchinson",
+                    "given": "Tara"
                 },
                 {
-                    "family": "Hutchinson"
+                    "family": "Hegemier",
+                    "given": "Gilbert"
                 },
                 {
-                    "family": "C.",
-                    "given": "T."
+                    "family": "Gunisetty",
+                    "given": "Srikar"
                 },
                 {
-                    "family": "Hegemier"
-                },
-                {
-                    "family": "G."
-                },
-                {
-                    "family": "Gunisetty"
-                },
-                {
-                    "family": "S."
-                },
-                {
-                    "family": "Kamath"
-                },
-                {
-                    "family": "P."
+                    "family": "Kamath",
+                    "given": "Praveen"
                 },
                 {
                     "family": "Meacham",
-                    "given": "&"
-                },
-                {
-                    "family": "B"
+                    "given": "Brian"
                 }
             ],
             "id": "WAN-2018-EAR",
@@ -1612,84 +1612,55 @@
     {
         "comp_type": "Doors",
         "csl_data": {
-            "DOI": "https://chei.ucsd.edu/bncs/resources/BNCS-SSRP-Report2-Final.pdf",
             "URL": "https://chei.ucsd.edu/bncs/resources/BNCS-SSRP-Report2-Final.pdf",
             "author": [
                 {
-                    "family": "Pantoli"
+                    "family": "Pantoli",
+                    "given": "Elide"
                 },
                 {
-                    "family": "E."
+                    "family": "Chen",
+                    "given": "Michelle"
                 },
                 {
-                    "family": "Chen"
+                    "family": "Wang",
+                    "given": "Xiang"
                 },
                 {
-                    "family": "C.",
-                    "given": "M."
+                    "family": "Astroza",
+                    "given": "Rodrigo"
                 },
                 {
-                    "family": "Wang"
+                    "family": "Ebrahimian",
+                    "given": "Hamed"
                 },
                 {
-                    "family": "X."
+                    "family": "Mintz",
+                    "given": "Steven"
                 },
                 {
-                    "family": "Astroza"
+                    "family": "Hutchinson",
+                    "given": "Tara"
                 },
                 {
-                    "family": "R."
+                    "family": "Conte",
+                    "given": "Joel"
                 },
                 {
-                    "family": "Ebrahimian"
+                    "family": "Restrepo",
+                    "given": "Jos\u00e9"
                 },
                 {
-                    "family": "H."
+                    "family": "Meacham",
+                    "given": "Brian"
                 },
                 {
-                    "family": "Mintz"
-                },
-                {
-                    "family": "S."
-                },
-                {
-                    "family": "Hutchinson"
-                },
-                {
-                    "family": "C.",
-                    "given": "T."
-                },
-                {
-                    "family": "Conte"
-                },
-                {
-                    "family": "J."
-                },
-                {
-                    "family": "Restrepo"
-                },
-                {
-                    "family": "J."
-                },
-                {
-                    "family": "Meacham"
-                },
-                {
-                    "family": "B."
-                },
-                {
-                    "family": "Kim"
-                },
-                {
-                    "family": "K.",
-                    "given": "J."
+                    "family": "Kim",
+                    "given": "Jin Kyung"
                 },
                 {
                     "family": "Park",
-                    "given": "&"
-                },
-                {
-                    "family": "J"
+                    "given": "Hae-jun"
                 }
             ],
             "id": "PAN-2013-FUL",
@@ -1771,6 +1742,7 @@
                     "given": "Mahmoud"
                 }
             ],
+            "container-title": "Earthquake Spectra",
             "id": "PAN-2016-FUL",
             "issued": {
                 "date-parts": [
@@ -1817,6 +1789,7 @@
                     "given": "Weiyuan"
                 }
             ],
+            "container-title": "Engineering Structures",
             "id": "ZHA-2024-SEI",
             "issued": {
                 "date-parts": [
@@ -1863,6 +1836,7 @@
                     "given": "Weiyuan"
                 }
             ],
+            "container-title": "Bulletin of Earthquake Engineering",
             "id": "ZHA-2023-SEI",
             "issued": {
                 "date-parts": [
@@ -1889,7 +1863,7 @@
                     "given": "Shuping"
                 },
                 {
-                    "family": "Zhang,",
+                    "family": "Zhang",
                     "given": "Zheng"
                 },
                 {
@@ -1901,6 +1875,7 @@
                     "given": "Zhifeng"
                 }
             ],
+            "container-title": "Structures",
             "id": "CON-2021-SEI",
             "issued": {
                 "date-parts": [
@@ -1921,58 +1896,39 @@
         "csl_data": {
             "author": [
                 {
-                    "family": "Sorosh"
+                    "family": "Sorosh",
+                    "given": "S."
                 },
                 {
-                    "family": "S."
+                    "family": "Hutchinson",
+                    "given": "T. C."
                 },
                 {
-                    "family": "Hutchinson"
+                    "family": "Ryan",
+                    "given": "K. L."
                 },
                 {
-                    "family": "C.",
-                    "given": "T."
-                },
-                {
-                    "family": "Ryan"
-                },
-                {
-                    "family": "L.",
+                    "family": "Smith",
                     "given": "K."
                 },
                 {
-                    "family": "Smith"
+                    "family": "Belvin",
+                    "given": "R."
                 },
                 {
-                    "family": "K."
+                    "family": "Kovac",
+                    "given": "A."
                 },
                 {
-                    "family": "Belvin"
-                },
-                {
-                    "family": "R."
-                },
-                {
-                    "family": "Kovac"
-                },
-                {
-                    "family": "A."
-                },
-                {
-                    "family": "Pei"
-                },
-                {
-                    "family": "S."
+                    "family": "Pei",
+                    "given": "S."
                 },
                 {
                     "family": "Dowden",
-                    "given": "&"
-                },
-                {
-                    "family": "M",
-                    "given": "D."
+                    "given": "D. M."
                 }
             ],
+            "container-title": "18th World Conference on Earthquake Engineering",
             "id": "SOR-2024-PER",
             "issued": {
                 "date-parts": [
@@ -2008,6 +1964,7 @@
                     "given": "Rajesh"
                 }
             ],
+            "container-title": "Bulletin of the New Zealand Society for Earthquake Engineering",
             "id": "ARI-2020-EXP",
             "issued": {
                 "date-parts": [
@@ -2016,8 +1973,8 @@
                     ]
                 ]
             },
-            "title": "Experimental investigations into the fragility of commercial glazing systems in New Zealand",
-            "type": "paper-conference"
+            "title": "Experimental Investigation into the Seismic Fragility of a Commercial Glazing System",
+            "type": "article-journal"
         },
         "pdf_saved": true,
         "reference_id": "ARI-2020-EXP",
@@ -2066,7 +2023,7 @@
                     "given": "Dustin T."
                 },
                 {
-                    "family": "Sattard",
+                    "family": "Sattar",
                     "given": "Siamak"
                 },
                 {
@@ -2078,6 +2035,7 @@
                     "given": "John van de"
                 }
             ],
+            "container-title": "Journal of Earthquake Engineering",
             "id": "JIT-2024-SEI",
             "issued": {
                 "date-parts": [
@@ -2100,7 +2058,7 @@
             "author": [
                 {
                     "family": "Goodwin",
-                    "given": "Elliot"
+                    "given": "Elliott R."
                 },
                 {
                     "family": "Maragakis",
@@ -2111,7 +2069,7 @@
                     "given": "Ahmad"
                 }
             ],
-            "genre": "Report No. MCEER-07-13",
+            "genre": "MCEER-07-0013",
             "id": "GOO-2007-EXP",
             "issued": {
                 "date-parts": [
@@ -2133,33 +2091,23 @@
     {
         "comp_type": "Glazing",
         "csl_data": {
-            "DOI": "https://doi.org/10.1061/(ASCE)1076-0431(2003)9:2(7",
-            "URL": "https://doi.org/10.1061/(ASCE)1076-0431(2003)9:2(7",
+            "DOI": "https://doi.org/10.1061/(ASCE)1076-0431(2003)9:2(70)",
+            "URL": "https://doi.org/10.1061/(ASCE)1076-0431(2003)9:2(70)",
             "author": [
                 {
-                    "family": "Memari"
+                    "family": "Memari",
+                    "given": "Ali M."
                 },
                 {
-                    "family": "M.",
-                    "given": "A."
-                },
-                {
-                    "family": "Behr"
-                },
-                {
-                    "family": "A.",
-                    "given": "R."
+                    "family": "Behr",
+                    "given": "Richard A."
                 },
                 {
                     "family": "Kremer",
-                    "given": "&"
-                },
-                {
-                    "family": "A",
-                    "given": "P."
+                    "given": "Paul A."
                 }
             ],
-            "container-title": "Journal of architectural engineering",
+            "container-title": "Journal of Architectural Engineering",
             "id": "MEM-2003-SEI",
             "issue": "2",
             "issued": {
@@ -2222,38 +2170,27 @@
     {
         "comp_type": "Glazing",
         "csl_data": {
-            "DOI": "https://doi.org/10.1520/STP41025S",
-            "URL": "https://doi.org/10.1520/STP41025S",
+            "DOI": "https://doi.org/10.1520/JAI100407",
+            "URL": "https://doi.org/10.1520/JAI100407",
             "author": [
                 {
-                    "family": "Memari"
+                    "family": "Memari",
+                    "given": "Ali M."
                 },
                 {
-                    "family": "M.",
-                    "given": "A."
+                    "family": "Chen",
+                    "given": "Xuezhen"
                 },
                 {
-                    "family": "Chen"
-                },
-                {
-                    "family": "X."
-                },
-                {
-                    "family": "Kremer"
-                },
-                {
-                    "family": "A.",
-                    "given": "P."
+                    "family": "Kremer",
+                    "given": "Paul A."
                 },
                 {
                     "family": "Behr",
-                    "given": "&"
-                },
-                {
-                    "family": "A",
-                    "given": "R."
+                    "given": "Richard A."
                 }
             ],
+            "container-title": "Journal of ASTM International",
             "id": "MEM-2006-SEI",
             "issued": {
                 "date-parts": [
@@ -2264,7 +2201,7 @@
             },
             "note": "Memari, A. M., Chen, X., Kremer, P. A., & Behr, R. A. (2006). Seismic performance of two-side structural silicone glazing systems. In Durability of Building and Construction Sealants and Adhesives: 2nd Volume. ASTM International.",
             "title": "Seismic performance of two-side structural silicone glazing systems",
-            "type": "chapter"
+            "type": "article-journal"
         },
         "pdf_saved": true,
         "reference_id": "MEM-2006-SEI",
@@ -2277,26 +2214,16 @@
             "URL": "https://doi.org/10.1193/1.2164875",
             "author": [
                 {
-                    "family": "Memari"
+                    "family": "Memari",
+                    "given": "Ali M."
                 },
                 {
-                    "family": "M.",
-                    "given": "A."
-                },
-                {
-                    "family": "Kremer"
-                },
-                {
-                    "family": "A.",
-                    "given": "P."
+                    "family": "Kremer",
+                    "given": "Paul A."
                 },
                 {
                     "family": "Behr",
-                    "given": "&"
-                },
-                {
-                    "family": "A",
-                    "given": "R."
+                    "given": "Richard A."
                 }
             ],
             "container-title": "Earthquake Spectra",
@@ -2424,8 +2351,8 @@
                 ]
             },
             "note": "Badillo-Almaraz H., Whittaker A. S., Reinhorn A. M. and Cimellaro G. P. 2006. Seismic Fragility of Suspended Ceiling Systems, Report No. MCEER-06-0001, Department of Civil, Structural and Environmental Engineering, State University of New York, Buffalo, NY.",
-            "publisher": "Department of Civil",
-            "publisher-place": "Structural and Environmental Engineering, State University of New York, Buffalo, NY",
+            "publisher": "University at Buffalo, State University of New York",
+            "publisher-place": "Buffalo, NY",
             "title": "Seismic Fragility of Suspended Ceiling Systems",
             "type": "report"
         },
@@ -2477,11 +2404,8 @@
                 }
             ],
             "container-title": "Earthquake Spectra",
-            "issue": "3",
-            "title": "Development of Full-Scale Experiment-Based Seismic Fragility Functions for Code-Compliant Fire Sprinkler Piping Systems",
-            "type": "article-journal",
-            "volume": "42",
             "id": "BHA-2026-DEV",
+            "issue": "3",
             "issued": {
                 "date-parts": [
                     [
@@ -2489,7 +2413,10 @@
                     ]
                 ]
             },
-            "note": "Bhatta Jitendra, Cook Dustin T., Sattar Siamak, Development of Full-Scale Experiment-Based Seismic Fragility Functions for Code-Compliant Fire Sprinkler Piping Systems, Earthquake Spectra2026, 42, e70085. https://doi.org/10.1002/esp4.70085"
+            "note": "Bhatta Jitendra, Cook Dustin T., Sattar Siamak, Development of Full-Scale Experiment-Based Seismic Fragility Functions for Code-Compliant Fire Sprinkler Piping Systems, Earthquake Spectra2026, 42, e70085. https://doi.org/10.1002/esp4.70085",
+            "title": "Development of Full-Scale Experiment-Based Seismic Fragility Functions for Code-Compliant Fire Sprinkler Piping Systems",
+            "type": "article-journal",
+            "volume": "42"
         },
         "pdf_saved": true,
         "reference_id": "BHA-2026-DEV",
