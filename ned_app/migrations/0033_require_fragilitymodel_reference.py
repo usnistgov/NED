@@ -6,7 +6,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('ned_app', '0029_alter_fragilitymodel_edp_metric'),
+        ('ned_app', '0032_alter_fragilitycurve_beta_and_more'),
     ]
 
     operations = [
