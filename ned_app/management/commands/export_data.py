@@ -98,8 +98,8 @@ class Command(BaseCommand):
 
         data = []
         for ref in references:
+            # reference_id is derived at ingest, not stored in the source JSON.
             ref_data = {
-                'reference_id': ref.reference_id,
                 'study_type': ref.study_type,
                 'comp_type': ref.comp_type,
                 'pdf_saved': ref.pdf_saved,

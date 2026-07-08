@@ -146,7 +146,7 @@ class DataIntegrityTests(TransactionTestCase):
             # Map each JSON file to its sort key function
             # For tables with composite keys, use tuple sorting
             json_files = {
-                'reference.json': lambda x: x['reference_id'],
+                'reference.json': lambda x: x['csl_data']['id'],
                 'component.json': lambda x: x['component_id'],
                 'fragility_model.json': lambda x: (
                     x['reference'],

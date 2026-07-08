@@ -149,7 +149,8 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(len(reference_data), 1)
             ref_data = reference_data[0]
 
-            self.assertEqual(ref_data['reference_id'], 'test-ref-001')
+            # reference_id is derived at ingest, not stored in the exported JSON.
+            self.assertNotIn('reference_id', ref_data)
             self.assertIn('study_type', ref_data)
             self.assertEqual(ref_data['study_type'], 'Experiment')
             self.assertIn('comp_type', ref_data)

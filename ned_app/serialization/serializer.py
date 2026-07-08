@@ -23,10 +23,13 @@ class ReferenceSerializer(serializers.ModelSerializer):
     Serializer for Reference model with CSL-JSON validation.
 
     Auto-populated fields (title, author, year) are optional during deserialization
-    as they are populated by the model's save() method from csl_data.
+    as they are populated by the model's save() method from csl_data. reference_id
+    is optional: when absent (as in the canonical source JSON) it is derived on
+    save() from reference_label (or the first-author surname) and the year.
     """
 
     csl_data = serializers.JSONField()
+    reference_id = serializers.CharField(required=False)
     title = serializers.CharField(required=False, allow_blank=True)
     author = serializers.CharField(required=False, allow_blank=True)
     year = serializers.IntegerField(required=False, allow_null=True)

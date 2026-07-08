@@ -1,5 +1,7 @@
 import json
 import os
+import re
+import unicodedata
 from django.conf import settings
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -10,6 +12,52 @@ from ned_app.validators import (
     validate_positive,
     validate_reference_label,
 )
+
+
+def normalize_author_token(name):
+    """
+    Normalize an author surname into an ASCII token for a reference id.
+
+    Strips diacritics (NFKD) and removes any character that is not a letter or
+    digit, preserving case. Used when no reference_label is provided, so the
+    first-author surname becomes the id token (e.g. "Araya-Letelier" ->
+    "ArayaLetelier", "O'Brien" -> "OBrien").
+
+    Args:
+        name (str): The raw surname.
+
+    Returns:
+        str: The normalized alphanumeric token.
+    """
+    nfkd = unicodedata.normalize('NFKD', name or '')
+    ascii_only = ''.join(c for c in nfkd if not unicodedata.combining(c))
+    return re.sub(r'[^A-Za-z0-9]', '', ascii_only)
+
+
+def derive_reference_id(reference_label, csl_data):
+    """
+    Derive a reference id from its label (if any), first author, and year.
+
+    The id is '<reference_label>-<year>' when a label is set, otherwise
+    '<normalized_first_author_surname>-<year>'. The year is taken from the
+    csl_data 'issued' date-parts (online-first year by convention).
+
+    Args:
+        reference_label (str): Optional label; empty string means "use author".
+        csl_data (dict): CSL-JSON data providing 'author' and 'issued'.
+
+    Returns:
+        str: The derived reference id.
+    """
+    year = csl_data['issued']['date-parts'][0][0]
+    if reference_label:
+        token = reference_label
+    else:
+        authors = csl_data.get('author') or [{}]
+        first = authors[0] if authors else {}
+        family = first.get('family') or first.get('literal') or ''
+        token = normalize_author_token(family)
+    return f'{token}-{year}'
 
 
 # Global variable to cache the NISTIR labels for efficiency
@@ -270,6 +318,15 @@ class Reference(models.Model):
                             self.author = f'{family_names[0]} and {family_names[1]}'
                         else:  # 3 or more authors
                             self.author = f'{family_names[0]} et al.'
+
+        # Auto-generate the reference id from the label (or first-author
+        # surname) and year when it is not explicitly set. reference_id is not
+        # stored in the source JSON, so the ingest pipeline always derives it;
+        # an explicitly provided id (e.g. in tests/admin) is respected.
+        if not self.reference_id:
+            self.reference_id = derive_reference_id(
+                self.reference_label, self.csl_data
+            )
 
         super().save(*args, **kwargs)
 

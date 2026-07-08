@@ -5,7 +5,11 @@ Unit tests for the NED application validators.
 from decimal import Decimal
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-from ned_app.validators import validate_nistir_component_id, validate_positive
+from ned_app.validators import (
+    validate_nistir_component_id,
+    validate_positive,
+    validate_reference_label,
+)
 
 
 class NistirComponentIdValidatorTest(TestCase):
@@ -225,3 +229,35 @@ class PositiveValidatorTest(TestCase):
     def test_negative_raises(self):
         with self.assertRaises(ValidationError):
             validate_positive(Decimal('-0.4'))
+
+
+class ReferenceLabelValidatorTest(TestCase):
+    """Test case for the validate_reference_label validator function."""
+
+    def test_valid_labels_pass(self):
+        # Letters, digits, and internal underscores are allowed.
+        validate_reference_label('FEMA_P58')
+        validate_reference_label('Bhatta_CladdingCyclic')
+        validate_reference_label('Wang_ElevatorSystem')
+        validate_reference_label('Ju_ThreadedTee')
+
+    def test_empty_label_passes(self):
+        # An empty label is allowed; the author surname is used instead.
+        validate_reference_label('')
+
+    def test_hyphen_raises(self):
+        # The hyphen separates the label from the year, so it is not allowed.
+        with self.assertRaises(ValidationError):
+            validate_reference_label('FEMA-P58')
+
+    def test_space_raises(self):
+        with self.assertRaises(ValidationError):
+            validate_reference_label('FEMA P58')
+
+    def test_leading_underscore_raises(self):
+        with self.assertRaises(ValidationError):
+            validate_reference_label('_FEMA')
+
+    def test_trailing_underscore_raises(self):
+        with self.assertRaises(ValidationError):
+            validate_reference_label('FEMA_')

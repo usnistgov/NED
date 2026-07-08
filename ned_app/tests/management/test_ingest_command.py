@@ -561,11 +561,11 @@ class IngestCommandTests(TransactionTestCase):
             # --- 1. Initial Data Setup ---
             reference_data = [
                 {
-                    'reference_id': 'ref-idem',
+                    'reference_id': 'Test-2025',
                     'study_type': 'Experiment',
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-idem',
+                        'id': 'Test-2025',
                         'title': 'Original Title',
                         'author': [{'family': 'Test', 'given': 'John'}],
                         'issued': {'date-parts': [[2025]]},
@@ -577,7 +577,7 @@ class IngestCommandTests(TransactionTestCase):
 
             fragility_model_data = [
                 {
-                    'reference': 'ref-idem',
+                    'reference': 'Test-2025',
                     'model_id': 'fm-idem',
                     'comp_description': 'Original FM Description',
                     'reviewer': 'Test Reviewer',
@@ -590,14 +590,14 @@ class IngestCommandTests(TransactionTestCase):
             component_fragility_bridge_data = [
                 {
                     'component': 'A.10.1.1',
-                    'fragility_model': 'ref-idem|fm-idem',
+                    'fragility_model': 'Test-2025|fm-idem',
                 }
             ]
 
             experiment_data = [
                 {
                     'id': 'exp-idem',
-                    'reference': 'ref-idem',
+                    'reference': 'Test-2025',
                     'component': 'A.10.1.1',
                     'test_type': 'Quasi-static Cyclic, uniaxial',
                     'comp_description': 'A typical steel frame component.',
@@ -610,12 +610,12 @@ class IngestCommandTests(TransactionTestCase):
             ]
 
             bridge_data = [
-                {'experiment': 'exp-idem', 'fragility_model': 'ref-idem|fm-idem'}
+                {'experiment': 'exp-idem', 'fragility_model': 'Test-2025|fm-idem'}
             ]
 
             fragility_curve_data = [
                 {
-                    'fragility_model': 'ref-idem|fm-idem',
+                    'fragility_model': 'Test-2025|fm-idem',
                     'ds_rank': 1,
                     'ds_description': 'Original FC Description',
                     'median': '0.01',
@@ -656,14 +656,14 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
 
-                ref = Reference.objects.get(reference_id='ref-idem')
+                ref = Reference.objects.get(reference_id='Test-2025')
                 self.assertEqual(ref.title, 'Original Title')
 
                 comp = Component.objects.get(component_id='A.10.1.1')
                 self.assertEqual(comp.name, 'Original Name')
 
                 fm = FragilityModel.objects.get(
-                    fragility_model_id='ref-idem|fm-idem'
+                    fragility_model_id='Test-2025|fm-idem'
                 )
                 self.assertEqual(fm.comp_description, 'Original FM Description')
 
@@ -715,7 +715,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(FragilityCurve.objects.count(), 1)
 
                 # --- 6. Verify Updates in Database ---
-                ref = Reference.objects.get(reference_id='ref-idem')
+                ref = Reference.objects.get(reference_id='Test-2025')
                 ref.refresh_from_db()
                 self.assertEqual(ref.title, 'Updated Title')
 
@@ -724,7 +724,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(comp.name, 'Updated Name')
 
                 fm = FragilityModel.objects.get(
-                    fragility_model_id='ref-idem|fm-idem'
+                    fragility_model_id='Test-2025|fm-idem'
                 )
                 fm.refresh_from_db()
                 self.assertEqual(fm.comp_description, 'Updated FM Description')
@@ -734,7 +734,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(exp.ds_description, 'Updated EXP Description')
 
                 fc = FragilityCurve.objects.get(
-                    fragility_model__fragility_model_id='ref-idem|fm-idem',
+                    fragility_model__fragility_model_id='Test-2025|fm-idem',
                     ds_rank=1,
                 )
                 fc.refresh_from_db()
