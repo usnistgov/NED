@@ -336,7 +336,7 @@ Directly edit the JSON files in the `resources/data/` directory.
 *   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
 *   **Templates:** Check `resources/example_data/` for examples of proper formatting.
 
-> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Set `reference_label` (letters, digits, and underscores only — no hyphens) to override the surname token — for institutional authors (e.g. `FEMA_P58`) or to disambiguate one author's multiple same-year works (e.g. `Bhatta_CladdingCyclic`). Any `id` inside `csl_data` is **stripped on ingest** so it cannot disagree with the derived id. Records in `experiment.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
+> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Set `reference_label` (letters, digits, and underscores only — no hyphens, not a bare year, at most 100 characters) to override the surname token — for institutional authors (e.g. `FEMA_P58`) or to disambiguate one author's multiple same-year works (e.g. `Bhatta_CladdingCyclic`). Any `id` inside `csl_data` is **stripped on ingest** so it cannot disagree with the derived id. Records in `experiment.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
 
 **Option B — Import from CSV** (useful for larger datasets or contributors who prefer spreadsheet tools):
 Populate a CSV template from `resources/import_templates/` and use the appropriate import command:
@@ -611,7 +611,7 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_csl_data
 - **Missing test data**: Ensure test fixtures and sample data are properly set up
 - **Import errors**: Check that all required dependencies are installed with `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
 
-**Test coverage**: The project has 185 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
+**Test coverage**: The project has 189 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
 
 **Data Integrity Tests**: The test suite includes critical end-to-end validation tests that ensure the integrity of the Git-as-Source data pipeline:
 - `test_db_round_trip`: Validates that data can be exported from the database and re-ingested without loss
