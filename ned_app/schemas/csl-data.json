@@ -456,7 +456,7 @@
         ]
       }
     },
-    "required": ["type", "id"],
+    "required": ["type"],
     "additionalProperties": false
   },
   "definitions": {

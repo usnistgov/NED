@@ -336,6 +336,8 @@ Directly edit the JSON files in the `resources/data/` directory.
 *   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
 *   **Templates:** Check `resources/example_data/` for examples of proper formatting.
 
+> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Set `reference_label` (letters, digits, and underscores only — no hyphens) to override the surname token — for institutional authors (e.g. `FEMA_P58`) or to disambiguate one author's multiple same-year works (e.g. `Bhatta_CladdingCyclic`). Any `id` inside `csl_data` is **stripped on ingest** so it cannot disagree with the derived id. Records in `experiment.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
+
 **Option B — Import from CSV** (useful for larger datasets or contributors who prefer spreadsheet tools):
 Populate a CSV template from `resources/import_templates/` and use the appropriate import command:
 ```bash

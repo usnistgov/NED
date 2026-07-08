@@ -1,13 +1,12 @@
 [
   {
-    "_comment": "This is an example for a Reference object. The csl_data field contains Citation Style Language (CSL) JSON format citation metadata.",
-    "reference_id": "SMITH-2020-EXP",
+    "_comment": "Example Reference object. Do NOT supply 'id' in csl_data -- any provided id is stripped on ingest so it cannot disagree with the derived id. reference_label is optional (letters, digits, and underscores only; no hyphens); set it to override the surname token, e.g. 'FEMA_P58' for an institutional author or 'Smith_CladdingCyclic' to disambiguate one author's multiple same-year works. Leave it empty to use the first-author surname.",
+    "reference_label": "",
     "study_type": "Experiment",
     "comp_type": "Example Component Type Description",
     "pdf_saved": "True",
     "csl_data": {
       "type": "article-journal",
-      "id": "SMITH-2020-EXP",
       "title": "Example Study Title",
       "author": [
         {"family": "Smith", "given": "John"},

@@ -116,6 +116,11 @@ class ReferenceSerializer(serializers.ModelSerializer):
         except jsonschema.ValidationError as e:
             raise serializers.ValidationError(f'CSL data validation failed: {e}')
 
+        # The CSL 'id' is not stored: reference_id is auto-derived and is the
+        # single identifier. Any contributor-provided id is dropped here so it
+        # can never disagree with the derived reference_id.
+        value.pop('id', None)
+
         return value
 
 

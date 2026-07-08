@@ -22,7 +22,6 @@
                     "given": "Elliot"
                 }
             ],
-            "id": "ARA-2012-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -51,7 +50,6 @@
             ],
             "event-place": "Lisbon, Portugal",
             "event-title": "15th World Conference on Earthquake Engineering",
-            "id": "ARA-2012-NOV",
             "issued": {
                 "date-parts": [
                     [
@@ -98,7 +96,6 @@
                 }
             ],
             "container-title": "Earthquake Spectra",
-            "id": "AST-2015-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -123,7 +120,6 @@
                     "given": "Andrew"
                 }
             ],
-            "id": "BAI-2014-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -153,7 +149,6 @@
                 }
             ],
             "container-title": "International Journal of Pressure Vessels and Piping",
-            "id": "BUS-2015-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -192,7 +187,6 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
-            "id": "CRA-2016-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -230,7 +224,6 @@
                 }
             ],
             "container-title": "Bulletin of the New Zealand Society for Earthquake Engineering",
-            "id": "CRE-2016-OUT",
             "issued": {
                 "date-parts": [
                     [
@@ -266,7 +259,6 @@
                 }
             ],
             "genre": "NEES Nonstructural Technical Report MCEER-11-0005",
-            "id": "DAV-2011-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -293,7 +285,6 @@
                     "given": "George"
                 }
             ],
-            "id": "GEO-2004-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -330,7 +321,6 @@
                     "given": "Maria Rosaria"
                 }
             ],
-            "id": "GIA-2018-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -353,7 +343,6 @@
                     "given": "Elliott R"
                 }
             ],
-            "id": "GOO-2004-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -399,7 +388,6 @@
                 }
             ],
             "container-title": "Engineering Structures",
-            "id": "HET-2021-CYC",
             "issued": {
                 "date-parts": [
                     [
@@ -424,7 +412,6 @@
                     "given": "Christopher"
                 }
             ],
-            "id": "HIG-2009-PRE",
             "issued": {
                 "date-parts": [
                     [
@@ -471,7 +458,6 @@
                 }
             ],
             "container-title": "Bulletin of the New Zealand Society for Earthquake Engineering",
-            "id": "JIT-2021-THE",
             "issued": {
                 "date-parts": [
                     [
@@ -505,7 +491,6 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
-            "id": "JIT-2022-CYC",
             "issued": {
                 "date-parts": [
                     [
@@ -544,7 +529,6 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
-            "id": "JIT-2022-LOW",
             "issued": {
                 "date-parts": [
                     [
@@ -579,7 +563,6 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
-            "id": "JIT-2022-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -614,7 +597,6 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
-            "id": "JIT-2023-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -649,7 +631,6 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
-            "id": "JIT-2023-SEI-2",
             "issued": {
                 "date-parts": [
                     [
@@ -692,7 +673,6 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
-            "id": "JIT-2023-SEI-3",
             "issued": {
                 "date-parts": [
                     [
@@ -743,7 +723,6 @@
                 }
             ],
             "container-title": "Structures Congress 2012",
-            "id": "KUR-2012-RES",
             "issued": {
                 "date-parts": [
                     [
@@ -786,7 +765,6 @@
                 }
             ],
             "container-title": "Earthquake Engineering & Structural Dynamics",
-            "id": "LEE-2007-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -814,7 +792,6 @@
                 }
             ],
             "genre": "CUREE-Caltech Woodframe Project Publication No",
-            "id": "MCM-2002-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -841,7 +818,6 @@
                     "given": "Muhammed"
                 }
             ],
-            "id": "MUH-2022-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -864,7 +840,6 @@
                     "given": "Elide"
                 }
             ],
-            "id": "PAN-2016-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -902,7 +877,6 @@
                 }
             ],
             "container-title": "Structures Congress 2014",
-            "id": "RAH-2014-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -937,7 +911,6 @@
             ],
             "container-title": "Proceedings of the 10th U.S. National Conference on Earthquake Engineering",
             "event-place": "Anchorage, AK",
-            "id": "RAH-2014-SYS",
             "issued": {
                 "date-parts": [
                     [
@@ -968,7 +941,6 @@
                     "given": "Andrew"
                 }
             ],
-            "id": "RES-2011-PER",
             "issued": {
                 "date-parts": [
                     [
@@ -1013,7 +985,6 @@
                     "given": "Taichiro"
                 }
             ],
-            "id": "RYA-2015-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -1050,7 +1021,6 @@
             ],
             "event-place": "Lisbon, Portugal",
             "event-title": "15th World Conference on Earthquake Engineering",
-            "id": "RYU-2012-FUL",
             "issued": {
                 "date-parts": [
                     [
@@ -1081,7 +1051,6 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
-            "id": "RYU-2019-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -1104,7 +1073,6 @@
                     "given": "Siavash"
                 }
             ],
-            "id": "SOR-2013-ANA",
             "issued": {
                 "date-parts": [
                     [
@@ -1146,7 +1114,6 @@
                 }
             ],
             "container-title": "Journal of Structural Engineering",
-            "id": "SOR-2018-FRA",
             "issued": {
                 "date-parts": [
                     [
@@ -1184,7 +1151,6 @@
                     "given": "Sung-Woo"
                 }
             ],
-            "id": "SUN-2021-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -1221,7 +1187,6 @@
                     "given": "Jichao"
                 }
             ],
-            "id": "TAO-2019-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -1247,7 +1212,6 @@
                     "given": "Ali"
                 }
             ],
-            "id": "TAS-2014-DAM",
             "issued": {
                 "date-parts": [
                     [
@@ -1293,7 +1257,6 @@
                     "given": "Raffaele"
                 }
             ],
-            "id": "PAL-2018-INP",
             "issued": {
                 "date-parts": [
                     [
@@ -1343,7 +1306,6 @@
                 }
             ],
             "container-title": "Earthquake Engineering & Structural Dynamics",
-            "id": "WAN-2016-SHA",
             "issued": {
                 "date-parts": [
                     [
@@ -1377,7 +1339,6 @@
                     "given": "Gilberto"
                 }
             ],
-            "id": "YUA-2015-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -1415,7 +1376,6 @@
                     "given": "Kuo-Chun"
                 }
             ],
-            "id": "ZHE-2016-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -1449,7 +1409,6 @@
                 }
             ],
             "container-title": "Journal of Performance of Constructed Facilities",
-            "id": "BAO-2017-SHA",
             "issued": {
                 "date-parts": [
                     [
@@ -1491,7 +1450,6 @@
                 }
             ],
             "container-title": "Nuclear Engineering and Technology",
-            "id": "SUN-2021-EVA",
             "issued": {
                 "date-parts": [
                     [
@@ -1525,7 +1483,6 @@
                 }
             ],
             "container-title": "Materials",
-            "id": "CHA-2022-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -1570,7 +1527,6 @@
                     "given": "Brian"
                 }
             ],
-            "id": "WAN-2018-EAR",
             "issued": {
                 "date-parts": [
                     [
@@ -1640,7 +1596,6 @@
                     "given": "Hae-jun"
                 }
             ],
-            "id": "PAN-2013-FUL",
             "issued": {
                 "date-parts": [
                     [
@@ -1720,7 +1675,6 @@
                 }
             ],
             "container-title": "Earthquake Spectra",
-            "id": "PAN-2016-FUL",
             "issued": {
                 "date-parts": [
                     [
@@ -1767,7 +1721,6 @@
                 }
             ],
             "container-title": "Engineering Structures",
-            "id": "ZHA-2024-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -1814,7 +1767,6 @@
                 }
             ],
             "container-title": "Bulletin of Earthquake Engineering",
-            "id": "ZHA-2023-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -1853,7 +1805,6 @@
                 }
             ],
             "container-title": "Structures",
-            "id": "CON-2021-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -1905,7 +1856,6 @@
                 }
             ],
             "container-title": "18th World Conference on Earthquake Engineering",
-            "id": "SOR-2024-PER",
             "issued": {
                 "date-parts": [
                     [
@@ -1940,7 +1890,6 @@
                 }
             ],
             "container-title": "Bulletin of the New Zealand Society for Earthquake Engineering",
-            "id": "ARI-2020-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -1963,7 +1912,6 @@
                     "given": "Yuan"
                 }
             ],
-            "id": "TIA-2012-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -2010,7 +1958,6 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
-            "id": "JIT-2024-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -2044,7 +1991,6 @@
                 }
             ],
             "genre": "MCEER-07-0013",
-            "id": "GOO-2007-EXP",
             "issued": {
                 "date-parts": [
                     [
@@ -2082,7 +2028,6 @@
                 }
             ],
             "container-title": "Journal of Architectural Engineering",
-            "id": "MEM-2003-SEI",
             "issue": "2",
             "issued": {
                 "date-parts": [
@@ -2126,7 +2071,6 @@
                     "given": "Richard"
                 }
             ],
-            "id": "MEM-2011-ARC",
             "issued": {
                 "date-parts": [
                     [
@@ -2165,7 +2109,6 @@
                 }
             ],
             "container-title": "Journal of ASTM International",
-            "id": "MEM-2006-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -2201,7 +2144,6 @@
                 }
             ],
             "container-title": "Earthquake Spectra",
-            "id": "MEM-2006-ARC",
             "issue": "1",
             "issued": {
                 "date-parts": [
@@ -2229,7 +2171,6 @@
                     "given": "William"
                 }
             ],
-            "id": "OBR-2009-DEV",
             "issued": {
                 "date-parts": [
                     [
@@ -2253,7 +2194,6 @@
                     "family": "FEMA"
                 }
             ],
-            "id": "FEM-2018-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -2278,7 +2218,6 @@
                     "given": "Christopher"
                 }
             ],
-            "id": "HIG-2011-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -2315,7 +2254,6 @@
                 }
             ],
             "genre": "Report No. MCEER-06-0001",
-            "id": "BAD-2006-SEI",
             "issued": {
                 "date-parts": [
                     [
@@ -2341,7 +2279,6 @@
                     "given": "Gilberto"
                 }
             ],
-            "id": "MOS-2016-INT",
             "issued": {
                 "date-parts": [
                     [
@@ -2375,7 +2312,6 @@
                 }
             ],
             "container-title": "Earthquake Spectra",
-            "id": "BHA-2026-DEV",
             "issue": "3",
             "issued": {
                 "date-parts": [

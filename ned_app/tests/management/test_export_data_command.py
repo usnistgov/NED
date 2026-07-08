@@ -33,7 +33,6 @@ class ExportDataCommandTest(TestCase):
             pdf_saved=True,
             csl_data={
                 'type': 'article-journal',
-                'id': 'test-ref-001',
                 'title': 'Test Reference Article',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2023]]},
@@ -158,7 +157,7 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('pdf_saved', ref_data)
             self.assertEqual(ref_data['pdf_saved'], True)
             self.assertIn('csl_data', ref_data)
-            self.assertEqual(ref_data['csl_data']['id'], 'test-ref-001')
+            self.assertNotIn('id', ref_data['csl_data'])
             self.assertEqual(ref_data['csl_data']['title'], 'Test Reference Article')
             self.assertEqual(ref_data['csl_data']['type'], 'article-journal')
             self.assertEqual(
