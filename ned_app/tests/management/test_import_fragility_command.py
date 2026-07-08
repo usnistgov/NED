@@ -65,13 +65,12 @@ class ImportFragilityCommandTests(TransactionTestCase):
 
     def _make_base_data(self):
         Reference.objects.create(
-            reference_id='SMITH-2020-EXP',
+            reference_id='Smith-2020',
             study_type='Experiment',
             comp_type='Sprinkler systems',
             pdf_saved=True,
             csl_data={
                 'type': 'article-journal',
-                'id': 'SMITH-2020-EXP',
                 'title': 'Seismic performance of CPVC sprinkler systems',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2020]]},
@@ -129,7 +128,7 @@ class ImportFragilityCommandTests(TransactionTestCase):
             'comp_description,reviewer,source,edp_metric,edp_unit,component_ids,'
             'ds_rank,ds_description,median,beta,probability,basis,num_observations\n'
         )
-        common = 'SMITH-2020-EXP,fra001,,Back-braced,CPVC,2 inch,'
+        common = 'Smith-2020,fra001,,Back-braced,CPVC,2 inch,'
         tail = (
             ',Reviewer,Literature,"Peak Floor Acceleration, horizontal",g,'
             'A.40.1.1,{rank},DS,{median},0.4,1.0,Experiment,30\n'
@@ -165,7 +164,7 @@ class ImportFragilityCommandTests(TransactionTestCase):
         with open(
             self._json_path('fragility_model.json'), 'w', encoding='utf-8'
         ) as f:
-            json.dump([{'reference': 'SMITH-2020-EXP', 'model_id': 'fra001'}], f)
+            json.dump([{'reference': 'Smith-2020', 'model_id': 'fra001'}], f)
 
         out = StringIO()
         call_command('import_fragility', input_file=FRAGILITY_TEMPLATE, stdout=out)
@@ -183,7 +182,7 @@ class ImportFragilityCommandTests(TransactionTestCase):
             'ds_rank,ds_description,median,beta,probability,basis,num_observations\n'
         )
         row = (
-            'SMITH-2020-EXP,fraX,,Braced,CPVC,2 inch,Desc,Rev,Lit,'
+            'Smith-2020,fraX,,Braced,CPVC,2 inch,Desc,Rev,Lit,'
             '"Peak Floor Acceleration, horizontal",g,A.40.1.1,'
             'one,Leak,0.5,0.4,1.0,Experiment,30\n'
         )

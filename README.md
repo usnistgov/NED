@@ -209,16 +209,16 @@ CSV templates with example rows are provided in `resources/import_templates/`. C
 
 ### CSV Conventions
 
-- **Foreign key columns** accept natural key values, not numeric IDs:
-  - `reference` → the `reference_id` string (e.g., `SMITH-2020-EXP`)
-  - `component` → the `component_id` string (e.g., `D.50.2.1.A`)
-  - `fragility_model` → the full `fragility_model_id` string (e.g., `SMITH-2020-EXP|fra001`)
-  - `experiment` → the experiment `id` string
+- **Foreign key columns** point at an existing record by its identifier, not a numeric database ID:
+  - `reference` → the generated id of the reference it belongs to (e.g., `Smith-2020`)
+  - `component` → the `component_id` (e.g., `D.50.2.1.A`)
+  - `fragility_model` → the full `fragility_model_id` (e.g., `Smith-2020|fra001`)
+  - `experiment` → the experiment `id`
 - **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
 - **Optional numeric fields** (e.g., `alt_edp_value`) may be left blank; they will be stored as `null`.
 - **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
 - Files should be **UTF-8** encoded and **comma-delimited**. Some non-US Excel versions save semicolon-delimited CSVs; if the importer reports this, re-save as *CSV UTF-8 (Comma delimited)*.
-- Because the `Reference` model stores citation data as nested CSL-JSON, the CSV template uses flattened `csl_*` columns that the command reconstructs internally.
+- **Reference imports** use flattened `csl_*` columns for the bibliographic details; the command reconstructs them into the nested CSL-JSON `csl_data`. NED generates the `reference_id` for you at ingest from the first author's surname and the year (e.g. `Smith-2020`). Fill the optional `reference_label` column when you want to choose the token yourself — for an institutional author (e.g. `FEMA_P58`) or to distinguish one author's multiple same-year works (e.g. `Bhatta_CladdingCyclic`); labels use letters, digits, and underscores only (no hyphens). See [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data) for details.
 
 ### Examples
 
@@ -611,7 +611,7 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_csl_data
 - **Missing test data**: Ensure test fixtures and sample data are properly set up
 - **Import errors**: Check that all required dependencies are installed with `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
 
-**Test coverage**: The project has 183 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
+**Test coverage**: The project has 185 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
 
 **Data Integrity Tests**: The test suite includes critical end-to-end validation tests that ensure the integrity of the Git-as-Source data pipeline:
 - `test_db_round_trip`: Validates that data can be exported from the database and re-ingested without loss

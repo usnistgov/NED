@@ -1,6 +1,6 @@
 [
   {
-    "_comment": "Example Reference object. Do NOT supply 'id' in csl_data -- any provided id is stripped on ingest so it cannot disagree with the derived id. reference_label is optional (letters, digits, and underscores only; no hyphens); set it to override the surname token, e.g. 'FEMA_P58' for an institutional author or 'Smith_CladdingCyclic' to disambiguate one author's multiple same-year works. Leave it empty to use the first-author surname.",
+    "_comment": "Example Reference object. Provide the bibliographic details in csl_data; the reference_id is generated automatically at ingest as <reference_label>-<year>, or <first-author-surname>-<year> when no label is set (this example derives 'Smith-2020'). reference_label is optional (letters, digits, and underscores only; no hyphens): choose the token yourself, e.g. 'FEMA_P58' for an institutional author or 'Smith_CladdingCyclic' to distinguish one author's multiple same-year works; leave it empty to use the first-author surname. Any 'id' inside csl_data (e.g. copied from a reference manager) is ignored.",
     "reference_label": "",
     "study_type": "Experiment",
     "comp_type": "Example Component Type Description",
