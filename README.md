@@ -42,11 +42,11 @@ The purpose of the DS Class attribute is to provide a first-pass structured grou
 All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
 
 ## Visualization Tools
-Several jupyter-notebook-based database user interface tools are provided in the `visualization_tools` subdirectory. These tools allow users to interact with data in the SQL database, query specific data views, and download cvs files without the need to code. 
+Several jupyter-notebook-based database user interface tools are provided in the `visualization_tools` subdirectory. These tools allow users to interact with data in the SQL database, query specific data views, and download csv files without the need to code. 
 
 Two predefined workflows are provided:
-- **visualization_tools/view_experemints.ipynb** - Queury experimental tests of nonstructural components in the database by component type and component detail, download data, and plot distributions of peak test demands at the occurrence of various damage states.
-- **visualization_tools/view_experemints.ipynb** - Queury fragility models of nonstructural components in the database by component type and component detail, download data, and plot fragility curves for various damage states.
+- **visualization_tools/view_experiments.ipynb** - Query experimental tests of nonstructural components in the database by component type and component detail, download data, and plot distributions of peak test demands at the occurrence of various damage states.
+- **visualization_tools/view_fragilities.ipynb** - Query fragility models of nonstructural components in the database by component type and component detail, download data, and plot fragility curves for various damage states.
 
 ### Running the Notebook
 Prior to running a notebook, first ensure that all required packages have been installed by running the following command:
@@ -54,12 +54,12 @@ Prior to running a notebook, first ensure that all required packages have been i
 pip install -r visualization_tools/requirements.txt
 ```
 
-Once all required packages have been installed, open the Jupyter Notbeook by running the following command:
+Once all required packages have been installed, open the Jupyter Notebook by running the following command:
 ```
-Jupter Notebook
+jupyter notebook
 ```
 
-For additional instructions please see the Juptyer Notebook installation instructions: https://jupyter.org/install
+For additional instructions please see the Jupyter Notebook installation instructions: https://jupyter.org/install
 
 ## Exporting Data to CSV
 
@@ -209,16 +209,16 @@ CSV templates with example rows are provided in `resources/import_templates/`. C
 
 ### CSV Conventions
 
-- **Foreign key columns** accept natural key values, not numeric IDs:
-  - `reference` → the `reference_id` string (e.g., `SMITH-2020-EXP`)
-  - `component` → the `component_id` string (e.g., `D.50.2.1.A`)
-  - `fragility_model` → the full `fragility_model_id` string (e.g., `SMITH-2020-EXP|fra001`)
-  - `experiment` → the experiment `id` string
+- **Foreign key columns** point at an existing record by its identifier, not a numeric database ID:
+  - `reference` → the generated id of the reference it belongs to (e.g., `Smith-2020`)
+  - `component` → the `component_id` (e.g., `D.50.2.1.A`)
+  - `fragility_model` → the full `fragility_model_id` (e.g., `Smith-2020|fra001`)
+  - `experiment` → the experiment `id`
 - **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
 - **Optional numeric fields** (e.g., `alt_edp_value`) may be left blank; they will be stored as `null`.
 - **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
 - Files should be **UTF-8** encoded and **comma-delimited**. Some non-US Excel versions save semicolon-delimited CSVs; if the importer reports this, re-save as *CSV UTF-8 (Comma delimited)*.
-- Because the `Reference` model stores citation data as nested CSL-JSON, the CSV template uses flattened `csl_*` columns that the command reconstructs internally.
+- **Reference imports** use flattened `csl_*` columns for the bibliographic details; the command reconstructs them into the nested CSL-JSON `csl_data`. NED generates the `reference_id` for you at ingest from the first author's surname and the year (e.g. `Smith-2020`). Fill the optional `reference_label` column to choose the token yourself — for an institutional author (e.g. `FEMA_P58`), or when two references would otherwise derive the same id (same surname and year), which **requires** a distinguishing label. Labels use letters, digits, and underscores only (no hyphens, not a bare year, at most 100 characters). See [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data) for details.
 
 ### Examples
 
@@ -319,7 +319,7 @@ python manage.py ingest
 The `ingest` command reads all JSON files from `resources/data/` and populates the SQLite database. This step is mandatory for local development, as the `db.sqlite3` file is not tracked in version control—it's a disposable build artifact generated from the JSON source data.
 
 ### How to Add New Data or Modify Existing Data
-We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data, or correctinng existing records involves working directly with the JSON files that serve as our single source of truth.
+We welcome contributions of new experimental results, reference data, and fragility models! Because NED uses a **"Git-as-Source"** architecture, adding data, or correcting existing records involves working directly with the JSON files that serve as our single source of truth.
 
 
 Follow this step-by-step guide to contribute:
@@ -336,6 +336,8 @@ Directly edit the JSON files in the `resources/data/` directory.
 *   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
 *   **Templates:** Check `resources/example_data/` for examples of proper formatting.
 
+> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Use `reference_label` (letters, digits, and underscores only — no hyphens, not a bare year, at most 100 characters) to choose the token yourself — for an institutional author (e.g. `FEMA_P58`) or one author's multiple works (e.g. `Bhatta_CladdingCyclic`). **A distinguishing `reference_label` is required whenever two references would otherwise derive the same id** (same first-author surname and year); without one they collide and silently merge on ingest, so a data-integrity test rejects duplicate derived ids. Any `reference_id`, or any `id` inside `csl_data`, that you include is **ignored and stripped on ingest**, so a stored value can never disagree with the derived id. Records in `experiment.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
+
 **Option B — Import from CSV** (useful for larger datasets or contributors who prefer spreadsheet tools):
 Populate a CSV template from `resources/import_templates/` and use the appropriate import command:
 ```bash
@@ -347,8 +349,8 @@ python manage.py import_fragility --input_file my_fragilities.csv
 ```
 See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
 *   **Common Files:**
-    *   `experiments.json`: For new experimental results.
-    *   `references.json`: For new bibliographic references.
+    *   `experiment.json`: For new experimental results.
+    *   `reference.json`: For new bibliographic references.
     *   `fragility_model.json`: For new fragility functions.
 *   **Editing Existing Records:** Only modify field values; do **not** change the data structure or schema.    
 
@@ -359,6 +361,8 @@ If modifying existing data:
     *   Updating numeric values or material classifications
     *   Adding or refining component details
     *   Correcting references or citations
+
+> **For large or systematic edits, use a script — don't hand-edit or use the Django admin.** When a change touches many records (e.g. renaming a value across the dataset or recomputing a derived field), write a small script that performs the edit and commit it together with the resulting JSON change, so a reviewer can see the logic behind the diff. Remove the script in a follow-up commit once the change is merged. Large opaque hand-edits — and the Django admin, whose changes leave no reviewable logic and bypass the ingest validation and id-derivation rules — make the diff challenging to audit.
 
 #### 3. Validate Locally (Recommended)
 Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
@@ -502,7 +506,7 @@ NED implements a **"Git-as-Source"** data pipeline where JSON files serve as the
 - Reads data from the database
 - Serializes models back to JSON format
 - Writes canonical JSON files to `resources/data/`
-- Used to generate the authoritative JSON after making changes via Django admin or code
+- Used to regenerate the canonical JSON from the database — e.g. after a schema migration (see the Round-Trip protocol) or a scripted data fix
 
 ### Data Flow
 
@@ -514,7 +518,7 @@ SQLite Database (db.sqlite3)
 JSON Files (resources/data/)
 ```
 
-This bidirectional pipeline enables both programmatic data entry (via JSON) and manual curation (via Django admin), while maintaining JSON as the canonical source.
+This bidirectional pipeline maintains JSON as the canonical source: the database is rebuilt from JSON via `ingest`, and regenerated back to JSON via `export_data` after a migration or scripted change.
 
 
 ### Code quality assurance
@@ -590,13 +594,13 @@ python manage.py test ned_app.tests
 **To run specific test files:**
 ```bash
 python manage.py test ned_app.tests.test_models
-python manage.py test ned_app.tests.test_serializers
-python manage.py test ned_app.tests.test_data_processor
+python manage.py test ned_app.tests.serialization.test_serializers
+python manage.py test ned_app.tests.test_data_integrity
 ```
 
 **To run a specific test method:**
 ```bash
-python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_csl_data_validation
+python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_save_populates_title_from_csl_data
 ```
 
 **Understanding test output:**
@@ -609,7 +613,7 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_csl_data
 - **Missing test data**: Ensure test fixtures and sample data are properly set up
 - **Import errors**: Check that all required dependencies are installed with `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
 
-**Test coverage**: The project has 94 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
+**Test coverage**: The project has 191 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
 
 **Data Integrity Tests**: The test suite includes critical end-to-end validation tests that ensure the integrity of the Git-as-Source data pipeline:
 - `test_db_round_trip`: Validates that data can be exported from the database and re-ingested without loss

@@ -4,8 +4,49 @@ Custom validators for the NED application.
 
 import json
 import os
+import re
 from django.conf import settings
 from django.core.exceptions import ValidationError
+
+
+def validate_reference_label(value):
+    """
+    Validate an optional reference label used to build a reference id.
+
+    When set, the label replaces the first-author surname when deriving the
+    reference id (e.g. 'FEMA_P58' -> 'FEMA_P58-2018'). Rules for a non-empty
+    label: letters, digits, and underscores only -- no hyphens (the hyphen
+    separates the label from the year) and no leading or trailing underscore;
+    it must not be a bare year (the year is appended automatically); and it is
+    capped at 100 characters (the same bound as the model column). An empty
+    value is allowed; the normalized first-author surname is used instead.
+
+    Args:
+        value (str): The reference label to validate.
+
+    Raises:
+        ValidationError: If a non-empty label violates the rules.
+    """
+    if not value:
+        return
+    if not re.fullmatch(r'[A-Za-z0-9_]+', value):
+        raise ValidationError(
+            f'reference_label "{value}" may contain only letters, digits, and '
+            f'underscores (no hyphens or spaces).'
+        )
+    if value.startswith('_') or value.endswith('_'):
+        raise ValidationError(
+            f'reference_label "{value}" must not start or end with an underscore.'
+        )
+    if re.fullmatch(r'[0-9]+', value):
+        raise ValidationError(
+            f'reference_label "{value}" must not be a bare year; the year is '
+            f'appended automatically to form the reference id.'
+        )
+    if len(value) > 100:
+        raise ValidationError(
+            f'reference_label must be at most 100 characters (got {len(value)}).'
+        )
 
 
 # Global variable to cache the labels for efficiency

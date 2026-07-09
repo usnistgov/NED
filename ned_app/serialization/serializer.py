@@ -12,7 +12,10 @@ from ned_app.models import (
     ComponentFragilityModelBridge,
     FragilityCurve,
 )
-from ned_app.validators import validate_nistir_component_id
+from ned_app.validators import (
+    validate_nistir_component_id,
+    validate_reference_label,
+)
 
 
 class ReferenceSerializer(serializers.ModelSerializer):
@@ -20,18 +23,26 @@ class ReferenceSerializer(serializers.ModelSerializer):
     Serializer for Reference model with CSL-JSON validation.
 
     Auto-populated fields (title, author, year) are optional during deserialization
-    as they are populated by the model's save() method from csl_data.
+    as they are populated by the model's save() method from csl_data. reference_id
+    is read-only: it is always derived on save() from reference_label (or the
+    first-author surname) and the year. Any value supplied in the input is
+    ignored.
     """
 
     csl_data = serializers.JSONField()
+    reference_id = serializers.CharField(read_only=True)
     title = serializers.CharField(required=False, allow_blank=True)
     author = serializers.CharField(required=False, allow_blank=True)
     year = serializers.IntegerField(required=False, allow_null=True)
+    reference_label = serializers.CharField(
+        required=False, allow_blank=True, validators=[validate_reference_label]
+    )
 
     class Meta:
         model = Reference
         fields = [
             'reference_id',
+            'reference_label',
             'title',
             'author',
             'year',
@@ -106,6 +117,11 @@ class ReferenceSerializer(serializers.ModelSerializer):
         except jsonschema.ValidationError as e:
             raise serializers.ValidationError(f'CSL data validation failed: {e}')
 
+        # The CSL 'id' is not stored: reference_id is auto-derived and is the
+        # single identifier. Any contributor-provided id is dropped here so it
+        # can never disagree with the derived reference_id.
+        value.pop('id', None)
+
         return value
 
 
@@ -147,8 +163,6 @@ class FragilityModelSerializer(serializers.ModelSerializer):
     reference = serializers.SlugRelatedField(
         slug_field='reference_id',
         queryset=Reference.objects.all(),
-        required=False,
-        allow_null=True,
     )
 
     class Meta:

@@ -18,7 +18,9 @@ from ned_app.serialization.serializer import (
 _MODEL_CONFIG = {
     'Reference': {
         'json_file': 'reference.json',
-        'pk_fields': ['reference_id'],
+        # No dedupe: reference_id is derived (not a stored field), and the
+        # importer is a pure converter. Duplicate and collision detection live at
+        # ingest and in the data-integrity tests.
         'serializer': ReferenceSerializer,
     },
     'Experiment': {
@@ -99,7 +101,6 @@ def _build_csl_data(row):
         year = year_raw
     csl_data = {
         'type': row.get('csl_type', '').strip(),
-        'id': row.get('reference_id', '').strip(),
         'title': row.get('csl_title', '').strip(),
         'issued': {'date-parts': [[year]]},
         'author': _parse_authors(row.get('csl_authors', '')),
@@ -129,7 +130,7 @@ def _row_to_record(row, model_name):
     if model_name == 'Reference':
         record = {}
         for key, val in row.items():
-            if not key or key in _CSL_COLUMNS:
+            if not key or key in _CSL_COLUMNS or key == 'reference_id':
                 continue
             if isinstance(val, str):
                 val = val.strip()
@@ -164,7 +165,7 @@ def _expected_columns(model_name, serializer_class):
     """
     fields = set(serializer_class().fields)
     if model_name == 'Reference':
-        fields -= {'csl_data', 'title', 'author', 'year'}
+        fields -= {'csl_data', 'title', 'author', 'year', 'reference_id'}
         fields |= _CSL_COLUMNS
     return fields
 
@@ -232,8 +233,12 @@ class Command(BaseCommand):
 
         config = _MODEL_CONFIG[model_name]
 
+        pk_fields = config.get('pk_fields')
+
         existing_records = load_json(config['json_file'])
-        existing_pk_set = build_pk_set(existing_records, config['pk_fields'])
+        existing_pk_set = (
+            build_pk_set(existing_records, pk_fields) if pk_fields else set()
+        )
 
         try:
             columns, rows = read_csv(input_file)
@@ -264,32 +269,51 @@ class Command(BaseCommand):
             )
 
         new_records = []
-        skipped_duplicates = []
-        seen_pks = set(existing_pk_set)
+        skipped_existing = []  # key already present in the JSON file
+        skipped_within = []  # key repeated within this CSV
+        seen_in_csv = set()
 
         for row_num, row in enumerate(rows, start=2):
             record = _row_to_record(row, model_name)
-            pk_tuple = tuple(
-                str(record.get(f, '') or '') for f in config['pk_fields']
-            )
-
-            if pk_tuple in seen_pks:
-                skipped_duplicates.append((row_num, pk_tuple))
+            if not pk_fields:
+                # No dedupe key: the importer just converts and appends.
+                new_records.append(record)
                 continue
 
-            seen_pks.add(pk_tuple)
+            pk_tuple = tuple(str(record.get(f, '') or '') for f in pk_fields)
+
+            if pk_tuple in existing_pk_set:
+                skipped_existing.append((row_num, pk_tuple))
+                continue
+            if pk_tuple in seen_in_csv:
+                skipped_within.append((row_num, pk_tuple))
+                continue
+
+            seen_in_csv.add(pk_tuple)
             new_records.append(record)
 
-        if skipped_duplicates:
+        # Report skipped rows so a dropped record is never silently discarded.
+        # (Only models with a stored dedupe key reach here — Experiment and the
+        # bridge; References have no dedupe key and are always appended.)
+        if skipped_existing:
             self.stdout.write(
                 self.style.WARNING(
-                    f'\nSkipped {len(skipped_duplicates)} duplicate(s) '
-                    f'(already present in {config["json_file"]}):'
+                    f'\nSkipped {len(skipped_existing)} duplicate(s) already '
+                    f'present in {config["json_file"]}:'
                 )
             )
-            for row_num, pk in skipped_duplicates:
-                pk_str = ' | '.join(pk)
-                self.stdout.write(f'  Row {row_num}: {pk_str}')
+            for row_num, pk in skipped_existing:
+                self.stdout.write(f'  Row {row_num}: {" | ".join(pk)}')
+
+        if skipped_within:
+            self.stdout.write(
+                self.style.WARNING(
+                    f'\nSkipped {len(skipped_within)} duplicate(s) within this '
+                    'CSV (matches an earlier row):'
+                )
+            )
+            for row_num, pk in skipped_within:
+                self.stdout.write(f'  Row {row_num}: {" | ".join(pk)}')
 
         if not new_records:
             self.stdout.write('No new records to add (all rows were duplicates).')

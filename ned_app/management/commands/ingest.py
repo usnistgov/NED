@@ -10,6 +10,7 @@ from ned_app.models import (
     ExperimentFragilityModelBridge,
     ComponentFragilityModelBridge,
     FragilityCurve,
+    derive_reference_id,
 )
 from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
 from ned_app.serialization.serializer import (
@@ -107,6 +108,13 @@ class Command(BaseCommand):
                 'serializer': ReferenceSerializer,
                 'file': 'reference.json',
                 'lookup_field': ['reference_id'],
+                # reference_id is not stored in the JSON; derive it for the
+                # idempotent lookup so re-ingest updates rather than duplicates.
+                'lookup_deriver': lambda item: {
+                    'reference_id': derive_reference_id(
+                        item.get('reference_label', ''), item['csl_data']
+                    )
+                },
             },
             {
                 'model': Component,
@@ -153,6 +161,7 @@ class Command(BaseCommand):
                 serializer_class=config['serializer'],
                 data_file=config['file'],
                 lookup_field=config['lookup_field'],
+                lookup_deriver=config.get('lookup_deriver'),
             )
 
         if total_failed:
@@ -166,7 +175,12 @@ class Command(BaseCommand):
         )
 
     def _process_data_file(
-        self, model_class, serializer_class, data_file, lookup_field
+        self,
+        model_class,
+        serializer_class,
+        data_file,
+        lookup_field,
+        lookup_deriver=None,
     ):
         """
         Process a JSON data file for a given model.
@@ -204,11 +218,28 @@ class Command(BaseCommand):
             return 1
 
         for item in data:
+            lookup_params = None
             try:
-                lookup_params = {field: item.get(field) for field in lookup_field}
+                if lookup_deriver is not None:
+                    # The lookup key is not stored in the JSON; compute it. A
+                    # malformed record (e.g. missing csl_data or its year) can't
+                    # be keyed — surface a clear message, not a bare KeyError.
+                    try:
+                        lookup_params = lookup_deriver(item)
+                    except (KeyError, IndexError, TypeError) as exc:
+                        raise ValueError(
+                            'could not derive the lookup key from the record '
+                            f'(malformed csl_data?): {exc!r}'
+                        ) from exc
+                    have_lookup = True
+                else:
+                    lookup_params = {
+                        field: item.get(field) for field in lookup_field
+                    }
+                    have_lookup = all(field in item for field in lookup_field)
                 instance = None
 
-                if all(field in item for field in lookup_field):
+                if have_lookup:
                     try:
                         instance = model_class.objects.get(**lookup_params)
                     except model_class.DoesNotExist:
@@ -229,10 +260,12 @@ class Command(BaseCommand):
 
             except (ValidationError, Exception) as ex:
                 failed_count += 1
-                record_label = (
-                    ', '.join(f'{f}={item.get(f)}' for f in lookup_field)
-                    or 'unknown'
-                )
+                if lookup_params:
+                    record_label = ', '.join(
+                        f'{f}={v}' for f, v in lookup_params.items()
+                    )
+                else:
+                    record_label = item.get('csl_data', {}).get('title') or 'unknown'
                 self.stderr.write(f'Error processing {model_name} [{record_label}]:')
                 for line in _format_errors(ex):
                     self.stderr.write(f'    - {line}')
