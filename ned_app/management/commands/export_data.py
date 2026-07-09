@@ -98,13 +98,16 @@ class Command(BaseCommand):
 
         data = []
         for ref in references:
+            # reference_id is derived at ingest, not stored in the source JSON.
             ref_data = {
-                'reference_id': ref.reference_id,
                 'study_type': ref.study_type,
                 'comp_type': ref.comp_type,
                 'pdf_saved': ref.pdf_saved,
                 'csl_data': ref.csl_data,
             }
+            # Only emit reference_label when set, to keep unlabeled records clean.
+            if ref.reference_label:
+                ref_data['reference_label'] = ref.reference_label
             data.append(ref_data)
 
         file_path = os.path.join(output_dir, 'reference.json')
@@ -197,7 +200,7 @@ class Command(BaseCommand):
         data = []
         for fm in fragility_models:
             fm_data = {
-                'reference': fm.reference.reference_id if fm.reference else None,
+                'reference': fm.reference.reference_id,
                 'model_id': fm.model_id,
                 'p58_fragility': fm.p58_fragility,
                 'comp_detail': fm.comp_detail,

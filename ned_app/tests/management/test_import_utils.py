@@ -157,7 +157,6 @@ class BuildCslDataTests(SimpleTestCase):
 
     def test_required_and_optional_fields(self):
         row = {
-            'reference_id': 'SMITH-2020',
             'csl_type': 'article-journal',
             'csl_title': 'A Title',
             'csl_year': '2020',
@@ -166,7 +165,8 @@ class BuildCslDataTests(SimpleTestCase):
             'csl_journal': 'J. Eng.',
         }
         csl = import_model._build_csl_data(row)
-        self.assertEqual(csl['id'], 'SMITH-2020')
+        # No 'id' is emitted: reference_id is derived at ingest, not stored.
+        self.assertNotIn('id', csl)
         self.assertEqual(csl['type'], 'article-journal')
         self.assertEqual(csl['title'], 'A Title')
         self.assertEqual(csl['issued'], {'date-parts': [[2020]]})
@@ -176,7 +176,6 @@ class BuildCslDataTests(SimpleTestCase):
 
     def test_blank_optional_fields_omitted(self):
         row = {
-            'reference_id': 'R',
             'csl_type': 'article-journal',
             'csl_title': 'T',
             'csl_year': '2020',
@@ -190,7 +189,6 @@ class BuildCslDataTests(SimpleTestCase):
         # A bad year must not crash the conversion; it passes through so
         # ingest's CSL validation can report it clearly.
         row = {
-            'reference_id': 'R',
             'csl_type': 'article-journal',
             'csl_title': 'T',
             'csl_year': 'in press',
@@ -201,7 +199,6 @@ class BuildCslDataTests(SimpleTestCase):
 
     def test_blank_year_passes_through(self):
         row = {
-            'reference_id': 'R',
             'csl_type': 'article-journal',
             'csl_title': 'T',
             'csl_year': '',
@@ -232,6 +229,8 @@ class RowToRecordTests(SimpleTestCase):
         self.assertNotIn('csl_title', record)
         self.assertEqual(record['csl_data']['title'], 'T')
         self.assertEqual(record['study_type'], 'Experiment')
+        self.assertNotIn('reference_id', record)
+        self.assertNotIn('id', record['csl_data'])
 
     def test_non_reference_coerces_numerics(self):
         row = {'id': 'exp1', 'ds_rank': '2', 'edp_value': '0.45'}
@@ -249,7 +248,8 @@ class ExpectedColumnsTests(SimpleTestCase):
 
         cols = import_model._expected_columns('Reference', ReferenceSerializer)
         self.assertIn('csl_title', cols)
-        self.assertIn('reference_id', cols)
+        self.assertIn('reference_label', cols)
+        self.assertNotIn('reference_id', cols)
         # nested/auto-populated fields are not CSV columns
         self.assertNotIn('csl_data', cols)
         self.assertNotIn('title', cols)

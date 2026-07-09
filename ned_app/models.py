@@ -1,11 +1,63 @@
 import json
 import os
+import re
+import unicodedata
 from django.conf import settings
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
-from ned_app.validators import validate_nistir_component_id, validate_positive
+from ned_app.validators import (
+    validate_nistir_component_id,
+    validate_positive,
+    validate_reference_label,
+)
+
+
+def normalize_author_token(name):
+    """
+    Normalize an author surname into an ASCII token for a reference id.
+
+    Strips diacritics (NFKD) and removes any character that is not a letter or
+    digit, preserving case. Used when no reference_label is provided, so the
+    first-author surname becomes the id token (e.g. "Araya-Letelier" ->
+    "ArayaLetelier", "O'Brien" -> "OBrien").
+
+    Args:
+        name (str): The raw surname.
+
+    Returns:
+        str: The normalized alphanumeric token.
+    """
+    nfkd = unicodedata.normalize('NFKD', name or '')
+    ascii_only = ''.join(c for c in nfkd if not unicodedata.combining(c))
+    return re.sub(r'[^A-Za-z0-9]', '', ascii_only)
+
+
+def derive_reference_id(reference_label, csl_data):
+    """
+    Derive a reference id from its label (if any), first author, and year.
+
+    The id is '<reference_label>-<year>' when a label is set, otherwise
+    '<normalized_first_author_surname>-<year>'. The year is taken from the
+    csl_data 'issued' date-parts (online-first year by convention).
+
+    Args:
+        reference_label (str): Optional label; empty string means "use author".
+        csl_data (dict): CSL-JSON data providing 'author' and 'issued'.
+
+    Returns:
+        str: The derived reference id.
+    """
+    year = csl_data['issued']['date-parts'][0][0]
+    if reference_label:
+        token = reference_label
+    else:
+        authors = csl_data.get('author') or [{}]
+        first = authors[0] if authors else {}
+        family = first.get('family') or first.get('literal') or ''
+        token = normalize_author_token(family)
+    return f'{token}-{year}'
 
 
 # Global variable to cache the NISTIR labels for efficiency
@@ -122,6 +174,16 @@ class Reference(models.Model):
         unique=True,
         help_text='Unique identifier for the reference.',
     )
+    reference_label = models.CharField(
+        _('reference label'),
+        max_length=100,
+        blank=True,
+        validators=[validate_reference_label],
+        help_text=(
+            'Optional label used in place of the first-author surname when '
+            'building the reference id (e.g. "FEMA_P58" -> FEMA_P58-<year>).'
+        ),
+    )
     title = models.CharField(
         _('title'),
         max_length=255,
@@ -230,6 +292,8 @@ class Reference(models.Model):
                 self.title = self.csl_data['title']
 
             if 'issued' in self.csl_data and 'date-parts' in self.csl_data['issued']:
+                # Policy: csl_data 'issued' holds the online-first / first-available
+                # year, not the later print-volume year, when the two differ.
                 date_parts = self.csl_data['issued']['date-parts']
                 if date_parts and len(date_parts) > 0 and len(date_parts[0]) > 0:
                     self.year = date_parts[0][0]
@@ -254,6 +318,15 @@ class Reference(models.Model):
                             self.author = f'{family_names[0]} and {family_names[1]}'
                         else:  # 3 or more authors
                             self.author = f'{family_names[0]} et al.'
+
+        # Auto-generate the reference id from the label (or first-author
+        # surname) and year when it is not explicitly set. reference_id is not
+        # stored in the source JSON, so the ingest pipeline always derives it;
+        # an explicitly provided id (e.g. in tests/admin) is respected.
+        if not self.reference_id:
+            self.reference_id = derive_reference_id(
+                self.reference_label, self.csl_data
+            )
 
         super().save(*args, **kwargs)
 
@@ -496,8 +569,6 @@ class FragilityModel(models.Model):
         'Reference',
         on_delete=models.PROTECT,
         to_field='reference_id',
-        null=True,
-        blank=True,
         help_text='Identifier of a Reference documenting this fragility model.',
     )
     model_id = models.CharField(
@@ -567,30 +638,20 @@ class FragilityModel(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['reference', 'model_id'],
-                condition=models.Q(reference__isnull=False),
                 name='unique_ref_model',
             ),
-            models.UniqueConstraint(
-                fields=['model_id'],
-                condition=models.Q(reference__isnull=True),
-                name='unique_legacy_model',
+            models.CheckConstraint(
+                condition=~models.Q(edp_metric=''),
+                name='requires_edp_metric',
             ),
             models.CheckConstraint(
-                condition=models.Q(reference__isnull=True)
-                | ~models.Q(edp_metric=''),
-                name='non_legacy_requires_edp_metric',
-            ),
-            models.CheckConstraint(
-                condition=models.Q(reference__isnull=True) | ~models.Q(edp_unit=''),
-                name='non_legacy_requires_edp_unit',
+                condition=~models.Q(edp_unit=''),
+                name='requires_edp_unit',
             ),
         ]
 
     def save(self, *args, **kwargs):
-        if self.reference_id:
-            self.fragility_model_id = f'{self.reference_id}|{self.model_id}'
-        else:
-            self.fragility_model_id = self.model_id
+        self.fragility_model_id = f'{self.reference_id}|{self.model_id}'
         super().save(*args, **kwargs)
 
     def __str__(self):

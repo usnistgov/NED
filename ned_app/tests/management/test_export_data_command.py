@@ -33,7 +33,6 @@ class ExportDataCommandTest(TestCase):
             pdf_saved=True,
             csl_data={
                 'type': 'article-journal',
-                'id': 'test-ref-001',
                 'title': 'Test Reference Article',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2023]]},
@@ -149,7 +148,8 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(len(reference_data), 1)
             ref_data = reference_data[0]
 
-            self.assertEqual(ref_data['reference_id'], 'test-ref-001')
+            # reference_id is derived at ingest, not stored in the exported JSON.
+            self.assertNotIn('reference_id', ref_data)
             self.assertIn('study_type', ref_data)
             self.assertEqual(ref_data['study_type'], 'Experiment')
             self.assertIn('comp_type', ref_data)
@@ -157,7 +157,7 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('pdf_saved', ref_data)
             self.assertEqual(ref_data['pdf_saved'], True)
             self.assertIn('csl_data', ref_data)
-            self.assertEqual(ref_data['csl_data']['id'], 'test-ref-001')
+            self.assertNotIn('id', ref_data['csl_data'])
             self.assertEqual(ref_data['csl_data']['title'], 'Test Reference Article')
             self.assertEqual(ref_data['csl_data']['type'], 'article-journal')
             self.assertEqual(

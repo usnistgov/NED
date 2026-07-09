@@ -28,13 +28,11 @@ class QueryToCsvCommandTests(TestCase):
         self.output_file = os.path.join(self.temp_dir, 'out.csv')
 
         self.reference = Reference.objects.create(
-            reference_id='SMITH-2020-EXP',
             study_type='Experiment',
             comp_type='Sprinkler systems',
             pdf_saved=True,
             csl_data={
                 'type': 'article-journal',
-                'id': 'SMITH-2020-EXP',
                 'title': 'A Title',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2020]]},
@@ -83,7 +81,7 @@ class QueryToCsvCommandTests(TestCase):
         rows = {r['id']: r for r in self._read_rows()}
         # reference must be the reference_id natural key, not the auto PK int;
         # component must be the component_id, not the concatenated id PK.
-        self.assertEqual(rows['exp001']['reference'], 'SMITH-2020-EXP')
+        self.assertEqual(rows['exp001']['reference'], 'Smith-2020')
         self.assertEqual(rows['exp001']['component'], 'D.50.2.1.A')
 
     # -- field selection / filtering -----------------------------------

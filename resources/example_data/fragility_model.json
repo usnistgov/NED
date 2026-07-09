@@ -1,6 +1,6 @@
 [
     {
-        "_comment": "This is an example for a FragilityModel object. The reference field links to a Reference (by reference_id) and combines with model_id to form the unique fragility_model_id (e.g., 'TIA-2012-EXP|fra1001'). Component relationships are managed through component_fragility_model_bridge.json. For non-legacy models (those with a reference), edp_metric and edp_unit are required.",
+        "_comment": "This is an example for a FragilityModel object. The reference field links to a Reference (by reference_id) and combines with model_id to form the unique fragility_model_id (e.g., 'Smith-2020|fra1001'). Component relationships are managed through component_fragility_model_bridge.json. edp_metric and edp_unit are required.",
         "comp_description": "Component level - Tee joint - Black Iron with Threaded Joints - Pipe size 6 inches, 40 psi",
         "comp_detail": "Threaded joint",
         "edp_metric": "Joint Rotation",
@@ -8,7 +8,7 @@
         "material": "Black Iron",
         "model_id": "fra1001",
         "p58_fragility": "",
-        "reference": "TIA-2012-EXP",
+        "reference": "Smith-2020",
         "reviewer": "NIST",
         "size_class": "6 inch diameter",
         "source": "Literature"
@@ -21,7 +21,7 @@
         "material": "Black Iron",
         "model_id": "fra1002",
         "p58_fragility": "",
-        "reference": "TIA-2012-EXP",
+        "reference": "Smith-2020",
         "reviewer": "NIST",
         "size_class": "4 inch diameter",
         "source": "Literature"
@@ -34,7 +34,7 @@
         "material": "Black Iron",
         "model_id": "fra1003",
         "p58_fragility": "",
-        "reference": "TIA-2012-EXP",
+        "reference": "Smith-2020",
         "reviewer": "NIST",
         "size_class": "2 inch diameter",
         "source": "Literature"
