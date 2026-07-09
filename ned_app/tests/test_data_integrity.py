@@ -3,7 +3,7 @@ import os
 import tempfile
 from unittest.mock import patch
 from django.core.management import call_command
-from django.test import TransactionTestCase, tag
+from django.test import SimpleTestCase, TransactionTestCase, tag
 from ned_app.models import (
     Reference,
     Component,
@@ -11,6 +11,7 @@ from ned_app.models import (
     Experiment,
     ExperimentFragilityModelBridge,
     FragilityCurve,
+    derive_reference_id,
 )
 
 
@@ -190,3 +191,56 @@ class DataIntegrityTests(TransactionTestCase):
             import shutil
 
             shutil.rmtree(temp_export_dir)
+
+
+class CanonicalReferenceDataTests(SimpleTestCase):
+    """
+    Guards on the canonical reference.json source data (no DB needed).
+
+    reference_id is derived at ingest, not stored. These checks make the two
+    failure modes of that scheme legible at test time.
+    """
+
+    REFERENCE_JSON = 'resources/data/reference.json'
+
+    def _load_references(self):
+        with open(self.REFERENCE_JSON, 'r', encoding='utf-8') as f:
+            return [r for r in json.load(f) if '_comment' not in r]
+
+    def test_no_stored_reference_id_or_csl_id(self):
+        # The id is derived (reference_id) or stripped (csl_data 'id') at ingest,
+        # so neither may be committed to the source data.
+        offenders = []
+        for ref in self._load_references():
+            title = ref.get('csl_data', {}).get('title', '<no title>')
+            if 'reference_id' in ref:
+                offenders.append(f'stored reference_id in {title!r}')
+            if 'id' in ref.get('csl_data', {}):
+                offenders.append(f"csl_data 'id' in {title!r}")
+        self.assertEqual(
+            offenders,
+            [],
+            'reference.json must not store a reference_id or a csl_data id:\n'
+            + '\n'.join(offenders),
+        )
+
+    def test_derived_reference_ids_are_unique(self):
+        # Two references deriving the same id would silently merge on ingest;
+        # fail loudly here and name the collision instead.
+        seen = {}
+        collisions = []
+        for ref in self._load_references():
+            derived = derive_reference_id(
+                ref.get('reference_label', '') or '', ref['csl_data']
+            )
+            title = ref.get('csl_data', {}).get('title', '<no title>')
+            if derived in seen:
+                collisions.append(f'{derived}: {seen[derived]!r} vs {title!r}')
+            else:
+                seen[derived] = title
+        self.assertEqual(
+            collisions,
+            [],
+            'Two references derive the same reference_id -- add a '
+            'reference_label to disambiguate:\n' + '\n'.join(collisions),
+        )

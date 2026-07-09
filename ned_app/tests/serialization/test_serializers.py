@@ -143,7 +143,7 @@ class ReferenceSerializerTest(TestCase):
                 reference = serializer.save()
 
                 self.assertIsInstance(reference, Reference)
-                self.assertEqual(reference.reference_id, 'test-serializer-001')
+                self.assertEqual(reference.reference_id, 'Smith-2023')
                 self.assertEqual(reference.csl_data, self.valid_csl_data)
 
                 self.assertEqual(reference.title, 'Test Article for Serializer')

@@ -218,6 +218,7 @@ class Command(BaseCommand):
             return 1
 
         for item in data:
+            lookup_params = None
             try:
                 if lookup_deriver is not None:
                     # The lookup key is not stored in the JSON; compute it.
@@ -251,10 +252,12 @@ class Command(BaseCommand):
 
             except (ValidationError, Exception) as ex:
                 failed_count += 1
-                record_label = (
-                    ', '.join(f'{f}={item.get(f)}' for f in lookup_field)
-                    or 'unknown'
-                )
+                if lookup_params:
+                    record_label = ', '.join(
+                        f'{f}={v}' for f, v in lookup_params.items()
+                    )
+                else:
+                    record_label = item.get('csl_data', {}).get('title') or 'unknown'
                 self.stderr.write(f'Error processing {model_name} [{record_label}]:')
                 for line in _format_errors(ex):
                     self.stderr.write(f'    - {line}')

@@ -24,12 +24,13 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
     Auto-populated fields (title, author, year) are optional during deserialization
     as they are populated by the model's save() method from csl_data. reference_id
-    is optional: when absent (as in the canonical source JSON) it is derived on
-    save() from reference_label (or the first-author surname) and the year.
+    is read-only: it is always derived on save() from reference_label (or the
+    first-author surname) and the year. Any value supplied in the input is
+    ignored.
     """
 
     csl_data = serializers.JSONField()
-    reference_id = serializers.CharField(required=False)
+    reference_id = serializers.CharField(read_only=True)
     title = serializers.CharField(required=False, allow_blank=True)
     author = serializers.CharField(required=False, allow_blank=True)
     year = serializers.IntegerField(required=False, allow_null=True)
