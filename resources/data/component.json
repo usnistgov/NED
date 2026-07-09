@@ -260,6 +260,10 @@
         "name": "Diesel Generator"
     },
     {
+        "component_id": "D.50.9.4.A",
+        "name": "Server Racks"
+    },
+    {
         "component_id": "E.20.2.2.A",
         "name": "Modular Office Work Stations"
     },
