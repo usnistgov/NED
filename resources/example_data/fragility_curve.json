@@ -1,11 +1,11 @@
 [
     {
-        "_comment": "This is an example for a FragilityCurve object. The fragility_model field references a FragilityModel by its derived fragility_model_id (formatted as 'reference_id|model_id', e.g., 'TIA-2012-EXP|fra1001'). Use null for optional numeric fields like num_observations and probability when not applicable.",
+        "_comment": "This is an example for a FragilityCurve object. The fragility_model field references a FragilityModel by its derived fragility_model_id (formatted as 'reference_id|model_id', e.g., 'Smith-2020|fra1001'). Use null for optional numeric fields like num_observations and probability when not applicable.",
         "basis": "Experiment",
         "beta": 0.204,
         "ds_description": "First leakage",
         "ds_rank": 1,
-        "fragility_model": "TIA-2012-EXP|fra1001",
+        "fragility_model": "Smith-2020|fra1001",
         "median": 0.006,
         "num_observations": null,
         "probability": null
@@ -15,7 +15,7 @@
         "beta": 0.216,
         "ds_description": "First leakage",
         "ds_rank": 1,
-        "fragility_model": "TIA-2012-EXP|fra1002",
+        "fragility_model": "Smith-2020|fra1002",
         "median": 0.01,
         "num_observations": null,
         "probability": null
@@ -25,7 +25,7 @@
         "beta": 0.094,
         "ds_description": "First leakage",
         "ds_rank": 1,
-        "fragility_model": "TIA-2012-EXP|fra1003",
+        "fragility_model": "Smith-2020|fra1003",
         "median": 0.014,
         "num_observations": null,
         "probability": null

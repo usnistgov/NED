@@ -33,26 +33,22 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
                     'pdf_saved': True,
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-001',
                         'title': 'Experimental Study of Building Components',
                         'author': [{'family': 'Smith', 'given': 'John'}],
                         'issued': {'date-parts': [[2020]]},
                     },
                 },
                 {
-                    'reference_id': 'ref-002',
                     'study_type': 'Analytical Study',
                     'comp_type': 'Mechanical Component',
                     'pdf_saved': False,
                     'csl_data': {
                         'type': 'paper-conference',
-                        'id': 'ref-002',
                         'title': 'Analysis of Component Fragility',
                         'author': [
                             {'family': 'Doe', 'given': 'Jane'},
@@ -76,7 +72,7 @@ class IngestCommandTests(TransactionTestCase):
 
             fragility_model_data = [
                 {
-                    'reference': 'ref-001',
+                    'reference': 'Smith-2020',
                     'model_id': 'fm-001',
                     'p58_fragility': 'B2011.001',
                     'comp_detail': 'Standard attachment',
@@ -88,7 +84,7 @@ class IngestCommandTests(TransactionTestCase):
                     'edp_unit': 'Ratio',
                 },
                 {
-                    'reference': 'ref-002',
+                    'reference': 'Doe-2021',
                     'model_id': 'fm-002',
                     'p58_fragility': '',
                     'comp_detail': 'Anchored',
@@ -104,18 +100,18 @@ class IngestCommandTests(TransactionTestCase):
             component_fragility_bridge_data = [
                 {
                     'component': 'B.20.1.1.A',
-                    'fragility_model': 'ref-001|fm-001',
+                    'fragility_model': 'Smith-2020|fm-001',
                 },
                 {
                     'component': 'D.30.3.2.B',
-                    'fragility_model': 'ref-002|fm-002',
+                    'fragility_model': 'Doe-2021|fm-002',
                 },
             ]
 
             experiment_data = [
                 {
                     'id': 'exp-001',
-                    'reference': 'ref-001',
+                    'reference': 'Smith-2020',
                     'component': 'B.20.1.1.A',
                     'specimen': 'Specimen-A',
                     'test_type': 'Quasi-static Cyclic, uniaxial',
@@ -128,7 +124,7 @@ class IngestCommandTests(TransactionTestCase):
                 },
                 {
                     'id': 'exp-002',
-                    'reference': 'ref-001',
+                    'reference': 'Smith-2020',
                     'component': 'D.30.3.2.B',
                     'specimen': 'Specimen-B',
                     'test_type': 'Dynamic, uniaxial',
@@ -144,17 +140,17 @@ class IngestCommandTests(TransactionTestCase):
             bridge_data = [
                 {
                     'experiment': 'exp-001',
-                    'fragility_model': 'ref-001|fm-001',
+                    'fragility_model': 'Smith-2020|fm-001',
                 },
                 {
                     'experiment': 'exp-002',
-                    'fragility_model': 'ref-002|fm-002',
+                    'fragility_model': 'Doe-2021|fm-002',
                 },
             ]
 
             fragility_curve_data = [
                 {
-                    'fragility_model': 'ref-001|fm-001',
+                    'fragility_model': 'Smith-2020|fm-001',
                     'basis': 'Experiment',
                     'num_observations': 10,
                     'ds_rank': 1,
@@ -164,7 +160,7 @@ class IngestCommandTests(TransactionTestCase):
                     'probability': '0.5',
                 },
                 {
-                    'fragility_model': 'ref-001|fm-001',
+                    'fragility_model': 'Smith-2020|fm-001',
                     'basis': 'Analytical Study',
                     'num_observations': 5,
                     'ds_rank': 2,
@@ -174,7 +170,7 @@ class IngestCommandTests(TransactionTestCase):
                     'probability': '0.5',
                 },
                 {
-                    'fragility_model': 'ref-002|fm-002',
+                    'fragility_model': 'Doe-2021|fm-002',
                     'basis': 'Historical Event',
                     'num_observations': 15,
                     'ds_rank': 1,
@@ -218,68 +214,68 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(FragilityCurve.objects.count(), 3)
 
             exp_001 = Experiment.objects.get(id='exp-001')
-            self.assertEqual(exp_001.reference.reference_id, 'ref-001')
+            self.assertEqual(exp_001.reference.reference_id, 'Smith-2020')
             self.assertEqual(exp_001.component.component_id, 'B.20.1.1.A')
 
             exp_002 = Experiment.objects.get(id='exp-002')
-            self.assertEqual(exp_002.reference.reference_id, 'ref-001')
+            self.assertEqual(exp_002.reference.reference_id, 'Smith-2020')
             self.assertEqual(exp_002.component.component_id, 'D.30.3.2.B')
 
             cfm_bridge_1 = ComponentFragilityModelBridge.objects.get(
                 component__component_id='B.20.1.1.A',
-                fragility_model__fragility_model_id='ref-001|fm-001',
+                fragility_model__fragility_model_id='Smith-2020|fm-001',
             )
             self.assertEqual(cfm_bridge_1.component.component_id, 'B.20.1.1.A')
             self.assertEqual(
-                cfm_bridge_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
+                cfm_bridge_1.fragility_model.fragility_model_id, 'Smith-2020|fm-001'
             )
 
             cfm_bridge_2 = ComponentFragilityModelBridge.objects.get(
                 component__component_id='D.30.3.2.B',
-                fragility_model__fragility_model_id='ref-002|fm-002',
+                fragility_model__fragility_model_id='Doe-2021|fm-002',
             )
             self.assertEqual(cfm_bridge_2.component.component_id, 'D.30.3.2.B')
             self.assertEqual(
-                cfm_bridge_2.fragility_model.fragility_model_id, 'ref-002|fm-002'
+                cfm_bridge_2.fragility_model.fragility_model_id, 'Doe-2021|fm-002'
             )
 
             bridge_1 = ExperimentFragilityModelBridge.objects.get(
                 experiment__id='exp-001',
-                fragility_model__fragility_model_id='ref-001|fm-001',
+                fragility_model__fragility_model_id='Smith-2020|fm-001',
             )
             self.assertEqual(bridge_1.experiment.id, 'exp-001')
             self.assertEqual(
-                bridge_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
+                bridge_1.fragility_model.fragility_model_id, 'Smith-2020|fm-001'
             )
 
             bridge_2 = ExperimentFragilityModelBridge.objects.get(
                 experiment__id='exp-002',
-                fragility_model__fragility_model_id='ref-002|fm-002',
+                fragility_model__fragility_model_id='Doe-2021|fm-002',
             )
             self.assertEqual(bridge_2.experiment.id, 'exp-002')
             self.assertEqual(
-                bridge_2.fragility_model.fragility_model_id, 'ref-002|fm-002'
+                bridge_2.fragility_model.fragility_model_id, 'Doe-2021|fm-002'
             )
 
             fc_1 = FragilityCurve.objects.get(
-                fragility_model__fragility_model_id='ref-001|fm-001', ds_rank=1
+                fragility_model__fragility_model_id='Smith-2020|fm-001', ds_rank=1
             )
             self.assertEqual(
-                fc_1.fragility_model.fragility_model_id, 'ref-001|fm-001'
+                fc_1.fragility_model.fragility_model_id, 'Smith-2020|fm-001'
             )
 
             fc_2 = FragilityCurve.objects.get(
-                fragility_model__fragility_model_id='ref-001|fm-001', ds_rank=2
+                fragility_model__fragility_model_id='Smith-2020|fm-001', ds_rank=2
             )
             self.assertEqual(
-                fc_2.fragility_model.fragility_model_id, 'ref-001|fm-001'
+                fc_2.fragility_model.fragility_model_id, 'Smith-2020|fm-001'
             )
 
             fc_3 = FragilityCurve.objects.get(
-                fragility_model__fragility_model_id='ref-002|fm-002', ds_rank=1
+                fragility_model__fragility_model_id='Doe-2021|fm-002', ds_rank=1
             )
             self.assertEqual(
-                fc_3.fragility_model.fragility_model_id, 'ref-002|fm-002'
+                fc_3.fragility_model.fragility_model_id, 'Doe-2021|fm-002'
             )
 
     def test_ingest_component_id_generation(self):
@@ -314,13 +310,11 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
                     'pdf_saved': True,
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-001',
                         'title': 'Experimental Study of Building Components',
                         'author': [{'family': 'Smith', 'given': 'John'}],
                         'issued': {'date-parts': [[2020]]},
@@ -341,7 +335,7 @@ class IngestCommandTests(TransactionTestCase):
             ):
                 call_command('ingest')
 
-            reference = Reference.objects.get(reference_id='ref-001')
+            reference = Reference.objects.get(reference_id='Smith-2020')
 
             self.assertEqual(
                 reference.title, 'Experimental Study of Building Components'
@@ -354,13 +348,11 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
                     'pdf_saved': True,
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-001',
                         'title': 'Test Study',
                         'author': [{'family': 'Smith', 'given': 'John'}],
                         'issued': {'date-parts': [[2020]]},
@@ -440,26 +432,22 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
                     'pdf_saved': True,
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-001',
                         'title': 'Valid Study',
                         'author': [{'family': 'Smith', 'given': 'John'}],
                         'issued': {'date-parts': [[2020]]},
                     },
                 },
                 {
-                    'reference_id': 'ref-002',
                     'study_type': 'Analytical Study',
                     'comp_type': 'Mechanical Component',
                     'pdf_saved': False,
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-002',
                         'author': [{'family': 'Doe', 'given': 'Jane'}],
                         'issued': {'date-parts': [[2021]]},
                     },
@@ -486,14 +474,14 @@ class IngestCommandTests(TransactionTestCase):
             stderr_value = stderr.getvalue()
 
             self.assertIn('Error processing Reference', stderr_value)
-            self.assertIn('ref-002', stderr_value)
+            self.assertIn('Doe-2021', stderr_value)
 
             self.assertEqual(Reference.objects.count(), 1)
             self.assertTrue(
-                Reference.objects.filter(reference_id='ref-001').exists()
+                Reference.objects.filter(reference_id='Smith-2020').exists()
             )
             self.assertFalse(
-                Reference.objects.filter(reference_id='ref-002').exists()
+                Reference.objects.filter(reference_id='Doe-2021').exists()
             )
 
     def test_ingest_handles_invalid_foreign_key(self):
@@ -509,7 +497,7 @@ class IngestCommandTests(TransactionTestCase):
             experiment_data = [
                 {
                     'id': 'exp-001',
-                    'reference': 'ref-001',  # Non-existent reference
+                    'reference': 'Smith-2020',  # Non-existent reference
                     'component': 'INVALID.COMPONENT',  # Non-existent component
                     'specimen': 'Specimen-A',
                     'test_type': 'Quasi-static Cyclic, uniaxial',
@@ -561,11 +549,9 @@ class IngestCommandTests(TransactionTestCase):
             # --- 1. Initial Data Setup ---
             reference_data = [
                 {
-                    'reference_id': 'ref-idem',
                     'study_type': 'Experiment',
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-idem',
                         'title': 'Original Title',
                         'author': [{'family': 'Test', 'given': 'John'}],
                         'issued': {'date-parts': [[2025]]},
@@ -577,7 +563,7 @@ class IngestCommandTests(TransactionTestCase):
 
             fragility_model_data = [
                 {
-                    'reference': 'ref-idem',
+                    'reference': 'Test-2025',
                     'model_id': 'fm-idem',
                     'comp_description': 'Original FM Description',
                     'reviewer': 'Test Reviewer',
@@ -590,14 +576,14 @@ class IngestCommandTests(TransactionTestCase):
             component_fragility_bridge_data = [
                 {
                     'component': 'A.10.1.1',
-                    'fragility_model': 'ref-idem|fm-idem',
+                    'fragility_model': 'Test-2025|fm-idem',
                 }
             ]
 
             experiment_data = [
                 {
                     'id': 'exp-idem',
-                    'reference': 'ref-idem',
+                    'reference': 'Test-2025',
                     'component': 'A.10.1.1',
                     'test_type': 'Quasi-static Cyclic, uniaxial',
                     'comp_description': 'A typical steel frame component.',
@@ -610,12 +596,12 @@ class IngestCommandTests(TransactionTestCase):
             ]
 
             bridge_data = [
-                {'experiment': 'exp-idem', 'fragility_model': 'ref-idem|fm-idem'}
+                {'experiment': 'exp-idem', 'fragility_model': 'Test-2025|fm-idem'}
             ]
 
             fragility_curve_data = [
                 {
-                    'fragility_model': 'ref-idem|fm-idem',
+                    'fragility_model': 'Test-2025|fm-idem',
                     'ds_rank': 1,
                     'ds_description': 'Original FC Description',
                     'median': '0.01',
@@ -656,14 +642,14 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
 
-                ref = Reference.objects.get(reference_id='ref-idem')
+                ref = Reference.objects.get(reference_id='Test-2025')
                 self.assertEqual(ref.title, 'Original Title')
 
                 comp = Component.objects.get(component_id='A.10.1.1')
                 self.assertEqual(comp.name, 'Original Name')
 
                 fm = FragilityModel.objects.get(
-                    fragility_model_id='ref-idem|fm-idem'
+                    fragility_model_id='Test-2025|fm-idem'
                 )
                 self.assertEqual(fm.comp_description, 'Original FM Description')
 
@@ -715,7 +701,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(FragilityCurve.objects.count(), 1)
 
                 # --- 6. Verify Updates in Database ---
-                ref = Reference.objects.get(reference_id='ref-idem')
+                ref = Reference.objects.get(reference_id='Test-2025')
                 ref.refresh_from_db()
                 self.assertEqual(ref.title, 'Updated Title')
 
@@ -724,7 +710,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(comp.name, 'Updated Name')
 
                 fm = FragilityModel.objects.get(
-                    fragility_model_id='ref-idem|fm-idem'
+                    fragility_model_id='Test-2025|fm-idem'
                 )
                 fm.refresh_from_db()
                 self.assertEqual(fm.comp_description, 'Updated FM Description')
@@ -734,7 +720,7 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(exp.ds_description, 'Updated EXP Description')
 
                 fc = FragilityCurve.objects.get(
-                    fragility_model__fragility_model_id='ref-idem|fm-idem',
+                    fragility_model__fragility_model_id='Test-2025|fm-idem',
                     ds_rank=1,
                 )
                 fc.refresh_from_db()
@@ -800,11 +786,9 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-001',
                         'title': 'Choices Test Reference',
                         'author': [{'family': 'Smith', 'given': 'John'}],
                         'issued': {'date-parts': [[2020]]},
@@ -814,14 +798,14 @@ class IngestCommandTests(TransactionTestCase):
 
             fragility_model_data = [
                 {
-                    'reference': 'ref-001',
+                    'reference': 'Smith-2020',
                     'model_id': 'fm-good',
                     'comp_description': 'Valid fragility model',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
                 },
                 {
-                    'reference': 'ref-001',
+                    'reference': 'Smith-2020',
                     'model_id': 'fm-bad',
                     'comp_description': 'Invalid fragility model',
                     'edp_metric': '__INVALID_METRIC__',
@@ -862,12 +846,12 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(FragilityModel.objects.count(), 1)
             self.assertTrue(
                 FragilityModel.objects.filter(
-                    fragility_model_id='ref-001|fm-good'
+                    fragility_model_id='Smith-2020|fm-good'
                 ).exists()
             )
             self.assertFalse(
                 FragilityModel.objects.filter(
-                    fragility_model_id='ref-001|fm-bad'
+                    fragility_model_id='Smith-2020|fm-bad'
                 ).exists()
             )
 
@@ -884,11 +868,9 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-001',
                         'title': 'Choices Test Reference',
                         'author': [{'family': 'Smith', 'given': 'John'}],
                         'issued': {'date-parts': [[2020]]},
@@ -906,7 +888,7 @@ class IngestCommandTests(TransactionTestCase):
             experiment_data = [
                 {
                     'id': 'exp-good',
-                    'reference': 'ref-001',
+                    'reference': 'Smith-2020',
                     'component': 'B.20.1.1.A',
                     'test_type': 'Quasi-static Cyclic, uniaxial',
                     'comp_description': 'Valid experiment',
@@ -918,7 +900,7 @@ class IngestCommandTests(TransactionTestCase):
                 },
                 {
                     'id': 'exp-bad',
-                    'reference': 'ref-001',
+                    'reference': 'Smith-2020',
                     'component': 'B.20.1.1.A',
                     'test_type': '__INVALID_TEST_TYPE__',
                     'comp_description': 'Invalid experiment',
@@ -1050,11 +1032,9 @@ class IngestCommandTests(TransactionTestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
                 {
-                    'reference_id': 'ref-001',
                     'study_type': 'Experiment',
                     'csl_data': {
                         'type': 'article-journal',
-                        'id': 'ref-001',
                         'title': 'T',
                         'author': [{'family': 'Smith', 'given': 'John'}],
                         'issued': {'date-parts': [[2020]]},
@@ -1065,7 +1045,7 @@ class IngestCommandTests(TransactionTestCase):
             experiment_data = [
                 {
                     'id': 'exp-bad',
-                    'reference': 'ref-001',
+                    'reference': 'Smith-2020',
                     'component': 'B.20.1.1.A',
                     'test_type': '__INVALID_TEST_TYPE__',
                     'comp_description': 'x',

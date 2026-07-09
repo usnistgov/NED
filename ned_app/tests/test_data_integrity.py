@@ -3,7 +3,7 @@ import os
 import tempfile
 from unittest.mock import patch
 from django.core.management import call_command
-from django.test import TransactionTestCase, tag
+from django.test import SimpleTestCase, TransactionTestCase, tag
 from ned_app.models import (
     Reference,
     Component,
@@ -11,6 +11,7 @@ from ned_app.models import (
     Experiment,
     ExperimentFragilityModelBridge,
     FragilityCurve,
+    derive_reference_id,
 )
 
 
@@ -146,10 +147,10 @@ class DataIntegrityTests(TransactionTestCase):
             # Map each JSON file to its sort key function
             # For tables with composite keys, use tuple sorting
             json_files = {
-                'reference.json': lambda x: x['reference_id'],
+                'reference.json': lambda x: x['csl_data']['title'],
                 'component.json': lambda x: x['component_id'],
                 'fragility_model.json': lambda x: (
-                    x['reference'] or '',
+                    x['reference'],
                     x['model_id'],
                 ),
                 'experiment.json': lambda x: x['id'],
@@ -190,3 +191,66 @@ class DataIntegrityTests(TransactionTestCase):
             import shutil
 
             shutil.rmtree(temp_export_dir)
+
+
+class CanonicalReferenceDataTests(SimpleTestCase):
+    """
+    Guards on the canonical reference.json source data (no DB needed).
+
+    reference_id is derived at ingest, not stored. These checks make the two
+    failure modes of that scheme legible at test time.
+    """
+
+    REFERENCE_JSON = 'resources/data/reference.json'
+
+    def _load_references(self):
+        with open(self.REFERENCE_JSON, 'r', encoding='utf-8') as f:
+            return [r for r in json.load(f) if '_comment' not in r]
+
+    def test_no_stored_reference_id_or_csl_id(self):
+        # The id is derived (reference_id) or stripped (csl_data 'id') at ingest,
+        # so neither may be committed to the source data.
+        offenders = []
+        for ref in self._load_references():
+            title = ref.get('csl_data', {}).get('title', '<no title>')
+            if 'reference_id' in ref:
+                offenders.append(f'stored reference_id in {title!r}')
+            if 'id' in ref.get('csl_data', {}):
+                offenders.append(f"csl_data 'id' in {title!r}")
+        self.assertEqual(
+            offenders,
+            [],
+            'reference.json must not store a reference_id or a csl_data id:\n'
+            + '\n'.join(offenders),
+        )
+
+    def test_derived_reference_ids_are_derivable_and_unique(self):
+        # The importer appends references without deriving/deduping, so this is
+        # the first place a bad id shows up. Two references deriving the same id
+        # would silently merge on ingest; a record whose csl_data can't be keyed
+        # would fail ingest cryptically. Catch both here with a clean message,
+        # not a raw KeyError.
+        seen = {}
+        problems = []
+        for ref in self._load_references():
+            title = ref.get('csl_data', {}).get('title', '<no title>')
+            try:
+                derived = derive_reference_id(
+                    ref.get('reference_label', '') or '', ref['csl_data']
+                )
+            except (KeyError, IndexError, TypeError) as exc:
+                problems.append(
+                    f'{title!r}: reference_id cannot be derived ({exc!r})'
+                )
+                continue
+            if derived in seen:
+                problems.append(f'{derived}: {seen[derived]!r} vs {title!r}')
+            else:
+                seen[derived] = title
+        self.assertEqual(
+            problems,
+            [],
+            'reference.json has references whose derived id is missing or '
+            'duplicated (add a reference_label / fix csl_data):\n'
+            + '\n'.join(problems),
+        )

@@ -1,6 +1,11 @@
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-from ned_app.models import Reference, Component
+from ned_app.models import (
+    Reference,
+    Component,
+    derive_reference_id,
+    normalize_author_token,
+)
 
 
 class ReferenceModelTest(TestCase):
@@ -279,6 +284,83 @@ class ReferenceModelTest(TestCase):
     def tearDown(self):
         """Clean up test data after each test."""
         Reference.objects.filter(reference_id__startswith='test-').delete()
+
+
+class ReferenceIdDerivationTest(TestCase):
+    """Tests for reference_id derivation from label / first-author surname + year."""
+
+    @staticmethod
+    def _csl(family=None, year=2023, literal=None):
+        author = [{'literal': literal}] if literal else [{'family': family}]
+        return {
+            'type': 'article-journal',
+            'id': 'x',
+            'title': 'Test Title',
+            'author': author,
+            'issued': {'date-parts': [[year]]},
+        }
+
+    def test_normalize_strips_punctuation_and_diacritics(self):
+        """Normalization drops non-alphanumerics and diacritics, keeps case."""
+        self.assertEqual(normalize_author_token('Smith'), 'Smith')
+        self.assertEqual(normalize_author_token("O'Brien"), 'OBrien')
+        self.assertEqual(normalize_author_token('Araya-Letelier'), 'ArayaLetelier')
+        self.assertEqual(normalize_author_token('García'), 'Garcia')
+        self.assertEqual(normalize_author_token(''), '')
+
+    def test_derive_uses_label_when_set(self):
+        """A reference_label replaces the surname token in the derived id."""
+        self.assertEqual(
+            derive_reference_id('FEMA_P58', self._csl(literal='FEMA', year=2018)),
+            'FEMA_P58-2018',
+        )
+
+    def test_derive_uses_first_author_surname_without_label(self):
+        """Without a label, the (first) author's surname is used."""
+        csl = self._csl(family='Zaghi', year=2012)
+        csl['author'].append({'family': 'Maragakis'})
+        self.assertEqual(derive_reference_id('', csl), 'Zaghi-2012')
+
+    def test_derive_normalizes_surname(self):
+        """A surname with punctuation is normalized in the derived id."""
+        self.assertEqual(
+            derive_reference_id('', self._csl(family='Araya-Letelier', year=2012)),
+            'ArayaLetelier-2012',
+        )
+
+    def test_derive_falls_back_to_literal_author(self):
+        """An institutional (literal) author is used when there is no family."""
+        self.assertEqual(
+            derive_reference_id('', self._csl(literal='FEMA', year=2018)),
+            'FEMA-2018',
+        )
+
+    def test_save_derives_reference_id_from_author(self):
+        """Reference.save() derives reference_id from the surname when unset."""
+        ref = Reference(csl_data=self._csl(family='Cook', year=2024))
+        ref.save()
+        self.assertEqual(ref.reference_id, 'Cook-2024')
+
+    def test_save_derives_reference_id_from_label(self):
+        """Reference.save() derives reference_id from reference_label when set."""
+        ref = Reference(
+            reference_label='Bhatta_TwoStoryCladding',
+            csl_data=self._csl(family='Bhatta', year=2022),
+        )
+        ref.save()
+        self.assertEqual(ref.reference_id, 'Bhatta_TwoStoryCladding-2022')
+
+    def test_save_respects_explicitly_set_reference_id(self):
+        """An explicitly provided reference_id is kept (derive only when unset)."""
+        ref = Reference(
+            reference_id='Explicit-1', csl_data=self._csl(family='Smith', year=2023)
+        )
+        ref.save()
+        self.assertEqual(ref.reference_id, 'Explicit-1')
+
+    def tearDown(self):
+        """Clean up test data after each test."""
+        Reference.objects.all().delete()
 
 
 class ComponentModelTest(TestCase):

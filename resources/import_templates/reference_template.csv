@@ -1,2 +1,2 @@
-reference_id,study_type,comp_type,pdf_saved,csl_type,csl_title,csl_year,csl_authors,csl_doi,csl_url,csl_journal,csl_volume,csl_issue,csl_page,csl_publisher
-SMITH-2020-EXP,Experiment,Sprinkler systems,True,article-journal,Seismic performance of CPVC sprinkler systems,2020,"Smith, John; Doe, Jane",https://doi.org/10.1234/example,,Earthquake Engineering and Structural Dynamics,49,3,301-320,
+reference_label,study_type,comp_type,pdf_saved,csl_type,csl_title,csl_year,csl_authors,csl_doi,csl_url,csl_journal,csl_volume,csl_issue,csl_page,csl_publisher
+,Experiment,Sprinkler systems,True,article-journal,Seismic performance of CPVC sprinkler systems,2020,"Smith, John; Doe, Jane",https://doi.org/10.1234/example,,Earthquake Engineering and Structural Dynamics,49,3,301-320,
