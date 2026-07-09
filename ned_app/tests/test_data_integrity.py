@@ -224,23 +224,33 @@ class CanonicalReferenceDataTests(SimpleTestCase):
             + '\n'.join(offenders),
         )
 
-    def test_derived_reference_ids_are_unique(self):
-        # Two references deriving the same id would silently merge on ingest;
-        # fail loudly here and name the collision instead.
+    def test_derived_reference_ids_are_derivable_and_unique(self):
+        # The importer appends references without deriving/deduping, so this is
+        # the first place a bad id shows up. Two references deriving the same id
+        # would silently merge on ingest; a record whose csl_data can't be keyed
+        # would fail ingest cryptically. Catch both here with a clean message,
+        # not a raw KeyError.
         seen = {}
-        collisions = []
+        problems = []
         for ref in self._load_references():
-            derived = derive_reference_id(
-                ref.get('reference_label', '') or '', ref['csl_data']
-            )
             title = ref.get('csl_data', {}).get('title', '<no title>')
+            try:
+                derived = derive_reference_id(
+                    ref.get('reference_label', '') or '', ref['csl_data']
+                )
+            except (KeyError, IndexError, TypeError) as exc:
+                problems.append(
+                    f'{title!r}: reference_id cannot be derived ({exc!r})'
+                )
+                continue
             if derived in seen:
-                collisions.append(f'{derived}: {seen[derived]!r} vs {title!r}')
+                problems.append(f'{derived}: {seen[derived]!r} vs {title!r}')
             else:
                 seen[derived] = title
         self.assertEqual(
-            collisions,
+            problems,
             [],
-            'Two references derive the same reference_id -- add a '
-            'reference_label to disambiguate:\n' + '\n'.join(collisions),
+            'reference.json has references whose derived id is missing or '
+            'duplicated (add a reference_label / fix csl_data):\n'
+            + '\n'.join(problems),
         )

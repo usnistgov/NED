@@ -9,7 +9,6 @@ from ned_app.management.import_utils import (
     write_json,
     build_pk_set,
 )
-from ned_app.models import derive_reference_id
 from ned_app.serialization.serializer import (
     ReferenceSerializer,
     ExperimentSerializer,
@@ -19,10 +18,9 @@ from ned_app.serialization.serializer import (
 _MODEL_CONFIG = {
     'Reference': {
         'json_file': 'reference.json',
-        'pk_fields': ['reference_id'],
-        'pk_deriver': lambda rec: derive_reference_id(
-            rec.get('reference_label', '') or '', rec['csl_data']
-        ),
+        # No dedupe: reference_id is derived (not a stored field), and the
+        # importer is a pure converter. Duplicate and collision detection live at
+        # ingest and in the data-integrity tests.
         'serializer': ReferenceSerializer,
     },
     'Experiment': {
@@ -172,32 +170,6 @@ def _expected_columns(model_name, serializer_class):
     return fields
 
 
-def _derive_pk_or_raise(pk_deriver, record, source):
-    """
-    Compute the derived primary-key tuple for a record.
-
-    Raises a CommandError when a record is malformed (e.g. a hand-edited
-    reference missing csl_data or its year), so the importer fails in a
-    user-friendly way.
-
-    Args:
-        pk_deriver (callable): Maps a record to its derived key string.
-        record (dict): The record to key.
-        source (str): Human-readable description of where the record came from.
-
-    Returns:
-        tuple[str]: A single-element primary-key tuple.
-    """
-    try:
-        return (pk_deriver(record),)
-    except (KeyError, IndexError, TypeError) as exc:
-        raise CommandError(
-            f'Could not derive the reference id for {source}: {exc!r}. '
-            'A reference needs csl_data with an author (family or literal) and '
-            'a year (issued.date-parts), or a reference_label.'
-        )
-
-
 class Command(BaseCommand):
     help = (
         'Import new records from a CSV file and append them to the '
@@ -261,19 +233,12 @@ class Command(BaseCommand):
 
         config = _MODEL_CONFIG[model_name]
 
-        pk_deriver = config.get('pk_deriver')
+        pk_fields = config.get('pk_fields')
 
         existing_records = load_json(config['json_file'])
-        if pk_deriver is not None:
-            existing_pk_set = set()
-            for rec in existing_records:
-                if '_comment' in rec:
-                    continue
-                title = rec.get('csl_data', {}).get('title', '?')
-                source = f'existing record "{title}" in {config["json_file"]}'
-                existing_pk_set.add(_derive_pk_or_raise(pk_deriver, rec, source))
-        else:
-            existing_pk_set = build_pk_set(existing_records, config['pk_fields'])
+        existing_pk_set = (
+            build_pk_set(existing_records, pk_fields) if pk_fields else set()
+        )
 
         try:
             columns, rows = read_csv(input_file)
@@ -310,14 +275,12 @@ class Command(BaseCommand):
 
         for row_num, row in enumerate(rows, start=2):
             record = _row_to_record(row, model_name)
-            if pk_deriver is not None:
-                pk_tuple = _derive_pk_or_raise(
-                    pk_deriver, record, f'CSV row {row_num}'
-                )
-            else:
-                pk_tuple = tuple(
-                    str(record.get(f, '') or '') for f in config['pk_fields']
-                )
+            if not pk_fields:
+                # No dedupe key: the importer just converts and appends.
+                new_records.append(record)
+                continue
+
+            pk_tuple = tuple(str(record.get(f, '') or '') for f in pk_fields)
 
             if pk_tuple in existing_pk_set:
                 skipped_existing.append((row_num, pk_tuple))
@@ -329,9 +292,9 @@ class Command(BaseCommand):
             seen_in_csv.add(pk_tuple)
             new_records.append(record)
 
-        # Report skipped rows so a dropped record (e.g. a reference whose derived
-        # id already exists) is never silently discarded. The reported key is the
-        # value collided on: for references that is the derived reference_id.
+        # Report skipped rows so a dropped record is never silently discarded.
+        # (Only models with a stored dedupe key reach here — Experiment and the
+        # bridge; References have no dedupe key and are always appended.)
         if skipped_existing:
             self.stdout.write(
                 self.style.WARNING(

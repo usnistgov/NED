@@ -2,8 +2,10 @@
 Tests for the import_model management command.
 
 Covers the keystone contract (template -> import -> ingest produces correct
-records) and the importer's own behaviors (dedupe, dry-run, column warnings).
-Validation itself is delegated to ingest and is not retested here.
+records) and the importer's own behaviors (append, dry-run, column warnings, and
+stored-key dedupe for Experiment/the bridge). References have no dedupe key —
+their derived id is validated at ingest and by the data-integrity tests, not
+here. Validation itself is delegated to ingest and is not retested here.
 """
 
 import json
@@ -187,49 +189,38 @@ class ImportModelCommandTests(TransactionTestCase):
 
     # -- Tier 3: behaviors ---------------------------------------------
 
-    def test_duplicate_existing_pk_is_skipped(self):
-        # Dedup is by the derived reference_id, not a stored field: this record
-        # derives 'Smith-2020', matching the template row.
-        self._write_json(
-            'reference.json',
-            [
-                {
-                    'study_type': 'Experiment',
-                    'csl_data': {
-                        'type': 'article-journal',
-                        'title': 'A prior CPVC study',
-                        'author': [{'family': 'Smith', 'given': 'John'}],
-                        'issued': {'date-parts': [[2020]]},
-                    },
-                }
-            ],
-        )
-
-        out = StringIO()
-        call_command(
-            'import_model',
-            model='Reference',
-            input_file=_template('reference_template.csv'),
-            stdout=out,
-        )
-        # The dropped row is reported, naming the derived id it collided on.
-        self.assertIn('already present', out.getvalue())
-        self.assertIn('Smith-2020', out.getvalue())
-        # Nothing appended: the file still has exactly the pre-existing record.
-        self.assertEqual(len(self._read_json('reference.json')), 1)
-
-    def test_within_file_duplicate_is_skipped(self):
-        # Two rows deriving the same reference_id ('Smith-2020') collapse to one,
-        # and the dropped row is reported rather than silently discarded.
+    def test_reference_rows_are_appended_without_dedupe(self):
+        # References have no dedupe key (reference_id is derived), so the importer
+        # is a pure converter: identical rows are appended, not collapsed.
         header = 'study_type,pdf_saved,csl_type,csl_title,csl_year,csl_authors\n'
         row = 'Experiment,True,article-journal,A Title,2020,"Smith, John"\n'
         path = self._write_csv('dups.csv', header + row + row)
 
         out = StringIO()
         call_command('import_model', model='Reference', input_file=path, stdout=out)
-        self.assertEqual(len(self._read_json('reference.json')), 1)
-        self.assertIn('within this CSV', out.getvalue())
-        self.assertIn('Smith-2020', out.getvalue())
+        self.assertEqual(len(self._read_json('reference.json')), 2)
+        self.assertNotIn('duplicate', out.getvalue().lower())
+
+    def test_experiment_dedupe_by_stored_key(self):
+        # Models with a stored natural key (Experiment id) still dedupe — against
+        # the existing JSON and within the CSV — reported so no drop is silent.
+        self._write_json('experiment.json', [{'id': 'exp001'}])
+        header = 'id,reference,component,test_type\n'
+        rows = (
+            'exp001,Smith-2020,D.50.2.1.A,"Dynamic, uniaxial"\n'  # already present
+            'exp002,Smith-2020,D.50.2.1.A,"Dynamic, uniaxial"\n'  # new
+            'exp002,Smith-2020,D.50.2.1.A,"Dynamic, uniaxial"\n'  # dup within CSV
+        )
+        path = self._write_csv('dup_exp.csv', header + rows)
+
+        out = StringIO()
+        call_command('import_model', model='Experiment', input_file=path, stdout=out)
+        value = out.getvalue()
+        self.assertIn('already present', value)  # exp001
+        self.assertIn('within this CSV', value)  # the second exp002
+        # Only the one genuinely new experiment (exp002) is appended.
+        ids = [r['id'] for r in self._read_json('experiment.json')]
+        self.assertEqual(sorted(ids), ['exp001', 'exp002'])
 
     def test_dry_run_writes_nothing(self):
         call_command(
@@ -302,18 +293,3 @@ class ImportModelCommandTests(TransactionTestCase):
             )
         self.assertIn('semicolon-delimited', str(cm.exception))
         self.assertFalse(os.path.exists(self._json_path('reference.json')))
-
-    def test_corrupt_existing_reference_raises_command_error(self):
-        # A hand-corrupted existing record (missing csl_data) must fail the
-        # derived-id dedup with a CommandError.
-        self._write_json('reference.json', [{'study_type': 'Experiment'}])
-
-        with self.assertRaises(CommandError) as cm:
-            call_command(
-                'import_model',
-                model='Reference',
-                input_file=_template('reference_template.csv'),
-                stdout=StringIO(),
-                stderr=StringIO(),
-            )
-        self.assertIn('derive the reference id', str(cm.exception))

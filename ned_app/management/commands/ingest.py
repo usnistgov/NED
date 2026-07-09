@@ -221,8 +221,16 @@ class Command(BaseCommand):
             lookup_params = None
             try:
                 if lookup_deriver is not None:
-                    # The lookup key is not stored in the JSON; compute it.
-                    lookup_params = lookup_deriver(item)
+                    # The lookup key is not stored in the JSON; compute it. A
+                    # malformed record (e.g. missing csl_data or its year) can't
+                    # be keyed — surface a clear message, not a bare KeyError.
+                    try:
+                        lookup_params = lookup_deriver(item)
+                    except (KeyError, IndexError, TypeError) as exc:
+                        raise ValueError(
+                            'could not derive the lookup key from the record '
+                            f'(malformed csl_data?): {exc!r}'
+                        ) from exc
                     have_lookup = True
                 else:
                     lookup_params = {
