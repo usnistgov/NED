@@ -302,3 +302,18 @@ class ImportModelCommandTests(TransactionTestCase):
             )
         self.assertIn('semicolon-delimited', str(cm.exception))
         self.assertFalse(os.path.exists(self._json_path('reference.json')))
+
+    def test_corrupt_existing_reference_raises_command_error(self):
+        # A hand-corrupted existing record (missing csl_data) must fail the
+        # derived-id dedup with a CommandError.
+        self._write_json('reference.json', [{'study_type': 'Experiment'}])
+
+        with self.assertRaises(CommandError) as cm:
+            call_command(
+                'import_model',
+                model='Reference',
+                input_file=_template('reference_template.csv'),
+                stdout=StringIO(),
+                stderr=StringIO(),
+            )
+        self.assertIn('derive the reference id', str(cm.exception))
