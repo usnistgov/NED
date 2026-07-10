@@ -20,7 +20,7 @@ The goal of this project is to develop a robust and scalable database of fragili
 - **db.sqlite3** - SQLite database file (disposable build artifact, generated from JSON data via `python manage.py ingest`).
 
 ### Data Schema
-Model and field descriptions are provided in the docstrings in ned_app/models.py. The overview below provides a brief description of two of the fields found in the experiment model.
+A human-readable data dictionary describing every attribute of the main tables (definitions, accepted values, and bounds) is provided in [ui/assets/data_dictionary.md](ui/assets/data_dictionary.md); it lives under `ui/` so the same document is also rendered as the *Data dictionary* page of the browser UI. The authoritative schema definition lives in the docstrings and field declarations in ned_app/models.py. The overview below provides a brief description of two of the fields found in the experiment model.
 
 #### Component Subcategorization Hierarchy
 To categorize building components, we rely on the UNIFORMAT II element classification system (NISTIR 6389). However, this system only classifies nonstructural components at a high level, and further detail is needed to adequately separate different types of components within each category for the purpose of assessing building performance.  Therefore, we propose a new subcategorization hierarchy consisting of four nested component attributes:
