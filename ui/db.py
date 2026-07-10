@@ -84,7 +84,10 @@ def get_component_fragility_models(component_id: str) -> pd.DataFrame:
             SELECT
                 fm.fragility_model_id,
                 fm.reference_id         AS "Reference",
-                json_extract(r.csl_data, '$.DOI') AS "doi",
+                COALESCE(
+                    json_extract(r.csl_data, '$.DOI'),
+                    json_extract(r.csl_data, '$.URL')
+                )                       AS "doi",
                 fm.model_id             AS "Model ID",
                 fm.comp_detail          AS "Component Detail",
                 fm.material             AS "Material",
@@ -241,7 +244,10 @@ def get_component_experiments(component_id: str) -> pd.DataFrame:
             SELECT
                 e.id                    AS "experiment_id",
                 r.author || ', ' || r.year AS "Source",
-                json_extract(r.csl_data, '$.DOI') AS "doi",
+                COALESCE(
+                    json_extract(r.csl_data, '$.DOI'),
+                    json_extract(r.csl_data, '$.URL')
+                )                       AS "doi",
                 e.test_type             AS "Test Type",
                 e.location              AS "Location",
                 e.design_objective      AS "Design Objective",
