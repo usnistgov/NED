@@ -131,8 +131,7 @@ def render() -> None:
     st.markdown(
         """
         The full backend codebase — including the database schema, ingestion pipeline,
-        contribution guide, and Jupyter notebook visualization tools — is publicly available
-        on GitHub:
+        and contribution guide — is publicly available on GitHub:
 
         **[usnistgov/NED on GitHub](https://github.com/usnistgov/NED)**
         """
