@@ -83,8 +83,9 @@ def get_component_fragility_models(component_id: str) -> pd.DataFrame:
             """
             SELECT
                 fm.fragility_model_id,
+                fm.reference_id         AS "Reference",
+                json_extract(r.csl_data, '$.DOI') AS "doi",
                 fm.model_id             AS "Model ID",
-                fm.p58_fragility        AS "P-58 Fragility",
                 fm.comp_detail          AS "Component Detail",
                 fm.material             AS "Material",
                 fm.size_class           AS "Size Class",
@@ -92,6 +93,7 @@ def get_component_fragility_models(component_id: str) -> pd.DataFrame:
             FROM ned_app_componentfragilitymodelbridge b
             JOIN ned_app_fragilitymodel fm ON fm.fragility_model_id = b.fragility_model_id
             JOIN ned_app_component c ON c.component_id = b.component_id
+            LEFT JOIN ned_app_reference r ON r.reference_id = fm.reference_id
             WHERE c.id = ?
             ORDER BY fm.fragility_model_id
             """,

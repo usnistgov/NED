@@ -98,10 +98,10 @@ def render() -> None:
     if df_fm.empty:
         st.info('No fragility models are associated with this component.')
     else:
-        _FM_WIDTHS = [1.5, 1.5, 2, 1.5, 1.5, 4, 1]
+        _FM_WIDTHS = [2, 1.5, 2, 1.5, 1.5, 4, 1]
         _FM_HEADERS = [
+            'Reference',
             'Model ID',
-            'P-58 Fragility',
             'Component Detail',
             'Material',
             'Size Class',
@@ -131,19 +131,23 @@ def render() -> None:
             c = st.columns(_FM_WIDTHS)
             desc = str(fmrow['Component Description'])
             desc_short = desc[:80] + '…' if len(desc) > 80 else desc
+            reference = esc(fmrow['Reference'])
+            url = doi_url(fmrow['doi'])
+            if url:
+                reference = f'<a href="{esc(url)}" target="_blank">{reference}</a>'
             for ci, val in zip(
                 c[:6],
                 [
-                    fmrow['Model ID'],
-                    fmrow['P-58 Fragility'],
-                    fmrow['Component Detail'],
-                    fmrow['Material'],
-                    fmrow['Size Class'],
-                    desc_short,
+                    reference,
+                    esc(fmrow['Model ID']),
+                    esc(fmrow['Component Detail']),
+                    esc(fmrow['Material']),
+                    esc(fmrow['Size Class']),
+                    esc(desc_short),
                 ],
             ):
                 ci.markdown(
-                    f"<span style='font-size:0.88rem;'>{esc(val)}</span>",
+                    f"<span style='font-size:0.88rem;'>{val}</span>",
                     unsafe_allow_html=True,
                 )
             if c[6].button('View', key=f'fm_{fmrow["fragility_model_id"]}'):
@@ -173,7 +177,7 @@ def render() -> None:
     else:
         _EXP_WIDTHS = [1.5, 2, 1.5, 2, 1, 1.5, 1]
         _EXP_HEADERS = [
-            'Source',
+            'Reference',
             'Test Type',
             'Location',
             'EDP Metric',
