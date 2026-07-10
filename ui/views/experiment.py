@@ -3,7 +3,7 @@ import json
 import streamlit as st
 
 from db import get_experiment_detail, get_reference
-from utils import attr, build_citation, fmt
+from utils import FIELD_HELP, attr, build_citation, fmt
 
 
 def render() -> None:
@@ -31,29 +31,57 @@ def render() -> None:
     st.markdown('---')
 
     attr('Specimen', fmt(row['Specimen']))
-    attr('Inspection Sequence', fmt(row['Inspection Sequence']))
+    attr(
+        'Inspection Sequence',
+        fmt(row['Inspection Sequence']),
+        help_text=FIELD_HELP['specimen_inspection_sequence'],
+    )
     attr('Reviewer', fmt(row['Reviewer']))
     attr('Test Type', fmt(row['Test Type']))
-    attr('Loading Protocol', fmt(row['Loading Protocol']))
+    attr(
+        'Loading Protocol',
+        fmt(row['Loading Protocol']),
+        help_text=FIELD_HELP['loading_protocol'],
+    )
     attr('Peak Test Amplitude', fmt(row['Peak Test Amplitude']))
     attr('Location', fmt(row['Location']))
-    attr('Governing Design Standard', fmt(row['Governing Design Standard']))
-    attr('Design Objective', fmt(row['Design Objective']))
-    attr('Component Detail', fmt(row['Component Detail']))
-    attr('Material', fmt(row['Material']))
-    attr('Size Class', fmt(row['Size Class']))
+    attr(
+        'Governing Design Standard',
+        fmt(row['Governing Design Standard']),
+        help_text=FIELD_HELP['governing_design_standard'],
+    )
+    attr(
+        'Design Objective',
+        fmt(row['Design Objective']),
+        help_text=FIELD_HELP['design_objective'],
+    )
+    attr(
+        'Component Detail',
+        fmt(row['Component Detail']),
+        help_text=FIELD_HELP['comp_detail'],
+    )
+    attr('Material', fmt(row['Material']), help_text=FIELD_HELP['material'])
+    attr('Size Class', fmt(row['Size Class']), help_text=FIELD_HELP['size_class'])
     attr('Component Description', fmt(row['Component Description']))
     attr('Damage Description', fmt(row['Damage Description']))
-    attr('DS Rank', fmt(row['DS Rank']))
-    attr('DS Class', fmt(row['DS Class']))
+    attr('DS Rank', fmt(row['DS Rank']), help_text=FIELD_HELP['ds_rank'])
+    attr('DS Class', fmt(row['DS Class']), help_text=FIELD_HELP['ds_class'])
     attr('EDP Metric', fmt(row['EDP Metric']))
     attr('EDP Unit', fmt(row['EDP Unit']))
     attr('EDP Value', fmt(row['EDP Value']))
     attr('Alt EDP Metric', fmt(row['Alt EDP Metric']))
     attr('Alt EDP Unit', fmt(row['Alt EDP Unit']))
     attr('Alt EDP Value', fmt(row['Alt EDP Value']))
-    attr('Prior Damage', fmt(row['Prior Damage']))
-    attr('Prior Damage Repaired', fmt(row['Prior Damage Repaired']))
+    attr(
+        'Prior Damage',
+        fmt(row['Prior Damage']),
+        help_text=FIELD_HELP['prior_damage'],
+    )
+    attr(
+        'Prior Damage Repaired',
+        fmt(row['Prior Damage Repaired']),
+        help_text=FIELD_HELP['prior_damage_repaired'],
+    )
     attr('Notes', fmt(row['Notes']))
 
     st.markdown('<br>', unsafe_allow_html=True)

@@ -10,7 +10,16 @@ from db import (
     get_component_fragility_models,
     get_component_fragility_models_export,
 )
-from utils import attr, build_citation, csv_safe, doi_url, esc, fmt, strip_prefix
+from utils import (
+    FIELD_HELP,
+    attr,
+    build_citation,
+    csv_safe,
+    doi_url,
+    esc,
+    fmt,
+    strip_prefix,
+)
 
 
 def _plain_citation(row: pd.Series) -> str:
@@ -99,6 +108,11 @@ def render() -> None:
             'Component Description',
             '',
         ]
+        _FM_HEADER_HELP = {
+            'Component Detail': FIELD_HELP['comp_detail'],
+            'Material': FIELD_HELP['material'],
+            'Size Class': FIELD_HELP['size_class'],
+        }
 
         h = st.columns(_FM_WIDTHS)
         for col, label in zip(h, _FM_HEADERS):
@@ -106,6 +120,7 @@ def render() -> None:
                 f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
                 f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
                 unsafe_allow_html=True,
+                help=_FM_HEADER_HELP.get(label),
             )
         st.markdown(
             "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
@@ -166,6 +181,9 @@ def render() -> None:
             'DS Class',
             '',
         ]
+        _EXP_HEADER_HELP = {
+            'DS Class': FIELD_HELP['ds_class'],
+        }
 
         h = st.columns(_EXP_WIDTHS)
         for col, label in zip(h, _EXP_HEADERS):
@@ -173,6 +191,7 @@ def render() -> None:
                 f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
                 f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
                 unsafe_allow_html=True,
+                help=_EXP_HEADER_HELP.get(label),
             )
         st.markdown(
             "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
