@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from db import get_fragility_curves, get_fragility_model_detail, get_reference
-from utils import attr, build_citation, csv_safe, fmt
+from utils import FIELD_HELP, attr, build_citation, csv_safe, fmt
 
 
 def _lognormal_curves(
@@ -76,9 +76,13 @@ def render_model_body(
 
     attr('Model ID', fmt(row['model_id']))
     attr('P-58 Fragility', fmt(row['p58_fragility']))
-    attr('Component Detail', fmt(row['comp_detail']))
-    attr('Material', fmt(row['material']))
-    attr('Size Class', fmt(row['size_class']))
+    attr(
+        'Component Detail',
+        fmt(row['comp_detail']),
+        help_text=FIELD_HELP['comp_detail'],
+    )
+    attr('Material', fmt(row['material']), help_text=FIELD_HELP['material'])
+    attr('Size Class', fmt(row['size_class']), help_text=FIELD_HELP['size_class'])
     attr('Component Description', fmt(row['comp_description']))
     attr('EDP Metric', fmt(row['edp_metric']))
     attr('EDP Unit', fmt(row['edp_unit']))
@@ -118,7 +122,10 @@ def render_model_body(
             x_title = f'{edp_metric} [{edp_unit}]' if edp_unit != '—' else edp_metric
 
             fig = go.Figure()
-            for ds_label, group in plot_df.sort_values('_rank').groupby(
+            # Sort by EDP as well: rows within a damage state share the same
+            # _rank, and an unstable sort on ties scrambles the point order,
+            # making the CDF trace double back on itself.
+            for ds_label, group in plot_df.sort_values(['_rank', 'EDP']).groupby(
                 'Damage State', sort=False
             ):
                 fig.add_trace(

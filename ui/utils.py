@@ -22,12 +22,83 @@ def strip_prefix(val) -> str:
     return parts[1] if len(parts) == 2 else s
 
 
-def attr(label: str, value: str, caption: str | None = None) -> None:
+def attr(
+    label: str,
+    value: str,
+    caption: str | None = None,
+    help_text: str | None = None,
+) -> None:
     c1, c2 = st.columns([1, 3])
-    c1.markdown(f'**{label}**')
+    c1.markdown(f'**{label}**', help=help_text)
     c2.markdown(value)
     if caption:
         c2.caption(caption)
+
+
+# Pop-up helper descriptions for database fields, keyed by model field name.
+# Wording follows the data dictionary (assets/data_dictionary.md); update both
+# together if a definition changes.
+FIELD_HELP = {
+    'comp_detail': (
+        'Classification or short description of the component '
+        'attachment/connection detailing (e.g., perimeter-fixed vs. '
+        'back-braced ceilings).'
+    ),
+    'material': (
+        'General material grouping of the component, if applicable '
+        '(e.g., CPVC vs. iron sprinkler pipes).'
+    ),
+    'size_class': (
+        'General size grouping of this component relative to others of the '
+        'same type, if applicable (e.g., large gridded area of ceiling tiles '
+        'or specific equipment size).'
+    ),
+    'ds_class': (
+        'First-pass classification of whether the observed damage is '
+        'consequential:\n'
+        '- **No damage** — no change in state was observed from the test.\n'
+        '- **Inconsequential** — (aesthetic) damage was observed but is '
+        'unlikely to require repair or impact system operation (no action '
+        'required).\n'
+        '- **Consequential** — damage that may require repair or impact '
+        'system operation (observable and requires action).\n'
+        '- **Unknown** — a damage state class could not be identified by '
+        'the reviewer.'
+    ),
+    'specimen_inspection_sequence': (
+        'Which test of this specimen the observation comes from (the ith '
+        'test), when a specimen was tested/inspected multiple times.'
+    ),
+    'loading_protocol': (
+        'Name, ID, or general description of the ground motion or loading '
+        'protocol used in the test.'
+    ),
+    'governing_design_standard': (
+        'Name of the standard governing the design of the specimen, if applicable.'
+    ),
+    'design_objective': (
+        'Performance level to which the specimen was designed, e.g., code '
+        'compliant, common construction practice, low-damage design, or '
+        'meeting a certain damage objective under a specific loading '
+        'condition.'
+    ),
+    'ds_rank': (
+        'Integer rank ordering this observed damage relative to other damage '
+        'observed in the same specimen (1 = first/least severe), as recorded '
+        'by the original author in the reference. Blank if not noted in the '
+        'reference.'
+    ),
+    'prior_damage': (
+        'Description of any damage noted during a previous test of this '
+        'specimen, including if and how the specimen was repaired before '
+        'this test. Empty if no prior damage was noted.'
+    ),
+    'prior_damage_repaired': (
+        'TRUE if prior damage was noted and repaired before this test; '
+        'FALSE if noted and not repaired; or a general description of the '
+        'previous damage that was repaired.'
+    ),
+}
 
 
 _DOI_RE = re.compile(r'^10\.\d{4,9}/\S+$')
