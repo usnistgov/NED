@@ -8,6 +8,7 @@ from views import (
     compare_fragilities,
     component_detail,
     components,
+    data_dictionary,
     experiment,
     fragility_model,
     home,
@@ -73,6 +74,11 @@ with st.sidebar:
         st.session_state['page'] = 'Compare Fragilities'
         st.rerun()
 
+    if st.button('📖  Data dictionary', key='nav_data_dictionary'):
+        st.query_params.clear()
+        st.session_state['page'] = 'Data Dictionary'
+        st.rerun()
+
     st.markdown('<br>', unsafe_allow_html=True)
     st.markdown('---')
     if st.button('Sign out', key='nav_logout'):
@@ -89,6 +95,8 @@ elif page == 'Components':
     components.render()
 elif page == 'Compare Fragilities':
     compare_fragilities.render()
+elif page == 'Data Dictionary':
+    data_dictionary.render()
 elif page == 'Component Detail':
     component_detail.render()
 elif page == 'Fragility Model Detail':

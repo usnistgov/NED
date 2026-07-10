@@ -1,7 +1,8 @@
 # NED Data Dictionary
 
 This document describes the attributes of the main tables in the NED database. This is
-a reference document; the authoritative definition of the schema is `ned_app/models.py`
+a reference document; the authoritative definition of the schema is
+[`ned_app/models.py`](https://github.com/usnistgov/NED/blob/main/ned_app/models.py)
 and this document is updated occasionally and may lag behind small schema changes.
 
 **Conventions used below:**
@@ -39,8 +40,9 @@ experiment and fragility model must point at a reference.
 
 The catalog of nonstructural building component types, classified using the
 UNIFORMAT II / NISTIR 6389 hierarchy, optionally extended with suffix levels for
-finer component types. One row per type of building component. See the README section *Component Subcategorization Hierarchy* for guidance on
-categorizing components.
+finer component types. One row per type of building component. See
+*[Component Subcategorization Hierarchy](https://github.com/usnistgov/NED#component-subcategorization-hierarchy)*
+in the NED README for guidance on categorizing components.
 
 | Field | Type | Required | Description |
 |---|---|---|---|
@@ -87,7 +89,7 @@ damage states, produces multiple rows.
 | `alt_edp_unit` | Choice | Optional | Unit of the secondary EDP. Same choice list as `edp_unit`. |
 | `alt_edp_value` | Decimal (up to 12 digits, 6 decimal places) | Optional | Value of the secondary EDP; stored as null when blank. |
 | `ds_rank` | Integer | Optional | Rank ordering this observed damage relative to other damage observed in the same specimen (1 = first/least severe) as recorded by the original author in the reference. Leave blank if not noted in the reference. |
-| `ds_class` | Choice | Required | First-pass classification of whether the damage is consequential, assigned by the individual or institution entering this record into the database. One of the [Damage state class](#damage-state-class) values. When in doubt, err toward `Consequential`; use `Unknown` only when a class cannot be identified. See the README section *DS Class* for additional information. |
+| `ds_class` | Choice | Required | First-pass classification of whether the damage is consequential, assigned by the individual or institution entering this record into the database. One of the [Damage state class](#damage-state-class) values. When in doubt, err toward `Consequential`; use `Unknown` only when a class cannot be identified. See *[DS Class](https://github.com/usnistgov/NED#ds-class)* in the NED README for additional information. |
 | `notes` | Text | Optional | Additional notes providing context for the damage observation. |
 
 ## Fragility Model
@@ -199,8 +201,8 @@ and `FragilityModel.edp_unit`.
 
 ### Damage state class
 
-Used by `Experiment.ds_class`. See the README section *DS Class* for the full
-discussion of intent and edge cases.
+Used by `Experiment.ds_class`. See *[DS Class](https://github.com/usnistgov/NED#ds-class)*
+in the NED README for the full discussion of intent and edge cases.
 
 | Value | Meaning |
 |---|---|

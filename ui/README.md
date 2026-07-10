@@ -68,6 +68,10 @@ Displays a single fragility model's metadata — material, size class, component
 
 Shows all metadata for an individual test observation: specimen identifier, test type, loading protocol, EDP value and metric, damage state rank and classification, damage description, and prior damage history. Links back to the source reference.
 
+### Data Dictionary
+
+Renders the human-readable data dictionary (`assets/data_dictionary.md`): a field-by-field description of the main database tables, including definitions, accepted data types, bounds, and the exact values allowed in choice fields.
+
 ## Deep linking
 
 The app supports query-parameter navigation for bookmarking and sharing:
@@ -116,9 +120,11 @@ All data lives in a single SQLite file. The app is strictly read-only.
 │   ├── components.py
 │   ├── component_detail.py
 │   ├── fragility_model.py
-│   └── experiment.py
+│   ├── experiment.py
+│   └── data_dictionary.py
 ├── assets/
-│   └── logo.png                # App logo
+│   ├── logo.png                # App logo
+│   └── data_dictionary.md      # Human-readable schema reference (rendered by data_dictionary.py)
 ├── backend/                    # Files synced from the backend repo — do not edit here
 │   ├── db.sqlite3              # SQLite database
 ├── .streamlit/
