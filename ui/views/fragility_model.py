@@ -234,7 +234,9 @@ def render() -> None:
     else:
         render_experiments_table(
             df_exp,
-            with_reference(get_fragility_model_experiments_export(fragility_model_id)),
+            with_reference(
+                get_fragility_model_experiments_export(fragility_model_id)
+            ),
             file_name=f'{fragility_model_id}_experiments.csv',
             key_prefix='src_',
         )
