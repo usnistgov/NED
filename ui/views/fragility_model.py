@@ -7,8 +7,15 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from db import get_fragility_curves, get_fragility_model_detail, get_reference
+from db import (
+    get_fragility_curves,
+    get_fragility_model_detail,
+    get_fragility_model_experiments,
+    get_fragility_model_experiments_export,
+    get_reference,
+)
 from utils import FIELD_HELP, attr, build_citation, csv_safe, fmt
+from views.experiments_table import render_experiments_table, with_reference
 
 
 def _lognormal_curves(
@@ -216,3 +223,18 @@ def render() -> None:
         unsafe_allow_html=True,
     )
     render_model_body(fragility_model_id)
+
+    # ── Source Data ──
+    st.markdown('---')
+    st.markdown('## Source Data')
+    df_exp = get_fragility_model_experiments(fragility_model_id)
+
+    if df_exp.empty:
+        st.info('No experiments are have been linked with this fragility model.')
+    else:
+        render_experiments_table(
+            df_exp,
+            with_reference(get_fragility_model_experiments_export(fragility_model_id)),
+            file_name=f'{fragility_model_id}_experiments.csv',
+            key_prefix='src_',
+        )

@@ -1,5 +1,3 @@
-import json
-
 import pandas as pd
 import streamlit as st
 
@@ -10,53 +8,21 @@ from db import (
     get_component_fragility_models,
     get_component_fragility_models_export,
 )
-from utils import (
-    FIELD_HELP,
-    attr,
-    build_citation,
-    csv_safe,
-    doi_url,
-    esc,
-    fmt,
-    strip_prefix,
-)
-
-
-def _plain_citation(row: pd.Series) -> str:
-    """Plain-text citation from a row carrying 'csl_data', 'author', 'year',
-    and 'title' columns, matching the citation shown on the detail pages."""
-    try:
-        csl = json.loads(row['csl_data']) if row['csl_data'] else {}
-    except (ValueError, TypeError):
-        csl = {}
-    cite = build_citation(csl, markdown=False)
-    if not cite and not (pd.isna(row['author']) and pd.isna(row['title'])):
-        cite = f'{fmt(row["author"])} ({fmt(row["year"])}). {fmt(row["title"])}.'
-    return cite
-
-
-def _with_reference(df: pd.DataFrame) -> pd.DataFrame:
-    """Replace the raw reference columns with a 'Reference' citation column
-    placed just before 'Study Type'."""
-    df.insert(
-        df.columns.get_loc('Study Type'),
-        'Reference',
-        df.apply(_plain_citation, axis=1),
-    )
-    return df.drop(columns=['author', 'year', 'title', 'csl_data'])
+from utils import FIELD_HELP, attr, csv_safe, doi_url, esc, fmt, strip_prefix
+from views.experiments_table import render_experiments_table, with_reference
 
 
 def _experiments_export(component_id: str) -> pd.DataFrame:
     """Experiments export with the same fields shown on the Experiment view
     page, including the reference citation and study type."""
-    return _with_reference(get_component_experiments_export(component_id))
+    return with_reference(get_component_experiments_export(component_id))
 
 
 def _fragilities_export(component_id: str) -> pd.DataFrame:
     """Fragility models export with the same fields shown on the Fragility
     Model view page, including the reference citation and study type — one
     row per fragility curve (damage state)."""
-    return _with_reference(get_component_fragility_models_export(component_id))
+    return with_reference(get_component_fragility_models_export(component_id))
 
 
 def render() -> None:
@@ -175,64 +141,8 @@ def render() -> None:
     if df_exp.empty:
         st.info('No experiments are associated with this component.')
     else:
-        _EXP_WIDTHS = [1.5, 2, 1.5, 2, 1, 1.5, 1]
-        _EXP_HEADERS = [
-            'Reference',
-            'Test Type',
-            'Location',
-            'EDP Metric',
-            'EDP Value',
-            'DS Class',
-            '',
-        ]
-        _EXP_HEADER_HELP = {
-            'DS Class': FIELD_HELP['ds_class'],
-        }
-
-        h = st.columns(_EXP_WIDTHS)
-        for col, label in zip(h, _EXP_HEADERS):
-            col.markdown(
-                f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
-                f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
-                unsafe_allow_html=True,
-                help=_EXP_HEADER_HELP.get(label),
-            )
-        st.markdown(
-            "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
-            unsafe_allow_html=True,
-        )
-
-        for _, erow in df_exp.iterrows():
-            c = st.columns(_EXP_WIDTHS)
-            source = esc(erow['Source'])
-            url = doi_url(erow['doi'])
-            if url:
-                source = f'<a href="{esc(url)}" target="_blank">{source}</a>'
-            for ci, val in zip(
-                c[:6],
-                [
-                    source,
-                    esc(erow['Test Type']),
-                    esc(erow['Location']),
-                    esc(erow['EDP Metric']),
-                    esc(erow['EDP Value']),
-                    esc(erow['DS Class']),
-                ],
-            ):
-                ci.markdown(
-                    f"<span style='font-size:0.88rem;'>{val}</span>",
-                    unsafe_allow_html=True,
-                )
-            if c[6].button('View', key=f'exp_{erow["experiment_id"]}'):
-                st.session_state['selected_experiment_id'] = erow['experiment_id']
-                st.session_state['page'] = 'Experiment Detail'
-                st.query_params['experiment'] = erow['experiment_id']
-                st.rerun()
-
-        st.download_button(
-            'Download Experiments as CSV',
-            csv_safe(_experiments_export(component_id)).to_csv(index=False),
+        render_experiments_table(
+            df_exp,
+            _experiments_export(component_id),
             file_name=f'{component_id}_experiments.csv',
-            mime='text/csv',
-            key='exp_csv',
         )
