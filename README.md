@@ -16,7 +16,6 @@ The goal of this project is to develop a robust and scalable database of fragili
 - **resources/example_data/** - Template JSON files for contributors to use when adding new data.
 - **scripts** - General project scripts that are outside the Django application management process.
 - **ui** - The Streamlit front-end (browser UI). NED is the source of truth for this code; it is published to the separate deployment repo via `scripts/export_frontend.py` (see [Front-end (UI)](#front-end-ui)).
-- **visualization_tools** - Jupyter notebook workflows that interact with the NED database to illustrate backend interactions via python.
 - **db.sqlite3** - SQLite database file (disposable build artifact, generated from JSON data via `python manage.py ingest`).
 
 ### Data Schema
@@ -41,26 +40,6 @@ To provide a structured detail of observed damage attributes, we propose a DS Cl
 The purpose of the DS Class attribute is to provide a first-pass structured grouping of observed damage to aid in later fragility development. However, we recognize that any grouping of damage states introduces subjectiveness into the process. Therefore, our goal is to implement as little subjectiveness as possible while still providing useful structured data for later users of the database. This attribute simply acts to separate consequential damage from inconsequential damage. Further separation of consequential damage into multiple damage states is an attribute of the damage state itself and not the initial observation of damage and is therefore up to the fragility developer to refine.
 
 All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
-
-## Visualization Tools
-Several jupyter-notebook-based database user interface tools are provided in the `visualization_tools` subdirectory. These tools allow users to interact with data in the SQL database, query specific data views, and download csv files without the need to code. 
-
-Two predefined workflows are provided:
-- **visualization_tools/view_experiments.ipynb** - Query experimental tests of nonstructural components in the database by component type and component detail, download data, and plot distributions of peak test demands at the occurrence of various damage states.
-- **visualization_tools/view_fragilities.ipynb** - Query fragility models of nonstructural components in the database by component type and component detail, download data, and plot fragility curves for various damage states.
-
-### Running the Notebook
-Prior to running a notebook, first ensure that all required packages have been installed by running the following command:
-```
-pip install -r visualization_tools/requirements.txt
-```
-
-Once all required packages have been installed, open the Jupyter Notebook by running the following command:
-```
-jupyter notebook
-```
-
-For additional instructions please see the Jupyter Notebook installation instructions: https://jupyter.org/install
 
 ## Exporting Data to CSV
 
@@ -630,7 +609,7 @@ codespell .
 - Python code comments and docstrings
 - Markdown files (like this README)
 - Configuration files
-- Excludes: Jupyter notebooks, resources/, and visualization_tools/ directories
+- Excludes: the resources/ directory
 
 #### 4. Unit Tests with Django Test Suite
 The project includes comprehensive unit tests that verify the functionality of models, serializers, and data processing components. All tests must pass to ensure your changes don't break existing functionality.
