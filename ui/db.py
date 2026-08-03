@@ -332,6 +332,41 @@ def get_fragility_model_experiments_export(fragility_model_id: str) -> pd.DataFr
 
 
 @st.cache_data
+def get_experiment_fragility_models(experiment_id: str) -> pd.DataFrame:
+    """Fragility models informed by an experiment, via the experiment–fragility
+    model bridge — the reverse of ``get_fragility_model_experiments()``. Returns
+    the same summary fields as the component fragility-models table so the row
+    rendering can be reused."""
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        return pd.read_sql(
+            """
+            SELECT
+                fm.fragility_model_id,
+                fm.reference_id         AS "Reference",
+                COALESCE(
+                    json_extract(r.csl_data, '$.DOI'),
+                    json_extract(r.csl_data, '$.URL')
+                )                       AS "doi",
+                fm.model_id             AS "Model ID",
+                fm.comp_detail          AS "Component Detail",
+                fm.material             AS "Material",
+                fm.size_class           AS "Size Class",
+                fm.comp_description     AS "Component Description"
+            FROM ned_app_experimentfragilitymodelbridge b
+            JOIN ned_app_fragilitymodel fm ON fm.fragility_model_id = b.fragility_model_id
+            LEFT JOIN ned_app_reference r ON r.reference_id = fm.reference_id
+            WHERE b.experiment_id = ?
+            ORDER BY fm.fragility_model_id
+            """,
+            conn,
+            params=(experiment_id,),
+        )
+    finally:
+        conn.close()
+
+
+@st.cache_data
 def get_component_experiments(component_id: str) -> pd.DataFrame:
     conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
     try:

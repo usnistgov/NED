@@ -64,15 +64,15 @@ def render() -> None:
     if df_fm.empty:
         st.info('No fragility models are associated with this component.')
     else:
-        _FM_WIDTHS = [2, 1.5, 2, 1.5, 1.5, 4, 1]
+        _FM_WIDTHS = [1, 1.5, 2, 1.5, 1.5, 4, 2]
         _FM_HEADERS = [
-            'Reference',
+            '',
             'Model ID',
             'Component Detail',
             'Material',
             'Size Class',
             'Component Description',
-            '',
+            'Reference',
         ]
         _FM_HEADER_HELP = {
             'Component Detail': FIELD_HELP['comp_detail'],
@@ -95,6 +95,13 @@ def render() -> None:
 
         for _, fmrow in df_fm.iterrows():
             c = st.columns(_FM_WIDTHS)
+            if c[0].button('View', key=f'fm_{fmrow["fragility_model_id"]}'):
+                st.session_state['selected_fragility_model_id'] = fmrow[
+                    'fragility_model_id'
+                ]
+                st.session_state['page'] = 'Fragility Model Detail'
+                st.query_params['fragility_model'] = fmrow['fragility_model_id']
+                st.rerun()
             desc = str(fmrow['Component Description'])
             desc_short = desc[:80] + '…' if len(desc) > 80 else desc
             reference = esc(fmrow['Reference'])
@@ -102,27 +109,20 @@ def render() -> None:
             if url:
                 reference = f'<a href="{esc(url)}" target="_blank">{reference}</a>'
             for ci, val in zip(
-                c[:6],
+                c[1:],
                 [
-                    reference,
                     esc(fmrow['Model ID']),
                     esc(fmrow['Component Detail']),
                     esc(fmrow['Material']),
                     esc(fmrow['Size Class']),
                     esc(desc_short),
+                    reference,
                 ],
             ):
                 ci.markdown(
                     f"<span style='font-size:0.88rem;'>{val}</span>",
                     unsafe_allow_html=True,
                 )
-            if c[6].button('View', key=f'fm_{fmrow["fragility_model_id"]}'):
-                st.session_state['selected_fragility_model_id'] = fmrow[
-                    'fragility_model_id'
-                ]
-                st.session_state['page'] = 'Fragility Model Detail'
-                st.query_params['fragility_model'] = fmrow['fragility_model_id']
-                st.rerun()
 
         st.download_button(
             'Download Fragilities as CSV',
