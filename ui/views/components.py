@@ -54,11 +54,11 @@ def render() -> None:
     if df_display.empty:
         st.info('No components match the current filters.')
     else:
-        _WIDTHS = [1.2, 2.5, 5, 1, 1.5, 1]
+        _WIDTHS = [1, 1.2, 2.5, 5, 1, 1.5]
 
         h = st.columns(_WIDTHS)
         for col, label in zip(
-            h, ['ID', 'Element', 'Name', '# Tests', '# Fragility Models', '']
+            h, ['', 'ID', 'Element', 'Name', '# Tests', '# Fragility Models']
         ):
             col.markdown(
                 f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
@@ -73,30 +73,30 @@ def render() -> None:
 
         for _, row in df_display.iterrows():
             c = st.columns(_WIDTHS)
-            c[0].markdown(
-                f"<span style='font-size:0.88rem;'>{esc(row['ID'])}</span>",
-                unsafe_allow_html=True,
-            )
-            c[1].markdown(
-                f"<span style='font-size:0.88rem;'>{esc(row['Element'])}</span>",
-                unsafe_allow_html=True,
-            )
-            c[2].markdown(
-                f"<span style='font-size:0.88rem;'>{esc(row['Name'])}</span>",
-                unsafe_allow_html=True,
-            )
-            c[3].markdown(
-                f"<span style='font-size:0.88rem;'>{int(row['# Tests'])}</span>",
-                unsafe_allow_html=True,
-            )
-            c[4].markdown(
-                f"<span style='font-size:0.88rem;'>{int(row['# Fragility Models'])}</span>",
-                unsafe_allow_html=True,
-            )
-            if c[5].button('View', key=f'comp_{row["ID"]}'):
+            if c[0].button('View', key=f'comp_{row["ID"]}'):
                 st.session_state['selected_component_id'] = row['ID']
                 st.session_state['page'] = 'Component Detail'
                 st.query_params['component'] = row['ID']
                 st.rerun()
+            c[1].markdown(
+                f"<span style='font-size:0.88rem;'>{esc(row['ID'])}</span>",
+                unsafe_allow_html=True,
+            )
+            c[2].markdown(
+                f"<span style='font-size:0.88rem;'>{esc(row['Element'])}</span>",
+                unsafe_allow_html=True,
+            )
+            c[3].markdown(
+                f"<span style='font-size:0.88rem;'>{esc(row['Name'])}</span>",
+                unsafe_allow_html=True,
+            )
+            c[4].markdown(
+                f"<span style='font-size:0.88rem;'>{int(row['# Tests'])}</span>",
+                unsafe_allow_html=True,
+            )
+            c[5].markdown(
+                f"<span style='font-size:0.88rem;'>{int(row['# Fragility Models'])}</span>",
+                unsafe_allow_html=True,
+            )
 
         st.caption(f'Showing {len(df_display)} of {total_components} components')
