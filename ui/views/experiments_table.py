@@ -11,15 +11,15 @@ from utils import FIELD_HELP, build_citation, csv_safe, doi_url, esc, fmt
 # to paint in the browser, so long tables are paginated.
 _PAGE_SIZE = 50
 
-_EXP_WIDTHS = [1.5, 2, 1.5, 2, 1, 1.5, 1]
+_EXP_WIDTHS = [1, 2, 1.5, 2, 1, 1.5, 1.5]
 _EXP_HEADERS = [
-    'Reference',
+    '',
     'Test Type',
     'Location',
     'EDP Metric',
     'EDP Value',
     'DS Class',
-    '',
+    'Reference',
 ]
 _EXP_HEADER_HELP = {
     'DS Class': FIELD_HELP['ds_class'],
@@ -97,30 +97,30 @@ def render_experiments_table(
 
     for _, erow in df_exp.iterrows():
         c = st.columns(_EXP_WIDTHS)
+        if c[0].button('View', key=f'{key_prefix}exp_{erow["experiment_id"]}'):
+            st.session_state['selected_experiment_id'] = erow['experiment_id']
+            st.session_state['page'] = 'Experiment Detail'
+            st.query_params['experiment'] = erow['experiment_id']
+            st.rerun()
         source = esc(erow['Source'])
         url = doi_url(erow['doi'])
         if url:
             source = f'<a href="{esc(url)}" target="_blank">{source}</a>'
         for ci, val in zip(
-            c[:6],
+            c[1:],
             [
-                source,
                 esc(erow['Test Type']),
                 esc(erow['Location']),
                 esc(erow['EDP Metric']),
                 esc(erow['EDP Value']),
                 esc(erow['DS Class']),
+                source,
             ],
         ):
             ci.markdown(
                 f"<span style='font-size:0.88rem;'>{val}</span>",
                 unsafe_allow_html=True,
             )
-        if c[6].button('View', key=f'{key_prefix}exp_{erow["experiment_id"]}'):
-            st.session_state['selected_experiment_id'] = erow['experiment_id']
-            st.session_state['page'] = 'Experiment Detail'
-            st.query_params['experiment'] = erow['experiment_id']
-            st.rerun()
 
     st.download_button(
         'Download Experiments as CSV',
