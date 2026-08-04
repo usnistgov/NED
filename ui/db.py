@@ -15,6 +15,7 @@ SELECT
     c.major_group                           AS major_group,
     c."group"                               AS "Group",
     c.element                               AS "Element",
+    c.subelement                            AS "Subelement",
     c.name                                  AS "Name",
     COUNT(DISTINCT e.id)                    AS "# Tests",
     COUNT(DISTINCT b.fragility_model_id)    AS "# Fragility Models"
@@ -23,7 +24,7 @@ LEFT JOIN ned_app_experiment e
        ON e.component_id = c.component_id
 LEFT JOIN ned_app_componentfragilitymodelbridge b
        ON b.component_id = c.component_id
-GROUP BY c.id, c.major_group, c."group", c.element, c.name
+GROUP BY c.id, c.major_group, c."group", c.element, c.subelement, c.name
 ORDER BY c.id
 """
 
@@ -37,6 +38,7 @@ def get_components() -> pd.DataFrame:
         conn.close()
 
     df['Element'] = df['Element'].str.split(' - ', n=1).str[-1].fillna('—')
+    df['Subelement'] = df['Subelement'].str.split(' - ', n=1).str[-1].fillna('—')
     df['major_group'] = df['major_group'].fillna('—')
 
     major_letter = df['major_group'].str.split(' - ', n=1).str[0]
