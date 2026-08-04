@@ -15,8 +15,14 @@ from utils import esc, fmt
 # To extend: add a term to an existing group, or append a new group. No other
 # code changes are required — this is the single source of truth for synonyms.
 _SEARCH_SYNONYMS: list[list[str]] = [
-    ['sprinkler', 'sprinkler drop', 'riser', 'branch line', 'standpipe',
-     'fire suppression'],
+    [
+        'sprinkler',
+        'sprinkler drop',
+        'riser',
+        'branch line',
+        'standpipe',
+        'fire suppression',
+    ],
     ['pipe', 'piping', 'plumbing', 'conduit'],
     ['glass', 'glazing', 'glazed', 'curtain wall', 'storefront', 'window'],
     ['partition', 'drywall', 'gypsum', 'gyp board', 'wall board', 'stud wall'],
