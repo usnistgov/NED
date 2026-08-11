@@ -6,7 +6,6 @@ skip = [
     "*/ned_app/migrations/*",
     "*/ned_proj/*",
     "*/resources/*",
-    "*/visualization_tools/*",
     "*/venv/*",
     'fair-software.md'
 ]
@@ -19,9 +18,7 @@ quiet-level = 2
 line-length = 85
 preview = true
 exclude = [
-    "*.ipynb",
     "resources/",
-    "visualization_tools/",
 ]
 
 [tool.ruff.lint]

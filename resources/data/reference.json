@@ -1931,6 +1931,8 @@
     {
         "comp_type": "Fire Sprinkler",
         "csl_data": {
+            "DOI": "https://doi.org/10.1080/13632469.2025.2470335",
+            "URL": "https://doi.org/10.1080/13632469.2025.2470335",
             "author": [
                 {
                     "family": "Bhatta",
@@ -1965,7 +1967,10 @@
                     ]
                 ]
             },
-            "note": "Bhatta et al. (2024). Seismic response of pressurized full-scale fire sprinkler piping system in six-story building. Journal of Earthquake Engineering. Recently Submitted",
+            "note": "Bhatta, J., Mishra, P., Cook, D., Sattar, S., Barbosa, A. R., & van de Lindt, J. (2026). Seismic Response of Pressurized Full-Scale Fire Sprinkler Piping System in Six-Story Building. Journal of Earthquake Engineering, 30(1).",
+            "page": "228-254",
+            "issue": "1",
+            "volume": "30",
             "title": "Seismic response of pressurized full-scale fire sprinkler piping system in six-story building",
             "type": "article-journal"
         },
@@ -2189,6 +2194,7 @@
     {
         "comp_type": "",
         "csl_data": {
+            "URL": "https://femap58.atcouncil.org/reports",
             "author": [
                 {
                     "family": "FEMA"

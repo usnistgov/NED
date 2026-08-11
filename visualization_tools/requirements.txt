@@ -1,5 +1,0 @@
-pandas
-matplotlib
-voila
-scipy
-ipywidgets

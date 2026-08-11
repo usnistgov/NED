@@ -15,11 +15,11 @@ The goal of this project is to develop a robust and scalable database of fragili
 - **ned_proj** - Django project settings.
 - **resources/example_data/** - Template JSON files for contributors to use when adding new data.
 - **scripts** - General project scripts that are outside the Django application management process.
-- **visualization_tools** - Jupyter notebook workflows that interact with the NED database to illustrate backend interactions via python.
+- **ui** - The Streamlit front-end (browser UI). NED is the source of truth for this code; it is published to the separate deployment repo via `scripts/export_frontend.py` (see [Front-end (UI)](#front-end-ui)).
 - **db.sqlite3** - SQLite database file (disposable build artifact, generated from JSON data via `python manage.py ingest`).
 
 ### Data Schema
-Model and field descriptions are provided in the docstrings in ned_app/models.py. The overview below provides a brief description of two of the fields found in the experiment model.
+A human-readable data dictionary describing every attribute of the main tables (definitions, accepted values, and bounds) is provided in [ui/assets/data_dictionary.md](ui/assets/data_dictionary.md); it lives under `ui/` so the same document is also rendered as the *Data dictionary* page of the browser UI. The authoritative schema definition lives in the docstrings and field declarations in ned_app/models.py. The overview below provides a brief description of two of the fields found in the experiment model.
 
 #### Component Subcategorization Hierarchy
 To categorize building components, we rely on the UNIFORMAT II element classification system (NISTIR 6389). However, this system only classifies nonstructural components at a high level, and further detail is needed to adequately separate different types of components within each category for the purpose of assessing building performance.  Therefore, we propose a new subcategorization hierarchy consisting of four nested component attributes:
@@ -40,26 +40,6 @@ To provide a structured detail of observed damage attributes, we propose a DS Cl
 The purpose of the DS Class attribute is to provide a first-pass structured grouping of observed damage to aid in later fragility development. However, we recognize that any grouping of damage states introduces subjectiveness into the process. Therefore, our goal is to implement as little subjectiveness as possible while still providing useful structured data for later users of the database. This attribute simply acts to separate consequential damage from inconsequential damage. Further separation of consequential damage into multiple damage states is an attribute of the damage state itself and not the initial observation of damage and is therefore up to the fragility developer to refine.
 
 All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
-
-## Visualization Tools
-Several jupyter-notebook-based database user interface tools are provided in the `visualization_tools` subdirectory. These tools allow users to interact with data in the SQL database, query specific data views, and download csv files without the need to code. 
-
-Two predefined workflows are provided:
-- **visualization_tools/view_experiments.ipynb** - Query experimental tests of nonstructural components in the database by component type and component detail, download data, and plot distributions of peak test demands at the occurrence of various damage states.
-- **visualization_tools/view_fragilities.ipynb** - Query fragility models of nonstructural components in the database by component type and component detail, download data, and plot fragility curves for various damage states.
-
-### Running the Notebook
-Prior to running a notebook, first ensure that all required packages have been installed by running the following command:
-```
-pip install -r visualization_tools/requirements.txt
-```
-
-Once all required packages have been installed, open the Jupyter Notebook by running the following command:
-```
-jupyter notebook
-```
-
-For additional instructions please see the Jupyter Notebook installation instructions: https://jupyter.org/install
 
 ## Exporting Data to CSV
 
@@ -275,6 +255,42 @@ Assuming your last good batch is already committed (see the tip above), recover 
    ```
 
 Then fix the CSV and import again.
+
+
+## Front-end (UI)
+The `ui/` directory contains the Streamlit application that powers the browser-based NED interface. The deployed version is hosted from a **separate** repository so that deployment can be handed off independently of the database back end. To avoid two sources of truth, **the code is authored here, in `ui/`, and published outward**. The only handshake between the two repositories is the database (`db.sqlite3`), which is built from the canonical JSON data and injected into the front-end at publish time.
+
+### Running the UI locally
+The UI reads the database path from the `DB_PATH` environment variable, defaulting to a bundled copy. Point it at your locally built `db.sqlite3` so the UI reflects your back-end changes immediately:
+
+```
+# 1. From the project root, build the database from the canonical data
+python manage.py migrate
+python manage.py ingest
+
+# 2. Install the UI's dependencies (a separate, lightweight set)
+pip install -r ui/requirements.txt
+
+# 3. **Run the app from inside ui/,** pointed at your local database
+cd ui
+DB_PATH=../db.sqlite3 AUTH_ENABLED=false streamlit run app.py
+```
+On Windows PowerShell, step 3 is: `cd ui; $env:DB_PATH = "../db.sqlite3"; $env:AUTH_ENABLED = "false"; streamlit run app.py`.
+
+- Run from **inside `ui/`**. The app resolves its assets (`assets/logo.png`) and Streamlit config (`.streamlit/config.toml`) relative to the current directory, just as it does from the repo root when deployed. Running from elsewhere breaks those paths.
+- `DB_PATH` is resolved relative to the current directory (`ui/` here), so `../db.sqlite3` points at the database you built in the project root. It is required: without it the app looks for its bundled deployment copy at `backend/db.sqlite3`, which does not exist in a local checkout.
+- `AUTH_ENABLED=false` skips the login screen for local use. Authentication is on by default; the deployment supplies `APP_USERNAME` / `APP_PASSWORD`. To exercise the login flow locally instead, omit `AUTH_ENABLED` and set those two variables.
+
+Add data or change the schema, re-run `ingest`, refresh the browser, and the changes appear in the UI.
+
+### Push the UI to the deployment repo (maintainers)
+`scripts/export_frontend.py` pushes the front-end code and the freshly built database into a clone of `ned-frontend`. It is *non-destructive*: it writes only the NED-owned paths plus `backend/db.sqlite3`, leaving the deployment repo's own files (`deploy/`, `.streamlit/secrets.toml`, etc.) untouched.
+
+```
+# Rebuild the db, then write code + db into the deployment repo's working tree
+python scripts/export_frontend.py --frontend ../ned-frontend --rebuild-db
+```
+Useful flags: `--rebuild-db` (run `migrate` + `ingest` first). Run `python scripts/export_frontend.py --help` for details.
 
 
 ## Contributors Guide
@@ -581,7 +597,7 @@ codespell .
 - Python code comments and docstrings
 - Markdown files (like this README)
 - Configuration files
-- Excludes: Jupyter notebooks, resources/, and visualization_tools/ directories
+- Excludes: the resources/ directory
 
 #### 4. Unit Tests with Django Test Suite
 The project includes comprehensive unit tests that verify the functionality of models, serializers, and data processing components. All tests must pass to ensure your changes don't break existing functionality.

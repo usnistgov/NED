@@ -163,7 +163,7 @@ class Reference(models.Model):
         author (str): The name(s) of the author(s) (auto-populated from csl_data).
         year (int): The year the study was published (auto-populated from csl_data).
         study_type (str): A classification of the type of study conducted.
-        comp_type (str): The type of component(s) invenstigated in study.
+        comp_type (str): The type of component(s) investigated in study.
         pdf_saved (bool): Is a pdf saved in the archive repository.
         csl_data (dict): Reference data in CSL-JSON format.
     """
@@ -218,7 +218,7 @@ class Reference(models.Model):
         _('component type'),
         max_length=255,
         blank=True,
-        help_text='The type of component(s) invenstigated in study.',
+        help_text='The type of component(s) investigated in study.',
     )
     pdf_saved = models.BooleanField(
         _('pdf saved'),
@@ -343,18 +343,18 @@ class Experiment(models.Model):
         component (id): Identifier of the component type.
         comp_detail (str): Classification or short description of the component attachment detailing.
         material (str): Classification or short description of the component material (if applicable).
-        size_class (str): Classification or short description of the general size of this particular components compared to others of the same type (if applicable).
+        size_class (str): Classification or short description of the general size of this particular component compared to others of the same type (if applicable).
         test_type (str): The type of test generally describing the condition under which the specimen was loaded.
         loading_protocol (str): Name, ID, or general description of the ground motion or loading protocol used in the test.
         peak_test_amplitude (str): The maximum amplitude to which this test was performed.
-        location (str): The location where the specimen was conducted.
+        location (str): The location where the test was conducted.
         governing_design_standard (str): Name of the standard governing the design of the specimen, if applicable.
         design_objective (str): General description of the performance level to which the specimen was designed, e.g., code compliant, common construction practice, low-damage-design, or meeting a certain damage objective under a specific loading condition.
         comp_description (str): General description of the type of component.
         ds_description (str): Description of the damage being observed.
         prior_damage (str): Description of any prior damage that was noted during a previous test of this specimen. Should also describe if and how the specimen was repaired prior to this test. Empty if no prior damage was noted.
         prior_damage_repaired (str): TRUE if prior damage was noted and repaired prior to this test. FALSE if prior damage was noted and not repaired. Or, a general description of the previous damage that was repaired.
-        edp_metric (str): Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.
+        edp_metric (str): Measure of the engineering demand parameter (EDP), e.g., peak story drift ratio.
         edp_unit (str): Unit of the engineering demand parameter.
         edp_value (float): Value of the engineering demand parameter recorded for this observation.
         alt_edp_metric (str): Secondary EDP metric.
@@ -412,7 +412,7 @@ class Experiment(models.Model):
         _('size classification tag'),
         max_length=100,
         blank=True,
-        help_text='Classification or short description of the general size of this particular components compared to others of the same type (if applicable).',
+        help_text='Classification or short description of the general size of this particular component compared to others of the same type (if applicable).',
     )
     test_type = models.CharField(
         _('test type'),
@@ -426,7 +426,7 @@ class Experiment(models.Model):
         help_text='Name, ID, or general description of the ground motion or loading protocol used in the test.',
     )
     peak_test_amplitude = models.CharField(
-        _('peak test amplitute'),
+        _('peak test amplitude'),
         max_length=255,
         blank=True,
         help_text='The maximum amplitude to which this test was performed.',
@@ -435,7 +435,7 @@ class Experiment(models.Model):
         _('location'),
         max_length=255,
         blank=True,
-        help_text='The location where the specimen was conducted.',
+        help_text='The location where the test was conducted.',
     )
     governing_design_standard = models.CharField(
         _('governing design standard'),
@@ -474,7 +474,7 @@ class Experiment(models.Model):
         max_length=50,
         choices=EDPMetricChoices.choices,
         blank=False,
-        help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.',
+        help_text='Measure of the engineering demand parameter (EDP), e.g., peak story drift ratio.',
     )
     edp_unit = models.CharField(
         _('edp unit'),
@@ -551,11 +551,11 @@ class FragilityModel(models.Model):
         p58_fragility (str): P-58 fragility id associated with this fragility model, if applicable.
         comp_detail (str): Classification or short description of the component attachment detailing.
         material (str): Classification or short description of the component material (if applicable).
-        size_class (str): Classification or short description of the general size of this particular components compared to others of the same type (if applicable).
+        size_class (str): Classification or short description of the general size of this particular component compared to others of the same type (if applicable).
         comp_description (str): General description of the type of component.
         reviewer (str): Person or party responsible for uploading this fragility model to the database.
         source (str): Source of the fragility data.
-        edp_metric (str): Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.
+        edp_metric (str): Measure of the engineering demand parameter (EDP), e.g., peak story drift ratio.
         edp_unit (str): Unit of the engineering demand parameter.
     """
 
@@ -598,7 +598,7 @@ class FragilityModel(models.Model):
         _('size classification tag'),
         max_length=100,
         blank=True,
-        help_text='Classification or short description of the general size of this particular components compared to others of the same type (if applicable).',
+        help_text='Classification or short description of the general size of this particular component compared to others of the same type (if applicable).',
     )
     comp_description = models.TextField(
         _('component description'),
@@ -622,7 +622,7 @@ class FragilityModel(models.Model):
         max_length=255,
         choices=EDPMetricChoices.choices,
         blank=True,
-        help_text='Measure of the engineering demand parameter (EDP), e.g, peak story drift ratio.',
+        help_text='Measure of the engineering demand parameter (EDP), e.g., peak story drift ratio.',
     )
     edp_unit = models.CharField(
         _('edp unit'),
