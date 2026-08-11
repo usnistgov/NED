@@ -58,7 +58,7 @@ def check_password() -> bool:
     with st.form('login_form'):
         username = st.text_input('Username')
         password = st.text_input('Password', type='password')
-        submitted = st.form_submit_button('Sign in', use_container_width=True)
+        submitted = st.form_submit_button('Sign in', width='stretch')
 
     if submitted:
         # Check every account (no early exit) so response time doesn't leak

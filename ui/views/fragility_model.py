@@ -223,9 +223,7 @@ def render_model_body(
                     font=dict(size=11),
                 ),
             )
-            st.plotly_chart(
-                fig, use_container_width=True, key=f'{key_prefix}curves_chart'
-            )
+            st.plotly_chart(fig, width='stretch', key=f'{key_prefix}curves_chart')
         else:
             st.info(
                 'No fragility curves with usable median/beta values for this model.'
@@ -233,7 +231,7 @@ def render_model_body(
 
         st.dataframe(
             df_curves,
-            use_container_width=True,
+            width='stretch',
             hide_index=True,
             column_config={
                 'DS Rank': st.column_config.NumberColumn('DS Rank', format='%d'),

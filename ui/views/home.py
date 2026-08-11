@@ -89,7 +89,7 @@ def render() -> None:
             Experiment     -> FragilityModel  [style=dashed dir=both]
         }
         """,
-        use_container_width=True,
+        width='stretch',
     )
     st.caption('— solid arrow: one-to-many    · · · dashed arrow: many-to-many')
 
