@@ -4,6 +4,7 @@ import streamlit as st
 
 import auth
 import styles
+from utils import scroll_to_top_on_page_change
 from views import (
     compare_fragilities,
     component_detail,
@@ -45,6 +46,8 @@ elif 'fragility_model' in st.query_params:
 elif 'component' in st.query_params:
     st.session_state['page'] = 'Component Detail'
     st.session_state['selected_component_id'] = st.query_params['component']
+
+scroll_to_top_on_page_change(st.session_state.get('page', 'Home'))
 
 # ── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
