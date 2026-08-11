@@ -71,6 +71,7 @@ with st.sidebar:
 
     if st.button('⚖️  Compare fragilities', key='nav_compare'):
         st.query_params.clear()
+        st.session_state.pop('compare_return_to_fragility', None)
         st.session_state['page'] = 'Compare Fragilities'
         st.rerun()
 

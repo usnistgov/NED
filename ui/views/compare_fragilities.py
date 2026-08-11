@@ -78,6 +78,16 @@ def _panel(side: str) -> None:
 
 
 def render() -> None:
+    return_to_fragility = st.session_state.get('compare_return_to_fragility')
+    if return_to_fragility:
+        if st.button('← Back to Fragility Model'):
+            st.session_state['selected_fragility_model_id'] = return_to_fragility
+            st.session_state.pop('compare_return_to_fragility', None)
+            st.session_state['page'] = 'Fragility Model Detail'
+            st.query_params.clear()
+            st.query_params['fragility_model'] = return_to_fragility
+            st.rerun()
+
     st.markdown(
         '<div class="ned-header"><h1>Compare Fragilities</h1></div>',
         unsafe_allow_html=True,

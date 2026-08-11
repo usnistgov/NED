@@ -8,10 +8,12 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from db import (
+    get_components,
     get_fragility_curves,
     get_fragility_model_detail,
     get_fragility_model_experiments,
     get_fragility_model_experiments_export,
+    get_fragility_models,
     get_reference,
 )
 from utils import FIELD_HELP, attr, build_citation, csv_safe, fmt
@@ -62,14 +64,56 @@ def _lognormal_curves(
     return pd.concat(frames, ignore_index=True)
 
 
+def _navigate_to_compare(fragility_model_id: str) -> None:
+    """Populate the Compare Fragilities filters from this model — all four
+    filters on the left panel, and the taxonomy filters (major group, group)
+    on the right — and navigate there, so the user lands already comparing
+    this model instead of starting from a blank drill-down."""
+    df_fm = get_fragility_models()
+    match = df_fm[df_fm['fragility_model_id'] == fragility_model_id]
+    comp_id = match.iloc[0]['comp_id'] if not match.empty else None
+
+    major_group = group = None
+    if comp_id is not None:
+        df_components = get_components()
+        comp_match = df_components[df_components['ID'] == comp_id]
+        if not comp_match.empty:
+            major_group = comp_match.iloc[0]['major_group']
+            group = comp_match.iloc[0]['Group']
+
+    if major_group:
+        st.session_state['cmp_major_left'] = major_group
+        st.session_state['cmp_major_right'] = major_group
+    if group:
+        st.session_state['cmp_group_left'] = group
+        st.session_state['cmp_group_right'] = group
+    if comp_id is not None:
+        st.session_state['cmp_comp_left'] = comp_id
+    st.session_state['cmp_frag_left'] = fragility_model_id
+    # Leave the right-hand component/fragility filters blank for the user to
+    # pick, clearing out any stale selection from a previous comparison.
+    st.session_state.pop('cmp_comp_right', None)
+    st.session_state.pop('cmp_frag_right', None)
+
+    st.session_state['compare_return_to_fragility'] = fragility_model_id
+    st.session_state['page'] = 'Compare Fragilities'
+    st.query_params.clear()
+    st.rerun()
+
+
 def render_model_body(
-    fragility_model_id: str, key_prefix: str = '', show_download: bool = True
+    fragility_model_id: str,
+    key_prefix: str = '',
+    show_download: bool = True,
+    show_compare_button: bool = False,
 ) -> None:
     """Render the full fragility-model detail (attributes, reference, damage-state
     chart, and curve table) for the given model. ``key_prefix`` makes the widget
     keys unique so this can be rendered more than once on a page (e.g. the
     side-by-side compare view). Set ``show_download`` to ``False`` to omit the
-    curve CSV download button."""
+    curve CSV download button. Set ``show_compare_button`` to ``True`` to show
+    a button that jumps to the Compare Fragilities view with this model
+    pre-selected."""
     df_fm_detail = get_fragility_model_detail(fragility_model_id)
 
     if df_fm_detail.empty:
@@ -79,6 +123,11 @@ def render_model_body(
     row = df_fm_detail.iloc[0]
 
     st.markdown(f'**{fmt(row["fragility_model_id"])}**')
+    if show_compare_button:
+        if st.button(
+            '⚖️ Compare with another fragility model', key=f'{key_prefix}compare_fragilities'
+        ):
+            _navigate_to_compare(fragility_model_id)
     st.markdown('---')
 
     attr('Model ID', fmt(row['model_id']))
@@ -222,7 +271,7 @@ def render() -> None:
         '<div class="ned-header"><h1>Fragility Model View</h1></div>',
         unsafe_allow_html=True,
     )
-    render_model_body(fragility_model_id)
+    render_model_body(fragility_model_id, show_compare_button=True)
 
     # ── Source Data ──
     st.markdown('---')
