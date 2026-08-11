@@ -125,7 +125,8 @@ def render_model_body(
     st.markdown(f'**{fmt(row["fragility_model_id"])}**')
     if show_compare_button:
         if st.button(
-            '⚖️ Compare with another fragility model', key=f'{key_prefix}compare_fragilities'
+            '⚖️ Compare with another fragility model',
+            key=f'{key_prefix}compare_fragilities',
         ):
             _navigate_to_compare(fragility_model_id)
     st.markdown('---')
