@@ -3,6 +3,58 @@ import re
 
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
+
+
+_SCROLL_TO_TOP_JS = """
+<script>
+    const doc = window.parent.document;
+    const toTop = () => {
+        const container = (
+            doc.querySelector('[data-testid="stMain"]')
+            || doc.querySelector('[data-testid="stAppViewContainer"]')
+            || doc.scrollingElement
+        );
+        if (container) {
+            container.scrollTo(0, 0);
+        }
+        window.parent.scrollTo(0, 0);
+    };
+    toTop();
+    // The new page is often still painting when this first runs, and late
+    // layout shifts can restore the old offset, so pin it again next frame.
+    requestAnimationFrame(toTop);
+    setTimeout(toTop, 50);
+</script>
+"""
+
+
+def scroll_to_top_on_page_change(page: str) -> None:
+    """Scroll the browser viewport to the top when `page` differs from the
+    page rendered on the previous run.
+
+    Streamlit reruns the whole script in place rather than doing a real page
+    navigation, so the browser keeps whatever scroll position it had before
+    (e.g. partway down the Components table). Without this, clicking through
+    to another page can land the user in the middle of the new page instead of
+    at the top. Comparing against the last-rendered page (rather than scrolling
+    unconditionally) avoids resetting scroll on reruns triggered by same-page
+    interactions like filters or search.
+    """
+    if st.session_state.get('_last_rendered_page') == page:
+        return
+    st.session_state['_last_rendered_page'] = page
+    # Streamlit reuses the existing component iframe when the markup is
+    # byte-for-byte identical to what sits at the same position in the previous
+    # render, and a reused iframe never re-executes its script. A nonce that
+    # changes on every navigation forces a fresh iframe, so the scroll fires on
+    # every page change rather than only the first one.
+    nonce = st.session_state.get('_scroll_to_top_nonce', 0) + 1
+    st.session_state['_scroll_to_top_nonce'] = nonce
+    components.html(
+        f'<!-- scroll-to-top {nonce} -->{_SCROLL_TO_TOP_JS}',
+        height=0,
+    )
 
 
 def fmt(val) -> str:
