@@ -129,7 +129,7 @@ def get_component_fragility_models_export(component_id: str) -> pd.DataFrame:
                 fm.comp_description     AS "Component Description",
                 fm.edp_metric           AS "EDP Metric",
                 fm.edp_unit             AS "EDP Unit",
-                fm.reviewer             AS "Reviewer",
+                fm.contributor          AS "Contributor",
                 fm.source               AS "Source",
                 r.author                AS "author",
                 r.year                  AS "year",
@@ -203,7 +203,7 @@ def get_fragility_model_detail(fragility_model_id: str) -> pd.DataFrame:
         return pd.read_sql(
             'SELECT fragility_model_id, model_id, reference_id, p58_fragility, '
             'comp_detail, material, size_class, comp_description, '
-            'edp_metric, edp_unit, reviewer, source '
+            'edp_metric, edp_unit, contributor, source '
             'FROM ned_app_fragilitymodel WHERE fragility_model_id = ?',
             conn,
             params=(fragility_model_id,),
@@ -292,7 +292,7 @@ def get_fragility_model_experiments_export(fragility_model_id: str) -> pd.DataFr
                 e.id                        AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
-                e.reviewer                  AS "Reviewer",
+                e.contributor               AS "Contributor",
                 e.test_type                 AS "Test Type",
                 e.loading_protocol          AS "Loading Protocol",
                 e.peak_test_amplitude       AS "Peak Test Amplitude",
@@ -419,7 +419,7 @@ def get_component_experiments_export(component_id: str) -> pd.DataFrame:
                 e.id                        AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
-                e.reviewer                  AS "Reviewer",
+                e.contributor               AS "Contributor",
                 e.test_type                 AS "Test Type",
                 e.loading_protocol          AS "Loading Protocol",
                 e.peak_test_amplitude       AS "Peak Test Amplitude",
@@ -470,7 +470,7 @@ def get_experiment_detail(experiment_id: str) -> pd.DataFrame:
                 e.id                        AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
-                e.reviewer                  AS "Reviewer",
+                e.contributor               AS "Contributor",
                 e.test_type                 AS "Test Type",
                 e.loading_protocol          AS "Loading Protocol",
                 e.peak_test_amplitude       AS "Peak Test Amplitude",

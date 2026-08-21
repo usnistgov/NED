@@ -339,7 +339,7 @@ class Experiment(models.Model):
         reference (id): ID of the published reference documenting this experimental observation.
         specimen (str): ID or name of the specimen as recorded in the reference.
         specimen_inspection_sequence (str): The ith test of this specimen.
-        reviewer (str): Individual or institution responsible for documenting this particular fragility in the database.
+        contributor (str): Individual or institution responsible for documenting this particular fragility in the database.
         component (id): Identifier of the component type.
         comp_detail (str): Classification or short description of the component attachment detailing.
         material (str): Classification or short description of the component material (if applicable).
@@ -384,8 +384,8 @@ class Experiment(models.Model):
         blank=True,
         help_text='The ith test of this specimen.',
     )
-    reviewer = models.CharField(
-        _('reviewer'),
+    contributor = models.CharField(
+        _('contributor'),
         max_length=50,
         blank=True,
         help_text='Individual or institution responsible for documenting this particular fragility in the database.',
@@ -553,7 +553,7 @@ class FragilityModel(models.Model):
         material (str): Classification or short description of the component material (if applicable).
         size_class (str): Classification or short description of the general size of this particular component compared to others of the same type (if applicable).
         comp_description (str): General description of the type of component.
-        reviewer (str): Person or party responsible for uploading this fragility model to the database.
+        contributor (str): Person or party responsible for uploading this fragility model to the database.
         source (str): Source of the fragility data.
         edp_metric (str): Measure of the engineering demand parameter (EDP), e.g., peak story drift ratio.
         edp_unit (str): Unit of the engineering demand parameter.
@@ -605,8 +605,8 @@ class FragilityModel(models.Model):
         blank=False,
         help_text='General description of the type of component.',
     )
-    reviewer = models.CharField(
-        _('reviewer'),
+    contributor = models.CharField(
+        _('contributor'),
         max_length=255,
         blank=True,
         help_text='Person or party responsible for uploading this fragility model to the database.',

@@ -9,7 +9,7 @@
         "model_id": "fra1001",
         "p58_fragility": "",
         "reference": "Smith-2020",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "6 inch diameter",
         "source": "Literature"
     },
@@ -22,7 +22,7 @@
         "model_id": "fra1002",
         "p58_fragility": "",
         "reference": "Smith-2020",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "4 inch diameter",
         "source": "Literature"
     },
@@ -35,7 +35,7 @@
         "model_id": "fra1003",
         "p58_fragility": "",
         "reference": "Smith-2020",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "2 inch diameter",
         "source": "Literature"
     }

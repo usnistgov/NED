@@ -115,7 +115,7 @@ FIELD_HELP = {
         '- **Consequential** — damage that may require repair or impact '
         'system operation (observable and requires action).\n'
         '- **Unknown** — a damage state class could not be identified by '
-        'the reviewer.'
+        'the contributor.'
     ),
     'specimen_inspection_sequence': (
         'Which test of this specimen the observation comes from (the ith '

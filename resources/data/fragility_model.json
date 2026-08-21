@@ -8,7 +8,7 @@
         "model_id": "fra1001",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "6 inch diameter",
         "source": "Literature"
     },
@@ -21,7 +21,7 @@
         "model_id": "fra1002",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "4 inch diameter",
         "source": "Literature"
     },
@@ -34,7 +34,7 @@
         "model_id": "fra1003",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "2 inch diameter",
         "source": "Literature"
     },
@@ -47,7 +47,7 @@
         "model_id": "fra1004",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1 inch diameter",
         "source": "Literature"
     },
@@ -60,7 +60,7 @@
         "model_id": "fra1005",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "3/4 inch diameter",
         "source": "Literature"
     },
@@ -73,7 +73,7 @@
         "model_id": "fra1006",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "2 inch diameter",
         "source": "Literature"
     },
@@ -86,7 +86,7 @@
         "model_id": "fra1007",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1 inch diameter",
         "source": "Literature"
     },
@@ -99,7 +99,7 @@
         "model_id": "fra1008",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "3/4 inch diameter",
         "source": "Literature"
     },
@@ -112,7 +112,7 @@
         "model_id": "fra1009",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "4 inch diameter",
         "source": "Literature"
     },
@@ -125,7 +125,7 @@
         "model_id": "fra1010",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "2 inch diameter",
         "source": "Literature"
     },
@@ -138,7 +138,7 @@
         "model_id": "fra1011",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "4 inch diameter",
         "source": "Literature"
     },
@@ -151,7 +151,7 @@
         "model_id": "fra1012",
         "p58_fragility": "",
         "reference": "Tian_SprinklerTeeJoints-2012",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "2 inch diameter",
         "source": "Literature"
     },
@@ -164,7 +164,7 @@
         "model_id": "fra1013",
         "p58_fragility": "",
         "reference": "Wang_GroovedPiping-2019",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "6 inch diameter",
         "source": "Literature"
     },
@@ -177,7 +177,7 @@
         "model_id": "fra1014",
         "p58_fragility": "",
         "reference": "Wang_GroovedPiping-2019",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "6 inch diameter",
         "source": "Literature"
     },
@@ -190,7 +190,7 @@
         "model_id": "fra1015",
         "p58_fragility": "",
         "reference": "Wang_GroovedPiping-2019",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "6 inch diameter",
         "source": "Literature"
     },
@@ -203,7 +203,7 @@
         "model_id": "fra1016",
         "p58_fragility": "",
         "reference": "Pali-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -216,7 +216,7 @@
         "model_id": "fra1017",
         "p58_fragility": "",
         "reference": "Pali-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -229,7 +229,7 @@
         "model_id": "fra1018",
         "p58_fragility": "",
         "reference": "Pali-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -242,7 +242,7 @@
         "model_id": "fra1019",
         "p58_fragility": "",
         "reference": "Pali-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -255,7 +255,7 @@
         "model_id": "fra1020",
         "p58_fragility": "",
         "reference": "Davies-2011",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -268,7 +268,7 @@
         "model_id": "fra1021",
         "p58_fragility": "",
         "reference": "Davies-2011",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -281,7 +281,7 @@
         "model_id": "fra1022",
         "p58_fragility": "",
         "reference": "Davies-2011",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -294,7 +294,7 @@
         "model_id": "fra1023",
         "p58_fragility": "",
         "reference": "Davies-2011",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -307,7 +307,7 @@
         "model_id": "fra1024",
         "p58_fragility": "",
         "reference": "Davies-2011",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -320,7 +320,7 @@
         "model_id": "fra1025",
         "p58_fragility": "",
         "reference": "Davies-2011",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -333,7 +333,7 @@
         "model_id": "fra1026",
         "p58_fragility": "",
         "reference": "Davies-2011",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -346,7 +346,7 @@
         "model_id": "fra1027",
         "p58_fragility": "",
         "reference": "Davies-2011",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -359,7 +359,7 @@
         "model_id": "fra1028",
         "p58_fragility": "",
         "reference": "Goodwin_HospitalPipingThesis-2004",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -372,7 +372,7 @@
         "model_id": "fra1029",
         "p58_fragility": "",
         "reference": "Goodwin_HospitalPipingThesis-2004",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -385,7 +385,7 @@
         "model_id": "fra1030",
         "p58_fragility": "",
         "reference": "Soroushian_FireSprinklerPipingFragility-2013",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -398,7 +398,7 @@
         "model_id": "B2011.001a",
         "p58_fragility": "B2011.001a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -411,7 +411,7 @@
         "model_id": "B2011.001b",
         "p58_fragility": "B2011.001b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -424,7 +424,7 @@
         "model_id": "B2011.011a",
         "p58_fragility": "B2011.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -437,7 +437,7 @@
         "model_id": "B2011.011b",
         "p58_fragility": "B2011.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -450,7 +450,7 @@
         "model_id": "B2011.021a",
         "p58_fragility": "B2011.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -463,7 +463,7 @@
         "model_id": "B2011.021b",
         "p58_fragility": "B2011.021b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -476,7 +476,7 @@
         "model_id": "B2011.101",
         "p58_fragility": "B2011.101",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -489,7 +489,7 @@
         "model_id": "B2011.102",
         "p58_fragility": "B2011.102",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -502,7 +502,7 @@
         "model_id": "B2011.111",
         "p58_fragility": "B2011.111",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -515,7 +515,7 @@
         "model_id": "B2011.121",
         "p58_fragility": "B2011.121",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -528,7 +528,7 @@
         "model_id": "B2011.131",
         "p58_fragility": "B2011.131",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -541,7 +541,7 @@
         "model_id": "B2011.201a",
         "p58_fragility": "B2011.201a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -554,7 +554,7 @@
         "model_id": "B2011.201b",
         "p58_fragility": "B2011.201b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -567,7 +567,7 @@
         "model_id": "B2022.001",
         "p58_fragility": "B2022.001",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -580,7 +580,7 @@
         "model_id": "B2022.002",
         "p58_fragility": "B2022.002",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -593,7 +593,7 @@
         "model_id": "B2022.011",
         "p58_fragility": "B2022.011",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -606,7 +606,7 @@
         "model_id": "B2022.021",
         "p58_fragility": "B2022.021",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -619,7 +619,7 @@
         "model_id": "B2022.022",
         "p58_fragility": "B2022.022",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -632,7 +632,7 @@
         "model_id": "B2022.023",
         "p58_fragility": "B2022.023",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -645,7 +645,7 @@
         "model_id": "B2022.031",
         "p58_fragility": "B2022.031",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -658,7 +658,7 @@
         "model_id": "B2022.032",
         "p58_fragility": "B2022.032",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -671,7 +671,7 @@
         "model_id": "B2022.033",
         "p58_fragility": "B2022.033",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -684,7 +684,7 @@
         "model_id": "B2022.034",
         "p58_fragility": "B2022.034",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -697,7 +697,7 @@
         "model_id": "B2022.035",
         "p58_fragility": "B2022.035",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -710,7 +710,7 @@
         "model_id": "B2022.036",
         "p58_fragility": "B2022.036",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -723,7 +723,7 @@
         "model_id": "B2022.037",
         "p58_fragility": "B2022.037",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -736,7 +736,7 @@
         "model_id": "B2022.038",
         "p58_fragility": "B2022.038",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -749,7 +749,7 @@
         "model_id": "B2022.039",
         "p58_fragility": "B2022.039",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -762,7 +762,7 @@
         "model_id": "B2022.040",
         "p58_fragility": "B2022.040",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -775,7 +775,7 @@
         "model_id": "B2022.041",
         "p58_fragility": "B2022.041",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -788,7 +788,7 @@
         "model_id": "B2022.051",
         "p58_fragility": "B2022.051",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -801,7 +801,7 @@
         "model_id": "B2022.052",
         "p58_fragility": "B2022.052",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -814,7 +814,7 @@
         "model_id": "B2022.053",
         "p58_fragility": "B2022.053",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -827,7 +827,7 @@
         "model_id": "B2022.054",
         "p58_fragility": "B2022.054",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -840,7 +840,7 @@
         "model_id": "B2022.061",
         "p58_fragility": "B2022.061",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -853,7 +853,7 @@
         "model_id": "B2022.071",
         "p58_fragility": "B2022.071",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -866,7 +866,7 @@
         "model_id": "B2022.072",
         "p58_fragility": "B2022.072",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -879,7 +879,7 @@
         "model_id": "B2022.081",
         "p58_fragility": "B2022.081",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -892,7 +892,7 @@
         "model_id": "B2022.082",
         "p58_fragility": "B2022.082",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -905,7 +905,7 @@
         "model_id": "B2022.083",
         "p58_fragility": "B2022.083",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -918,7 +918,7 @@
         "model_id": "B2022.084",
         "p58_fragility": "B2022.084",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -931,7 +931,7 @@
         "model_id": "B2022.091",
         "p58_fragility": "B2022.091",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -944,7 +944,7 @@
         "model_id": "B2022.101",
         "p58_fragility": "B2022.101",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -957,7 +957,7 @@
         "model_id": "B2022.201",
         "p58_fragility": "B2022.201",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -970,7 +970,7 @@
         "model_id": "B2023.001",
         "p58_fragility": "B2023.001",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -983,7 +983,7 @@
         "model_id": "B2023.002",
         "p58_fragility": "B2023.002",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -996,7 +996,7 @@
         "model_id": "B2023.011",
         "p58_fragility": "B2023.011",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1009,7 +1009,7 @@
         "model_id": "B2023.021",
         "p58_fragility": "B2023.021",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1022,7 +1022,7 @@
         "model_id": "B2023.031",
         "p58_fragility": "B2023.031",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1035,7 +1035,7 @@
         "model_id": "B2023.032",
         "p58_fragility": "B2023.032",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1048,7 +1048,7 @@
         "model_id": "B2023.033",
         "p58_fragility": "B2023.033",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1061,7 +1061,7 @@
         "model_id": "B2023.034",
         "p58_fragility": "B2023.034",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1074,7 +1074,7 @@
         "model_id": "B2023.041",
         "p58_fragility": "B2023.041",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1087,7 +1087,7 @@
         "model_id": "B2023.051",
         "p58_fragility": "B2023.051",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1100,7 +1100,7 @@
         "model_id": "B2023.052",
         "p58_fragility": "B2023.052",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1113,7 +1113,7 @@
         "model_id": "B2023.053",
         "p58_fragility": "B2023.053",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1126,7 +1126,7 @@
         "model_id": "B2023.054",
         "p58_fragility": "B2023.054",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1139,7 +1139,7 @@
         "model_id": "B2023.055",
         "p58_fragility": "B2023.055",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1152,7 +1152,7 @@
         "model_id": "B2023.056",
         "p58_fragility": "B2023.056",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1165,7 +1165,7 @@
         "model_id": "B2023.057",
         "p58_fragility": "B2023.057",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1178,7 +1178,7 @@
         "model_id": "B2023.058",
         "p58_fragility": "B2023.058",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1191,7 +1191,7 @@
         "model_id": "B3011.011",
         "p58_fragility": "B3011.011",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1204,7 +1204,7 @@
         "model_id": "B3011.012",
         "p58_fragility": "B3011.012",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1217,7 +1217,7 @@
         "model_id": "B3011.013",
         "p58_fragility": "B3011.013",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1230,7 +1230,7 @@
         "model_id": "B3011.014",
         "p58_fragility": "B3011.014",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1243,7 +1243,7 @@
         "model_id": "B3031.001a",
         "p58_fragility": "B3031.001a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "5 ft",
         "source": "FEMA P-58"
     },
@@ -1256,7 +1256,7 @@
         "model_id": "B3031.001b",
         "p58_fragility": "B3031.001b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "10 ft",
         "source": "FEMA P-58"
     },
@@ -1269,7 +1269,7 @@
         "model_id": "B3031.001c",
         "p58_fragility": "B3031.001c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "15 ft",
         "source": "FEMA P-58"
     },
@@ -1282,7 +1282,7 @@
         "model_id": "B3031.002a",
         "p58_fragility": "B3031.002a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "5 ft",
         "source": "FEMA P-58"
     },
@@ -1295,7 +1295,7 @@
         "model_id": "B3031.002b",
         "p58_fragility": "B3031.002b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "10 ft",
         "source": "FEMA P-58"
     },
@@ -1308,7 +1308,7 @@
         "model_id": "B3031.002c",
         "p58_fragility": "B3031.002c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "15 ft",
         "source": "FEMA P-58"
     },
@@ -1321,7 +1321,7 @@
         "model_id": "B3041.001",
         "p58_fragility": "B3041.001",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1334,7 +1334,7 @@
         "model_id": "C1011.001a",
         "p58_fragility": "C1011.001a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1347,7 +1347,7 @@
         "model_id": "C1011.001b",
         "p58_fragility": "C1011.001b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1360,7 +1360,7 @@
         "model_id": "C1011.001c",
         "p58_fragility": "C1011.001c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1373,7 +1373,7 @@
         "model_id": "C1011.001d",
         "p58_fragility": "C1011.001d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1386,7 +1386,7 @@
         "model_id": "C1011.011a",
         "p58_fragility": "C1011.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1399,7 +1399,7 @@
         "model_id": "C2011.001a",
         "p58_fragility": "C2011.001a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1412,7 +1412,7 @@
         "model_id": "C2011.001b",
         "p58_fragility": "C2011.001b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1425,7 +1425,7 @@
         "model_id": "C2011.011a",
         "p58_fragility": "C2011.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1438,7 +1438,7 @@
         "model_id": "C2011.011b",
         "p58_fragility": "C2011.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1451,7 +1451,7 @@
         "model_id": "C2011.021a",
         "p58_fragility": "C2011.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1464,7 +1464,7 @@
         "model_id": "C2011.021b",
         "p58_fragility": "C2011.021b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1477,7 +1477,7 @@
         "model_id": "C2011.021c",
         "p58_fragility": "C2011.021c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1490,7 +1490,7 @@
         "model_id": "C2011.021d",
         "p58_fragility": "C2011.021d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1503,7 +1503,7 @@
         "model_id": "C2011.031a",
         "p58_fragility": "C2011.031a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1516,7 +1516,7 @@
         "model_id": "C2011.031b",
         "p58_fragility": "C2011.031b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1529,7 +1529,7 @@
         "model_id": "C3011.001a",
         "p58_fragility": "C3011.001a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1542,7 +1542,7 @@
         "model_id": "C3011.001b",
         "p58_fragility": "C3011.001b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1555,7 +1555,7 @@
         "model_id": "C3011.001c",
         "p58_fragility": "C3011.001c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1568,7 +1568,7 @@
         "model_id": "C3011.001d",
         "p58_fragility": "C3011.001d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1581,7 +1581,7 @@
         "model_id": "C3011.002a",
         "p58_fragility": "C3011.002a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1594,7 +1594,7 @@
         "model_id": "C3011.002b",
         "p58_fragility": "C3011.002b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1607,7 +1607,7 @@
         "model_id": "C3011.002c",
         "p58_fragility": "C3011.002c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1620,7 +1620,7 @@
         "model_id": "C3011.002d",
         "p58_fragility": "C3011.002d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1633,7 +1633,7 @@
         "model_id": "C3011.003a",
         "p58_fragility": "C3011.003a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1646,7 +1646,7 @@
         "model_id": "C3011.003b",
         "p58_fragility": "C3011.003b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1659,7 +1659,7 @@
         "model_id": "C3011.003c",
         "p58_fragility": "C3011.003c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1672,7 +1672,7 @@
         "model_id": "C3011.003d",
         "p58_fragility": "C3011.003d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1685,7 +1685,7 @@
         "model_id": "C3021.001a",
         "p58_fragility": "C3021.001a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1698,7 +1698,7 @@
         "model_id": "C3021.001b",
         "p58_fragility": "C3021.001b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1711,7 +1711,7 @@
         "model_id": "C3021.001c",
         "p58_fragility": "C3021.001c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1724,7 +1724,7 @@
         "model_id": "C3021.001d",
         "p58_fragility": "C3021.001d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1737,7 +1737,7 @@
         "model_id": "C3021.001e",
         "p58_fragility": "C3021.001e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1750,7 +1750,7 @@
         "model_id": "C3021.001f",
         "p58_fragility": "C3021.001f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1763,7 +1763,7 @@
         "model_id": "C3021.001g",
         "p58_fragility": "C3021.001g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1776,7 +1776,7 @@
         "model_id": "C3021.001h",
         "p58_fragility": "C3021.001h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1789,7 +1789,7 @@
         "model_id": "C3021.001i",
         "p58_fragility": "C3021.001i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1802,7 +1802,7 @@
         "model_id": "C3021.001j",
         "p58_fragility": "C3021.001j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1815,7 +1815,7 @@
         "model_id": "C3021.001k",
         "p58_fragility": "C3021.001k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1828,7 +1828,7 @@
         "model_id": "C3021.001l",
         "p58_fragility": "C3021.001l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1841,7 +1841,7 @@
         "model_id": "C3021.001m",
         "p58_fragility": "C3021.001m",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1854,7 +1854,7 @@
         "model_id": "C3021.001n",
         "p58_fragility": "C3021.001n",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1867,7 +1867,7 @@
         "model_id": "C3021.001o",
         "p58_fragility": "C3021.001o",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1880,7 +1880,7 @@
         "model_id": "C3021.001p",
         "p58_fragility": "C3021.001p",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1893,7 +1893,7 @@
         "model_id": "C3027.001",
         "p58_fragility": "C3027.001",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1906,7 +1906,7 @@
         "model_id": "C3027.002",
         "p58_fragility": "C3027.002",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -1919,7 +1919,7 @@
         "model_id": "C3032.001a",
         "p58_fragility": "C3032.001a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 250 sqft",
         "source": "FEMA P-58"
     },
@@ -1932,7 +1932,7 @@
         "model_id": "C3032.001b",
         "p58_fragility": "C3032.001b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 250 sqft and <= 1000 sqft",
         "source": "FEMA P-58"
     },
@@ -1945,7 +1945,7 @@
         "model_id": "C3032.001c",
         "p58_fragility": "C3032.001c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 1000 sqft and <= 2500 sqft",
         "source": "FEMA P-58"
     },
@@ -1958,7 +1958,7 @@
         "model_id": "C3032.001d",
         "p58_fragility": "C3032.001d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2500 sqft",
         "source": "FEMA P-58"
     },
@@ -1971,7 +1971,7 @@
         "model_id": "C3032.003a",
         "p58_fragility": "C3032.003a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 250 sqft",
         "source": "FEMA P-58"
     },
@@ -1984,7 +1984,7 @@
         "model_id": "C3032.003b",
         "p58_fragility": "C3032.003b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 250 sqft and <= 1000 sqft",
         "source": "FEMA P-58"
     },
@@ -1997,7 +1997,7 @@
         "model_id": "C3032.003c",
         "p58_fragility": "C3032.003c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 1000 sqft and <= 2500 sqft",
         "source": "FEMA P-58"
     },
@@ -2010,7 +2010,7 @@
         "model_id": "C3032.003d",
         "p58_fragility": "C3032.003d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2500 sqft",
         "source": "FEMA P-58"
     },
@@ -2023,7 +2023,7 @@
         "model_id": "C3032.004a",
         "p58_fragility": "C3032.004a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 250 sqft",
         "source": "FEMA P-58"
     },
@@ -2036,7 +2036,7 @@
         "model_id": "C3032.004b",
         "p58_fragility": "C3032.004b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 250 sqft and <= 1000 sqft",
         "source": "FEMA P-58"
     },
@@ -2049,7 +2049,7 @@
         "model_id": "C3032.004c",
         "p58_fragility": "C3032.004c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 1000 sqft and <= 2500 sqft",
         "source": "FEMA P-58"
     },
@@ -2062,7 +2062,7 @@
         "model_id": "C3032.004d",
         "p58_fragility": "C3032.004d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2500 sqft",
         "source": "FEMA P-58"
     },
@@ -2075,7 +2075,7 @@
         "model_id": "C3034.001",
         "p58_fragility": "C3034.001",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -2088,7 +2088,7 @@
         "model_id": "C3034.002",
         "p58_fragility": "C3034.002",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -2101,7 +2101,7 @@
         "model_id": "D1014.011",
         "p58_fragility": "D1014.011",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -2114,7 +2114,7 @@
         "model_id": "D1014.012",
         "p58_fragility": "D1014.012",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -2127,7 +2127,7 @@
         "model_id": "D1014.021",
         "p58_fragility": "D1014.021",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -2140,7 +2140,7 @@
         "model_id": "D1014.022",
         "p58_fragility": "D1014.022",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -2153,7 +2153,7 @@
         "model_id": "D2061.023a",
         "p58_fragility": "D2061.023a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -2166,7 +2166,7 @@
         "model_id": "D2061.023b",
         "p58_fragility": "D2061.023b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -2179,7 +2179,7 @@
         "model_id": "D2061.024a",
         "p58_fragility": "D2061.024a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -2192,7 +2192,7 @@
         "model_id": "D2061.024b",
         "p58_fragility": "D2061.024b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -2205,7 +2205,7 @@
         "model_id": "D3031.011a",
         "p58_fragility": "D3031.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2218,7 +2218,7 @@
         "model_id": "D3031.011b",
         "p58_fragility": "D3031.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2231,7 +2231,7 @@
         "model_id": "D3031.011c",
         "p58_fragility": "D3031.011c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2244,7 +2244,7 @@
         "model_id": "D3031.011d",
         "p58_fragility": "D3031.011d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2257,7 +2257,7 @@
         "model_id": "D3031.012a",
         "p58_fragility": "D3031.012a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2270,7 +2270,7 @@
         "model_id": "D3031.012b",
         "p58_fragility": "D3031.012b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2283,7 +2283,7 @@
         "model_id": "D3031.012c",
         "p58_fragility": "D3031.012c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2296,7 +2296,7 @@
         "model_id": "D3031.012d",
         "p58_fragility": "D3031.012d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2309,7 +2309,7 @@
         "model_id": "D3031.012e",
         "p58_fragility": "D3031.012e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2322,7 +2322,7 @@
         "model_id": "D3031.012f",
         "p58_fragility": "D3031.012f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2335,7 +2335,7 @@
         "model_id": "D3031.012g",
         "p58_fragility": "D3031.012g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2348,7 +2348,7 @@
         "model_id": "D3031.012h",
         "p58_fragility": "D3031.012h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2361,7 +2361,7 @@
         "model_id": "D3031.012i",
         "p58_fragility": "D3031.012i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2374,7 +2374,7 @@
         "model_id": "D3031.012j",
         "p58_fragility": "D3031.012j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2387,7 +2387,7 @@
         "model_id": "D3031.012k",
         "p58_fragility": "D3031.012k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2400,7 +2400,7 @@
         "model_id": "D3031.012l",
         "p58_fragility": "D3031.012l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2413,7 +2413,7 @@
         "model_id": "D3031.013a",
         "p58_fragility": "D3031.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2426,7 +2426,7 @@
         "model_id": "D3031.013b",
         "p58_fragility": "D3031.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2439,7 +2439,7 @@
         "model_id": "D3031.013c",
         "p58_fragility": "D3031.013c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2452,7 +2452,7 @@
         "model_id": "D3031.013d",
         "p58_fragility": "D3031.013d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2465,7 +2465,7 @@
         "model_id": "D3031.013e",
         "p58_fragility": "D3031.013e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2478,7 +2478,7 @@
         "model_id": "D3031.013f",
         "p58_fragility": "D3031.013f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2491,7 +2491,7 @@
         "model_id": "D3031.013g",
         "p58_fragility": "D3031.013g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2504,7 +2504,7 @@
         "model_id": "D3031.013h",
         "p58_fragility": "D3031.013h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2517,7 +2517,7 @@
         "model_id": "D3031.013i",
         "p58_fragility": "D3031.013i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2530,7 +2530,7 @@
         "model_id": "D3031.013j",
         "p58_fragility": "D3031.013j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2543,7 +2543,7 @@
         "model_id": "D3031.013k",
         "p58_fragility": "D3031.013k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2556,7 +2556,7 @@
         "model_id": "D3031.013l",
         "p58_fragility": "D3031.013l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2569,7 +2569,7 @@
         "model_id": "D3031.021a",
         "p58_fragility": "D3031.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2582,7 +2582,7 @@
         "model_id": "D3031.021b",
         "p58_fragility": "D3031.021b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2595,7 +2595,7 @@
         "model_id": "D3031.021c",
         "p58_fragility": "D3031.021c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2608,7 +2608,7 @@
         "model_id": "D3031.021d",
         "p58_fragility": "D3031.021d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2621,7 +2621,7 @@
         "model_id": "D3031.022a",
         "p58_fragility": "D3031.022a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2634,7 +2634,7 @@
         "model_id": "D3031.022b",
         "p58_fragility": "D3031.022b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2647,7 +2647,7 @@
         "model_id": "D3031.022c",
         "p58_fragility": "D3031.022c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2660,7 +2660,7 @@
         "model_id": "D3031.022d",
         "p58_fragility": "D3031.022d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2673,7 +2673,7 @@
         "model_id": "D3031.022e",
         "p58_fragility": "D3031.022e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2686,7 +2686,7 @@
         "model_id": "D3031.022f",
         "p58_fragility": "D3031.022f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2699,7 +2699,7 @@
         "model_id": "D3031.022g",
         "p58_fragility": "D3031.022g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2712,7 +2712,7 @@
         "model_id": "D3031.022h",
         "p58_fragility": "D3031.022h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2725,7 +2725,7 @@
         "model_id": "D3031.022i",
         "p58_fragility": "D3031.022i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2738,7 +2738,7 @@
         "model_id": "D3031.022j",
         "p58_fragility": "D3031.022j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2751,7 +2751,7 @@
         "model_id": "D3031.022k",
         "p58_fragility": "D3031.022k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2764,7 +2764,7 @@
         "model_id": "D3031.022l",
         "p58_fragility": "D3031.022l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2777,7 +2777,7 @@
         "model_id": "D3031.023a",
         "p58_fragility": "D3031.023a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2790,7 +2790,7 @@
         "model_id": "D3031.023b",
         "p58_fragility": "D3031.023b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2803,7 +2803,7 @@
         "model_id": "D3031.023c",
         "p58_fragility": "D3031.023c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 Ton",
         "source": "FEMA P-58"
     },
@@ -2816,7 +2816,7 @@
         "model_id": "D3031.023d",
         "p58_fragility": "D3031.023d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2829,7 +2829,7 @@
         "model_id": "D3031.023e",
         "p58_fragility": "D3031.023e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2842,7 +2842,7 @@
         "model_id": "D3031.023f",
         "p58_fragility": "D3031.023f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -2855,7 +2855,7 @@
         "model_id": "D3031.023g",
         "p58_fragility": "D3031.023g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2868,7 +2868,7 @@
         "model_id": "D3031.023h",
         "p58_fragility": "D3031.023h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2881,7 +2881,7 @@
         "model_id": "D3031.023i",
         "p58_fragility": "D3031.023i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -2894,7 +2894,7 @@
         "model_id": "D3031.023j",
         "p58_fragility": "D3031.023j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2907,7 +2907,7 @@
         "model_id": "D3031.023k",
         "p58_fragility": "D3031.023k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2920,7 +2920,7 @@
         "model_id": "D3031.023l",
         "p58_fragility": "D3031.023l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1000 Ton",
         "source": "FEMA P-58"
     },
@@ -2933,7 +2933,7 @@
         "model_id": "D3032.011a",
         "p58_fragility": "D3032.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -2946,7 +2946,7 @@
         "model_id": "D3032.011b",
         "p58_fragility": "D3032.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -2959,7 +2959,7 @@
         "model_id": "D3032.011c",
         "p58_fragility": "D3032.011c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -2972,7 +2972,7 @@
         "model_id": "D3032.011d",
         "p58_fragility": "D3032.011d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -2985,7 +2985,7 @@
         "model_id": "D3032.012a",
         "p58_fragility": "D3032.012a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -2998,7 +2998,7 @@
         "model_id": "D3032.012b",
         "p58_fragility": "D3032.012b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3011,7 +3011,7 @@
         "model_id": "D3032.012c",
         "p58_fragility": "D3032.012c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3024,7 +3024,7 @@
         "model_id": "D3032.012d",
         "p58_fragility": "D3032.012d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3037,7 +3037,7 @@
         "model_id": "D3032.012e",
         "p58_fragility": "D3032.012e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3050,7 +3050,7 @@
         "model_id": "D3032.012f",
         "p58_fragility": "D3032.012f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3063,7 +3063,7 @@
         "model_id": "D3032.012g",
         "p58_fragility": "D3032.012g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3076,7 +3076,7 @@
         "model_id": "D3032.012h",
         "p58_fragility": "D3032.012h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3089,7 +3089,7 @@
         "model_id": "D3032.012i",
         "p58_fragility": "D3032.012i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3102,7 +3102,7 @@
         "model_id": "D3032.012j",
         "p58_fragility": "D3032.012j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3115,7 +3115,7 @@
         "model_id": "D3032.012k",
         "p58_fragility": "D3032.012k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3128,7 +3128,7 @@
         "model_id": "D3032.012l",
         "p58_fragility": "D3032.012l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3141,7 +3141,7 @@
         "model_id": "D3032.013a",
         "p58_fragility": "D3032.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3154,7 +3154,7 @@
         "model_id": "D3032.013b",
         "p58_fragility": "D3032.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3167,7 +3167,7 @@
         "model_id": "D3032.013c",
         "p58_fragility": "D3032.013c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3180,7 +3180,7 @@
         "model_id": "D3032.013d",
         "p58_fragility": "D3032.013d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3193,7 +3193,7 @@
         "model_id": "D3032.013e",
         "p58_fragility": "D3032.013e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3206,7 +3206,7 @@
         "model_id": "D3032.013f",
         "p58_fragility": "D3032.013f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3219,7 +3219,7 @@
         "model_id": "D3032.013g",
         "p58_fragility": "D3032.013g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3232,7 +3232,7 @@
         "model_id": "D3032.013h",
         "p58_fragility": "D3032.013h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3245,7 +3245,7 @@
         "model_id": "D3032.013i",
         "p58_fragility": "D3032.013i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Small",
         "source": "FEMA P-58"
     },
@@ -3258,7 +3258,7 @@
         "model_id": "D3032.013j",
         "p58_fragility": "D3032.013j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3271,7 +3271,7 @@
         "model_id": "D3032.013k",
         "p58_fragility": "D3032.013k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3284,7 +3284,7 @@
         "model_id": "D3032.013l",
         "p58_fragility": "D3032.013l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "Large",
         "source": "FEMA P-58"
     },
@@ -3297,7 +3297,7 @@
         "model_id": "D3041.001a",
         "p58_fragility": "D3041.001a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3310,7 +3310,7 @@
         "model_id": "D3041.001b",
         "p58_fragility": "D3041.001b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3323,7 +3323,7 @@
         "model_id": "D3041.001c",
         "p58_fragility": "D3041.001c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3336,7 +3336,7 @@
         "model_id": "D3041.001d",
         "p58_fragility": "D3041.001d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3349,7 +3349,7 @@
         "model_id": "D3041.002a",
         "p58_fragility": "D3041.002a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3362,7 +3362,7 @@
         "model_id": "D3041.002b",
         "p58_fragility": "D3041.002b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3375,7 +3375,7 @@
         "model_id": "D3041.002c",
         "p58_fragility": "D3041.002c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3388,7 +3388,7 @@
         "model_id": "D3041.002d",
         "p58_fragility": "D3041.002d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3401,7 +3401,7 @@
         "model_id": "D3041.011a",
         "p58_fragility": "D3041.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3414,7 +3414,7 @@
         "model_id": "D3041.011b",
         "p58_fragility": "D3041.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3427,7 +3427,7 @@
         "model_id": "D3041.011c",
         "p58_fragility": "D3041.011c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3440,7 +3440,7 @@
         "model_id": "D3041.011d",
         "p58_fragility": "D3041.011d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3453,7 +3453,7 @@
         "model_id": "D3041.012a",
         "p58_fragility": "D3041.012a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": ">= 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3466,7 +3466,7 @@
         "model_id": "D3041.012b",
         "p58_fragility": "D3041.012b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": ">= 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3479,7 +3479,7 @@
         "model_id": "D3041.012c",
         "p58_fragility": "D3041.012c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": ">= 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3492,7 +3492,7 @@
         "model_id": "D3041.012d",
         "p58_fragility": "D3041.012d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": ">= 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3505,7 +3505,7 @@
         "model_id": "D3041.021a",
         "p58_fragility": "D3041.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3518,7 +3518,7 @@
         "model_id": "D3041.021b",
         "p58_fragility": "D3041.021b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3531,7 +3531,7 @@
         "model_id": "D3041.021c",
         "p58_fragility": "D3041.021c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3544,7 +3544,7 @@
         "model_id": "D3041.021d",
         "p58_fragility": "D3041.021d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3557,7 +3557,7 @@
         "model_id": "D3041.022a",
         "p58_fragility": "D3041.022a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": ">= 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3570,7 +3570,7 @@
         "model_id": "D3041.022b",
         "p58_fragility": "D3041.022b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": ">= 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3583,7 +3583,7 @@
         "model_id": "D3041.022c",
         "p58_fragility": "D3041.022c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": ">= 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3596,7 +3596,7 @@
         "model_id": "D3041.022d",
         "p58_fragility": "D3041.022d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": ">= 6 sqft",
         "source": "FEMA P-58"
     },
@@ -3609,7 +3609,7 @@
         "model_id": "D3041.031a",
         "p58_fragility": "D3041.031a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3622,7 +3622,7 @@
         "model_id": "D3041.031b",
         "p58_fragility": "D3041.031b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3635,7 +3635,7 @@
         "model_id": "D3041.032a",
         "p58_fragility": "D3041.032a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3648,7 +3648,7 @@
         "model_id": "D3041.032b",
         "p58_fragility": "D3041.032b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3661,7 +3661,7 @@
         "model_id": "D3041.032c",
         "p58_fragility": "D3041.032c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3674,7 +3674,7 @@
         "model_id": "D3041.032d",
         "p58_fragility": "D3041.032d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3687,7 +3687,7 @@
         "model_id": "D3041.041a",
         "p58_fragility": "D3041.041a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3700,7 +3700,7 @@
         "model_id": "D3041.041b",
         "p58_fragility": "D3041.041b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3713,7 +3713,7 @@
         "model_id": "D3041.101a",
         "p58_fragility": "D3041.101a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3726,7 +3726,7 @@
         "model_id": "D3041.102a",
         "p58_fragility": "D3041.102a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3739,7 +3739,7 @@
         "model_id": "D3041.102b",
         "p58_fragility": "D3041.102b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3752,7 +3752,7 @@
         "model_id": "D3041.102c",
         "p58_fragility": "D3041.102c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3765,7 +3765,7 @@
         "model_id": "D3041.103a",
         "p58_fragility": "D3041.103a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3778,7 +3778,7 @@
         "model_id": "D3041.103b",
         "p58_fragility": "D3041.103b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3791,7 +3791,7 @@
         "model_id": "D3041.103c",
         "p58_fragility": "D3041.103c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -3804,7 +3804,7 @@
         "model_id": "D3052.011a",
         "p58_fragility": "D3052.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 5000 CFM",
         "source": "FEMA P-58"
     },
@@ -3817,7 +3817,7 @@
         "model_id": "D3052.011b",
         "p58_fragility": "D3052.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "5000 to 10000 CFM",
         "source": "FEMA P-58"
     },
@@ -3830,7 +3830,7 @@
         "model_id": "D3052.011c",
         "p58_fragility": "D3052.011c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "10000 to 25000 CFM",
         "source": "FEMA P-58"
     },
@@ -3843,7 +3843,7 @@
         "model_id": "D3052.011d",
         "p58_fragility": "D3052.011d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "25000 to 40000 CFM",
         "source": "FEMA P-58"
     },
@@ -3856,7 +3856,7 @@
         "model_id": "D3052.013a",
         "p58_fragility": "D3052.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 5000 CFM",
         "source": "FEMA P-58"
     },
@@ -3869,7 +3869,7 @@
         "model_id": "D3052.013b",
         "p58_fragility": "D3052.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 5000 CFM",
         "source": "FEMA P-58"
     },
@@ -3882,7 +3882,7 @@
         "model_id": "D3052.013c",
         "p58_fragility": "D3052.013c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 5000 CFM",
         "source": "FEMA P-58"
     },
@@ -3895,7 +3895,7 @@
         "model_id": "D3052.013d",
         "p58_fragility": "D3052.013d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "5000 to 10000 CFM",
         "source": "FEMA P-58"
     },
@@ -3908,7 +3908,7 @@
         "model_id": "D3052.013e",
         "p58_fragility": "D3052.013e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "5000 to 10000 CFM",
         "source": "FEMA P-58"
     },
@@ -3921,7 +3921,7 @@
         "model_id": "D3052.013f",
         "p58_fragility": "D3052.013f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "5000 to 10000 CFM",
         "source": "FEMA P-58"
     },
@@ -3934,7 +3934,7 @@
         "model_id": "D3052.013g",
         "p58_fragility": "D3052.013g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "10000 to 25000 CFM",
         "source": "FEMA P-58"
     },
@@ -3947,7 +3947,7 @@
         "model_id": "D3052.013h",
         "p58_fragility": "D3052.013h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "10000 to 25000 CFM",
         "source": "FEMA P-58"
     },
@@ -3960,7 +3960,7 @@
         "model_id": "D3052.013i",
         "p58_fragility": "D3052.013i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "10000 to 25000 CFM",
         "source": "FEMA P-58"
     },
@@ -3973,7 +3973,7 @@
         "model_id": "D3052.013j",
         "p58_fragility": "D3052.013j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "25000 to 40000 CFM",
         "source": "FEMA P-58"
     },
@@ -3986,7 +3986,7 @@
         "model_id": "D3052.013k",
         "p58_fragility": "D3052.013k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "25000 to 40000 CFM",
         "source": "FEMA P-58"
     },
@@ -3999,7 +3999,7 @@
         "model_id": "D3052.013l",
         "p58_fragility": "D3052.013l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "25000 to 40000 CFM",
         "source": "FEMA P-58"
     },
@@ -4012,7 +4012,7 @@
         "model_id": "D3067.011a",
         "p58_fragility": "D3067.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4025,7 +4025,7 @@
         "model_id": "D3067.012a",
         "p58_fragility": "D3067.012a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4038,7 +4038,7 @@
         "model_id": "D3067.012b",
         "p58_fragility": "D3067.012b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4051,7 +4051,7 @@
         "model_id": "D3067.012c",
         "p58_fragility": "D3067.012c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4064,7 +4064,7 @@
         "model_id": "D4011.021a",
         "p58_fragility": "D4011.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4077,7 +4077,7 @@
         "model_id": "D4011.022a",
         "p58_fragility": "D4011.022a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4090,7 +4090,7 @@
         "model_id": "D4011.023a",
         "p58_fragility": "D4011.023a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4103,7 +4103,7 @@
         "model_id": "D4011.024a",
         "p58_fragility": "D4011.024a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4116,7 +4116,7 @@
         "model_id": "D4011.031a",
         "p58_fragility": "D4011.031a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4129,7 +4129,7 @@
         "model_id": "D4011.032a",
         "p58_fragility": "D4011.032a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4142,7 +4142,7 @@
         "model_id": "D4011.033a",
         "p58_fragility": "D4011.033a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4155,7 +4155,7 @@
         "model_id": "D4011.034a",
         "p58_fragility": "D4011.034a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4168,7 +4168,7 @@
         "model_id": "D4011.041a",
         "p58_fragility": "D4011.041a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4181,7 +4181,7 @@
         "model_id": "D4011.042a",
         "p58_fragility": "D4011.042a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4194,7 +4194,7 @@
         "model_id": "D4011.053a",
         "p58_fragility": "D4011.053a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4207,7 +4207,7 @@
         "model_id": "D4011.054a",
         "p58_fragility": "D4011.054a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4220,7 +4220,7 @@
         "model_id": "D4011.063a",
         "p58_fragility": "D4011.063a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4233,7 +4233,7 @@
         "model_id": "D4011.064a",
         "p58_fragility": "D4011.064a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4246,7 +4246,7 @@
         "model_id": "D4011.071a",
         "p58_fragility": "D4011.071a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4259,7 +4259,7 @@
         "model_id": "D4011.072a",
         "p58_fragility": "D4011.072a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4272,7 +4272,7 @@
         "model_id": "D4011.073a",
         "p58_fragility": "D4011.073a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4285,7 +4285,7 @@
         "model_id": "D4011.074a",
         "p58_fragility": "D4011.074a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4298,7 +4298,7 @@
         "model_id": "D5011.011a",
         "p58_fragility": "D5011.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 kVa",
         "source": "FEMA P-58"
     },
@@ -4311,7 +4311,7 @@
         "model_id": "D5011.011b",
         "p58_fragility": "D5011.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -4324,7 +4324,7 @@
         "model_id": "D5011.011c",
         "p58_fragility": "D5011.011c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -4337,7 +4337,7 @@
         "model_id": "D5011.011d",
         "p58_fragility": "D5011.011d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1500 Ton",
         "source": "FEMA P-58"
     },
@@ -4350,7 +4350,7 @@
         "model_id": "D5011.013a",
         "p58_fragility": "D5011.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 kVa",
         "source": "FEMA P-58"
     },
@@ -4363,7 +4363,7 @@
         "model_id": "D5011.013b",
         "p58_fragility": "D5011.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 kVa",
         "source": "FEMA P-58"
     },
@@ -4376,7 +4376,7 @@
         "model_id": "D5011.013c",
         "p58_fragility": "D5011.013c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "< 100 kVa",
         "source": "FEMA P-58"
     },
@@ -4389,7 +4389,7 @@
         "model_id": "D5011.013d",
         "p58_fragility": "D5011.013d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -4402,7 +4402,7 @@
         "model_id": "D5011.013e",
         "p58_fragility": "D5011.013e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -4415,7 +4415,7 @@
         "model_id": "D5011.013f",
         "p58_fragility": "D5011.013f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Ton",
         "source": "FEMA P-58"
     },
@@ -4428,7 +4428,7 @@
         "model_id": "D5011.013g",
         "p58_fragility": "D5011.013g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -4441,7 +4441,7 @@
         "model_id": "D5011.013h",
         "p58_fragility": "D5011.013h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -4454,7 +4454,7 @@
         "model_id": "D5011.013i",
         "p58_fragility": "D5011.013i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Ton",
         "source": "FEMA P-58"
     },
@@ -4467,7 +4467,7 @@
         "model_id": "D5011.013j",
         "p58_fragility": "D5011.013j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1500 Ton",
         "source": "FEMA P-58"
     },
@@ -4480,7 +4480,7 @@
         "model_id": "D5011.013k",
         "p58_fragility": "D5011.013k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1500 Ton",
         "source": "FEMA P-58"
     },
@@ -4493,7 +4493,7 @@
         "model_id": "D5011.013l",
         "p58_fragility": "D5011.013l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1500 Ton",
         "source": "FEMA P-58"
     },
@@ -4506,7 +4506,7 @@
         "model_id": "D5012.013a",
         "p58_fragility": "D5012.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4519,7 +4519,7 @@
         "model_id": "D5012.013b",
         "p58_fragility": "D5012.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4532,7 +4532,7 @@
         "model_id": "D5012.013c",
         "p58_fragility": "D5012.013c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4545,7 +4545,7 @@
         "model_id": "D5012.013d",
         "p58_fragility": "D5012.013d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4558,7 +4558,7 @@
         "model_id": "D5012.021a",
         "p58_fragility": "D5012.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Amp",
         "source": "FEMA P-58"
     },
@@ -4571,7 +4571,7 @@
         "model_id": "D5012.021b",
         "p58_fragility": "D5012.021b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Amp",
         "source": "FEMA P-58"
     },
@@ -4584,7 +4584,7 @@
         "model_id": "D5012.021c",
         "p58_fragility": "D5012.021c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1200 Amp",
         "source": "FEMA P-58"
     },
@@ -4597,7 +4597,7 @@
         "model_id": "D5012.021d",
         "p58_fragility": "D5012.021d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 Amp",
         "source": "FEMA P-58"
     },
@@ -4610,7 +4610,7 @@
         "model_id": "D5012.023a",
         "p58_fragility": "D5012.023a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Amp",
         "source": "FEMA P-58"
     },
@@ -4623,7 +4623,7 @@
         "model_id": "D5012.023b",
         "p58_fragility": "D5012.023b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Amp",
         "source": "FEMA P-58"
     },
@@ -4636,7 +4636,7 @@
         "model_id": "D5012.023c",
         "p58_fragility": "D5012.023c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Amp",
         "source": "FEMA P-58"
     },
@@ -4649,7 +4649,7 @@
         "model_id": "D5012.023d",
         "p58_fragility": "D5012.023d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Amp",
         "source": "FEMA P-58"
     },
@@ -4662,7 +4662,7 @@
         "model_id": "D5012.023e",
         "p58_fragility": "D5012.023e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Amp",
         "source": "FEMA P-58"
     },
@@ -4675,7 +4675,7 @@
         "model_id": "D5012.023f",
         "p58_fragility": "D5012.023f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Amp",
         "source": "FEMA P-58"
     },
@@ -4688,7 +4688,7 @@
         "model_id": "D5012.023g",
         "p58_fragility": "D5012.023g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1200 Amp",
         "source": "FEMA P-58"
     },
@@ -4701,7 +4701,7 @@
         "model_id": "D5012.023h",
         "p58_fragility": "D5012.023h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1200 Amp",
         "source": "FEMA P-58"
     },
@@ -4714,7 +4714,7 @@
         "model_id": "D5012.023i",
         "p58_fragility": "D5012.023i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1200 Amp",
         "source": "FEMA P-58"
     },
@@ -4727,7 +4727,7 @@
         "model_id": "D5012.023j",
         "p58_fragility": "D5012.023j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 Amp",
         "source": "FEMA P-58"
     },
@@ -4740,7 +4740,7 @@
         "model_id": "D5012.023k",
         "p58_fragility": "D5012.023k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 Amp",
         "source": "FEMA P-58"
     },
@@ -4753,7 +4753,7 @@
         "model_id": "D5012.023l",
         "p58_fragility": "D5012.023l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 Amp",
         "source": "FEMA P-58"
     },
@@ -4766,7 +4766,7 @@
         "model_id": "D5012.031a",
         "p58_fragility": "D5012.031a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Amp",
         "source": "FEMA P-58"
     },
@@ -4779,7 +4779,7 @@
         "model_id": "D5012.031b",
         "p58_fragility": "D5012.031b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Amp",
         "source": "FEMA P-58"
     },
@@ -4792,7 +4792,7 @@
         "model_id": "D5012.031c",
         "p58_fragility": "D5012.031c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1200 Amp",
         "source": "FEMA P-58"
     },
@@ -4805,7 +4805,7 @@
         "model_id": "D5012.031d",
         "p58_fragility": "D5012.031d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 Amp",
         "source": "FEMA P-58"
     },
@@ -4818,7 +4818,7 @@
         "model_id": "D5012.033a",
         "p58_fragility": "D5012.033a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Amp",
         "source": "FEMA P-58"
     },
@@ -4831,7 +4831,7 @@
         "model_id": "D5012.033b",
         "p58_fragility": "D5012.033b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Amp",
         "source": "FEMA P-58"
     },
@@ -4844,7 +4844,7 @@
         "model_id": "D5012.033c",
         "p58_fragility": "D5012.033c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to <350 Amp",
         "source": "FEMA P-58"
     },
@@ -4857,7 +4857,7 @@
         "model_id": "D5012.033d",
         "p58_fragility": "D5012.033d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Amp",
         "source": "FEMA P-58"
     },
@@ -4870,7 +4870,7 @@
         "model_id": "D5012.033e",
         "p58_fragility": "D5012.033e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Amp",
         "source": "FEMA P-58"
     },
@@ -4883,7 +4883,7 @@
         "model_id": "D5012.033f",
         "p58_fragility": "D5012.033f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to <750 Amp",
         "source": "FEMA P-58"
     },
@@ -4896,7 +4896,7 @@
         "model_id": "D5012.033g",
         "p58_fragility": "D5012.033g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1200 Amp",
         "source": "FEMA P-58"
     },
@@ -4909,7 +4909,7 @@
         "model_id": "D5012.033h",
         "p58_fragility": "D5012.033h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1200 Amp",
         "source": "FEMA P-58"
     },
@@ -4922,7 +4922,7 @@
         "model_id": "D5012.033i",
         "p58_fragility": "D5012.033i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to <1200 Amp",
         "source": "FEMA P-58"
     },
@@ -4935,7 +4935,7 @@
         "model_id": "D5012.033j",
         "p58_fragility": "D5012.033j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 Amp",
         "source": "FEMA P-58"
     },
@@ -4948,7 +4948,7 @@
         "model_id": "D5012.033k",
         "p58_fragility": "D5012.033k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 Amp",
         "source": "FEMA P-58"
     },
@@ -4961,7 +4961,7 @@
         "model_id": "D5012.033l",
         "p58_fragility": "D5012.033l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 Amp",
         "source": "FEMA P-58"
     },
@@ -4974,7 +4974,7 @@
         "model_id": "D5092.011a",
         "p58_fragility": "D5092.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -4987,7 +4987,7 @@
         "model_id": "D5092.013a",
         "p58_fragility": "D5092.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5000,7 +5000,7 @@
         "model_id": "D5092.013b",
         "p58_fragility": "D5092.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5013,7 +5013,7 @@
         "model_id": "D5092.013c",
         "p58_fragility": "D5092.013c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5026,7 +5026,7 @@
         "model_id": "D5092.021a",
         "p58_fragility": "D5092.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5039,7 +5039,7 @@
         "model_id": "D5092.023a",
         "p58_fragility": "D5092.023a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5052,7 +5052,7 @@
         "model_id": "D5092.023b",
         "p58_fragility": "D5092.023b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5065,7 +5065,7 @@
         "model_id": "D5092.023c",
         "p58_fragility": "D5092.023c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5078,7 +5078,7 @@
         "model_id": "D5092.031a",
         "p58_fragility": "D5092.031a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to 350 kVa",
         "source": "FEMA P-58"
     },
@@ -5091,7 +5091,7 @@
         "model_id": "D5092.031b",
         "p58_fragility": "D5092.031b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to 750 kVa",
         "source": "FEMA P-58"
     },
@@ -5104,7 +5104,7 @@
         "model_id": "D5092.031c",
         "p58_fragility": "D5092.031c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to 1200 kVa",
         "source": "FEMA P-58"
     },
@@ -5117,7 +5117,7 @@
         "model_id": "D5092.031d",
         "p58_fragility": "D5092.031d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 kVa",
         "source": "FEMA P-58"
     },
@@ -5130,7 +5130,7 @@
         "model_id": "D5092.032a",
         "p58_fragility": "D5092.032a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to 350 kVa",
         "source": "FEMA P-58"
     },
@@ -5143,7 +5143,7 @@
         "model_id": "D5092.032b",
         "p58_fragility": "D5092.032b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to 350 kVa",
         "source": "FEMA P-58"
     },
@@ -5156,7 +5156,7 @@
         "model_id": "D5092.032c",
         "p58_fragility": "D5092.032c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to 350 kVa",
         "source": "FEMA P-58"
     },
@@ -5169,7 +5169,7 @@
         "model_id": "D5092.032d",
         "p58_fragility": "D5092.032d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to 750 kVa",
         "source": "FEMA P-58"
     },
@@ -5182,7 +5182,7 @@
         "model_id": "D5092.032e",
         "p58_fragility": "D5092.032e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to 750 kVa",
         "source": "FEMA P-58"
     },
@@ -5195,7 +5195,7 @@
         "model_id": "D5092.032f",
         "p58_fragility": "D5092.032f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to 750 kVa",
         "source": "FEMA P-58"
     },
@@ -5208,7 +5208,7 @@
         "model_id": "D5092.032g",
         "p58_fragility": "D5092.032g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to 1200 kVa",
         "source": "FEMA P-58"
     },
@@ -5221,7 +5221,7 @@
         "model_id": "D5092.032h",
         "p58_fragility": "D5092.032h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to 1200 kVa",
         "source": "FEMA P-58"
     },
@@ -5234,7 +5234,7 @@
         "model_id": "D5092.032i",
         "p58_fragility": "D5092.032i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to 1200 kVa",
         "source": "FEMA P-58"
     },
@@ -5247,7 +5247,7 @@
         "model_id": "D5092.032j",
         "p58_fragility": "D5092.032j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 kVa",
         "source": "FEMA P-58"
     },
@@ -5260,7 +5260,7 @@
         "model_id": "D5092.032k",
         "p58_fragility": "D5092.032k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 kVa",
         "source": "FEMA P-58"
     },
@@ -5273,7 +5273,7 @@
         "model_id": "D5092.032l",
         "p58_fragility": "D5092.032l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 kVa",
         "source": "FEMA P-58"
     },
@@ -5286,7 +5286,7 @@
         "model_id": "D5092.033a",
         "p58_fragility": "D5092.033a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to 350 kVa",
         "source": "FEMA P-58"
     },
@@ -5299,7 +5299,7 @@
         "model_id": "D5092.033b",
         "p58_fragility": "D5092.033b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to 350 kVa",
         "source": "FEMA P-58"
     },
@@ -5312,7 +5312,7 @@
         "model_id": "D5092.033c",
         "p58_fragility": "D5092.033c",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "100 to 350 kVa",
         "source": "FEMA P-58"
     },
@@ -5325,7 +5325,7 @@
         "model_id": "D5092.033d",
         "p58_fragility": "D5092.033d",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to 750 kVa",
         "source": "FEMA P-58"
     },
@@ -5338,7 +5338,7 @@
         "model_id": "D5092.033e",
         "p58_fragility": "D5092.033e",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to 750 kVa",
         "source": "FEMA P-58"
     },
@@ -5351,7 +5351,7 @@
         "model_id": "D5092.033f",
         "p58_fragility": "D5092.033f",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "350 to 750 kVa",
         "source": "FEMA P-58"
     },
@@ -5364,7 +5364,7 @@
         "model_id": "D5092.033g",
         "p58_fragility": "D5092.033g",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to 1200 kVa",
         "source": "FEMA P-58"
     },
@@ -5377,7 +5377,7 @@
         "model_id": "D5092.033h",
         "p58_fragility": "D5092.033h",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to 1200 kVa",
         "source": "FEMA P-58"
     },
@@ -5390,7 +5390,7 @@
         "model_id": "D5092.033i",
         "p58_fragility": "D5092.033i",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "750 to 1200 kVa",
         "source": "FEMA P-58"
     },
@@ -5403,7 +5403,7 @@
         "model_id": "D5092.033j",
         "p58_fragility": "D5092.033j",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 kVa",
         "source": "FEMA P-58"
     },
@@ -5416,7 +5416,7 @@
         "model_id": "D5092.033k",
         "p58_fragility": "D5092.033k",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 kVa",
         "source": "FEMA P-58"
     },
@@ -5429,7 +5429,7 @@
         "model_id": "D5092.033l",
         "p58_fragility": "D5092.033l",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "1200 to 2000 kVa",
         "source": "FEMA P-58"
     },
@@ -5442,7 +5442,7 @@
         "model_id": "E2022.001",
         "p58_fragility": "E2022.001",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5455,7 +5455,7 @@
         "model_id": "E2022.010",
         "p58_fragility": "E2022.010",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5468,7 +5468,7 @@
         "model_id": "E2022.011",
         "p58_fragility": "E2022.011",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5481,7 +5481,7 @@
         "model_id": "E2022.012",
         "p58_fragility": "E2022.012",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5494,7 +5494,7 @@
         "model_id": "E2022.013",
         "p58_fragility": "E2022.013",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5507,7 +5507,7 @@
         "model_id": "E2022.020",
         "p58_fragility": "E2022.020",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5520,7 +5520,7 @@
         "model_id": "E2022.021",
         "p58_fragility": "E2022.021",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5533,7 +5533,7 @@
         "model_id": "E2022.022",
         "p58_fragility": "E2022.022",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5546,7 +5546,7 @@
         "model_id": "E2022.023",
         "p58_fragility": "E2022.023",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5559,7 +5559,7 @@
         "model_id": "E2022.102a",
         "p58_fragility": "E2022.102a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5572,7 +5572,7 @@
         "model_id": "E2022.102b",
         "p58_fragility": "E2022.102b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5585,7 +5585,7 @@
         "model_id": "E2022.103a",
         "p58_fragility": "E2022.103a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5598,7 +5598,7 @@
         "model_id": "E2022.103b",
         "p58_fragility": "E2022.103b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5611,7 +5611,7 @@
         "model_id": "E2022.104a",
         "p58_fragility": "E2022.104a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5624,7 +5624,7 @@
         "model_id": "E2022.104b",
         "p58_fragility": "E2022.104b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5637,7 +5637,7 @@
         "model_id": "E2022.105a",
         "p58_fragility": "E2022.105a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5650,7 +5650,7 @@
         "model_id": "E2022.105b",
         "p58_fragility": "E2022.105b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5663,7 +5663,7 @@
         "model_id": "E2022.106a",
         "p58_fragility": "E2022.106a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5676,7 +5676,7 @@
         "model_id": "E2022.106b",
         "p58_fragility": "E2022.106b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5689,7 +5689,7 @@
         "model_id": "E2022.112a",
         "p58_fragility": "E2022.112a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5702,7 +5702,7 @@
         "model_id": "E2022.112b",
         "p58_fragility": "E2022.112b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5715,7 +5715,7 @@
         "model_id": "E2022.114a",
         "p58_fragility": "E2022.114a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5728,7 +5728,7 @@
         "model_id": "E2022.114b",
         "p58_fragility": "E2022.114b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5741,7 +5741,7 @@
         "model_id": "E2022.124a",
         "p58_fragility": "E2022.124a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5754,7 +5754,7 @@
         "model_id": "E2022.124b",
         "p58_fragility": "E2022.124b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5767,7 +5767,7 @@
         "model_id": "E2022.125a",
         "p58_fragility": "E2022.125a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5780,7 +5780,7 @@
         "model_id": "E2022.125b",
         "p58_fragility": "E2022.125b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5793,7 +5793,7 @@
         "model_id": "F1012.001",
         "p58_fragility": "F1012.001",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -5806,7 +5806,7 @@
         "model_id": "D2021.011a",
         "p58_fragility": "D2021.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5819,7 +5819,7 @@
         "model_id": "D2021.011b",
         "p58_fragility": "D2021.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5832,7 +5832,7 @@
         "model_id": "D2021.012a",
         "p58_fragility": "D2021.012a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5845,7 +5845,7 @@
         "model_id": "D2021.012b",
         "p58_fragility": "D2021.012b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5858,7 +5858,7 @@
         "model_id": "D2021.013a",
         "p58_fragility": "D2021.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5871,7 +5871,7 @@
         "model_id": "D2021.013b",
         "p58_fragility": "D2021.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5884,7 +5884,7 @@
         "model_id": "D2021.014a",
         "p58_fragility": "D2021.014a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5897,7 +5897,7 @@
         "model_id": "D2021.014b",
         "p58_fragility": "D2021.014b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5910,7 +5910,7 @@
         "model_id": "D2021.021a",
         "p58_fragility": "D2021.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5923,7 +5923,7 @@
         "model_id": "D2021.022a",
         "p58_fragility": "D2021.022a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5936,7 +5936,7 @@
         "model_id": "D2021.023a",
         "p58_fragility": "D2021.023a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5949,7 +5949,7 @@
         "model_id": "D2021.023b",
         "p58_fragility": "D2021.023b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5962,7 +5962,7 @@
         "model_id": "D2021.024a",
         "p58_fragility": "D2021.024a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5975,7 +5975,7 @@
         "model_id": "D2021.024b",
         "p58_fragility": "D2021.024b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -5988,7 +5988,7 @@
         "model_id": "D2022.011a",
         "p58_fragility": "D2022.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6001,7 +6001,7 @@
         "model_id": "D2022.011b",
         "p58_fragility": "D2022.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6014,7 +6014,7 @@
         "model_id": "D2022.012a",
         "p58_fragility": "D2022.012a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6027,7 +6027,7 @@
         "model_id": "D2022.012b",
         "p58_fragility": "D2022.012b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6040,7 +6040,7 @@
         "model_id": "D2022.013a",
         "p58_fragility": "D2022.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6053,7 +6053,7 @@
         "model_id": "D2022.013b",
         "p58_fragility": "D2022.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6066,7 +6066,7 @@
         "model_id": "D2022.014a",
         "p58_fragility": "D2022.014a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6079,7 +6079,7 @@
         "model_id": "D2022.014b",
         "p58_fragility": "D2022.014b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6092,7 +6092,7 @@
         "model_id": "D2022.021a",
         "p58_fragility": "D2022.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6105,7 +6105,7 @@
         "model_id": "D2022.022a",
         "p58_fragility": "D2022.022a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6118,7 +6118,7 @@
         "model_id": "D2022.023a",
         "p58_fragility": "D2022.023a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6131,7 +6131,7 @@
         "model_id": "D2022.023b",
         "p58_fragility": "D2022.023b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6144,7 +6144,7 @@
         "model_id": "D2022.024a",
         "p58_fragility": "D2022.024a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6157,7 +6157,7 @@
         "model_id": "D2022.024b",
         "p58_fragility": "D2022.024b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6170,7 +6170,7 @@
         "model_id": "D2031.011b",
         "p58_fragility": "D2031.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6183,7 +6183,7 @@
         "model_id": "D2031.012b",
         "p58_fragility": "D2031.012b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6196,7 +6196,7 @@
         "model_id": "D2031.013b",
         "p58_fragility": "D2031.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6209,7 +6209,7 @@
         "model_id": "D2031.014b",
         "p58_fragility": "D2031.014b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6222,7 +6222,7 @@
         "model_id": "D2031.021a",
         "p58_fragility": "D2031.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6235,7 +6235,7 @@
         "model_id": "D2031.021b",
         "p58_fragility": "D2031.021b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6248,7 +6248,7 @@
         "model_id": "D2031.022a",
         "p58_fragility": "D2031.022a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6261,7 +6261,7 @@
         "model_id": "D2031.022b",
         "p58_fragility": "D2031.022b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6274,7 +6274,7 @@
         "model_id": "D2031.023a",
         "p58_fragility": "D2031.023a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6287,7 +6287,7 @@
         "model_id": "D2031.023b",
         "p58_fragility": "D2031.023b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6300,7 +6300,7 @@
         "model_id": "D2031.024a",
         "p58_fragility": "D2031.024a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6313,7 +6313,7 @@
         "model_id": "D2031.024b",
         "p58_fragility": "D2031.024b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6326,7 +6326,7 @@
         "model_id": "D2051.011a",
         "p58_fragility": "D2051.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6339,7 +6339,7 @@
         "model_id": "D2051.011b",
         "p58_fragility": "D2051.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6352,7 +6352,7 @@
         "model_id": "D2051.012a",
         "p58_fragility": "D2051.012a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6365,7 +6365,7 @@
         "model_id": "D2051.012b",
         "p58_fragility": "D2051.012b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6378,7 +6378,7 @@
         "model_id": "D2051.013a",
         "p58_fragility": "D2051.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6391,7 +6391,7 @@
         "model_id": "D2051.013b",
         "p58_fragility": "D2051.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6404,7 +6404,7 @@
         "model_id": "D2051.014a",
         "p58_fragility": "D2051.014a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6417,7 +6417,7 @@
         "model_id": "D2051.014b",
         "p58_fragility": "D2051.014b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6430,7 +6430,7 @@
         "model_id": "D2051.021a",
         "p58_fragility": "D2051.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6443,7 +6443,7 @@
         "model_id": "D2051.021b",
         "p58_fragility": "D2051.021b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6456,7 +6456,7 @@
         "model_id": "D2051.022a",
         "p58_fragility": "D2051.022a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6469,7 +6469,7 @@
         "model_id": "D2051.023a",
         "p58_fragility": "D2051.023a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6482,7 +6482,7 @@
         "model_id": "D2051.023b",
         "p58_fragility": "D2051.023b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6495,7 +6495,7 @@
         "model_id": "D2051.024a",
         "p58_fragility": "D2051.024a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6508,7 +6508,7 @@
         "model_id": "D2051.024b",
         "p58_fragility": "D2051.024b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6521,7 +6521,7 @@
         "model_id": "D2061.011a",
         "p58_fragility": "D2061.011a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6534,7 +6534,7 @@
         "model_id": "D2061.011b",
         "p58_fragility": "D2061.011b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6547,7 +6547,7 @@
         "model_id": "D2061.012a",
         "p58_fragility": "D2061.012a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6560,7 +6560,7 @@
         "model_id": "D2061.012b",
         "p58_fragility": "D2061.012b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6573,7 +6573,7 @@
         "model_id": "D2061.013a",
         "p58_fragility": "D2061.013a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6586,7 +6586,7 @@
         "model_id": "D2061.013b",
         "p58_fragility": "D2061.013b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6599,7 +6599,7 @@
         "model_id": "D2061.014a",
         "p58_fragility": "D2061.014a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6612,7 +6612,7 @@
         "model_id": "D2061.014b",
         "p58_fragility": "D2061.014b",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "<= 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6625,7 +6625,7 @@
         "model_id": "D2061.021a",
         "p58_fragility": "D2061.021a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6638,7 +6638,7 @@
         "model_id": "D2061.022a",
         "p58_fragility": "D2061.022a",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "> 2.5 inch diameter",
         "source": "FEMA P-58"
     },
@@ -6651,7 +6651,7 @@
         "model_id": "1",
         "p58_fragility": "D4011.023a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6664,7 +6664,7 @@
         "model_id": "2",
         "p58_fragility": "D4011.024a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6677,7 +6677,7 @@
         "model_id": "3",
         "p58_fragility": "D4011.033a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6690,7 +6690,7 @@
         "model_id": "4",
         "p58_fragility": "D4011.034a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6703,7 +6703,7 @@
         "model_id": "5",
         "p58_fragility": "D4011.053a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6716,7 +6716,7 @@
         "model_id": "6",
         "p58_fragility": "D4011.054a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6729,7 +6729,7 @@
         "model_id": "7",
         "p58_fragility": "D4011.063a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6742,7 +6742,7 @@
         "model_id": "8",
         "p58_fragility": "D4011.064a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6755,7 +6755,7 @@
         "model_id": "9",
         "p58_fragility": "D4011.073a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6768,7 +6768,7 @@
         "model_id": "10",
         "p58_fragility": "D4011.074a",
         "reference": "Bhatta_SprinklerFragilityFunctions-2026",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "Literature"
     },
@@ -6781,7 +6781,7 @@
         "model_id": "door1",
         "p58_fragility": "",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     },
@@ -6794,7 +6794,7 @@
         "model_id": "door2",
         "p58_fragility": "",
         "reference": "FEMA_P58-2018",
-        "reviewer": "NIST",
+        "contributor": "NIST",
         "size_class": "",
         "source": "FEMA P-58"
     }

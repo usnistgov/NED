@@ -143,7 +143,7 @@ def render_model_body(
     attr('Component Description', fmt(row['comp_description']))
     attr('EDP Metric', fmt(row['edp_metric']))
     attr('EDP Unit', fmt(row['edp_unit']))
-    attr('Reviewer', fmt(row['reviewer']))
+    attr('Contributor', fmt(row['contributor']))
     attr('Source', fmt(row['source']))
 
     reference_id = row['reference_id']
