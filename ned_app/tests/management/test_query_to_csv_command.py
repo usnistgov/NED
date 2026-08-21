@@ -50,7 +50,7 @@ class QueryToCsvCommandTests(TestCase):
             reference=self.reference,
             component=self.component,
             specimen='SP-1',
-            reviewer='Reviewer',
+            contributor='Contributor',
             test_type='Dynamic, uniaxial',
             material=material,
             comp_description='CPVC sprinkler pipe',

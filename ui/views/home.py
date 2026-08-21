@@ -100,7 +100,7 @@ def render() -> None:
         | **Component** | The central reference table. Each row is a unique nonstructural component subtype, classified by the four-level NISTIR hierarchy: Major Group → Group → Element → Subelement. |
         | **Reference** | Research publications from which data are drawn — experimental studies, reconnaissance reports, analytical studies, and literature reviews. Stores full citation metadata in CSL-JSON format. |
         | **Experiment** | Individual experimental test observations. Each record captures the specimen, test type, loading protocol, EDP (metric, unit, and value), and damage state classification. Subcategory attributes (`comp_detail`, `material`, `size_class`) allow a single component type to be subdivided without a new component record. Linked to one Component and one Reference. |
-        | **FragilityModel** | A fragility model for a specific component configuration. Stores the EDP metric and unit that the curves are expressed in, along with subcategory attributes, data source provenance (`reviewer`, `source`), and an optional FEMA P-58 cross-reference. Linked to one Reference. |
+        | **FragilityModel** | A fragility model for a specific component configuration. Stores the EDP metric and unit that the curves are expressed in, along with subcategory attributes, data source provenance (`contributor`, `source`), and an optional FEMA P-58 cross-reference. Linked to one Reference. |
         | **FragilityCurve** | Individual lognormal fragility curves within a FragilityModel. Each curve stores damage state rank, description, basis, number of observations, median, beta (lognormal dispersion), and mutually exclusive probability. |
         """
     )

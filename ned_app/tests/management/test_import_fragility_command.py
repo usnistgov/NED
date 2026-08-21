@@ -125,12 +125,12 @@ class ImportFragilityCommandTests(TransactionTestCase):
         # field (comp_description) — the command must abort.
         header = (
             'reference,model_id,p58_fragility,comp_detail,material,size_class,'
-            'comp_description,reviewer,source,edp_metric,edp_unit,component_ids,'
+            'comp_description,contributor,source,edp_metric,edp_unit,component_ids,'
             'ds_rank,ds_description,median,beta,probability,basis,num_observations\n'
         )
         common = 'Smith-2020,fra001,,Back-braced,CPVC,2 inch,'
         tail = (
-            ',Reviewer,Literature,"Peak Floor Acceleration, horizontal",g,'
+            ',Contributor,Literature,"Peak Floor Acceleration, horizontal",g,'
             'A.40.1.1,{rank},DS,{median},0.4,1.0,Experiment,30\n'
         )
         row1 = common + 'Description ONE' + tail.format(rank=1, median=0.5)
@@ -178,11 +178,11 @@ class ImportFragilityCommandTests(TransactionTestCase):
         # rather than crashing; ingest reports the bad value later.
         header = (
             'reference,model_id,p58_fragility,comp_detail,material,size_class,'
-            'comp_description,reviewer,source,edp_metric,edp_unit,component_ids,'
+            'comp_description,contributor,source,edp_metric,edp_unit,component_ids,'
             'ds_rank,ds_description,median,beta,probability,basis,num_observations\n'
         )
         row = (
-            'Smith-2020,fraX,,Braced,CPVC,2 inch,Desc,Rev,Lit,'
+            'Smith-2020,fraX,,Braced,CPVC,2 inch,Desc,Contrib,Lit,'
             '"Peak Floor Acceleration, horizontal",g,A.40.1.1,'
             'one,Leak,0.5,0.4,1.0,Experiment,30\n'
         )

@@ -40,7 +40,7 @@ def render() -> None:
         fmt(row['Inspection Sequence']),
         help_text=FIELD_HELP['specimen_inspection_sequence'],
     )
-    attr('Reviewer', fmt(row['Reviewer']))
+    attr('Contributor', fmt(row['Contributor']))
     attr('Test Type', fmt(row['Test Type']))
     attr(
         'Loading Protocol',

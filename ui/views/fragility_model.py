@@ -113,7 +113,7 @@ def render_model_body(
     side-by-side compare view). Set ``show_download`` to ``False`` to omit the
     curve CSV download button. Set ``show_compare_button`` to ``True`` to show
     a button that jumps to the Compare Fragilities view with this model
-    pre-selected."""
+    preselected."""
     df_fm_detail = get_fragility_model_detail(fragility_model_id)
 
     if df_fm_detail.empty:
@@ -143,7 +143,7 @@ def render_model_body(
     attr('Component Description', fmt(row['comp_description']))
     attr('EDP Metric', fmt(row['edp_metric']))
     attr('EDP Unit', fmt(row['edp_unit']))
-    attr('Reviewer', fmt(row['reviewer']))
+    attr('Contributor', fmt(row['contributor']))
     attr('Source', fmt(row['source']))
 
     reference_id = row['reference_id']

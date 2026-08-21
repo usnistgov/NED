@@ -67,7 +67,7 @@ damage states, produces multiple rows.
 | `reference` | Foreign key → `Reference.reference_id` | Required | Derived id of the published reference documenting this observation (e.g. `Smith-2020`). The reference must already exist. |
 | `specimen` | String (max 255) | Optional | ID or name of the specimen as recorded in the reference. |
 | `specimen_inspection_sequence` | String (max 255) | Optional | Which test of this specimen the observation comes from (the *i*th test), when a specimen was tested/inspected multiple times. |
-| `reviewer` | String (max 50) | Optional | Individual or institution responsible for entering this record into the database. |
+| `contributor` | String (max 50) | Optional | Individual or institution responsible for entering this record into the database. |
 | `component` | Foreign key → `Component.component_id` | Required | Dotted component ID identifying the component type (e.g. `D.50.2.1.A`). The component must already exist. |
 | `comp_detail` | String (max 100) | Optional | Subcategorization tag: classification or short description of the component attachment/connection detailing (e.g. `perimeter-fixed` vs `back-braced`). Use consistent naming, case, and spelling across records. |
 | `material` | String (max 100) | Optional | Subcategorization tag: general material grouping of the component, if applicable (e.g. `CPVC` vs `iron` sprinkler pipes). |
@@ -106,7 +106,7 @@ Seismic fragility models describing the sequence of damage of a particular nonst
 | `material` | String (max 100) | Optional | Subcategorization tag: general material grouping of the component, if applicable (e.g. `CPVC` vs `iron` sprinkler pipes). |
 | `size_class` | String (max 100) | Optional | Subcategorization tag: general size grouping of this component relative to others of the same type, if applicable. |
 | `comp_description` | Text | Required | General description of the type of component the model applies to. |
-| `reviewer` | String (max 255) | Optional | Person or party responsible for uploading this fragility model to the database. |
+| `contributor` | String (max 255) | Optional | Person or party responsible for uploading this fragility model to the database. |
 | `source` | String (max 255) | Optional | Source of the fragility data. |
 | `edp_metric` | Choice | Required (database-enforced non-empty) | The EDP the fragility curves are defined against. One of the [EDP metric](#edp-metric) values. |
 | `edp_unit` | Choice | Required (database-enforced non-empty) | Unit of the EDP. One of the [EDP unit](#edp-unit) values. |
@@ -209,4 +209,4 @@ in the NED README for the full discussion of intent and edge cases.
 | `No damage` | No change in state was observed from the test. |
 | `Inconsequential` | (Aesthetic) damage was observed but is unlikely to require repair or impact system operation — no action required. |
 | `Consequential` | Damage that may require repair or impact system operation — observable and requires action. |
-| `Unknown` | A damage state class could not be identified by the reviewer. |
+| `Unknown` | A damage state class could not be identified by the contributor. |
