@@ -247,7 +247,7 @@ def render_model_body(
                 ),
             },
         )
-        st.caption(f"**Probability:** {FIELD_HELP['probability']}")
+        st.caption(f'**Probability:** {FIELD_HELP["probability"]}')
         if show_download:
             st.download_button(
                 'Download CSV',
