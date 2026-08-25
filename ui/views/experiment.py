@@ -123,7 +123,7 @@ def render() -> None:
         _FM_WIDTHS = [2, 1.5, 2, 1.5, 1.5, 4, 1]
         _FM_HEADERS = [
             'Reference',
-            'Model ID',
+            'Fragility Model ID',
             'Component Detail',
             'Material',
             'Size Class',
@@ -161,7 +161,7 @@ def render() -> None:
                 c[:6],
                 [
                     reference,
-                    esc(fmrow['Model ID']),
+                    esc(fmrow['Fragility Model ID']),
                     esc(fmrow['Component Detail']),
                     esc(fmrow['Material']),
                     esc(fmrow['Size Class']),
@@ -172,12 +172,12 @@ def render() -> None:
                     f"<span style='font-size:0.88rem;'>{val}</span>",
                     unsafe_allow_html=True,
                 )
-            if c[6].button('View', key=f'fm_{fmrow["fragility_model_id"]}'):
+            if c[6].button('View', key=f'fm_{fmrow["Fragility Model ID"]}'):
                 st.session_state['selected_fragility_model_id'] = fmrow[
-                    'fragility_model_id'
+                    'Fragility Model ID'
                 ]
                 st.session_state['page'] = 'Fragility Model Detail'
-                st.query_params['fragility_model'] = fmrow['fragility_model_id']
+                st.query_params['fragility_model'] = fmrow['Fragility Model ID']
                 if component_id:
                     st.query_params['component'] = component_id
                 if 'experiment' in st.query_params:

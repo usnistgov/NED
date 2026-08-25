@@ -67,7 +67,7 @@ def render() -> None:
         _FM_WIDTHS = [1, 1.5, 2, 1.5, 1.5, 4, 2]
         _FM_HEADERS = [
             '',
-            'Model ID',
+            'Fragility Model ID',
             'Component Detail',
             'Material',
             'Size Class',
@@ -95,12 +95,12 @@ def render() -> None:
 
         for _, fmrow in df_fm.iterrows():
             c = st.columns(_FM_WIDTHS)
-            if c[0].button('View', key=f'fm_{fmrow["fragility_model_id"]}'):
+            if c[0].button('View', key=f'fm_{fmrow["Fragility Model ID"]}'):
                 st.session_state['selected_fragility_model_id'] = fmrow[
-                    'fragility_model_id'
+                    'Fragility Model ID'
                 ]
                 st.session_state['page'] = 'Fragility Model Detail'
-                st.query_params['fragility_model'] = fmrow['fragility_model_id']
+                st.query_params['fragility_model'] = fmrow['Fragility Model ID']
                 st.rerun()
             desc = str(fmrow['Component Description'])
             desc_short = desc[:80] + '…' if len(desc) > 80 else desc
@@ -111,7 +111,7 @@ def render() -> None:
             for ci, val in zip(
                 c[1:],
                 [
-                    esc(fmrow['Model ID']),
+                    esc(fmrow['Fragility Model ID']),
                     esc(fmrow['Component Detail']),
                     esc(fmrow['Material']),
                     esc(fmrow['Size Class']),
