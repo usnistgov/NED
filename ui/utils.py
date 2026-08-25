@@ -188,6 +188,12 @@ FIELD_HELP = {
         'FALSE if noted and not repaired; or a general description of the '
         'previous damage that was repaired.'
     ),
+    'probability': (
+        'Mutually exclusive probability of this damage state, for models '
+        'with mutually exclusive damage states. Must be between 0 and 1 '
+        'inclusive. Use a probability of 1 for purely sequential damage '
+        'states.'
+    ),
 }
 
 

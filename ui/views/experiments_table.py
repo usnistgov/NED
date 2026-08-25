@@ -161,7 +161,7 @@ def render_experiments_table(
 
     st.download_button(
         'Download Experiments as CSV',
-        csv_safe(df_export).to_csv(index=False),
+        csv_safe(df_export).to_csv(index=False).encode('utf-8-sig'),
         file_name=file_name,
         mime='text/csv',
         key=f'{key_prefix}exp_csv',
