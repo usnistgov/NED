@@ -29,14 +29,16 @@ ORDER BY c.id
 """
 
 
-@st.cache_data
-def get_components() -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
-    try:
-        df = pd.read_sql(_COMPONENTS_QUERY, conn)
-    finally:
-        conn.close()
+def _shape_components_df(df: pd.DataFrame) -> pd.DataFrame:
+    """Post-process the raw components query result.
 
+    Strips the "<code> - " prefix off Element/Subelement (the code is
+    redundant once grouped under the Group column), and rebuilds Group to
+    lead with the major-group letter (e.g. "20 - Exterior Enclosure" ->
+    "B20 - Exterior Enclosure") so groups from different major groups with
+    the same numeric code don't collide.
+    """
+    df = df.copy()
     df['Element'] = df['Element'].str.split(' - ', n=1).str[-1].fillna('—')
     df['Subelement'] = df['Subelement'].str.split(' - ', n=1).str[-1].fillna('—')
     df['major_group'] = df['major_group'].fillna('—')
@@ -48,6 +50,17 @@ def get_components() -> pd.DataFrame:
     ).fillna('—')
 
     return df
+
+
+@st.cache_data
+def get_components() -> pd.DataFrame:
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        df = pd.read_sql(_COMPONENTS_QUERY, conn)
+    finally:
+        conn.close()
+
+    return _shape_components_df(df)
 
 
 def get_major_groups() -> list[str]:
