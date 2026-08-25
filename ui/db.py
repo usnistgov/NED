@@ -76,6 +76,40 @@ def get_groups(major_group_filter: str | None = None) -> list[str]:
     return sorted(groups)
 
 
+_MAJOR_GROUP_OPTION_PREFIX = '__major__'
+_GROUP_OPTION_INDENT = ' ' * 4
+
+
+def group_filter_options() -> tuple[list[str], dict[str, str]]:
+    """Build a single combined Group filter's option list and display labels.
+
+    Each major group appears once as an un-indented header entry, immediately
+    followed by its groups indented beneath it — a lightweight stand-in for a
+    disabled separator, since a Streamlit selectbox can't mark an individual
+    option unselectable. Feed the chosen option to `resolve_group_filter()`.
+    """
+    options = ['All groups']
+    labels = {'All groups': 'All groups'}
+    for major in get_major_groups():
+        header = f'{_MAJOR_GROUP_OPTION_PREFIX}{major}'
+        options.append(header)
+        labels[header] = major
+        for group in get_groups(major):
+            options.append(group)
+            labels[group] = f'{_GROUP_OPTION_INDENT}{group}'
+    return options, labels
+
+
+def resolve_group_filter(option: str) -> tuple[str | None, str | None]:
+    """Split a `group_filter_options()` selection into `(major_group, group)`
+    filter values, either of which is None when not applicable."""
+    if option == 'All groups':
+        return None, None
+    if option.startswith(_MAJOR_GROUP_OPTION_PREFIX):
+        return option[len(_MAJOR_GROUP_OPTION_PREFIX) :], None
+    return None, option
+
+
 @st.cache_data
 def get_component_detail(component_id: str) -> pd.DataFrame:
     conn = sqlite3.connect(_DB_PATH, check_same_thread=False)

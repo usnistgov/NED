@@ -1,11 +1,22 @@
 import streamlit as st
 
-from db import get_components, get_fragility_models, get_groups, get_major_groups
-from utils import fmt
+from db import (
+    get_components,
+    get_fragility_models,
+    group_filter_options,
+    resolve_group_filter,
+)
+from utils import FIELD_HELP, fmt
 from views.fragility_model import render_model_body
 
 _PICK_COMPONENT = 'Select a component…'
 _PICK_FRAGILITY = 'Select a fragility model…'
+
+_GROUP_FILTER_HELP = (
+    f'{FIELD_HELP["major_group"]} {FIELD_HELP["group"]} Major groups are '
+    'listed above their groups — pick one to filter to everything under '
+    'it, or pick a specific group indented beneath it.'
+)
 
 
 def _label(*parts) -> str:
@@ -18,19 +29,21 @@ def _panel(side: str) -> None:
     drill-down, followed by the selected model's detail."""
     df_all = get_components()
 
-    major_groups = ['All groups'] + get_major_groups()
-    selected_group = st.selectbox(
-        'NISTIR Major Group', major_groups, key=f'cmp_major_{side}'
+    group_options, group_labels = group_filter_options()
+    selected_option = st.selectbox(
+        'Group',
+        group_options,
+        format_func=lambda v: group_labels.get(v, v),
+        help=_GROUP_FILTER_HELP,
+        key=f'cmp_group_{side}',
     )
-
-    groups = ['All groups'] + get_groups(selected_group)
-    selected_subgroup = st.selectbox('NISTIR Group', groups, key=f'cmp_group_{side}')
+    major_filter, group_filter = resolve_group_filter(selected_option)
 
     df_filt = df_all
-    if selected_group != 'All groups':
-        df_filt = df_filt[df_filt['major_group'] == selected_group]
-    if selected_subgroup != 'All groups':
-        df_filt = df_filt[df_filt['Group'] == selected_subgroup]
+    if major_filter:
+        df_filt = df_filt[df_filt['major_group'] == major_filter]
+    if group_filter:
+        df_filt = df_filt[df_filt['Group'] == group_filter]
 
     # Label each component option as "ID - Element - Name".
     comp_labels = {

@@ -129,6 +129,12 @@ def header_span(label: str, help_text: str | None = None) -> str:
 # Wording follows the data dictionary (assets/data_dictionary.md); update both
 # together if a definition changes.
 FIELD_HELP = {
+    'major_group': (
+        'UNIFORMAT II / NISTIR level-1 ID and description (e.g., '
+        '"A - Substructure").'
+    ),
+    'group': ('UNIFORMAT II / NISTIR level-2 ID and description.'),
+    'subelement': ('UNIFORMAT II / NISTIR level-4 ID and description.'),
     'comp_detail': (
         'Classification or short description of the component '
         'attachment/connection detailing (e.g., perimeter-fixed vs. '
