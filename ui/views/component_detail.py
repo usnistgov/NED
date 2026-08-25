@@ -8,7 +8,16 @@ from db import (
     get_component_fragility_models,
     get_component_fragility_models_export,
 )
-from utils import FIELD_HELP, attr, csv_safe, doi_url, esc, fmt, strip_prefix
+from utils import (
+    FIELD_HELP,
+    attr,
+    csv_safe,
+    doi_url,
+    esc,
+    fmt,
+    header_span,
+    strip_prefix,
+)
 from views.experiments_table import render_experiments_table, with_reference
 
 
@@ -83,10 +92,8 @@ def render() -> None:
         h = st.columns(_FM_WIDTHS)
         for col, label in zip(h, _FM_HEADERS):
             col.markdown(
-                f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
-                f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
+                header_span(label, _FM_HEADER_HELP.get(label)),
                 unsafe_allow_html=True,
-                help=_FM_HEADER_HELP.get(label),
             )
         st.markdown(
             "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
@@ -126,7 +133,9 @@ def render() -> None:
 
         st.download_button(
             'Download Fragilities as CSV',
-            csv_safe(_fragilities_export(component_id)).to_csv(index=False),
+            csv_safe(_fragilities_export(component_id))
+            .to_csv(index=False)
+            .encode('utf-8-sig'),
             file_name=f'{component_id}_fragility_models.csv',
             mime='text/csv',
             key='fm_csv',
@@ -145,4 +154,5 @@ def render() -> None:
             df_exp,
             _experiments_export(component_id),
             file_name=f'{component_id}_experiments.csv',
+            page_id=component_id,
         )

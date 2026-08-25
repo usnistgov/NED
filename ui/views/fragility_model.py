@@ -159,7 +159,7 @@ def render_model_attributes(
     widget keys unique so this can be rendered more than once on a page (e.g.
     the side-by-side compare view). Set ``show_compare_button`` to ``True`` to
     show a button that jumps to the Compare Fragilities view with this model
-    pre-selected. Returns the model's detail row (e.g. for its EDP metric/
+    preselected. Returns the model's detail row (e.g. for its EDP metric/
     unit), or ``None`` if the model id doesn't resolve."""
     df_fm_detail = get_fragility_model_detail(fragility_model_id)
 
@@ -267,14 +267,15 @@ def render_damage_states(
             'Median': st.column_config.NumberColumn('Median', format='%.4f'),
             'Beta': st.column_config.NumberColumn('Beta', format='%.3f'),
             'Probability': st.column_config.NumberColumn(
-                'Probability', format='%.2f'
+                'Probability', format='%.2f', help=FIELD_HELP['probability']
             ),
         },
     )
+    st.caption(f'**Probability:** {FIELD_HELP["probability"]}')
     if show_download:
         st.download_button(
             'Download CSV',
-            csv_safe(df_curves).to_csv(index=False),
+            csv_safe(df_curves).to_csv(index=False).encode('utf-8-sig'),
             file_name=f'{fragility_model_id}_curves.csv',
             mime='text/csv',
             key=f'{key_prefix}curves_csv',
@@ -293,7 +294,7 @@ def render_model_body(
     side-by-side compare view). Set ``show_download`` to ``False`` to omit the
     curve CSV download button. Set ``show_compare_button`` to ``True`` to show
     a button that jumps to the Compare Fragilities view with this model
-    pre-selected."""
+    preselected."""
     row = render_model_attributes(
         fragility_model_id, key_prefix, show_compare_button
     )
@@ -341,4 +342,5 @@ def render() -> None:
             ),
             file_name=f'{fragility_model_id}_experiments.csv',
             key_prefix='src_',
+            page_id=fragility_model_id,
         )

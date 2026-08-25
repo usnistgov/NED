@@ -7,7 +7,7 @@ from db import (
     get_experiment_fragility_models,
     get_reference,
 )
-from utils import FIELD_HELP, attr, build_citation, doi_url, esc, fmt
+from utils import FIELD_HELP, attr, build_citation, doi_url, esc, fmt, header_span
 
 
 def render() -> None:
@@ -139,10 +139,8 @@ def render() -> None:
         h = st.columns(_FM_WIDTHS)
         for col, label in zip(h, _FM_HEADERS):
             col.markdown(
-                f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
-                f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
+                header_span(label, _FM_HEADER_HELP.get(label)),
                 unsafe_allow_html=True,
-                help=_FM_HEADER_HELP.get(label),
             )
         st.markdown(
             "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",

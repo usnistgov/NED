@@ -7,10 +7,10 @@ from db import (
     get_components,
     get_fragility_curves,
     get_fragility_models,
-    get_groups,
-    get_major_groups,
+    group_filter_options,
+    resolve_group_filter,
 )
-from utils import esc, fmt
+from utils import FIELD_HELP, esc, fmt
 from views.fragility_model import get_model_attributes, lognormal_curves
 
 _PICK_COMPONENT = 'Select a component…'
@@ -21,6 +21,12 @@ _DS_ATTR_FORMATS = {'Median': '{:.4f}', 'Beta': '{:.3f}', 'Probability': '{:.2f}
 _SIDE_COLORS = (px.colors.qualitative.Plotly[0], px.colors.qualitative.Plotly[1])
 _DASH_PATTERNS = ['solid', 'dash', 'dot', 'dashdot', 'longdash', 'longdashdot']
 _ATTR_WIDTHS = [1, 2, 2]
+
+_GROUP_FILTER_HELP = (
+    f'{FIELD_HELP["major_group"]} {FIELD_HELP["group"]} Major groups are '
+    'listed above their groups — pick one to filter to everything under '
+    'it, or pick a specific group indented beneath it.'
+)
 
 
 def _label(*parts) -> str:
@@ -53,6 +59,7 @@ def _render_picker_row(
     key_right: str,
     format_left=None,
     format_right=None,
+    help_text: str | None = None,
 ) -> tuple:
     """Render one taxonomy-picker row: a bold label on the left, and a
     baseline/comparison selectbox pair on the right, laid out with the same
@@ -60,7 +67,7 @@ def _render_picker_row(
     model-attribute rows below, so the pickers read as the table's first
     rows rather than a separate section."""
     row = st.columns(_ATTR_WIDTHS)
-    row[0].markdown(f'**{label}**')
+    row[0].markdown(f'**{label}**', help=help_text)
 
     kwargs_left = {'label_visibility': 'collapsed'}
     if format_left is not None:
@@ -77,42 +84,40 @@ def _render_picker_row(
 
 
 def _render_selection_rows() -> tuple[str | None, str | None]:
-    """Render the major group / group / component / fragility drill-down as
-    the first four rows of the merged model-attributes table — a baseline
+    """Render the group / component / fragility drill-down as the first
+    three rows of the merged model-attributes table — a baseline
     and a comparison selectbox side by side for each — replacing the old
     separate 'Select baseline/comparison fragility' sections. Returns the
     selected fragility model id for each side, or None if not yet selected."""
     df_all = get_components()
-    major_groups = ['All groups'] + get_major_groups()
+    group_options, group_labels = group_filter_options()
 
-    major_left, major_right = _render_picker_row(
-        'major',
-        'NISTIR Major Group',
-        major_groups,
-        major_groups,
-        'cmp_major_left',
-        'cmp_major_right',
-    )
+    def _group_format(v):
+        return group_labels.get(v, v)
 
     group_left, group_right = _render_picker_row(
         'group',
-        'NISTIR Group',
-        ['All groups'] + get_groups(major_left),
-        ['All groups'] + get_groups(major_right),
+        'Group',
+        group_options,
+        group_options,
         'cmp_group_left',
         'cmp_group_right',
+        _group_format,
+        _group_format,
+        help_text=_GROUP_FILTER_HELP,
     )
 
-    def _filtered(major: str, group: str) -> pd.DataFrame:
+    def _filtered(option: str) -> pd.DataFrame:
+        major_filter, group_filter = resolve_group_filter(option)
         df = df_all
-        if major != 'All groups':
-            df = df[df['major_group'] == major]
-        if group != 'All groups':
-            df = df[df['Group'] == group]
+        if major_filter:
+            df = df[df['major_group'] == major_filter]
+        if group_filter:
+            df = df[df['Group'] == group_filter]
         return df
 
-    df_filt_left = _filtered(major_left, group_left)
-    df_filt_right = _filtered(major_right, group_right)
+    df_filt_left = _filtered(group_left)
+    df_filt_right = _filtered(group_right)
 
     def _comp_format(df: pd.DataFrame):
         # Label each component option as "ID - Element - Name".
