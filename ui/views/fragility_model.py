@@ -243,14 +243,15 @@ def render_model_body(
                 'Median': st.column_config.NumberColumn('Median', format='%.4f'),
                 'Beta': st.column_config.NumberColumn('Beta', format='%.3f'),
                 'Probability': st.column_config.NumberColumn(
-                    'Probability', format='%.2f'
+                    'Probability', format='%.2f', help=FIELD_HELP['probability']
                 ),
             },
         )
+        st.caption(f"**Probability:** {FIELD_HELP['probability']}")
         if show_download:
             st.download_button(
                 'Download CSV',
-                csv_safe(df_curves).to_csv(index=False),
+                csv_safe(df_curves).to_csv(index=False).encode('utf-8-sig'),
                 file_name=f'{fragility_model_id}_curves.csv',
                 mime='text/csv',
                 key=f'{key_prefix}curves_csv',

@@ -126,7 +126,7 @@ def render() -> None:
 
         st.download_button(
             'Download Fragilities as CSV',
-            csv_safe(_fragilities_export(component_id)).to_csv(index=False),
+            csv_safe(_fragilities_export(component_id)).to_csv(index=False).encode('utf-8-sig'),
             file_name=f'{component_id}_fragility_models.csv',
             mime='text/csv',
             key='fm_csv',
