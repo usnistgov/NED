@@ -8,7 +8,7 @@ from db import (
     get_experiment_fragility_models,
     get_reference,
 )
-from utils import FIELD_HELP, attr, build_citation, doi_url, esc, fmt
+from utils import FIELD_HELP, attr, build_citation, doi_url, esc, fmt, header_span
 
 
 def render(pages: dict) -> None:
@@ -141,7 +141,7 @@ def render(pages: dict) -> None:
         _FM_WIDTHS = [2, 1.5, 2, 1.5, 1.5, 4, 1]
         _FM_HEADERS = [
             'Reference',
-            'Model ID',
+            'Fragility Model ID',
             'Component Detail',
             'Material',
             'Size Class',
@@ -157,10 +157,8 @@ def render(pages: dict) -> None:
         h = st.columns(_FM_WIDTHS)
         for col, label in zip(h, _FM_HEADERS):
             col.markdown(
-                f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
-                f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
+                header_span(label, _FM_HEADER_HELP.get(label)),
                 unsafe_allow_html=True,
-                help=_FM_HEADER_HELP.get(label),
             )
         st.markdown(
             "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
@@ -179,7 +177,7 @@ def render(pages: dict) -> None:
                 c[:6],
                 [
                     reference,
-                    esc(fmrow['Model ID']),
+                    esc(fmrow['Fragility Model ID']),
                     esc(fmrow['Component Detail']),
                     esc(fmrow['Material']),
                     esc(fmrow['Size Class']),
@@ -190,7 +188,7 @@ def render(pages: dict) -> None:
                     f"<span style='font-size:0.88rem;'>{val}</span>",
                     unsafe_allow_html=True,
                 )
-            query_params = {'fragility_model': fmrow['fragility_model_id']}
+            query_params = {'fragility_model': fmrow['Fragility Model ID']}
             if component_id:
                 query_params['component'] = component_id
             c[6].page_link(

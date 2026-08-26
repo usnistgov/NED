@@ -4,7 +4,15 @@ import math
 import pandas as pd
 import streamlit as st
 
-from utils import FIELD_HELP, build_citation, csv_safe, doi_url, esc, fmt
+from utils import (
+    FIELD_HELP,
+    build_citation,
+    csv_safe,
+    doi_url,
+    esc,
+    fmt,
+    header_span,
+)
 
 # Rows shown per page. Rendering every experiment at once makes the heavily
 # referenced models (200+ experiments) slow to build on each rerun and slow
@@ -57,43 +65,61 @@ def render_experiments_table(
     pages: dict,
     component_id: str = '',
     key_prefix: str = '',
+    page_id: str = '',
 ) -> None:
     """Render the experiments summary table (header row, one row per
     experiment with a View button, and a CSV download of ``df_export``).
     Shared by the component detail and fragility model views; ``key_prefix``
-    keeps widget keys unique across pages. Tables longer than ``_PAGE_SIZE``
-    are paginated; the CSV download always contains every experiment.
+    keeps widget keys unique across pages, and ``page_id`` (the component or
+    fragility model id) keeps filter/pagination state from leaking when the
+    user navigates from one component/model page to another. Tables longer
+    than ``_PAGE_SIZE`` are paginated; the CSV download always contains every
+    experiment, regardless of the EDP/DS Class filters below.
     ``component_id``, when known from the calling page, is carried along in
     the View link's query params so the destination doesn't have to fall
     back to the database backfill for it."""
+    c_edp, c_ds = st.columns(2)
+    edp_options = ['All EDPs'] + sorted(df_exp['EDP Metric'].dropna().unique())
+    edp_choice = c_edp.selectbox(
+        'Filter by EDP Metric', edp_options, key=f'{key_prefix}{page_id}_edp_filter'
+    )
+    ds_options = ['All DS Classes'] + sorted(df_exp['DS Class'].dropna().unique())
+    ds_choice = c_ds.selectbox(
+        'Filter by DS Class',
+        ds_options,
+        key=f'{key_prefix}{page_id}_ds_filter',
+        help=FIELD_HELP['ds_class'],
+    )
+    if edp_choice != 'All EDPs':
+        df_exp = df_exp[df_exp['EDP Metric'] == edp_choice]
+    if ds_choice != 'All DS Classes':
+        df_exp = df_exp[df_exp['DS Class'] == ds_choice]
+
     n = len(df_exp)
-    if n > _PAGE_SIZE:
+    if n == 0:
+        st.info('No experiments match the selected filters.')
+
+    paginated = n > _PAGE_SIZE
+    if paginated:
         n_pages = math.ceil(n / _PAGE_SIZE)
         page_key = f'{key_prefix}exp_page'
         # Clamp state left over from a longer table viewed earlier so the
         # widget doesn't raise when its max shrinks.
         if st.session_state.get(page_key, 1) > n_pages:
             st.session_state[page_key] = n_pages
-        c_info, c_page = st.columns([5, 1], vertical_alignment='bottom')
-        page = c_page.number_input(
-            'Page', min_value=1, max_value=n_pages, key=page_key
-        )
+        # Read the current page from session state (rather than creating the
+        # widget here) so the table can be sliced before the page controls
+        # are drawn below it.
+        page = st.session_state.get(page_key, 1)
         start = (page - 1) * _PAGE_SIZE
         stop = min(start + _PAGE_SIZE, n)
-        c_info.caption(
-            f'Showing experiments {start + 1}–{stop} of {n} '
-            f'(page {page} of {n_pages}). The CSV download includes all '
-            'experiments.'
-        )
         df_exp = df_exp.iloc[start:stop]
 
     h = st.columns(_EXP_WIDTHS)
     for col, label in zip(h, _EXP_HEADERS):
         col.markdown(
-            f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
-            f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
+            header_span(label, _EXP_HEADER_HELP.get(label)),
             unsafe_allow_html=True,
-            help=_EXP_HEADER_HELP.get(label),
         )
     st.markdown(
         "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
@@ -126,9 +152,20 @@ def render_experiments_table(
                 unsafe_allow_html=True,
             )
 
+    if paginated:
+        c_info, c_page = st.columns([5, 1], vertical_alignment='bottom')
+        page = c_page.number_input(
+            'Page', min_value=1, max_value=n_pages, key=page_key
+        )
+        c_info.caption(
+            f'Showing experiments {start + 1}–{stop} of {n} '
+            f'(page {page} of {n_pages}). The CSV download includes all '
+            'experiments.'
+        )
+
     st.download_button(
         'Download Experiments as CSV',
-        csv_safe(df_export).to_csv(index=False),
+        csv_safe(df_export).to_csv(index=False).encode('utf-8-sig'),
         file_name=file_name,
         mime='text/csv',
         key=f'{key_prefix}exp_csv',

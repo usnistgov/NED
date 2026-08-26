@@ -159,6 +159,56 @@ div[data-testid="stSelectbox"] > div {
     color: #888;
     margin-top: -0.4rem;
 }
+
+/* ── Compare Fragilities: divider between baseline/comparison attributes ── */
+[class*="st-key-cmp-attr-right-"] {
+    border-left: 1px solid #d8dce3;
+    padding-left: 0.75rem;
+}
+
+/* ── Compare Fragilities: damage-state comparison table ── */
+.ds-cmp-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+.ds-cmp-table th,
+.ds-cmp-table td {
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+    white-space: normal;
+    overflow-wrap: break-word;
+    border-bottom: 1px solid #ececec;
+}
+.ds-cmp-table th.ds-cmp-attr,
+.ds-cmp-table td.ds-cmp-attr {
+    font-weight: 600;
+    color: #1a1a2e;
+}
+.ds-cmp-table th.ds-cmp-group {
+    background-color: #eef1f5;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    border-bottom: 1px solid #d8dce3;
+}
+.ds-cmp-table th.ds-cmp-side {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.ds-cmp-table th.ds-cmp-shaded,
+.ds-cmp-table td.ds-cmp-shaded {
+    background-color: #f4f5f7;
+}
+.ds-cmp-table th.ds-cmp-group-start,
+.ds-cmp-table td.ds-cmp-group-start {
+    border-left: 2px solid #c9ccd3;
+}
 </style>
 """
 
