@@ -29,14 +29,16 @@ ORDER BY c.id
 """
 
 
-@st.cache_data
-def get_components() -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
-    try:
-        df = pd.read_sql(_COMPONENTS_QUERY, conn)
-    finally:
-        conn.close()
+def _shape_components_df(df: pd.DataFrame) -> pd.DataFrame:
+    """Post-process the raw components query result.
 
+    Strips the "<code> - " prefix off Element/Subelement (the code is
+    redundant once grouped under the Group column), and rebuilds Group to
+    lead with the major-group letter (e.g. "20 - Exterior Enclosure" ->
+    "B20 - Exterior Enclosure") so groups from different major groups with
+    the same numeric code don't collide.
+    """
+    df = df.copy()
     df['Element'] = df['Element'].str.split(' - ', n=1).str[-1].fillna('—')
     df['Subelement'] = df['Subelement'].str.split(' - ', n=1).str[-1].fillna('—')
     df['major_group'] = df['major_group'].fillna('—')
@@ -50,6 +52,17 @@ def get_components() -> pd.DataFrame:
     return df
 
 
+@st.cache_data
+def get_components() -> pd.DataFrame:
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        df = pd.read_sql(_COMPONENTS_QUERY, conn)
+    finally:
+        conn.close()
+
+    return _shape_components_df(df)
+
+
 def get_major_groups() -> list[str]:
     df = get_components()
     return sorted(df['major_group'].dropna().unique().tolist())
@@ -61,6 +74,40 @@ def get_groups(major_group_filter: str | None = None) -> list[str]:
         df = df[df['major_group'] == major_group_filter]
     groups = df['Group'].replace('—', pd.NA).dropna().unique().tolist()
     return sorted(groups)
+
+
+_MAJOR_GROUP_OPTION_PREFIX = '__major__'
+_GROUP_OPTION_INDENT = ' ' * 4
+
+
+def group_filter_options() -> tuple[list[str], dict[str, str]]:
+    """Build a single combined Group filter's option list and display labels.
+
+    Each major group appears once as an un-indented header entry, immediately
+    followed by its groups indented beneath it — a lightweight stand-in for a
+    disabled separator, since a Streamlit selectbox can't mark an individual
+    option unselectable. Feed the chosen option to `resolve_group_filter()`.
+    """
+    options = ['All groups']
+    labels = {'All groups': 'All groups'}
+    for major in get_major_groups():
+        header = f'{_MAJOR_GROUP_OPTION_PREFIX}{major}'
+        options.append(header)
+        labels[header] = major
+        for group in get_groups(major):
+            options.append(group)
+            labels[group] = f'{_GROUP_OPTION_INDENT}{group}'
+    return options, labels
+
+
+def resolve_group_filter(option: str) -> tuple[str | None, str | None]:
+    """Split a `group_filter_options()` selection into `(major_group, group)`
+    filter values, either of which is None when not applicable."""
+    if option == 'All groups':
+        return None, None
+    if option.startswith(_MAJOR_GROUP_OPTION_PREFIX):
+        return option[len(_MAJOR_GROUP_OPTION_PREFIX) :], None
+    return None, option
 
 
 @st.cache_data
@@ -84,13 +131,12 @@ def get_component_fragility_models(component_id: str) -> pd.DataFrame:
         return pd.read_sql(
             """
             SELECT
-                fm.fragility_model_id,
+                fm.fragility_model_id   AS "Fragility Model ID",
                 fm.reference_id         AS "Reference",
                 COALESCE(
                     json_extract(r.csl_data, '$.DOI'),
                     json_extract(r.csl_data, '$.URL')
                 )                       AS "doi",
-                fm.model_id             AS "Model ID",
                 fm.comp_detail          AS "Component Detail",
                 fm.material             AS "Material",
                 fm.size_class           AS "Size Class",
@@ -121,7 +167,6 @@ def get_component_fragility_models_export(component_id: str) -> pd.DataFrame:
             """
             SELECT
                 fm.fragility_model_id   AS "Fragility Model ID",
-                fm.model_id             AS "Model ID",
                 fm.p58_fragility        AS "P-58 Fragility",
                 fm.comp_detail          AS "Component Detail",
                 fm.material             AS "Material",
@@ -201,7 +246,7 @@ def get_fragility_model_detail(fragility_model_id: str) -> pd.DataFrame:
     conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
     try:
         return pd.read_sql(
-            'SELECT fragility_model_id, model_id, reference_id, p58_fragility, '
+            'SELECT fragility_model_id, reference_id, p58_fragility, '
             'comp_detail, material, size_class, comp_description, '
             'edp_metric, edp_unit, reviewer, source '
             'FROM ned_app_fragilitymodel WHERE fragility_model_id = ?',
@@ -344,13 +389,12 @@ def get_experiment_fragility_models(experiment_id: str) -> pd.DataFrame:
         return pd.read_sql(
             """
             SELECT
-                fm.fragility_model_id,
+                fm.fragility_model_id   AS "Fragility Model ID",
                 fm.reference_id         AS "Reference",
                 COALESCE(
                     json_extract(r.csl_data, '$.DOI'),
                     json_extract(r.csl_data, '$.URL')
                 )                       AS "doi",
-                fm.model_id             AS "Model ID",
                 fm.comp_detail          AS "Component Detail",
                 fm.material             AS "Material",
                 fm.size_class           AS "Size Class",

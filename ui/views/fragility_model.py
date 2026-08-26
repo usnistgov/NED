@@ -20,7 +20,7 @@ from utils import FIELD_HELP, attr, build_citation, csv_safe, fmt
 from views.experiments_table import render_experiments_table, with_reference
 
 
-def _lognormal_curves(
+def lognormal_curves(
     df_curves: pd.DataFrame, n_points: int = 200
 ) -> pd.DataFrame | None:
     """Build long-format plot data from median/beta pairs. Returns None if no
@@ -64,6 +64,20 @@ def _lognormal_curves(
     return pd.concat(frames, ignore_index=True)
 
 
+def median_display(edp_unit: str) -> tuple[float, str]:
+    """Return the ``(scale, printf format)`` a damage-state median should be
+    displayed with, given its model's EDP unit. Medians carry the model's EDP
+    unit, so the curve tables show that unit next to the value; ratios read
+    more naturally as a percentage, which means scaling by 100 on top of
+    relabelling. ``edp_unit`` is the ``fmt()``-formatted unit, so '—' means
+    the model has no unit to show."""
+    if edp_unit.strip().lower() == 'ratio':
+        return 100.0, '%.2f%%'
+    if edp_unit == '—':
+        return 1.0, '%.4f'
+    return 1.0, f'%.2f {edp_unit}'
+
+
 def _navigate_to_compare(fragility_model_id: str) -> None:
     """Populate the Compare Fragilities filters from this model — all four
     filters on the left panel, and the taxonomy filters (major group, group)
@@ -101,55 +115,32 @@ def _navigate_to_compare(fragility_model_id: str) -> None:
     st.rerun()
 
 
-def render_model_body(
+def get_model_attributes(
     fragility_model_id: str,
-    key_prefix: str = '',
-    show_download: bool = True,
-    show_compare_button: bool = False,
-    plot_unavailable_message: str | None = None,
-) -> None:
-    """Render the full fragility-model detail (attributes, reference, damage-state
-    chart, and curve table) for the given model. ``key_prefix`` makes the widget
-    keys unique so this can be rendered more than once on a page (e.g. the
-    side-by-side compare view). Set ``show_download`` to ``False`` to omit the
-    curve CSV download button. Set ``show_compare_button`` to ``True`` to show
-    a button that jumps to the Compare Fragilities view with this model
-    pre-selected. Pass ``plot_unavailable_message`` to show that message in
-    place of the damage-state chart instead of plotting it (e.g. when
-    comparing against another model with a different EDP, where overlaying
-    the two wouldn't be a valid comparison) — the curve table below is
-    unaffected."""
+) -> list[tuple[str, str, str | None]] | None:
+    """Fetch a fragility model's identity/taxonomy attributes and reference
+    citation as an ordered list of ``(label, value, help_text)`` tuples, or
+    ``None`` if the model id doesn't resolve. Shared by the single-model
+    detail view (rendered as label/value rows) and the compare view (rendered
+    as a tabular attribute-by-attribute comparison)."""
     df_fm_detail = get_fragility_model_detail(fragility_model_id)
-
     if df_fm_detail.empty:
-        st.warning(f"Fragility model '{fragility_model_id}' not found.")
-        return
+        return None
 
     row = df_fm_detail.iloc[0]
 
-    st.markdown(f'**{fmt(row["fragility_model_id"])}**')
-    if show_compare_button:
-        if st.button(
-            '⚖️ Compare with another fragility model',
-            key=f'{key_prefix}compare_fragilities',
-        ):
-            _navigate_to_compare(fragility_model_id)
-    st.markdown('---')
-
-    attr('Model ID', fmt(row['model_id']))
-    attr('P-58 Fragility', fmt(row['p58_fragility']))
-    attr(
-        'Component Detail',
-        fmt(row['comp_detail']),
-        help_text=FIELD_HELP['comp_detail'],
-    )
-    attr('Material', fmt(row['material']), help_text=FIELD_HELP['material'])
-    attr('Size Class', fmt(row['size_class']), help_text=FIELD_HELP['size_class'])
-    attr('Component Description', fmt(row['comp_description']))
-    attr('EDP Metric', fmt(row['edp_metric']))
-    attr('EDP Unit', fmt(row['edp_unit']))
-    attr('Reviewer', fmt(row['reviewer']))
-    attr('Source', fmt(row['source']))
+    items: list[tuple[str, str, str | None]] = [
+        ('Fragility Model ID', fmt(row['fragility_model_id']), None),
+        ('P-58 Fragility', fmt(row['p58_fragility']), None),
+        ('Component Detail', fmt(row['comp_detail']), FIELD_HELP['comp_detail']),
+        ('Material', fmt(row['material']), FIELD_HELP['material']),
+        ('Size Class', fmt(row['size_class']), FIELD_HELP['size_class']),
+        ('Component Description', fmt(row['comp_description']), None),
+        ('EDP Metric', fmt(row['edp_metric']), None),
+        ('EDP Unit', fmt(row['edp_unit']), None),
+        ('Reviewer', fmt(row['reviewer']), None),
+        ('Source', fmt(row['source']), None),
+    ]
 
     reference_id = row['reference_id']
     df_ref = get_reference(fmt(reference_id)) if reference_id else None
@@ -166,121 +157,178 @@ def render_model_body(
             citation = (
                 f'{fmt(ref["author"])} ({fmt(ref["year"])}). {fmt(ref["title"])}.'
             )
-        attr('Reference', citation)
-        attr('Study Type', fmt(ref['study_type']))
+        items.append(('Reference', citation, None))
+        items.append(('Study Type', fmt(ref['study_type']), None))
 
+    return items
+
+
+def render_model_attributes(
+    fragility_model_id: str,
+    key_prefix: str = '',
+    show_compare_button: bool = False,
+) -> pd.Series | None:
+    """Render a fragility model's identity, attributes, and reference citation
+    (everything above the damage-state chart/table). ``key_prefix`` makes the
+    widget keys unique so this can be rendered more than once on a page (e.g.
+    the side-by-side compare view). Set ``show_compare_button`` to ``True`` to
+    show a button that jumps to the Compare Fragilities view with this model
+    preselected. Returns the model's detail row (e.g. for its EDP metric/
+    unit), or ``None`` if the model id doesn't resolve."""
+    df_fm_detail = get_fragility_model_detail(fragility_model_id)
+
+    if df_fm_detail.empty:
+        st.warning(f"Fragility model '{fragility_model_id}' not found.")
+        return None
+
+    row = df_fm_detail.iloc[0]
+
+    st.markdown(f'**{fmt(row["fragility_model_id"])}**')
+    if show_compare_button:
+        if st.button(
+            '⚖️ Compare with another fragility model',
+            key=f'{key_prefix}compare_fragilities',
+        ):
+            _navigate_to_compare(fragility_model_id)
     st.markdown('---')
 
-    st.markdown('## Damage States')
+    for label, value, help_text in get_model_attributes(fragility_model_id):
+        attr(label, value, help_text=help_text)
+
+    return row
+
+
+def render_damage_states(
+    fragility_model_id: str,
+    edp_metric: str,
+    edp_unit: str,
+    key_prefix: str = '',
+    show_download: bool = True,
+) -> None:
+    """Render the damage-state chart and curve table for a single fragility
+    model. Set ``show_download`` to ``False`` to omit the curve CSV download
+    button."""
     df_curves = get_fragility_curves(fragility_model_id)
 
     if df_curves.empty:
         st.info('No fragility curves are associated with this model.')
-    else:
-        edp_metric = fmt(row['edp_metric'])
-        edp_unit = fmt(row['edp_unit'])
-        # Ratios read more naturally as a percentage in the curve table, so
-        # the underlying unit drives both a x100 scaling of the Median
-        # column below and its displayed unit.
-        is_ratio_unit = str(row['edp_unit'] or '').strip().lower() == 'ratio'
+        return
 
-        plot_df = _lognormal_curves(df_curves)
-        if plot_df is not None:
-            if plot_unavailable_message:
-                st.info(plot_unavailable_message)
-            else:
-                x_title = (
-                    f'{edp_metric} [{edp_unit}]' if edp_unit != '—' else edp_metric
-                )
+    plot_df = lognormal_curves(df_curves)
+    if plot_df is not None:
+        x_title = f'{edp_metric} [{edp_unit}]' if edp_unit != '—' else edp_metric
 
-                fig = go.Figure()
-                # Sort by EDP as well: rows within a damage state share the
-                # same _rank, and an unstable sort on ties scrambles the
-                # point order, making the CDF trace double back on itself.
-                for ds_label, group in plot_df.sort_values(['_rank', 'EDP']).groupby(
-                    'Damage State', sort=False
-                ):
-                    fig.add_trace(
-                        go.Scatter(
-                            x=group['EDP'],
-                            y=group['Probability'],
-                            mode='lines',
-                            name=ds_label,
-                            hovertemplate=(
-                                f'{x_title}: %{{x:.3f}}<br>'
-                                'Probability: %{y:.2f}<extra></extra>'
-                            ),
-                        )
-                    )
-
-                fig.update_layout(
-                    height=360,
-                    autosize=True,
-                    margin=dict(l=10, r=10, t=10, b=10),
-                    xaxis=dict(
-                        title=x_title,
-                        showgrid=False,
-                    ),
-                    yaxis=dict(
-                        title='Probability of Exceedance',
-                        range=[0, 1],
-                        showgrid=True,
-                        gridcolor='#e0e0e0',
-                    ),
-                    hovermode='closest',
-                    hoverdistance=12,
-                    legend=dict(
-                        orientation='v',
-                        x=1.02,
-                        y=1,
-                        xanchor='left',
-                        yanchor='top',
-                        font=dict(size=11),
+        fig = go.Figure()
+        # Sort by EDP as well: rows within a damage state share the same
+        # _rank, and an unstable sort on ties scrambles the point order,
+        # making the CDF trace double back on itself.
+        for ds_label, group in plot_df.sort_values(['_rank', 'EDP']).groupby(
+            'Damage State', sort=False
+        ):
+            fig.add_trace(
+                go.Scatter(
+                    x=group['EDP'],
+                    y=group['Probability'],
+                    mode='lines',
+                    name=ds_label,
+                    hovertemplate=(
+                        f'{x_title}: %{{x:.3f}}<br>'
+                        'Probability: %{y:.2f}<extra></extra>'
                     ),
                 )
-                st.plotly_chart(
-                    fig, width='stretch', key=f'{key_prefix}curves_chart'
-                )
-        else:
-            st.info(
-                'No fragility curves with usable median/beta values for this model.'
             )
 
-        df_table = df_curves.copy()
-        if is_ratio_unit:
-            df_table['Median'] = df_table['Median'] * 100
-            median_format = '%.2f%%'
-        else:
-            median_format = f'%.2f {edp_unit}' if edp_unit != '—' else '%.4f'
-
-        st.dataframe(
-            df_table,
-            width='stretch',
-            hide_index=True,
-            column_config={
-                'DS Rank': st.column_config.NumberColumn('DS Rank', format='%d'),
-                'DS Description': st.column_config.TextColumn('DS Description'),
-                'Basis': st.column_config.TextColumn('Basis'),
-                '# Observations': st.column_config.NumberColumn(
-                    '# Observations', format='%d'
-                ),
-                'Median': st.column_config.NumberColumn(
-                    'Median', format=median_format
-                ),
-                'Beta': st.column_config.NumberColumn('Beta', format='%.3f'),
-                'Probability': st.column_config.NumberColumn(
-                    'Probability', format='%.2f'
-                ),
-            },
+        fig.update_layout(
+            height=360,
+            autosize=True,
+            margin=dict(l=10, r=10, t=10, b=10),
+            xaxis=dict(
+                title=x_title,
+                showgrid=False,
+            ),
+            yaxis=dict(
+                title='Probability of Exceedance',
+                range=[0, 1],
+                showgrid=True,
+                gridcolor='#e0e0e0',
+            ),
+            hovermode='closest',
+            hoverdistance=12,
+            legend=dict(
+                orientation='v',
+                x=1.02,
+                y=1,
+                xanchor='left',
+                yanchor='top',
+                font=dict(size=11),
+            ),
         )
-        if show_download:
-            st.download_button(
-                'Download CSV',
-                csv_safe(df_curves).to_csv(index=False),
-                file_name=f'{fragility_model_id}_curves.csv',
-                mime='text/csv',
-                key=f'{key_prefix}curves_csv',
-            )
+        st.plotly_chart(fig, width='stretch', key=f'{key_prefix}curves_chart')
+    else:
+        st.info('No fragility curves with usable median/beta values for this model.')
+
+    df_table = df_curves.copy()
+    median_scale, median_format = median_display(edp_unit)
+    if median_scale != 1.0:
+        df_table['Median'] = df_table['Median'] * median_scale
+
+    st.dataframe(
+        df_table,
+        width='stretch',
+        hide_index=True,
+        column_config={
+            'DS Rank': st.column_config.NumberColumn('DS Rank', format='%d'),
+            'DS Description': st.column_config.TextColumn('DS Description'),
+            'Basis': st.column_config.TextColumn('Basis'),
+            '# Observations': st.column_config.NumberColumn(
+                '# Observations', format='%d'
+            ),
+            'Median': st.column_config.NumberColumn('Median', format=median_format),
+            'Beta': st.column_config.NumberColumn('Beta', format='%.3f'),
+            'Probability': st.column_config.NumberColumn(
+                'Probability', format='%.2f', help=FIELD_HELP['probability']
+            ),
+        },
+    )
+    st.caption(f'**Probability:** {FIELD_HELP["probability"]}')
+    if show_download:
+        st.download_button(
+            'Download CSV',
+            csv_safe(df_curves).to_csv(index=False).encode('utf-8-sig'),
+            file_name=f'{fragility_model_id}_curves.csv',
+            mime='text/csv',
+            key=f'{key_prefix}curves_csv',
+        )
+
+
+def render_model_body(
+    fragility_model_id: str,
+    key_prefix: str = '',
+    show_download: bool = True,
+    show_compare_button: bool = False,
+) -> None:
+    """Render the full fragility-model detail (attributes, reference, damage-state
+    chart, and curve table) for the given model. ``key_prefix`` makes the widget
+    keys unique so this can be rendered more than once on a page (e.g. the
+    side-by-side compare view). Set ``show_download`` to ``False`` to omit the
+    curve CSV download button. Set ``show_compare_button`` to ``True`` to show
+    a button that jumps to the Compare Fragilities view with this model
+    preselected."""
+    row = render_model_attributes(
+        fragility_model_id, key_prefix, show_compare_button
+    )
+    if row is None:
+        return
+
+    st.markdown('---')
+    st.markdown('## Damage States')
+    render_damage_states(
+        fragility_model_id,
+        edp_metric=fmt(row['edp_metric']),
+        edp_unit=fmt(row['edp_unit']),
+        key_prefix=key_prefix,
+        show_download=show_download,
+    )
 
 
 def render() -> None:
@@ -313,4 +361,5 @@ def render() -> None:
             ),
             file_name=f'{fragility_model_id}_experiments.csv',
             key_prefix='src_',
+            page_id=fragility_model_id,
         )

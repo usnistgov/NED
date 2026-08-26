@@ -637,6 +637,15 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_save_pop
 
 These tests are essential for maintaining data quality and ensuring that the `ingest` and `export_data` commands work correctly together.
 
+#### 5. UI Tests with Pytest
+The Streamlit front end (`ui/`) has its own test suite in `ui/tests/`, separate from the Django `ned_app.tests` suite above. It covers `ui/`'s pure helper functions and its SQLite query layer (`db.py`) against a small hand-seeded fixture database built fresh for each test — no real `db.sqlite3` or Django app required to run it. See [ui/README.md](ui/README.md#testing) for what it covers and its known gaps.
+
+**To run locally (from the repository root):**
+```bash
+pip install -r ui/requirements.txt -r requirements-dev.txt
+python -m pytest ui/tests -q
+```
+
 #### Running All Quality Checks Locally
 To run all quality checks that the continuous integration (CI) pipeline will run, use these commands in sequence:
 
@@ -652,6 +661,9 @@ codespell .
 
 # 4. Run unit tests
 python manage.py test ned_app.tests
+
+# 5. Run UI tests
+python -m pytest ui/tests -q
 ```
 
 
