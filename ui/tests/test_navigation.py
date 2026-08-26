@@ -1,10 +1,10 @@
 """Smoke tests for the native st.navigation router in app.py.
 
-Run from the ``ui/`` directory (matching how the app itself resolves its
-database path), pointed at a real built database, e.g.:
+These run against the hand-seeded fixture database built by ``conftest.py``
+(the ``fixture_db_path`` fixture), so they need no built database and run
+as part of the standard suite and in CI:
 
-    cd ui
-    DB_PATH=../db.sqlite3 AUTH_ENABLED=false python -m unittest tests.test_navigation
+    python -m pytest ui/tests -q
 
 ``streamlit.testing.v1.AppTest`` has two hard limitations that shape what's
 covered here rather than what's ideal:
@@ -19,30 +19,68 @@ covered here rather than what's ideal:
   practice. Each test below therefore drives at most one navigation, and the
   page_link-based sidebar controls are checked structurally (their target
   page) rather than by simulating a click.
+
+The fixture database is deliberately tiny: one fragility model wired to one
+component through the component bridge, and one experiment on that same
+component. The assertions below therefore check *which* records a page
+resolved to and that the page rendered, never how many rows a table drew —
+the ``_pick_*`` helpers query for the relationships rather than hardcoding
+ids, so growing the seed data doesn't rot these tests.
 """
 
-import os
 import sqlite3
-import unittest
 from pathlib import Path
 
+import pytest
+import streamlit as st
 from streamlit.testing.v1 import AppTest
 
 _UI_DIR = Path(__file__).resolve().parent.parent
 _APP_PATH = _UI_DIR / 'app.py'
 
-os.environ.setdefault('AUTH_ENABLED', 'false')
+# AppTest's default 3s script timeout is generous locally but tight on a cold
+# CI runner, where the first run pays for importing plotly and Streamlit's
+# script-runner machinery.
+_RUN_TIMEOUT = 30
 
 
-def _db_path() -> str:
-    return os.environ.get('DB_PATH', str(_UI_DIR / 'backend' / 'db.sqlite3'))
+@pytest.fixture
+def app_db(fixture_db_path, monkeypatch):
+    """Point app.py's database access at the conftest fixture DB.
+
+    ``ui/db.py`` resolves ``_DB_PATH`` once at import time and ``AppTest``
+    execs app.py inside this same process, so the already-imported ``db``
+    module is what the app ends up querying — patch the module attribute,
+    and ``DB_PATH`` as well to cover the case where ``db`` hasn't been
+    imported yet. Cached results are cleared on both sides for the same
+    reason ``conftest.db_module`` clears them: @st.cache_data keys on
+    function+args only, not on ``_DB_PATH``, so a query answered against an
+    earlier test's fixture DB would otherwise leak into this one.
+
+    Also runs from ``ui/``, because app.py loads its sidebar logo by the
+    relative path ``assets/logo.png`` — the same working directory
+    ``streamlit run app.py`` is launched from. Without this the app raises
+    MediaFileStorageError when the suite is invoked from the repo root, as
+    CI does.
+    """
+    monkeypatch.chdir(_UI_DIR)
+    monkeypatch.setenv('DB_PATH', fixture_db_path)
+    monkeypatch.setenv('AUTH_ENABLED', 'false')
+
+    import db
+
+    monkeypatch.setattr(db, '_DB_PATH', fixture_db_path)
+    st.cache_data.clear()
+    yield fixture_db_path
+    st.cache_data.clear()
 
 
-def _pick_fragility_model_with_component() -> tuple[str, str]:
-    """A (fragility_model_id, component_id) pair from the real database,
-    rather than a hardcoded id, so the test doesn't rot as source data
-    changes."""
-    conn = sqlite3.connect(_db_path())
+def _pick_fragility_model_with_component(db_path: str) -> tuple[str, str]:
+    """A (fragility_model_id, component_id) pair from the fixture database,
+    rather than hardcoded ids, so the test doesn't rot as the seed data
+    changes. The pair is guaranteed to exist by ``conftest._seed()``, so a
+    missing one is a broken fixture, not a reason to skip."""
+    conn = sqlite3.connect(db_path)
     try:
         row = conn.execute("""
             SELECT fm.fragility_model_id, c.id
@@ -55,15 +93,14 @@ def _pick_fragility_model_with_component() -> tuple[str, str]:
         """).fetchone()
     finally:
         conn.close()
-    if row is None:
-        raise unittest.SkipTest(
-            'no fragility model with a linked component in the test database'
-        )
+    assert row is not None, (
+        'fixture database has no fragility model linked to a component'
+    )
     return row
 
 
-def _pick_experiment_with_component() -> tuple[str, str]:
-    conn = sqlite3.connect(_db_path())
+def _pick_experiment_with_component(db_path: str) -> tuple[str, str]:
+    conn = sqlite3.connect(db_path)
     try:
         row = conn.execute("""
             SELECT e.id, c.id
@@ -74,90 +111,99 @@ def _pick_experiment_with_component() -> tuple[str, str]:
         """).fetchone()
     finally:
         conn.close()
-    if row is None:
-        raise unittest.SkipTest(
-            'no experiment with a linked component in the test database'
-        )
+    assert row is not None, (
+        'fixture database has no experiment linked to a component'
+    )
     return row
 
 
-@unittest.skipUnless(
-    os.path.exists(_db_path()), f'no database at {_db_path()!r} — set DB_PATH'
-)
-class NavigationSmokeTest(unittest.TestCase):
-    def test_sidebar_page_links_target_expected_pages(self):
-        """Home / Components / Data dictionary are st.page_link controls
-        (see app.py for why); AppTest can't click them, so this checks each
-        points at the right page rather than simulating the click."""
-        at = AppTest.from_file(str(_APP_PATH))
-        at.run()
-        self.assertFalse(at.exception)
+def test_sidebar_page_links_target_expected_pages(app_db):
+    """Home / Components / Data dictionary are st.page_link controls (see
+    app.py for why); AppTest can't click them, so this checks each points at
+    the right page rather than simulating the click."""
+    at = AppTest.from_file(str(_APP_PATH))
+    at.run(timeout=_RUN_TIMEOUT)
+    assert not at.exception
 
-        links = {pl.label: pl.page for pl in at.get('page_link')}
-        self.assertEqual(links.get('Home'), '')
-        self.assertEqual(links.get('Components'), 'components')
-        self.assertEqual(links.get('Compare fragilities'), 'compare-fragilities')
-        self.assertEqual(links.get('Data dictionary'), 'data-dictionary')
-
-    def test_fragility_model_only_deep_link_backfills_component(self):
-        """A `?fragility_model=` URL with no `component` must still resolve
-        a real, non-empty component id before "Back to Component" draws."""
-        fragility_model_id, expected_component = (
-            _pick_fragility_model_with_component()
-        )
-        at = AppTest.from_file(str(_APP_PATH))
-        at.query_params['fragility_model'] = fragility_model_id
-        at.run()
-
-        self.assertFalse(at.exception)
-        self.assertEqual(
-            at.session_state['selected_component_id'], expected_component
-        )
-        self.assertEqual(at.query_params.get('component'), [expected_component])
-        self.assertTrue(any('Fragility Model View' in m.value for m in at.markdown))
-
-    def test_experiment_only_deep_link_backfills_component(self):
-        """Same backfill, via the experiment -> component bridge instead of
-        the fragility-model one."""
-        experiment_id, expected_component = _pick_experiment_with_component()
-        at = AppTest.from_file(str(_APP_PATH))
-        at.query_params['experiment'] = experiment_id
-        at.run()
-
-        self.assertFalse(at.exception)
-        self.assertEqual(
-            at.session_state['selected_component_id'], expected_component
-        )
-        self.assertEqual(at.query_params.get('component'), [expected_component])
-        self.assertTrue(any('Experiment View' in m.value for m in at.markdown))
-
-    def test_legacy_redirect_fires_once_per_session(self):
-        """A bare `?fragility_model=`/`?experiment=`/`?component=` URL with
-        no page path resolves to the default (Home) page, which should
-        forward to the matching detail page exactly once per session — not
-        on every rerun that happens to land back on Home with a leftover
-        deep-link param still in the URL."""
-        fragility_model_id, _ = _pick_fragility_model_with_component()
-        at = AppTest.from_file(str(_APP_PATH))
-        at.query_params['fragility_model'] = fragility_model_id
-        at.run()
-
-        self.assertFalse(at.exception)
-        self.assertTrue(at.session_state['_legacy_redirect_done'])
-        self.assertTrue(any('Fragility Model View' in m.value for m in at.markdown))
-
-        # A later rerun in the same AppTest session (same session_state)
-        # with a *different* deep-link param present must not redirect
-        # again -- it should stay on the (AppTest always re-renders the
-        # default) page instead of jumping to the new target.
-        at.query_params.clear()
-        at.query_params['experiment'] = 'does-not-matter-guard-should-hold'
-        at.run()
-
-        self.assertFalse(at.exception)
-        self.assertFalse(any('Experiment View' in m.value for m in at.markdown))
-        self.assertFalse(any('Fragility Model View' in m.value for m in at.markdown))
+    links = {pl.label: pl.page for pl in at.get('page_link')}
+    assert links.get('Home') == ''
+    assert links.get('Components') == 'components'
+    assert links.get('Compare fragilities') == 'compare-fragilities'
+    assert links.get('Data dictionary') == 'data-dictionary'
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_fragility_model_only_deep_link_backfills_component(app_db):
+    """A `?fragility_model=` URL with no `component` must still resolve a
+    real, non-empty component id before "Back to Component" draws."""
+    fragility_model_id, expected_component = _pick_fragility_model_with_component(
+        app_db
+    )
+    at = AppTest.from_file(str(_APP_PATH))
+    at.query_params['fragility_model'] = fragility_model_id
+    at.run(timeout=_RUN_TIMEOUT)
+
+    assert not at.exception
+    assert at.session_state['selected_component_id'] == expected_component
+    assert at.query_params.get('component') == [expected_component]
+    assert any('Fragility Model View' in m.value for m in at.markdown)
+
+
+def test_experiment_only_deep_link_backfills_component(app_db):
+    """Same backfill, via the experiment -> component bridge instead of the
+    fragility-model one."""
+    experiment_id, expected_component = _pick_experiment_with_component(app_db)
+    at = AppTest.from_file(str(_APP_PATH))
+    at.query_params['experiment'] = experiment_id
+    at.run(timeout=_RUN_TIMEOUT)
+
+    assert not at.exception
+    assert at.session_state['selected_component_id'] == expected_component
+    assert at.query_params.get('component') == [expected_component]
+    assert any('Experiment View' in m.value for m in at.markdown)
+
+
+def test_component_deep_link_renders_component_detail(app_db):
+    """The third deep-link param. Unlike the two above there's nothing to
+    backfill, so this just pins that `?component=` resolves to the detail
+    page for that component and not to the default (Home) page."""
+    _, component_id = _pick_experiment_with_component(app_db)
+    at = AppTest.from_file(str(_APP_PATH))
+    at.query_params['component'] = component_id
+    at.run(timeout=_RUN_TIMEOUT)
+
+    assert not at.exception
+    assert at.session_state['selected_component_id'] == component_id
+    assert any('Component View' in m.value for m in at.markdown)
+
+
+def test_legacy_redirect_fires_once_per_session(app_db):
+    """A bare `?fragility_model=`/`?experiment=`/`?component=` URL with no
+    page path resolves to the default (Home) page, which should forward to
+    the matching detail page exactly once per session — not on every rerun
+    that happens to land back on Home with a leftover deep-link param still
+    in the URL."""
+    fragility_model_id, _ = _pick_fragility_model_with_component(app_db)
+    at = AppTest.from_file(str(_APP_PATH))
+    at.query_params['fragility_model'] = fragility_model_id
+    at.run(timeout=_RUN_TIMEOUT)
+
+    assert not at.exception
+    assert at.session_state['_legacy_redirect_done']
+    assert any('Fragility Model View' in m.value for m in at.markdown)
+
+    # A later rerun in the same AppTest session (same session_state) with a
+    # *different* deep-link param present must not redirect again -- it
+    # should stay on the (AppTest always re-renders the default) page
+    # instead of jumping to the new target.
+    #
+    # This has to be a *real* experiment id: the experiment view bails out
+    # at its "not found" warning before drawing its header, so a bogus id
+    # would make the assertion below hold whether or not the guard works.
+    experiment_id, _ = _pick_experiment_with_component(app_db)
+    at.query_params.clear()
+    at.query_params['experiment'] = experiment_id
+    at.run(timeout=_RUN_TIMEOUT)
+
+    assert not at.exception
+    assert not any('Experiment View' in m.value for m in at.markdown)
+    assert not any('Fragility Model View' in m.value for m in at.markdown)
