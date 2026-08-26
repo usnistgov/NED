@@ -106,6 +106,7 @@ def render_model_body(
     key_prefix: str = '',
     show_download: bool = True,
     show_compare_button: bool = False,
+    plot_unavailable_message: str | None = None,
 ) -> None:
     """Render the full fragility-model detail (attributes, reference, damage-state
     chart, and curve table) for the given model. ``key_prefix`` makes the widget
@@ -113,7 +114,11 @@ def render_model_body(
     side-by-side compare view). Set ``show_download`` to ``False`` to omit the
     curve CSV download button. Set ``show_compare_button`` to ``True`` to show
     a button that jumps to the Compare Fragilities view with this model
-    pre-selected."""
+    pre-selected. Pass ``plot_unavailable_message`` to show that message in
+    place of the damage-state chart instead of plotting it (e.g. when
+    comparing against another model with a different EDP, where overlaying
+    the two wouldn't be a valid comparison) — the curve table below is
+    unaffected."""
     df_fm_detail = get_fragility_model_detail(fragility_model_id)
 
     if df_fm_detail.empty:
@@ -172,65 +177,84 @@ def render_model_body(
     if df_curves.empty:
         st.info('No fragility curves are associated with this model.')
     else:
+        edp_metric = fmt(row['edp_metric'])
+        edp_unit = fmt(row['edp_unit'])
+        # Ratios read more naturally as a percentage in the curve table, so
+        # the underlying unit drives both a x100 scaling of the Median
+        # column below and its displayed unit.
+        is_ratio_unit = str(row['edp_unit'] or '').strip().lower() == 'ratio'
+
         plot_df = _lognormal_curves(df_curves)
         if plot_df is not None:
-            edp_metric = fmt(row['edp_metric'])
-            edp_unit = fmt(row['edp_unit'])
-            x_title = f'{edp_metric} [{edp_unit}]' if edp_unit != '—' else edp_metric
-
-            fig = go.Figure()
-            # Sort by EDP as well: rows within a damage state share the same
-            # _rank, and an unstable sort on ties scrambles the point order,
-            # making the CDF trace double back on itself.
-            for ds_label, group in plot_df.sort_values(['_rank', 'EDP']).groupby(
-                'Damage State', sort=False
-            ):
-                fig.add_trace(
-                    go.Scatter(
-                        x=group['EDP'],
-                        y=group['Probability'],
-                        mode='lines',
-                        name=ds_label,
-                        hovertemplate=(
-                            f'{x_title}: %{{x:.3f}}<br>'
-                            'Probability: %{y:.2f}<extra></extra>'
-                        ),
-                    )
+            if plot_unavailable_message:
+                st.info(plot_unavailable_message)
+            else:
+                x_title = (
+                    f'{edp_metric} [{edp_unit}]' if edp_unit != '—' else edp_metric
                 )
 
-            fig.update_layout(
-                height=360,
-                autosize=True,
-                margin=dict(l=10, r=10, t=10, b=10),
-                xaxis=dict(
-                    title=x_title,
-                    showgrid=False,
-                ),
-                yaxis=dict(
-                    title='Probability of Exceedance',
-                    range=[0, 1],
-                    showgrid=True,
-                    gridcolor='#e0e0e0',
-                ),
-                hovermode='closest',
-                hoverdistance=12,
-                legend=dict(
-                    orientation='v',
-                    x=1.02,
-                    y=1,
-                    xanchor='left',
-                    yanchor='top',
-                    font=dict(size=11),
-                ),
-            )
-            st.plotly_chart(fig, width='stretch', key=f'{key_prefix}curves_chart')
+                fig = go.Figure()
+                # Sort by EDP as well: rows within a damage state share the
+                # same _rank, and an unstable sort on ties scrambles the
+                # point order, making the CDF trace double back on itself.
+                for ds_label, group in plot_df.sort_values(['_rank', 'EDP']).groupby(
+                    'Damage State', sort=False
+                ):
+                    fig.add_trace(
+                        go.Scatter(
+                            x=group['EDP'],
+                            y=group['Probability'],
+                            mode='lines',
+                            name=ds_label,
+                            hovertemplate=(
+                                f'{x_title}: %{{x:.3f}}<br>'
+                                'Probability: %{y:.2f}<extra></extra>'
+                            ),
+                        )
+                    )
+
+                fig.update_layout(
+                    height=360,
+                    autosize=True,
+                    margin=dict(l=10, r=10, t=10, b=10),
+                    xaxis=dict(
+                        title=x_title,
+                        showgrid=False,
+                    ),
+                    yaxis=dict(
+                        title='Probability of Exceedance',
+                        range=[0, 1],
+                        showgrid=True,
+                        gridcolor='#e0e0e0',
+                    ),
+                    hovermode='closest',
+                    hoverdistance=12,
+                    legend=dict(
+                        orientation='v',
+                        x=1.02,
+                        y=1,
+                        xanchor='left',
+                        yanchor='top',
+                        font=dict(size=11),
+                    ),
+                )
+                st.plotly_chart(
+                    fig, width='stretch', key=f'{key_prefix}curves_chart'
+                )
         else:
             st.info(
                 'No fragility curves with usable median/beta values for this model.'
             )
 
+        df_table = df_curves.copy()
+        if is_ratio_unit:
+            df_table['Median'] = df_table['Median'] * 100
+            median_format = '%.2f%%'
+        else:
+            median_format = f'%.2f {edp_unit}' if edp_unit != '—' else '%.4f'
+
         st.dataframe(
-            df_curves,
+            df_table,
             width='stretch',
             hide_index=True,
             column_config={
@@ -240,7 +264,9 @@ def render_model_body(
                 '# Observations': st.column_config.NumberColumn(
                     '# Observations', format='%d'
                 ),
-                'Median': st.column_config.NumberColumn('Median', format='%.4f'),
+                'Median': st.column_config.NumberColumn(
+                    'Median', format=median_format
+                ),
                 'Beta': st.column_config.NumberColumn('Beta', format='%.3f'),
                 'Probability': st.column_config.NumberColumn(
                     'Probability', format='%.2f'

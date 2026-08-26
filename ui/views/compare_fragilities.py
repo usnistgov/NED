@@ -1,11 +1,21 @@
 import streamlit as st
 
-from db import get_components, get_fragility_models, get_groups, get_major_groups
+from db import (
+    get_components,
+    get_fragility_model_detail,
+    get_fragility_models,
+    get_groups,
+    get_major_groups,
+)
 from utils import fmt
 from views.fragility_model import render_model_body
 
 _PICK_COMPONENT = 'Select a component…'
 _PICK_FRAGILITY = 'Select a fragility model…'
+_DIFFERENT_EDPS_MESSAGE = (
+    'The selected fragility models have different EDPs; Could not directly '
+    'compare fragility curves.'
+)
 
 
 def _label(*parts) -> str:
@@ -13,9 +23,20 @@ def _label(*parts) -> str:
     return ' - '.join(v for v in (fmt(p) for p in parts) if v != '—')
 
 
-def _panel(side: str) -> None:
+def _edp_of(fragility_id: str) -> tuple[str, str] | None:
+    """Return a fragility model's (EDP metric, EDP unit), or None if the
+    model can't be found."""
+    df_detail = get_fragility_model_detail(fragility_id)
+    if df_detail.empty:
+        return None
+    row = df_detail.iloc[0]
+    return fmt(row['edp_metric']), fmt(row['edp_unit'])
+
+
+def _panel(side: str) -> str | None:
     """Render one half of the comparison: a taxonomy → component → fragility
-    drill-down, followed by the selected model's detail."""
+    drill-down. Returns the selected fragility model id, or None if nothing
+    is selected yet."""
     df_all = get_components()
 
     major_groups = ['All groups'] + get_major_groups()
@@ -71,10 +92,9 @@ def _panel(side: str) -> None:
     )
 
     if fragility_id == _PICK_FRAGILITY:
-        return
+        return None
 
-    st.markdown('---')
-    render_model_body(fragility_id, key_prefix=f'cmp_{side}_', show_download=False)
+    return fragility_id
 
 
 def render() -> None:
@@ -99,6 +119,34 @@ def render() -> None:
 
     left, right = st.columns(2, gap='large')
     with left:
-        _panel('left')
+        left_id = _panel('left')
     with right:
-        _panel('right')
+        right_id = _panel('right')
+
+    edps_differ = False
+    if left_id and right_id:
+        left_edp = _edp_of(left_id)
+        right_edp = _edp_of(right_id)
+        edps_differ = (
+            left_edp is not None and right_edp is not None and left_edp != right_edp
+        )
+    plot_message = _DIFFERENT_EDPS_MESSAGE if edps_differ else None
+
+    with left:
+        if left_id:
+            st.markdown('---')
+            render_model_body(
+                left_id,
+                key_prefix='cmp_left_',
+                show_download=False,
+                plot_unavailable_message=plot_message,
+            )
+    with right:
+        if right_id:
+            st.markdown('---')
+            render_model_body(
+                right_id,
+                key_prefix='cmp_right_',
+                show_download=False,
+                plot_unavailable_message=plot_message,
+            )
