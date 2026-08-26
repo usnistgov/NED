@@ -159,6 +159,52 @@ def get_component_fragility_models_export(component_id: str) -> pd.DataFrame:
 
 
 @st.cache_data
+def get_component_for_fragility_model(fragility_model_id: str) -> str | None:
+    """The id of a component associated with a fragility model, via the
+    many-to-many component-fragility-model bridge. A model can be linked to
+    more than one component; this returns the first (by component id), which
+    is sufficient for backfilling a missing 'component' deep-link param."""
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        df = pd.read_sql(
+            """
+            SELECT c.id
+            FROM ned_app_componentfragilitymodelbridge b
+            JOIN ned_app_component c ON c.component_id = b.component_id
+            WHERE b.fragility_model_id = ?
+            ORDER BY c.id
+            LIMIT 1
+            """,
+            conn,
+            params=(fragility_model_id,),
+        )
+    finally:
+        conn.close()
+    return df.iloc[0]['id'] if not df.empty else None
+
+
+@st.cache_data
+def get_component_for_experiment(experiment_id: str) -> str | None:
+    """The id of the component an experiment belongs to, for backfilling a
+    missing 'component' deep-link param."""
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        df = pd.read_sql(
+            """
+            SELECT c.id
+            FROM ned_app_experiment e
+            JOIN ned_app_component c ON c.component_id = e.component_id
+            WHERE e.id = ?
+            """,
+            conn,
+            params=(experiment_id,),
+        )
+    finally:
+        conn.close()
+    return df.iloc[0]['id'] if not df.empty else None
+
+
+@st.cache_data
 def get_fragility_models() -> pd.DataFrame:
     """All fragility models paired with the (human-readable) component id they
     belong to, so the list can be filtered by component/taxonomy/search."""

@@ -102,6 +102,40 @@ div[data-testid="stSelectbox"] > div {
     flex: 1;
 }
 
+/* ── Page links styled to match the plain st.button controls they replace
+   (View / Back navigation that must carry a query param, so it uses
+   st.page_link instead of st.button — see app.py for why). This also
+   covers the sidebar's Home/Components/Data dictionary links: the sidebar's
+   own .stButton rule above (for "Sign out" and "Compare fragilities") only
+   matches because it targets `div[data-testid="stSidebar"]`, but the real
+   element is `<section data-testid="stSidebar">` — that rule has never
+   actually applied, on this branch or on main, so those buttons already
+   render with Streamlit's plain default button style. This rule produces a
+   near-identical result (verified via computed styles: same border, radius,
+   padding, min-height, font-size and weight; background is off by a couple
+   RGB points, from Streamlit's own base-vs-secondary color tokens), so the
+   sidebar's page_link controls end up visually consistent with the
+   (already-unstyled) buttons next to them without a second, sidebar-only
+   override. ── */
+[data-testid="stPageLink"] a[data-testid="stPageLink-NavLink"] {
+    border: 1px solid rgba(49, 51, 63, 0.2);
+    border-radius: 8px;
+    padding: 4px 12px;
+    min-height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(49, 51, 63);
+    background-color: rgb(255, 255, 255);
+    text-decoration: none;
+    line-height: 1.6;
+}
+[data-testid="stPageLink"] a[data-testid="stPageLink-NavLink"]:hover {
+    border: 1px solid rgba(49, 51, 63, 0.2);
+    color: rgb(49, 51, 63);
+    background-color: rgba(151, 166, 195, 0.15);
+}
+
 /* ── Component detail attribute grid ── */
 .attr-grid {
     display: grid;
