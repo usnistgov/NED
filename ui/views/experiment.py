@@ -10,14 +10,23 @@ from db import (
 from utils import FIELD_HELP, attr, build_citation, doi_url, esc, fmt
 
 
-def render() -> None:
-    experiment_id = st.session_state.get('selected_experiment_id', '')
+def render(pages: dict) -> None:
+    experiment_id = st.query_params.get('experiment', '') or st.session_state.get(
+        'selected_experiment_id', ''
+    )
+    st.session_state['selected_experiment_id'] = experiment_id
 
-    if st.button('← Back to Component'):
-        st.session_state['page'] = 'Component Detail'
-        if 'experiment' in st.query_params:
-            del st.query_params['experiment']
-        st.rerun()
+    component_id = st.query_params.get('component', '') or st.session_state.get(
+        'selected_component_id', ''
+    )
+    if component_id:
+        st.session_state['selected_component_id'] = component_id
+
+    st.page_link(
+        pages['component_detail'],
+        label='← Back to Component',
+        query_params={'component': component_id},
+    )
 
     df_exp_detail = get_experiment_detail(experiment_id)
 
@@ -119,7 +128,6 @@ def render() -> None:
     if df_fm.empty:
         st.info('No fragility models currently cite this experiment.')
     else:
-        component_id = st.session_state.get('selected_component_id', '')
         _FM_WIDTHS = [2, 1.5, 2, 1.5, 1.5, 4, 1]
         _FM_HEADERS = [
             'Reference',
@@ -172,14 +180,9 @@ def render() -> None:
                     f"<span style='font-size:0.88rem;'>{val}</span>",
                     unsafe_allow_html=True,
                 )
-            if c[6].button('View', key=f'fm_{fmrow["fragility_model_id"]}'):
-                st.session_state['selected_fragility_model_id'] = fmrow[
-                    'fragility_model_id'
-                ]
-                st.session_state['page'] = 'Fragility Model Detail'
-                st.query_params['fragility_model'] = fmrow['fragility_model_id']
-                if component_id:
-                    st.query_params['component'] = component_id
-                if 'experiment' in st.query_params:
-                    del st.query_params['experiment']
-                st.rerun()
+            query_params = {'fragility_model': fmrow['fragility_model_id']}
+            if component_id:
+                query_params['component'] = component_id
+            c[6].page_link(
+                pages['fragility_model'], label='View', query_params=query_params
+            )

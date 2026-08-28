@@ -77,16 +77,15 @@ def _panel(side: str) -> None:
     render_model_body(fragility_id, key_prefix=f'cmp_{side}_', show_download=False)
 
 
-def render() -> None:
+def render(pages: dict) -> None:
     return_to_fragility = st.session_state.get('compare_return_to_fragility')
     if return_to_fragility:
         if st.button('← Back to Fragility Model'):
-            st.session_state['selected_fragility_model_id'] = return_to_fragility
             st.session_state.pop('compare_return_to_fragility', None)
-            st.session_state['page'] = 'Fragility Model Detail'
-            st.query_params.clear()
-            st.query_params['fragility_model'] = return_to_fragility
-            st.rerun()
+            st.switch_page(
+                pages['fragility_model'],
+                query_params={'fragility_model': return_to_fragility},
+            )
 
     st.markdown(
         '<div class="ned-header"><h1>Compare Fragilities</h1></div>',

@@ -46,7 +46,7 @@ def _expand_search_terms(query: str) -> list[str]:
     return [t for t in terms if t]
 
 
-def render() -> None:
+def render(pages: dict) -> None:
     st.markdown(
         '<div class="ned-header"><h1>Components</h1></div>',
         unsafe_allow_html=True,
@@ -114,11 +114,11 @@ def render() -> None:
 
         for _, row in df_display.iterrows():
             c = st.columns(_WIDTHS)
-            if c[0].button('View', key=f'comp_{row["ID"]}'):
-                st.session_state['selected_component_id'] = row['ID']
-                st.session_state['page'] = 'Component Detail'
-                st.query_params['component'] = row['ID']
-                st.rerun()
+            c[0].page_link(
+                pages['component_detail'],
+                label='View',
+                query_params={'component': row['ID']},
+            )
             c[1].markdown(
                 f"<span style='font-size:0.88rem;'>{esc(row['ID'])}</span>",
                 unsafe_allow_html=True,

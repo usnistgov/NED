@@ -25,13 +25,13 @@ def _fragilities_export(component_id: str) -> pd.DataFrame:
     return with_reference(get_component_fragility_models_export(component_id))
 
 
-def render() -> None:
-    component_id = st.session_state.get('selected_component_id', '')
+def render(pages: dict) -> None:
+    component_id = st.query_params.get('component', '') or st.session_state.get(
+        'selected_component_id', ''
+    )
+    st.session_state['selected_component_id'] = component_id
 
-    if st.button('← Back to Components'):
-        st.query_params.clear()
-        st.session_state['page'] = 'Components'
-        st.rerun()
+    st.page_link(pages['components'], label='← Back to Components')
 
     df_comp = get_component_detail(component_id)
 
@@ -95,13 +95,14 @@ def render() -> None:
 
         for _, fmrow in df_fm.iterrows():
             c = st.columns(_FM_WIDTHS)
-            if c[0].button('View', key=f'fm_{fmrow["fragility_model_id"]}'):
-                st.session_state['selected_fragility_model_id'] = fmrow[
-                    'fragility_model_id'
-                ]
-                st.session_state['page'] = 'Fragility Model Detail'
-                st.query_params['fragility_model'] = fmrow['fragility_model_id']
-                st.rerun()
+            c[0].page_link(
+                pages['fragility_model'],
+                label='View',
+                query_params={
+                    'fragility_model': fmrow['fragility_model_id'],
+                    'component': component_id,
+                },
+            )
             desc = str(fmrow['Component Description'])
             desc_short = desc[:80] + '…' if len(desc) > 80 else desc
             reference = esc(fmrow['Reference'])
@@ -145,4 +146,6 @@ def render() -> None:
             df_exp,
             _experiments_export(component_id),
             file_name=f'{component_id}_experiments.csv',
+            pages=pages,
+            component_id=component_id,
         )

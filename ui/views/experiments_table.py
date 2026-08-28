@@ -54,13 +54,18 @@ def render_experiments_table(
     df_exp: pd.DataFrame,
     df_export: pd.DataFrame,
     file_name: str,
+    pages: dict,
+    component_id: str = '',
     key_prefix: str = '',
 ) -> None:
     """Render the experiments summary table (header row, one row per
     experiment with a View button, and a CSV download of ``df_export``).
     Shared by the component detail and fragility model views; ``key_prefix``
     keeps widget keys unique across pages. Tables longer than ``_PAGE_SIZE``
-    are paginated; the CSV download always contains every experiment."""
+    are paginated; the CSV download always contains every experiment.
+    ``component_id``, when known from the calling page, is carried along in
+    the View link's query params so the destination doesn't land without
+    one."""
     n = len(df_exp)
     if n > _PAGE_SIZE:
         n_pages = math.ceil(n / _PAGE_SIZE)
@@ -97,11 +102,10 @@ def render_experiments_table(
 
     for _, erow in df_exp.iterrows():
         c = st.columns(_EXP_WIDTHS)
-        if c[0].button('View', key=f'{key_prefix}exp_{erow["experiment_id"]}'):
-            st.session_state['selected_experiment_id'] = erow['experiment_id']
-            st.session_state['page'] = 'Experiment Detail'
-            st.query_params['experiment'] = erow['experiment_id']
-            st.rerun()
+        query_params = {'experiment': erow['experiment_id']}
+        if component_id:
+            query_params['component'] = component_id
+        c[0].page_link(pages['experiment'], label='View', query_params=query_params)
         source = esc(erow['Source'])
         url = doi_url(erow['doi'])
         if url:

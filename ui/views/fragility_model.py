@@ -64,7 +64,7 @@ def _lognormal_curves(
     return pd.concat(frames, ignore_index=True)
 
 
-def _navigate_to_compare(fragility_model_id: str) -> None:
+def _navigate_to_compare(fragility_model_id: str, pages: dict) -> None:
     """Populate the Compare Fragilities filters from this model — all four
     filters on the left panel, and the taxonomy filters (major group, group)
     on the right — and navigate there, so the user lands already comparing
@@ -96,9 +96,7 @@ def _navigate_to_compare(fragility_model_id: str) -> None:
     st.session_state.pop('cmp_frag_right', None)
 
     st.session_state['compare_return_to_fragility'] = fragility_model_id
-    st.session_state['page'] = 'Compare Fragilities'
-    st.query_params.clear()
-    st.rerun()
+    st.switch_page(pages['compare'])
 
 
 def render_model_body(
@@ -106,6 +104,7 @@ def render_model_body(
     key_prefix: str = '',
     show_download: bool = True,
     show_compare_button: bool = False,
+    pages: dict | None = None,
 ) -> None:
     """Render the full fragility-model detail (attributes, reference, damage-state
     chart, and curve table) for the given model. ``key_prefix`` makes the widget
@@ -113,7 +112,7 @@ def render_model_body(
     side-by-side compare view). Set ``show_download`` to ``False`` to omit the
     curve CSV download button. Set ``show_compare_button`` to ``True`` to show
     a button that jumps to the Compare Fragilities view with this model
-    pre-selected."""
+    pre-selected — ``pages`` is required in that case."""
     df_fm_detail = get_fragility_model_detail(fragility_model_id)
 
     if df_fm_detail.empty:
@@ -128,7 +127,7 @@ def render_model_body(
             '⚖️ Compare with another fragility model',
             key=f'{key_prefix}compare_fragilities',
         ):
-            _navigate_to_compare(fragility_model_id)
+            _navigate_to_compare(fragility_model_id, pages)
     st.markdown('---')
 
     attr('Model ID', fmt(row['model_id']))
@@ -257,20 +256,29 @@ def render_model_body(
             )
 
 
-def render() -> None:
-    fragility_model_id = st.session_state.get('selected_fragility_model_id', '')
+def render(pages: dict) -> None:
+    fragility_model_id = st.query_params.get(
+        'fragility_model', ''
+    ) or st.session_state.get('selected_fragility_model_id', '')
+    st.session_state['selected_fragility_model_id'] = fragility_model_id
 
-    if st.button('← Back to Component'):
-        st.session_state['page'] = 'Component Detail'
-        if 'fragility_model' in st.query_params:
-            del st.query_params['fragility_model']
-        st.rerun()
+    component_id = st.query_params.get('component', '') or st.session_state.get(
+        'selected_component_id', ''
+    )
+    if component_id:
+        st.session_state['selected_component_id'] = component_id
+
+    st.page_link(
+        pages['component_detail'],
+        label='← Back to Component',
+        query_params={'component': component_id},
+    )
 
     st.markdown(
         '<div class="ned-header"><h1>Fragility Model View</h1></div>',
         unsafe_allow_html=True,
     )
-    render_model_body(fragility_model_id, show_compare_button=True)
+    render_model_body(fragility_model_id, show_compare_button=True, pages=pages)
 
     # ── Source Data ──
     st.markdown('---')
@@ -286,5 +294,7 @@ def render() -> None:
                 get_fragility_model_experiments_export(fragility_model_id)
             ),
             file_name=f'{fragility_model_id}_experiments.csv',
+            pages=pages,
+            component_id=component_id,
             key_prefix='src_',
         )

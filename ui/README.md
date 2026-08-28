@@ -46,11 +46,11 @@ Always override the defaults before deploying to a shared environment. See [DEPL
 
 ## App pages
 
-### Home
+### About NED
 
 Project overview with aggregate statistics (total experiments, fragility models, etc.) and a description of the database architecture.
 
-### Components
+### Component database
 
 Browse all 71 component types. Components follow a four-level NISTIR taxonomy:
 
@@ -58,7 +58,7 @@ Browse all 71 component types. Components follow a four-level NISTIR taxonomy:
 
 For example: *Mechanical, Electrical, Plumbing → Fire Protection → Sprinkler Systems → Horizontal Piping*
 
-Users can filter by Major Group and Group using sidebar dropdowns, or search by component ID, name, or element classification. Each component links to a detail page showing its associated fragility models and experimental data, both downloadable as CSV.
+Users can filter by Major Group and Group using dropdowns, or search by component ID, name, or element classification. Each component links to a detail page showing its associated fragility models and experimental data, both downloadable as CSV.
 
 ### Fragility Model Detail
 
@@ -74,13 +74,16 @@ Renders the human-readable data dictionary (`assets/data_dictionary.md`): a fiel
 
 ## Deep linking
 
-The app supports query-parameter navigation for bookmarking and sharing:
+Each page has its own URL path, so links can be bookmarked and shared directly:
 
 | URL pattern | Page |
 |---|---|
-| `?component=<id>` | Component detail |
-| `?fragility_model=<id>` | Fragility model detail |
-| `?experiment=<id>` | Experiment detail |
+| `/component?component=<id>` | Component detail |
+| `/fragility-model?fragility_model=<id>` | Fragility model detail |
+| `/experiment?experiment=<id>` | Experiment detail |
+
+Older bare-root links (e.g. `?component=<id>` with no path) still work — they redirect to
+the matching page above automatically.
 
 ## Database schema
 
