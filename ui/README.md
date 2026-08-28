@@ -85,6 +85,30 @@ Each page has its own URL path, so links can be bookmarked and shared directly:
 Older bare-root links (e.g. `?component=<id>` with no path) still work — they redirect to
 the matching page above automatically.
 
+## Testing
+
+`ui/tests/` covers the parts of the UI that don't require a running browser: pure
+helper functions (`utils.py`, `auth.py::_load_credentials`, the component-search
+synonym expansion in `views/components.py`) and the SQLite query functions in
+`db.py`, run against a small hand-seeded fixture database built fresh in-memory
+for each test (no real `db.sqlite3` needed). `test_navigation.py` adds
+`AppTest`-based routing smoke tests on top of that — deep links, the legacy
+root-URL redirect, and the default page. `AppTest` can't press the browser's
+Back button or click the top nav bar, so those still need a browser-driven
+check; see the notes at the top of that file.
+
+**Install and run:**
+
+```bash
+pip install -r ui/requirements.txt -r requirements-dev.txt
+python -m pytest ui/tests -q
+```
+
+Run from the repository root (not from inside `ui/`) — `ui/tests/conftest.py`
+puts `ui/` on `sys.path` itself so the tests can use the same flat imports
+(`from db import ...`) that `ui/`'s own modules use. This is also what CI runs
+(`ui_test` job in `.github/workflows/ci.yml`).
+
 ## Database schema
 
 All data lives in a single SQLite file. The app is strictly read-only.

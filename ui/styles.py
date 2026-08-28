@@ -132,6 +132,32 @@ div[data-testid="stSelectbox"] > div {
 .st-key-data-dictionary table:nth-of-type(2) :is(th, td):nth-child(2) { width: 16%; }
 .st-key-data-dictionary table:nth-of-type(2) :is(th, td):nth-child(3) { width: 12%; }
 
+/* ── In-page navigation links ── */
+/* The View / Back controls are st.page_link rather than st.button, so they
+   can carry a query param. Style them to match the plain buttons they
+   replaced: same border, radius, padding, min-height, font size and weight
+   (the background differs by a couple of RGB points, from Streamlit's own
+   base-vs-secondary color tokens). Only the in-page links need this — the
+   top nav bar is Streamlit's own chrome and is styled above. */
+[data-testid="stPageLink"] a[data-testid="stPageLink-NavLink"] {
+    border: 1px solid rgba(49, 51, 63, 0.2);
+    border-radius: 8px;
+    padding: 4px 12px;
+    min-height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(49, 51, 63);
+    background-color: rgb(255, 255, 255);
+    text-decoration: none;
+    line-height: 1.6;
+}
+[data-testid="stPageLink"] a[data-testid="stPageLink-NavLink"]:hover {
+    border: 1px solid rgba(49, 51, 63, 0.2);
+    color: rgb(49, 51, 63);
+    background-color: rgba(151, 166, 195, 0.15);
+}
+
 /* ── Component detail attribute grid ── */
 .attr-grid {
     display: grid;
@@ -154,6 +180,56 @@ div[data-testid="stSelectbox"] > div {
     font-size: 0.78rem;
     color: #888;
     margin-top: -0.4rem;
+}
+
+/* ── Compare Fragilities: divider between baseline/comparison attributes ── */
+[class*="st-key-cmp-attr-right-"] {
+    border-left: 1px solid #d8dce3;
+    padding-left: 0.75rem;
+}
+
+/* ── Compare Fragilities: damage-state comparison table ── */
+.ds-cmp-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+.ds-cmp-table th,
+.ds-cmp-table td {
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+    white-space: normal;
+    overflow-wrap: break-word;
+    border-bottom: 1px solid #ececec;
+}
+.ds-cmp-table th.ds-cmp-attr,
+.ds-cmp-table td.ds-cmp-attr {
+    font-weight: 600;
+    color: #1a1a2e;
+}
+.ds-cmp-table th.ds-cmp-group {
+    background-color: #eef1f5;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    border-bottom: 1px solid #d8dce3;
+}
+.ds-cmp-table th.ds-cmp-side {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.ds-cmp-table th.ds-cmp-shaded,
+.ds-cmp-table td.ds-cmp-shaded {
+    background-color: #f4f5f7;
+}
+.ds-cmp-table th.ds-cmp-group-start,
+.ds-cmp-table td.ds-cmp-group-start {
+    border-left: 2px solid #c9ccd3;
 }
 </style>
 """

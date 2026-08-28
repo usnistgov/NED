@@ -87,10 +87,54 @@ def attr(
         c2.caption(caption)
 
 
+def _md_to_plain(text: str) -> str:
+    """Strip the light Markdown used in FIELD_HELP entries (``**bold**`` and
+    ``- `` bullets) down to plain text.
+
+    FIELD_HELP strings are written for Streamlit's own ``help=`` tooltip,
+    which renders Markdown. Embedding one verbatim in an HTML attribute (as
+    ``header_span`` does below) instead runs it through Streamlit's Markdown
+    pass a second time, splicing literal ``<strong>``/list HTML into the
+    middle of the attribute string and corrupting the tag it belongs to.
+    """
+    text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+    return re.sub(r'^- ', '• ', text, flags=re.MULTILINE)
+
+
+def header_span(label: str, help_text: str | None = None) -> str:
+    """HTML for a table column header label, with an inline help icon placed
+    immediately after the text when ``help_text`` is given.
+
+    Streamlit's own ``help=`` tooltip renders its icon flush with the right
+    edge of the container passed to it, which — inside a ``st.columns()``
+    cell — is the full column width rather than the (usually narrower) label
+    text, making the icon look attached to whichever column happens to sit
+    next to it. Rendering the icon inline as part of the same markdown
+    string keeps it next to the text it actually describes.
+    """
+    out = (
+        f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
+        f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>"
+    )
+    if help_text:
+        out += (
+            f'<span title="{esc(_md_to_plain(help_text))}" '
+            "style='cursor:help;color:#888;margin-left:0.3rem;"
+            "font-size:0.75rem;'>&#9432;</span>"
+        )
+    return out
+
+
 # Pop-up helper descriptions for database fields, keyed by model field name.
 # Wording follows the data dictionary (assets/data_dictionary.md); update both
 # together if a definition changes.
 FIELD_HELP = {
+    'major_group': (
+        'UNIFORMAT II / NISTIR level-1 ID and description (e.g., '
+        '"A - Substructure").'
+    ),
+    'group': ('UNIFORMAT II / NISTIR level-2 ID and description.'),
+    'subelement': ('UNIFORMAT II / NISTIR level-4 ID and description.'),
     'comp_detail': (
         'Classification or short description of the component '
         'attachment/connection detailing (e.g., perimeter-fixed vs. '
@@ -149,6 +193,12 @@ FIELD_HELP = {
         'TRUE if prior damage was noted and repaired before this test; '
         'FALSE if noted and not repaired; or a general description of the '
         'previous damage that was repaired.'
+    ),
+    'probability': (
+        'Mutually exclusive probability of this damage state, for models '
+        'with mutually exclusive damage states. Must be between 0 and 1 '
+        'inclusive. Use a probability of 1 for purely sequential damage '
+        'states.'
     ),
 }
 

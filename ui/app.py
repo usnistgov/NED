@@ -38,6 +38,16 @@ _authenticated = not _auth_enabled or bool(st.session_state.get('authenticated')
 # st.page_link/st.switch_page targets for other pages without an import cycle
 # (this module is the only place the view modules and their st.Page wrappers
 # both exist).
+#
+# Those views navigate with st.page_link wherever they can, rather than
+# st.button + st.switch_page: st.switch_page always emits two separate
+# history.pushState calls to the frontend (one to clear the outgoing page's
+# query params, one for the page change) even when no query_params= is
+# passed, so leaving a detail page through a button stutters the browser's
+# Back button. st.page_link renders a real <a href>, which is always a
+# single history entry. The exception is the compare view's entry point,
+# which must clear `compare_return_to_fragility` session state before
+# navigating — a page_link's click can't run that, so it stays a button.
 PAGES: dict[str, Any] = {}
 
 
