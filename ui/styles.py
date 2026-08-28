@@ -134,13 +134,12 @@ div[data-testid="stSelectbox"] > div {
 
 /* ── In-page navigation links ── */
 /* The View / Back controls are st.page_link rather than st.button, so they
-   can carry a query param. Style them to match the plain buttons they
-   replaced: same border, radius, padding, min-height, font size and weight
-   (the background differs by a couple of RGB points, from Streamlit's own
-   base-vs-secondary color tokens). Only the in-page links need this — the
-   top nav bar is Streamlit's own chrome and is styled above. */
+   can carry a query param. They read as quieter table affordances without a
+   permanent outline: no border or filled background at rest, just the grey
+   wash on hover. Only the in-page links need this — the top nav bar is
+   Streamlit's own chrome and is styled above. */
 [data-testid="stPageLink"] a[data-testid="stPageLink-NavLink"] {
-    border: 1px solid rgba(49, 51, 63, 0.2);
+    border: 1px solid transparent;
     border-radius: 8px;
     padding: 4px 12px;
     min-height: 40px;
@@ -148,12 +147,11 @@ div[data-testid="stSelectbox"] > div {
     justify-content: center;
     align-items: center;
     color: rgb(49, 51, 63);
-    background-color: rgb(255, 255, 255);
+    background-color: transparent;
     text-decoration: none;
     line-height: 1.6;
 }
 [data-testid="stPageLink"] a[data-testid="stPageLink-NavLink"]:hover {
-    border: 1px solid rgba(49, 51, 63, 0.2);
     color: rgb(49, 51, 63);
     background-color: rgba(151, 166, 195, 0.15);
 }

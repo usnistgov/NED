@@ -73,7 +73,13 @@ def render(pages: dict) -> None:
     if df_fm.empty:
         st.info('No fragility models are associated with this component.')
     else:
-        _FM_WIDTHS = [1, 1.5, 2, 1.5, 1.5, 4, 2]
+        # The ID column is wide enough to hold a fragility model id on one
+        # line: they run to ~24 characters for ~90% of models, and at the
+        # previous 1.5 every id wrapped to two lines. The width comes out of
+        # Material, Size Class and Component Description, which have slack —
+        # measured against the components with the longest values in each,
+        # this costs no extra table height.
+        _FM_WIDTHS = [1, 2.5, 2, 1.3, 1.3, 3.4, 2]
         _FM_HEADERS = [
             '',
             'Fragility Model ID',

@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 from db import get_components, group_filter_options, resolve_group_filter
-from utils import FIELD_HELP, esc
+from utils import FIELD_HELP, esc, header_span
 
 # Synonym groups for component search.
 #
@@ -76,11 +76,9 @@ def _render_table(df: pd.DataFrame, pages: dict) -> None:
     """Render the header row plus one plain row per component."""
     h = st.columns(_WIDTHS)
     for col, label in zip(h, _HEADERS):
-        col.caption(
-            f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
-            f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
+        col.markdown(
+            header_span(label, _COLUMN_HELP.get(label)),
             unsafe_allow_html=True,
-            help=_COLUMN_HELP.get(label),
         )
 
     st.markdown(
