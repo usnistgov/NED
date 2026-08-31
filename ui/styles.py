@@ -134,10 +134,10 @@ div[data-testid="stSelectbox"] > div {
 
 /* ── In-page navigation links ── */
 /* The View / Back controls are st.page_link rather than st.button, so they
-   can carry a query param. They read as quieter table affordances without a
-   permanent outline: no border or filled background at rest, just the grey
-   wash on hover. Only the in-page links need this — the top nav bar is
-   Streamlit's own chrome and is styled above. */
+   can carry a query param. The Back links read as quiet table affordances
+   without a permanent outline: no border or filled background at rest, just
+   the grey wash on hover. Only the in-page links need this — the top nav bar
+   is Streamlit's own chrome and is styled above. */
 [data-testid="stPageLink"] a[data-testid="stPageLink-NavLink"] {
     border: 1px solid transparent;
     border-radius: 8px;
@@ -154,6 +154,24 @@ div[data-testid="stSelectbox"] > div {
 [data-testid="stPageLink"] a[data-testid="stPageLink-NavLink"]:hover {
     color: rgb(49, 51, 63);
     background-color: rgba(151, 166, 195, 0.15);
+}
+
+/* ── "View" row-action links ── */
+/* Each View link's column is wrapped in a container keyed "view-link-*"
+   (components.py, component_detail.py, experiment.py, experiments_table.py)
+   so it can be targeted separately from the quieter Back links above, which
+   share the same stPageLink-NavLink markup. Giving it a visible border and
+   background at rest — and Streamlit's own button hover colors — makes it
+   read as a button, matching st.button elsewhere in the app, rather than a
+   plain link. */
+[class*="st-key-view-link-"] a[data-testid="stPageLink-NavLink"] {
+    border-color: rgba(49, 51, 63, 0.2);
+    background-color: rgb(255, 255, 255);
+}
+[class*="st-key-view-link-"] a[data-testid="stPageLink-NavLink"]:hover {
+    color: rgb(255, 75, 75);
+    border-color: rgb(255, 75, 75);
+    background-color: rgb(255, 255, 255);
 }
 
 /* ── Component detail attribute grid ── */

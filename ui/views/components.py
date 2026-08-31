@@ -119,13 +119,14 @@ def _render_table(df: pd.DataFrame, pages: dict) -> None:
         unsafe_allow_html=True,
     )
 
-    for _, row in df.iterrows():
+    for i, (_, row) in enumerate(df.iterrows()):
         c = st.columns(_WIDTHS)
-        c[0].page_link(
-            pages['component_detail'],
-            label='View',
-            query_params={'component': row['ID']},
-        )
+        with c[0].container(key=f'view-link-comp-{i}'):
+            st.page_link(
+                pages['component_detail'],
+                label='View',
+                query_params={'component': row['ID']},
+            )
         _cell(c[1], esc(row['ID']))
         _cell(c[2], esc(row['Group']))
         _cell(c[3], esc(row['Subelement']))

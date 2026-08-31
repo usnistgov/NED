@@ -19,17 +19,20 @@ from utils import (
 # to paint in the browser, so long tables are paginated.
 _PAGE_SIZE = 50
 
-_EXP_WIDTHS = [1, 2, 1.5, 2, 1, 1.5, 1.5]
+_EXP_WIDTHS = [1, 1.5, 1.2, 1.5, 1.5, 2, 1.5, 1, 1.2]
 _EXP_HEADERS = [
     '',
-    'Test Type',
+    'Reference',
     'Location',
+    'Component Type',
+    'Component Detail',
+    'Component Description',
     'EDP Metric',
     'EDP Value',
     'DS Class',
-    'Reference',
 ]
 _EXP_HEADER_HELP = {
+    'Component Detail': FIELD_HELP['comp_detail'],
     'DS Class': FIELD_HELP['ds_class'],
 }
 
@@ -126,12 +129,13 @@ def render_experiments_table(
         unsafe_allow_html=True,
     )
 
-    for _, erow in df_exp.iterrows():
+    for i, (_, erow) in enumerate(df_exp.iterrows()):
         c = st.columns(_EXP_WIDTHS)
         query_params = {'experiment': erow['experiment_id']}
         if component_id:
             query_params['component'] = component_id
-        c[0].page_link(pages['experiment'], label='View', query_params=query_params)
+        with c[0].container(key=f'view-link-exp-{key_prefix}{i}'):
+            st.page_link(pages['experiment'], label='View', query_params=query_params)
         source = esc(erow['Source'])
         url = doi_url(erow['doi'])
         if url:
@@ -139,12 +143,14 @@ def render_experiments_table(
         for ci, val in zip(
             c[1:],
             [
-                esc(erow['Test Type']),
+                source,
                 esc(erow['Location']),
+                esc(erow['Component Type']),
+                esc(erow['Component Detail']),
+                esc(erow['Component Description']),
                 esc(erow['EDP Metric']),
                 esc(erow['EDP Value']),
                 esc(erow['DS Class']),
-                source,
             ],
         ):
             ci.markdown(
