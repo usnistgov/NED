@@ -126,12 +126,13 @@ def render_experiments_table(
         unsafe_allow_html=True,
     )
 
-    for _, erow in df_exp.iterrows():
+    for i, (_, erow) in enumerate(df_exp.iterrows()):
         c = st.columns(_EXP_WIDTHS)
         query_params = {'experiment': erow['experiment_id']}
         if component_id:
             query_params['component'] = component_id
-        c[0].page_link(pages['experiment'], label='View', query_params=query_params)
+        with c[0].container(key=f'view-link-exp-{key_prefix}{i}'):
+            st.page_link(pages['experiment'], label='View', query_params=query_params)
         source = esc(erow['Source'])
         url = doi_url(erow['doi'])
         if url:

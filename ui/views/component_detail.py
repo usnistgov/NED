@@ -106,16 +106,17 @@ def render(pages: dict) -> None:
             unsafe_allow_html=True,
         )
 
-        for _, fmrow in df_fm.iterrows():
+        for i, (_, fmrow) in enumerate(df_fm.iterrows()):
             c = st.columns(_FM_WIDTHS)
-            c[0].page_link(
-                pages['fragility_model'],
-                label='View',
-                query_params={
-                    'fragility_model': fmrow['Fragility Model ID'],
-                    'component': component_id,
-                },
-            )
+            with c[0].container(key=f'view-link-fm-{i}'):
+                st.page_link(
+                    pages['fragility_model'],
+                    label='View',
+                    query_params={
+                        'fragility_model': fmrow['Fragility Model ID'],
+                        'component': component_id,
+                    },
+                )
             desc = str(fmrow['Component Description'])
             desc_short = desc[:80] + '…' if len(desc) > 80 else desc
             reference = esc(fmrow['Reference'])
