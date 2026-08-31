@@ -135,7 +135,9 @@ def render_experiments_table(
         if component_id:
             query_params['component'] = component_id
         with c[0].container(key=f'view-link-exp-{key_prefix}{i}'):
-            st.page_link(pages['experiment'], label='View', query_params=query_params)
+            st.page_link(
+                pages['experiment'], label='View', query_params=query_params
+            )
         source = esc(erow['Source'])
         url = doi_url(erow['doi'])
         if url:
