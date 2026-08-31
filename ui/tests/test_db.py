@@ -122,10 +122,14 @@ class TestGetComponentDetail:
 
 
 class TestGetComponentFragilityModels:
-    def test_returns_linked_models_with_doi(self, db_module):
+    def test_returns_linked_models_with_component_type(self, db_module):
         df = db_module.get_component_fragility_models('B2011')
         assert df['Fragility Model ID'].tolist() == ['Smith-2020|M1']
-        assert df.iloc[0]['doi'] == '10.1000/xyz123'
+        assert df.iloc[0]['Component Type'] == 'Curtain Wall'
+
+    def test_number_of_tests_counts_linked_experiments(self, db_module):
+        df = db_module.get_component_fragility_models('B2011')
+        assert df.iloc[0]['Number of Tests'] == 1
 
     def test_component_without_models_returns_empty(self, db_module):
         df = db_module.get_component_fragility_models('B3010')
@@ -176,6 +180,11 @@ class TestGetExperimentFragilityModels:
     def test_reverse_lookup_from_experiment(self, db_module):
         df = db_module.get_experiment_fragility_models('EXP-001')
         assert df['Fragility Model ID'].tolist() == ['Smith-2020|M1']
+        assert df.iloc[0]['Component Type'] == 'Curtain Wall'
+
+    def test_number_of_tests_counts_linked_experiments(self, db_module):
+        df = db_module.get_experiment_fragility_models('EXP-001')
+        assert df.iloc[0]['Number of Tests'] == 1
 
     def test_experiment_without_models_returns_empty(self, db_module):
         df = db_module.get_experiment_fragility_models('EXP-002')

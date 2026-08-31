@@ -8,7 +8,7 @@ from db import (
     get_experiment_fragility_models,
     get_reference,
 )
-from utils import FIELD_HELP, attr, build_citation, doi_url, esc, fmt, header_span
+from utils import FIELD_HELP, attr, build_citation, esc, fmt, header_span
 
 
 def render(pages: dict) -> None:
@@ -138,20 +138,24 @@ def render(pages: dict) -> None:
     if df_fm.empty:
         st.info('No fragility models currently cite this experiment.')
     else:
-        _FM_WIDTHS = [2, 1.5, 2, 1.5, 1.5, 4, 1]
+        # Same column shape as the Component View's Fragility Models table —
+        # see the matching comment there for the width rationale.
+        _FM_WIDTHS = [1, 2.5, 1.8, 1.8, 1.3, 1.3, 2.6, 1.3]
         _FM_HEADERS = [
-            'Reference',
+            '',
             'Fragility Model ID',
+            'Component Type',
             'Component Detail',
             'Material',
             'Size Class',
             'Component Description',
-            '',
+            'Number of Tests',
         ]
         _FM_HEADER_HELP = {
             'Component Detail': FIELD_HELP['comp_detail'],
             'Material': FIELD_HELP['material'],
             'Size Class': FIELD_HELP['size_class'],
+            'Number of Tests': FIELD_HELP['number_of_tests'],
         }
 
         h = st.columns(_FM_WIDTHS)
@@ -167,30 +171,27 @@ def render(pages: dict) -> None:
 
         for _, fmrow in df_fm.iterrows():
             c = st.columns(_FM_WIDTHS)
+            query_params = {'fragility_model': fmrow['Fragility Model ID']}
+            if component_id:
+                query_params['component'] = component_id
+            c[0].page_link(
+                pages['fragility_model'], label='View', query_params=query_params
+            )
             desc = str(fmrow['Component Description'])
             desc_short = desc[:80] + '…' if len(desc) > 80 else desc
-            reference = esc(fmrow['Reference'])
-            url = doi_url(fmrow['doi'])
-            if url:
-                reference = f'<a href="{esc(url)}" target="_blank">{reference}</a>'
             for ci, val in zip(
-                c[:6],
+                c[1:],
                 [
-                    reference,
                     esc(fmrow['Fragility Model ID']),
+                    esc(fmrow['Component Type']),
                     esc(fmrow['Component Detail']),
                     esc(fmrow['Material']),
                     esc(fmrow['Size Class']),
                     esc(desc_short),
+                    esc(fmrow['Number of Tests']),
                 ],
             ):
                 ci.markdown(
                     f"<span style='font-size:0.88rem;'>{val}</span>",
                     unsafe_allow_html=True,
                 )
-            query_params = {'fragility_model': fmrow['Fragility Model ID']}
-            if component_id:
-                query_params['component'] = component_id
-            c[6].page_link(
-                pages['fragility_model'], label='View', query_params=query_params
-            )

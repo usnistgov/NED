@@ -200,6 +200,10 @@ FIELD_HELP = {
         'inclusive. Use a probability of 1 for purely sequential damage '
         'states.'
     ),
+    'number_of_tests': (
+        'Total number of distinct experiments this fragility model is based '
+        'on, from the fragility model–experiment bridge table.'
+    ),
 }
 
 

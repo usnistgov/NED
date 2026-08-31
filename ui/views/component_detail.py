@@ -12,7 +12,6 @@ from utils import (
     FIELD_HELP,
     attr,
     csv_safe,
-    doi_url,
     esc,
     fmt,
     header_span,
@@ -79,20 +78,22 @@ def render(pages: dict) -> None:
         # Material, Size Class and Component Description, which have slack —
         # measured against the components with the longest values in each,
         # this costs no extra table height.
-        _FM_WIDTHS = [1, 2.5, 2, 1.3, 1.3, 3.4, 2]
+        _FM_WIDTHS = [1, 2.5, 1.8, 1.8, 1.3, 1.3, 2.6, 1.3]
         _FM_HEADERS = [
             '',
             'Fragility Model ID',
+            'Component Type',
             'Component Detail',
             'Material',
             'Size Class',
             'Component Description',
-            'Reference',
+            'Number of Tests',
         ]
         _FM_HEADER_HELP = {
             'Component Detail': FIELD_HELP['comp_detail'],
             'Material': FIELD_HELP['material'],
             'Size Class': FIELD_HELP['size_class'],
+            'Number of Tests': FIELD_HELP['number_of_tests'],
         }
 
         h = st.columns(_FM_WIDTHS)
@@ -118,19 +119,16 @@ def render(pages: dict) -> None:
             )
             desc = str(fmrow['Component Description'])
             desc_short = desc[:80] + '…' if len(desc) > 80 else desc
-            reference = esc(fmrow['Reference'])
-            url = doi_url(fmrow['doi'])
-            if url:
-                reference = f'<a href="{esc(url)}" target="_blank">{reference}</a>'
             for ci, val in zip(
                 c[1:],
                 [
                     esc(fmrow['Fragility Model ID']),
+                    esc(fmrow['Component Type']),
                     esc(fmrow['Component Detail']),
                     esc(fmrow['Material']),
                     esc(fmrow['Size Class']),
                     esc(desc_short),
-                    reference,
+                    esc(fmrow['Number of Tests']),
                 ],
             ):
                 ci.markdown(

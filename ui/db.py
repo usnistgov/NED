@@ -132,20 +132,20 @@ def get_component_fragility_models(component_id: str) -> pd.DataFrame:
             """
             SELECT
                 fm.fragility_model_id   AS "Fragility Model ID",
-                fm.reference_id         AS "Reference",
-                COALESCE(
-                    json_extract(r.csl_data, '$.DOI'),
-                    json_extract(r.csl_data, '$.URL')
-                )                       AS "doi",
+                c.name                  AS "Component Type",
                 fm.comp_detail          AS "Component Detail",
                 fm.material             AS "Material",
                 fm.size_class           AS "Size Class",
-                fm.comp_description     AS "Component Description"
+                fm.comp_description     AS "Component Description",
+                COUNT(DISTINCT efmb.experiment_id) AS "Number of Tests"
             FROM ned_app_componentfragilitymodelbridge b
             JOIN ned_app_fragilitymodel fm ON fm.fragility_model_id = b.fragility_model_id
             JOIN ned_app_component c ON c.component_id = b.component_id
-            LEFT JOIN ned_app_reference r ON r.reference_id = fm.reference_id
+            LEFT JOIN ned_app_experimentfragilitymodelbridge efmb
+                   ON efmb.fragility_model_id = fm.fragility_model_id
             WHERE c.id = ?
+            GROUP BY fm.fragility_model_id, c.name, fm.comp_detail, fm.material,
+                     fm.size_class, fm.comp_description
             ORDER BY fm.fragility_model_id
             """,
             conn,
@@ -428,26 +428,36 @@ def get_fragility_model_experiments_export(fragility_model_id: str) -> pd.DataFr
 def get_experiment_fragility_models(experiment_id: str) -> pd.DataFrame:
     """Fragility models informed by an experiment, via the experiment–fragility
     model bridge — the reverse of ``get_fragility_model_experiments()``. Returns
-    the same summary fields as the component fragility-models table so the row
-    rendering can be reused."""
+    the same summary fields (and "Number of Tests" semantics — total distinct
+    experiments linked to the model, not just this one) as the component
+    fragility-models table so the row rendering can be reused. A model can be
+    linked to more than one component (see ``get_component_for_fragility_model``),
+    so "Component Type" picks the first, by component id."""
     conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
     try:
         return pd.read_sql(
             """
             SELECT
                 fm.fragility_model_id   AS "Fragility Model ID",
-                fm.reference_id         AS "Reference",
-                COALESCE(
-                    json_extract(r.csl_data, '$.DOI'),
-                    json_extract(r.csl_data, '$.URL')
-                )                       AS "doi",
+                (
+                    SELECT c.name
+                    FROM ned_app_componentfragilitymodelbridge cb
+                    JOIN ned_app_component c ON c.component_id = cb.component_id
+                    WHERE cb.fragility_model_id = fm.fragility_model_id
+                    ORDER BY c.id
+                    LIMIT 1
+                )                       AS "Component Type",
                 fm.comp_detail          AS "Component Detail",
                 fm.material             AS "Material",
                 fm.size_class           AS "Size Class",
-                fm.comp_description     AS "Component Description"
+                fm.comp_description     AS "Component Description",
+                (
+                    SELECT COUNT(DISTINCT efmb.experiment_id)
+                    FROM ned_app_experimentfragilitymodelbridge efmb
+                    WHERE efmb.fragility_model_id = fm.fragility_model_id
+                )                       AS "Number of Tests"
             FROM ned_app_experimentfragilitymodelbridge b
             JOIN ned_app_fragilitymodel fm ON fm.fragility_model_id = b.fragility_model_id
-            LEFT JOIN ned_app_reference r ON r.reference_id = fm.reference_id
             WHERE b.experiment_id = ?
             ORDER BY fm.fragility_model_id
             """,
