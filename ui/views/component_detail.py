@@ -17,6 +17,7 @@ from utils import (
     header_span,
     strip_prefix,
 )
+from views.components import last_filters_query_params
 from views.experiments_table import render_experiments_table, with_reference
 
 
@@ -39,7 +40,11 @@ def render(pages: dict) -> None:
     )
     st.session_state['selected_component_id'] = component_id
 
-    st.page_link(pages['components'], label='← Back to Components')
+    st.page_link(
+        pages['components'],
+        label='← Back to Components',
+        query_params=last_filters_query_params(),
+    )
 
     df_comp = get_component_detail(component_id)
 
@@ -107,16 +112,17 @@ def render(pages: dict) -> None:
             unsafe_allow_html=True,
         )
 
-        for _, fmrow in df_fm.iterrows():
+        for i, (_, fmrow) in enumerate(df_fm.iterrows()):
             c = st.columns(_FM_WIDTHS)
-            c[0].page_link(
-                pages['fragility_model'],
-                label='View',
-                query_params={
-                    'fragility_model': fmrow['Fragility Model ID'],
-                    'component': component_id,
-                },
-            )
+            with c[0].container(key=f'view-link-fm-{i}'):
+                st.page_link(
+                    pages['fragility_model'],
+                    label='View',
+                    query_params={
+                        'fragility_model': fmrow['Fragility Model ID'],
+                        'component': component_id,
+                    },
+                )
             desc = str(fmrow['Component Description'])
             desc_short = desc[:80] + '…' if len(desc) > 80 else desc
             for ci, val in zip(

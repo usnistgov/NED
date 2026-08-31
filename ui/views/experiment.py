@@ -169,14 +169,15 @@ def render(pages: dict) -> None:
             unsafe_allow_html=True,
         )
 
-        for _, fmrow in df_fm.iterrows():
+        for i, (_, fmrow) in enumerate(df_fm.iterrows()):
             c = st.columns(_FM_WIDTHS)
             query_params = {'fragility_model': fmrow['Fragility Model ID']}
             if component_id:
                 query_params['component'] = component_id
-            c[0].page_link(
-                pages['fragility_model'], label='View', query_params=query_params
-            )
+            with c[0].container(key=f'view-link-fm-{i}'):
+                st.page_link(
+                    pages['fragility_model'], label='View', query_params=query_params
+                )
             desc = str(fmrow['Component Description'])
             desc_short = desc[:80] + '…' if len(desc) > 80 else desc
             for ci, val in zip(
