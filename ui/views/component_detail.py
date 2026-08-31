@@ -18,6 +18,7 @@ from utils import (
     header_span,
     strip_prefix,
 )
+from views.components import last_filters_query_params
 from views.experiments_table import render_experiments_table, with_reference
 
 
@@ -40,7 +41,11 @@ def render(pages: dict) -> None:
     )
     st.session_state['selected_component_id'] = component_id
 
-    st.page_link(pages['components'], label='← Back to Components')
+    st.page_link(
+        pages['components'],
+        label='← Back to Components',
+        query_params=last_filters_query_params(),
+    )
 
     df_comp = get_component_detail(component_id)
 

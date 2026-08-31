@@ -47,6 +47,39 @@ _HEADERS = [
 ]
 _COLUMN_HELP = {'Group': FIELD_HELP['group'], 'Subelement': FIELD_HELP['subelement']}
 
+# Session-state key the current Group/Search filters are mirrored into,
+# alongside the URL, so the "Back to Components" link on the detail page can
+# still send the user back to them — that link sets an explicit target URL
+# rather than inheriting the one being left, so the URL alone isn't enough
+# there the way it is for a real browser Back/Forward press.
+_FILTER_STATE_KEY = 'components_last_filters'
+
+
+def last_filters_query_params() -> dict[str, str]:
+    """The Group/Search filters last applied on this page, as page_link
+    query params, for the detail pages' "Back to Components" link."""
+    return dict(st.session_state.get(_FILTER_STATE_KEY, {}))
+
+
+def _sync_filters(selected_option: str, search: str, all_groups_option: str) -> None:
+    """Mirror the current filters into the URL — so a real browser
+    Back/Forward restores them and the view can be bookmarked/shared — and
+    into session_state (see `_FILTER_STATE_KEY`). Only non-default values are
+    written, keeping the URL clean when no filter is active."""
+    active: dict[str, str] = {}
+    if selected_option != all_groups_option:
+        active['group'] = selected_option
+    if search:
+        active['search'] = search
+
+    for name in ('group', 'search'):
+        if name in active:
+            st.query_params[name] = active[name]
+        elif name in st.query_params:
+            del st.query_params[name]
+
+    st.session_state[_FILTER_STATE_KEY] = active
+
 
 def _expand_search_terms(query: str) -> list[str]:
     """Return the search query plus any synonymous terms.
@@ -113,19 +146,31 @@ def render(pages: dict) -> None:
     st.markdown('---')
 
     group_options, group_labels = group_filter_options()
+    saved_filters = st.session_state.get(_FILTER_STATE_KEY, {})
+    default_group = st.query_params.get('group') or saved_filters.get('group')
+    if default_group not in group_options:
+        default_group = group_options[0]
+    default_search = st.query_params.get('search') or saved_filters.get('search', '')
+
     selected_option = st.selectbox(
         'Group',
         group_options,
+        index=group_options.index(default_group),
         format_func=lambda v: group_labels.get(v, v),
         help=_GROUP_FILTER_HELP,
+        key='components_group_filter',
     )
     major_filter, group_filter = resolve_group_filter(selected_option)
 
     search = st.text_input(
         'Search',
+        value=default_search,
         placeholder='Search by name, ID, element, sub-element, or keyword…',
         label_visibility='collapsed',
+        key='components_search',
     )
+
+    _sync_filters(selected_option, search, group_options[0])
 
     df_display = df_all.copy()
 

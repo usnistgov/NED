@@ -6,40 +6,97 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 
-_SCROLL_TO_TOP_JS = """
+_RESTORE_SCROLL_JS = """
 <script>
-    const doc = window.parent.document;
-    const toTop = () => {
-        const container = (
-            doc.querySelector('[data-testid="stMain"]')
-            || doc.querySelector('[data-testid="stAppViewContainer"]')
-            || doc.scrollingElement
-        );
-        if (container) {
-            container.scrollTo(0, 0);
-        }
-        window.parent.scrollTo(0, 0);
+    const win = window.parent;
+    const doc = win.document;
+    const container = (
+        doc.querySelector('[data-testid="stMain"]')
+        || doc.querySelector('[data-testid="stAppViewContainer"]')
+        || doc.scrollingElement
+    );
+
+    const scrollKey = () => 'ned-scroll:' + win.location.pathname + win.location.search;
+
+    // Save the departing page's own scroll position the instant the user
+    // clicks something that navigates away from it (every in-app navigation
+    // control -- page_link, the top nav, a table's View link -- renders as
+    // an <a>). This only fires on that genuine user action rather than on
+    // `scroll` events, which also fire as a side effect of Streamlit tearing
+    // the old page's content down once the new page starts mounting -- that
+    // teardown collapses the container's scrollHeight and forces scrollTop
+    // to 0, and a listener reacting to it would save that 0 under the
+    // *old* page's key, overwriting the position being navigated away from
+    // right as it's needed. Attached at most once per browser tab (guarded
+    // on `win`, which survives every rerun, rather than on this script's own
+    // — recreated each time — iframe realm), and in the capture phase so it
+    // always runs before the click's own navigation handling.
+    if (container && !win.__nedScrollListenerAttached) {
+        win.__nedScrollListenerAttached = true;
+        doc.addEventListener('click', (event) => {
+            const target = event.target;
+            const link = target && target.closest ? target.closest('a') : null;
+            if (!link) return;
+            try {
+                win.sessionStorage.setItem(scrollKey(), String(container.scrollTop));
+            } catch (e) {}
+        }, true);
+    }
+
+    let target = 0;
+    try {
+        const saved = win.sessionStorage.getItem(scrollKey());
+        if (saved !== null) target = parseFloat(saved) || 0;
+    } catch (e) {}
+
+    const applyScroll = () => {
+        if (container) container.scrollTo(0, target);
+        win.scrollTo(0, target);
     };
-    toTop();
-    // The new page is often still painting when this first runs, and late
-    // layout shifts can restore the old offset, so pin it again next frame.
-    requestAnimationFrame(toTop);
-    setTimeout(toTop, 50);
+    // The new page (e.g. a long Components table) is often still painting
+    // rows well after this first runs, and each layout shift can undo the
+    // restored offset, so keep reapplying it until the container's height
+    // has held steady for a few checks in a row (content has settled) or a
+    // hard cap is hit, rather than a fixed handful of early retries.
+    let lastHeight = -1;
+    let stableChecks = 0;
+    let ticks = 0;
+    const tick = () => {
+        applyScroll();
+        const height = container ? container.scrollHeight : 0;
+        if (height === lastHeight) {
+            stableChecks += 1;
+        } else {
+            stableChecks = 0;
+            lastHeight = height;
+        }
+        ticks += 1;
+        if (stableChecks >= 3 || ticks >= 30) {
+            win.clearInterval(intervalId);
+        }
+    };
+    const intervalId = win.setInterval(tick, 100);
+    tick();
 </script>
 """
 
 
-def scroll_to_top_on_page_change(page: str) -> None:
-    """Scroll the browser viewport to the top when `page` differs from the
-    page rendered on the previous run.
+def restore_scroll_on_page_change(page: str) -> None:
+    """Restore the browser's remembered scroll position for the current URL
+    when `page` differs from the page rendered on the previous run, falling
+    back to the top of the page if nothing was remembered for it.
 
     Streamlit reruns the whole script in place rather than doing a real page
     navigation, so the browser keeps whatever scroll position it had before
-    (e.g. partway down the Components table). Without this, clicking through
-    to another page can land the user in the middle of the new page instead of
-    at the top. Comparing against the last-rendered page (rather than scrolling
-    unconditionally) avoids resetting scroll on reruns triggered by same-page
-    interactions like filters or search.
+    (e.g. partway down the Components table) instead of landing on the new
+    page's own scroll position. The remembered position is keyed by the full
+    URL (path *and* query params) in the browser's sessionStorage — saved
+    client-side when the user clicks away from the page — so returning to
+    it (e.g. via "Back to Components", or a real browser Back press)
+    resumes where that exact view left off, including an active
+    search/filter, while landing on a not-yet-visited page still starts at
+    the top. Comparing against the last-rendered page (rather than firing on
+    every run) avoids fighting same-page interactions like typing a filter.
     """
     if st.session_state.get('_last_rendered_page') == page:
         return
@@ -49,10 +106,10 @@ def scroll_to_top_on_page_change(page: str) -> None:
     # render, and a reused iframe never re-executes its script. A nonce that
     # changes on every navigation forces a fresh iframe, so the scroll fires on
     # every page change rather than only the first one.
-    nonce = st.session_state.get('_scroll_to_top_nonce', 0) + 1
-    st.session_state['_scroll_to_top_nonce'] = nonce
+    nonce = st.session_state.get('_restore_scroll_nonce', 0) + 1
+    st.session_state['_restore_scroll_nonce'] = nonce
     components.html(
-        f'<!-- scroll-to-top {nonce} -->{_SCROLL_TO_TOP_JS}',
+        f'<!-- restore-scroll {nonce} -->{_RESTORE_SCROLL_JS}',
         height=0,
     )
 

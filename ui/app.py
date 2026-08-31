@@ -5,7 +5,7 @@ import streamlit as st
 
 import auth
 import styles
-from utils import scroll_to_top_on_page_change
+from utils import restore_scroll_on_page_change
 from views import (
     compare_fragilities,
     component_detail,
@@ -172,7 +172,7 @@ if nav is components_page and not st.session_state.get('_legacy_redirect_done'):
         target_page, target_params = target
         st.switch_page(target_page, query_params=target_params)
 
-scroll_to_top_on_page_change(nav.url_path)
+restore_scroll_on_page_change(nav.url_path)
 
 # ── Page dispatch ──────────────────────────────────────────────────────────────
 nav.run()
