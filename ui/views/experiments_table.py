@@ -19,17 +19,20 @@ from utils import (
 # to paint in the browser, so long tables are paginated.
 _PAGE_SIZE = 50
 
-_EXP_WIDTHS = [1, 2, 1.5, 2, 1, 1.5, 1.5]
+_EXP_WIDTHS = [1, 1.5, 1.2, 1.5, 1.5, 2, 1.5, 1, 1.2]
 _EXP_HEADERS = [
     '',
-    'Test Type',
+    'Reference',
     'Location',
+    'Component Type',
+    'Component Detail',
+    'Component Description',
     'EDP Metric',
     'EDP Value',
     'DS Class',
-    'Reference',
 ]
 _EXP_HEADER_HELP = {
+    'Component Detail': FIELD_HELP['comp_detail'],
     'DS Class': FIELD_HELP['ds_class'],
 }
 
@@ -140,12 +143,14 @@ def render_experiments_table(
         for ci, val in zip(
             c[1:],
             [
-                esc(erow['Test Type']),
+                source,
                 esc(erow['Location']),
+                esc(erow['Component Type']),
+                esc(erow['Component Detail']),
+                esc(erow['Component Description']),
                 esc(erow['EDP Metric']),
                 esc(erow['EDP Value']),
                 esc(erow['DS Class']),
-                source,
             ],
         ):
             ci.markdown(
