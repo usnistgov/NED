@@ -11,6 +11,7 @@ from db import (
 from utils import (
     FIELD_HELP,
     attr,
+    clamp_cell,
     csv_safe,
     esc,
     fmt,
@@ -123,8 +124,6 @@ def render(pages: dict) -> None:
                         'component': component_id,
                     },
                 )
-            desc = str(fmrow['Component Description'])
-            desc_short = desc[:80] + '…' if len(desc) > 80 else desc
             for ci, val in zip(
                 c[1:],
                 [
@@ -133,7 +132,7 @@ def render(pages: dict) -> None:
                     esc(fmrow['Component Detail']),
                     esc(fmrow['Material']),
                     esc(fmrow['Size Class']),
-                    esc(desc_short),
+                    clamp_cell(fmrow['Component Description']),
                     esc(fmrow['Number of Tests']),
                 ],
             ):

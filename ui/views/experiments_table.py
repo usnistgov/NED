@@ -7,6 +7,7 @@ import streamlit as st
 from utils import (
     FIELD_HELP,
     build_citation,
+    clamp_cell,
     csv_safe,
     doi_url,
     esc,
@@ -149,7 +150,7 @@ def render_experiments_table(
                 esc(erow['Location']),
                 esc(erow['Component Type']),
                 esc(erow['Component Detail']),
-                esc(erow['Component Description']),
+                clamp_cell(erow['Component Description']),
                 esc(erow['EDP Metric']),
                 esc(erow['EDP Value']),
                 esc(erow['DS Class']),

@@ -8,7 +8,15 @@ from db import (
     get_experiment_fragility_models,
     get_reference,
 )
-from utils import FIELD_HELP, attr, build_citation, esc, fmt, header_span
+from utils import (
+    FIELD_HELP,
+    attr,
+    build_citation,
+    clamp_cell,
+    esc,
+    fmt,
+    header_span,
+)
 
 
 def render(pages: dict) -> None:
@@ -178,8 +186,6 @@ def render(pages: dict) -> None:
                 st.page_link(
                     pages['fragility_model'], label='View', query_params=query_params
                 )
-            desc = str(fmrow['Component Description'])
-            desc_short = desc[:80] + '…' if len(desc) > 80 else desc
             for ci, val in zip(
                 c[1:],
                 [
@@ -188,7 +194,7 @@ def render(pages: dict) -> None:
                     esc(fmrow['Component Detail']),
                     esc(fmrow['Material']),
                     esc(fmrow['Size Class']),
-                    esc(desc_short),
+                    clamp_cell(fmrow['Component Description']),
                     esc(fmrow['Number of Tests']),
                 ],
             ):
