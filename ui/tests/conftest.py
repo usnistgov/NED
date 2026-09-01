@@ -125,9 +125,11 @@ def _seed(conn: sqlite3.Connection) -> None:
     queries and post-processing rely on: two major groups (so
     get_major_groups/get_groups have something to filter), two groups within
     one major group (so Group letter-recombination + get_groups filtering are
-    exercised), a component with no subelement (fillna('—') path), and one
-    fully wired-up component -> experiment -> fragility model -> curve chain
-    (via both bridge tables) for the relational queries."""
+    exercised), a component with no subelement (fillna('—') path), one fully
+    wired-up component -> experiment -> fragility model -> curve chain (via
+    both bridge tables) for the relational queries, and a second experiment
+    (EXP-003) on that same component that is *not* linked to the fragility
+    model, so there's an "available but unused" experiment to query for."""
     conn.executescript(_SCHEMA)
 
     conn.executemany(
@@ -236,6 +238,20 @@ def _seed(conn: sqlite3.Connection) -> None:
                 'Peak Floor Acceleration, horizontal',
                 'g',
                 0.5,
+                1,
+                'No damage',
+            ),
+            (
+                'EXP-003',
+                'Smith-2020',
+                'B.20.1.1',
+                'S3',
+                'Dynamic, uniaxial',
+                'Wall panel',
+                'No visible damage',
+                'Story Drift Ratio',
+                'Ratio',
+                0.01,
                 1,
                 'No damage',
             ),

@@ -24,7 +24,7 @@ covered here rather than what's ideal:
   is the default) is covered here.
 
 The fixture database is deliberately tiny: one fragility model wired to one
-component through the component bridge, and one experiment on that same
+component through the component bridge, and experiments on that same
 component. The assertions below therefore check *which* records a page
 resolved to and that the page rendered, never how many rows a table drew —
 the ``_pick_*`` helpers query for the relationships rather than hardcoding

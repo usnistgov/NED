@@ -427,6 +427,128 @@ def get_fragility_model_experiments_export(fragility_model_id: str) -> pd.DataFr
 
 
 @st.cache_data
+def get_fragility_model_available_experiments(
+    fragility_model_id: str,
+) -> pd.DataFrame:
+    """Experiments on the same component(s) as a fragility model that are
+    *not* linked to it through the experiment–fragility model bridge — the
+    available-but-unused counterpart to ``get_fragility_model_experiments()``,
+    for comparing a fragility's basis against experimentation that could have
+    informed it but didn't. Same summary fields as that function."""
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        return pd.read_sql(
+            """
+            SELECT
+                e.id                    AS "experiment_id",
+                r.author || ', ' || r.year AS "Source",
+                COALESCE(
+                    json_extract(r.csl_data, '$.DOI'),
+                    json_extract(r.csl_data, '$.URL')
+                )                       AS "doi",
+                e.test_type             AS "Test Type",
+                e.location              AS "Location",
+                c.name                  AS "Component Type",
+                e.comp_detail           AS "Component Detail",
+                e.design_objective      AS "Design Objective",
+                e.comp_description      AS "Component Description",
+                e.ds_description        AS "Damage Description",
+                e.edp_metric            AS "EDP Metric",
+                e.edp_unit              AS "EDP Unit",
+                e.edp_value             AS "EDP Value",
+                e.ds_rank               AS "DS Rank",
+                e.ds_class              AS "DS Class",
+                e.reference_id          AS "Reference ID",
+                c.subelement            AS "NISTIR Subelement"
+            FROM ned_app_experiment e
+            JOIN ned_app_component c ON c.component_id = e.component_id
+            JOIN ned_app_reference r ON r.reference_id = e.reference_id
+            WHERE e.component_id IN (
+                SELECT b.component_id
+                FROM ned_app_componentfragilitymodelbridge b
+                WHERE b.fragility_model_id = ?
+            )
+            AND e.id NOT IN (
+                SELECT efmb.experiment_id
+                FROM ned_app_experimentfragilitymodelbridge efmb
+                WHERE efmb.fragility_model_id = ?
+            )
+            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            """,
+            conn,
+            params=(fragility_model_id, fragility_model_id),
+        )
+    finally:
+        conn.close()
+
+
+@st.cache_data
+def get_fragility_model_available_experiments_export(
+    fragility_model_id: str,
+) -> pd.DataFrame:
+    """All experiments on the same component(s) as a fragility model but not
+    linked to it (see ``get_fragility_model_available_experiments()``), with
+    the full set of fields shown on the Experiment view page, plus the
+    reference columns needed to build the citation ('author', 'year',
+    'title', 'csl_data')."""
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        return pd.read_sql(
+            """
+            SELECT
+                e.id                        AS "Experiment ID",
+                e.specimen                  AS "Specimen",
+                e.specimen_inspection_sequence AS "Inspection Sequence",
+                e.reviewer                  AS "Reviewer",
+                e.test_type                 AS "Test Type",
+                e.loading_protocol          AS "Loading Protocol",
+                e.peak_test_amplitude       AS "Peak Test Amplitude",
+                e.location                  AS "Location",
+                e.governing_design_standard AS "Governing Design Standard",
+                e.design_objective          AS "Design Objective",
+                e.comp_detail               AS "Component Detail",
+                e.material                  AS "Material",
+                e.size_class                AS "Size Class",
+                e.comp_description          AS "Component Description",
+                e.ds_description            AS "Damage Description",
+                e.ds_rank                   AS "DS Rank",
+                e.ds_class                  AS "DS Class",
+                e.edp_metric                AS "EDP Metric",
+                e.edp_unit                  AS "EDP Unit",
+                e.edp_value                 AS "EDP Value",
+                e.alt_edp_metric            AS "Alt EDP Metric",
+                e.alt_edp_unit              AS "Alt EDP Unit",
+                e.alt_edp_value             AS "Alt EDP Value",
+                e.prior_damage              AS "Prior Damage",
+                e.prior_damage_repaired     AS "Prior Damage Repaired",
+                e.notes                     AS "Notes",
+                r.author                    AS "author",
+                r.year                      AS "year",
+                r.title                     AS "title",
+                r.csl_data                  AS "csl_data",
+                r.study_type                AS "Study Type"
+            FROM ned_app_experiment e
+            JOIN ned_app_reference r ON r.reference_id = e.reference_id
+            WHERE e.component_id IN (
+                SELECT b.component_id
+                FROM ned_app_componentfragilitymodelbridge b
+                WHERE b.fragility_model_id = ?
+            )
+            AND e.id NOT IN (
+                SELECT efmb.experiment_id
+                FROM ned_app_experimentfragilitymodelbridge efmb
+                WHERE efmb.fragility_model_id = ?
+            )
+            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            """,
+            conn,
+            params=(fragility_model_id, fragility_model_id),
+        )
+    finally:
+        conn.close()
+
+
+@st.cache_data
 def get_experiment_fragility_models(experiment_id: str) -> pd.DataFrame:
     """Fragility models informed by an experiment, via the experiment–fragility
     model bridge — the reverse of ``get_fragility_model_experiments()``. Returns

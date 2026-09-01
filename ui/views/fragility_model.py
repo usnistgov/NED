@@ -11,6 +11,8 @@ from db import (
     get_component_for_fragility_model,
     get_components,
     get_fragility_curves,
+    get_fragility_model_available_experiments,
+    get_fragility_model_available_experiments_export,
     get_fragility_model_detail,
     get_fragility_model_experiments,
     get_fragility_model_experiments_export,
@@ -387,5 +389,28 @@ def render(pages: dict) -> None:
             pages=pages,
             component_id=component_id,
             key_prefix='src_',
+            page_id=fragility_model_id,
+        )
+
+    # ── Available Experiments Not Used ──
+    st.markdown('---')
+    st.markdown('## Available Experiments Not Used in This Fragility')
+    df_avail = get_fragility_model_available_experiments(fragility_model_id)
+
+    if df_avail.empty:
+        st.info(
+            'No additional experiments on this component are available '
+            'beyond the ones already linked to this fragility model.'
+        )
+    else:
+        render_experiments_table(
+            df_avail,
+            with_reference(
+                get_fragility_model_available_experiments_export(fragility_model_id)
+            ),
+            file_name=f'{fragility_model_id}_available_experiments.csv',
+            pages=pages,
+            component_id=component_id,
+            key_prefix='avail_',
             page_id=fragility_model_id,
         )
