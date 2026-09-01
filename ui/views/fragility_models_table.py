@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-from utils import FIELD_HELP, esc, fmt, header_span
+from utils import FIELD_HELP, clamp_cell, esc, fmt, header_span
 
 _FM_COLUMN_WIDTHS = {
     '': 1,
@@ -69,9 +69,6 @@ def render_fragility_models_table(
             st.page_link(
                 pages['fragility_model'], label='View', query_params=query_params
             )
-        desc = str(fmrow['Component Description'])
-        desc_short = desc[:80] + '…' if len(desc) > 80 else desc
-
         values = [
             esc(fmrow['Fragility Model ID']),
             esc(fmrow['Component Type']),
@@ -81,7 +78,10 @@ def render_fragility_models_table(
             values.append(esc(fmrow['Material']))
         if 'Size Class' in headers:
             values.append(esc(fmrow['Size Class']))
-        values += [esc(desc_short), esc(fmrow['Number of Tests'])]
+        values += [
+            clamp_cell(fmrow['Component Description']),
+            esc(fmrow['Number of Tests']),
+        ]
 
         for ci, val in zip(c[1:], values):
             ci.markdown(

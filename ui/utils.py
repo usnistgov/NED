@@ -125,6 +125,16 @@ def esc(val) -> str:
     return html.escape(fmt(val), quote=True)
 
 
+def clamp_cell(val) -> str:
+    """HTML for a table cell whose text is visually clamped to 4 lines with
+    a trailing ellipsis (see `.ned-clamp` in styles.py), with the full text
+    available as a native tooltip on hover. Used for long free-text fields
+    (e.g. Component Description) that would otherwise wrap to as many lines
+    as the text needs and inflate that row's height for every column in it."""
+    text = esc(val)
+    return f'<span class="ned-clamp" title="{text}">{text}</span>'
+
+
 def strip_prefix(val) -> str:
     s = fmt(val)
     parts = s.split(' - ', 1)
