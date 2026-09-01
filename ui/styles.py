@@ -83,6 +83,21 @@ html, body, [data-testid="stAppViewContainer"] {
     color: #1a1a2e;
 }
 
+/* ── Clamped long-text table cells ── */
+/* Long free-text fields (e.g. Component Description) would otherwise wrap
+   to as many lines as the text needs, inflating that row's height for
+   every column in it. Clamping to 4 lines with a trailing ellipsis keeps
+   row heights bounded; pair this class with a `title` attribute (see
+   `clamp_cell()` in utils.py) so hovering still reveals the full text via
+   the browser's native tooltip. */
+.ned-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    cursor: help;
+}
+
 /* ── Dataframe tweaks ── */
 [data-testid="stDataFrame"] {
     border-radius: 8px;

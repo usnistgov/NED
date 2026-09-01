@@ -10,7 +10,7 @@ from db import (
     group_filter_options,
     resolve_group_filter,
 )
-from utils import FIELD_HELP, esc, fmt
+from utils import FIELD_HELP, clamp_cell, esc, fmt
 from views.fragility_model import (
     get_model_attributes,
     lognormal_curves,
@@ -468,8 +468,13 @@ def _render_damage_state_table(
         for g, group in enumerate(group_labels):
             for i, side in enumerate(sides_by_group[group]):
                 value = display.loc[attr_label, (group, side)]
+                cell_html = (
+                    clamp_cell(value)
+                    if attr_label == 'DS Description'
+                    else esc(value)
+                )
                 classes = cell_classes(i == 0 and g > 0, side)
-                cells.append(f'<td{classes}>{esc(value)}</td>')
+                cells.append(f'<td{classes}>{cell_html}</td>')
         body_rows.append(f'<tr>{"".join(cells)}</tr>')
 
     colgroup = '<col style="width:170px">' + '<col>' * len(display.columns)
