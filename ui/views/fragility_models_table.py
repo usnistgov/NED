@@ -4,7 +4,6 @@ import streamlit as st
 from utils import FIELD_HELP, clamp_cell, esc, fmt, header_span
 
 _FM_COLUMN_WIDTHS = {
-    '': 1,
     'Fragility Model ID': 2.5,
     'Component Type': 1.8,
     'Component Detail': 1.8,
@@ -34,14 +33,14 @@ def render_fragility_models_table(
     component_id: str = '',
     key_prefix: str = '',
 ) -> None:
-    """Render the Fragility Models summary table (header row, one row per
-    model with a View button). Shared by the Component and Experiment detail
+    """Render the Fragility Models summary table (header row, one clickable
+    row per model). Shared by the Component and Experiment detail
     views, which both list the fragility models linked to their record.
     Material and Size Class are subcategory fields that are often left blank
     on a given model, so each is only shown as a column when at least one row
     of ``df_fm`` actually has a value — an all-blank column would otherwise
     take up table width on every page for nothing."""
-    headers = ['', 'Fragility Model ID', 'Component Type', 'Component Detail']
+    headers = ['Fragility Model ID', 'Component Type', 'Component Detail']
     if _has_values(df_fm['Material']):
         headers.append('Material')
     if _has_values(df_fm['Size Class']):
@@ -61,30 +60,34 @@ def render_fragility_models_table(
     )
 
     for i, (_, fmrow) in enumerate(df_fm.iterrows()):
-        c = st.columns(widths)
-        query_params = {'fragility_model': fmrow['Fragility Model ID']}
-        if component_id:
-            query_params['component'] = component_id
-        with c[0].container(key=f'view-link-fm-{key_prefix}{i}'):
-            st.page_link(
-                pages['fragility_model'], label='View', query_params=query_params
-            )
-        values = [
-            esc(fmrow['Fragility Model ID']),
-            esc(fmrow['Component Type']),
-            esc(fmrow['Component Detail']),
-        ]
-        if 'Material' in headers:
-            values.append(esc(fmrow['Material']))
-        if 'Size Class' in headers:
-            values.append(esc(fmrow['Size Class']))
-        values += [
-            clamp_cell(fmrow['Component Description']),
-            esc(fmrow['Number of Tests']),
-        ]
+        with st.container(key=f'row-fm-{key_prefix}{i}'):
+            c = st.columns(widths)
+            query_params = {'fragility_model': fmrow['Fragility Model ID']}
+            if component_id:
+                query_params['component'] = component_id
+            # The row's navigation link rides along in the first data
+            # column — styles.py takes it out of flow, so it costs the cell
+            # neither width nor spacing.
+            with c[0]:
+                st.page_link(
+                    pages['fragility_model'], label='View', query_params=query_params
+                )
+            values = [
+                esc(fmrow['Fragility Model ID']),
+                esc(fmrow['Component Type']),
+                esc(fmrow['Component Detail']),
+            ]
+            if 'Material' in headers:
+                values.append(esc(fmrow['Material']))
+            if 'Size Class' in headers:
+                values.append(esc(fmrow['Size Class']))
+            values += [
+                clamp_cell(fmrow['Component Description']),
+                esc(fmrow['Number of Tests']),
+            ]
 
-        for ci, val in zip(c[1:], values):
-            ci.markdown(
-                f"<span style='font-size:0.88rem;'>{val}</span>",
-                unsafe_allow_html=True,
-            )
+            for ci, val in zip(c, values):
+                ci.markdown(
+                    f"<span style='font-size:0.88rem;'>{val}</span>",
+                    unsafe_allow_html=True,
+                )

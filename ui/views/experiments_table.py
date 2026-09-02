@@ -9,7 +9,6 @@ from utils import (
     build_citation,
     clamp_cell,
     csv_safe,
-    doi_url,
     esc,
     fmt,
     header_span,
@@ -20,9 +19,8 @@ from utils import (
 # to paint in the browser, so long tables are paginated.
 _PAGE_SIZE = 50
 
-_EXP_WIDTHS = [1, 1.5, 1.2, 1.5, 1.5, 2, 1.5, 1, 1.2]
+_EXP_WIDTHS = [1.5, 1.2, 1.5, 1.5, 2, 1.5, 1, 1.2]
 _EXP_HEADERS = [
-    '',
     'Reference',
     'Location',
     'Component Type',
@@ -71,8 +69,8 @@ def render_experiments_table(
     key_prefix: str = '',
     page_id: str = '',
 ) -> None:
-    """Render the experiments summary table (header row, one row per
-    experiment with a View button, and a CSV download of ``df_export``).
+    """Render the experiments summary table (header row, one clickable row
+    per experiment, and a CSV download of ``df_export``).
     Shared by the component detail and fragility model views; ``key_prefix``
     keeps widget keys unique across pages, and ``page_id`` (the component or
     fragility model id) keeps filter/pagination state from leaking when the
@@ -80,7 +78,7 @@ def render_experiments_table(
     than ``_PAGE_SIZE`` are paginated; the CSV download always contains every
     experiment, regardless of the EDP/DS Class filters below.
     ``component_id``, when known from the calling page, is carried along in
-    the View link's query params so the destination doesn't have to fall
+    the row link's query params so the destination doesn't have to fall
     back to the database backfill for it."""
     c_edp, c_ds = st.columns(2)
     edp_options = ['All EDPs'] + sorted(df_exp['EDP Metric'].dropna().unique())
@@ -131,35 +129,35 @@ def render_experiments_table(
     )
 
     for i, (_, erow) in enumerate(df_exp.iterrows()):
-        c = st.columns(_EXP_WIDTHS)
-        query_params = {'experiment': erow['experiment_id']}
-        if component_id:
-            query_params['component'] = component_id
-        with c[0].container(key=f'view-link-exp-{key_prefix}{i}'):
-            st.page_link(
-                pages['experiment'], label='View', query_params=query_params
-            )
-        source = esc(erow['Source'])
-        url = doi_url(erow['doi'])
-        if url:
-            source = f'<a href="{esc(url)}" target="_blank">{source}</a>'
-        for ci, val in zip(
-            c[1:],
-            [
-                source,
-                esc(erow['Location']),
-                esc(erow['Component Type']),
-                esc(erow['Component Detail']),
-                clamp_cell(erow['Component Description']),
-                esc(erow['EDP Metric']),
-                esc(erow['EDP Value']),
-                esc(erow['DS Class']),
-            ],
-        ):
-            ci.markdown(
-                f"<span style='font-size:0.88rem;'>{val}</span>",
-                unsafe_allow_html=True,
-            )
+        with st.container(key=f'row-exp-{key_prefix}{i}'):
+            c = st.columns(_EXP_WIDTHS)
+            query_params = {'experiment': erow['experiment_id']}
+            if component_id:
+                query_params['component'] = component_id
+            # The row's navigation link rides along in the first data
+            # column — styles.py takes it out of flow, so it costs the cell
+            # neither width nor spacing.
+            with c[0]:
+                st.page_link(
+                    pages['experiment'], label='View', query_params=query_params
+                )
+            for ci, val in zip(
+                c,
+                [
+                    esc(erow['Source']),
+                    esc(erow['Location']),
+                    esc(erow['Component Type']),
+                    esc(erow['Component Detail']),
+                    clamp_cell(erow['Component Description']),
+                    esc(erow['EDP Metric']),
+                    esc(erow['EDP Value']),
+                    esc(erow['DS Class']),
+                ],
+            ):
+                ci.markdown(
+                    f"<span style='font-size:0.88rem;'>{val}</span>",
+                    unsafe_allow_html=True,
+                )
 
     if paginated:
         c_info, c_page = st.columns([5, 1], vertical_alignment='bottom')

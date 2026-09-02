@@ -86,13 +86,13 @@ html, body, [data-testid="stAppViewContainer"] {
 /* ── Clamped long-text table cells ── */
 /* Long free-text fields (e.g. Component Description) would otherwise wrap
    to as many lines as the text needs, inflating that row's height for
-   every column in it. Clamping to 4 lines with a trailing ellipsis keeps
+   every column in it. Clamping to 3 lines with a trailing ellipsis keeps
    row heights bounded; pair this class with a `title` attribute (see
    `clamp_cell()` in utils.py) so hovering still reveals the full text via
    the browser's native tooltip. */
 .ned-clamp {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     cursor: help;
@@ -171,22 +171,42 @@ div[data-testid="stSelectbox"] > div {
     background-color: rgba(151, 166, 195, 0.15);
 }
 
-/* ── "View" row-action links ── */
-/* Each View link's column is wrapped in a container keyed "view-link-*"
-   (components.py, component_detail.py, experiment.py, experiments_table.py)
-   so it can be targeted separately from the quieter Back links above, which
-   share the same stPageLink-NavLink markup. Giving it a visible border and
-   background at rest — and Streamlit's own button hover colors — makes it
-   read as a button, matching st.button elsewhere in the app, rather than a
-   plain link. */
-[class*="st-key-view-link-"] a[data-testid="stPageLink-NavLink"] {
-    border-color: rgba(49, 51, 63, 0.2);
-    background-color: rgb(255, 255, 255);
+/* ── Clickable table rows ── */
+/* Each data row is wrapped in a container keyed "row-*" (components.py,
+   experiments_table.py, fragility_models_table.py) so the whole row acts as
+   a single click target for its detail page, replacing a separate "View"
+   button. `st.columns()` renders as one flex box per row, so shading the
+   row container's own background on hover paints continuously behind the
+   inter-column gaps too, with no seam at the column boundaries. The row's
+   actual navigation is still a real st.page_link anchor — kept for the same
+   single-history-entry navigation and scroll-restore reasons as the Back
+   links above — just visually hidden (not `display:none`, which would drop
+   it from the tab order) and reached by anywhere-in-row clicks via the
+   delegated click handler in `enable_row_click_navigation` (utils.py).
+   The hiding is applied to the anchor's whole stElementContainer, not just
+   the anchor: the link now shares the row's first data column rather than
+   sitting in a column of its own, and taking the container out of flow
+   entirely means it contributes neither width nor a share of the column's
+   flex `gap` to that cell. `position: relative` on the row keeps the
+   absolutely positioned container anchored to its own row. */
+[class*="st-key-row-"] {
+    position: relative;
 }
-[class*="st-key-view-link-"] a[data-testid="stPageLink-NavLink"]:hover {
-    color: rgb(255, 75, 75);
-    border-color: rgb(255, 75, 75);
-    background-color: rgb(255, 255, 255);
+[class*="st-key-row-"]:hover {
+    background-color: rgba(151, 166, 195, 0.15);
+    cursor: pointer;
+}
+[class*="st-key-row-"]
+    div[data-testid="stElementContainer"]:has(a[data-testid="stPageLink-NavLink"]) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 /* ── Component detail attribute grid ── */

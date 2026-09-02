@@ -114,6 +114,48 @@ def restore_scroll_on_page_change(page: str) -> None:
     )
 
 
+_ROW_CLICK_JS = """
+<script>
+    const win = window.parent;
+    const doc = win.document;
+
+    // Forward a click anywhere in a keyed "row-*" table-row container
+    // (components.py, experiments_table.py, fragility_models_table.py) to
+    // that row's own st.page_link anchor, which styles.py visually hides
+    // (not `display:none`, so it stays reachable via Tab+Enter) so the row
+    // reads as one clickable unit instead of a separate "View" button.
+    // Dispatching a real .click() on the real anchor -- rather than
+    // navigating directly -- means Streamlit's SPA-navigation interception
+    // and the scroll-position save below both fire exactly as they do for a
+    // literal click on a visible link. Guarded on `win` (survives every
+    // rerun) so it's attached at most once per browser tab; a click that
+    // already landed on the anchor is left alone so the synthetic .click()
+    // doesn't recurse back into this same handler.
+    if (!win.__nedRowClickDelegationAttached) {
+        win.__nedRowClickDelegationAttached = true;
+        doc.addEventListener('click', (event) => {
+            const target = event.target;
+            if (!target || !target.closest) return;
+            if (target.closest('a[data-testid="stPageLink-NavLink"]')) return;
+            const row = target.closest('[class*="st-key-row-"]');
+            if (!row) return;
+            const link = row.querySelector('a[data-testid="stPageLink-NavLink"]');
+            if (link) link.click();
+        }, true);
+    }
+</script>
+"""
+
+
+def enable_row_click_navigation() -> None:
+    """Make every keyed "row-*" table-row container clickable anywhere in
+    the row, not just on its st.page_link (see `_ROW_CLICK_JS` above).
+    Injected once, up front, so it covers all four row-tables (Components,
+    Experiments, and the two Fragility Models tables) rather than needing a
+    separate call per page."""
+    components.html(_ROW_CLICK_JS, height=0)
+
+
 def fmt(val) -> str:
     if val is None or (isinstance(val, float) and pd.isna(val)):
         return '—'
@@ -125,13 +167,32 @@ def esc(val) -> str:
     return html.escape(fmt(val), quote=True)
 
 
+# Any run of whitespace — including the newlines that many free-text fields
+# carry over from their source documents (see `clamp_cell` below).
+_WHITESPACE_RUN = re.compile(r'\s+')
+
+
 def clamp_cell(val) -> str:
-    """HTML for a table cell whose text is visually clamped to 4 lines with
+    """HTML for a table cell whose text is visually clamped to 3 lines with
     a trailing ellipsis (see `.ned-clamp` in styles.py), with the full text
     available as a native tooltip on hover. Used for long free-text fields
     (e.g. Component Description) that would otherwise wrap to as many lines
-    as the text needs and inflate that row's height for every column in it."""
-    text = esc(val)
+    as the text needs and inflate that row's height for every column in it.
+
+    Whitespace is collapsed to single spaces first. Many Component
+    Description values arrive as several lines, most often a prose lead-in
+    followed by a numbered list on the following lines, and the cell is
+    handed to `st.markdown(unsafe_allow_html=True)`, which runs a Markdown
+    pass before the HTML is parsed. A list marker at the start of a line
+    interrupts the enclosing paragraph, closing it in the middle of this
+    function's own `<span>` tag — so the opening tag was emitted as literal
+    text ('<span class="ned-clamp" title="...'), the rest rendered as an
+    unclamped list, and the row grew to the description's full height. On
+    one line there are no line starts for a Markdown block construct to
+    begin at, so the span stays inline HTML and the clamp applies. A
+    tooltip is a single run of text either way, and the detail pages still
+    render the description with its original line breaks intact."""
+    text = esc(_WHITESPACE_RUN.sub(' ', fmt(val)))
     return f'<span class="ned-clamp" title="{text}">{text}</span>'
 
 

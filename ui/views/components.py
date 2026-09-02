@@ -35,9 +35,8 @@ _GROUP_FILTER_HELP = (
     'it, or pick a specific group indented beneath it.'
 )
 
-_WIDTHS = [1.1, 1, 2, 2.3, 3.1, 1, 1.6]
+_WIDTHS = [1, 2, 2.3, 3.1, 1, 1.6]
 _HEADERS = [
-    '',
     'ID',
     'Group',
     'Subelement',
@@ -120,19 +119,23 @@ def _render_table(df: pd.DataFrame, pages: dict) -> None:
     )
 
     for i, (_, row) in enumerate(df.iterrows()):
-        c = st.columns(_WIDTHS)
-        with c[0].container(key=f'view-link-comp-{i}'):
-            st.page_link(
-                pages['component_detail'],
-                label='View',
-                query_params={'component': row['ID']},
-            )
-        _cell(c[1], esc(row['ID']))
-        _cell(c[2], esc(row['Group']))
-        _cell(c[3], esc(row['Subelement']))
-        _cell(c[4], esc(row['Name']))
-        _cell(c[5], int(row['# Tests']))
-        _cell(c[6], int(row['# Fragility Models']))
+        with st.container(key=f'row-comp-{i}'):
+            c = st.columns(_WIDTHS)
+            # The row's navigation link rides along in the first data
+            # column — styles.py takes it out of flow, so it costs the cell
+            # neither width nor spacing.
+            with c[0]:
+                st.page_link(
+                    pages['component_detail'],
+                    label='View',
+                    query_params={'component': row['ID']},
+                )
+            _cell(c[0], esc(row['ID']))
+            _cell(c[1], esc(row['Group']))
+            _cell(c[2], esc(row['Subelement']))
+            _cell(c[3], esc(row['Name']))
+            _cell(c[4], int(row['# Tests']))
+            _cell(c[5], int(row['# Fragility Models']))
 
 
 def render(pages: dict) -> None:
