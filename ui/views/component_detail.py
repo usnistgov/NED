@@ -8,8 +8,10 @@ from db import (
     get_component_fragility_models,
     get_component_fragility_models_export,
 )
-from utils import FIELD_HELP, attr, csv_safe, doi_url, esc, fmt, strip_prefix
+from utils import attr, csv_safe, fmt, strip_prefix
+from views.components import last_filters_query_params
 from views.experiments_table import render_experiments_table, with_reference
+from views.fragility_models_table import render_fragility_models_table
 
 
 def _experiments_export(component_id: str) -> pd.DataFrame:
@@ -25,13 +27,17 @@ def _fragilities_export(component_id: str) -> pd.DataFrame:
     return with_reference(get_component_fragility_models_export(component_id))
 
 
-def render() -> None:
-    component_id = st.session_state.get('selected_component_id', '')
+def render(pages: dict) -> None:
+    component_id = st.query_params.get('component', '') or st.session_state.get(
+        'selected_component_id', ''
+    )
+    st.session_state['selected_component_id'] = component_id
 
-    if st.button('← Back to Components'):
-        st.query_params.clear()
-        st.session_state['page'] = 'Components'
-        st.rerun()
+    st.page_link(
+        pages['components'],
+        label='← Back to Components',
+        query_params=last_filters_query_params(),
+    )
 
     df_comp = get_component_detail(component_id)
 
@@ -64,69 +70,13 @@ def render() -> None:
     if df_fm.empty:
         st.info('No fragility models are associated with this component.')
     else:
-        _FM_WIDTHS = [1, 1.5, 2, 1.5, 1.5, 4, 2]
-        _FM_HEADERS = [
-            '',
-            'Model ID',
-            'Component Detail',
-            'Material',
-            'Size Class',
-            'Component Description',
-            'Reference',
-        ]
-        _FM_HEADER_HELP = {
-            'Component Detail': FIELD_HELP['comp_detail'],
-            'Material': FIELD_HELP['material'],
-            'Size Class': FIELD_HELP['size_class'],
-        }
-
-        h = st.columns(_FM_WIDTHS)
-        for col, label in zip(h, _FM_HEADERS):
-            col.markdown(
-                f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
-                f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
-                unsafe_allow_html=True,
-                help=_FM_HEADER_HELP.get(label),
-            )
-        st.markdown(
-            "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
-            unsafe_allow_html=True,
-        )
-
-        for _, fmrow in df_fm.iterrows():
-            c = st.columns(_FM_WIDTHS)
-            if c[0].button('View', key=f'fm_{fmrow["fragility_model_id"]}'):
-                st.session_state['selected_fragility_model_id'] = fmrow[
-                    'fragility_model_id'
-                ]
-                st.session_state['page'] = 'Fragility Model Detail'
-                st.query_params['fragility_model'] = fmrow['fragility_model_id']
-                st.rerun()
-            desc = str(fmrow['Component Description'])
-            desc_short = desc[:80] + '…' if len(desc) > 80 else desc
-            reference = esc(fmrow['Reference'])
-            url = doi_url(fmrow['doi'])
-            if url:
-                reference = f'<a href="{esc(url)}" target="_blank">{reference}</a>'
-            for ci, val in zip(
-                c[1:],
-                [
-                    esc(fmrow['Model ID']),
-                    esc(fmrow['Component Detail']),
-                    esc(fmrow['Material']),
-                    esc(fmrow['Size Class']),
-                    esc(desc_short),
-                    reference,
-                ],
-            ):
-                ci.markdown(
-                    f"<span style='font-size:0.88rem;'>{val}</span>",
-                    unsafe_allow_html=True,
-                )
+        render_fragility_models_table(df_fm, pages, component_id=component_id)
 
         st.download_button(
             'Download Fragilities as CSV',
-            csv_safe(_fragilities_export(component_id)).to_csv(index=False),
+            csv_safe(_fragilities_export(component_id))
+            .to_csv(index=False)
+            .encode('utf-8-sig'),
             file_name=f'{component_id}_fragility_models.csv',
             mime='text/csv',
             key='fm_csv',
@@ -145,4 +95,7 @@ def render() -> None:
             df_exp,
             _experiments_export(component_id),
             file_name=f'{component_id}_experiments.csv',
+            pages=pages,
+            component_id=component_id,
+            page_id=component_id,
         )

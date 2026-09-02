@@ -1,8 +1,8 @@
 import pandas as pd
 import streamlit as st
 
-from db import get_components, get_groups, get_major_groups
-from utils import esc, fmt
+from db import get_components, group_filter_options, resolve_group_filter
+from utils import FIELD_HELP, esc, header_span
 
 # Synonym groups for component search.
 #
@@ -29,6 +29,56 @@ _SEARCH_SYNONYMS: list[list[str]] = [
     ['hvac', 'duct', 'ductwork', 'diffuser', 'air handler', 'air distribution'],
 ]
 
+_GROUP_FILTER_HELP = (
+    f'{FIELD_HELP["major_group"]} {FIELD_HELP["group"]} Major groups are '
+    'listed above their groups — pick one to filter to everything under '
+    'it, or pick a specific group indented beneath it.'
+)
+
+_WIDTHS = [1, 2, 2.3, 3.1, 1, 1.6]
+_HEADERS = [
+    'ID',
+    'Group',
+    'Subelement',
+    'Component',
+    '# Tests',
+    '# Fragility Models',
+]
+_COLUMN_HELP = {'Group': FIELD_HELP['group'], 'Subelement': FIELD_HELP['subelement']}
+
+# Session-state key the current Group/Search filters are mirrored into,
+# alongside the URL, so the "Back to Components" link on the detail page can
+# still send the user back to them — that link sets an explicit target URL
+# rather than inheriting the one being left, so the URL alone isn't enough
+# there the way it is for a real browser Back/Forward press.
+_FILTER_STATE_KEY = 'components_last_filters'
+
+
+def last_filters_query_params() -> dict[str, str]:
+    """The Group/Search filters last applied on this page, as page_link
+    query params, for the detail pages' "Back to Components" link."""
+    return dict(st.session_state.get(_FILTER_STATE_KEY, {}))
+
+
+def _sync_filters(selected_option: str, search: str, all_groups_option: str) -> None:
+    """Mirror the current filters into the URL — so a real browser
+    Back/Forward restores them and the view can be bookmarked/shared — and
+    into session_state (see `_FILTER_STATE_KEY`). Only non-default values are
+    written, keeping the URL clean when no filter is active."""
+    active: dict[str, str] = {}
+    if selected_option != all_groups_option:
+        active['group'] = selected_option
+    if search:
+        active['search'] = search
+
+    for name in ('group', 'search'):
+        if name in active:
+            st.query_params[name] = active[name]
+        elif name in st.query_params:
+            del st.query_params[name]
+
+    st.session_state[_FILTER_STATE_KEY] = active
+
 
 def _expand_search_terms(query: str) -> list[str]:
     """Return the search query plus any synonymous terms.
@@ -46,7 +96,49 @@ def _expand_search_terms(query: str) -> list[str]:
     return [t for t in terms if t]
 
 
-def render() -> None:
+def _cell(col, value) -> None:
+    """Render one cell's text at the table's body font size."""
+    col.markdown(
+        f"<span style='font-size:0.88rem;'>{value}</span>",
+        unsafe_allow_html=True,
+    )
+
+
+def _render_table(df: pd.DataFrame, pages: dict) -> None:
+    """Render the header row plus one plain row per component."""
+    h = st.columns(_WIDTHS)
+    for col, label in zip(h, _HEADERS):
+        col.markdown(
+            header_span(label, _COLUMN_HELP.get(label)),
+            unsafe_allow_html=True,
+        )
+
+    st.markdown(
+        "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
+        unsafe_allow_html=True,
+    )
+
+    for i, (_, row) in enumerate(df.iterrows()):
+        with st.container(key=f'row-comp-{i}'):
+            c = st.columns(_WIDTHS)
+            # The row's navigation link rides along in the first data
+            # column — styles.py takes it out of flow, so it costs the cell
+            # neither width nor spacing.
+            with c[0]:
+                st.page_link(
+                    pages['component_detail'],
+                    label='View',
+                    query_params={'component': row['ID']},
+                )
+            _cell(c[0], esc(row['ID']))
+            _cell(c[1], esc(row['Group']))
+            _cell(c[2], esc(row['Subelement']))
+            _cell(c[3], esc(row['Name']))
+            _cell(c[4], int(row['# Tests']))
+            _cell(c[5], int(row['# Fragility Models']))
+
+
+def render(pages: dict) -> None:
     st.markdown(
         '<div class="ned-header"><h1>Components</h1></div>',
         unsafe_allow_html=True,
@@ -57,25 +149,39 @@ def render() -> None:
 
     st.markdown('---')
 
-    major_groups = ['All groups'] + get_major_groups()
-    selected_group = st.selectbox('NISTIR Major Group', major_groups)
+    group_options, group_labels = group_filter_options()
+    saved_filters = st.session_state.get(_FILTER_STATE_KEY, {})
+    default_group = st.query_params.get('group') or saved_filters.get('group')
+    if default_group not in group_options:
+        default_group = group_options[0]
+    default_search = st.query_params.get('search') or saved_filters.get('search', '')
 
-    groups = ['All groups'] + get_groups(selected_group)
-    selected_subgroup = st.selectbox('NISTIR Group', groups)
+    selected_option = st.selectbox(
+        'Group',
+        group_options,
+        index=group_options.index(default_group),
+        format_func=lambda v: group_labels.get(v, v),
+        help=_GROUP_FILTER_HELP,
+        key='components_group_filter',
+    )
+    major_filter, group_filter = resolve_group_filter(selected_option)
 
     search = st.text_input(
         'Search',
+        value=default_search,
         placeholder='Search by name, ID, element, sub-element, or keyword…',
         label_visibility='collapsed',
+        key='components_search',
     )
+
+    _sync_filters(selected_option, search, group_options[0])
 
     df_display = df_all.copy()
 
-    if selected_group != 'All groups':
-        df_display = df_display[df_display['major_group'] == selected_group]
-
-    if selected_subgroup != 'All groups':
-        df_display = df_display[df_display['Group'] == selected_subgroup]
+    if major_filter:
+        df_display = df_display[df_display['major_group'] == major_filter]
+    if group_filter:
+        df_display = df_display[df_display['Group'] == group_filter]
 
     if search:
         terms = _expand_search_terms(search)
@@ -88,56 +194,10 @@ def render() -> None:
                 )
         df_display = df_display[mask]
 
-    df_display = df_display.drop(
-        columns=['major_group', 'Group', 'Subelement']
-    ).reset_index(drop=True)
-
     if df_display.empty:
         st.info('No components match the current filters.')
-    else:
-        _WIDTHS = [1, 1.2, 2.5, 5, 1, 1.5]
+        return
 
-        h = st.columns(_WIDTHS)
-        for col, label in zip(
-            h, ['', 'ID', 'Element', 'Name', '# Tests', '# Fragility Models']
-        ):
-            col.markdown(
-                f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
-                f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
-                unsafe_allow_html=True,
-            )
+    _render_table(df_display, pages)
 
-        st.markdown(
-            "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
-            unsafe_allow_html=True,
-        )
-
-        for _, row in df_display.iterrows():
-            c = st.columns(_WIDTHS)
-            if c[0].button('View', key=f'comp_{row["ID"]}'):
-                st.session_state['selected_component_id'] = row['ID']
-                st.session_state['page'] = 'Component Detail'
-                st.query_params['component'] = row['ID']
-                st.rerun()
-            c[1].markdown(
-                f"<span style='font-size:0.88rem;'>{esc(row['ID'])}</span>",
-                unsafe_allow_html=True,
-            )
-            c[2].markdown(
-                f"<span style='font-size:0.88rem;'>{esc(row['Element'])}</span>",
-                unsafe_allow_html=True,
-            )
-            c[3].markdown(
-                f"<span style='font-size:0.88rem;'>{esc(row['Name'])}</span>",
-                unsafe_allow_html=True,
-            )
-            c[4].markdown(
-                f"<span style='font-size:0.88rem;'>{int(row['# Tests'])}</span>",
-                unsafe_allow_html=True,
-            )
-            c[5].markdown(
-                f"<span style='font-size:0.88rem;'>{int(row['# Fragility Models'])}</span>",
-                unsafe_allow_html=True,
-            )
-
-        st.caption(f'Showing {len(df_display)} of {total_components} components')
+    st.caption(f'Showing {len(df_display)} of {total_components} components')

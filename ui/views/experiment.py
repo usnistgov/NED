@@ -3,21 +3,41 @@ import json
 import streamlit as st
 
 from db import (
+    get_component_for_experiment,
     get_experiment_detail,
     get_experiment_fragility_models,
     get_reference,
 )
-from utils import FIELD_HELP, attr, build_citation, doi_url, esc, fmt
+from utils import FIELD_HELP, attr, build_citation, fmt
+from views.fragility_models_table import render_fragility_models_table
 
 
-def render() -> None:
-    experiment_id = st.session_state.get('selected_experiment_id', '')
+def render(pages: dict) -> None:
+    experiment_id = st.query_params.get('experiment', '') or st.session_state.get(
+        'selected_experiment_id', ''
+    )
+    st.session_state['selected_experiment_id'] = experiment_id
 
-    if st.button('← Back to Component'):
-        st.session_state['page'] = 'Component Detail'
-        if 'experiment' in st.query_params:
-            del st.query_params['experiment']
-        st.rerun()
+    # Deep-link backfill, same as the fragility model view: a URL with only
+    # `?experiment=` (no `component`) needs the owning component looked up
+    # before "Back to Component" is drawn. Only write st.query_params when
+    # it's actually missing — see the matching comment in fragility_model.py
+    # for why re-asserting an unchanged value on every rerun is harmful.
+    component_id = st.query_params.get('component', '') or st.session_state.get(
+        'selected_component_id', ''
+    )
+    if not component_id and experiment_id:
+        component_id = get_component_for_experiment(experiment_id) or ''
+        if component_id:
+            st.query_params['component'] = component_id
+    if component_id:
+        st.session_state['selected_component_id'] = component_id
+
+    st.page_link(
+        pages['component_detail'],
+        label='← Back to Component',
+        query_params={'component': component_id},
+    )
 
     df_exp_detail = get_experiment_detail(experiment_id)
 
@@ -119,67 +139,4 @@ def render() -> None:
     if df_fm.empty:
         st.info('No fragility models currently cite this experiment.')
     else:
-        component_id = st.session_state.get('selected_component_id', '')
-        _FM_WIDTHS = [2, 1.5, 2, 1.5, 1.5, 4, 1]
-        _FM_HEADERS = [
-            'Reference',
-            'Model ID',
-            'Component Detail',
-            'Material',
-            'Size Class',
-            'Component Description',
-            '',
-        ]
-        _FM_HEADER_HELP = {
-            'Component Detail': FIELD_HELP['comp_detail'],
-            'Material': FIELD_HELP['material'],
-            'Size Class': FIELD_HELP['size_class'],
-        }
-
-        h = st.columns(_FM_WIDTHS)
-        for col, label in zip(h, _FM_HEADERS):
-            col.markdown(
-                f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
-                f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>",
-                unsafe_allow_html=True,
-                help=_FM_HEADER_HELP.get(label),
-            )
-        st.markdown(
-            "<hr style='margin:0.25rem 0 0.1rem;border:none;border-top:2px solid #e0e0e0;'>",
-            unsafe_allow_html=True,
-        )
-
-        for _, fmrow in df_fm.iterrows():
-            c = st.columns(_FM_WIDTHS)
-            desc = str(fmrow['Component Description'])
-            desc_short = desc[:80] + '…' if len(desc) > 80 else desc
-            reference = esc(fmrow['Reference'])
-            url = doi_url(fmrow['doi'])
-            if url:
-                reference = f'<a href="{esc(url)}" target="_blank">{reference}</a>'
-            for ci, val in zip(
-                c[:6],
-                [
-                    reference,
-                    esc(fmrow['Model ID']),
-                    esc(fmrow['Component Detail']),
-                    esc(fmrow['Material']),
-                    esc(fmrow['Size Class']),
-                    esc(desc_short),
-                ],
-            ):
-                ci.markdown(
-                    f"<span style='font-size:0.88rem;'>{val}</span>",
-                    unsafe_allow_html=True,
-                )
-            if c[6].button('View', key=f'fm_{fmrow["fragility_model_id"]}'):
-                st.session_state['selected_fragility_model_id'] = fmrow[
-                    'fragility_model_id'
-                ]
-                st.session_state['page'] = 'Fragility Model Detail'
-                st.query_params['fragility_model'] = fmrow['fragility_model_id']
-                if component_id:
-                    st.query_params['component'] = component_id
-                if 'experiment' in st.query_params:
-                    del st.query_params['experiment']
-                st.rerun()
+        render_fragility_models_table(df_fm, pages, component_id=component_id)
