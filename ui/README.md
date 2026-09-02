@@ -89,8 +89,7 @@ helper functions (`utils.py`, `auth.py::_load_credentials`, the component-search
 synonym expansion in `views/components.py`) and the SQLite query functions in
 `db.py`, run against a small hand-seeded fixture database built fresh in-memory
 for each test (no real `db.sqlite3` needed). There are no `AppTest`-based
-interaction/UI tests yet — see the "Phase 3" discussion in the T003 task notes
-for the tradeoffs there.
+interaction/UI tests yet.
 
 **Install and run:**
 
