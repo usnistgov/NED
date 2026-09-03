@@ -46,6 +46,29 @@ def _expand_search_terms(query: str) -> list[str]:
     return [t for t in terms if t]
 
 
+def _filter_by_search(df: pd.DataFrame, search: str) -> pd.DataFrame:
+    """Return the rows of `df` matching `search`, or all rows if it is blank.
+
+    The guard is on `search.strip()`, not on `search`. A whitespace-only
+    query is truthy but _expand_search_terms strips it to '', which is a
+    substring of every synonym term, so every group is pulled in while the
+    query itself is dropped from the returned list. Filtering on that gives
+    an OR over every synonym with nothing that matches everything, silently
+    hiding any row that mentions no synonym -- so blank input has to skip
+    filtering entirely rather than fall through to the mask.
+    """
+    if not search.strip():
+        return df
+
+    terms = _expand_search_terms(search)
+    search_cols = ['ID', 'Name', 'Element', 'Subelement']
+    mask = pd.Series(False, index=df.index)
+    for term in terms:
+        for col in search_cols:
+            mask |= df[col].str.contains(term, case=False, na=False, regex=False)
+    return df[mask]
+
+
 def render() -> None:
     st.markdown(
         '<div class="ned-header"><h1>Components</h1></div>',
@@ -77,16 +100,7 @@ def render() -> None:
     if selected_subgroup != 'All groups':
         df_display = df_display[df_display['Group'] == selected_subgroup]
 
-    if search:
-        terms = _expand_search_terms(search)
-        search_cols = ['ID', 'Name', 'Element', 'Subelement']
-        mask = pd.Series(False, index=df_display.index)
-        for term in terms:
-            for col in search_cols:
-                mask |= df_display[col].str.contains(
-                    term, case=False, na=False, regex=False
-                )
-        df_display = df_display[mask]
+    df_display = _filter_by_search(df_display, search)
 
     df_display = df_display.drop(
         columns=['major_group', 'Group', 'Subelement']

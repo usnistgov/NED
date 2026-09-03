@@ -82,6 +82,27 @@ The app supports query-parameter navigation for bookmarking and sharing:
 | `?fragility_model=<id>` | Fragility model detail |
 | `?experiment=<id>` | Experiment detail |
 
+## Testing
+
+`ui/tests/` covers the parts of the UI that don't require a running browser: pure
+helper functions (`utils.py`, `auth.py::_load_credentials`, the component-search
+synonym expansion in `views/components.py`) and the SQLite query functions in
+`db.py`, run against a small hand-seeded fixture database built fresh in-memory
+for each test (no real `db.sqlite3` needed). There are no `AppTest`-based
+interaction/UI tests yet.
+
+**Install and run:**
+
+```bash
+pip install -r ui/requirements.txt -r requirements-dev.txt
+python -m pytest ui/tests -q
+```
+
+Run from the repository root (not from inside `ui/`) — `ui/tests/conftest.py`
+puts `ui/` on `sys.path` itself so the tests can use the same flat imports
+(`from db import ...`) that `ui/`'s own modules use. This is also what CI runs
+(`ui_test` job in `.github/workflows/ci.yml`).
+
 ## Database schema
 
 All data lives in a single SQLite file. The app is strictly read-only.
