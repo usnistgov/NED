@@ -127,7 +127,14 @@ def _seed(conn: sqlite3.Connection) -> None:
     one major group (so Group letter-recombination + get_groups filtering are
     exercised), a component with no subelement (fillna('—') path), and one
     fully wired-up component -> experiment -> fragility model -> curve chain
-    (via both bridge tables) for the relational queries."""
+    (via both bridge tables) for the relational queries.
+
+    D2010 additionally carries 2 experiments and 2 fragility models. The
+    components query LEFT JOINs both off the same component in one
+    statement, so SQLite forms their cross-product (2 x 2 = 4 rows) before
+    aggregating, and COUNT(DISTINCT ...) is the only thing turning that back
+    into 2. A component with 1 of each cannot show this, since 1 x 1 = 1
+    makes COUNT and COUNT(DISTINCT) agree."""
     conn.executescript(_SCHEMA)
 
     conn.executemany(
@@ -201,6 +208,17 @@ def _seed(conn: sqlite3.Connection) -> None:
                 0,
                 json.dumps({'URL': 'https://example.com/paper'}),
             ),
+            (
+                'Lee-2022',
+                '',
+                'Sprinkler Riser Shake Table Tests',
+                'Lee',
+                2022,
+                'Experiment',
+                '',
+                0,
+                json.dumps({'DOI': '10.1000/abc789'}),
+            ),
         ],
     )
 
@@ -239,27 +257,77 @@ def _seed(conn: sqlite3.Connection) -> None:
                 1,
                 'No damage',
             ),
+            (
+                'EXP-003',
+                'Lee-2022',
+                'D.20.1.0',
+                'S1',
+                'Dynamic, uniaxial',
+                'Riser pipe',
+                'Joint leakage',
+                'Peak Floor Acceleration, horizontal',
+                'g',
+                0.8,
+                1,
+                'Consequential',
+            ),
+            (
+                'EXP-004',
+                'Lee-2022',
+                'D.20.1.0',
+                'S2',
+                'Dynamic, uniaxial',
+                'Riser bracing',
+                'Brace buckling',
+                'Peak Floor Acceleration, horizontal',
+                'g',
+                1.2,
+                2,
+                'Consequential',
+            ),
         ],
     )
 
-    conn.execute(
+    conn.executemany(
         'INSERT INTO ned_app_fragilitymodel '
         '(fragility_model_id, reference_id, model_id, comp_description, '
         'edp_metric, edp_unit) VALUES (?, ?, ?, ?, ?, ?)',
-        (
-            'Smith-2020|M1',
-            'Smith-2020',
-            'M1',
-            'Wall panel fragility',
-            'Story Drift Ratio',
-            'Ratio',
-        ),
+        [
+            (
+                'Smith-2020|M1',
+                'Smith-2020',
+                'M1',
+                'Wall panel fragility',
+                'Story Drift Ratio',
+                'Ratio',
+            ),
+            (
+                'Lee-2022|M1',
+                'Lee-2022',
+                'M1',
+                'Riser pipe fragility',
+                'Peak Floor Acceleration, horizontal',
+                'g',
+            ),
+            (
+                'Lee-2022|M2',
+                'Lee-2022',
+                'M2',
+                'Riser bracing fragility',
+                'Peak Floor Acceleration, horizontal',
+                'g',
+            ),
+        ],
     )
 
-    conn.execute(
+    conn.executemany(
         'INSERT INTO ned_app_componentfragilitymodelbridge '
         '(component_id, fragility_model_id) VALUES (?, ?)',
-        ('B.20.1.1', 'Smith-2020|M1'),
+        [
+            ('B.20.1.1', 'Smith-2020|M1'),
+            ('D.20.1.0', 'Lee-2022|M1'),
+            ('D.20.1.0', 'Lee-2022|M2'),
+        ],
     )
     conn.execute(
         'INSERT INTO ned_app_experimentfragilitymodelbridge '
