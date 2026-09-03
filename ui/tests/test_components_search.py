@@ -1,4 +1,10 @@
-from views.components import _SEARCH_SYNONYMS, _expand_search_terms
+import pandas as pd
+
+from views.components import (
+    _SEARCH_SYNONYMS,
+    _expand_search_terms,
+    _filter_by_search,
+)
 
 
 class TestExpandSearchTerms:
@@ -47,15 +53,20 @@ class TestExpandSearchTerms:
 
     def test_empty_query_matches_every_synonym_group(self):
         # An empty string is a substring of every term, so every group's
-        # membership check passes. render() only calls this under
-        # `if search:`, so an empty query is never reached in practice --
-        # this documents the function's actual behavior in isolation rather
-        # than the guarded call site.
+        # membership check passes. _filter_by_search only calls this once
+        # search.strip() is non-empty, so a blank query never reaches it in
+        # practice -- this documents the function's behavior in isolation
+        # rather than the guarded call site.
         terms = set(_expand_search_terms(''))
         expected = {term for group in _SEARCH_SYNONYMS for term in group}
         assert terms == expected
 
-    def test_whitespace_only_query_behaves_like_empty(self):
+    def test_whitespace_only_query_expands_to_every_synonym_group(self):
+        # Same mechanism as the empty case: the query is stripped to ''
+        # before the membership check. Note the stripped query itself is
+        # dropped by the final filter, so nothing in the returned list
+        # matches every row -- see TestFilterBySearch for why that makes
+        # the call-site guard load-bearing.
         terms = set(_expand_search_terms('   '))
         expected = {term for group in _SEARCH_SYNONYMS for term in group}
         assert terms == expected
@@ -71,3 +82,56 @@ class TestExpandSearchTerms:
     def test_result_has_no_duplicates(self):
         terms = _expand_search_terms('pipe')
         assert len(terms) == len(set(terms))
+
+
+class TestFilterBySearch:
+    """Search filtering, including the blank-query guard that decides
+    whether filtering runs at all."""
+
+    @staticmethod
+    def _df() -> pd.DataFrame:
+        return pd.DataFrame({
+            'ID': ['B2011', 'B3010', 'D2010'],
+            'Name': ['Curtain Wall', 'Built-Up Roofing', 'Sprinkler Riser'],
+            'Element': ['Exterior Walls', 'Roof Coverings', 'Fire Protection'],
+            'Subelement': ['Curtain Walls', '—', '—'],
+        })
+
+    def test_empty_query_returns_every_row(self):
+        df = self._df()
+        assert _filter_by_search(df, '')['ID'].tolist() == df['ID'].tolist()
+
+    def test_whitespace_only_query_returns_every_row(self):
+        # Regression: '   ' is truthy, so guarding on `search` rather than
+        # `search.strip()` let filtering run. The expansion is an OR over
+        # every synonym with no catch-all term, so rows mentioning no
+        # synonym -- here 'Built-Up Roofing' -- silently disappeared.
+        df = self._df()
+        assert _filter_by_search(df, '   ')['ID'].tolist() == df['ID'].tolist()
+
+    def test_whitespace_only_query_returns_every_row_from_real_query(
+        self, db_module
+    ):
+        # Same assertion against the columns get_components() actually
+        # emits, so a renamed alias in _COMPONENTS_QUERY is caught too.
+        df = db_module.get_components()
+        assert len(_filter_by_search(df, '   ')) == len(df)
+
+    def test_matches_are_case_insensitive_and_span_searchable_columns(self):
+        df = self._df()
+        assert _filter_by_search(df, 'ROOF')['ID'].tolist() == ['B3010']
+        assert _filter_by_search(df, 'b2011')['ID'].tolist() == ['B2011']
+
+    def test_synonym_expansion_widens_the_match(self):
+        # 'standpipe' appears nowhere in the data, but it shares a
+        # synonym group with 'sprinkler', which matches D2010's Name.
+        df = self._df()
+        assert _filter_by_search(df, 'standpipe')['ID'].tolist() == ['D2010']
+
+    def test_query_matching_nothing_returns_empty(self):
+        assert _filter_by_search(self._df(), 'zzzz').empty
+
+    def test_does_not_mutate_input_dataframe(self):
+        df = self._df()
+        _filter_by_search(df, 'roof')
+        assert len(df) == 3
