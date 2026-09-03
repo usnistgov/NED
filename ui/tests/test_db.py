@@ -1,3 +1,5 @@
+import sqlite3
+
 import pandas as pd
 
 from db import _shape_components_df
@@ -80,10 +82,30 @@ class TestGetComponents:
         assert df.loc['B2011', 'Group'] == 'B20 - Exterior Enclosure'
         assert df.loc['B3010', 'Group'] == 'B30 - Roofing'
 
-    def test_result_is_cached_across_calls(self, db_module):
+    def test_result_is_cached_across_calls(self, db_module, monkeypatch):
+        """The second call must be served from cache without re-querying.
+
+        Asserting only that the two results are equal -- or that they are
+        distinct objects -- does not separate the cached case from the
+        uncached one: pd.read_sql builds a fresh, equal DataFrame on every
+        call, so both assertions hold with @st.cache_data removed. Counting
+        connections is what actually pins the decorator down.
+        """
+        connect_count = 0
+        real_connect = sqlite3.connect
+
+        def counting_connect(*args, **kwargs):
+            nonlocal connect_count
+            connect_count += 1
+            return real_connect(*args, **kwargs)
+
+        monkeypatch.setattr(sqlite3, 'connect', counting_connect)
+
         first = db_module.get_components()
+        assert connect_count == 1
         second = db_module.get_components()
-        assert first is not second  # cache_data returns copies
+        assert connect_count == 1
+
         pd.testing.assert_frame_equal(first, second)
 
 
