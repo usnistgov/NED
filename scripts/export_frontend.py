@@ -5,8 +5,11 @@ NED is the single source of truth for the front-end *code* (authored in ``ui/``)
 and for the database (built by ``manage.py ingest``). This script pushes both
 into a clone of the deployment repo (ned-frontend):
 
-    1. Replace the NED-owned code paths (``OWNS``) in the front-end repo.
-    2. Inject the freshly built ``db.sqlite3`` at ``backend/db.sqlite3``.
+    1. Regenerate ``ui/requirements.txt`` from ``uv.lock`` (the ``ui``
+       dependency group), so the front-end repo receives the same pinned
+       versions NED tests against.
+    2. Replace the NED-owned code paths (``OWNS``) in the front-end repo.
+    3. Inject the freshly built ``db.sqlite3`` at ``backend/db.sqlite3``.
 
 The changes are written to the front-end repo's working tree only; staging,
 committing, and pushing are left to you to do manually.
@@ -55,6 +58,23 @@ OWNS = [
 
 # Built into the front-end repo for deployment; gitignored / untracked in NED.
 DB_DEST = 'backend/db.sqlite3'
+
+# Writes ui/requirements.txt from the lock. --locked refuses a lock that is
+# out of date with pyproject.toml, so stale pins are never published.
+EXPORT_CMD = [
+    'uv',
+    'export',
+    '--locked',
+    '--format',
+    'requirements.txt',
+    '--only-group',
+    'ui',
+    '--no-hashes',
+    '--no-annotate',
+    '--no-header',
+    '-o',
+    'ui/requirements.txt',
+]
 
 # Safety net: never publish anything that looks like a credential into the repo.
 _SECRET_HINTS = ('secret', '.env')
@@ -109,14 +129,24 @@ def main() -> int:
             'or pass --rebuild-db.'
         )
 
-    # 1. Publish NED-owned code paths.
+    # 1. Regenerate the pinned requirements from the lock.
+    if shutil.which('uv') is None:
+        sys.exit(
+            'error: uv is not on PATH; it is needed to regenerate ui/requirements.txt'
+        )
+    try:
+        run(EXPORT_CMD, cwd=NED)
+    except subprocess.CalledProcessError as exc:
+        sys.exit(f'error: uv export failed with exit status {exc.returncode}')
+
+    # 2. Publish NED-owned code paths.
     for path in OWNS:
         src = UI / path
         if not src.exists():
             sys.exit(f'error: ui/{path} is missing; cannot export an incomplete UI')
         _copy(src, fe / path)
 
-    # 2. Inject the database.
+    # 3. Inject the database.
     _copy(DB, fe / DB_DEST)
 
     sha = (
