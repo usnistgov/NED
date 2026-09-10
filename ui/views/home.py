@@ -6,9 +6,18 @@ from db import get_components
 def render() -> None:
     df_home = get_components()
 
+    # A horizontal container rather than columns: columns split the row into
+    # fixed fractions, which strands a wide gap between the logo and the title.
+    with st.container(horizontal=True, vertical_alignment='center', gap='small'):
+        st.image('assets/logo.png', width=90)
+        st.markdown(
+            '<div class="ned-header"><h1>Nonstructural Element Database</h1></div>',
+            unsafe_allow_html=True,
+        )
+
     st.markdown('---')
 
-    st.markdown('## What is NED?')
+    st.markdown('### What is NED?')
     st.markdown(
         """
         The **Nonstructural Element Database (NED)** is a curated relational database collecting experimental,
@@ -27,7 +36,7 @@ def render() -> None:
 
     st.markdown('---')
 
-    st.markdown('## Key Features')
+    st.markdown('### Key Features')
     col1, col2 = st.columns(2)
 
     with col1:
@@ -60,7 +69,7 @@ def render() -> None:
 
     st.markdown('---')
 
-    st.markdown('## Database Architecture')
+    st.markdown('### Database Architecture')
     st.markdown(
         """
         NED is a relational SQLite database with five core tables and two bridge tables
@@ -89,7 +98,7 @@ def render() -> None:
             Experiment     -> FragilityModel  [style=dashed dir=both]
         }
         """,
-        width='stretch',
+        width=650,
     )
     st.caption('— solid arrow: one-to-many    · · · dashed arrow: many-to-many')
 
@@ -115,19 +124,19 @@ def render() -> None:
 
     st.markdown('---')
 
-    st.markdown('## Using This App')
+    st.markdown('### Using This App')
     st.markdown(
         """
-        Use the **sidebar** to navigate between pages:
+        Use the **top navigation bar** to move between pages:
 
-        - **Home** — this page; project overview and documentation.
-        - **Components** — browse, filter, and search all component types in the database.
+        - **About NED** — this page; project overview and documentation.
+        - **Component database** — browse, filter, and search all component types in the database.
         """
     )
 
     st.markdown('---')
 
-    st.markdown('## Learn More')
+    st.markdown('### Learn More')
     st.markdown(
         """
         The full backend codebase — including the database schema, ingestion pipeline,
