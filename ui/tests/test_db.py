@@ -1,3 +1,5 @@
+import sqlite3
+
 import pandas as pd
 
 from db import _shape_components_df
@@ -75,15 +77,45 @@ class TestGetComponents:
         assert df.loc['B3010', '# Tests'] == 0
         assert df.loc['B3010', '# Fragility Models'] == 0
 
+    def test_counts_deduplicate_the_join_cross_product(self, db_module):
+        """D2010 has 2 experiments and 2 fragility models, which the two
+        LEFT JOINs in _COMPONENTS_QUERY expand into 4 rows before the
+        aggregate runs. Both counts must report 2, not 4 -- dropping either
+        COUNT(DISTINCT ...) yields 4 here.
+        """
+        df = db_module.get_components().set_index('ID')
+        assert df.loc['D2010', '# Tests'] == 2
+        assert df.loc['D2010', '# Fragility Models'] == 2
+
     def test_group_letter_prefix_applied_through_full_query(self, db_module):
         df = db_module.get_components().set_index('ID')
         assert df.loc['B2011', 'Group'] == 'B20 - Exterior Enclosure'
         assert df.loc['B3010', 'Group'] == 'B30 - Roofing'
 
-    def test_result_is_cached_across_calls(self, db_module):
+    def test_result_is_cached_across_calls(self, db_module, monkeypatch):
+        """The second call must be served from cache without re-querying.
+
+        Asserting only that the two results are equal -- or that they are
+        distinct objects -- does not separate the cached case from the
+        uncached one: pd.read_sql builds a fresh, equal DataFrame on every
+        call, so both assertions hold with @st.cache_data removed. Counting
+        connections is what actually pins the decorator down.
+        """
+        connect_count = 0
+        real_connect = sqlite3.connect
+
+        def counting_connect(*args, **kwargs):
+            nonlocal connect_count
+            connect_count += 1
+            return real_connect(*args, **kwargs)
+
+        monkeypatch.setattr(sqlite3, 'connect', counting_connect)
+
         first = db_module.get_components()
+        assert connect_count == 1
         second = db_module.get_components()
-        assert first is not second  # cache_data returns copies
+        assert connect_count == 1
+
         pd.testing.assert_frame_equal(first, second)
 
 
@@ -138,10 +170,14 @@ class TestGetComponentFragilityModels:
 
 class TestGetFragilityModels:
     def test_returns_all_models_with_component_id(self, db_module):
-        df = db_module.get_fragility_models()
-        assert len(df) == 1
-        assert df.iloc[0]['fragility_model_id'] == 'Smith-2020|M1'
-        assert df.iloc[0]['comp_id'] == 'B2011'
+        df = db_module.get_fragility_models().set_index('fragility_model_id')
+        assert sorted(df.index) == [
+            'Lee-2022|M1',
+            'Lee-2022|M2',
+            'Smith-2020|M1',
+        ]
+        assert df.loc['Smith-2020|M1', 'comp_id'] == 'B2011'
+        assert df.loc['Lee-2022|M1', 'comp_id'] == 'D2010'
 
 
 class TestGetReference:
