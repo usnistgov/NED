@@ -4,6 +4,70 @@
 #### Nonstructural Element Database
 This repository provides remote hosting and version control for the development of NED, the Nonstructural Element Database. NED is a relational database that collects information from experimental, analytical, and historic performance observations of nonstructural building elements into seismic fragilities and consequence models to support building-specific seismic performance research and assessments. Currently, the project is still in its active development and does not yet have consequence models or data from historical events, but has collected over 2000 experimental data points and compiled a fragility data set that includes and expands upon the full FEMA P-58 nonstructural database. The experimental test data and seismic fragility are explicitly related through primary and foreign key architecture within the database to promote data transparency and reuse.
 
+## Contents
+- [NED-Beta](#ned-beta)
+      - [Nonstructural Element Database](#nonstructural-element-database)
+  - [Contents](#contents)
+  - [Database Architecture](#database-architecture)
+  - [Repository Organization](#repository-organization)
+    - [Data Schema](#data-schema)
+      - [Component Subcategorization Hierarchy](#component-subcategorization-hierarchy)
+      - [DS Class](#ds-class)
+  - [Setting up the environment](#setting-up-the-environment)
+    - [Updating dependencies](#updating-dependencies)
+  - [Exporting Data to CSV](#exporting-data-to-csv)
+    - [Using the `query_to_csv` Command](#using-the-query_to_csv-command)
+      - [Basic Usage](#basic-usage)
+      - [Available Parameters](#available-parameters)
+      - [Examples](#examples)
+      - [Available Models](#available-models)
+      - [Tips and Best Practices](#tips-and-best-practices)
+      - [Troubleshooting](#troubleshooting)
+  - [Importing Data from CSV](#importing-data-from-csv)
+    - [Using the `import_model` Command](#using-the-import_model-command)
+      - [Basic Usage](#basic-usage-1)
+      - [Available Parameters](#available-parameters-1)
+    - [Using the `import_fragility` Command](#using-the-import_fragility-command)
+      - [Basic Usage](#basic-usage-2)
+      - [Available Parameters](#available-parameters-2)
+    - [Templates](#templates)
+    - [CSV Conventions](#csv-conventions)
+    - [Examples](#examples-1)
+    - [Tips](#tips)
+    - [Recovering from a failed import](#recovering-from-a-failed-import)
+  - [Front-end (UI)](#front-end-ui)
+    - [Running the UI locally](#running-the-ui-locally)
+    - [Push the UI to the deployment repo (maintainers)](#push-the-ui-to-the-deployment-repo-maintainers)
+  - [Contributors Guide](#contributors-guide)
+    - [Local Development Setup](#local-development-setup)
+    - [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data)
+      - [1. Fork and Branch](#1-fork-and-branch)
+      - [2. Add Your Data or Edit existing data](#2-add-your-data-or-edit-existing-data)
+      - [3. Validate Locally (Recommended)](#3-validate-locally-recommended)
+      - [4. Submit a Pull Request](#4-submit-a-pull-request)
+      - [What Happens Next? (The Review Process)](#what-happens-next-the-review-process)
+    - [How to Modify the Database Structure](#how-to-modify-the-database-structure)
+      - [Step 1: Prepare Your Workspace](#step-1-prepare-your-workspace)
+      - [Step 2: Implement Schema Change \& Data Migration](#step-2-implement-schema-change--data-migration)
+      - [Step 3: Update the Pipelines](#step-3-update-the-pipelines)
+      - [Step 4: Apply Migrations to the Saved Database](#step-4-apply-migrations-to-the-saved-database)
+      - [Step 5: Export Updated Canonical Data](#step-5-export-updated-canonical-data)
+      - [Step 6: Verification (The "Round-Trip" Protocol)](#step-6-verification-the-round-trip-protocol)
+      - [Step 7: Update and Run Unit Tests](#step-7-update-and-run-unit-tests)
+      - [Step 8: Finalize and Commit](#step-8-finalize-and-commit)
+    - [Launch the Django Admin](#launch-the-django-admin)
+  - [Architecture Overview](#architecture-overview)
+    - [Key Components](#key-components)
+    - [Data Flow](#data-flow)
+    - [Code quality assurance](#code-quality-assurance)
+      - [1. Code Linting with Ruff](#1-code-linting-with-ruff)
+      - [2. Code Formatting with Ruff](#2-code-formatting-with-ruff)
+      - [3. Spell Checking with Codespell](#3-spell-checking-with-codespell)
+      - [4. Unit Tests with Django Test Suite](#4-unit-tests-with-django-test-suite)
+      - [5. UI Tests with Pytest](#5-ui-tests-with-pytest)
+      - [Running All Quality Checks Locally](#running-all-quality-checks-locally)
+  - [Disclaimer:](#disclaimer)
+
 ## Database Architecture
 The goal of this project is to develop a robust and scalable database of fragility and consequence models of nonstructural building elements for seismic performance evaluation. Data is organized in a way such that each data table represents an abstract portion of the fragility model, e.g., separating observations of component performance from an experimental test from that of a fragility model and repair costs consequence models. In that way, that data is both nimble/scalable with new information and can be clearly linked back to original source data and models through explicit relational keys. The outcomes of this project will expand the applicability of performance- and recovery-based earthquake assessments, resulting in a publicly available database to support current research and building design. The figure below outlines the current portions of the database under development and future development plans.
 
@@ -17,6 +81,8 @@ The goal of this project is to develop a robust and scalable database of fragili
 - **scripts** - General project scripts that are outside the Django application management process.
 - **ui** - The Streamlit front-end (browser UI). NED is the source of truth for this code; it is published to the separate deployment repo via `scripts/export_frontend.py` (see [Front-end (UI)](#front-end-ui)).
 - **db.sqlite3** - SQLite database file (disposable build artifact, generated from JSON data via `python manage.py ingest`).
+- **pyproject.toml** - Project metadata: runtime dependencies plus the `dev` and `ui` dependency groups.
+- **uv.lock** - Locked, exact versions for every dependency; `uv sync` installs from this file.
 
 ### Data Schema
 A human-readable data dictionary describing every attribute of the main tables (definitions, accepted values, and bounds) is provided in [ui/assets/data_dictionary.md](ui/assets/data_dictionary.md); it lives under `ui/` so the same document is also rendered as the *Data dictionary* page of the browser UI. The authoritative schema definition lives in the docstrings and field declarations in ned_app/models.py. The overview below provides a brief description of two of the fields found in the experiment model.
@@ -40,6 +106,37 @@ To provide a structured detail of observed damage attributes, we propose a DS Cl
 The purpose of the DS Class attribute is to provide a first-pass structured grouping of observed damage to aid in later fragility development. However, we recognize that any grouping of damage states introduces subjectiveness into the process. Therefore, our goal is to implement as little subjectiveness as possible while still providing useful structured data for later users of the database. This attribute simply acts to separate consequential damage from inconsequential damage. Further separation of consequential damage into multiple damage states is an attribute of the damage state itself and not the initial observation of damage and is therefore up to the fragility developer to refine.
 
 All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
+
+## Setting up the environment
+NED manages its Python environment with [uv](https://docs.astral.sh/uv/). Install it once, with no admin rights required:
+```bash
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows PowerShell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# or, via an existing package manager
+pipx install uv
+brew install uv
+```
+NED targets Python 3.11 and up; `.python-version` pins 3.12 for local environments, and uv downloads that version if it is not already on your machine.
+
+From the repository root, run:
+```bash
+uv sync
+```
+This creates a virtual environment in a `.venv` folder and installs every dependency from `uv.lock`, including the `dev` group (ruff, codespell, pytest) and the `ui` group (streamlit, pandas, numpy, plotly); both sync by default. There are two ways to run a command inside that environment: prefix it with `uv run` (e.g. `uv run python manage.py migrate`), or activate the environment once per shell (`source .venv/bin/activate`, or `.venv\Scripts\activate` on Windows) and run commands directly.
+
+The command examples in this README are written as `python manage.py ...`; run them with an activated environment or a `uv run` prefix.
+
+### Updating dependencies
+To add, remove, or change a dependency, edit `pyproject.toml`, then run `uv lock` followed by `uv sync`. If the change edited the `ui` group, regenerate `ui/requirements.txt` (see [Push the UI to the deployment repo](#push-the-ui-to-the-deployment-repo-maintainers)). Commit `pyproject.toml`, `uv.lock`, and `ui/requirements.txt` together.
+
+To upgrade a single package, run `uv lock --upgrade-package NAME`; to upgrade everything, run `uv lock --upgrade`. `ruff`, `codespell` and `pytest` are pinned to exact versions in `pyproject.toml` to ensure robust CI results.
+
+Regenerate `ui/requirements.txt` with `python scripts/export_requirements.py`; `--check` reports whether the committed file still matches the lock, which is what CI runs. If CI disagrees with a file you regenerated locally, match the uv version it uses (`UV_VERSION` in `.github/workflows/ci.yml`), since the export format can change between uv releases.
+
 
 ## Exporting Data to CSV
 
@@ -261,21 +358,18 @@ Then fix the CSV and import again.
 The `ui/` directory contains the Streamlit application that powers the browser-based NED interface. The deployed version is hosted from a **separate** repository so that deployment can be handed off independently of the database back end. To avoid two sources of truth, **the code is authored here, in `ui/`, and published outward**. The only handshake between the two repositories is the database (`db.sqlite3`), which is built from the canonical JSON data and injected into the front-end at publish time.
 
 ### Running the UI locally
-The UI reads the database path from the `DB_PATH` environment variable, defaulting to a bundled copy. Point it at your locally built `db.sqlite3` so the UI reflects your back-end changes immediately:
+The UI reads the database path from the `DB_PATH` environment variable, defaulting to a bundled copy. Point it at your locally built `db.sqlite3` so the UI reflects your back-end changes immediately. The UI's dependencies are part of the environment that `uv sync` builds (see [Setting up the environment](#setting-up-the-environment)), so there is nothing extra to install.
 
 ```
 # 1. From the project root, build the database from the canonical data
-python manage.py migrate
-python manage.py ingest
+uv run python manage.py migrate
+uv run python manage.py ingest
 
-# 2. Install the UI's dependencies (a separate, lightweight set)
-pip install -r ui/requirements.txt
-
-# 3. **Run the app from inside ui/,** pointed at your local database
+# 2. **Run the app from inside ui/,** pointed at your local database
 cd ui
-DB_PATH=../db.sqlite3 AUTH_ENABLED=false streamlit run app.py
+DB_PATH=../db.sqlite3 AUTH_ENABLED=false uv run streamlit run app.py
 ```
-On Windows PowerShell, step 3 is: `cd ui; $env:DB_PATH = "../db.sqlite3"; $env:AUTH_ENABLED = "false"; streamlit run app.py`.
+On Windows PowerShell, step 2 is: `cd ui; $env:DB_PATH = "../db.sqlite3"; $env:AUTH_ENABLED = "false"; uv run streamlit run app.py`.
 
 - Run from **inside `ui/`**. The app resolves its assets (`assets/logo.png`) and Streamlit config (`.streamlit/config.toml`) relative to the current directory, just as it does from the repo root when deployed. Running from elsewhere breaks those paths.
 - `DB_PATH` is resolved relative to the current directory (`ui/` here), so `../db.sqlite3` points at the database you built in the project root. It is required: without it the app looks for its bundled deployment copy at `backend/db.sqlite3`, which does not exist in a local checkout.
@@ -286,39 +380,20 @@ Add data or change the schema, re-run `ingest`, refresh the browser, and the cha
 ### Push the UI to the deployment repo (maintainers)
 `scripts/export_frontend.py` pushes the front-end code and the freshly built database into a clone of `ned-frontend`. It is *non-destructive*: it writes only the NED-owned paths plus `backend/db.sqlite3`, leaving the deployment repo's own files (`deploy/`, `.streamlit/secrets.toml`, etc.) untouched.
 
-```
+```bash
 # Rebuild the db, then write code + db into the deployment repo's working tree
 python scripts/export_frontend.py --frontend ../ned-frontend --rebuild-db
 ```
 Useful flags: `--rebuild-db` (run `migrate` + `ingest` first). Run `python scripts/export_frontend.py --help` for details.
 
+`ui/requirements.txt` travels with the exported code but is not hand-written: it is generated from `uv.lock`, and the export script regenerates it before copying. To refresh it by hand, run
+```bash
+python scripts/export_requirements.py
+```
+whenever the `ui` dependency group changes, and commit the result together with `pyproject.toml` and `uv.lock`. CI fails if `ui/requirements.txt` falls out of sync with the lock.
+
 
 ## Contributors Guide
-
-### Setting up a Virtual Environment (optional but recommended)
-Setting up a virtual environment helps to ensure you are able to setup an isolated project for using the NED database locally and avoid conflicts with other dependencies. While there are many ways to setup a virtual environment, below is an example using Python's built in `venv` module.
-```
-python -m venv venv      # create a virtual environment called "venv"
-# Activate on Windows (Command Prompt / PowerShell)
-venv\Scripts\activate
-# Activate on Git Bash / Bash on Windows
-source venv/Scripts/activate
-# Activate on macOS / Linux / WSL
-source venv/bin/activate
-```
-
-### Installing the Required Packages
-Be sure that all packages below have been installed in your virtual or global environment.
-
-**For production dependencies:**
-```
-pip install -r requirements.txt
-```
-
-**For development dependencies (includes ruff for code quality):**
-```
-pip install -r requirements-dev.txt
-```
 
 ### Local Development Setup
 
@@ -545,12 +620,12 @@ Ruff checks your Python code for style issues, potential bugs, and code quality 
 
 **To run locally:**
 ```bash
-ruff check
+uv run ruff check
 ```
 
 **To fix auto-fixable issues:**
 ```bash
-ruff check --fix
+uv run ruff check --fix
 ```
 
 **Common issues and fixes:**
@@ -566,12 +641,12 @@ Ruff format ensures consistent code formatting across the entire codebase. It au
 
 **To check formatting without making changes:**
 ```bash
-ruff format --check
+uv run ruff format --check
 ```
 
 **To automatically format your code:**
 ```bash
-ruff format
+uv run ruff format
 ```
 
 **Key formatting rules:**
@@ -585,7 +660,7 @@ Codespell catches spelling mistakes in text files, comments, and docstrings. Thi
 
 **To run locally:**
 ```bash
-codespell .
+uv run codespell .
 ```
 
 **Handling false positives:**
@@ -604,7 +679,7 @@ The project includes comprehensive unit tests that verify the functionality of m
 
 **To run all tests:**
 ```bash
-python manage.py test ned_app.tests
+uv run python manage.py test ned_app.tests
 ```
 
 **To run specific test files:**
@@ -627,7 +702,7 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_save_pop
 **Common test failure causes:**
 - **Database issues**: Make sure you haven't changed model fields without creating migrations
 - **Missing test data**: Ensure test fixtures and sample data are properly set up
-- **Import errors**: Check that all required dependencies are installed with `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
+- **Import errors**: Run `uv sync` to make sure your environment has every dependency from the lock
 
 **Test coverage**: The project has 191 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
 
@@ -642,8 +717,7 @@ The Streamlit front end (`ui/`) has its own test suite in `ui/tests/`, separate 
 
 **To run locally (from the repository root):**
 ```bash
-pip install -r ui/requirements.txt -r requirements-dev.txt
-python -m pytest ui/tests -q
+uv run python -m pytest ui/tests -q
 ```
 
 #### Running All Quality Checks Locally
@@ -651,19 +725,19 @@ To run all quality checks that the continuous integration (CI) pipeline will run
 
 ```bash
 # 1. Check code formatting
-ruff format --check
+uv run ruff format --check
 
 # 2. Run linting
-ruff check
+uv run ruff check
 
 # 3. Check spelling
-codespell .
+uv run codespell .
 
 # 4. Run unit tests
-python manage.py test ned_app.tests
+uv run python manage.py test ned_app.tests
 
 # 5. Run UI tests
-python -m pytest ui/tests -q
+uv run python -m pytest ui/tests -q
 ```
 
 
