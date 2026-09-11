@@ -5,34 +5,68 @@
 This repository provides remote hosting and version control for the development of NED, the Nonstructural Element Database. NED is a relational database that collects information from experimental, analytical, and historic performance observations of nonstructural building elements into seismic fragilities and consequence models to support building-specific seismic performance research and assessments. Currently, the project is still in its active development and does not yet have consequence models or data from historical events, but has collected over 2000 experimental data points and compiled a fragility data set that includes and expands upon the full FEMA P-58 nonstructural database. The experimental test data and seismic fragility are explicitly related through primary and foreign key architecture within the database to promote data transparency and reuse.
 
 ## Contents
-- [Database Architecture](#database-architecture)
-- [Repository Organization](#repository-organization)
-  - [Data Schema](#data-schema)
-- [Setting up the environment](#setting-up-the-environment)
-  - [Updating dependencies](#updating-dependencies)
-- [Exporting Data to CSV](#exporting-data-to-csv)
-  - [Using the query_to_csv Command](#using-the-query_to_csv-command)
-- [Importing Data from CSV](#importing-data-from-csv)
-  - [Using the import_model Command](#using-the-import_model-command)
-  - [Using the import_fragility Command](#using-the-import_fragility-command)
-  - [Templates](#templates)
-  - [CSV Conventions](#csv-conventions)
-  - [Examples](#examples)
-  - [Tips](#tips)
-  - [Recovering from a failed import](#recovering-from-a-failed-import)
-- [Front-end (UI)](#front-end-ui)
-  - [Running the UI locally](#running-the-ui-locally)
-  - [Push the UI to the deployment repo (maintainers)](#push-the-ui-to-the-deployment-repo-maintainers)
-- [Contributors Guide](#contributors-guide)
-  - [Local Development Setup](#local-development-setup)
-  - [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data)
-  - [How to Modify the Database Structure](#how-to-modify-the-database-structure)
-  - [Launch the Django Admin](#launch-the-django-admin)
-- [Architecture Overview](#architecture-overview)
-  - [Key Components](#key-components)
-  - [Data Flow](#data-flow)
-  - [Code quality assurance](#code-quality-assurance)
-- [Disclaimer](#disclaimer)
+- [NED-Beta](#ned-beta)
+      - [Nonstructural Element Database](#nonstructural-element-database)
+  - [Contents](#contents)
+  - [Database Architecture](#database-architecture)
+  - [Repository Organization](#repository-organization)
+    - [Data Schema](#data-schema)
+      - [Component Subcategorization Hierarchy](#component-subcategorization-hierarchy)
+      - [DS Class](#ds-class)
+  - [Setting up the environment](#setting-up-the-environment)
+    - [Updating dependencies](#updating-dependencies)
+  - [Exporting Data to CSV](#exporting-data-to-csv)
+    - [Using the `query_to_csv` Command](#using-the-query_to_csv-command)
+      - [Basic Usage](#basic-usage)
+      - [Available Parameters](#available-parameters)
+      - [Examples](#examples)
+      - [Available Models](#available-models)
+      - [Tips and Best Practices](#tips-and-best-practices)
+      - [Troubleshooting](#troubleshooting)
+  - [Importing Data from CSV](#importing-data-from-csv)
+    - [Using the `import_model` Command](#using-the-import_model-command)
+      - [Basic Usage](#basic-usage-1)
+      - [Available Parameters](#available-parameters-1)
+    - [Using the `import_fragility` Command](#using-the-import_fragility-command)
+      - [Basic Usage](#basic-usage-2)
+      - [Available Parameters](#available-parameters-2)
+    - [Templates](#templates)
+    - [CSV Conventions](#csv-conventions)
+    - [Examples](#examples-1)
+    - [Tips](#tips)
+    - [Recovering from a failed import](#recovering-from-a-failed-import)
+  - [Front-end (UI)](#front-end-ui)
+    - [Running the UI locally](#running-the-ui-locally)
+    - [Push the UI to the deployment repo (maintainers)](#push-the-ui-to-the-deployment-repo-maintainers)
+  - [Contributors Guide](#contributors-guide)
+    - [Local Development Setup](#local-development-setup)
+    - [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data)
+      - [1. Fork and Branch](#1-fork-and-branch)
+      - [2. Add Your Data or Edit existing data](#2-add-your-data-or-edit-existing-data)
+      - [3. Validate Locally (Recommended)](#3-validate-locally-recommended)
+      - [4. Submit a Pull Request](#4-submit-a-pull-request)
+      - [What Happens Next? (The Review Process)](#what-happens-next-the-review-process)
+    - [How to Modify the Database Structure](#how-to-modify-the-database-structure)
+      - [Step 1: Prepare Your Workspace](#step-1-prepare-your-workspace)
+      - [Step 2: Implement Schema Change \& Data Migration](#step-2-implement-schema-change--data-migration)
+      - [Step 3: Update the Pipelines](#step-3-update-the-pipelines)
+      - [Step 4: Apply Migrations to the Saved Database](#step-4-apply-migrations-to-the-saved-database)
+      - [Step 5: Export Updated Canonical Data](#step-5-export-updated-canonical-data)
+      - [Step 6: Verification (The "Round-Trip" Protocol)](#step-6-verification-the-round-trip-protocol)
+      - [Step 7: Update and Run Unit Tests](#step-7-update-and-run-unit-tests)
+      - [Step 8: Finalize and Commit](#step-8-finalize-and-commit)
+    - [Launch the Django Admin](#launch-the-django-admin)
+  - [Architecture Overview](#architecture-overview)
+    - [Key Components](#key-components)
+    - [Data Flow](#data-flow)
+    - [Code quality assurance](#code-quality-assurance)
+      - [1. Code Linting with Ruff](#1-code-linting-with-ruff)
+      - [2. Code Formatting with Ruff](#2-code-formatting-with-ruff)
+      - [3. Spell Checking with Codespell](#3-spell-checking-with-codespell)
+      - [4. Unit Tests with Django Test Suite](#4-unit-tests-with-django-test-suite)
+      - [5. UI Tests with Pytest](#5-ui-tests-with-pytest)
+      - [Running All Quality Checks Locally](#running-all-quality-checks-locally)
+  - [Disclaimer:](#disclaimer)
 
 ## Database Architecture
 The goal of this project is to develop a robust and scalable database of fragility and consequence models of nonstructural building elements for seismic performance evaluation. Data is organized in a way such that each data table represents an abstract portion of the fragility model, e.g., separating observations of component performance from an experimental test from that of a fragility model and repair costs consequence models. In that way, that data is both nimble/scalable with new information and can be clearly linked back to original source data and models through explicit relational keys. The outcomes of this project will expand the applicability of performance- and recovery-based earthquake assessments, resulting in a publicly available database to support current research and building design. The figure below outlines the current portions of the database under development and future development plans.
@@ -101,7 +135,7 @@ To add, remove, or change a dependency, edit `pyproject.toml`, then run `uv lock
 
 To upgrade a single package, run `uv lock --upgrade-package NAME`; to upgrade everything, run `uv lock --upgrade`. `ruff`, `codespell` and `pytest` are pinned to exact versions in `pyproject.toml` to ensure robust CI results.
 
-Regenerate `ui/requirements.txt` with the same uv version CI uses (`UV_VERSION` in `.github/workflows/ci.yml`), since the export format can change between uv releases.
+Regenerate `ui/requirements.txt` with `python scripts/export_requirements.py`; `--check` reports whether the committed file still matches the lock, which is what CI runs. If CI disagrees with a file you regenerated locally, match the uv version it uses (`UV_VERSION` in `.github/workflows/ci.yml`), since the export format can change between uv releases.
 
 
 ## Exporting Data to CSV
@@ -346,7 +380,7 @@ Add data or change the schema, re-run `ingest`, refresh the browser, and the cha
 ### Push the UI to the deployment repo (maintainers)
 `scripts/export_frontend.py` pushes the front-end code and the freshly built database into a clone of `ned-frontend`. It is *non-destructive*: it writes only the NED-owned paths plus `backend/db.sqlite3`, leaving the deployment repo's own files (`deploy/`, `.streamlit/secrets.toml`, etc.) untouched.
 
-```
+```bash
 # Rebuild the db, then write code + db into the deployment repo's working tree
 python scripts/export_frontend.py --frontend ../ned-frontend --rebuild-db
 ```
@@ -354,7 +388,7 @@ Useful flags: `--rebuild-db` (run `migrate` + `ingest` first). Run `python scrip
 
 `ui/requirements.txt` travels with the exported code but is not hand-written: it is generated from `uv.lock`, and the export script regenerates it before copying. To refresh it by hand, run
 ```bash
-uv export --locked --format requirements.txt --only-group ui --no-hashes --no-annotate --no-header -o ui/requirements.txt
+python scripts/export_requirements.py
 ```
 whenever the `ui` dependency group changes, and commit the result together with `pyproject.toml` and `uv.lock`. CI fails if `ui/requirements.txt` falls out of sync with the lock.
 
