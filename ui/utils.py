@@ -6,40 +6,97 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 
-_SCROLL_TO_TOP_JS = """
+_RESTORE_SCROLL_JS = """
 <script>
-    const doc = window.parent.document;
-    const toTop = () => {
-        const container = (
-            doc.querySelector('[data-testid="stMain"]')
-            || doc.querySelector('[data-testid="stAppViewContainer"]')
-            || doc.scrollingElement
-        );
-        if (container) {
-            container.scrollTo(0, 0);
-        }
-        window.parent.scrollTo(0, 0);
+    const win = window.parent;
+    const doc = win.document;
+    const container = (
+        doc.querySelector('[data-testid="stMain"]')
+        || doc.querySelector('[data-testid="stAppViewContainer"]')
+        || doc.scrollingElement
+    );
+
+    const scrollKey = () => 'ned-scroll:' + win.location.pathname + win.location.search;
+
+    // Save the departing page's own scroll position the instant the user
+    // clicks something that navigates away from it (every in-app navigation
+    // control -- page_link, the top nav, a table's View link -- renders as
+    // an <a>). This only fires on that genuine user action rather than on
+    // `scroll` events, which also fire as a side effect of Streamlit tearing
+    // the old page's content down once the new page starts mounting -- that
+    // teardown collapses the container's scrollHeight and forces scrollTop
+    // to 0, and a listener reacting to it would save that 0 under the
+    // *old* page's key, overwriting the position being navigated away from
+    // right as it's needed. Attached at most once per browser tab (guarded
+    // on `win`, which survives every rerun, rather than on this script's own
+    // — recreated each time — iframe realm), and in the capture phase so it
+    // always runs before the click's own navigation handling.
+    if (container && !win.__nedScrollListenerAttached) {
+        win.__nedScrollListenerAttached = true;
+        doc.addEventListener('click', (event) => {
+            const target = event.target;
+            const link = target && target.closest ? target.closest('a') : null;
+            if (!link) return;
+            try {
+                win.sessionStorage.setItem(scrollKey(), String(container.scrollTop));
+            } catch (e) {}
+        }, true);
+    }
+
+    let target = 0;
+    try {
+        const saved = win.sessionStorage.getItem(scrollKey());
+        if (saved !== null) target = parseFloat(saved) || 0;
+    } catch (e) {}
+
+    const applyScroll = () => {
+        if (container) container.scrollTo(0, target);
+        win.scrollTo(0, target);
     };
-    toTop();
-    // The new page is often still painting when this first runs, and late
-    // layout shifts can restore the old offset, so pin it again next frame.
-    requestAnimationFrame(toTop);
-    setTimeout(toTop, 50);
+    // The new page (e.g. a long Components table) is often still painting
+    // rows well after this first runs, and each layout shift can undo the
+    // restored offset, so keep reapplying it until the container's height
+    // has held steady for a few checks in a row (content has settled) or a
+    // hard cap is hit, rather than a fixed handful of early retries.
+    let lastHeight = -1;
+    let stableChecks = 0;
+    let ticks = 0;
+    const tick = () => {
+        applyScroll();
+        const height = container ? container.scrollHeight : 0;
+        if (height === lastHeight) {
+            stableChecks += 1;
+        } else {
+            stableChecks = 0;
+            lastHeight = height;
+        }
+        ticks += 1;
+        if (stableChecks >= 3 || ticks >= 30) {
+            win.clearInterval(intervalId);
+        }
+    };
+    const intervalId = win.setInterval(tick, 100);
+    tick();
 </script>
 """
 
 
-def scroll_to_top_on_page_change(page: str) -> None:
-    """Scroll the browser viewport to the top when `page` differs from the
-    page rendered on the previous run.
+def restore_scroll_on_page_change(page: str) -> None:
+    """Restore the browser's remembered scroll position for the current URL
+    when `page` differs from the page rendered on the previous run, falling
+    back to the top of the page if nothing was remembered for it.
 
     Streamlit reruns the whole script in place rather than doing a real page
     navigation, so the browser keeps whatever scroll position it had before
-    (e.g. partway down the Components table). Without this, clicking through
-    to another page can land the user in the middle of the new page instead of
-    at the top. Comparing against the last-rendered page (rather than scrolling
-    unconditionally) avoids resetting scroll on reruns triggered by same-page
-    interactions like filters or search.
+    (e.g. partway down the Components table) instead of landing on the new
+    page's own scroll position. The remembered position is keyed by the full
+    URL (path *and* query params) in the browser's sessionStorage — saved
+    client-side when the user clicks away from the page — so returning to
+    it (e.g. via "Back to Components", or a real browser Back press)
+    resumes where that exact view left off, including an active
+    search/filter, while landing on a not-yet-visited page still starts at
+    the top. Comparing against the last-rendered page (rather than firing on
+    every run) avoids fighting same-page interactions like typing a filter.
     """
     if st.session_state.get('_last_rendered_page') == page:
         return
@@ -49,12 +106,54 @@ def scroll_to_top_on_page_change(page: str) -> None:
     # render, and a reused iframe never re-executes its script. A nonce that
     # changes on every navigation forces a fresh iframe, so the scroll fires on
     # every page change rather than only the first one.
-    nonce = st.session_state.get('_scroll_to_top_nonce', 0) + 1
-    st.session_state['_scroll_to_top_nonce'] = nonce
+    nonce = st.session_state.get('_restore_scroll_nonce', 0) + 1
+    st.session_state['_restore_scroll_nonce'] = nonce
     components.html(
-        f'<!-- scroll-to-top {nonce} -->{_SCROLL_TO_TOP_JS}',
+        f'<!-- restore-scroll {nonce} -->{_RESTORE_SCROLL_JS}',
         height=0,
     )
+
+
+_ROW_CLICK_JS = """
+<script>
+    const win = window.parent;
+    const doc = win.document;
+
+    // Forward a click anywhere in a keyed "row-*" table-row container
+    // (components.py, experiments_table.py, fragility_models_table.py) to
+    // that row's own st.page_link anchor, which styles.py visually hides
+    // (not `display:none`, so it stays reachable via Tab+Enter) so the row
+    // reads as one clickable unit instead of a separate "View" button.
+    // Dispatching a real .click() on the real anchor -- rather than
+    // navigating directly -- means Streamlit's SPA-navigation interception
+    // and the scroll-position save below both fire exactly as they do for a
+    // literal click on a visible link. Guarded on `win` (survives every
+    // rerun) so it's attached at most once per browser tab; a click that
+    // already landed on the anchor is left alone so the synthetic .click()
+    // doesn't recurse back into this same handler.
+    if (!win.__nedRowClickDelegationAttached) {
+        win.__nedRowClickDelegationAttached = true;
+        doc.addEventListener('click', (event) => {
+            const target = event.target;
+            if (!target || !target.closest) return;
+            if (target.closest('a[data-testid="stPageLink-NavLink"]')) return;
+            const row = target.closest('[class*="st-key-row-"]');
+            if (!row) return;
+            const link = row.querySelector('a[data-testid="stPageLink-NavLink"]');
+            if (link) link.click();
+        }, true);
+    }
+</script>
+"""
+
+
+def enable_row_click_navigation() -> None:
+    """Make every keyed "row-*" table-row container clickable anywhere in
+    the row, not just on its st.page_link (see `_ROW_CLICK_JS` above).
+    Injected once, up front, so it covers all four row-tables (Components,
+    Experiments, and the two Fragility Models tables) rather than needing a
+    separate call per page."""
+    components.html(_ROW_CLICK_JS, height=0)
 
 
 def fmt(val) -> str:
@@ -66,6 +165,35 @@ def fmt(val) -> str:
 
 def esc(val) -> str:
     return html.escape(fmt(val), quote=True)
+
+
+# Any run of whitespace — including the newlines that many free-text fields
+# carry over from their source documents (see `clamp_cell` below).
+_WHITESPACE_RUN = re.compile(r'\s+')
+
+
+def clamp_cell(val) -> str:
+    """HTML for a table cell whose text is visually clamped to 3 lines with
+    a trailing ellipsis (see `.ned-clamp` in styles.py), with the full text
+    available as a native tooltip on hover. Used for long free-text fields
+    (e.g. Component Description) that would otherwise wrap to as many lines
+    as the text needs and inflate that row's height for every column in it.
+
+    Whitespace is collapsed to single spaces first. Many Component
+    Description values arrive as several lines, most often a prose lead-in
+    followed by a numbered list on the following lines, and the cell is
+    handed to `st.markdown(unsafe_allow_html=True)`, which runs a Markdown
+    pass before the HTML is parsed. A list marker at the start of a line
+    interrupts the enclosing paragraph, closing it in the middle of this
+    function's own `<span>` tag — so the opening tag was emitted as literal
+    text ('<span class="ned-clamp" title="...'), the rest rendered as an
+    unclamped list, and the row grew to the description's full height. On
+    one line there are no line starts for a Markdown block construct to
+    begin at, so the span stays inline HTML and the clamp applies. A
+    tooltip is a single run of text either way, and the detail pages still
+    render the description with its original line breaks intact."""
+    text = esc(_WHITESPACE_RUN.sub(' ', fmt(val)))
+    return f'<span class="ned-clamp" title="{text}">{text}</span>'
 
 
 def strip_prefix(val) -> str:
@@ -87,10 +215,54 @@ def attr(
         c2.caption(caption)
 
 
+def _md_to_plain(text: str) -> str:
+    """Strip the light Markdown used in FIELD_HELP entries (``**bold**`` and
+    ``- `` bullets) down to plain text.
+
+    FIELD_HELP strings are written for Streamlit's own ``help=`` tooltip,
+    which renders Markdown. Embedding one verbatim in an HTML attribute (as
+    ``header_span`` does below) instead runs it through Streamlit's Markdown
+    pass a second time, splicing literal ``<strong>``/list HTML into the
+    middle of the attribute string and corrupting the tag it belongs to.
+    """
+    text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+    return re.sub(r'^- ', '• ', text, flags=re.MULTILINE)
+
+
+def header_span(label: str, help_text: str | None = None) -> str:
+    """HTML for a table column header label, with an inline help icon placed
+    immediately after the text when ``help_text`` is given.
+
+    Streamlit's own ``help=`` tooltip renders its icon flush with the right
+    edge of the container passed to it, which — inside a ``st.columns()``
+    cell — is the full column width rather than the (usually narrower) label
+    text, making the icon look attached to whichever column happens to sit
+    next to it. Rendering the icon inline as part of the same markdown
+    string keeps it next to the text it actually describes.
+    """
+    out = (
+        f"<span style='font-size:0.8rem;font-weight:600;color:#555;"
+        f"text-transform:uppercase;letter-spacing:0.04em;'>{label}</span>"
+    )
+    if help_text:
+        out += (
+            f'<span title="{esc(_md_to_plain(help_text))}" '
+            "style='cursor:help;color:#888;margin-left:0.3rem;"
+            "font-size:0.75rem;'>&#9432;</span>"
+        )
+    return out
+
+
 # Pop-up helper descriptions for database fields, keyed by model field name.
 # Wording follows the data dictionary (assets/data_dictionary.md); update both
 # together if a definition changes.
 FIELD_HELP = {
+    'major_group': (
+        'UNIFORMAT II / NISTIR level-1 ID and description (e.g., '
+        '"A - Substructure").'
+    ),
+    'group': ('UNIFORMAT II / NISTIR level-2 ID and description.'),
+    'subelement': ('UNIFORMAT II / NISTIR level-4 ID and description.'),
     'comp_detail': (
         'Classification or short description of the component '
         'attachment/connection detailing (e.g., perimeter-fixed vs. '
@@ -149,6 +321,16 @@ FIELD_HELP = {
         'TRUE if prior damage was noted and repaired before this test; '
         'FALSE if noted and not repaired; or a general description of the '
         'previous damage that was repaired.'
+    ),
+    'probability': (
+        'Mutually exclusive probability of this damage state, for models '
+        'with mutually exclusive damage states. Must be between 0 and 1 '
+        'inclusive. Use a probability of 1 for purely sequential damage '
+        'states.'
+    ),
+    'number_of_tests': (
+        'Total number of distinct experiments this fragility model is based '
+        'on, from the fragility model–experiment bridge table.'
     ),
 }
 
