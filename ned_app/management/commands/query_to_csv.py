@@ -44,7 +44,7 @@ class Command(BaseCommand):
             '--filter',
             type=str,
             default=None,
-            help='Filter query as key=value pairs, comma-separated (e.g., reviewer=John,material=Steel)',
+            help='Filter query as key=value pairs, comma-separated (e.g., contributor=John,material=Steel)',
         )
 
     def get_available_models(self):

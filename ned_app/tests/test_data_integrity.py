@@ -254,3 +254,46 @@ class CanonicalReferenceDataTests(SimpleTestCase):
             'duplicated (add a reference_label / fix csl_data):\n'
             + '\n'.join(problems),
         )
+
+
+class CanonicalJsonFormatTests(SimpleTestCase):
+    """
+    Guards that resources/data/ is byte-identical to what export_data writes.
+
+    The round-trip tests above compare parsed JSON, so they are blind to key
+    order and formatting: a hand-edit that renames a key in place still passes
+    them, while leaving the file out of canonical order. The drift then surfaces
+    as a large unexplained diff for whoever next runs export_data. This compares
+    the bytes instead, and needs no database.
+    """
+
+    DATA_DIR = 'resources/data'
+
+    # Mirrors the json.dump call in every export_* method of the export_data
+    # command; keep the two in step.
+    INDENT = 4
+    SORT_KEYS = True
+
+    def test_source_data_is_in_canonical_export_format(self):
+        offenders = []
+        for filename in sorted(os.listdir(self.DATA_DIR)):
+            if not filename.endswith('.json'):
+                continue
+            path = os.path.join(self.DATA_DIR, filename)
+            with open(path, 'r', encoding='utf-8') as f:
+                raw = f.read()
+            canonical = json.dumps(
+                json.loads(raw), indent=self.INDENT, sort_keys=self.SORT_KEYS
+            )
+            if raw != canonical:
+                offenders.append(filename)
+        self.assertEqual(
+            offenders,
+            [],
+            'These files are not in canonical export format (most often a key '
+            'renamed in place rather than through the schema):\n'
+            + '\n'.join(offenders)
+            + '\n\nRegenerate them from the database instead of editing by '
+            'hand:\n    python manage.py export_data --output_dir '
+            'resources/data/',
+        )

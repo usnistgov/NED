@@ -39,7 +39,7 @@ To provide a structured detail of observed damage attributes, we propose a DS Cl
 
 The purpose of the DS Class attribute is to provide a first-pass structured grouping of observed damage to aid in later fragility development. However, we recognize that any grouping of damage states introduces subjectiveness into the process. Therefore, our goal is to implement as little subjectiveness as possible while still providing useful structured data for later users of the database. This attribute simply acts to separate consequential damage from inconsequential damage. Further separation of consequential damage into multiple damage states is an attribute of the damage state itself and not the initial observation of damage and is therefore up to the fragility developer to refine.
 
-All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
+All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the contributor, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
 
 ## Exporting Data to CSV
 
@@ -88,7 +88,7 @@ python manage.py query_to_csv --model Experiment \
 python manage.py query_to_csv --model Experiment \
   --output_file exports/filtered_data.csv \
   --fields id,specimen,material,peak_demand \
-  --filter reviewer=John,ds_class=Consequential
+  --filter contributor=John,ds_class=Consequential
 ```
 
 #### Available Models
