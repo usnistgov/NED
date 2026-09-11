@@ -371,14 +371,14 @@ See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
 *   **Editing Existing Records:** Only modify field values; do **not** change the data structure or schema.    
 
 If modifying existing data:
-*   **Important:** Only modify field values; do not change the structure or schema.
+*   **Important:** Only modify field values; do not change the structure or schema. If you need to add, rename, or remove a *field*, stop here and follow [How to Modify the Database Structure](#how-to-modify-the-database-structure) instead — schema changes go through the Django model, never through these files.
 *   **Examples of valid modifications:**
     *   Correcting spelling or grammar in descriptions
     *   Updating numeric values or material classifications
     *   Adding or refining component details
     *   Correcting references or citations
 
-> **For large or systematic edits, use a script — don't hand-edit or use the Django admin.** When a change touches many records (e.g. renaming a value across the dataset or recomputing a derived field), write a small script that performs the edit and commit it together with the resulting JSON change, so a reviewer can see the logic behind the diff. Remove the script in a follow-up commit once the change is merged. Large opaque hand-edits — and the Django admin, whose changes leave no reviewable logic and bypass the ingest validation and id-derivation rules — make the diff challenging to audit.
+> **For large or systematic edits, use a script — don't hand-edit or use the Django admin.** When a change touches many records (e.g. renaming a stored *value* across the dataset, or recomputing a derived field), write a small script that performs the edit and commit it together with the resulting JSON change, so a reviewer can see the logic behind the diff. Remove the script in a follow-up commit once the change is merged. Large opaque hand-edits — and the Django admin, whose changes leave no reviewable logic and bypass the ingest validation and id-derivation rules — make the diff challenging to audit. This applies to values only: a **field name** is part of the schema, so renaming one is a migration, not a scripted edit of the JSON.
 
 #### 3. Validate Locally (Recommended)
 Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
@@ -427,6 +427,8 @@ A project maintainer will review your PR. They will check the "JSON Diff" to see
 
 **For Developers:** If you need to change the database schema (e.g., adding a new field like `data_source_type`, renaming a column, or creating a new table), you must follow a strict "Round-Trip" protocol. This ensures that the mapping between our JSON source of truth and the runtime database remains perfectly synced.
 
+> **Never hand-edit `resources/data/*.json` to carry out a schema change — change the model and regenerate them.** Those files are the canonical source of the *data*, but their on-disk form is **generated output**: `export_data` writes them with `json.dump(..., indent=4, sort_keys=True)`, so keys are stored in alphabetical order. Editing a key in place leaves the file parsing correctly and passing the round-trip tests while sitting in the wrong sort position. Nothing fails, and the drift stays invisible until the next contributor runs `export_data` and gets thousands of lines of unexplained reordering mixed into their own diff. Change `models.py`, migrate a populated database, and let `export_data` rewrite the files. `CanonicalJsonFormatTests` in `ned_app/tests/test_data_integrity.py` enforces this by comparing the committed bytes against a canonical re-dump.
+
 #### Step 1: Prepare Your Workspace
 Start with a fresh local database populated with the current canonical data. **Keep a copy of this database** — you will need it later to apply your new migrations.
 ```bash
@@ -458,6 +460,8 @@ Restore the database you saved in Step 1 and apply your new migrations to it. Th
 cp db_before_changes.sqlite3 db.sqlite3
 python manage.py migrate
 ```
+
+> **Do not rebuild the database with `ingest` at this point.** `ingest` would read `resources/data/*.json`, which still uses the *old* schema. The serializers silently ignore keys they no longer recognize, and any field that is `blank=True` is not required — so on a rename, `ingest` reports **0 failures** while dropping every value in the renamed field, and Step 5 then exports the emptied column over your source data. Migrating the populated database you saved in Step 1 is what carries the values across.
 
 #### Step 5: Export Updated Canonical Data
 Export the migrated database to generate the updated canonical JSON files and fixture:
