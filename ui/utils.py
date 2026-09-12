@@ -3,7 +3,24 @@ import re
 
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as components
+
+
+# Both of the behaviours below are pure <script> blobs with nothing to show,
+# run inside a component iframe -- which is also what makes `window.parent`
+# throughout them the app's own window. `st.iframe` is the supported way to
+# render one: `st.components.v1.html` does the same thing but is deprecated in
+# favour of it and logs a warning on every call, so on every rerun. It is not
+# quite a drop-in, though -- it rejects the height=0 those calls passed, so
+# these render at the 1px minimum instead. The inline reset keeps the srcdoc
+# document's default 8px body margin from overflowing that 1px box, since
+# `st.iframe` always enables scrolling.
+_JS_IFRAME_RESET = '<style>html,body{margin:0;padding:0;overflow:hidden}</style>'
+
+
+def _inject_js(markup: str) -> None:
+    """Execute `markup` -- a <script> blob -- in an effectively invisible
+    component iframe."""
+    st.iframe(f'{_JS_IFRAME_RESET}{markup}', height=1)
 
 
 _RESTORE_SCROLL_JS = """
@@ -108,10 +125,7 @@ def restore_scroll_on_page_change(page: str) -> None:
     # every page change rather than only the first one.
     nonce = st.session_state.get('_restore_scroll_nonce', 0) + 1
     st.session_state['_restore_scroll_nonce'] = nonce
-    components.html(
-        f'<!-- restore-scroll {nonce} -->{_RESTORE_SCROLL_JS}',
-        height=0,
-    )
+    _inject_js(f'<!-- restore-scroll {nonce} -->{_RESTORE_SCROLL_JS}')
 
 
 _ROW_CLICK_JS = """
@@ -153,7 +167,7 @@ def enable_row_click_navigation() -> None:
     Injected once, up front, so it covers all four row-tables (Components,
     Experiments, and the two Fragility Models tables) rather than needing a
     separate call per page."""
-    components.html(_ROW_CLICK_JS, height=0)
+    _inject_js(_ROW_CLICK_JS)
 
 
 def fmt(val) -> str:
@@ -448,7 +462,7 @@ def csv_safe(df: pd.DataFrame) -> pd.DataFrame:
     tab, CR) with a single quote so Excel won't evaluate them on open."""
     out = df.copy()
     triggers = ('=', '+', '-', '@', '\t', '\r')
-    for col in out.select_dtypes(include='object').columns:
+    for col in out.select_dtypes(include=['object', 'str']).columns:
         out[col] = out[col].map(
             lambda v: "'" + v if isinstance(v, str) and v and v[0] in triggers else v
         )
