@@ -2,7 +2,6 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-
 from db import (
     get_components,
     get_fragility_curves,
@@ -11,6 +10,7 @@ from db import (
     resolve_group_filter,
 )
 from utils import FIELD_HELP, clamp_cell, esc, fmt
+
 from views.fragility_model import (
     get_model_attributes,
     lognormal_curves,
@@ -217,7 +217,7 @@ def _add_curve_traces(
                 y=group['Probability'],
                 mode='lines',
                 name=f'{side_label} — DS {rank}',
-                line=dict(color=color, dash=rank_dashes.get(rank, 'solid')),
+                line={'color': color, 'dash': rank_dashes.get(rank, 'solid')},
                 hovertemplate=(
                     f'{x_title}: %{{x:.3f}}<br>Probability: %{{y:.2f}}<extra></extra>'
                 ),
@@ -263,24 +263,24 @@ def _render_comparison_chart(
     fig.update_layout(
         height=420,
         autosize=True,
-        margin=dict(l=10, r=10, t=10, b=10),
-        xaxis=dict(title=x_title, showgrid=False),
-        yaxis=dict(
-            title='Probability of Exceedance',
-            range=[0, 1],
-            showgrid=True,
-            gridcolor='#e0e0e0',
-        ),
+        margin={'l': 10, 'r': 10, 't': 10, 'b': 10},
+        xaxis={'title': x_title, 'showgrid': False},
+        yaxis={
+            'title': 'Probability of Exceedance',
+            'range': [0, 1],
+            'showgrid': True,
+            'gridcolor': '#e0e0e0',
+        },
         hovermode='closest',
         hoverdistance=12,
-        legend=dict(
-            orientation='v',
-            x=1.02,
-            y=1,
-            xanchor='left',
-            yanchor='top',
-            font=dict(size=11),
-        ),
+        legend={
+            'orientation': 'v',
+            'x': 1.02,
+            'y': 1,
+            'xanchor': 'left',
+            'yanchor': 'top',
+            'font': {'size': 11},
+        },
     )
     st.plotly_chart(fig, width='stretch', key='cmp_curves_chart')
     st.caption(
