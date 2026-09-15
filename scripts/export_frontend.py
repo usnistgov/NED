@@ -5,10 +5,18 @@ NED is the single source of truth for the front-end *code* (authored in ``ui/``)
 and for the database (built by ``manage.py ingest``). This script pushes both
 into a clone of the deployment repo (ned-frontend):
 
-    1. Replace the NED-owned code paths (``OWNS``) in the front-end repo.
-    2. Inject the freshly built ``db.sqlite3`` at ``backend/db.sqlite3``.
+    1. Regenerate ``ui/requirements.txt`` from ``uv.lock`` (the ``ui``
+       dependency group), so the front-end repo receives the same pinned
+       versions NED tests against.
+    2. Replace the NED-owned code paths (``OWNS``) in the front-end repo.
+    3. Inject the freshly built ``db.sqlite3`` at ``backend/db.sqlite3``.
 
-The changes are written to the front-end repo's working tree only; staging,
+Step 1 is the one write this script makes inside NED itself. If it leaves
+``ui/requirements.txt`` differing from HEAD, the script stops without touching
+the front-end repo: the published files must correspond to the NED commit
+reported at the end, so the regenerated file has to be committed here first.
+
+Everything else is written to the front-end repo's working tree only; staging,
 committing, and pushing are left to you to do manually.
 
 It is deliberately *non-destructive*: it only ever writes the paths listed in
@@ -30,6 +38,11 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+# Same directory as this script, so a plain `python scripts/export_frontend.py`
+# finds it. Owns the uv command that generates ui/requirements.txt, so the
+# flags here, in CI, and in the README cannot drift apart.
+from export_requirements import REQUIREMENTS, regenerate
 
 NED = Path(__file__).resolve().parent.parent
 UI = NED / 'ui'
@@ -63,6 +76,24 @@ _SECRET_HINTS = ('secret', '.env')
 def run(cmd: list[str], cwd: Path) -> None:
     print('+', ' '.join(str(c) for c in cmd))
     subprocess.run(cmd, cwd=cwd, check=True)
+
+
+def _differs_from_head(path: str) -> bool:
+    """True if ``path``'s content differs from the committed version in NED.
+
+    Compares line by line rather than byte for byte, and reads the committed
+    blob directly, so the answer does not depend on ``core.autocrlf``: a
+    checkout that put CRLF in the working tree is not a difference in the
+    pinned versions, which is the only thing that matters here.
+    """
+    try:
+        committed = subprocess.check_output(
+            ['git', 'show', f'HEAD:{path}'], cwd=NED, stderr=subprocess.DEVNULL
+        ).decode()
+    except subprocess.CalledProcessError:
+        return True  # not in HEAD yet, so it needs committing
+    current = (NED / path).read_text(encoding='utf-8')
+    return committed.splitlines() != current.splitlines()
 
 
 def _copy(src: Path, dst: Path) -> None:
@@ -109,14 +140,30 @@ def main() -> int:
             'or pass --rebuild-db.'
         )
 
-    # 1. Publish NED-owned code paths.
+    # 1. Regenerate the pinned requirements from the lock.
+    regenerate()
+
+    # Nothing has been written to the front-end repo yet, so it is safe to stop
+    # here. The closing message reports the NED commit the export came from; if
+    # ui/requirements.txt does not match HEAD, that commit would not describe
+    # what was published, and CI would fail on the same difference.
+    if _differs_from_head(REQUIREMENTS):
+        sys.exit(
+            f'error: {REQUIREMENTS} differs from HEAD after regenerating it '
+            'from uv.lock.\n'
+            f'       Review the change (`git diff -- {REQUIREMENTS}`), commit '
+            'it, then re-run this script.\n'
+            '       Nothing was written to the front-end repo.'
+        )
+
+    # 2. Publish NED-owned code paths.
     for path in OWNS:
         src = UI / path
         if not src.exists():
             sys.exit(f'error: ui/{path} is missing; cannot export an incomplete UI')
         _copy(src, fe / path)
 
-    # 2. Inject the database.
+    # 3. Inject the database.
     _copy(DB, fe / DB_DEST)
 
     sha = (
