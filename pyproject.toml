@@ -1,3 +1,36 @@
+[project]
+name = "ned"
+version = "0.1.0"
+description = "Nonstructural Element Database: Django backend and Streamlit frontend"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "Django>=5.2.0,<6",
+    "djangorestframework>=3.14.0",
+    "django-extensions>=4.1",
+    "jsonschema>=4.0.0",
+]
+
+# Development-time groups introduce sets of tools to sync into the environment.
+# Both are default groups, so a plain `uv sync` gives a contributor everything.
+# ruff, codespell and pytest are pinned exactly: a new version changes what
+# the CI gate reports, so be careful with bumping these.
+[dependency-groups]
+dev = [
+    "ruff==0.12.9",
+    "codespell==2.4.1",
+    "pytest==9.0.3",
+]
+ui = [
+    "streamlit==1.63.0",
+    "pandas",
+    "numpy",
+    "plotly",
+]
+
+[tool.uv]
+package = false
+default-groups = ["dev", "ui"]
 
 [tool.codespell]
 ignore-words = "ignore_words.txt"
@@ -17,7 +50,7 @@ quiet-level = 2
 [tool.ruff]
 line-length = 85
 preview = true
-exclude = [
+extend-exclude = [
     "resources/",
 ]
 
