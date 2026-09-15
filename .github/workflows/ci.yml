@@ -64,13 +64,14 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           version: ${{ env.UV_VERSION }}
+          python-version: '3.12'
           enable-cache: true
       # ui/requirements.txt is generated from uv.lock for the front-end
       # deployment repo; fail if it was not regenerated after a lock change.
-      - run: |
-          uv export --locked --format requirements.txt --only-group ui \
-            --no-hashes --no-annotate --no-header -o /tmp/ui-requirements.txt
-          diff -u ui/requirements.txt /tmp/ui-requirements.txt
+      # The export command lives in the script, not here, so CI and the
+      # publish path cannot disagree about the flags. The script is stdlib
+      # only, so the project itself does not need syncing.
+      - run: uv run --no-project scripts/export_requirements.py --check
 
   # ----- STAGE 2: TESTING -----
   test:

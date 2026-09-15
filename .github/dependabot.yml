@@ -1,8 +1,7 @@
 # Dependabot follows uv.lock, so a bump updates pyproject.toml and the lock
 # together. ui/requirements.txt is generated from the lock; after a bump that
 # touches the ui group, regenerate it with
-#   uv export --locked --format requirements.txt --only-group ui \
-#     --no-hashes --no-annotate --no-header -o ui/requirements.txt
+#   python scripts/export_requirements.py
 # or the CI check on that file fails on the Dependabot branch.
 version: 2
 updates:

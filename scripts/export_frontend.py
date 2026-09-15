@@ -11,7 +11,12 @@ into a clone of the deployment repo (ned-frontend):
     2. Replace the NED-owned code paths (``OWNS``) in the front-end repo.
     3. Inject the freshly built ``db.sqlite3`` at ``backend/db.sqlite3``.
 
-The changes are written to the front-end repo's working tree only; staging,
+Step 1 is the one write this script makes inside NED itself. If it leaves
+``ui/requirements.txt`` differing from HEAD, the script stops without touching
+the front-end repo: the published files must correspond to the NED commit
+reported at the end, so the regenerated file has to be committed here first.
+
+Everything else is written to the front-end repo's working tree only; staging,
 committing, and pushing are left to you to do manually.
 
 It is deliberately *non-destructive*: it only ever writes the paths listed in
@@ -33,6 +38,11 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+# Same directory as this script, so a plain `python scripts/export_frontend.py`
+# finds it. Owns the uv command that generates ui/requirements.txt, so the
+# flags here, in CI, and in the README cannot drift apart.
+from export_requirements import REQUIREMENTS, regenerate
 
 NED = Path(__file__).resolve().parent.parent
 UI = NED / 'ui'
@@ -59,23 +69,6 @@ OWNS = [
 # Built into the front-end repo for deployment; gitignored / untracked in NED.
 DB_DEST = 'backend/db.sqlite3'
 
-# Writes ui/requirements.txt from the lock. --locked refuses a lock that is
-# out of date with pyproject.toml, so stale pins are never published.
-EXPORT_CMD = [
-    'uv',
-    'export',
-    '--locked',
-    '--format',
-    'requirements.txt',
-    '--only-group',
-    'ui',
-    '--no-hashes',
-    '--no-annotate',
-    '--no-header',
-    '-o',
-    'ui/requirements.txt',
-]
-
 # Safety net: never publish anything that looks like a credential into the repo.
 _SECRET_HINTS = ('secret', '.env')
 
@@ -83,6 +76,24 @@ _SECRET_HINTS = ('secret', '.env')
 def run(cmd: list[str], cwd: Path) -> None:
     print('+', ' '.join(str(c) for c in cmd))
     subprocess.run(cmd, cwd=cwd, check=True)
+
+
+def _differs_from_head(path: str) -> bool:
+    """True if ``path``'s content differs from the committed version in NED.
+
+    Compares line by line rather than byte for byte, and reads the committed
+    blob directly, so the answer does not depend on ``core.autocrlf``: a
+    checkout that put CRLF in the working tree is not a difference in the
+    pinned versions, which is the only thing that matters here.
+    """
+    try:
+        committed = subprocess.check_output(
+            ['git', 'show', f'HEAD:{path}'], cwd=NED, stderr=subprocess.DEVNULL
+        ).decode()
+    except subprocess.CalledProcessError:
+        return True  # not in HEAD yet, so it needs committing
+    current = (NED / path).read_text(encoding='utf-8')
+    return committed.splitlines() != current.splitlines()
 
 
 def _copy(src: Path, dst: Path) -> None:
@@ -130,14 +141,20 @@ def main() -> int:
         )
 
     # 1. Regenerate the pinned requirements from the lock.
-    if shutil.which('uv') is None:
+    regenerate()
+
+    # Nothing has been written to the front-end repo yet, so it is safe to stop
+    # here. The closing message reports the NED commit the export came from; if
+    # ui/requirements.txt does not match HEAD, that commit would not describe
+    # what was published, and CI would fail on the same difference.
+    if _differs_from_head(REQUIREMENTS):
         sys.exit(
-            'error: uv is not on PATH; it is needed to regenerate ui/requirements.txt'
+            f'error: {REQUIREMENTS} differs from HEAD after regenerating it '
+            'from uv.lock.\n'
+            f'       Review the change (`git diff -- {REQUIREMENTS}`), commit '
+            'it, then re-run this script.\n'
+            '       Nothing was written to the front-end repo.'
         )
-    try:
-        run(EXPORT_CMD, cwd=NED)
-    except subprocess.CalledProcessError as exc:
-        sys.exit(f'error: uv export failed with exit status {exc.returncode}')
 
     # 2. Publish NED-owned code paths.
     for path in OWNS:
