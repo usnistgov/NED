@@ -1,9 +1,8 @@
 import os
 from typing import Any
 
-import streamlit as st
-
 import auth
+import streamlit as st
 import styles
 from utils import enable_row_click_navigation, restore_scroll_on_page_change
 from views import (

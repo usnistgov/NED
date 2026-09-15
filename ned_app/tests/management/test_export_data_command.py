@@ -1,17 +1,19 @@
+import json
 import os
 import tempfile
-import json
 from decimal import Decimal
-from django.test import TestCase
+
 from django.core.management import call_command
+from django.test import TestCase
+
 from ned_app.models import (
-    Reference,
     Component,
-    Experiment,
-    FragilityModel,
-    ExperimentFragilityModelBridge,
     ComponentFragilityModelBridge,
+    Experiment,
+    ExperimentFragilityModelBridge,
     FragilityCurve,
+    FragilityModel,
+    Reference,
 )
 
 

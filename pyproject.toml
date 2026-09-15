@@ -19,6 +19,7 @@ line-length = 85
 preview = true
 exclude = [
     "resources/",
+    "*/migrations/*",
 ]
 
 [tool.ruff.lint]
