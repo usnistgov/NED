@@ -1,5 +1,4 @@
 import streamlit as st
-
 from db import get_components
 
 
