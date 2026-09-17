@@ -1,7 +1,7 @@
 import sqlite3
 
 import pandas as pd
-
+import pytest
 from db import _shape_components_df
 
 
@@ -202,7 +202,7 @@ class TestGetFragilityCurves:
     def test_returns_curves_ordered_by_ds_rank(self, db_module):
         df = db_module.get_fragility_curves('Smith-2020|M1')
         assert df['DS Rank'].tolist() == [1]
-        assert float(df.iloc[0]['Median']) == 0.02
+        assert float(df.iloc[0]['Median']) == pytest.approx(0.02)
 
 
 class TestGetFragilityModelExperiments:

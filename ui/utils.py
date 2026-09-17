@@ -3,8 +3,6 @@ import re
 
 import pandas as pd
 import streamlit as st
-<<<<<<< HEAD
-
 
 # Both of the behaviours below are pure <script> blobs with nothing to show,
 # run inside a component iframe -- which is also what makes `window.parent`
@@ -22,8 +20,6 @@ def _inject_js(markup: str) -> None:
     """Execute `markup` -- a <script> blob -- in an effectively invisible
     component iframe."""
     st.iframe(f'{_JS_IFRAME_RESET}{markup}', height=1)
-=======
->>>>>>> task/48
 
 
 _RESTORE_SCROLL_JS = """
@@ -128,17 +124,7 @@ def restore_scroll_on_page_change(page: str) -> None:
     # every page change rather than only the first one.
     nonce = st.session_state.get('_restore_scroll_nonce', 0) + 1
     st.session_state['_restore_scroll_nonce'] = nonce
-<<<<<<< HEAD
     _inject_js(f'<!-- restore-scroll {nonce} -->{_RESTORE_SCROLL_JS}')
-=======
-    # st.iframe requires a positive height (unlike the deprecated
-    # components.html, which allowed 0); 1px keeps this script-only iframe
-    # effectively invisible.
-    st.iframe(
-        f'<!-- restore-scroll {nonce} -->{_RESTORE_SCROLL_JS}',
-        height=1,
-    )
->>>>>>> task/48
 
 
 _ROW_CLICK_JS = """
@@ -180,18 +166,14 @@ def enable_row_click_navigation() -> None:
     Injected once, up front, so it covers all four row-tables (Components,
     Experiments, and the two Fragility Models tables) rather than needing a
     separate call per page."""
-<<<<<<< HEAD
     _inject_js(_ROW_CLICK_JS)
-=======
-    st.iframe(_ROW_CLICK_JS, height=1)
->>>>>>> task/48
 
 
 def fmt(val) -> str:
     if val is None or (isinstance(val, float) and pd.isna(val)):
         return '—'
     s = str(val).strip()
-    return s if s else '—'
+    return s or '—'
 
 
 def esc(val) -> str:

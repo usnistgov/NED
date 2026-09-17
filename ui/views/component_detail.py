@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-
 from db import (
     get_component_detail,
     get_component_experiments,
@@ -9,6 +8,7 @@ from db import (
     get_component_fragility_models_export,
 )
 from utils import attr, csv_safe, fmt, strip_prefix
+
 from views.components import last_filters_query_params
 from views.experiments_table import render_experiments_table, with_reference
 from views.fragility_models_table import render_fragility_models_table

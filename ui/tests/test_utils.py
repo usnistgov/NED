@@ -4,7 +4,6 @@ import math
 import pandas as pd
 import pytest
 from streamlit.testing.v1 import AppTest
-
 from utils import build_citation, csv_safe, doi_link, doi_url, esc, fmt, strip_prefix
 
 
