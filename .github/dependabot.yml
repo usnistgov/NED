@@ -1,0 +1,19 @@
+# Dependabot follows uv.lock, so a bump updates pyproject.toml and the lock
+# together. ui/requirements.txt is generated from the lock; after a bump that
+# touches the ui group, regenerate it with
+#   python scripts/export_requirements.py
+# or the CI check on that file fails on the Dependabot branch.
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    ignore:
+      # Bumped by hand: the UI calls st.components.v1.html, which Streamlit
+      # has marked for removal, so a new Streamlit needs a code change first.
+      - dependency-name: "streamlit"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"

@@ -2,7 +2,7 @@
 
 An interactive data explorer for seismic fragility and consequence modeling of nonstructural building components. NED provides curated experimental data, fragility models, and research references to support loss estimation frameworks like FEMA P-58.
 
-![Streamlit](https://img.shields.io/badge/Streamlit-1.56-red)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.58-red)
 ![Python](https://img.shields.io/badge/Python-3.11+-blue)
 
 ## What's in the database
@@ -16,6 +16,8 @@ An interactive data explorer for seismic fragility and consequence modeling of n
 | References | 63 | Research publications and studies |
 
 ## Running locally
+
+Inside the NED repository, use uv instead: see the root README's [Running the UI locally](https://github.com/usnistgov/NED#running-the-ui-locally).
 
 ```bash
 python -m venv venv
@@ -100,11 +102,11 @@ check; see the notes at the top of that file.
 **Install and run:**
 
 ```bash
-pip install -r ui/requirements.txt -r requirements-dev.txt
-python -m pytest ui/tests -q
+uv sync
+uv run python -m pytest ui/tests -q
 ```
 
-Run from the repository root (not from inside `ui/`) — `ui/tests/conftest.py`
+Run from the NED repository root (not from inside `ui/`), because `ui/tests/conftest.py`
 puts `ui/` on `sys.path` itself so the tests can use the same flat imports
 (`from db import ...`) that `ui/`'s own modules use. This is also what CI runs
 (`ui_test` job in `.github/workflows/ci.yml`).
@@ -161,6 +163,10 @@ All data lives in a single SQLite file. The app is strictly read-only.
 
 ## Dependencies
 
-- **streamlit** 1.56.0 — Web framework
-- **pandas** 2.1.4 — Data manipulation and SQL query results
-- **sqlite3** — Database access (Python standard library)
+- **streamlit**, the web framework
+- **pandas**, for query results and data manipulation
+- **numpy**, for numerical operations
+- **plotly**, for charts
+- **sqlite3**, database access (Python standard library)
+
+Exact versions are pinned in `requirements.txt`, which NED generates from its `uv.lock`.
