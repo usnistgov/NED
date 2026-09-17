@@ -17,12 +17,12 @@ dependencies = [
 # the CI gate reports, so be careful with bumping these.
 [dependency-groups]
 dev = [
-    "ruff==0.12.9",
+    "ruff==0.16.7",
     "codespell==2.4.1",
     "pytest==9.0.3",
 ]
 ui = [
-    "streamlit==1.58.0",
+    "streamlit==1.63.0",
     "pandas",
     "numpy",
     "plotly",
@@ -52,6 +52,7 @@ line-length = 85
 preview = true
 extend-exclude = [
     "resources/",
+    "*/migrations/*",
 ]
 
 [tool.ruff.lint]
