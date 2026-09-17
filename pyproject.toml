@@ -18,7 +18,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ruff==0.12.9",
-    "codespell==2.4.1",
+    "codespell==2.4.3",
     "pytest==9.0.3",
 ]
 ui = [
