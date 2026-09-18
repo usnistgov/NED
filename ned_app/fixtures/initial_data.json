@@ -82389,9 +82389,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 20,
   "fields": {
-    "fragility_model_id": "Davies-2011|fra1020",
+    "fragility_model_id": "Davies-2011|1a",
     "reference": "Davies-2011",
-    "model_id": "fra1020",
+    "model_id": "1a",
     "p58_fragility": "",
     "comp_detail": "Full height - Slip track",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82407,9 +82407,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 21,
   "fields": {
-    "fragility_model_id": "Davies-2011|fra1021",
+    "fragility_model_id": "Davies-2011|1b",
     "reference": "Davies-2011",
-    "model_id": "fra1021",
+    "model_id": "1b",
     "p58_fragility": "",
     "comp_detail": "Full height",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82425,9 +82425,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 22,
   "fields": {
-    "fragility_model_id": "Davies-2011|fra1022",
+    "fragility_model_id": "Davies-2011|1c",
     "reference": "Davies-2011",
-    "model_id": "fra1022",
+    "model_id": "1c",
     "p58_fragility": "",
     "comp_detail": "Full height",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82443,9 +82443,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 23,
   "fields": {
-    "fragility_model_id": "Davies-2011|fra1023",
+    "fragility_model_id": "Davies-2011|2a",
     "reference": "Davies-2011",
-    "model_id": "fra1023",
+    "model_id": "2a",
     "p58_fragility": "",
     "comp_detail": "Full height - Slip track",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82461,9 +82461,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 24,
   "fields": {
-    "fragility_model_id": "Davies-2011|fra1024",
+    "fragility_model_id": "Davies-2011|2b",
     "reference": "Davies-2011",
-    "model_id": "fra1024",
+    "model_id": "2b",
     "p58_fragility": "",
     "comp_detail": "Full height",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82479,9 +82479,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 25,
   "fields": {
-    "fragility_model_id": "Davies-2011|fra1025",
+    "fragility_model_id": "Davies-2011|2c",
     "reference": "Davies-2011",
-    "model_id": "fra1025",
+    "model_id": "2c",
     "p58_fragility": "",
     "comp_detail": "Full height",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82497,9 +82497,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 26,
   "fields": {
-    "fragility_model_id": "Davies-2011|fra1026",
+    "fragility_model_id": "Davies-2011|3",
     "reference": "Davies-2011",
-    "model_id": "fra1026",
+    "model_id": "3",
     "p58_fragility": "",
     "comp_detail": "Partial height",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82515,9 +82515,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 27,
   "fields": {
-    "fragility_model_id": "Davies-2011|fra1027",
+    "fragility_model_id": "Davies-2011|4",
     "reference": "Davies-2011",
-    "model_id": "fra1027",
+    "model_id": "4",
     "p58_fragility": "",
     "comp_detail": "",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -103110,7 +103110,7 @@
   "pk": 20,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Davies-2011|fra1020"
+    "fragility_model": "Davies-2011|1a"
   }
 },
 {
@@ -103118,7 +103118,7 @@
   "pk": 21,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Davies-2011|fra1021"
+    "fragility_model": "Davies-2011|1b"
   }
 },
 {
@@ -103126,7 +103126,7 @@
   "pk": 22,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Davies-2011|fra1022"
+    "fragility_model": "Davies-2011|1c"
   }
 },
 {
@@ -103134,7 +103134,7 @@
   "pk": 23,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Davies-2011|fra1023"
+    "fragility_model": "Davies-2011|2a"
   }
 },
 {
@@ -103142,7 +103142,7 @@
   "pk": 24,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Davies-2011|fra1024"
+    "fragility_model": "Davies-2011|2b"
   }
 },
 {
@@ -103150,7 +103150,7 @@
   "pk": 25,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Davies-2011|fra1025"
+    "fragility_model": "Davies-2011|2c"
   }
 },
 {
@@ -103158,7 +103158,7 @@
   "pk": 26,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Davies-2011|fra1026"
+    "fragility_model": "Davies-2011|3"
   }
 },
 {
@@ -103166,7 +103166,7 @@
   "pk": 27,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Davies-2011|fra1027"
+    "fragility_model": "Davies-2011|4"
   }
 },
 {
@@ -121421,12 +121421,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1021,
   "fields": {
-    "fragility_model": "Davies-2011|fra1020",
+    "fragility_model": "Davies-2011|1a",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
-    "median": "0.2600",
+    "median": "0.0026",
     "beta": "0.450",
     "probability": "1.00"
   }
@@ -121435,13 +121435,13 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1022,
   "fields": {
-    "fragility_model": "Davies-2011|fra1020",
+    "fragility_model": "Davies-2011|1a",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
-    "median": "0.6800",
-    "beta": "0.330",
+    "median": "0.0068",
+    "beta": "0.350",
     "probability": "1.00"
   }
 },
@@ -121449,12 +121449,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1023,
   "fields": {
-    "fragility_model": "Davies-2011|fra1020",
+    "fragility_model": "Davies-2011|1a",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
-    "median": "0.7500",
+    "median": "0.0075",
     "beta": "0.360",
     "probability": "1.00"
   }
@@ -121463,12 +121463,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1024,
   "fields": {
-    "fragility_model": "Davies-2011|fra1021",
+    "fragility_model": "Davies-2011|1b",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
-    "median": "0.2700",
+    "median": "0.0027",
     "beta": "0.450",
     "probability": "1.00"
   }
@@ -121477,12 +121477,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1025,
   "fields": {
-    "fragility_model": "Davies-2011|fra1021",
+    "fragility_model": "Davies-2011|1b",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
-    "median": "0.6100",
+    "median": "0.0061",
     "beta": "0.420",
     "probability": "1.00"
   }
@@ -121491,12 +121491,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1026,
   "fields": {
-    "fragility_model": "Davies-2011|fra1021",
+    "fragility_model": "Davies-2011|1b",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
-    "median": "1.2000",
+    "median": "0.0120",
     "beta": "0.590",
     "probability": "1.00"
   }
@@ -121505,12 +121505,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1027,
   "fields": {
-    "fragility_model": "Davies-2011|fra1022",
+    "fragility_model": "Davies-2011|1c",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
-    "median": "0.2700",
+    "median": "0.0027",
     "beta": "0.440",
     "probability": "1.00"
   }
@@ -121519,12 +121519,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1028,
   "fields": {
-    "fragility_model": "Davies-2011|fra1022",
+    "fragility_model": "Davies-2011|1c",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
-    "median": "0.6400",
+    "median": "0.0064",
     "beta": "0.380",
     "probability": "1.00"
   }
@@ -121533,13 +121533,13 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1029,
   "fields": {
-    "fragility_model": "Davies-2011|fra1022",
+    "fragility_model": "Davies-2011|1c",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
-    "median": "0.9900",
-    "beta": "0.550",
+    "median": "0.0096",
+    "beta": "0.610",
     "probability": "1.00"
   }
 },
@@ -121547,13 +121547,13 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1030,
   "fields": {
-    "fragility_model": "Davies-2011|fra1023",
+    "fragility_model": "Davies-2011|2a",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
-    "median": "0.3700",
-    "beta": "0.620",
+    "median": "0.0037",
+    "beta": "0.550",
     "probability": "1.00"
   }
 },
@@ -121561,12 +121561,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1031,
   "fields": {
-    "fragility_model": "Davies-2011|fra1023",
+    "fragility_model": "Davies-2011|2a",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
-    "median": "0.7900",
+    "median": "0.0079",
     "beta": "0.350",
     "probability": "1.00"
   }
@@ -121575,13 +121575,13 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1032,
   "fields": {
-    "fragility_model": "Davies-2011|fra1023",
+    "fragility_model": "Davies-2011|2c",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
-    "median": "0.8800",
-    "beta": "0.330",
+    "median": "0.0098",
+    "beta": "0.520",
     "probability": "1.00"
   }
 },
@@ -121589,12 +121589,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1033,
   "fields": {
-    "fragility_model": "Davies-2011|fra1024",
+    "fragility_model": "Davies-2011|2b",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
-    "median": "0.4000",
+    "median": "0.0040",
     "beta": "0.250",
     "probability": "1.00"
   }
@@ -121603,13 +121603,13 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1034,
   "fields": {
-    "fragility_model": "Davies-2011|fra1024",
+    "fragility_model": "Davies-2011|2b",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
-    "median": "0.6300",
-    "beta": "0.460",
+    "median": "0.0063",
+    "beta": "0.430",
     "probability": "1.00"
   }
 },
@@ -121617,13 +121617,13 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1035,
   "fields": {
-    "fragility_model": "Davies-2011|fra1024",
+    "fragility_model": "Davies-2011|2b",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
-    "median": "0.9300",
-    "beta": "0.360",
+    "median": "0.0088",
+    "beta": "0.330",
     "probability": "1.00"
   }
 },
@@ -121631,13 +121631,13 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1036,
   "fields": {
-    "fragility_model": "Davies-2011|fra1025",
+    "fragility_model": "Davies-2011|2c",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
-    "median": "0.3900",
-    "beta": "0.380",
+    "median": "0.0042",
+    "beta": "0.310",
     "probability": "1.00"
   }
 },
@@ -121645,13 +121645,13 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1037,
   "fields": {
-    "fragility_model": "Davies-2011|fra1025",
+    "fragility_model": "Davies-2011|2c",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
-    "median": "0.6800",
-    "beta": "0.430",
+    "median": "0.0068",
+    "beta": "0.400",
     "probability": "1.00"
   }
 },
@@ -121659,12 +121659,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1038,
   "fields": {
-    "fragility_model": "Davies-2011|fra1026",
+    "fragility_model": "Davies-2011|3",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
-    "median": "0.7400",
+    "median": "0.0074",
     "beta": "0.290",
     "probability": "1.00"
   }
@@ -121673,12 +121673,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1039,
   "fields": {
-    "fragility_model": "Davies-2011|fra1026",
+    "fragility_model": "Davies-2011|3",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Crushing of wall corners, out-of-plane bending and cracking of gypsum wallboards at wall intersections, bending of boundary studs, buckling of diagonal braces (partial height walls)",
-    "median": "1.0000",
+    "median": "0.0100",
     "beta": "0.330",
     "probability": "1.00"
   }
@@ -121687,12 +121687,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1040,
   "fields": {
-    "fragility_model": "Davies-2011|fra1026",
+    "fragility_model": "Davies-2011|3",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Tears in steel tracks through slab fasteners, track flanges bent at wall intersections, hinges forming in studs, partition wall collapse",
-    "median": "1.7900",
+    "median": "0.0179",
     "beta": "0.280",
     "probability": "1.00"
   }
@@ -121701,13 +121701,13 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1041,
   "fields": {
-    "fragility_model": "Davies-2011|fra1027",
+    "fragility_model": "Davies-2011|4",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Cracks along cornerbeads, and joint paper tape; screws pulled out from gypsum",
-    "median": "0.3600",
-    "beta": "0.800",
+    "median": "0.0034",
+    "beta": "0.770",
     "probability": "1.00"
   }
 },

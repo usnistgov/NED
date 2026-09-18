@@ -77,35 +77,35 @@
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Davies-2011|fra1020"
+        "fragility_model": "Davies-2011|1a"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Davies-2011|fra1021"
+        "fragility_model": "Davies-2011|1b"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Davies-2011|fra1022"
+        "fragility_model": "Davies-2011|1c"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Davies-2011|fra1023"
+        "fragility_model": "Davies-2011|2a"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Davies-2011|fra1024"
+        "fragility_model": "Davies-2011|2b"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Davies-2011|fra1025"
+        "fragility_model": "Davies-2011|2c"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Davies-2011|fra1026"
+        "fragility_model": "Davies-2011|3"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Davies-2011|fra1027"
+        "fragility_model": "Davies-2011|4"
     },
     {
         "component": "D.40.1.1.F",
