@@ -102,7 +102,6 @@ class Command(BaseCommand):
             ref_data = {
                 'study_type': ref.study_type,
                 'comp_type': ref.comp_type,
-                'pdf_saved': ref.pdf_saved,
                 'csl_data': ref.csl_data,
             }
             # Only emit reference_label when set, to keep unlabeled records clean.

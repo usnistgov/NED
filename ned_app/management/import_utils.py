@@ -9,7 +9,6 @@ from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
 
 _INT_FIELDS = {'ds_rank', 'num_observations'}
 _FLOAT_FIELDS = {'edp_value', 'alt_edp_value', 'median', 'beta', 'probability'}
-_BOOL_FIELDS = {'pdf_saved'}
 
 
 def load_json(filename):
@@ -186,13 +185,6 @@ def coerce_value(field, val):
     if val == '' or val is None:
         if field in _INT_FIELDS or field in _FLOAT_FIELDS:
             return None
-        return val
-    if field in _BOOL_FIELDS:
-        lowered = val.strip().lower() if isinstance(val, str) else val
-        if lowered == 'true':
-            return True
-        if lowered == 'false':
-            return False
         return val
     if field in _INT_FIELDS:
         try:
