@@ -167,7 +167,8 @@ def main() -> int:
     _copy(DB, fe / DB_DEST)
 
     sha = (
-        subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'], cwd=NED)
+        subprocess
+        .check_output(['git', 'rev-parse', '--short', 'HEAD'], cwd=NED)
         .decode()
         .strip()
     )

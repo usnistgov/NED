@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-
 from db import (
     get_component_for_fragility_model,
     get_components,
@@ -20,6 +19,7 @@ from db import (
     get_reference,
 )
 from utils import FIELD_HELP, attr, build_citation, csv_safe, fmt
+
 from views.experiments_table import render_experiments_table, with_reference
 
 
@@ -158,8 +158,10 @@ def get_model_attributes(
             citation = (
                 f'{fmt(ref["author"])} ({fmt(ref["year"])}). {fmt(ref["title"])}.'
             )
-        items.append(('Reference', citation, None))
-        items.append(('Study Type', fmt(ref['study_type']), None))
+        items.extend([
+            ('Reference', citation, None),
+            ('Study Type', fmt(ref['study_type']), None),
+        ])
 
     return items
 
@@ -244,27 +246,27 @@ def render_damage_states(
         fig.update_layout(
             height=360,
             autosize=True,
-            margin=dict(l=10, r=10, t=10, b=10),
-            xaxis=dict(
-                title=x_title,
-                showgrid=False,
-            ),
-            yaxis=dict(
-                title='Probability of Exceedance',
-                range=[0, 1],
-                showgrid=True,
-                gridcolor='#e0e0e0',
-            ),
+            margin={'l': 10, 'r': 10, 't': 10, 'b': 10},
+            xaxis={
+                'title': x_title,
+                'showgrid': False,
+            },
+            yaxis={
+                'title': 'Probability of Exceedance',
+                'range': [0, 1],
+                'showgrid': True,
+                'gridcolor': '#e0e0e0',
+            },
             hovermode='closest',
             hoverdistance=12,
-            legend=dict(
-                orientation='v',
-                x=1.02,
-                y=1,
-                xanchor='left',
-                yanchor='top',
-                font=dict(size=11),
-            ),
+            legend={
+                'orientation': 'v',
+                'x': 1.02,
+                'y': 1,
+                'xanchor': 'left',
+                'yanchor': 'top',
+                'font': {'size': 11},
+            },
         )
         st.plotly_chart(fig, width='stretch', key=f'{key_prefix}curves_chart')
     else:
@@ -272,7 +274,10 @@ def render_damage_states(
 
     df_table = df_curves.copy()
     median_scale, median_format = median_display(edp_unit)
-    if median_scale != 1.0:
+    # median_scale is always one of a small set of literal constants (1.0 or
+    # 100.0) returned by median_display, never an arithmetic result, so exact
+    # comparison is safe here.
+    if median_scale != 1.0:  # noqa: RUF069
         df_table['Median'] = df_table['Median'] * median_scale
 
     st.dataframe(
