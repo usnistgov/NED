@@ -82317,9 +82317,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 16,
   "fields": {
-    "fragility_model_id": "Pali-2018|fra1016",
+    "fragility_model_id": "Pali-2018|type1_fixed",
     "reference": "Pali-2018",
-    "model_id": "fra1016",
+    "model_id": "type1_fixed",
     "p58_fragility": "",
     "comp_detail": "Fixed",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82335,9 +82335,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 17,
   "fields": {
-    "fragility_model_id": "Pali-2018|fra1017",
+    "fragility_model_id": "Pali-2018|type1_sliding",
     "reference": "Pali-2018",
-    "model_id": "fra1017",
+    "model_id": "type1_sliding",
     "p58_fragility": "",
     "comp_detail": "Sliding connection",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82353,9 +82353,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 18,
   "fields": {
-    "fragility_model_id": "Pali-2018|fra1018",
+    "fragility_model_id": "Pali-2018|type2_fixed",
     "reference": "Pali-2018",
-    "model_id": "fra1018",
+    "model_id": "type2_fixed",
     "p58_fragility": "",
     "comp_detail": "Fixed",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -82371,9 +82371,9 @@
   "model": "ned_app.fragilitymodel",
   "pk": 19,
   "fields": {
-    "fragility_model_id": "Pali-2018|fra1019",
+    "fragility_model_id": "Pali-2018|type2_sliding",
     "reference": "Pali-2018",
-    "model_id": "fra1019",
+    "model_id": "type2_sliding",
     "p58_fragility": "",
     "comp_detail": "Sliding connection",
     "material": "Cold-formed steel stud with gypsum sheathing",
@@ -103078,7 +103078,7 @@
   "pk": 16,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Pali-2018|fra1016"
+    "fragility_model": "Pali-2018|type1_fixed"
   }
 },
 {
@@ -103086,7 +103086,7 @@
   "pk": 17,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Pali-2018|fra1017"
+    "fragility_model": "Pali-2018|type1_sliding"
   }
 },
 {
@@ -103094,7 +103094,7 @@
   "pk": 18,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Pali-2018|fra1018"
+    "fragility_model": "Pali-2018|type2_fixed"
   }
 },
 {
@@ -103102,7 +103102,7 @@
   "pk": 19,
   "fields": {
     "component": "C.10.1.1.A",
-    "fragility_model": "Pali-2018|fra1019"
+    "fragility_model": "Pali-2018|type2_sliding"
   }
 },
 {
@@ -121253,12 +121253,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1009,
   "fields": {
-    "fragility_model": "Pali-2018|fra1016",
+    "fragility_model": "Pali-2018|type1_fixed",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Drop of gypsum dust, Detachment of joint tape, Crack in joints, Detachment between indoor partition walls and surrounding structural elements (<5 mm).",
-    "median": "0.3700",
+    "median": "0.0037",
     "beta": "0.510",
     "probability": "1.00"
   }
@@ -121267,12 +121267,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1010,
   "fields": {
-    "fragility_model": "Pali-2018|fra1016",
+    "fragility_model": "Pali-2018|type1_fixed",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Detachment between indoor partition walls and surrounding structural elements (>5 mm), Crack in panels, Corner crushing of panels, Local plastic deformations of studs, Rupture of panel portions (<50 cm2), Collapse of panel-to-frame fixings (<5%), Collapse of dowels (<5%).",
-    "median": "1.0500",
+    "median": "0.0105",
     "beta": "0.290",
     "probability": "1.00"
   }
@@ -121281,12 +121281,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1011,
   "fields": {
-    "fragility_model": "Pali-2018|fra1016",
+    "fragility_model": "Pali-2018|type1_fixed",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Rupture of panel portions (>50 cm2), Collapse of panel?to?frame fixings (>5%), Collapse of dowels (>5%), Detachment between indoor partition walls and outdoor facade walls, Out-of-plane collapse of panels,  Wall out-of-plane collapse.",
-    "median": "1.4900",
+    "median": "0.0149",
     "beta": "0.290",
     "probability": "1.00"
   }
@@ -121295,12 +121295,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1012,
   "fields": {
-    "fragility_model": "Pali-2018|fra1017",
+    "fragility_model": "Pali-2018|type1_sliding",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Drop of gypsum dust, Detachment of joint tape, Crack in joints, Detachment between indoor partition walls and surrounding structural elements (<5 mm).",
-    "median": "1.2700",
+    "median": "0.0127",
     "beta": "0.280",
     "probability": "1.00"
   }
@@ -121309,12 +121309,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1013,
   "fields": {
-    "fragility_model": "Pali-2018|fra1017",
+    "fragility_model": "Pali-2018|type1_sliding",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Detachment between indoor partition walls and surrounding structural elements (>5 mm), Crack in panels, Corner crushing of panels, Local plastic deformations of studs, Rupture of panel portions (<50 cm2), Collapse of panel-to-frame fixings (<5%), Collapse of dowels (<5%).",
-    "median": "1.5200",
+    "median": "0.0152",
     "beta": "0.250",
     "probability": "1.00"
   }
@@ -121323,12 +121323,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1014,
   "fields": {
-    "fragility_model": "Pali-2018|fra1017",
+    "fragility_model": "Pali-2018|type1_sliding",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Rupture of panel portions (>50 cm2), Collapse of panel?to?frame fixings (>5%), Collapse of dowels (>5%), Detachment between indoor partition walls and outdoor facade walls, Out-of-plane collapse of panels,  Wall out-of-plane collapse.",
-    "median": "2.1000",
+    "median": "0.0210",
     "beta": "0.250",
     "probability": "1.00"
   }
@@ -121337,12 +121337,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1015,
   "fields": {
-    "fragility_model": "Pali-2018|fra1018",
+    "fragility_model": "Pali-2018|type2_fixed",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Drop of gypsum dust, Detachment of joint tape, Crack in joints, Detachment between indoor partition walls and surrounding structural elements (<5 mm).",
-    "median": "0.7800",
+    "median": "0.0078",
     "beta": "0.350",
     "probability": "1.00"
   }
@@ -121351,12 +121351,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1016,
   "fields": {
-    "fragility_model": "Pali-2018|fra1018",
+    "fragility_model": "Pali-2018|type2_fixed",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Detachment between indoor partition walls and surrounding structural elements (>5 mm), Crack in panels, Corner crushing of panels, Local plastic deformations of studs, Rupture of panel portions (<50 cm2), Collapse of panel-to-frame fixings (<5%), Collapse of dowels (<5%).",
-    "median": "1.1800",
+    "median": "0.0118",
     "beta": "0.280",
     "probability": "1.00"
   }
@@ -121365,12 +121365,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1017,
   "fields": {
-    "fragility_model": "Pali-2018|fra1018",
+    "fragility_model": "Pali-2018|type2_fixed",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Rupture of panel portions (>50 cm2), Collapse of panel?to?frame fixings (>5%), Collapse of dowels (>5%), Detachment between indoor partition walls and outdoor facade walls, Out-of-plane collapse of panels,  Wall out-of-plane collapse.",
-    "median": "1.4400",
+    "median": "0.0144",
     "beta": "0.390",
     "probability": "1.00"
   }
@@ -121379,12 +121379,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1018,
   "fields": {
-    "fragility_model": "Pali-2018|fra1019",
+    "fragility_model": "Pali-2018|type2_sliding",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 1,
     "ds_description": "Drop of gypsum dust, Detachment of joint tape, Crack in joints, Detachment between indoor partition walls and surrounding structural elements (<5 mm).",
-    "median": "0.7000",
+    "median": "0.0070",
     "beta": "0.390",
     "probability": "1.00"
   }
@@ -121393,12 +121393,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1019,
   "fields": {
-    "fragility_model": "Pali-2018|fra1019",
+    "fragility_model": "Pali-2018|type2_sliding",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 2,
     "ds_description": "Detachment between indoor partition walls and surrounding structural elements (>5 mm), Crack in panels, Corner crushing of panels, Local plastic deformations of studs, Rupture of panel portions (<50 cm2), Collapse of panel-to-frame fixings (<5%), Collapse of dowels (<5%).",
-    "median": "1.0100",
+    "median": "0.0101",
     "beta": "0.250",
     "probability": "1.00"
   }
@@ -121407,12 +121407,12 @@
   "model": "ned_app.fragilitycurve",
   "pk": 1020,
   "fields": {
-    "fragility_model": "Pali-2018|fra1019",
+    "fragility_model": "Pali-2018|type2_sliding",
     "basis": "Experiment",
     "num_observations": null,
     "ds_rank": 3,
     "ds_description": "Rupture of panel portions (>50 cm2), Collapse of panel?to?frame fixings (>5%), Collapse of dowels (>5%), Detachment between indoor partition walls and outdoor facade walls, Out-of-plane collapse of panels,  Wall out-of-plane collapse.",
-    "median": "1.2000",
+    "median": "0.0120",
     "beta": "0.290",
     "probability": "1.00"
   }
