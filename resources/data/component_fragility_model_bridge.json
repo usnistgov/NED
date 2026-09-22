@@ -61,19 +61,19 @@
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Pali-2018|fra1016"
+        "fragility_model": "Pali-2018|type1_fixed"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Pali-2018|fra1017"
+        "fragility_model": "Pali-2018|type1_sliding"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Pali-2018|fra1018"
+        "fragility_model": "Pali-2018|type2_fixed"
     },
     {
         "component": "C.10.1.1.A",
-        "fragility_model": "Pali-2018|fra1019"
+        "fragility_model": "Pali-2018|type2_sliding"
     },
     {
         "component": "C.10.1.1.A",
