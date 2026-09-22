@@ -10,7 +10,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Hospital Piping Assembly",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1193/1.3672911",
       "URL": "https://doi.org/10.1193/1.3672911",
@@ -55,7 +54,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Partition Walls",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -93,7 +91,6 @@
     "year": 2015,
     "study_type": "Experiment",
     "comp_type": "boilers, air conditioning, cooling towers",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.1193/071513EQS205M",
       "URL": "http://doi.org/10.1193/071513EQS205M",
@@ -147,7 +144,6 @@
     "year": 2014,
     "study_type": "Experiment",
     "comp_type": "Cladding",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.26021/2533",
       "URL": "http://doi.org/10.26021/2533",
@@ -180,7 +176,6 @@
     "year": 2015,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.ijpvp.2015.06.001",
       "URL": "https://doi.org/10.1016/j.ijpvp.2015.06.001",
@@ -218,7 +213,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2016.1157528",
       "URL": "https://doi.org/10.1080/13632469.2016.1157528",
@@ -264,7 +258,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.5459/bnzsee.49.1.125-137",
       "URL": "https://doi.org/10.5459/bnzsee.49.1.125-137",
@@ -310,7 +303,6 @@
     "year": 2011,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -356,7 +348,6 @@
     "year": 2004,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1115/PVP2004-2915",
       "URL": "https://doi.org/10.1115/PVP2004-2915",
@@ -389,7 +380,6 @@
     "year": 2018,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.engstruct.2018.07.045",
       "URL": "https://doi.org/10.1016/j.engstruct.2018.07.045",
@@ -434,7 +424,6 @@
     "year": 2004,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -468,7 +457,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.engstruct.2021.112561",
       "URL": "https://doi.org/10.1016/j.engstruct.2021.112561",
@@ -518,7 +506,6 @@
     "year": 2009,
     "study_type": "Experiment",
     "comp_type": "Stairways",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/(ASCE)0733-9445(2009)135:2(122)",
       "URL": "https://doi.org/10.1061/(ASCE)0733-9445(2009)135:2(122)",
@@ -551,7 +538,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.5459/bnzsee.54.4.263-281",
       "URL": "https://doi.org/10.5459/bnzsee.54.4.263-281",
@@ -605,7 +591,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2074918",
       "URL": "https://doi.org/10.1080/13632469.2022.2074918",
@@ -647,7 +632,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2020.1830201",
       "URL": "https://doi.org/10.1080/13632469.2020.1830201",
@@ -693,7 +677,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2033359",
       "URL": "https://doi.org/10.1080/13632469.2022.2033359",
@@ -735,7 +718,6 @@
     "year": 2023,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2162629",
       "URL": "https://doi.org/10.1080/13632469.2022.2162629",
@@ -777,7 +759,6 @@
     "year": 2023,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2112322",
       "URL": "https://doi.org/10.1080/13632469.2022.2112322",
@@ -819,7 +800,6 @@
     "year": 2023,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2137709",
       "URL": "https://doi.org/10.1080/13632469.2022.2137709",
@@ -869,7 +849,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/9780784412367.117",
       "URL": "https://doi.org/10.1061/9780784412367.117",
@@ -927,7 +906,6 @@
     "year": 2007,
     "study_type": "Experiment",
     "comp_type": "Partition Walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1002/eqe.638",
       "URL": "https://doi.org/10.1002/eqe.638",
@@ -977,7 +955,6 @@
     "year": 2002,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1014,7 +991,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.26021/12872",
       "URL": "http://doi.org/10.26021/12872",
@@ -1047,7 +1023,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1081,7 +1056,6 @@
     "year": 2014,
     "study_type": "Analytical Study",
     "comp_type": "Ceilings, piping, partitions",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/9780784413357.161",
       "URL": "https://doi.org/10.1061/9780784413357.161",
@@ -1124,7 +1098,6 @@
     "year": 2014,
     "study_type": "Experiment",
     "comp_type": "Ceilings, piping, partitions",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1166,7 +1139,6 @@
     "year": 2011,
     "study_type": "Experiment",
     "comp_type": "Partition Walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.tws.2010.10.001",
       "URL": "https://doi.org/10.1016/j.tws.2010.10.001",
@@ -1203,7 +1175,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Ceiling and Fire Sprinker assemblies",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.1061/(ASCE)ST.1943-541X.0001384",
       "URL": "http://doi.org/10.1061/(ASCE)ST.1943-541X.0001384",
@@ -1256,7 +1227,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Suspended Ceiling",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1302,7 +1272,6 @@
     "year": 2019,
     "study_type": "Experiment",
     "comp_type": "Suspended Ceilings",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2017.1342294",
       "URL": "https://doi.org/10.1080/13632469.2017.1342294",
@@ -1340,7 +1309,6 @@
     "year": 2013,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1374,7 +1342,6 @@
     "year": 2019,
     "study_type": "Experiment",
     "comp_type": "Suspended Ceiling Systems",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/(ASCE)ST.1943-541X.0002273",
       "URL": "https://doi.org/10.1061/(ASCE)ST.1943-541X.0002273",
@@ -1420,7 +1387,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.jobe.2020.101911",
       "URL": "https://doi.org/10.1016/j.jobe.2020.101911",
@@ -1465,7 +1431,6 @@
     "year": 2019,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.3389/fbuil.2019.00049",
       "URL": "https://doi.org/10.3389/fbuil.2019.00049",
@@ -1510,7 +1475,6 @@
     "year": 2014,
     "study_type": "Experiment",
     "comp_type": "Partition Walls, Infill Walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.26021/3160",
       "URL": "http://doi.org/10.26021/3160",
@@ -1544,7 +1508,6 @@
     "year": 2018,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1002/eqe.3031",
       "URL": "https://doi.org/10.1002/eqe.3031",
@@ -1597,7 +1560,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Elevators",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1002/eqe.2793",
       "URL": "https://doi.org/10.1002/eqe.2793",
@@ -1655,7 +1617,6 @@
     "year": 2015,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2014.994147",
       "URL": "https://doi.org/10.1080/13632469.2014.994147",
@@ -1696,7 +1657,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.5459/bnzsee.49.1.1-12",
       "URL": "https://doi.org/10.5459/bnzsee.49.1.1-12",
@@ -1741,7 +1701,6 @@
     "year": 2017,
     "study_type": "Experiment",
     "comp_type": "cable trays",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/(ASCE)CF.1943-5509.0001009",
       "URL": "https://doi.org/10.1061/(ASCE)CF.1943-5509.0001009",
@@ -1783,7 +1742,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "Motor Control Centers",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.net.2020.10.002",
       "URL": "https://doi.org/10.1016/j.net.2020.10.002",
@@ -1833,7 +1791,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "switchgears",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.3390/ma15114035",
       "URL": "https://doi.org/10.3390/ma15114035",
@@ -1875,7 +1832,6 @@
     "year": 2018,
     "study_type": "Experiment",
     "comp_type": "Doors",
-    "pdf_saved": true,
     "csl_data": {
       "URL": "https://chei.ucsd.edu/cfs/resources/CFS_Report2-Final.pdf",
       "author": [
@@ -1928,7 +1884,6 @@
     "year": 2013,
     "study_type": "Experiment",
     "comp_type": "Doors",
-    "pdf_saved": true,
     "csl_data": {
       "URL": "https://chei.ucsd.edu/bncs/resources/BNCS-SSRP-Report2-Final.pdf",
       "author": [
@@ -2005,7 +1960,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Steel Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1193/012414eqs017m",
       "URL": "https://doi.org/10.1193/012414eqs017m",
@@ -2091,7 +2045,6 @@
     "year": 2024,
     "study_type": "Experiment",
     "comp_type": "RC Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.engstruct.2023.117061",
       "URL": "https://doi.org/10.1016/j.engstruct.2023.117061",
@@ -2145,7 +2098,6 @@
     "year": 2023,
     "study_type": "Experiment",
     "comp_type": "RC Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1007/s10518-022-01548-z",
       "URL": "https://doi.org/10.1007/s10518-022-01548-z",
@@ -2199,7 +2151,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "RC Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.istruc.2021.10.026",
       "URL": "https://doi.org/10.1016/j.istruc.2021.10.026",
@@ -2245,7 +2196,6 @@
     "year": 2024,
     "study_type": "Experiment",
     "comp_type": "Steel Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2306,7 +2256,6 @@
     "year": 2020,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.5459/bnzsee.53.3.144-149",
       "URL": "https://doi.org/10.5459/bnzsee.53.3.144-149",
@@ -2348,7 +2297,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2381,7 +2329,6 @@
     "year": 2025,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2025.2470335",
       "URL": "https://doi.org/10.1080/13632469.2025.2470335",
@@ -2439,7 +2386,6 @@
     "year": 2007,
     "study_type": "Experiment",
     "comp_type": "Piping",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2482,7 +2428,6 @@
     "year": 2003,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/(ASCE)1076-0431(2003)9:2(70)",
       "URL": "https://doi.org/10.1061/(ASCE)1076-0431(2003)9:2(70)",
@@ -2528,7 +2473,6 @@
     "year": 2011,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2575,7 +2519,6 @@
     "year": 2006,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1520/JAI100407",
       "URL": "https://doi.org/10.1520/JAI100407",
@@ -2622,7 +2565,6 @@
     "year": 2006,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1193/1.2164875",
       "URL": "https://doi.org/10.1193/1.2164875",
@@ -2668,7 +2610,6 @@
     "year": 2009,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2701,7 +2642,6 @@
     "year": 2018,
     "study_type": "Other",
     "comp_type": "",
-    "pdf_saved": false,
     "csl_data": {
       "URL": "https://femap58.atcouncil.org/reports",
       "author": [
@@ -2733,7 +2673,6 @@
     "year": 2011,
     "study_type": "Experiment",
     "comp_type": "Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2764,7 +2703,6 @@
     "year": 2006,
     "study_type": "Experiment",
     "comp_type": "Suspended Ceilings",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2811,7 +2749,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2842,7 +2779,6 @@
     "year": 2026,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1002/esp4.70085",
       "URL": "https://doi.org/10.1002/esp4.70085",

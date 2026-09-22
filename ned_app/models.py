@@ -164,7 +164,6 @@ class Reference(models.Model):
         year (int): The year the study was published (auto-populated from csl_data).
         study_type (str): A classification of the type of study conducted.
         comp_type (str): The type of component(s) investigated in study.
-        pdf_saved (bool): Is a pdf saved in the archive repository.
         csl_data (dict): Reference data in CSL-JSON format.
     """
 
@@ -219,11 +218,6 @@ class Reference(models.Model):
         max_length=255,
         blank=True,
         help_text='The type of component(s) investigated in study.',
-    )
-    pdf_saved = models.BooleanField(
-        _('pdf saved'),
-        default=False,
-        help_text='Is a pdf saved in the archive repository.',
     )
     csl_data = models.JSONField(
         _('csl data'),
