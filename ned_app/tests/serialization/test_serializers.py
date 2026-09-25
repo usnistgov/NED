@@ -45,7 +45,6 @@ class ReferenceSerializerTest(TestCase):
             'csl_data': self.valid_csl_data,
             'study_type': 'Experiment',
             'comp_type': 'Test Component',
-            'pdf_saved': True,
         }
 
     def test_serializer_accepts_valid_csl_data(self):

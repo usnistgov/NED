@@ -32,7 +32,6 @@
             "title": "Experimental and Analytical Studies of Hospital Piping Assemblies Subjected to Seismic Loading",
             "type": "document"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -61,7 +60,6 @@
             "title": "Novel Sliding/Frictional Connections for Improved Seismic Performance of Gypsum Wallboard Partitions",
             "type": "paper-conference"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -106,7 +104,6 @@
             "title": "Experimental Evaluation of the Seismic Response of a Rooftop-Mounted Cooling Tower",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -130,7 +127,6 @@
             "title": "Seismic Performance of Precast Concrete Cladding Systems (PhD Thesis)",
             "type": "document"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -159,7 +155,6 @@
             "title": "Seismic fragility of threaded Tee-joint connections in piping systems",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Ju_ThreadedTee",
         "study_type": "Experiment"
     },
@@ -197,7 +192,6 @@
             "title": "Experimental Fragility Analysis of Pressurized Fire Sprinkler Piping Systems",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -234,7 +228,6 @@
             "title": "Out-of-Plane Seismic Performance of Plasterboard Partition Walls via Quasi-Static Tests",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -271,7 +264,6 @@
             "title": "Experimental Seismic Evaluation, Model Parameterization, and Effects of Cold-Formed Steel-Framed Gypsum Partition Walls on the Seismic Performance of an Essential Facility",
             "type": "report"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -295,7 +287,6 @@
             "title": "Seismic Capacity of Threaded, Brazed and Grooved Clamped Joints",
             "type": "document"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -331,7 +322,6 @@
             "title": "Seismic response evaluation of medical gas and fire-protection pipelines' Tee-Joints",
             "type": "document"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -356,7 +346,6 @@
             "title": "Experimental Evaluation of the Seismic Performance of Hospital Piping Subassemblies",
             "type": "thesis"
         },
-        "pdf_saved": true,
         "reference_label": "Goodwin_HospitalPipingThesis",
         "study_type": "Experiment"
     },
@@ -398,7 +387,6 @@
             "title": "Cyclic tests of steel tee energy absorbers for precast exterior wall panels in steel building frames",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -422,7 +410,6 @@
             "title": "Prefabricated Steel Stair Performance under Combined Seismic and Gravity Loads",
             "type": "document"
         },
-        "pdf_saved": true,
         "reference_label": "Higgins_PrefabSteelStairs",
         "study_type": "Experiment"
     },
@@ -468,7 +455,6 @@
             "title": "Theoretical and experimental evaluation of timber-framed partitions under lateral drift.",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -501,7 +487,6 @@
             "title": "Cyclic Behaviour of Two-Story Low-Damage Rocking Precast Concrete Cladding Panel System",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Bhatta_TwoStoryCladding",
         "study_type": "Experiment"
     },
@@ -539,7 +524,6 @@
             "title": "Low-Damage Rocking Precast Concrete Cladding Panels: Design Approach and Experimental Validation",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Bhatta_CladdingDesign",
         "study_type": "Experiment"
     },
@@ -573,7 +557,6 @@
             "title": "Seismic Performance of a Rocking Precast Concrete Cladding Panel System under Lateral Cyclic Displacement Demands",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Bhatta_CladdingCyclic",
         "study_type": "Experiment"
     },
@@ -607,7 +590,6 @@
             "title": "Seismic Evaluation of Rocking Internal Partition Walls with Dual-Slot Track Under Quasi-Static Cyclic Drifts",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Bhatta_DualSlotPartition",
         "study_type": "Experiment"
     },
@@ -641,7 +623,6 @@
             "title": "Seismic Performance of 'Rocking' Dual-slot Track Internal Partition Walls with Concealed Joints under Lateral Cyclic Drift Demands",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Bhatta_ConcealedJoint",
         "study_type": "Experiment"
     },
@@ -683,7 +664,6 @@
             "title": "Seismic Performance of Internal Partition Walls with Slotted and Bracketed Head-Tracks",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Bhatta_SlottedBracketPartition",
         "study_type": "Experiment"
     },
@@ -733,7 +713,6 @@
             "title": "Response of Exterior Precast Concrete Cladding Panels in NEES-TIPS/NEES-GC/E-Defense Tests on a Full Scale 5-story Building",
             "type": "paper-conference"
         },
-        "pdf_saved": true,
         "reference_label": "McMullin_BNCSCladding",
         "study_type": "Experiment"
     },
@@ -775,7 +754,6 @@
             "title": "Seismic performance evaluation of non-structural components: Drywall partitions",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -803,7 +781,6 @@
             "title": "Seismic Performance of Gypsum Walls: Experimental Test Program",
             "type": "report"
         },
-        "pdf_saved": true,
         "reference_label": "McMullin_GypsumWallsCUREE",
         "study_type": "Experiment"
     },
@@ -828,7 +805,6 @@
             "title": "Seismic assessment and design of fire sprinkler piping systems",
             "type": "document"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -853,7 +829,6 @@
             "title": "Seismic Behavior of Architectural Precast Concrete Cladding Panels and Connections",
             "type": "thesis"
         },
-        "pdf_saved": true,
         "reference_label": "Pantoli_APC_PanelsAndConnections",
         "study_type": "Experiment"
     },
@@ -888,7 +863,6 @@
             "title": "Seismic Response of Ceiling/Piping/Partition Systems in NEESR-GC System-Level Experiments",
             "type": "paper-conference"
         },
-        "pdf_saved": true,
         "reference_label": "Rahmanishamsi_CPP_DamageStates",
         "study_type": "Analytical Study"
     },
@@ -922,7 +896,6 @@
             "title": "System-Level Experiments on Ceiling/Piping/Partition Systems at UNR-NEES Site",
             "type": "paper-conference"
         },
-        "pdf_saved": true,
         "reference_label": "Rahmanishamsi_CPP_TestBed",
         "study_type": "Experiment"
     },
@@ -951,7 +924,6 @@
             "title": "Performance Characteristics of Light Gage Steel Stud Partition Walls",
             "type": "document"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -995,7 +967,6 @@
             "title": "Seismic Simulation of an Integrated Ceiling-Partition Wall-Piping System at E-Defense. I: Three-Dimensional Structural Response and Base Isolation",
             "type": "document"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1032,7 +1003,6 @@
             "title": "Full Scale Dynamic Testing of Large Area Suspended Ceiling System",
             "type": "paper-conference"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1061,7 +1031,6 @@
             "title": "Experimental Study of Large Area Suspended Ceilings",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1086,7 +1055,6 @@
             "title": "Analytical Seismic Fragility of Fire Sprinkler Piping Systems",
             "type": "thesis"
         },
-        "pdf_saved": true,
         "reference_label": "Soroushian_FireSprinklerPipingFragility",
         "study_type": "Experiment"
     },
@@ -1124,7 +1092,6 @@
             "title": "Fragility Analysis of Suspended Ceiling Systems in a Full-Scale Experiment",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Soroushian_SuspendedCeilingFragility",
         "study_type": "Experiment"
     },
@@ -1161,7 +1128,6 @@
             "title": "Seismic behavior of riser pipes with pressure and groove joints using an in-plane cyclic loading test",
             "type": "document"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1197,7 +1163,6 @@
             "title": "Experiments and Fragility Analyses of Piping Systems Connected by Grooved Fit Joints With Large Deformability",
             "type": "document"
         },
-        "pdf_saved": true,
         "reference_label": "Wang_GroovedPiping",
         "study_type": "Experiment"
     },
@@ -1223,7 +1188,6 @@
             "title": "Damage Mitigation Strategies for Non-Structural Infill Walls",
             "type": "thesis"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1267,7 +1231,6 @@
             "title": "In\u2010plane quasi\u2010static cyclic tests of nonstructural lightweight steel drywall partitions for seismic performance evaluation",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1316,7 +1279,6 @@
             "title": "Shake table testing of an elevator system in a full-scale five-story building",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Wang_ElevatorSystem",
         "study_type": "Experiment"
     },
@@ -1349,7 +1311,6 @@
             "title": "Seismic Response of Pressurized Fire Sprinkler Piping Systems I: Experimental Study",
             "type": "document"
         },
-        "pdf_saved": true,
         "reference_label": "Tian_SprinklerPipingUB_NCS",
         "study_type": "Experiment"
     },
@@ -1386,7 +1347,6 @@
             "title": "Experimental Studies of a Typical Sprinkler Piping System in Hospitals",
             "type": "document"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1419,7 +1379,6 @@
             "title": "Shaking Table Tests of the Cable Tray System in Nuclear Power Plants",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1460,7 +1419,6 @@
             "title": "Evaluation of MCC seismic response according to the frequency contents through the shake table test",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1493,7 +1451,6 @@
             "title": "Experimental Evaluations on Seismic Performances of Porcelain and GFRP Composite UHV GIS Bushings",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "He_GISBushings",
         "study_type": "Experiment"
     },
@@ -1538,7 +1495,6 @@
             "title": "Earthquake and fire performance of a mid-rise cold-formed steel framed building - test program and test results: Final Report",
             "type": "report"
         },
-        "pdf_saved": true,
         "reference_label": "Wang_CFS_Report",
         "study_type": "Experiment"
     },
@@ -1607,7 +1563,6 @@
             "title": "Full-scale structural and nonstructural building system performance during earthquakes and post-earthquake fire - test results",
             "type": "report"
         },
-        "pdf_saved": true,
         "reference_label": "Pantoli_BNCS_Report2",
         "study_type": "Experiment"
     },
@@ -1685,7 +1640,6 @@
             "title": "Full-Scale Structural and Nonstructural Building System Performance during Earthquakes: Part II - NCS Damage States",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Pantoli_NCS_DamageStates",
         "study_type": "Experiment"
     },
@@ -1731,7 +1685,6 @@
             "title": "Seismic performance of novel low-damage stair system: Precast reinforced concrete stair isolated with a sliding joint",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Zhang_StairSlidingJoint",
         "study_type": "Experiment"
     },
@@ -1777,7 +1730,6 @@
             "title": "Seismic behavior of prefabricated reinforced concrete stair isolated by high damping rubber bearings",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Zhang_StairHDRBearings",
         "study_type": "Experiment"
     },
@@ -1815,7 +1767,6 @@
             "title": "Seismic behavior of reinforced concrete frame staircase with separated slab stairs",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1867,7 +1818,6 @@
             "title": "Performance of a 10-story steel stair tower within the NHERI TallWood Building",
             "type": "paper-conference"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1900,7 +1850,6 @@
             "title": "Experimental Investigation into the Seismic Fragility of a Commercial Glazing System",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -1924,7 +1873,6 @@
             "title": "Experimental Seismic Study of Pressurized Fire Sprinkler Piping Subsystems",
             "type": "thesis"
         },
-        "pdf_saved": true,
         "reference_label": "Tian_SprinklerTeeJoints",
         "study_type": "Experiment"
     },
@@ -1960,6 +1908,7 @@
                 }
             ],
             "container-title": "Journal of Earthquake Engineering",
+            "issue": "1",
             "issued": {
                 "date-parts": [
                     [
@@ -1969,12 +1918,10 @@
             },
             "note": "Bhatta, J., Mishra, P., Cook, D., Sattar, S., Barbosa, A. R., & van de Lindt, J. (2026). Seismic Response of Pressurized Full-Scale Fire Sprinkler Piping System in Six-Story Building. Journal of Earthquake Engineering, 30(1).",
             "page": "228-254",
-            "issue": "1",
-            "volume": "30",
             "title": "Seismic response of pressurized full-scale fire sprinkler piping system in six-story building",
-            "type": "article-journal"
+            "type": "article-journal",
+            "volume": "30"
         },
-        "pdf_saved": true,
         "reference_label": "Bhatta_NHERIFireSprinkler",
         "study_type": "Experiment"
     },
@@ -2009,7 +1956,6 @@
             "title": "Experimental evaluation of the seismic performance of hospital piping subassemblies",
             "type": "report"
         },
-        "pdf_saved": true,
         "reference_label": "Goodwin_PipingWeldedThreaded",
         "study_type": "Experiment"
     },
@@ -2047,7 +1993,6 @@
             "type": "article-journal",
             "volume": "9"
         },
-        "pdf_saved": true,
         "reference_label": "Memari_CurtainWallIGU",
         "study_type": "Experiment"
     },
@@ -2086,7 +2031,6 @@
             "title": "Architectural Glass Seismic Behavior Fragility Curve Development",
             "type": "report"
         },
-        "pdf_saved": true,
         "reference_label": "Memari_ArchGlassFragility",
         "study_type": "Experiment"
     },
@@ -2125,7 +2069,6 @@
             "title": "Seismic performance of two-side structural silicone glazing systems",
             "type": "article-journal"
         },
-        "pdf_saved": true,
         "reference_label": "Memari_SiliconeGlazing",
         "study_type": "Experiment"
     },
@@ -2163,7 +2106,6 @@
             "type": "article-journal",
             "volume": "22"
         },
-        "pdf_saved": true,
         "reference_label": "Memari_RoundedCorners",
         "study_type": "Experiment"
     },
@@ -2188,7 +2130,6 @@
             "title": "Development of a closed-form equation and fragility curves for performance-based seismic design ofglass curtain wall and storefront systems",
             "type": "thesis"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -2211,7 +2152,6 @@
             "title": "FEMA P-58: Seismic Performance Assessment of Buildings",
             "type": "report"
         },
-        "pdf_saved": false,
         "reference_label": "FEMA_P58",
         "study_type": "Other"
     },
@@ -2234,7 +2174,6 @@
             "title": "Seismic Fragility of Standard Building Stairs",
             "type": "report"
         },
-        "pdf_saved": true,
         "reference_label": "Higgins_StairFragilityFunctions",
         "study_type": "Experiment"
     },
@@ -2273,7 +2212,6 @@
             "title": "Seismic Fragility of Suspended Ceiling Systems",
             "type": "report"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -2295,7 +2233,6 @@
             "title": "Interior Cold-Formed Steel Framed Gypsum Partition Walls",
             "type": "report"
         },
-        "pdf_saved": true,
         "study_type": "Experiment"
     },
     {
@@ -2331,7 +2268,6 @@
             "type": "article-journal",
             "volume": "42"
         },
-        "pdf_saved": true,
         "reference_label": "Bhatta_SprinklerFragilityFunctions",
         "study_type": "Experiment"
     }

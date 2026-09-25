@@ -35,7 +35,6 @@ class IngestCommandTests(TransactionTestCase):
                 {
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
-                    'pdf_saved': True,
                     'csl_data': {
                         'type': 'article-journal',
                         'title': 'Experimental Study of Building Components',
@@ -46,7 +45,6 @@ class IngestCommandTests(TransactionTestCase):
                 {
                     'study_type': 'Analytical Study',
                     'comp_type': 'Mechanical Component',
-                    'pdf_saved': False,
                     'csl_data': {
                         'type': 'paper-conference',
                         'title': 'Analysis of Component Fragility',
@@ -312,7 +310,6 @@ class IngestCommandTests(TransactionTestCase):
                 {
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
-                    'pdf_saved': True,
                     'csl_data': {
                         'type': 'article-journal',
                         'title': 'Experimental Study of Building Components',
@@ -350,7 +347,6 @@ class IngestCommandTests(TransactionTestCase):
                 {
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
-                    'pdf_saved': True,
                     'csl_data': {
                         'type': 'article-journal',
                         'title': 'Test Study',
@@ -434,7 +430,6 @@ class IngestCommandTests(TransactionTestCase):
                 {
                     'study_type': 'Experiment',
                     'comp_type': 'Structural Component',
-                    'pdf_saved': True,
                     'csl_data': {
                         'type': 'article-journal',
                         'title': 'Valid Study',
@@ -445,7 +440,6 @@ class IngestCommandTests(TransactionTestCase):
                 {
                     'study_type': 'Analytical Study',
                     'comp_type': 'Mechanical Component',
-                    'pdf_saved': False,
                     'csl_data': {
                         'type': 'article-journal',
                         'author': [{'family': 'Doe', 'given': 'Jane'}],
