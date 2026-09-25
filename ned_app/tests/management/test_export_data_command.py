@@ -49,7 +49,7 @@ class ExportDataCommandTest(TestCase):
             component=self.component,
             specimen='Test specimen',
             specimen_inspection_sequence='1st test',
-            reviewer='Test reviewer',
+            contributor='Test contributor',
             test_type='Dynamic, uniaxial',
             comp_detail='Detailed connection',
             material='Steel',
@@ -82,7 +82,7 @@ class ExportDataCommandTest(TestCase):
             material='Cold-formed steel',
             size_class='Medium',
             comp_description='Test fragility model description',
-            reviewer='Test reviewer',
+            contributor='Test contributor',
             source='Experimental data',
             edp_metric='Story Drift Ratio',
             edp_unit='Ratio',
@@ -206,8 +206,8 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(exp_data['specimen'], 'Test specimen')
             self.assertIn('specimen_inspection_sequence', exp_data)
             self.assertEqual(exp_data['specimen_inspection_sequence'], '1st test')
-            self.assertIn('reviewer', exp_data)
-            self.assertEqual(exp_data['reviewer'], 'Test reviewer')
+            self.assertIn('contributor', exp_data)
+            self.assertEqual(exp_data['contributor'], 'Test contributor')
             self.assertIn('test_type', exp_data)
             self.assertEqual(exp_data['test_type'], 'Dynamic, uniaxial')
             self.assertIn('comp_detail', exp_data)
@@ -285,8 +285,8 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(
                 fm_data['comp_description'], 'Test fragility model description'
             )
-            self.assertIn('reviewer', fm_data)
-            self.assertEqual(fm_data['reviewer'], 'Test reviewer')
+            self.assertIn('contributor', fm_data)
+            self.assertEqual(fm_data['contributor'], 'Test contributor')
             self.assertIn('source', fm_data)
             self.assertEqual(fm_data['source'], 'Experimental data')
             self.assertIn('edp_metric', fm_data)
@@ -359,7 +359,7 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(float(curve['probability']), 0.75)
 
             # Verify moved fields are NOT in curve export
-            self.assertNotIn('reviewer', curve)
+            self.assertNotIn('contributor', curve)
             self.assertNotIn('source', curve)
             self.assertNotIn('edp_metric', curve)
             self.assertNotIn('edp_unit', curve)
