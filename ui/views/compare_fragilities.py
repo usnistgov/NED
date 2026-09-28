@@ -2,6 +2,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+
 from db import (
     get_components,
     get_fragility_curves,
@@ -10,7 +11,6 @@ from db import (
     resolve_group_filter,
 )
 from utils import FIELD_HELP, clamp_cell, esc, fmt
-
 from views.fragility_model import (
     get_model_attributes,
     lognormal_curves,
