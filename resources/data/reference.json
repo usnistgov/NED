@@ -2270,5 +2270,87 @@
         },
         "reference_label": "Bhatta_SprinklerFragilityFunctions",
         "study_type": "Experiment"
+    },
+    {
+        "comp_type": "Ceilings, interior wall finishes, exterior walls, stairs, doors, windows, fire protection, gas distribution, HVAC",
+        "csl_data": {
+            "DOI": "https://doi.org/10.1061/9780784486924.024",
+            "URL": "https://doi.org/10.1061/9780784486924.024",
+            "author": [
+                {
+                    "family": "Singh",
+                    "given": "Amanpreet"
+                },
+                {
+                    "family": "Sorosh",
+                    "given": "Shokrullah"
+                },
+                {
+                    "family": "Zhang",
+                    "given": "Xianzhao"
+                },
+                {
+                    "family": "Zhang",
+                    "given": "Jiachen"
+                },
+                {
+                    "family": "Cyizere Rukundo",
+                    "given": "Fidence"
+                },
+                {
+                    "family": "Eladly",
+                    "given": "Mohammed"
+                },
+                {
+                    "family": "Ji",
+                    "given": "Ruipu"
+                },
+                {
+                    "family": "Rivera",
+                    "given": "Daniel"
+                },
+                {
+                    "family": "Padgett",
+                    "given": "Lynn"
+                },
+                {
+                    "family": "Meacham",
+                    "given": "Brian J."
+                },
+                {
+                    "family": "Gernay",
+                    "given": "Thomas"
+                },
+                {
+                    "family": "Emberley",
+                    "given": "Richard L."
+                },
+                {
+                    "family": "Schafer",
+                    "given": "Benjamin W."
+                },
+                {
+                    "family": "Hutchinson",
+                    "given": "Tara C."
+                }
+            ],
+            "container-title": "Structures Congress 2026",
+            "event-place": "Boston, MA",
+            "event-title": "Structures Congress 2026",
+            "issued": {
+                "date-parts": [
+                    [
+                        2026
+                    ]
+                ]
+            },
+            "note": "Singh, A., Sorosh, S., Zhang, X., Zhang, J., Cyizere Rukundo, F., Eladly, M., Ji, R., Rivera, D., Padgett, L., Meacham, B. J., Gernay, T., Emberley, R. L., Schafer, B. W., and Hutchinson, T. C. (2026). \"Physical Damage-Measured Response Correlation for Nonstructural Components Tested under Multi-Hazard (Earthquake and Fire) Demands in the CFS10 Building.\" Structures Congress 2026, Boston, MA, 298-310. Reston, VA: American Society of Civil Engineers. https://doi.org/10.1061/9780784486924.024",
+            "page": "298-310",
+            "publisher": "American Society of Civil Engineers",
+            "publisher-place": "Reston, VA",
+            "title": "Physical Damage-Measured Response Correlation for Nonstructural Components Tested under Multi-Hazard (Earthquake and Fire) Demands in the CFS10 Building",
+            "type": "paper-conference"
+        },
+        "study_type": "Experiment"
     }
 ]
