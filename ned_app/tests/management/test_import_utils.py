@@ -296,12 +296,14 @@ class WriteJsonFilesTests(SimpleTestCase):
                 raise KeyboardInterrupt('interrupted')
             real_dump(filepath, data)
 
-        with patch.object(import_utils, '_dump_json', side_effect=flaky):
-            with self.assertRaises(KeyboardInterrupt):
-                import_utils.write_json_files({
-                    'a.json': [{'x': 999}],
-                    'b.json': [{'y': 999}],
-                })
+        with (
+            patch.object(import_utils, '_dump_json', side_effect=flaky),
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            import_utils.write_json_files({
+                'a.json': [{'x': 999}],
+                'b.json': [{'y': 999}],
+            })
 
         self.assertEqual(self._read('a.json'), [{'x': 1}])
         self.assertEqual(self._read('b.json'), [{'y': 1}])
@@ -320,12 +322,14 @@ class WriteJsonFilesTests(SimpleTestCase):
                 raise RuntimeError('boom')
             real_dump(filepath, data)
 
-        with patch.object(import_utils, '_dump_json', side_effect=flaky):
-            with self.assertRaises(RuntimeError):
-                import_utils.write_json_files({
-                    'a.json': [{'x': 2}],
-                    'c.json': [{'z': 2}],
-                })
+        with (
+            patch.object(import_utils, '_dump_json', side_effect=flaky),
+            self.assertRaises(RuntimeError),
+        ):
+            import_utils.write_json_files({
+                'a.json': [{'x': 2}],
+                'c.json': [{'z': 2}],
+            })
 
         self.assertEqual(self._read('a.json'), [{'x': 1}])
         self.assertFalse(os.path.exists(self._path('c.json')))

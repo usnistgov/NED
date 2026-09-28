@@ -1,16 +1,19 @@
 import json
 import os
+from typing import ClassVar
+
 import jsonschema
 from django.conf import settings
 from rest_framework import serializers
+
 from ned_app.models import (
-    Reference,
     Component,
-    FragilityModel,
+    ComponentFragilityModelBridge,
     Experiment,
     ExperimentFragilityModelBridge,
-    ComponentFragilityModelBridge,
     FragilityCurve,
+    FragilityModel,
+    Reference,
 )
 from ned_app.validators import (
     validate_nistir_component_id,
@@ -40,7 +43,7 @@ class ReferenceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reference
-        fields = [
+        fields: ClassVar[list[str]] = [
             'reference_id',
             'reference_label',
             'title',
@@ -140,7 +143,7 @@ class ComponentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Component
-        fields = [
+        fields: ClassVar[list[str]] = [
             'id',
             'name',
             'component_id',
@@ -167,7 +170,7 @@ class FragilityModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FragilityModel
-        fields = [
+        fields: ClassVar[list[str]] = [
             'reference',
             'model_id',
             'p58_fragility',
@@ -198,7 +201,7 @@ class ExperimentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Experiment
-        fields = [
+        fields: ClassVar[list[str]] = [
             'id',
             'reference',
             'specimen',
@@ -246,7 +249,7 @@ class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ExperimentFragilityModelBridge
-        fields = [
+        fields: ClassVar[list[str]] = [
             'id',
             'experiment',
             'fragility_model',
@@ -269,7 +272,7 @@ class ComponentFragilityModelBridgeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ComponentFragilityModelBridge
-        fields = [
+        fields: ClassVar[list[str]] = [
             'id',
             'component',
             'fragility_model',
@@ -289,7 +292,7 @@ class FragilityCurveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FragilityCurve
-        fields = [
+        fields: ClassVar[list[str]] = [
             'fragility_model',
             'basis',
             'num_observations',

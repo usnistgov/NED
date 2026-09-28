@@ -2,9 +2,9 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Any, Dict, Iterable
-
+from typing import Any
 
 # Hardcoded paths relative to this file's repository root
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -70,9 +70,9 @@ def _iter_children(node: dict[str, Any]) -> Iterable[dict[str, Any]]:
                     yield child
 
 
-def build_label_map(data: Any) -> Dict[str, str]:
+def build_label_map(data: Any) -> dict[str, str]:
     """Traverse the nested NISTIR structure and build a flat id→name map."""
-    labels: Dict[str, str] = {}
+    labels: dict[str, str] = {}
 
     def visit(node: dict[str, Any]) -> None:
         cid = node.get('id')
@@ -90,7 +90,7 @@ def build_label_map(data: Any) -> Dict[str, str]:
     elif isinstance(data, dict):
         visit(data)
     else:
-        raise ValueError(
+        raise TypeError(
             'Unexpected JSON structure for NISTIR data: expected list or dict root'
         )
 

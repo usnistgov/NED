@@ -5,7 +5,6 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
-
 _RESTORE_SCROLL_JS = """
 <script>
     const win = window.parent;
@@ -160,7 +159,7 @@ def fmt(val) -> str:
     if val is None or (isinstance(val, float) and pd.isna(val)):
         return '—'
     s = str(val).strip()
-    return s if s else '—'
+    return s or '—'
 
 
 def esc(val) -> str:

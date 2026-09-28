@@ -17,7 +17,7 @@ dependencies = [
 # the CI gate reports, so be careful with bumping these.
 [dependency-groups]
 dev = [
-    "ruff==0.12.9",
+    "ruff==0.16.7",
     "codespell==2.4.3",
     "pytest==9.1.1",
 ]
@@ -50,6 +50,7 @@ quiet-level = 2
 [tool.ruff]
 line-length = 85
 preview = true
+src = [".", "ui"]
 extend-exclude = [
     "resources/",
 ]
@@ -77,6 +78,9 @@ ignore = [
     "NPY002",
     "F401",
     "TRY003",
+]
+exclude = [
+    "*/migrations/*",
 ]
 
 [tool.ruff.format]

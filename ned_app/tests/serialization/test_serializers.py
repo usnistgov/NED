@@ -1,26 +1,28 @@
 import json
 import os
-from unittest.mock import patch, mock_open
-from django.test import TestCase
+from unittest.mock import mock_open, patch
+
 from django.conf import settings
+from django.test import TestCase
 from rest_framework.exceptions import ValidationError
-from ned_app.serialization.serializer import (
-    ReferenceSerializer,
-    ComponentSerializer,
-    FragilityModelSerializer,
-    ExperimentSerializer,
-    ExperimentFragilityModelBridgeSerializer,
-    ComponentFragilityModelBridgeSerializer,
-    FragilityCurveSerializer,
-)
+
 from ned_app.models import (
-    Reference,
     Component,
-    FragilityModel,
+    ComponentFragilityModelBridge,
     Experiment,
     ExperimentFragilityModelBridge,
-    ComponentFragilityModelBridge,
     FragilityCurve,
+    FragilityModel,
+    Reference,
+)
+from ned_app.serialization.serializer import (
+    ComponentFragilityModelBridgeSerializer,
+    ComponentSerializer,
+    ExperimentFragilityModelBridgeSerializer,
+    ExperimentSerializer,
+    FragilityCurveSerializer,
+    FragilityModelSerializer,
+    ReferenceSerializer,
 )
 
 
@@ -52,14 +54,16 @@ class ReferenceSerializerTest(TestCase):
         """Test that serializer accepts valid CSL data."""
         serializer = ReferenceSerializer(data=self.valid_reference_data)
 
-        with patch('builtins.open', mock_open(read_data='{"type": "array"}')):
-            with patch('jsonschema.validate') as mock_validate:
-                mock_validate.return_value = None  # No validation errors
+        with (
+            patch('builtins.open', mock_open(read_data='{"type": "array"}')),
+            patch('jsonschema.validate') as mock_validate,
+        ):
+            mock_validate.return_value = None  # No validation errors
 
-                self.assertTrue(serializer.is_valid())
-                self.assertEqual(
-                    serializer.validated_data['csl_data'], self.valid_csl_data
-                )
+            self.assertTrue(serializer.is_valid())
+            self.assertEqual(
+                serializer.validated_data['csl_data'], self.valid_csl_data
+            )
 
     def test_serializer_rejects_missing_csl_data(self):
         """Test that serializer rejects data without csl_data field."""
@@ -89,12 +93,14 @@ class ReferenceSerializerTest(TestCase):
 
         serializer = ReferenceSerializer(data=invalid_data)
 
-        with patch('builtins.open', mock_open(read_data='{"type": "array"}')):
-            with patch('jsonschema.validate') as mock_validate:
-                mock_validate.side_effect = Exception('Validation failed')
+        with (
+            patch('builtins.open', mock_open(read_data='{"type": "array"}')),
+            patch('jsonschema.validate') as mock_validate,
+        ):
+            mock_validate.side_effect = Exception('Validation failed')
 
-                self.assertFalse(serializer.is_valid())
-                self.assertIn('csl_data', serializer.errors)
+            self.assertFalse(serializer.is_valid())
+            self.assertIn('csl_data', serializer.errors)
 
     def test_validate_csl_data_with_schema_validation_error(self):
         """Test that validate_csl_data handles schema validation errors."""
@@ -108,16 +114,18 @@ class ReferenceSerializerTest(TestCase):
             'issued': {'date-parts': [[2023]]},
         }
 
-        with patch('builtins.open', mock_open(read_data='{"type": "array"}')):
-            with patch('jsonschema.validate') as mock_validate:
-                from jsonschema import ValidationError as JSONSchemaValidationError
+        with (
+            patch('builtins.open', mock_open(read_data='{"type": "array"}')),
+            patch('jsonschema.validate') as mock_validate,
+        ):
+            from jsonschema import ValidationError as JSONSchemaValidationError
 
-                mock_validate.side_effect = JSONSchemaValidationError('Invalid type')
+            mock_validate.side_effect = JSONSchemaValidationError('Invalid type')
 
-                with self.assertRaises(ValidationError) as context:
-                    serializer.validate_csl_data(invalid_csl_data)
+            with self.assertRaises(ValidationError) as context:
+                serializer.validate_csl_data(invalid_csl_data)
 
-                self.assertIn('CSL data validation failed', str(context.exception))
+            self.assertIn('CSL data validation failed', str(context.exception))
 
     def test_validate_csl_data_with_missing_schema_file(self):
         """Test that validate_csl_data handles missing schema file."""
@@ -135,20 +143,22 @@ class ReferenceSerializerTest(TestCase):
         """Test that serializer creates Reference object successfully."""
         serializer = ReferenceSerializer(data=self.valid_reference_data)
 
-        with patch('builtins.open', mock_open(read_data='{"type": "array"}')):
-            with patch('jsonschema.validate') as mock_validate:
-                mock_validate.return_value = None
+        with (
+            patch('builtins.open', mock_open(read_data='{"type": "array"}')),
+            patch('jsonschema.validate') as mock_validate,
+        ):
+            mock_validate.return_value = None
 
-                self.assertTrue(serializer.is_valid())
-                reference = serializer.save()
+            self.assertTrue(serializer.is_valid())
+            reference = serializer.save()
 
-                self.assertIsInstance(reference, Reference)
-                self.assertEqual(reference.reference_id, 'Smith-2023')
-                self.assertEqual(reference.csl_data, self.valid_csl_data)
+            self.assertIsInstance(reference, Reference)
+            self.assertEqual(reference.reference_id, 'Smith-2023')
+            self.assertEqual(reference.csl_data, self.valid_csl_data)
 
-                self.assertEqual(reference.title, 'Test Article for Serializer')
-                self.assertEqual(reference.author, 'Smith and Doe')
-                self.assertEqual(reference.year, 2023)
+            self.assertEqual(reference.title, 'Test Article for Serializer')
+            self.assertEqual(reference.author, 'Smith and Doe')
+            self.assertEqual(reference.year, 2023)
 
     def test_serializer_handles_optional_fields(self):
         """Test that serializer handles optional auto-populated fields correctly."""
@@ -165,18 +175,18 @@ class ReferenceSerializerTest(TestCase):
 
         serializer = ReferenceSerializer(data=minimal_data)
 
-        with patch('builtins.open', mock_open(read_data='{"type": "array"}')):
-            with patch('jsonschema.validate') as mock_validate:
-                mock_validate.return_value = None
+        with (
+            patch('builtins.open', mock_open(read_data='{"type": "array"}')),
+            patch('jsonschema.validate') as mock_validate,
+        ):
+            mock_validate.return_value = None
 
-                self.assertTrue(serializer.is_valid())
-                reference = serializer.save()
+            self.assertTrue(serializer.is_valid())
+            reference = serializer.save()
 
-                self.assertEqual(reference.title, 'Minimal Test Article')
-                self.assertEqual(
-                    reference.author, 'Smith'
-                )  # Should use csl_data value
-                self.assertEqual(reference.year, 2023)  # Should use csl_data value
+            self.assertEqual(reference.title, 'Minimal Test Article')
+            self.assertEqual(reference.author, 'Smith')  # Should use csl_data value
+            self.assertEqual(reference.year, 2023)  # Should use csl_data value
 
     def test_serializer_with_explicit_title_field(self):
         """Test that serializer works when title field is explicitly provided."""
@@ -185,14 +195,16 @@ class ReferenceSerializerTest(TestCase):
 
         serializer = ReferenceSerializer(data=data_with_title)
 
-        with patch('builtins.open', mock_open(read_data='{"type": "array"}')):
-            with patch('jsonschema.validate') as mock_validate:
-                mock_validate.return_value = None
+        with (
+            patch('builtins.open', mock_open(read_data='{"type": "array"}')),
+            patch('jsonschema.validate') as mock_validate,
+        ):
+            mock_validate.return_value = None
 
-                self.assertTrue(serializer.is_valid())
-                reference = serializer.save()
+            self.assertTrue(serializer.is_valid())
+            reference = serializer.save()
 
-                self.assertEqual(reference.title, 'Test Article for Serializer')
+            self.assertEqual(reference.title, 'Test Article for Serializer')
 
     def test_serializer_with_complex_csl_data(self):
         """Test serializer with complex CSL data including all supported fields."""
@@ -223,17 +235,19 @@ class ReferenceSerializerTest(TestCase):
 
         serializer = ReferenceSerializer(data=complex_data)
 
-        with patch('builtins.open', mock_open(read_data='{"type": "array"}')):
-            with patch('jsonschema.validate') as mock_validate:
-                mock_validate.return_value = None
+        with (
+            patch('builtins.open', mock_open(read_data='{"type": "array"}')),
+            patch('jsonschema.validate') as mock_validate,
+        ):
+            mock_validate.return_value = None
 
-                self.assertTrue(serializer.is_valid())
-                reference = serializer.save()
+            self.assertTrue(serializer.is_valid())
+            reference = serializer.save()
 
-                self.assertEqual(reference.title, 'Complex Conference Paper')
-                self.assertEqual(reference.author, 'Smith et al.')  # 3+ authors
-                self.assertEqual(reference.year, 2023)
-                self.assertEqual(reference.csl_data, complex_csl_data)
+            self.assertEqual(reference.title, 'Complex Conference Paper')
+            self.assertEqual(reference.author, 'Smith et al.')  # 3+ authors
+            self.assertEqual(reference.year, 2023)
+            self.assertEqual(reference.csl_data, complex_csl_data)
 
     def test_serializer_validation_with_real_schema(self):
         """Test serializer validation against the actual CSL schema."""
