@@ -56,27 +56,10 @@ jobs:
       # skip list and ignore_words.txt.
       - run: uv run --no-sync codespell
 
-  requirements_check:
-    name: UI Requirements Match Lock
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
-        with:
-          version: ${{ env.UV_VERSION }}
-          python-version: '3.12'
-          enable-cache: true
-      # ui/requirements.txt is generated from uv.lock for the front-end
-      # deployment repo; fail if it was not regenerated after a lock change.
-      # The export command lives in the script, not here, so CI and the
-      # publish path cannot disagree about the flags. The script is stdlib
-      # only, so the project itself does not need syncing.
-      - run: uv run --no-project scripts/export_requirements.py --check
-
   # ----- STAGE 2: TESTING -----
   test:
     name: Run Tests
-    needs: [lint, format_check, spell_check, requirements_check]
+    needs: [lint, format_check, spell_check]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -100,7 +83,7 @@ jobs:
 
   ui_test:
     name: Run UI Tests
-    needs: [lint, format_check, spell_check, requirements_check]
+    needs: [lint, format_check, spell_check]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7

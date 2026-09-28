@@ -5,25 +5,29 @@ NED is the single source of truth for the front-end *code* (authored in ``ui/``)
 and for the database (built by ``manage.py ingest``). This script pushes both
 into a clone of the deployment repo (ned-frontend):
 
-    1. Regenerate ``ui/requirements.txt`` from ``uv.lock`` (the ``ui``
-       dependency group), so the front-end repo receives the same pinned
-       versions NED tests against.
-    2. Replace the NED-owned code paths (``OWNS``) in the front-end repo.
-    3. Inject the freshly built ``db.sqlite3`` at ``backend/db.sqlite3``.
+    1. Refuse to run if ``ui/``, ``pyproject.toml``, or ``uv.lock`` has
+       uncommitted changes, so the published files correspond to the NED
+       commit reported at the end.
+    2. Export ``requirements.txt`` from ``uv.lock`` (the ``ui`` dependency
+       group), so the front-end repo receives the same pinned versions NED
+       tests against. The file is generated for publishing only and is never
+       committed to NED; the front-end repo's history is its record.
+    3. Replace the NED-owned code paths (``OWNS``) in the front-end repo.
+    4. Write the exported ``requirements.txt`` to the front-end repo root.
+    5. Inject the freshly built ``db.sqlite3`` at ``backend/db.sqlite3``.
 
-Step 1 is the one write this script makes inside NED itself. If it leaves
-``ui/requirements.txt`` differing from HEAD, the script stops without touching
-the front-end repo: the published files must correspond to the NED commit
-reported at the end, so the regenerated file has to be committed here first.
+Steps 1 and 2 can fail, so both finish before anything is written to the
+front-end repo. The script makes no writes inside NED itself, apart from
+``--rebuild-db`` rebuilding the database.
 
-Everything else is written to the front-end repo's working tree only; staging,
+Everything is written to the front-end repo's working tree only; staging,
 committing, and pushing are left to you to do manually.
 
 It is deliberately *non-destructive*: it only ever writes the paths listed in
-``OWNS`` plus ``backend/db.sqlite3``. Anything else in the front-end repo --
-``deploy/``, ``.gcloudignore``, ``.streamlit/secrets.toml``, and whatever the
-deployment owner adds later -- is left untouched. The script describes only what NED owns, never
-what the front-end owns.
+``OWNS`` plus ``requirements.txt`` and ``backend/db.sqlite3``. Anything else in
+the front-end repo -- ``deploy/``, ``.gcloudignore``, ``.streamlit/secrets.toml``,
+and whatever the deployment owner adds later -- is left untouched. The script
+describes only what NED owns, never what the front-end owns.
 
 Usage (run from anywhere; paths are resolved relative to this file):
 
@@ -37,12 +41,13 @@ import argparse
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 # Same directory as this script, so a plain `python scripts/export_frontend.py`
-# finds it. Owns the uv command that generates ui/requirements.txt, so the
-# flags here, in CI, and in the README cannot drift apart.
-from export_requirements import REQUIREMENTS, regenerate
+# finds it. Owns the uv command that generates requirements.txt, so the flags
+# here and in the README cannot drift apart.
+from export_requirements import regenerate
 
 NED = Path(__file__).resolve().parent.parent
 UI = NED / 'ui'
@@ -58,7 +63,6 @@ OWNS = [
     'db.py',
     'styles.py',
     'utils.py',
-    'requirements.txt',
     'README.md',
     '.gitignore',
     '.streamlit/config.toml',
@@ -66,8 +70,15 @@ OWNS = [
     'views',
 ]
 
+# Generated from uv.lock at publish time; never committed to NED.
+REQUIREMENTS_DEST = 'requirements.txt'
+
 # Built into the front-end repo for deployment; gitignored / untracked in NED.
 DB_DEST = 'backend/db.sqlite3'
+
+# NED paths whose uncommitted changes would make the published files differ
+# from the NED commit reported at the end: the UI code and the dependency pins.
+PUBLISHED_SOURCES = ['ui', 'pyproject.toml', 'uv.lock']
 
 # Safety net: never publish anything that looks like a credential into the repo.
 _SECRET_HINTS = ('secret', '.env')
@@ -78,22 +89,16 @@ def run(cmd: list[str], cwd: Path) -> None:
     subprocess.run(cmd, cwd=cwd, check=True)
 
 
-def _differs_from_head(path: str) -> bool:
-    """True if ``path``'s content differs from the committed version in NED.
+def _dirty_sources() -> list[str]:
+    """``git status`` lines for uncommitted changes to ``PUBLISHED_SOURCES``.
 
-    Compares line by line rather than byte for byte, and reads the committed
-    blob directly, so the answer does not depend on ``core.autocrlf``: a
-    checkout that put CRLF in the working tree is not a difference in the
-    pinned versions, which is the only thing that matters here.
+    Includes untracked files, which would be published without being in the
+    reported commit. Gitignored files (``__pycache__``) are not reported.
     """
-    try:
-        committed = subprocess.check_output(
-            ['git', 'show', f'HEAD:{path}'], cwd=NED, stderr=subprocess.DEVNULL
-        ).decode()
-    except subprocess.CalledProcessError:
-        return True  # not in HEAD yet, so it needs committing
-    current = (NED / path).read_text(encoding='utf-8')
-    return committed.splitlines() != current.splitlines()
+    out = subprocess.check_output(
+        ['git', 'status', '--porcelain', '--', *PUBLISHED_SOURCES], cwd=NED
+    ).decode()
+    return out.splitlines()
 
 
 def _copy(src: Path, dst: Path) -> None:
@@ -129,6 +134,23 @@ def main() -> int:
         if any(hint in path.lower() for hint in _SECRET_HINTS):
             sys.exit(f'error: OWNS contains a secret-shaped path: {path!r}')
 
+    # 1. The closing message reports the NED commit the export came from; an
+    # uncommitted change to the UI or the lock would not be in that commit.
+    dirty = _dirty_sources()
+    if dirty:
+        listing = '\n'.join(f'         {line}' for line in dirty)
+        sys.exit(
+            'error: uncommitted changes in NED would be published under a '
+            'commit that does not contain them:\n'
+            f'{listing}\n'
+            '       Commit or stash them, then re-run this script.\n'
+            '       Nothing was written to the front-end repo.'
+        )
+
+    for path in OWNS:
+        if not (UI / path).exists():
+            sys.exit(f'error: ui/{path} is missing; cannot export an incomplete UI')
+
     if args.rebuild_db:
         run([sys.executable, 'manage.py', 'migrate'], cwd=NED)
         run([sys.executable, 'manage.py', 'ingest'], cwd=NED)
@@ -140,30 +162,21 @@ def main() -> int:
             'or pass --rebuild-db.'
         )
 
-    # 1. Regenerate the pinned requirements from the lock.
-    regenerate()
+    with tempfile.TemporaryDirectory() as tmp:
+        # 2. Export the pinned requirements from the lock. This exits on
+        # failure (e.g. a stale lock), and nothing has been written to the
+        # front-end repo yet, so it is safe to stop here.
+        requirements = Path(tmp) / REQUIREMENTS_DEST
+        regenerate(requirements)
 
-    # Nothing has been written to the front-end repo yet, so it is safe to stop
-    # here. The closing message reports the NED commit the export came from; if
-    # ui/requirements.txt does not match HEAD, that commit would not describe
-    # what was published, and CI would fail on the same difference.
-    if _differs_from_head(REQUIREMENTS):
-        sys.exit(
-            f'error: {REQUIREMENTS} differs from HEAD after regenerating it '
-            'from uv.lock.\n'
-            f'       Review the change (`git diff -- {REQUIREMENTS}`), commit '
-            'it, then re-run this script.\n'
-            '       Nothing was written to the front-end repo.'
-        )
+        # 3. Publish NED-owned code paths.
+        for path in OWNS:
+            _copy(UI / path, fe / path)
 
-    # 2. Publish NED-owned code paths.
-    for path in OWNS:
-        src = UI / path
-        if not src.exists():
-            sys.exit(f'error: ui/{path} is missing; cannot export an incomplete UI')
-        _copy(src, fe / path)
+        # 4. Publish the requirements alongside the code.
+        _copy(requirements, fe / REQUIREMENTS_DEST)
 
-    # 3. Inject the database.
+    # 5. Inject the database.
     _copy(DB, fe / DB_DEST)
 
     sha = (
@@ -173,7 +186,7 @@ def main() -> int:
         .strip()
     )
     print(
-        f'\nDone. Wrote UI + db from NED @ {sha} into {fe}.\n'
+        f'\nDone. Wrote UI + requirements + db from NED @ {sha} into {fe}.\n'
         'Review, stage, and commit the changes in the front-end repo manually.'
     )
     return 0
