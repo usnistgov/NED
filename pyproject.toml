@@ -52,7 +52,6 @@ line-length = 85
 preview = true
 extend-exclude = [
     "resources/",
-    "*/migrations/*",
 ]
 
 [tool.ruff.lint]
@@ -78,6 +77,9 @@ ignore = [
     "NPY002",
     "F401",
     "TRY003",
+]
+exclude = [
+    "*/migrations/*",
 ]
 
 [tool.ruff.format]
