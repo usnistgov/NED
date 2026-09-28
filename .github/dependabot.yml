@@ -9,10 +9,6 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    ignore:
-      # Bumped by hand: the UI calls st.components.v1.html, which Streamlit
-      # has marked for removal, so a new Streamlit needs a code change first.
-      - dependency-name: "streamlit"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

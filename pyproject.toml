@@ -22,7 +22,7 @@ dev = [
     "pytest==9.1.1",
 ]
 ui = [
-    "streamlit==1.58.0",
+    "streamlit==1.63.0",
     "pandas",
     "numpy",
     "plotly",
