@@ -1,4 +1,5 @@
 import pandas as pd
+
 from views.components import (
     _SEARCH_SYNONYMS,
     _expand_search_terms,

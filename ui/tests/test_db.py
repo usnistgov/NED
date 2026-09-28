@@ -2,6 +2,7 @@ import sqlite3
 
 import pandas as pd
 import pytest
+
 from db import _shape_components_df
 
 

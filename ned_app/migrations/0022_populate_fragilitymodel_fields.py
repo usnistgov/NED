@@ -23,7 +23,8 @@ def populate_fragility_model_fields(apps, schema_editor):
 
         # Derive reference from curves
         curve_refs = (
-            FragilityCurve.objects.filter(fragility_model=fm)
+            FragilityCurve.objects
+            .filter(fragility_model=fm)
             .values_list('reference_id', flat=True)
             .distinct()
         )

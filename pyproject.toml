@@ -18,8 +18,8 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ruff==0.16.7",
-    "codespell==2.4.1",
-    "pytest==9.0.3",
+    "codespell==2.4.3",
+    "pytest==9.1.1",
 ]
 ui = [
     "streamlit==1.63.0",
@@ -50,9 +50,9 @@ quiet-level = 2
 [tool.ruff]
 line-length = 85
 preview = true
+src = [".", "ui"]
 extend-exclude = [
     "resources/",
-    "*/migrations/*",
 ]
 
 [tool.ruff.lint]
@@ -78,6 +78,9 @@ ignore = [
     "NPY002",
     "F401",
     "TRY003",
+]
+exclude = [
+    "*/migrations/*",
 ]
 
 [tool.ruff.format]

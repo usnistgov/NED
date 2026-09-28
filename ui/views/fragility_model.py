@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
+
 from db import (
     get_component_for_fragility_model,
     get_components,
@@ -19,7 +20,6 @@ from db import (
     get_reference,
 )
 from utils import FIELD_HELP, attr, build_citation, csv_safe, fmt
-
 from views.experiments_table import render_experiments_table, with_reference
 
 
