@@ -59,7 +59,7 @@ class FragilityModelAdmin(admin.ModelAdmin):
         'fragility_model_id',
         'reference',
         'model_id',
-        'reviewer',
+        'contributor',
         'source',
     )
 

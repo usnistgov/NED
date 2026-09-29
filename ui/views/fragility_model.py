@@ -139,7 +139,7 @@ def get_model_attributes(
         ('Component Description', fmt(row['comp_description']), None),
         ('EDP Metric', fmt(row['edp_metric']), None),
         ('EDP Unit', fmt(row['edp_unit']), None),
-        ('Reviewer', fmt(row['reviewer']), None),
+        ('Contributor', fmt(row['contributor']), None),
         ('Source', fmt(row['source']), None),
     ]
 
