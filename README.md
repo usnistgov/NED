@@ -97,11 +97,9 @@ This creates a virtual environment in a `.venv` folder and installs every depend
 The command examples in this README are written as `python manage.py ...`; run them with an activated environment or a `uv run` prefix.
 
 ### Updating dependencies
-To add, remove, or change a dependency, edit `pyproject.toml`, then run `uv lock` followed by `uv sync`. If the change edited the `ui` group, regenerate `ui/requirements.txt` (see [Push the UI to the deployment repo](#push-the-ui-to-the-deployment-repo-maintainers)). Commit `pyproject.toml`, `uv.lock`, and `ui/requirements.txt` together.
+To add, remove, or change a dependency, edit `pyproject.toml`, then run `uv lock` followed by `uv sync`. Commit `pyproject.toml` and `uv.lock` together. The front-end's pip `requirements.txt` is derived from the lock at publish time and is not committed (see [Push the UI to the deployment repo](#push-the-ui-to-the-deployment-repo-maintainers)).
 
 To upgrade a single package, run `uv lock --upgrade-package NAME`; to upgrade everything, run `uv lock --upgrade`. `ruff`, `codespell` and `pytest` are pinned to exact versions in `pyproject.toml` to ensure robust CI results.
-
-Regenerate `ui/requirements.txt` with `python scripts/export_requirements.py`; `--check` reports whether the committed file still matches the lock, which is what CI runs. If CI disagrees with a file you regenerated locally, match the uv version it uses (`UV_VERSION` in `.github/workflows/ci.yml`), since the export format can change between uv releases.
 
 
 ## Exporting Data to CSV
@@ -352,11 +350,7 @@ python scripts/export_frontend.py --frontend ../ned-frontend --rebuild-db
 ```
 Useful flags: `--rebuild-db` (run `migrate` + `ingest` first). Run `python scripts/export_frontend.py --help` for details.
 
-`ui/requirements.txt` travels with the exported code but is not hand-written: it is generated from `uv.lock`, and the export script regenerates it before copying. To refresh it by hand, run
-```bash
-python scripts/export_requirements.py
-```
-whenever the `ui` dependency group changes, and commit the result together with `pyproject.toml` and `uv.lock`. CI fails if `ui/requirements.txt` falls out of sync with the lock.
+The export script generates the deployment repo's `requirements.txt` from `uv.lock` (the `ui` group) and writes it straight into the deployment repo; it is never committed to NED. It refuses to run while `ui/`, `pyproject.toml`, or `uv.lock` has uncommitted changes, so everything published matches the NED commit it reports. To see the pins without publishing, run `python scripts/export_requirements.py` (prints to stdout; `-o FILE` writes a file).
 
 
 ## Contributors Guide
