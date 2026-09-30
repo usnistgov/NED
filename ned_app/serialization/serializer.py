@@ -51,7 +51,6 @@ class ReferenceSerializer(serializers.ModelSerializer):
             'year',
             'study_type',
             'comp_type',
-            'pdf_saved',
             'csl_data',
         ]
 

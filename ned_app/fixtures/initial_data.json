@@ -10,7 +10,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Hospital Piping Assembly",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1193/1.3672911",
       "URL": "https://doi.org/10.1193/1.3672911",
@@ -55,7 +54,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Partition Walls",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -93,7 +91,6 @@
     "year": 2015,
     "study_type": "Experiment",
     "comp_type": "boilers, air conditioning, cooling towers",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.1193/071513EQS205M",
       "URL": "http://doi.org/10.1193/071513EQS205M",
@@ -147,7 +144,6 @@
     "year": 2014,
     "study_type": "Experiment",
     "comp_type": "Cladding",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.26021/2533",
       "URL": "http://doi.org/10.26021/2533",
@@ -180,7 +176,6 @@
     "year": 2015,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.ijpvp.2015.06.001",
       "URL": "https://doi.org/10.1016/j.ijpvp.2015.06.001",
@@ -218,7 +213,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2016.1157528",
       "URL": "https://doi.org/10.1080/13632469.2016.1157528",
@@ -264,7 +258,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.5459/bnzsee.49.1.125-137",
       "URL": "https://doi.org/10.5459/bnzsee.49.1.125-137",
@@ -310,7 +303,6 @@
     "year": 2011,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -356,7 +348,6 @@
     "year": 2004,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1115/PVP2004-2915",
       "URL": "https://doi.org/10.1115/PVP2004-2915",
@@ -389,7 +380,6 @@
     "year": 2018,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.engstruct.2018.07.045",
       "URL": "https://doi.org/10.1016/j.engstruct.2018.07.045",
@@ -434,7 +424,6 @@
     "year": 2004,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -468,7 +457,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.engstruct.2021.112561",
       "URL": "https://doi.org/10.1016/j.engstruct.2021.112561",
@@ -518,7 +506,6 @@
     "year": 2009,
     "study_type": "Experiment",
     "comp_type": "Stairways",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/(ASCE)0733-9445(2009)135:2(122)",
       "URL": "https://doi.org/10.1061/(ASCE)0733-9445(2009)135:2(122)",
@@ -551,7 +538,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.5459/bnzsee.54.4.263-281",
       "URL": "https://doi.org/10.5459/bnzsee.54.4.263-281",
@@ -605,7 +591,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2074918",
       "URL": "https://doi.org/10.1080/13632469.2022.2074918",
@@ -647,7 +632,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2020.1830201",
       "URL": "https://doi.org/10.1080/13632469.2020.1830201",
@@ -693,7 +677,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2033359",
       "URL": "https://doi.org/10.1080/13632469.2022.2033359",
@@ -735,7 +718,6 @@
     "year": 2023,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2162629",
       "URL": "https://doi.org/10.1080/13632469.2022.2162629",
@@ -777,7 +759,6 @@
     "year": 2023,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2112322",
       "URL": "https://doi.org/10.1080/13632469.2022.2112322",
@@ -819,7 +800,6 @@
     "year": 2023,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2022.2137709",
       "URL": "https://doi.org/10.1080/13632469.2022.2137709",
@@ -869,7 +849,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/9780784412367.117",
       "URL": "https://doi.org/10.1061/9780784412367.117",
@@ -927,7 +906,6 @@
     "year": 2007,
     "study_type": "Experiment",
     "comp_type": "Partition Walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1002/eqe.638",
       "URL": "https://doi.org/10.1002/eqe.638",
@@ -977,7 +955,6 @@
     "year": 2002,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1014,7 +991,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.26021/12872",
       "URL": "http://doi.org/10.26021/12872",
@@ -1047,7 +1023,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Precast Concrete Cladding Panels",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1081,7 +1056,6 @@
     "year": 2014,
     "study_type": "Analytical Study",
     "comp_type": "Ceilings, piping, partitions",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/9780784413357.161",
       "URL": "https://doi.org/10.1061/9780784413357.161",
@@ -1124,7 +1098,6 @@
     "year": 2014,
     "study_type": "Experiment",
     "comp_type": "Ceilings, piping, partitions",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1166,7 +1139,6 @@
     "year": 2011,
     "study_type": "Experiment",
     "comp_type": "Partition Walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.tws.2010.10.001",
       "URL": "https://doi.org/10.1016/j.tws.2010.10.001",
@@ -1203,7 +1175,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Ceiling and Fire Sprinker assemblies",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.1061/(ASCE)ST.1943-541X.0001384",
       "URL": "http://doi.org/10.1061/(ASCE)ST.1943-541X.0001384",
@@ -1256,7 +1227,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Suspended Ceiling",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1302,7 +1272,6 @@
     "year": 2019,
     "study_type": "Experiment",
     "comp_type": "Suspended Ceilings",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2017.1342294",
       "URL": "https://doi.org/10.1080/13632469.2017.1342294",
@@ -1340,7 +1309,6 @@
     "year": 2013,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -1374,7 +1342,6 @@
     "year": 2019,
     "study_type": "Experiment",
     "comp_type": "Suspended Ceiling Systems",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/(ASCE)ST.1943-541X.0002273",
       "URL": "https://doi.org/10.1061/(ASCE)ST.1943-541X.0002273",
@@ -1420,7 +1387,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.jobe.2020.101911",
       "URL": "https://doi.org/10.1016/j.jobe.2020.101911",
@@ -1465,7 +1431,6 @@
     "year": 2019,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.3389/fbuil.2019.00049",
       "URL": "https://doi.org/10.3389/fbuil.2019.00049",
@@ -1510,7 +1475,6 @@
     "year": 2014,
     "study_type": "Experiment",
     "comp_type": "Partition Walls, Infill Walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "http://doi.org/10.26021/3160",
       "URL": "http://doi.org/10.26021/3160",
@@ -1544,7 +1508,6 @@
     "year": 2018,
     "study_type": "Experiment",
     "comp_type": "Internal partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1002/eqe.3031",
       "URL": "https://doi.org/10.1002/eqe.3031",
@@ -1597,7 +1560,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Elevators",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1002/eqe.2793",
       "URL": "https://doi.org/10.1002/eqe.2793",
@@ -1655,7 +1617,6 @@
     "year": 2015,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2014.994147",
       "URL": "https://doi.org/10.1080/13632469.2014.994147",
@@ -1696,7 +1657,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.5459/bnzsee.49.1.1-12",
       "URL": "https://doi.org/10.5459/bnzsee.49.1.1-12",
@@ -1741,7 +1701,6 @@
     "year": 2017,
     "study_type": "Experiment",
     "comp_type": "cable trays",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/(ASCE)CF.1943-5509.0001009",
       "URL": "https://doi.org/10.1061/(ASCE)CF.1943-5509.0001009",
@@ -1783,7 +1742,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "Motor Control Centers",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.net.2020.10.002",
       "URL": "https://doi.org/10.1016/j.net.2020.10.002",
@@ -1833,7 +1791,6 @@
     "year": 2022,
     "study_type": "Experiment",
     "comp_type": "switchgears",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.3390/ma15114035",
       "URL": "https://doi.org/10.3390/ma15114035",
@@ -1875,7 +1832,6 @@
     "year": 2018,
     "study_type": "Experiment",
     "comp_type": "Doors",
-    "pdf_saved": true,
     "csl_data": {
       "URL": "https://chei.ucsd.edu/cfs/resources/CFS_Report2-Final.pdf",
       "author": [
@@ -1928,7 +1884,6 @@
     "year": 2013,
     "study_type": "Experiment",
     "comp_type": "Doors",
-    "pdf_saved": true,
     "csl_data": {
       "URL": "https://chei.ucsd.edu/bncs/resources/BNCS-SSRP-Report2-Final.pdf",
       "author": [
@@ -2005,7 +1960,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Steel Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1193/012414eqs017m",
       "URL": "https://doi.org/10.1193/012414eqs017m",
@@ -2091,7 +2045,6 @@
     "year": 2024,
     "study_type": "Experiment",
     "comp_type": "RC Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.engstruct.2023.117061",
       "URL": "https://doi.org/10.1016/j.engstruct.2023.117061",
@@ -2145,7 +2098,6 @@
     "year": 2023,
     "study_type": "Experiment",
     "comp_type": "RC Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1007/s10518-022-01548-z",
       "URL": "https://doi.org/10.1007/s10518-022-01548-z",
@@ -2199,7 +2151,6 @@
     "year": 2021,
     "study_type": "Experiment",
     "comp_type": "RC Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1016/j.istruc.2021.10.026",
       "URL": "https://doi.org/10.1016/j.istruc.2021.10.026",
@@ -2245,7 +2196,6 @@
     "year": 2024,
     "study_type": "Experiment",
     "comp_type": "Steel Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2306,7 +2256,6 @@
     "year": 2020,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.5459/bnzsee.53.3.144-149",
       "URL": "https://doi.org/10.5459/bnzsee.53.3.144-149",
@@ -2348,7 +2297,6 @@
     "year": 2012,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2381,7 +2329,6 @@
     "year": 2025,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1080/13632469.2025.2470335",
       "URL": "https://doi.org/10.1080/13632469.2025.2470335",
@@ -2412,6 +2359,7 @@
         }
       ],
       "container-title": "Journal of Earthquake Engineering",
+      "issue": "1",
       "issued": {
         "date-parts": [
           [
@@ -2421,10 +2369,9 @@
       },
       "note": "Bhatta, J., Mishra, P., Cook, D., Sattar, S., Barbosa, A. R., & van de Lindt, J. (2026). Seismic Response of Pressurized Full-Scale Fire Sprinkler Piping System in Six-Story Building. Journal of Earthquake Engineering, 30(1).",
       "page": "228-254",
-      "issue": "1",
-      "volume": "30",
       "title": "Seismic response of pressurized full-scale fire sprinkler piping system in six-story building",
-      "type": "article-journal"
+      "type": "article-journal",
+      "volume": "30"
     }
   }
 },
@@ -2439,7 +2386,6 @@
     "year": 2007,
     "study_type": "Experiment",
     "comp_type": "Piping",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2482,7 +2428,6 @@
     "year": 2003,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1061/(ASCE)1076-0431(2003)9:2(70)",
       "URL": "https://doi.org/10.1061/(ASCE)1076-0431(2003)9:2(70)",
@@ -2528,7 +2473,6 @@
     "year": 2011,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2575,7 +2519,6 @@
     "year": 2006,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1520/JAI100407",
       "URL": "https://doi.org/10.1520/JAI100407",
@@ -2622,7 +2565,6 @@
     "year": 2006,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1193/1.2164875",
       "URL": "https://doi.org/10.1193/1.2164875",
@@ -2668,7 +2610,6 @@
     "year": 2009,
     "study_type": "Experiment",
     "comp_type": "Glazing",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2701,7 +2642,6 @@
     "year": 2018,
     "study_type": "Other",
     "comp_type": "",
-    "pdf_saved": false,
     "csl_data": {
       "URL": "https://femap58.atcouncil.org/reports",
       "author": [
@@ -2733,7 +2673,6 @@
     "year": 2011,
     "study_type": "Experiment",
     "comp_type": "Stairs",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2764,7 +2703,6 @@
     "year": 2006,
     "study_type": "Experiment",
     "comp_type": "Suspended Ceilings",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2811,7 +2749,6 @@
     "year": 2016,
     "study_type": "Experiment",
     "comp_type": "Partition walls",
-    "pdf_saved": true,
     "csl_data": {
       "author": [
         {
@@ -2842,7 +2779,6 @@
     "year": 2026,
     "study_type": "Experiment",
     "comp_type": "Fire Sprinkler",
-    "pdf_saved": true,
     "csl_data": {
       "DOI": "https://doi.org/10.1002/esp4.70085",
       "URL": "https://doi.org/10.1002/esp4.70085",
@@ -2873,6 +2809,97 @@
       "title": "Development of Full-Scale Experiment-Based Seismic Fragility Functions for Code-Compliant Fire Sprinkler Piping Systems",
       "type": "article-journal",
       "volume": "42"
+    }
+  }
+},
+{
+  "model": "ned_app.reference",
+  "pk": 65,
+  "fields": {
+    "reference_id": "Singh-2026",
+    "reference_label": "",
+    "title": "Physical Damage-Measured Response Correlation for Nonstructural Components Tested under Multi-Hazard (Earthquake and Fire) Demands in the CFS10 Building",
+    "author": "Singh et al.",
+    "year": 2026,
+    "study_type": "Experiment",
+    "comp_type": "Ceilings, interior wall finishes, exterior walls, stairs, doors, windows, fire protection, gas distribution, HVAC",
+    "csl_data": {
+      "DOI": "https://doi.org/10.1061/9780784486924.024",
+      "URL": "https://doi.org/10.1061/9780784486924.024",
+      "author": [
+        {
+          "family": "Singh",
+          "given": "Amanpreet"
+        },
+        {
+          "family": "Sorosh",
+          "given": "Shokrullah"
+        },
+        {
+          "family": "Zhang",
+          "given": "Xianzhao"
+        },
+        {
+          "family": "Zhang",
+          "given": "Jiachen"
+        },
+        {
+          "family": "Cyizere Rukundo",
+          "given": "Fidence"
+        },
+        {
+          "family": "Eladly",
+          "given": "Mohammed"
+        },
+        {
+          "family": "Ji",
+          "given": "Ruipu"
+        },
+        {
+          "family": "Rivera",
+          "given": "Daniel"
+        },
+        {
+          "family": "Padgett",
+          "given": "Lynn"
+        },
+        {
+          "family": "Meacham",
+          "given": "Brian J."
+        },
+        {
+          "family": "Gernay",
+          "given": "Thomas"
+        },
+        {
+          "family": "Emberley",
+          "given": "Richard L."
+        },
+        {
+          "family": "Schafer",
+          "given": "Benjamin W."
+        },
+        {
+          "family": "Hutchinson",
+          "given": "Tara C."
+        }
+      ],
+      "container-title": "Structures Congress 2026",
+      "event-place": "Boston, MA",
+      "event-title": "Structures Congress 2026",
+      "issued": {
+        "date-parts": [
+          [
+            2026
+          ]
+        ]
+      },
+      "note": "Singh, A., Sorosh, S., Zhang, X., Zhang, J., Cyizere Rukundo, F., Eladly, M., Ji, R., Rivera, D., Padgett, L., Meacham, B. J., Gernay, T., Emberley, R. L., Schafer, B. W., and Hutchinson, T. C. (2026). \"Physical Damage-Measured Response Correlation for Nonstructural Components Tested under Multi-Hazard (Earthquake and Fire) Demands in the CFS10 Building.\" Structures Congress 2026, Boston, MA, 298-310. Reston, VA: American Society of Civil Engineers. https://doi.org/10.1061/9780784486924.024",
+      "page": "298-310",
+      "publisher": "American Society of Civil Engineers",
+      "publisher-place": "Reston, VA",
+      "title": "Physical Damage-Measured Response Correlation for Nonstructural Components Tested under Multi-Hazard (Earthquake and Fire) Demands in the CFS10 Building",
+      "type": "paper-conference"
     }
   }
 },
@@ -3541,7 +3568,7 @@
   "pk": "exp1035a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Facade: Levels 1-3 balloon framing",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.1.1.A",
@@ -3574,7 +3601,7 @@
   "pk": "exp1036a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Facade: Levels 1-3 balloon framing",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.1.1.A",
@@ -3607,7 +3634,7 @@
   "pk": "exp1037a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Facade: Levels 1-3 balloon framing",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.1.1.A",
@@ -3640,7 +3667,7 @@
   "pk": "exp1055a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 1 perimeter-attached",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3673,7 +3700,7 @@
   "pk": "exp1056a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 1 floating",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3706,7 +3733,7 @@
   "pk": "exp1057a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 1 perimeter-attached",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3739,7 +3766,7 @@
   "pk": "exp1058a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 1 floating",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3772,7 +3799,7 @@
   "pk": "exp1059a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 1 perimeter-attached",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3805,7 +3832,7 @@
   "pk": "exp1060a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 1 floating",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3838,7 +3865,7 @@
   "pk": "exp1061a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 1 perimeter-attached",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3871,7 +3898,7 @@
   "pk": "exp1062a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 1 floating",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3904,7 +3931,7 @@
   "pk": "exp1063a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 2 lay-in",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3937,7 +3964,7 @@
   "pk": "exp1064a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 3 NE room",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -3970,7 +3997,7 @@
   "pk": "exp1065a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 3 SW room",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -4003,7 +4030,7 @@
   "pk": "exp1066a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 3 NE room",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -4036,7 +4063,7 @@
   "pk": "exp1067a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 3 NE room",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -4069,7 +4096,7 @@
   "pk": "exp1068a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: Level 3 SW room",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -4102,7 +4129,7 @@
   "pk": "exp1069a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: hospital-rated lay-in (3/8 in. clearance)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -4135,7 +4162,7 @@
   "pk": "exp1069b",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: hospital-rated drywall diaphragm",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -4168,7 +4195,7 @@
   "pk": "exp1069c",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Ceiling: hospital-rated corridor (lateral support bars)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.30.3.2.A",
@@ -4861,7 +4888,7 @@
   "pk": "exp1090a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Level 1 access door: NE sectional (open)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -4894,7 +4921,7 @@
   "pk": "exp1093a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Level 1 access door: NW rolling (open)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -4927,7 +4954,7 @@
   "pk": "exp1096a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Level 1 access door: SE rolling (closed)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -4960,7 +4987,7 @@
   "pk": "exp1099a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Level 1 access door: SW sectional (closed)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -4993,7 +5020,7 @@
   "pk": "exp1102a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Fire sprinkler piping system",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -5004,8 +5031,8 @@
     "loading_protocol": "CNP100 : 1994 Northridge–Canoga Park–100%",
     "peak_test_amplitude": "100% scale",
     "location": "California",
-    "governing_design_standard": "",
-    "design_objective": "NFPA - 13 (2010)",
+    "governing_design_standard": "NFPA - 13 (2010)",
+    "design_objective": "",
     "comp_description": "Full-scale fire sprinkler piping system, Concrete floor, beams and columns,  steel pipes, pressurized, Riser and the main pipe: groove fit,\nother joints: threaded, No ceiling interaction, Braced according to NFPA-13 (2010)",
     "ds_description": "Rotation of the riser around grooved joints at floor junction",
     "prior_damage": "",
@@ -5026,7 +5053,7 @@
   "pk": "exp1103a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Fire sprinkler piping system",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -5037,8 +5064,8 @@
     "loading_protocol": "LAC1001994 Northridge–LA City Terrace–100%",
     "peak_test_amplitude": "100% scale",
     "location": "California",
-    "governing_design_standard": "",
-    "design_objective": "NFPA - 13 (2010)",
+    "governing_design_standard": "NFPA - 13 (2010)",
+    "design_objective": "",
     "comp_description": "Full-scale fire sprinkler piping system, Concrete floor, beams and columns,  steel pipes, pressurized, Riser and the main pipe: groove fit,\nother joints: threaded, No ceiling interaction, Braced according to NFPA-13 (2010)",
     "ds_description": "Displacement of the mineral wool at penetration locations",
     "prior_damage": "Rotation of the riser around grooved joints at floor junction",
@@ -5059,7 +5086,7 @@
   "pk": "exp1104a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Gas piping: rigid, 1 in. riser",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.9.1.A",
@@ -9613,7 +9640,7 @@
   "pk": "exp1310a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Fifth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9646,7 +9673,7 @@
   "pk": "exp1311a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Fifth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9679,7 +9706,7 @@
   "pk": "exp1312a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Fifth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9712,7 +9739,7 @@
   "pk": "exp1313a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Sixth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9745,7 +9772,7 @@
   "pk": "exp1314a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Fifth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9778,7 +9805,7 @@
   "pk": "exp1315a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Fifth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9811,7 +9838,7 @@
   "pk": "exp1316a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Sixth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9844,7 +9871,7 @@
   "pk": "exp1317a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Fifth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9877,7 +9904,7 @@
   "pk": "exp1318a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Sixth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9910,7 +9937,7 @@
   "pk": "exp1319a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Fifth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9943,7 +9970,7 @@
   "pk": "exp1320a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Sixth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -9976,7 +10003,7 @@
   "pk": "exp1321a",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "72",
+    "specimen": "Sixth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -10009,7 +10036,7 @@
   "pk": "exp1321b",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "",
+    "specimen": "Fifth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -10042,7 +10069,7 @@
   "pk": "exp1321c",
   "fields": {
     "reference": "Ryan-2016",
-    "specimen": "",
+    "specimen": "Sixth floor piping",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -12748,7 +12775,7 @@
   "pk": "exp1403a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN150) - Cyclic 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -12781,7 +12808,7 @@
   "pk": "exp1404a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN150) - Cyclic 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -12814,7 +12841,7 @@
   "pk": "exp1405a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN150) - Cyclic 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -12847,7 +12874,7 @@
   "pk": "exp1406a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN150) - Cyclic 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -12880,7 +12907,7 @@
   "pk": "exp1407a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN150) - Cyclic 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -12913,7 +12940,7 @@
   "pk": "exp1408a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN150) - Cyclic 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -12946,7 +12973,7 @@
   "pk": "exp1409a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN150) - Monotonic",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -12979,7 +13006,7 @@
   "pk": "exp1410a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN150) - Monotonic",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -13012,7 +13039,7 @@
   "pk": "exp1411a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN80) - Cyclic 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -13045,7 +13072,7 @@
   "pk": "exp1412a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN80) - Cyclic 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -13078,7 +13105,7 @@
   "pk": "exp1413a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN80) - Cyclic 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -13111,7 +13138,7 @@
   "pk": "exp1414a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN80) - Cyclic 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -13144,7 +13171,7 @@
   "pk": "exp1415a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN80) - Cyclic 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -13177,7 +13204,7 @@
   "pk": "exp1416a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN80) - Cyclic 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -13210,7 +13237,7 @@
   "pk": "exp1417a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN80) - Monotonic",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -13243,7 +13270,7 @@
   "pk": "exp1418a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Tee joint (DN80) - Monotonic",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.C",
@@ -13276,7 +13303,7 @@
   "pk": "exp1419a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Elbow joint - Cyclic 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.E",
@@ -13309,7 +13336,7 @@
   "pk": "exp1420a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Elbow joint - Cyclic 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.E",
@@ -13342,7 +13369,7 @@
   "pk": "exp1421a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Elbow joint - Cyclic 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.E",
@@ -13375,7 +13402,7 @@
   "pk": "exp1422a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Elbow joint - Cyclic 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.E",
@@ -13408,7 +13435,7 @@
   "pk": "exp1423a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Elbow joint - Cyclic 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.E",
@@ -13441,7 +13468,7 @@
   "pk": "exp1424a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Elbow joint - Cyclic 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.E",
@@ -13474,7 +13501,7 @@
   "pk": "exp1425a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Elbow joint - Monotonic",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.E",
@@ -13507,7 +13534,7 @@
   "pk": "exp1426a",
   "fields": {
     "reference": "Wang_GroovedPiping-2019",
-    "specimen": "77",
+    "specimen": "Elbow joint - Monotonic",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.E",
@@ -13540,7 +13567,7 @@
   "pk": "exp1427a",
   "fields": {
     "reference": "Goodwin_HospitalPipingThesis-2004",
-    "specimen": "78",
+    "specimen": "Cable 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -13573,7 +13600,7 @@
   "pk": "exp1428a",
   "fields": {
     "reference": "Goodwin_HospitalPipingThesis-2004",
-    "specimen": "78",
+    "specimen": "Cable 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -13606,7 +13633,7 @@
   "pk": "exp1429a",
   "fields": {
     "reference": "Goodwin_HospitalPipingThesis-2004",
-    "specimen": "78",
+    "specimen": "Cable 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -13639,7 +13666,7 @@
   "pk": "exp1430a",
   "fields": {
     "reference": "Goodwin_HospitalPipingThesis-2004",
-    "specimen": "78",
+    "specimen": "Rod 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -13672,7 +13699,7 @@
   "pk": "exp1431a",
   "fields": {
     "reference": "Goodwin_HospitalPipingThesis-2004",
-    "specimen": "78",
+    "specimen": "Rod 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -13705,7 +13732,7 @@
   "pk": "exp1432a",
   "fields": {
     "reference": "Goodwin_HospitalPipingThesis-2004",
-    "specimen": "78",
+    "specimen": "Rod 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -13837,7 +13864,7 @@
   "pk": "exp1436a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 2mm - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -13870,7 +13897,7 @@
   "pk": "exp1437a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 2mm - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -13903,7 +13930,7 @@
   "pk": "exp1438a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 2mm - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -13936,7 +13963,7 @@
   "pk": "exp1439a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 3mm - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -13969,7 +13996,7 @@
   "pk": "exp1440a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 3mm - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -14002,7 +14029,7 @@
   "pk": "exp1441a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 3mm - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -14035,7 +14062,7 @@
   "pk": "exp1442a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 4.75mm - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -14068,7 +14095,7 @@
   "pk": "exp1443a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 4.75mm - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -14101,7 +14128,7 @@
   "pk": "exp1444a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 4.75mm - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -14134,7 +14161,7 @@
   "pk": "exp1445a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 6mm - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -14167,7 +14194,7 @@
   "pk": "exp1446a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 6mm - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -14200,7 +14227,7 @@
   "pk": "exp1447a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 4 - Cable 6mm - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.F",
@@ -14233,7 +14260,7 @@
   "pk": "exp1448a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - HC - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -14266,7 +14293,7 @@
   "pk": "exp1449a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - HC - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -14299,7 +14326,7 @@
   "pk": "exp1450a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - HC - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -14332,7 +14359,7 @@
   "pk": "exp1451a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - HC - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -14365,7 +14392,7 @@
   "pk": "exp1452a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - HC - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -14398,7 +14425,7 @@
   "pk": "exp1453a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - HC - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -14431,7 +14458,7 @@
   "pk": "exp1454a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - HC - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -14464,7 +14491,7 @@
   "pk": "exp1455a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - HC - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -14497,7 +14524,7 @@
   "pk": "exp1456a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - BAC - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14530,7 +14557,7 @@
   "pk": "exp1457a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - BAC - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14563,7 +14590,7 @@
   "pk": "exp1458a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - BAC - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14596,7 +14623,7 @@
   "pk": "exp1459a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - BAC - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14629,7 +14656,7 @@
   "pk": "exp1460a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - BAC - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14662,7 +14689,7 @@
   "pk": "exp1461a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - BAC - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14695,7 +14722,7 @@
   "pk": "exp1462a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - BAC - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14728,7 +14755,7 @@
   "pk": "exp1463a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - BAC - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14761,7 +14788,7 @@
   "pk": "exp1464a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - BAC - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14794,7 +14821,7 @@
   "pk": "exp1465a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - PAC - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14827,7 +14854,7 @@
   "pk": "exp1466a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - PAC - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14860,7 +14887,7 @@
   "pk": "exp1467a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - PAC - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14893,7 +14920,7 @@
   "pk": "exp1468a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - PAC - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14926,7 +14953,7 @@
   "pk": "exp1469a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - PAC - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14959,7 +14986,7 @@
   "pk": "exp1470a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - PAC - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -14992,7 +15019,7 @@
   "pk": "exp1471a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - PAC - T1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15025,7 +15052,7 @@
   "pk": "exp1472a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - PAC - T2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15058,7 +15085,7 @@
   "pk": "exp1473a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - PAC - T3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15091,7 +15118,7 @@
   "pk": "exp1474a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - HC - C1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -15124,7 +15151,7 @@
   "pk": "exp1475a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - HC - C2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -15157,7 +15184,7 @@
   "pk": "exp1476a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - HC - C3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -15190,7 +15217,7 @@
   "pk": "exp1477a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - HC - C1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -15223,7 +15250,7 @@
   "pk": "exp1478a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - HC - C2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -15256,7 +15283,7 @@
   "pk": "exp1479a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - HC - C3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -15289,7 +15316,7 @@
   "pk": "exp1480a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - HC - C1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -15322,7 +15349,7 @@
   "pk": "exp1481a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - HC - C2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -15355,7 +15382,7 @@
   "pk": "exp1482a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "81",
+    "specimen": "Variant 3 - HC - C3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.G",
@@ -15388,7 +15415,7 @@
   "pk": "exp1483a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - BAC - C1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15421,7 +15448,7 @@
   "pk": "exp1484a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - BAC - C2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15454,7 +15481,7 @@
   "pk": "exp1485a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - BAC - C3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15487,7 +15514,7 @@
   "pk": "exp1486a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - BAC - C1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15520,7 +15547,7 @@
   "pk": "exp1487a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - BAC - C2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15553,7 +15580,7 @@
   "pk": "exp1488a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - BAC - C3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15586,7 +15613,7 @@
   "pk": "exp1489a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - PAC - C1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15619,7 +15646,7 @@
   "pk": "exp1490a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - PAC - C2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15652,7 +15679,7 @@
   "pk": "exp1491a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 1 - PAC - C3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15685,7 +15712,7 @@
   "pk": "exp1492a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - PAC - C1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15718,7 +15745,7 @@
   "pk": "exp1493a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - PAC - C2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15751,7 +15778,7 @@
   "pk": "exp1494a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 2 - PAC - C3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15784,7 +15811,7 @@
   "pk": "exp1495a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - PAC - C1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15817,7 +15844,7 @@
   "pk": "exp1496a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - PAC - C2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -15850,7 +15877,7 @@
   "pk": "exp1497a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "Variant 3 - PAC - C3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.H",
@@ -16180,7 +16207,7 @@
   "pk": "exp1511a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16213,7 +16240,7 @@
   "pk": "exp1512a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16246,7 +16273,7 @@
   "pk": "exp1513a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16279,7 +16306,7 @@
   "pk": "exp1514a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16312,7 +16339,7 @@
   "pk": "exp1515a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16345,7 +16372,7 @@
   "pk": "exp1516a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16378,7 +16405,7 @@
   "pk": "exp1517a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16411,7 +16438,7 @@
   "pk": "exp1518a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16444,7 +16471,7 @@
   "pk": "exp1519a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16477,7 +16504,7 @@
   "pk": "exp1520a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16510,7 +16537,7 @@
   "pk": "exp1521a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16543,7 +16570,7 @@
   "pk": "exp1522a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16576,7 +16603,7 @@
   "pk": "exp1523a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16609,7 +16636,7 @@
   "pk": "exp1524a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16642,7 +16669,7 @@
   "pk": "exp1525a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "82",
+    "specimen": "Specimen 3",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16675,7 +16702,7 @@
   "pk": "exp1525b",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "",
+    "specimen": "Specimen 1",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -16708,7 +16735,7 @@
   "pk": "exp1525c",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "",
+    "specimen": "Specimen 2",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -17005,7 +17032,7 @@
   "pk": "exp1534a",
   "fields": {
     "reference": "Lin-2016",
-    "specimen": "84",
+    "specimen": "1 in. screwed fitting",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.D",
@@ -17038,7 +17065,7 @@
   "pk": "exp1535a",
   "fields": {
     "reference": "Lin-2016",
-    "specimen": "84",
+    "specimen": "1 in. flexible coupling",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.D",
@@ -17071,7 +17098,7 @@
   "pk": "exp1536a",
   "fields": {
     "reference": "Lin-2016",
-    "specimen": "84",
+    "specimen": "OC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -17104,7 +17131,7 @@
   "pk": "exp1537a",
   "fields": {
     "reference": "Lin-2016",
-    "specimen": "84",
+    "specimen": "CT",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -17137,7 +17164,7 @@
   "pk": "exp1538a",
   "fields": {
     "reference": "Lin-2016",
-    "specimen": "84",
+    "specimen": "CB",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -17170,7 +17197,7 @@
   "pk": "exp1539a",
   "fields": {
     "reference": "Lin-2016",
-    "specimen": "84",
+    "specimen": "FH",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -17203,7 +17230,7 @@
   "pk": "exp1540a",
   "fields": {
     "reference": "Lin-2016",
-    "specimen": "84",
+    "specimen": "DBF",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -41029,7 +41056,7 @@
   "pk": "exp2282a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41062,7 +41089,7 @@
   "pk": "exp2283a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41095,7 +41122,7 @@
   "pk": "exp2284a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41128,7 +41155,7 @@
   "pk": "exp2285a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41161,7 +41188,7 @@
   "pk": "exp2286a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41194,7 +41221,7 @@
   "pk": "exp2287a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41227,7 +41254,7 @@
   "pk": "exp2288a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41260,7 +41287,7 @@
   "pk": "exp2289a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41293,7 +41320,7 @@
   "pk": "exp2290a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41326,7 +41353,7 @@
   "pk": "exp2291a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41359,7 +41386,7 @@
   "pk": "exp2292a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -41392,7 +41419,7 @@
   "pk": "exp2293a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "1",
+    "specimen": "Stairs: steel scissor stair",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.20.1.1.A",
@@ -43174,17 +43201,17 @@
   "pk": "exp2367b",
   "fields": {
     "reference": "Bhatta_NHERIFireSprinkler-2025",
-    "specimen": "",
+    "specimen": "Level 4",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "",
-    "material": "",
+    "comp_detail": "Braced",
+    "material": "Steel",
     "size_class": "",
     "test_type": "Dynamic, uniaxial",
-    "loading_protocol": "",
-    "peak_test_amplitude": "",
-    "location": "",
+    "loading_protocol": "1994 Northridge",
+    "peak_test_amplitude": "0.75g, PFA",
+    "location": "UCSD, California",
     "governing_design_standard": "",
     "design_objective": "",
     "comp_description": "Piping according to NFPA-13 (2022). Pressurized to 130 psi (0.89 Mpa).Steel pipes: distribution pipe: 2.5 in. (SCH 10), branch pipe: 1 to 1.5 in (SCH 10), armover pipe: 1 in (SCH 40)",
@@ -43834,7 +43861,7 @@
   "pk": "exp2389a",
   "fields": {
     "reference": "Chang-2021",
-    "specimen": "Fragility 20%  (RG 1.60)",
+    "specimen": "Fragility 20% (RG 1.60)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.50.1.2.A",
@@ -43999,7 +44026,7 @@
   "pk": "exp2394a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "1-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44032,7 +44059,7 @@
   "pk": "exp2395a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "2-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44065,7 +44092,7 @@
   "pk": "exp2396a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "3-NC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44098,7 +44125,7 @@
   "pk": "exp2397a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "3-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44131,7 +44158,7 @@
   "pk": "exp2398a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "4-NC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44164,7 +44191,7 @@
   "pk": "exp2399a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "6-NC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44197,7 +44224,7 @@
   "pk": "exp2400a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "1-NC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44230,7 +44257,7 @@
   "pk": "exp2401a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "2-NC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44263,7 +44290,7 @@
   "pk": "exp2402a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "3-NC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44296,7 +44323,7 @@
   "pk": "exp2403a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "3-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44329,7 +44356,7 @@
   "pk": "exp2404a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "4-NC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44362,7 +44389,7 @@
   "pk": "exp2405a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "4-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44395,7 +44422,7 @@
   "pk": "exp2406a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "5-NC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44428,7 +44455,7 @@
   "pk": "exp2407a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "5-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44461,7 +44488,7 @@
   "pk": "exp2408a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "6-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44494,7 +44521,7 @@
   "pk": "exp2409a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "3-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44527,7 +44554,7 @@
   "pk": "exp2410a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "4-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44560,7 +44587,7 @@
   "pk": "exp2411a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "5-NC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44593,7 +44620,7 @@
   "pk": "exp2412a",
   "fields": {
     "reference": "Wang_CFS_Report-2018",
-    "specimen": "",
+    "specimen": "5-SC",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44626,7 +44653,7 @@
   "pk": "exp2413a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 4 ICU breakout door (EW)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.B",
@@ -44659,7 +44686,7 @@
   "pk": "exp2414a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 4 ICU breakout door (EW)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.B",
@@ -44692,7 +44719,7 @@
   "pk": "exp2415a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 4 ICU breakout door (NS)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.B",
@@ -44725,7 +44752,7 @@
   "pk": "exp2416a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 3 swinging door: particleboard core (open)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44758,7 +44785,7 @@
   "pk": "exp2417a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 3 swinging door: particleboard core (closed)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "C.10.2.1.A",
@@ -44791,7 +44818,7 @@
   "pk": "exp2418a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 3 swinging door: honeycomb metal (open)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.2.A",
@@ -44824,7 +44851,7 @@
   "pk": "exp2419a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 3 swinging door: honeycomb metal (closed)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.2.A",
@@ -44857,7 +44884,7 @@
   "pk": "exp2420a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 1 access door: NW rolling (open)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -44890,7 +44917,7 @@
   "pk": "exp2421a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 1 access door: NW rolling (open)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -44923,7 +44950,7 @@
   "pk": "exp2422a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 1 access door: SE rolling (closed)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -44956,7 +44983,7 @@
   "pk": "exp2423a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 1 access door: SE rolling (closed)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -44989,7 +45016,7 @@
   "pk": "exp2424a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 1 access door: SW sectional (closed)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -45022,7 +45049,7 @@
   "pk": "exp2425a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 1 access door: SW sectional (closed)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -45055,7 +45082,7 @@
   "pk": "exp2426a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 1 access door: NE sectional (open)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -45088,7 +45115,7 @@
   "pk": "exp2427a",
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
-    "specimen": "",
+    "specimen": "Level 1 access door: NE sectional (open)",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "B.20.3.4.A",
@@ -45715,7 +45742,7 @@
   "pk": "exp2446a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "48",
+    "specimen": "Fire sprinkler piping system",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -45748,7 +45775,7 @@
   "pk": "exp2447a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "100-40E",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -45781,7 +45808,7 @@
   "pk": "exp2448a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "65-32E",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -45814,7 +45841,7 @@
   "pk": "exp2449a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "100-40E",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -45847,7 +45874,7 @@
   "pk": "exp2450a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "100-40E",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -45880,7 +45907,7 @@
   "pk": "exp2451a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "65-32E",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -45913,7 +45940,7 @@
   "pk": "exp2452a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "40-25E",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -45946,7 +45973,7 @@
   "pk": "exp2453a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "40-25E",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -45979,7 +46006,7 @@
   "pk": "exp2454a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "100-40L",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46012,7 +46039,7 @@
   "pk": "exp2455a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "100-40L",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46045,7 +46072,7 @@
   "pk": "exp2456a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "100-40L",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46078,7 +46105,7 @@
   "pk": "exp2457a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "65-32L",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46111,7 +46138,7 @@
   "pk": "exp2458a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "40-25L",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46144,7 +46171,7 @@
   "pk": "exp2459a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "65-32L",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46177,7 +46204,7 @@
   "pk": "exp2460a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "40-25L",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46210,7 +46237,7 @@
   "pk": "exp2461a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "40-25L",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46243,7 +46270,7 @@
   "pk": "exp2462a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "65-32L",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46276,7 +46303,7 @@
   "pk": "exp2463a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "100-40S",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46309,7 +46336,7 @@
   "pk": "exp2464a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "80",
+    "specimen": "50-25S",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
@@ -46342,18 +46369,18 @@
   "pk": "exp2464b",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "",
+    "specimen": "40-25E",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "",
-    "material": "",
+    "comp_detail": "braced",
+    "material": "Steel",
     "size_class": "",
     "test_type": "Dynamic, uniaxial",
-    "loading_protocol": "",
-    "peak_test_amplitude": "",
-    "location": "",
-    "governing_design_standard": "",
+    "loading_protocol": "The floor motions used were recorded during 2010/11 Canterbury Eqs on an eight-story RC building, UC Physics at the University of Canterbury. One random moton generated to match the target spectrum in AC156",
+    "peak_test_amplitude": "All motions were initially scaled to a peak acceleration of 0.1g.\nThese motions were then input to the table with scale factors\nof 1.0, 1.5, 3.0, 4.5, 6.0, 7.5 and 8.5. The maximum capacity\nof the table, 1.0g,",
+    "location": "University of Canterbury, New Zealand",
+    "governing_design_standard": "NZA 4541 (2020)",
     "design_objective": "",
     "comp_description": "Plenum depth: Main pipe: 39 in. (1000 mm), Branch pipe: 16 - 18 in. (400-450 mm) steel pipes, Steel columns and beam, concrete sections for brace and hanger connections, Pressure: 175 psi (1.2 MPa),No riser, main and branch pipe connected using a 600mm long riser nipple with Victaulic Mechanical-T outlet (threaded) other joints: threaded, Braces to main pipes include 25 mm (1.0 in) schedule 40 steel pipes. No ceiling interaction, irrespective of pipe diameters",
     "ds_description": "No damage",
@@ -46441,7 +46468,7 @@
   "pk": "exp2467a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "",
+    "specimen": "Gas piping: rigid, 1 in. riser",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.9.1.A",
@@ -46474,7 +46501,7 @@
   "pk": "exp2468a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "",
+    "specimen": "Gas piping: rigid, 1 in. branch",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.9.1.A",
@@ -46507,7 +46534,7 @@
   "pk": "exp2469a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "",
+    "specimen": "Gas piping: rigid, 3/4 in. branch",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.9.1.A",
@@ -46540,7 +46567,7 @@
   "pk": "exp2470a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "",
+    "specimen": "Gas piping: rigid, 1/2 in. branch",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.9.1.A",
@@ -46573,7 +46600,7 @@
   "pk": "exp2471a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "",
+    "specimen": "Gas piping: flexible CSST, 1 in. riser",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.9.1.A",
@@ -46590,8 +46617,8 @@
     "ds_description": "No Damage",
     "prior_damage": "",
     "prior_damage_repaired": "",
-    "edp_metric": "Peak Floor Acceleration, horizontal",
-    "edp_unit": "g",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
     "edp_value": "0.059900",
     "alt_edp_metric": "",
     "alt_edp_unit": "",
@@ -46606,7 +46633,7 @@
   "pk": "exp2472a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "",
+    "specimen": "Gas piping: flexible CSST, 1 in. branch",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.9.1.A",
@@ -46639,7 +46666,7 @@
   "pk": "exp2473a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "",
+    "specimen": "Gas piping: flexible CSST, 3/4 in. branch",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.9.1.A",
@@ -46672,7 +46699,7 @@
   "pk": "exp2474a",
   "fields": {
     "reference": "Pantoli_NCS_DamageStates-2016",
-    "specimen": "",
+    "specimen": "Gas piping: flexible CSST, 1/2 in. branch",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.9.1.A",
@@ -46705,7 +46732,7 @@
   "pk": "exp2475a",
   "fields": {
     "reference": "Goodwin_PipingWeldedThreaded-2007",
-    "specimen": "",
+    "specimen": "Specimen I",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.2.1.A",
@@ -46738,7 +46765,7 @@
   "pk": "exp2476a",
   "fields": {
     "reference": "Goodwin_PipingWeldedThreaded-2007",
-    "specimen": "",
+    "specimen": "Specimen II",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.2.1.A",
@@ -46771,7 +46798,7 @@
   "pk": "exp2477a",
   "fields": {
     "reference": "Goodwin_PipingWeldedThreaded-2007",
-    "specimen": "",
+    "specimen": "Specimen III",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.2.1.A",
@@ -46804,7 +46831,7 @@
   "pk": "exp2478a",
   "fields": {
     "reference": "Goodwin_PipingWeldedThreaded-2007",
-    "specimen": "",
+    "specimen": "Specimen III",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.2.1.A",
@@ -46837,7 +46864,7 @@
   "pk": "exp2479a",
   "fields": {
     "reference": "Goodwin_PipingWeldedThreaded-2007",
-    "specimen": "",
+    "specimen": "Specimen IV",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.2.1.A",
@@ -46870,7 +46897,7 @@
   "pk": "exp2480a",
   "fields": {
     "reference": "Goodwin_PipingWeldedThreaded-2007",
-    "specimen": "",
+    "specimen": "Specimen IV",
     "specimen_inspection_sequence": "",
     "reviewer": "NIST",
     "component": "D.20.2.1.A",
@@ -48289,7 +48316,7 @@
   "pk": "exp2526a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - short sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - short sliding connection",
     "specimen_inspection_sequence": "7.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48322,7 +48349,7 @@
   "pk": "exp2527a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - short sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - short sliding connection",
     "specimen_inspection_sequence": "8.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48355,7 +48382,7 @@
   "pk": "exp2528a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - short sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - short sliding connection",
     "specimen_inspection_sequence": "9.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48388,7 +48415,7 @@
   "pk": "exp2529a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - short sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - short sliding connection",
     "specimen_inspection_sequence": "10.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48421,7 +48448,7 @@
   "pk": "exp2530a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - short sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - short sliding connection",
     "specimen_inspection_sequence": "11.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48454,7 +48481,7 @@
   "pk": "exp2531a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - short sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - short sliding connection",
     "specimen_inspection_sequence": "12.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48487,7 +48514,7 @@
   "pk": "exp2532a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - short sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - short sliding connection",
     "specimen_inspection_sequence": "13.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48520,7 +48547,7 @@
   "pk": "exp2533a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - medium sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - medium sliding connection",
     "specimen_inspection_sequence": "7.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48553,7 +48580,7 @@
   "pk": "exp2534a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - medium sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - medium sliding connection",
     "specimen_inspection_sequence": "8.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48586,7 +48613,7 @@
   "pk": "exp2535a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - medium sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - medium sliding connection",
     "specimen_inspection_sequence": "9.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48619,7 +48646,7 @@
   "pk": "exp2536a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - medium sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - medium sliding connection",
     "specimen_inspection_sequence": "10.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48652,7 +48679,7 @@
   "pk": "exp2537a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - medium sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - medium sliding connection",
     "specimen_inspection_sequence": "11.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48685,7 +48712,7 @@
   "pk": "exp2538a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - medium sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - medium sliding connection",
     "specimen_inspection_sequence": "12.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -48718,7 +48745,7 @@
   "pk": "exp2539a",
   "fields": {
     "reference": "Pantoli_APC_PanelsAndConnections-2016",
-    "specimen": "In-Plane APC Panel 5NE and  5SE - medium sliding connection",
+    "specimen": "In-Plane APC Panel 5NE and 5SE - medium sliding connection",
     "specimen_inspection_sequence": "13.0",
     "reviewer": "NIST",
     "component": "B.20.1.1.C",
@@ -82041,6 +82068,402 @@
     "ds_rank": 2,
     "ds_class": "Inconsequential",
     "notes": "John A. Blume and Associates (John A. Blume and Associates 1966, 1968, Freeman 1971, 1974, 1979)"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3570a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X1.0",
+    "specimen_inspection_sequence": "1.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "C.10.2.1.A",
+    "comp_detail": "Swing, fire-rated",
+    "material": "Metal",
+    "size_class": "1.02 m by 2.18 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1989 Loma Prieta, CA. Station: Gilroy Array #3",
+    "peak_test_amplitude": "PGA = 0.723g, 0.619g, 0.016g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "ANSI/SDI A250.8-23/ NAAMM HMMA 810-09",
+    "design_objective": "standard practice",
+    "comp_description": "Line C (open): L2; Line D (closed): L2, L3, L6, L9; Line E (closed): L3, L6. Hollow-metal swing doors with cylindrical door latch. 90 min fire rating for door, 20 min fire rating for door frame.",
+    "ds_description": "Level 2, Line C door (open) frame hinge damage, but operational",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.003200",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "Inconsequential",
+    "notes": "Only Y-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3571a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X1.1",
+    "specimen_inspection_sequence": "2.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "C.10.2.1.A",
+    "comp_detail": "Swing, fire-rated",
+    "material": "Metal",
+    "size_class": "1.02 m by 2.18 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1992 Cape Mendocino, CA. Station: Rio Dell Overpass",
+    "peak_test_amplitude": "PGA = 0.782g, 0.336g, 0.025g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "ANSI/SDI A250.8-23/ NAAMM HMMA 810-09",
+    "design_objective": "standard practice",
+    "comp_description": "Line C (open): L2; Line D (closed): L2, L3, L6, L9; Line E (closed): L3, L6. Hollow-metal swing doors with cylindrical door latch. 90 min fire rating for door, 20 min fire rating for door frame.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.004600",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only Y-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3572a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X1.2",
+    "specimen_inspection_sequence": "3.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "C.10.2.1.A",
+    "comp_detail": "Swing, fire-rated",
+    "material": "Metal",
+    "size_class": "1.02 m by 2.18 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1992 Cape Mendocino, CA. Station: Rio Dell Overpass",
+    "peak_test_amplitude": "PGA = 0.782g, 0.336g, 0.025g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "ANSI/SDI A250.8-23/ NAAMM HMMA 810-09",
+    "design_objective": "standard practice",
+    "comp_description": "Line C (open): L2; Line D (closed): L2, L3, L6, L9; Line E (closed): L3, L6. Hollow-metal swing doors with cylindrical door latch. 90 min fire rating for door, 20 min fire rating for door frame.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.005000",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only Y-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3573a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X1.3",
+    "specimen_inspection_sequence": "4.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "C.10.2.1.A",
+    "comp_detail": "Swing, fire-rated",
+    "material": "Metal",
+    "size_class": "1.02 m by 2.18 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1992 Cape Mendocino, CA. Station: Rio Dell Overpass",
+    "peak_test_amplitude": "PGA = 0.782g, 0.336g, 0.025g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "ANSI/SDI A250.8-23/ NAAMM HMMA 810-09",
+    "design_objective": "standard practice",
+    "comp_description": "Line C (open): L2; Line D (closed): L2, L3, L6, L9; Line E (closed): L3, L6. Hollow-metal swing doors with cylindrical door latch. 90 min fire rating for door, 20 min fire rating for door frame.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.004400",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only Y-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3574a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X1.4",
+    "specimen_inspection_sequence": "5.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "C.10.2.1.A",
+    "comp_detail": "Swing, fire-rated",
+    "material": "Metal",
+    "size_class": "1.02 m by 2.18 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1989 Loma Prieta, CA. Station: Gilroy Array #3",
+    "peak_test_amplitude": "PGA = 0.723g, 0.619g, 0.016g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "ANSI/SDI A250.8-23/ NAAMM HMMA 810-09",
+    "design_objective": "standard practice",
+    "comp_description": "Line C (open): L2; Line D (closed): L2, L3, L6, L9; Line E (closed): L3, L6. Hollow-metal swing doors with cylindrical door latch. 90 min fire rating for door, 20 min fire rating for door frame.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.004100",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only Y-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3575a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X2.0",
+    "specimen_inspection_sequence": "1.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "B.20.3.4.A",
+    "comp_detail": "Roll-up, fire-rated",
+    "material": "Metal",
+    "size_class": "2.15 m by 2.79 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1992 Cape Mendocino, CA. Station: Rio Dell Overpass",
+    "peak_test_amplitude": "PGA = 0.782g, 0.336g, 0.025g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "NFPA 80",
+    "design_objective": "standard practice",
+    "comp_description": "L2 stair landing",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.004800",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only X-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3576a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X3.0",
+    "specimen_inspection_sequence": "1.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "B.20.2.1.A",
+    "comp_detail": "Dry-glazed stick built, resilient",
+    "material": "Tempered",
+    "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1992 Cape Mendocino, CA. Station: Rio Dell Overpass",
+    "peak_test_amplitude": "PGA = 0.782g, 0.336g, 0.025g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "AAMA/ WDMA/ CSA 101/ I.S.2/ A440-22",
+    "design_objective": "standard practice",
+    "comp_description": "West room Line 1. Aluminum-framed, double pane, fixed windows. Sliding detail to accommodate drift.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.006900",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only X-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3577a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X4.0",
+    "specimen_inspection_sequence": "1.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "B.20.2.1.A",
+    "comp_detail": "Dry-glazed stick built, resilient",
+    "material": "Laminated",
+    "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1992 Cape Mendocino, CA. Station: Rio Dell Overpass",
+    "peak_test_amplitude": "PGA = 0.782g, 0.336g, 0.025g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "AAMA/ WDMA/ CSA 101/ I.S.2/ A440-22",
+    "design_objective": "standard practice",
+    "comp_description": "West room Line 1. Aluminum-framed, double pane, fixed windows. Sliding detail to accommodate drift.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.007900",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only X-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3578a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X5.0",
+    "specimen_inspection_sequence": "1.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "B.20.2.1.A",
+    "comp_detail": "Dry-glazed stick built, resilient",
+    "material": "Heat-strengthened",
+    "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1992 Cape Mendocino, CA. Station: Rio Dell Overpass",
+    "peak_test_amplitude": "PGA = 0.782g, 0.336g, 0.025g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "AAMA/ WDMA/ CSA 101/ I.S.2/ A440-22",
+    "design_objective": "standard practice",
+    "comp_description": "West room Line 1. Aluminum-framed, double pane, fixed windows. Sliding detail to accommodate drift.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.009100",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only X-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3579a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X6.0",
+    "specimen_inspection_sequence": "1.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "B.20.2.1.A",
+    "comp_detail": "Dry-glazed stick built",
+    "material": "Tempered",
+    "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1992 Cape Mendocino, CA. Station: Rio Dell Overpass",
+    "peak_test_amplitude": "PGA = 0.782g, 0.336g, 0.025g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "AAMA/ WDMA/ CSA 101/ I.S.2/ A440-22",
+    "design_objective": "standard practice",
+    "comp_description": "East room Line 1. Vinyl-framed windows. L1-4: triple pane; L5-6, L8, L10: double pane. L1, L3-4, L6, L10: operable; L2, L5, L8: fixed. 16 mm clearance between glazing and window frame to accommodate drift.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.006900",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only X-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3580a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X7.0",
+    "specimen_inspection_sequence": "1.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "B.20.2.1.A",
+    "comp_detail": "Dry-glazed stick built",
+    "material": "Laminated",
+    "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1992 Cape Mendocino, CA. Station: Rio Dell Overpass",
+    "peak_test_amplitude": "PGA = 0.782g, 0.336g, 0.025g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "AAMA/ WDMA/ CSA 101/ I.S.2/ A440-22",
+    "design_objective": "standard practice",
+    "comp_description": "East room Line 1. Vinyl-framed windows. L1-4: triple pane; L5-6, L8, L10: double pane. L1, L3-4, L6, L10: operable; L2, L5, L8: fixed. 16 mm clearance between glazing and window frame to accommodate drift.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.009100",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only X-direction"
+  }
+},
+{
+  "model": "ned_app.experiment",
+  "pk": "exp3581a",
+  "fields": {
+    "reference": "Singh-2026",
+    "specimen": "X8.0",
+    "specimen_inspection_sequence": "1.1",
+    "reviewer": "Amanpreet Singh",
+    "component": "B.20.2.1.A",
+    "comp_detail": "Dry-glazed stick built",
+    "material": "Laminated-annealed",
+    "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
+    "test_type": "Dynamic, 3D",
+    "loading_protocol": "1989 Loma Prieta, CA. Station: Gilroy Array #3",
+    "peak_test_amplitude": "PGA = 0.723g, 0.619g, 0.016g (X, Y, Z)",
+    "location": "NHERI, U of California San Diego",
+    "governing_design_standard": "AAMA/ WDMA/ CSA 101/ I.S.2/ A440-22",
+    "design_objective": "standard practice",
+    "comp_description": "East room Line 1. Vinyl-framed windows. L1-4: triple pane; L5-6, L8, L10: double pane. L1, L3-4, L6, L10: operable; L2, L5, L8: fixed. 16 mm clearance between glazing and window frame to accommodate drift.",
+    "ds_description": "No damage",
+    "prior_damage": "",
+    "prior_damage_repaired": "",
+    "edp_metric": "Story Drift Ratio",
+    "edp_unit": "Ratio",
+    "edp_value": "0.006900",
+    "alt_edp_metric": "",
+    "alt_edp_unit": "",
+    "alt_edp_value": null,
+    "ds_rank": null,
+    "ds_class": "No damage",
+    "notes": "Only X-direction"
   }
 },
 {
@@ -122109,6 +122532,18 @@
 },
 {
   "model": "ned_app.component",
+  "pk": "B2021.A",
+  "fields": {
+    "name": "Dry-glazed stick built windows",
+    "component_id": "B.20.2.1.A",
+    "major_group": "B - Shell",
+    "group": "20 - Exterior Enclosure",
+    "element": "2 - Exterior Windows",
+    "subelement": "1 - Windows"
+  }
+},
+{
+  "model": "ned_app.component",
   "pk": "B2022.A",
   "fields": {
     "name": "Dry-glazed stick built curtain walls",
@@ -122337,10 +122772,34 @@
 },
 {
   "model": "ned_app.component",
+  "pk": "C3011.B",
+  "fields": {
+    "name": "Wall bottom track firestop seals",
+    "component_id": "C.30.1.1.B",
+    "major_group": "C - Interiors",
+    "group": "30 - Interior Finishes",
+    "element": "1 - Wall Finishes",
+    "subelement": "1 - Wall Finishes to Inside Exterior Wall"
+  }
+},
+{
+  "model": "ned_app.component",
   "pk": "C3012.A",
   "fields": {
     "name": "Interior Wall Finish",
     "component_id": "C.30.1.2.A",
+    "major_group": "C - Interiors",
+    "group": "30 - Interior Finishes",
+    "element": "1 - Wall Finishes",
+    "subelement": "2 - Wall Finishes to Interior Walls"
+  }
+},
+{
+  "model": "ned_app.component",
+  "pk": "C3012.B",
+  "fields": {
+    "name": "Wall bottom track firestop seals",
+    "component_id": "C.30.1.2.B",
     "major_group": "C - Interiors",
     "group": "30 - Interior Finishes",
     "element": "1 - Wall Finishes",
@@ -122713,6 +123172,18 @@
   "fields": {
     "name": "Fire sprinkler structural braces",
     "component_id": "D.40.1.1.H",
+    "major_group": "D - Services",
+    "group": "40 - Fire Protection",
+    "element": "1 - Sprinklers",
+    "subelement": "1 - Sprinkler Water Supply"
+  }
+},
+{
+  "model": "ned_app.component",
+  "pk": "D4011.I",
+  "fields": {
+    "name": "Fire Sprinkler Water Piping - Risers",
+    "component_id": "D.40.1.1.I",
     "major_group": "D - Services",
     "group": "40 - Fire Protection",
     "element": "1 - Sprinklers",

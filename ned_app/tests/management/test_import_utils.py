@@ -28,11 +28,6 @@ class CoerceValueTests(SimpleTestCase):
         self.assertIsNone(import_utils.coerce_value('ds_rank', ''))
         self.assertIsNone(import_utils.coerce_value('edp_value', ''))
 
-    def test_boolean_true_false_case_insensitive(self):
-        self.assertIs(import_utils.coerce_value('pdf_saved', 'True'), True)
-        self.assertIs(import_utils.coerce_value('pdf_saved', 'false'), False)
-        self.assertIs(import_utils.coerce_value('pdf_saved', 'FALSE'), False)
-
     def test_unparseable_numeric_passes_through(self):
         # Producing valid JSON is the goal; bad types surface at ingest.
         self.assertEqual(import_utils.coerce_value('ds_rank', 'abc'), 'abc')
@@ -211,20 +206,17 @@ class BuildCslDataTests(SimpleTestCase):
 class RowToRecordTests(SimpleTestCase):
     """Tests for import_model._row_to_record conversion."""
 
-    def test_reference_flattens_csl_and_coerces_boolean(self):
+    def test_reference_flattens_csl(self):
         row = {
             'reference_id': 'R',
             'study_type': 'Experiment',
             'comp_type': 'Walls',
-            'pdf_saved': 'True',
             'csl_type': 'article-journal',
             'csl_title': 'T',
             'csl_year': '2020',
             'csl_authors': 'Smith, John',
         }
         record = import_model._row_to_record(row, 'Reference')
-        # pdf_saved coerced to a real boolean, not the string "True"
-        self.assertIs(record['pdf_saved'], True)
         # csl_* columns are folded into nested csl_data, not left flat
         self.assertNotIn('csl_title', record)
         self.assertEqual(record['csl_data']['title'], 'T')
