@@ -122136,6 +122136,18 @@
 },
 {
   "model": "ned_app.component",
+  "pk": "B2021.A",
+  "fields": {
+    "name": "Dry-glazed stick built windows",
+    "component_id": "B.20.2.1.A",
+    "major_group": "B - Shell",
+    "group": "20 - Exterior Enclosure",
+    "element": "2 - Exterior Windows",
+    "subelement": "1 - Windows"
+  }
+},
+{
+  "model": "ned_app.component",
   "pk": "B2022.A",
   "fields": {
     "name": "Dry-glazed stick built curtain walls",
@@ -122364,10 +122376,34 @@
 },
 {
   "model": "ned_app.component",
+  "pk": "C3011.B",
+  "fields": {
+    "name": "Wall bottom track firestop seals",
+    "component_id": "C.30.1.1.B",
+    "major_group": "C - Interiors",
+    "group": "30 - Interior Finishes",
+    "element": "1 - Wall Finishes",
+    "subelement": "1 - Wall Finishes to Inside Exterior Wall"
+  }
+},
+{
+  "model": "ned_app.component",
   "pk": "C3012.A",
   "fields": {
     "name": "Interior Wall Finish",
     "component_id": "C.30.1.2.A",
+    "major_group": "C - Interiors",
+    "group": "30 - Interior Finishes",
+    "element": "1 - Wall Finishes",
+    "subelement": "2 - Wall Finishes to Interior Walls"
+  }
+},
+{
+  "model": "ned_app.component",
+  "pk": "C3012.B",
+  "fields": {
+    "name": "Wall bottom track firestop seals",
+    "component_id": "C.30.1.2.B",
     "major_group": "C - Interiors",
     "group": "30 - Interior Finishes",
     "element": "1 - Wall Finishes",
@@ -122740,6 +122776,18 @@
   "fields": {
     "name": "Fire sprinkler structural braces",
     "component_id": "D.40.1.1.H",
+    "major_group": "D - Services",
+    "group": "40 - Fire Protection",
+    "element": "1 - Sprinklers",
+    "subelement": "1 - Sprinkler Water Supply"
+  }
+},
+{
+  "model": "ned_app.component",
+  "pk": "D4011.I",
+  "fields": {
+    "name": "Fire Sprinkler Water Piping - Risers",
+    "component_id": "D.40.1.1.I",
     "major_group": "D - Services",
     "group": "40 - Fire Protection",
     "element": "1 - Sprinklers",
