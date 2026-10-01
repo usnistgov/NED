@@ -17,7 +17,7 @@ dependencies = [
 # the CI gate reports, so be careful with bumping these.
 [dependency-groups]
 dev = [
-    "ruff==0.16.7",
+    "ruff==0.16.9",
     "codespell==2.4.3",
     "pytest==9.1.1",
 ]
