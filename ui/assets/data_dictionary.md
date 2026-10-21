@@ -33,7 +33,6 @@ experiment and fragility model must point at a reference.
 | `year` | Integer | Auto | Publication year, taken from `csl_data['issued']['date-parts']`. Not editable. |
 | `study_type` | Choice | Required (defaults to `Other`) | Classification of the type of study conducted. One of the [Study type](#study-type) values. |
 | `comp_type` | String (max 255) | Optional | The type of component(s) investigated in the study (e.g. "suspended ceilings"). |
-| `pdf_saved` | Boolean (`true`/`false`) | Required (defaults to `false`) | Whether a PDF of the reference is saved in the archive repository. |
 | `csl_data` | JSON object (CSL-JSON) | Required | Full bibliographic record in [CSL-JSON](https://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html) format. Must contain a non-empty `title`, a non-empty `author` list, and an `issued` field with `date-parts` containing at least a valid positive-integer year. Do **not** include an `id` key — it is stripped at ingest. **Year policy:** when the online-first year and the print-volume year differ, `issued` holds the online-first (first-available) year. |
 
 ## Component

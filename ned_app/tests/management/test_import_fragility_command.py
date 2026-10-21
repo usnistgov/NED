@@ -68,7 +68,6 @@ class ImportFragilityCommandTests(TransactionTestCase):
             reference_id='Smith-2020',
             study_type='Experiment',
             comp_type='Sprinkler systems',
-            pdf_saved=True,
             csl_data={
                 'type': 'article-journal',
                 'title': 'Seismic performance of CPVC sprinkler systems',
