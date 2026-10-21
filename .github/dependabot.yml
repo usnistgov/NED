@@ -2,13 +2,23 @@
 # together. The pinned requirements.txt for the front-end is generated from the
 # lock at publish time and never committed here, so there is nothing else to
 # regenerate on a Dependabot branch.
+#
+# Version updates are batched into one grouped PR per ecosystem on a slow
+# cadence to keep maintenance light. Security updates are separate and are
+# still raised as soon as a fix is available, regardless of this schedule.
 version: 2
 updates:
   - package-ecosystem: "uv"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "quarterly"
+    groups:
+      python-deps:
+        patterns: ["*"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "semiannually"
+    groups:
+      actions:
+        patterns: ["*"]
