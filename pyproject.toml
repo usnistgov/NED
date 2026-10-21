@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "Django>=5.2.0,<6",
-    "djangorestframework>=3.14.0",
+    "djangorestframework>=3.18.3",
     "django-extensions>=4.1",
     "jsonschema>=4.0.0",
 ]
