@@ -15,6 +15,11 @@ updates:
     groups:
       python-deps:
         patterns: ["*"]
+    # Streamlit 1.66 breaks ui/tests/test_navigation.py (query params and the
+    # legacy deep-link redirect). Hold at 1.64 until that is fixed, then remove.
+    ignore:
+      - dependency-name: "streamlit"
+        versions: [">=1.65"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
