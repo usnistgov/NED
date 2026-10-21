@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "Django>=5.2.0,<6",
-    "djangorestframework>=3.18.3",
+    "django>=5.2.18,<6",
     "django-extensions>=4.1",
     "jsonschema>=4.0.0",
 ]
@@ -17,12 +17,12 @@ dependencies = [
 # the CI gate reports, so be careful with bumping these.
 [dependency-groups]
 dev = [
-    "ruff==0.16.9",
+    "ruff==0.17.1",
     "codespell==2.4.3",
     "pytest==9.1.1",
 ]
 ui = [
-    "streamlit==1.64.0",
+    "streamlit==1.66.0",
     "pandas",
     "numpy",
     "plotly",
