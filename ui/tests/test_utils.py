@@ -1,6 +1,9 @@
+import logging
 import math
 
 import pandas as pd
+import pytest
+from streamlit.testing.v1 import AppTest
 
 from utils import build_citation, csv_safe, doi_link, doi_url, esc, fmt, strip_prefix
 
@@ -183,3 +186,87 @@ class TestCsvSafe:
         out = csv_safe(df)
         assert out['col'].iloc[0] == ''
         assert pd.isna(out['col'].iloc[1])
+
+    def test_prefixes_mixed_dtype_column(self):
+        df = pd.DataFrame({'col': ['=cmd', 3, 'safe']})
+        out = csv_safe(df)
+        assert out['col'].tolist() == ["'=cmd", 3, 'safe']
+
+
+# Script exercised by TestJsInjection below. ui/ is already on sys.path (see
+# conftest.py), and AppTest execs this in the current process, so the flat
+# `from utils import ...` resolves the same way it does inside the real app.
+_INJECT_APP = """
+import streamlit as st
+
+from utils import enable_row_click_navigation, restore_scroll_on_page_change
+
+enable_row_click_navigation()
+restore_scroll_on_page_change(st.session_state.get('page', 'components'))
+"""
+
+
+class TestJsInjection:
+    """Both script-injecting helpers render their <script> blob through
+    `st.iframe`. They previously used `st.components.v1.html`, which Streamlit
+    deprecated in favour of `st.iframe` with a stated removal date of
+    2026-06-01 and which logs a warning on every call -- so on every rerun,
+    twice. The swap is not a drop-in: `st.iframe` rejects the height=0 those
+    calls passed, which would raise at render time rather than at import, so
+    these tests drive a real script run.
+    """
+
+    @pytest.fixture
+    def deprecation_warnings(self):
+        """Every deprecation message Streamlit logs during the test.
+
+        Streamlit's loggers set ``propagate = False``, so ``caplog`` never
+        sees these; attach to the emitting logger itself instead.
+        """
+        records = []
+        logger = logging.getLogger('streamlit.deprecation_util')
+
+        class _Capture(logging.Handler):
+            def emit(self, record):
+                records.append(record.getMessage())
+
+        handler = _Capture()
+        logger.addHandler(handler)
+        try:
+            yield records
+        finally:
+            logger.removeHandler(handler)
+
+    def test_injection_renders_without_error(self, deprecation_warnings):
+        at = AppTest.from_string(_INJECT_APP)
+        at.run(timeout=30)
+
+        assert not at.exception
+        assert deprecation_warnings == []
+
+    def test_scroll_restore_markup_changes_on_page_change(self):
+        """The nonce in `restore_scroll_on_page_change` exists so Streamlit
+        cannot reuse the previous run's iframe (a reused iframe never
+        re-executes its script). That only works if the markup differs
+        between a run that navigated and the previous one.
+        """
+        at = AppTest.from_string(_INJECT_APP)
+        at.run(timeout=30)
+        first = at.session_state['_restore_scroll_nonce']
+
+        at.session_state['page'] = 'home'
+        at.run(timeout=30)
+
+        assert at.session_state['_restore_scroll_nonce'] == first + 1
+
+    def test_same_page_rerun_does_not_reinject(self):
+        """A rerun that stays on the same page (typing in a filter, say)
+        must leave the nonce alone, so Streamlit reuses the iframe and the
+        scroll script does not fight the user's own scrolling."""
+        at = AppTest.from_string(_INJECT_APP)
+        at.run(timeout=30)
+        first = at.session_state['_restore_scroll_nonce']
+
+        at.run(timeout=30)
+
+        assert at.session_state['_restore_scroll_nonce'] == first

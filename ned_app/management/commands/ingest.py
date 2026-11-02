@@ -1,26 +1,28 @@
-import os
 import json
-from django.core.management.base import BaseCommand, CommandError
+import os
+
 from django.core.exceptions import ValidationError
+from django.core.management.base import BaseCommand, CommandError
+
 from ned_app.models import (
-    Reference,
     Component,
-    FragilityModel,
+    ComponentFragilityModelBridge,
     Experiment,
     ExperimentFragilityModelBridge,
-    ComponentFragilityModelBridge,
     FragilityCurve,
+    FragilityModel,
+    Reference,
     derive_reference_id,
 )
 from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
 from ned_app.serialization.serializer import (
-    ReferenceSerializer,
-    ComponentSerializer,
-    FragilityModelSerializer,
-    ExperimentSerializer,
-    ExperimentFragilityModelBridgeSerializer,
     ComponentFragilityModelBridgeSerializer,
+    ComponentSerializer,
+    ExperimentFragilityModelBridgeSerializer,
+    ExperimentSerializer,
     FragilityCurveSerializer,
+    FragilityModelSerializer,
+    ReferenceSerializer,
 )
 
 
@@ -258,7 +260,9 @@ class Command(BaseCommand):
                 else:
                     created_count += 1
 
-            except (ValidationError, Exception) as ex:
+            # Broad catch is intentional: one malformed record must not abort
+            # the rest of the batch import.
+            except (ValidationError, Exception) as ex:  # noqa: BLE001
                 failed_count += 1
                 if lookup_params:
                     record_label = ', '.join(

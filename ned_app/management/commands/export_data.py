@@ -1,15 +1,17 @@
-import os
 import json
+import os
 from decimal import Decimal
+
 from django.core.management.base import BaseCommand
+
 from ned_app.models import (
-    Reference,
     Component,
-    Experiment,
-    FragilityModel,
-    ExperimentFragilityModelBridge,
     ComponentFragilityModelBridge,
+    Experiment,
+    ExperimentFragilityModelBridge,
     FragilityCurve,
+    FragilityModel,
+    Reference,
 )
 
 
