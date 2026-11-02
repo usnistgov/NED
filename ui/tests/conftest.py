@@ -50,7 +50,7 @@ CREATE TABLE ned_app_experiment (
     component_id VARCHAR(20) NOT NULL REFERENCES ned_app_component(component_id),
     specimen VARCHAR(255),
     specimen_inspection_sequence VARCHAR(255),
-    reviewer VARCHAR(50),
+    contributor VARCHAR(50),
     comp_detail VARCHAR(100),
     material VARCHAR(100),
     size_class VARCHAR(100),
@@ -85,7 +85,7 @@ CREATE TABLE ned_app_fragilitymodel (
     material VARCHAR(100),
     size_class VARCHAR(100),
     comp_description TEXT NOT NULL,
-    reviewer VARCHAR(255),
+    contributor VARCHAR(255),
     source VARCHAR(255),
     edp_metric VARCHAR(255),
     edp_unit VARCHAR(255)
