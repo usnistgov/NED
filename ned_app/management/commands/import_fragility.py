@@ -27,7 +27,7 @@ _MODEL_FIELDS = [
     'p58_fragility',
     'material',
     'size_class',
-    'reviewer',
+    'contributor',
     'source',
 ]
 

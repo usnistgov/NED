@@ -5,7 +5,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('ned_app', '0035_alter_experiment_edp_metric_and_more'),
+        ('ned_app', '0036_rename_reviewer_to_contributor'),
     ]
 
     operations = [
