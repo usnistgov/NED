@@ -1,5 +1,7 @@
 venv/
+.venv/
 __pycache__/
 db.sqlite3
 .github/commit-instructions.md
 docs/
+/ui/requirements.txt

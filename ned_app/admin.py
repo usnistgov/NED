@@ -3,13 +3,13 @@ from django.template.loader import get_template
 from django.utils.translation import gettext as _
 
 from ned_app.models import (
-    Reference,
     Component,
+    ComponentFragilityModelBridge,
     Experiment,
+    ExperimentFragilityModelBridge,
     FragilityCurve,
     FragilityModel,
-    ExperimentFragilityModelBridge,
-    ComponentFragilityModelBridge,
+    Reference,
 )
 
 

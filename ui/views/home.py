@@ -139,9 +139,12 @@ def render() -> None:
     st.markdown('### Learn More')
     st.markdown(
         """
+        NED was developed by the **[Earthquake Engineer Group](https://www.nist.gov/el/mssd/earthquake-engineering-group)** at the National Institute of Standards and Technology to 
+        support data transparency, accessibility, and reuse in building seismic performance research and design. Major contributions 
+        in the development of NED were made by Dustin Cook, Siamak Sattar, Jitendra Bhatta, Amanpreet Singh, Mohammed Eladly,  Ben Schafer, Adam Zsarnoczay, and Peter Morris.
+        
+        
         The full backend codebase — including the database schema, ingestion pipeline,
-        and contribution guide — is publicly available on GitHub:
-
-        **[usnistgov/NED on GitHub](https://github.com/usnistgov/NED)**
+        and contribution guide — is publicly available on GitHub: **[usnistgov/NED on GitHub](https://github.com/usnistgov/NED)**
         """
     )

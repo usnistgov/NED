@@ -3,8 +3,10 @@ Unit tests for the NED application validators.
 """
 
 from decimal import Decimal
-from django.test import TestCase
+
 from django.core.exceptions import ValidationError
+from django.test import TestCase
+
 from ned_app.validators import (
     validate_nistir_component_id,
     validate_positive,
@@ -266,9 +268,8 @@ class ReferenceLabelValidatorTest(TestCase):
         # The year is appended automatically, so a label that is only digits
         # would produce an ambiguous '<year>-<year>' id.
         for label in ('2019', '2020', '18'):
-            with self.subTest(label=label):
-                with self.assertRaises(ValidationError):
-                    validate_reference_label(label)
+            with self.subTest(label=label), self.assertRaises(ValidationError):
+                validate_reference_label(label)
 
     def test_label_with_embedded_year_passes(self):
         # Only a *bare* year is rejected; a token mixing letters and digits

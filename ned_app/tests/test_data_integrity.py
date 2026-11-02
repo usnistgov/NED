@@ -1,23 +1,26 @@
 import json
 import os
 import tempfile
+from typing import ClassVar
 from unittest.mock import patch
+
 from django.core.management import call_command
 from django.test import SimpleTestCase, TransactionTestCase, tag
+
 from ned_app.models import (
-    Reference,
     Component,
-    FragilityModel,
     Experiment,
     ExperimentFragilityModelBridge,
     FragilityCurve,
+    FragilityModel,
+    Reference,
     derive_reference_id,
 )
 
 
 @tag('integrity')
 class DataIntegrityTests(TransactionTestCase):
-    fixtures = ['initial_data.json']
+    fixtures: ClassVar[list[str]] = ['initial_data.json']
 
     def setUp(self):
         self.temp_dir_path = tempfile.mkdtemp()

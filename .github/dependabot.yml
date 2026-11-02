@@ -1,0 +1,29 @@
+# Dependabot follows uv.lock, so a bump updates pyproject.toml and the lock
+# together. The pinned requirements.txt for the front-end is generated from the
+# lock at publish time and never committed here, so there is nothing else to
+# regenerate on a Dependabot branch.
+#
+# Version updates are batched into one grouped PR per ecosystem on a slow
+# cadence to keep maintenance light. Security updates are separate and are
+# still raised as soon as a fix is available, regardless of this schedule.
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "quarterly"
+    groups:
+      python-deps:
+        patterns: ["*"]
+    # Streamlit 1.66 breaks ui/tests/test_navigation.py (query params and the
+    # legacy deep-link redirect). Hold at 1.64 until that is fixed, then remove.
+    ignore:
+      - dependency-name: "streamlit"
+        versions: [">=1.65"]
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "semiannually"
+    groups:
+      actions:
+        patterns: ["*"]
