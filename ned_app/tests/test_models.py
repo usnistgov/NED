@@ -1,8 +1,9 @@
-from django.test import TestCase
 from django.core.exceptions import ValidationError
+from django.test import TestCase
+
 from ned_app.models import (
-    Reference,
     Component,
+    Reference,
     derive_reference_id,
     normalize_author_token,
 )

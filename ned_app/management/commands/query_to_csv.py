@@ -1,10 +1,11 @@
 import csv
 import json
 import os
-from django.core.management.base import BaseCommand, CommandError
-from django.core.exceptions import FieldDoesNotExist, FieldError
+
 from django.apps import apps
-from django.db.models import JSONField, ManyToOneRel, ManyToManyField
+from django.core.exceptions import FieldDoesNotExist, FieldError
+from django.core.management.base import BaseCommand, CommandError
+from django.db.models import JSONField, ManyToManyField, ManyToOneRel
 
 
 class Command(BaseCommand):
@@ -44,7 +45,7 @@ class Command(BaseCommand):
             '--filter',
             type=str,
             default=None,
-            help='Filter query as key=value pairs, comma-separated (e.g., reviewer=John,material=Steel)',
+            help='Filter query as key=value pairs, comma-separated (e.g., contributor=John,material=Steel)',
         )
 
     def get_available_models(self):

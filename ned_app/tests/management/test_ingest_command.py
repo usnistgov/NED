@@ -2,26 +2,28 @@
 Unit tests for the ingest management command.
 """
 
+import json
 import os
 import tempfile
-import json
 from io import StringIO
 from unittest.mock import patch
-from django.test import SimpleTestCase, TransactionTestCase
+
+from django.conf import settings
+from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.management import call_command
 from django.core.management.base import CommandError
-from django.core.exceptions import ValidationError as DjangoValidationError
-from django.conf import settings
+from django.test import SimpleTestCase, TransactionTestCase
 from rest_framework.exceptions import ValidationError as DRFValidationError
+
 from ned_app.management.commands.ingest import _format_errors
 from ned_app.models import (
     Component,
-    Reference,
-    Experiment,
-    FragilityModel,
-    ExperimentFragilityModelBridge,
     ComponentFragilityModelBridge,
+    Experiment,
+    ExperimentFragilityModelBridge,
     FragilityCurve,
+    FragilityModel,
+    Reference,
 )
 
 
@@ -78,7 +80,7 @@ class IngestCommandTests(TransactionTestCase):
                     'comp_detail': 'Standard attachment',
                     'material': 'Steel',
                     'comp_description': 'Cold-formed steel exterior wall system',
-                    'reviewer': 'Test Reviewer',
+                    'contributor': 'Test Contributor',
                     'source': 'Laboratory Testing',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
@@ -90,7 +92,7 @@ class IngestCommandTests(TransactionTestCase):
                     'comp_detail': 'Anchored',
                     'material': 'Steel tank',
                     'comp_description': 'Residential water heater',
-                    'reviewer': 'Test Reviewer',
+                    'contributor': 'Test Contributor',
                     'source': 'Field Observation',
                     'edp_metric': 'Peak Floor Acceleration, horizontal',
                     'edp_unit': 'g',
@@ -413,12 +415,14 @@ class IngestCommandTests(TransactionTestCase):
             stdout = StringIO()
             stderr = StringIO()
 
-            with patch(
-                'ned_app.management.commands.ingest.build_json_data_file_path',
-                side_effect=mock_build_path,
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError),
             ):
-                with self.assertRaises(CommandError):
-                    call_command('ingest', stdout=stdout, stderr=stderr)
+                call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -464,12 +468,14 @@ class IngestCommandTests(TransactionTestCase):
             stdout = StringIO()
             stderr = StringIO()
 
-            with patch(
-                'ned_app.management.commands.ingest.build_json_data_file_path',
-                side_effect=mock_build_path,
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError),
             ):
-                with self.assertRaises(CommandError):
-                    call_command('ingest', stdout=stdout, stderr=stderr)
+                call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -524,12 +530,14 @@ class IngestCommandTests(TransactionTestCase):
             stdout = StringIO()
             stderr = StringIO()
 
-            with patch(
-                'ned_app.management.commands.ingest.build_json_data_file_path',
-                side_effect=mock_build_path,
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError),
             ):
-                with self.assertRaises(CommandError):
-                    call_command('ingest', stdout=stdout, stderr=stderr)
+                call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -566,7 +574,7 @@ class IngestCommandTests(TransactionTestCase):
                     'reference': 'Test-2025',
                     'model_id': 'fm-idem',
                     'comp_description': 'Original FM Description',
-                    'reviewer': 'Test Reviewer',
+                    'contributor': 'Test Contributor',
                     'source': 'Laboratory Testing',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
@@ -829,12 +837,14 @@ class IngestCommandTests(TransactionTestCase):
             stdout = StringIO()
             stderr = StringIO()
 
-            with patch(
-                'ned_app.management.commands.ingest.build_json_data_file_path',
-                side_effect=mock_build_path,
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError),
             ):
-                with self.assertRaises(CommandError):
-                    call_command('ingest', stdout=stdout, stderr=stderr)
+                call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -929,12 +939,14 @@ class IngestCommandTests(TransactionTestCase):
             stdout = StringIO()
             stderr = StringIO()
 
-            with patch(
-                'ned_app.management.commands.ingest.build_json_data_file_path',
-                side_effect=mock_build_path,
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError),
             ):
-                with self.assertRaises(CommandError):
-                    call_command('ingest', stdout=stdout, stderr=stderr)
+                call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
 
@@ -1004,12 +1016,14 @@ class IngestCommandTests(TransactionTestCase):
 
             stdout = StringIO()
             stderr = StringIO()
-            with patch(
-                'ned_app.management.commands.ingest.build_json_data_file_path',
-                side_effect=mock_build_path,
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError),
             ):
-                with self.assertRaises(CommandError):
-                    call_command('ingest', stdout=stdout, stderr=stderr)
+                call_command('ingest', stdout=stdout, stderr=stderr)
 
             stderr_value = stderr.getvalue()
             self.assertIn(
@@ -1070,12 +1084,14 @@ class IngestCommandTests(TransactionTestCase):
                 return os.path.join(temp_dir, filename)
 
             stderr = StringIO()
-            with patch(
-                'ned_app.management.commands.ingest.build_json_data_file_path',
-                side_effect=mock_build_path,
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError),
             ):
-                with self.assertRaises(CommandError):
-                    call_command('ingest', stdout=StringIO(), stderr=stderr)
+                call_command('ingest', stdout=StringIO(), stderr=stderr)
 
             stderr_value = stderr.getvalue()
             self.assertIn('Error processing Experiment [id=exp-bad]:', stderr_value)

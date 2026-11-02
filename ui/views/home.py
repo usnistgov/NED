@@ -109,7 +109,7 @@ def render() -> None:
         | **Component** | The central reference table. Each row is a unique nonstructural component subtype, classified by the four-level NISTIR hierarchy: Major Group → Group → Element → Subelement. |
         | **Reference** | Research publications from which data are drawn — experimental studies, reconnaissance reports, analytical studies, and literature reviews. Stores full citation metadata in CSL-JSON format. |
         | **Experiment** | Individual experimental test observations. Each record captures the specimen, test type, loading protocol, EDP (metric, unit, and value), and damage state classification. Subcategory attributes (`comp_detail`, `material`, `size_class`) allow a single component type to be subdivided without a new component record. Linked to one Component and one Reference. |
-        | **FragilityModel** | A fragility model for a specific component configuration. Stores the EDP metric and unit that the curves are expressed in, along with subcategory attributes, data source provenance (`reviewer`, `source`), and an optional FEMA P-58 cross-reference. Linked to one Reference. |
+        | **FragilityModel** | A fragility model for a specific component configuration. Stores the EDP metric and unit that the curves are expressed in, along with subcategory attributes, data source provenance (`contributor`, `source`), and an optional FEMA P-58 cross-reference. Linked to one Reference. |
         | **FragilityCurve** | Individual lognormal fragility curves within a FragilityModel. Each curve stores damage state rank, description, basis, number of observations, median, beta (lognormal dispersion), and mutually exclusive probability. |
         """
     )
@@ -139,9 +139,12 @@ def render() -> None:
     st.markdown('### Learn More')
     st.markdown(
         """
+        NED was developed by the **[Earthquake Engineer Group](https://www.nist.gov/el/mssd/earthquake-engineering-group)** at the National Institute of Standards and Technology to 
+        support data transparency, accessibility, and reuse in building seismic performance research and design. Major contributions 
+        in the development of NED were made by Dustin Cook, Siamak Sattar, Jitendra Bhatta, Amanpreet Singh, Mohammed Eladly,  Ben Schafer, Adam Zsarnoczay, and Peter Morris.
+        
+        
         The full backend codebase — including the database schema, ingestion pipeline,
-        and contribution guide — is publicly available on GitHub:
-
-        **[usnistgov/NED on GitHub](https://github.com/usnistgov/NED)**
+        and contribution guide — is publicly available on GitHub: **[usnistgov/NED on GitHub](https://github.com/usnistgov/NED)**
         """
     )

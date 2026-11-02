@@ -2,11 +2,14 @@ import json
 import os
 import re
 import unicodedata
+from typing import ClassVar
+
 from django.conf import settings
-from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
-from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+from django.utils.translation import gettext as _
+
 from ned_app.validators import (
     validate_nistir_component_id,
     validate_positive,
@@ -339,7 +342,7 @@ class Experiment(models.Model):
         reference (id): ID of the published reference documenting this experimental observation.
         specimen (str): ID or name of the specimen as recorded in the reference.
         specimen_inspection_sequence (str): The ith test of this specimen.
-        reviewer (str): Individual or institution responsible for documenting this particular fragility in the database.
+        contributor (str): Individual or institution responsible for documenting this particular fragility in the database.
         component (id): Identifier of the component type.
         comp_detail (str): Classification or short description of the component attachment detailing.
         material (str): Classification or short description of the component material (if applicable).
@@ -384,8 +387,8 @@ class Experiment(models.Model):
         blank=True,
         help_text='The ith test of this specimen.',
     )
-    reviewer = models.CharField(
-        _('reviewer'),
+    contributor = models.CharField(
+        _('contributor'),
         max_length=50,
         blank=True,
         help_text='Individual or institution responsible for documenting this particular fragility in the database.',
@@ -553,7 +556,7 @@ class FragilityModel(models.Model):
         material (str): Classification or short description of the component material (if applicable).
         size_class (str): Classification or short description of the general size of this particular component compared to others of the same type (if applicable).
         comp_description (str): General description of the type of component.
-        reviewer (str): Person or party responsible for uploading this fragility model to the database.
+        contributor (str): Person or party responsible for uploading this fragility model to the database.
         source (str): Source of the fragility data.
         edp_metric (str): Measure of the engineering demand parameter (EDP), e.g., peak story drift ratio.
         edp_unit (str): Unit of the engineering demand parameter.
@@ -605,8 +608,8 @@ class FragilityModel(models.Model):
         blank=False,
         help_text='General description of the type of component.',
     )
-    reviewer = models.CharField(
-        _('reviewer'),
+    contributor = models.CharField(
+        _('contributor'),
         max_length=255,
         blank=True,
         help_text='Person or party responsible for uploading this fragility model to the database.',
@@ -635,7 +638,7 @@ class FragilityModel(models.Model):
     class Meta:
         verbose_name = 'Fragility Model'
         verbose_name_plural = 'Fragility Models'
-        constraints = [
+        constraints: ClassVar[list] = [
             models.UniqueConstraint(
                 fields=['reference', 'model_id'],
                 name='unique_ref_model',
@@ -650,12 +653,12 @@ class FragilityModel(models.Model):
             ),
         ]
 
+    def __str__(self):
+        return self.fragility_model_id
+
     def save(self, *args, **kwargs):
         self.fragility_model_id = f'{self.reference_id}|{self.model_id}'
         super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.fragility_model_id
 
 
 class ExperimentFragilityModelBridge(models.Model):
@@ -868,6 +871,13 @@ class Component(models.Model):
         help_text='NISTIR subelement ID and description.',
     )
 
+    class Meta:
+        verbose_name = 'Component'
+        verbose_name_plural = 'Components'
+
+    def __str__(self):
+        return self.id
+
     def save(self, *args, **kwargs):
         """
         Override save to auto-populate NISTIR hierarchy fields and generate primary key.
@@ -928,10 +938,3 @@ class Component(models.Model):
                     self.subelement = f'{parts[3]} - {labels[subelement_key]}'
 
         super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = 'Component'
-        verbose_name_plural = 'Components'
-
-    def __str__(self):
-        return self.id

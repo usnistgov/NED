@@ -1,15 +1,17 @@
-import os
 import json
+import os
 from decimal import Decimal
+
 from django.core.management.base import BaseCommand
+
 from ned_app.models import (
-    Reference,
     Component,
-    Experiment,
-    FragilityModel,
-    ExperimentFragilityModelBridge,
     ComponentFragilityModelBridge,
+    Experiment,
+    ExperimentFragilityModelBridge,
     FragilityCurve,
+    FragilityModel,
+    Reference,
 )
 
 
@@ -156,7 +158,7 @@ class Command(BaseCommand):
                 'reference': exp.reference_id,
                 'specimen': exp.specimen,
                 'specimen_inspection_sequence': exp.specimen_inspection_sequence,
-                'reviewer': exp.reviewer,
+                'contributor': exp.contributor,
                 'component': exp.component.component_id,
                 'comp_detail': exp.comp_detail,
                 'material': exp.material,
@@ -207,7 +209,7 @@ class Command(BaseCommand):
                 'material': fm.material,
                 'size_class': fm.size_class,
                 'comp_description': fm.comp_description,
-                'reviewer': fm.reviewer,
+                'contributor': fm.contributor,
                 'source': fm.source,
                 'edp_metric': fm.edp_metric,
                 'edp_unit': fm.edp_unit,

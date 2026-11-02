@@ -5,8 +5,8 @@ description = "Nonstructural Element Database: Django backend and Streamlit fron
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "Django>=5.2.0,<6",
-    "djangorestframework>=3.14.0",
+    "django>=5.2.18,<6",
+    "djangorestframework>=3.18.3",
     "django-extensions>=4.1",
     "jsonschema>=4.0.0",
 ]
@@ -17,12 +17,12 @@ dependencies = [
 # the CI gate reports, so be careful with bumping these.
 [dependency-groups]
 dev = [
-    "ruff==0.12.9",
-    "codespell==2.4.1",
+    "ruff==0.17.1",
+    "codespell==2.4.3",
     "pytest==9.1.1",
 ]
 ui = [
-    "streamlit==1.58.0",
+    "streamlit==1.64.0",
     "pandas",
     "numpy",
     "plotly",
@@ -50,6 +50,7 @@ quiet-level = 2
 [tool.ruff]
 line-length = 85
 preview = true
+src = [".", "ui"]
 extend-exclude = [
     "resources/",
 ]
@@ -77,6 +78,9 @@ ignore = [
     "NPY002",
     "F401",
     "TRY003",
+]
+exclude = [
+    "*/migrations/*",
 ]
 
 [tool.ruff.format]

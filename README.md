@@ -71,7 +71,7 @@ To provide a structured detail of observed damage attributes, we propose a DS Cl
 
 The purpose of the DS Class attribute is to provide a first-pass structured grouping of observed damage to aid in later fragility development. However, we recognize that any grouping of damage states introduces subjectiveness into the process. Therefore, our goal is to implement as little subjectiveness as possible while still providing useful structured data for later users of the database. This attribute simply acts to separate consequential damage from inconsequential damage. Further separation of consequential damage into multiple damage states is an attribute of the damage state itself and not the initial observation of damage and is therefore up to the fragility developer to refine.
 
-All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the reviewer, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
+All observations of damage in the database are assigned into one of the three aforementioned DS classes; if for some reason a damage state class cannot be identified by the contributor, it should be flagged as “unknown”. When in doubt, we err towards assigning observed damage as consequential, to allow the later fragility developers the option to decide whether or not to include the observation in their fragility development.
 
 ## Setting up the environment
 NED manages its Python environment with [uv](https://docs.astral.sh/uv/). Install it once, with no admin rights required:
@@ -97,11 +97,9 @@ This creates a virtual environment in a `.venv` folder and installs every depend
 The command examples in this README are written as `python manage.py ...`; run them with an activated environment or a `uv run` prefix.
 
 ### Updating dependencies
-To add, remove, or change a dependency, edit `pyproject.toml`, then run `uv lock` followed by `uv sync`. If the change edited the `ui` group, regenerate `ui/requirements.txt` (see [Push the UI to the deployment repo](#push-the-ui-to-the-deployment-repo-maintainers)). Commit `pyproject.toml`, `uv.lock`, and `ui/requirements.txt` together.
+To add, remove, or change a dependency, edit `pyproject.toml`, then run `uv lock` followed by `uv sync`. Commit `pyproject.toml` and `uv.lock` together. The front-end's pip `requirements.txt` is derived from the lock at publish time and is not committed (see [Push the UI to the deployment repo](#push-the-ui-to-the-deployment-repo-maintainers)).
 
 To upgrade a single package, run `uv lock --upgrade-package NAME`; to upgrade everything, run `uv lock --upgrade`. `ruff`, `codespell` and `pytest` are pinned to exact versions in `pyproject.toml` to ensure robust CI results.
-
-Regenerate `ui/requirements.txt` with `python scripts/export_requirements.py`; `--check` reports whether the committed file still matches the lock, which is what CI runs. If CI disagrees with a file you regenerated locally, match the uv version it uses (`UV_VERSION` in `.github/workflows/ci.yml`), since the export format can change between uv releases.
 
 
 ## Exporting Data to CSV
@@ -151,7 +149,7 @@ python manage.py query_to_csv --model Experiment \
 python manage.py query_to_csv --model Experiment \
   --output_file exports/filtered_data.csv \
   --fields id,specimen,material,peak_demand \
-  --filter reviewer=John,ds_class=Consequential
+  --filter contributor=John,ds_class=Consequential
 ```
 
 #### Available Models
@@ -352,11 +350,7 @@ python scripts/export_frontend.py --frontend ../ned-frontend --rebuild-db
 ```
 Useful flags: `--rebuild-db` (run `migrate` + `ingest` first). Run `python scripts/export_frontend.py --help` for details.
 
-`ui/requirements.txt` travels with the exported code but is not hand-written: it is generated from `uv.lock`, and the export script regenerates it before copying. To refresh it by hand, run
-```bash
-python scripts/export_requirements.py
-```
-whenever the `ui` dependency group changes, and commit the result together with `pyproject.toml` and `uv.lock`. CI fails if `ui/requirements.txt` falls out of sync with the lock.
+The export script generates the deployment repo's `requirements.txt` from `uv.lock` (the `ui` group) and writes it straight into the deployment repo; it is never committed to NED. It refuses to run while `ui/`, `pyproject.toml`, or `uv.lock` has uncommitted changes, so everything published matches the NED commit it reports. To see the pins without publishing, run `python scripts/export_requirements.py` (prints to stdout; `-o FILE` writes a file).
 
 
 ## Contributors Guide
@@ -412,14 +406,14 @@ See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
 *   **Editing Existing Records:** Only modify field values; do **not** change the data structure or schema.    
 
 If modifying existing data:
-*   **Important:** Only modify field values; do not change the structure or schema.
+*   **Important:** Only modify field values; do not change the structure or schema. If you need to add, rename, or remove a *field*, stop here and follow [How to Modify the Database Structure](#how-to-modify-the-database-structure) instead — schema changes go through the Django model, never through these files.
 *   **Examples of valid modifications:**
     *   Correcting spelling or grammar in descriptions
     *   Updating numeric values or material classifications
     *   Adding or refining component details
     *   Correcting references or citations
 
-> **For large or systematic edits, use a script — don't hand-edit or use the Django admin.** When a change touches many records (e.g. renaming a value across the dataset or recomputing a derived field), write a small script that performs the edit and commit it together with the resulting JSON change, so a reviewer can see the logic behind the diff. Remove the script in a follow-up commit once the change is merged. Large opaque hand-edits — and the Django admin, whose changes leave no reviewable logic and bypass the ingest validation and id-derivation rules — make the diff challenging to audit.
+> **For large or systematic edits, use a script — don't hand-edit or use the Django admin.** When a change touches many records (e.g. renaming a stored *value* across the dataset, or recomputing a derived field), write a small script that performs the edit and commit it together with the resulting JSON change, so a reviewer can see the logic behind the diff. Remove the script in a follow-up commit once the change is merged. Large opaque hand-edits — and the Django admin, whose changes leave no reviewable logic and bypass the ingest validation and id-derivation rules — make the diff challenging to audit. This applies to values only: a **field name** is part of the schema, so renaming one is a migration, not a scripted edit of the JSON.
 
 #### 3. Validate Locally (Recommended)
 Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
@@ -468,13 +462,15 @@ A project maintainer will review your PR. They will check the "JSON Diff" to see
 
 **For Developers:** If you need to change the database schema (e.g., adding a new field like `data_source_type`, renaming a column, or creating a new table), you must follow a strict "Round-Trip" protocol. This ensures that the mapping between our JSON source of truth and the runtime database remains perfectly synced.
 
+> **Never hand-edit `resources/data/*.json` to carry out a schema change — change the model and regenerate them.** Those files are the canonical source of the *data*, but their on-disk form is **generated output**: `export_data` writes them with `json.dump(..., indent=4, sort_keys=True)`, so keys are stored in alphabetical order. Editing a key in place leaves the file parsing correctly and passing the round-trip tests while sitting in the wrong sort position. Nothing fails, and the drift stays invisible until the next contributor runs `export_data` and gets thousands of lines of unexplained reordering mixed into their own diff. Change `models.py`, migrate a populated database, and let `export_data` rewrite the files. `CanonicalJsonFormatTests` in `ned_app/tests/test_data_integrity.py` enforces this by comparing the committed bytes against a canonical re-dump.
+
 #### Step 1: Prepare Your Workspace
 Start with a fresh local database populated with the current canonical data. **Keep a copy of this database** — you will need it later to apply your new migrations.
 ```bash
-cp db.sqlite3 db_before_changes.sqlite3
 rm -f db.sqlite3
 python manage.py migrate
 python manage.py ingest
+cp db.sqlite3 db_before_changes.sqlite3
 ```
 
 #### Step 2: Implement Schema Change & Data Migration
@@ -499,6 +495,8 @@ Restore the database you saved in Step 1 and apply your new migrations to it. Th
 cp db_before_changes.sqlite3 db.sqlite3
 python manage.py migrate
 ```
+
+> **Do not rebuild the database with `ingest` at this point.** `ingest` would read `resources/data/*.json`, which still uses the *old* schema. The serializers silently ignore keys they no longer recognize, and any field that is `blank=True` is not required — so on a rename, `ingest` reports **0 failures** while dropping every value in the renamed field, and Step 5 then exports the emptied column over your source data. Migrating the populated database you saved in Step 1 is what carries the values across.
 
 #### Step 5: Export Updated Canonical Data
 Export the migrated database to generate the updated canonical JSON files and fixture:

@@ -13,8 +13,8 @@ from ned_app.management.import_utils import (
     write_json_files,
 )
 from ned_app.serialization.serializer import (
-    FragilityModelSerializer,
     FragilityCurveSerializer,
+    FragilityModelSerializer,
 )
 
 _MODEL_FIELDS = [
@@ -27,7 +27,7 @@ _MODEL_FIELDS = [
     'p58_fragility',
     'material',
     'size_class',
-    'reviewer',
+    'contributor',
     'source',
 ]
 
