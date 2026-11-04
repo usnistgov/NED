@@ -16207,7 +16207,7 @@
   "pk": "exp1511a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 1",
+    "specimen": "Specimen-1-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16240,7 +16240,7 @@
   "pk": "exp1512a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 1",
+    "specimen": "Specimen-1-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16273,7 +16273,7 @@
   "pk": "exp1513a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 1",
+    "specimen": "Specimen-1-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16298,7 +16298,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "Max acceleration recorded = 4.129g at the end of bracnch line\nPFA as damage state intensity"
+    "notes": "Max acceleration recorded = 4.129g at the end of bracnch line\nPFA as damage state intensity\nPhase 4 of Table 3 (PDF p.12): the same installed piping as Specimen-1-braced with all sway braces and wire restraints removed, tested after Phases 1-3."
   }
 },
 {
@@ -16306,7 +16306,7 @@
   "pk": "exp1514a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 1",
+    "specimen": "Specimen-1-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16331,7 +16331,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Consequential",
-    "notes": "PFA as damage state intensity"
+    "notes": "PFA as damage state intensity\nPhase 4 of Table 3 (PDF p.12): the same installed piping as Specimen-1-braced with all sway braces and wire restraints removed, tested after Phases 1-3. The paper lists this damage in Table 5 (PDF p.14) without a phase; it is kept in the fully unbraced configuration per the original record."
   }
 },
 {
@@ -16339,7 +16339,7 @@
   "pk": "exp1515a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 1",
+    "specimen": "Specimen-1-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16364,7 +16364,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "PFA as damage state intensity"
+    "notes": "PFA as damage state intensity\nPhase 4 of Table 3 (PDF p.12): the same installed piping as Specimen-1-braced with all sway braces and wire restraints removed, tested after Phases 1-3."
   }
 },
 {
@@ -16372,7 +16372,7 @@
   "pk": "exp1516a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 2",
+    "specimen": "Specimen-2-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16405,7 +16405,7 @@
   "pk": "exp1517a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 2",
+    "specimen": "Specimen-2-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16438,7 +16438,7 @@
   "pk": "exp1518a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 2",
+    "specimen": "Specimen-2-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16463,7 +16463,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Consequential",
-    "notes": "Max acceleration recorded =6.323 g at the end of bracnch line interacting with ceiling tile at 67% MCE. No recordings at 100% MCE. \nPFA as damage state intensity"
+    "notes": "Max acceleration recorded =6.323 g at the end of bracnch line interacting with ceiling tile at 67% MCE. No recordings at 100% MCE. \nPFA as damage state intensity\nPhase 4 of Table 3 (PDF p.12): the same installed piping as Specimen-2-braced with all sway braces and wire restraints removed, tested after Phases 1-3."
   }
 },
 {
@@ -16471,7 +16471,7 @@
   "pk": "exp1519a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 2",
+    "specimen": "Specimen-2-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16496,7 +16496,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "PFA as damage state intensity"
+    "notes": "PFA as damage state intensity\nPhase 4 of Table 3 (PDF p.12): the same installed piping as Specimen-2-braced with all sway braces and wire restraints removed, tested after Phases 1-3."
   }
 },
 {
@@ -16504,7 +16504,7 @@
   "pk": "exp1520a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 2",
+    "specimen": "Specimen-2-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16529,7 +16529,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Consequential",
-    "notes": "PFA as damage state intensity"
+    "notes": "PFA as damage state intensity\nPhase 4 of Table 3 (PDF p.12): the same installed piping as Specimen-2-braced with all sway braces and wire restraints removed, tested after Phases 1-3. The paper lists this damage in Table 5 (PDF p.14) without a phase; it is kept in the fully unbraced configuration per the original record."
   }
 },
 {
@@ -16537,7 +16537,7 @@
   "pk": "exp1521a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 3",
+    "specimen": "Specimen-3-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16570,7 +16570,7 @@
   "pk": "exp1522a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 3",
+    "specimen": "Specimen-3-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16603,7 +16603,7 @@
   "pk": "exp1523a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 3",
+    "specimen": "Specimen-3-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16628,7 +16628,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Consequential",
-    "notes": "Max acceleration recorded = 5.037g at the end of branch line\nPFA as damage state intensity"
+    "notes": "Max acceleration recorded = 5.037g at the end of branch line\nPFA as damage state intensity\nPhase 4 of Table 3 (PDF p.12): the same installed piping as Specimen-3-braced with all sway braces and wire restraints removed, tested after Phases 1-3."
   }
 },
 {
@@ -16636,7 +16636,7 @@
   "pk": "exp1524a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 3",
+    "specimen": "Specimen-3-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16661,7 +16661,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "PFA as damage state intensity"
+    "notes": "PFA as damage state intensity\nPhase 4 of Table 3 (PDF p.12): the same installed piping as Specimen-3-braced with all sway braces and wire restraints removed, tested after Phases 1-3."
   }
 },
 {
@@ -16669,7 +16669,7 @@
   "pk": "exp1525a",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 3",
+    "specimen": "Specimen-3-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16694,7 +16694,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Consequential",
-    "notes": "PFA as damage state intensity"
+    "notes": "PFA as damage state intensity\nPhase 4 of Table 3 (PDF p.12): the same installed piping as Specimen-3-braced with all sway braces and wire restraints removed, tested after Phases 1-3. The paper lists this damage in Table 5 (PDF p.14) without a phase; it is kept in the fully unbraced configuration per the original record."
   }
 },
 {
@@ -16702,12 +16702,12 @@
   "pk": "exp1525b",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 1",
+    "specimen": "Specimen-1-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
-    "material": "Black Iron",
+    "material": "Black iron",
     "size_class": "",
     "test_type": "Dynamic, uniaxial",
     "loading_protocol": "Spectral accelerations SDS=1 g and SD1=0.6 g, and a maximum inter-story drift ratio 3%",
@@ -16715,7 +16715,7 @@
     "location": "University at Buffalo Nonstructural Component Simulator (UB-NCS)",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "The bottom level was designed to assess the performance of a longitudinal main line and longer transverse branch lines subjected to earthquake shaking. a total of six generic ceiling boxes supporting ceiling tiles were installed at various locations to assess potential failure mechanisms of sprinkler heads interacting with the suspended ceiling during earthquake shaking\nThe two levels of the specimen were connected together by a vertical riser\nMain Line, Cross Main, and Vertical Riser: 10.2-cm steel pipes (schedule 10) with groove-fit connections (4 in pipes)\nFlexible couplings were installed within 30.5 cm above and below the simulated floor slab.\npressure = 40 psi\n10 mm hanger rods, 12g wire restrainers\nBranch lines = black iron pipes (schedule 40) with threaded connections (2 in pipes)\nFully braced specimen (bracing systems installed according to NFPA 13. (1 in dia pipe braces and wire restrainers next at the ends of cantilever pipes on top level (no end pipe bracings on bottom floor)",
+    "comp_description": "The top level was designed to evaluate the seismic behavior of an unsupported elbow armover, a cross main line, as well as longitudinal and transverse branch lines.\nThe bottom level was designed to assess the performance of a longitudinal main line and longer transverse branch lines subjected to earthquake shaking.\na total of six generic ceiling boxes supporting ceiling tiles were installed at various locations to assess potential failure mechanisms of sprinkler heads interacting with the suspended ceiling during earthquake shaking\nThe two levels of the specimen were connected together by a vertical riser\nMain Line, Cross Main, and Vertical Riser: 10.2-cm steel pipes (schedule 10) with groove-fit connections (4 in pipes)\nFlexible couplings were installed within 30.5 cm above and below the simulated floor slab.\npressure = 40 psi\n10 mm hanger rods, 12g wire restrainers\nBranch lines = black iron pipes (schedule 40) with threaded connections (2 in pipes)\nFully braced specimen (bracing systems installed according to NFPA 13. (1 in dia pipe braces and wire restrainers next at the ends of cantilever pipes on top level (no end pipe bracings on bottom floor)",
     "ds_description": "No damage (100% MCE)",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -16727,7 +16727,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": ""
+    "notes": "Observation at the bottom level of the specimen; edp_value is the bottom-level platform peak acceleration at MCE (0.56 g, Table 1, PDF p.6)."
   }
 },
 {
@@ -16735,7 +16735,7 @@
   "pk": "exp1525c",
   "fields": {
     "reference": "Tian_SprinklerPipingUB_NCS-2015",
-    "specimen": "Specimen 2",
+    "specimen": "Specimen-2-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16748,7 +16748,7 @@
     "location": "University at Buffalo Nonstructural Component Simulator (UB-NCS)",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "The bottom level was designed to assess the performance of a longitudinal main line and longer transverse branch lines subjected to earthquake shaking. A total of six generic ceiling boxes supporting ceiling tiles were installed at various locations to assess potential failure mechanisms of sprinkler heads interacting with the suspended ceiling during earthquake shaking\nThe two levels of the specimen were connected together by a vertical riser\nMain Line, Cross Main, and Vertical Riser: 10.2-cm steel pipes (schedule 10) with groove-fit connections (4 in pipes)\nFlexible couplings were installed within 30.5 cm above and below the simulated floor slab.\npressure = 40 psi\n10 mm hanger rods, 12g wire restrainers\nBranch lines = Schedule 40 CPVC pipes with cement joints (2 in pipes)\nFully braced specimen (bracing systems installed according to NFPA 13. (1 in dia pipe braces and wire restrainers next at the ends of cantilever pipes on top level (no end pipe bracings on bottom floor)",
+    "comp_description": "The top level was designed to evaluate the seismic behavior of an unsupported elbow armover, a cross main line, as well as longitudinal and transverse branch lines.\nThe bottom level was designed to assess the performance of a longitudinal main line and longer transverse branch lines subjected to earthquake shaking.\na total of six generic ceiling boxes supporting ceiling tiles were installed at various locations to assess potential failure mechanisms of sprinkler heads interacting with the suspended ceiling during earthquake shaking\nThe two levels of the specimen were connected together by a vertical riser\nMain Line, Cross Main, and Vertical Riser: 10.2-cm steel pipes (schedule 10) with groove-fit connections (4 in pipes)\nFlexible couplings were installed within 30.5 cm above and below the simulated floor slab.\npressure = 40 psi\n10 mm hanger rods, 12g wire restrainers\nBranch lines = Schedule 40 CPVC pipes with cement joints (2 in pipes)\nFully braced specimen (bracing systems installed according to NFPA 13. (1 in dia pipe braces and wire restrainers next at the ends of cantilever pipes on top level (no end pipe bracings on bottom floor)",
     "ds_description": "No damage (100% MCE)",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -16760,7 +16760,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": ""
+    "notes": "Observation at the bottom level of the specimen; edp_value is the bottom-level platform peak acceleration at MCE (0.56 g, Table 1, PDF p.6)."
   }
 },
 {
