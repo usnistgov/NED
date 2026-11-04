@@ -13765,7 +13765,7 @@
   "pk": "exp1433a",
   "fields": {
     "reference": "Soroushian_FireSprinklerPipingFragility-2013",
-    "specimen": "79",
+    "specimen": "Wire 1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.F",
@@ -13798,7 +13798,7 @@
   "pk": "exp1434a",
   "fields": {
     "reference": "Soroushian_FireSprinklerPipingFragility-2013",
-    "specimen": "79",
+    "specimen": "Wire 2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.F",
@@ -13831,7 +13831,7 @@
   "pk": "exp1435a",
   "fields": {
     "reference": "Soroushian_FireSprinklerPipingFragility-2013",
-    "specimen": "79",
+    "specimen": "Wire 3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.F",
