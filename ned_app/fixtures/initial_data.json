@@ -12577,7 +12577,7 @@
   "pk": "exp1397a",
   "fields": {
     "reference": "Blasi-2018",
-    "specimen": "76",
+    "specimen": "FMT",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -12610,7 +12610,7 @@
   "pk": "exp1398a",
   "fields": {
     "reference": "Blasi-2018",
-    "specimen": "76",
+    "specimen": "FCT 1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -12643,7 +12643,7 @@
   "pk": "exp1399a",
   "fields": {
     "reference": "Blasi-2018",
-    "specimen": "76",
+    "specimen": "FCT 2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -12676,7 +12676,7 @@
   "pk": "exp1400a",
   "fields": {
     "reference": "Blasi-2018",
-    "specimen": "76",
+    "specimen": "FCT 3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -12709,7 +12709,7 @@
   "pk": "exp1401a",
   "fields": {
     "reference": "Blasi-2018",
-    "specimen": "76",
+    "specimen": "FCT I",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -12742,7 +12742,7 @@
   "pk": "exp1402a",
   "fields": {
     "reference": "Blasi-2018",
-    "specimen": "76",
+    "specimen": "FCT II",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",

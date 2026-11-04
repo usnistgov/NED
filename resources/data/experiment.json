@@ -8755,7 +8755,7 @@
         "prior_damage_repaired": "",
         "reference": "Blasi-2018",
         "size_class": "2 inch diameter",
-        "specimen": "76",
+        "specimen": "FMT",
         "specimen_inspection_sequence": "",
         "test_type": "Monotonic, bending"
     },
@@ -8785,7 +8785,7 @@
         "prior_damage_repaired": "",
         "reference": "Blasi-2018",
         "size_class": "2 inch diameter",
-        "specimen": "76",
+        "specimen": "FCT 1",
         "specimen_inspection_sequence": "",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
@@ -8815,7 +8815,7 @@
         "prior_damage_repaired": "",
         "reference": "Blasi-2018",
         "size_class": "2 inch diameter",
-        "specimen": "76",
+        "specimen": "FCT 2",
         "specimen_inspection_sequence": "",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
@@ -8845,7 +8845,7 @@
         "prior_damage_repaired": "",
         "reference": "Blasi-2018",
         "size_class": "2 inch diameter",
-        "specimen": "76",
+        "specimen": "FCT 3",
         "specimen_inspection_sequence": "",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
@@ -8875,7 +8875,7 @@
         "prior_damage_repaired": "",
         "reference": "Blasi-2018",
         "size_class": "2 inch diameter",
-        "specimen": "76",
+        "specimen": "FCT I",
         "specimen_inspection_sequence": "",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
@@ -8905,7 +8905,7 @@
         "prior_damage_repaired": "",
         "reference": "Blasi-2018",
         "size_class": "2 inch diameter",
-        "specimen": "76",
+        "specimen": "FCT II",
         "specimen_inspection_sequence": "",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
