@@ -5364,14 +5364,6 @@
         "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1"
     },
     {
-        "experiment": "exp2465a",
-        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1"
-    },
-    {
-        "experiment": "exp2466a",
-        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1"
-    },
-    {
         "experiment": "exp1102a",
         "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
     },
@@ -5564,14 +5556,6 @@
         "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
     },
     {
-        "experiment": "exp2465a",
-        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
-    },
-    {
-        "experiment": "exp2466a",
-        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
-    },
-    {
         "experiment": "exp1313a",
         "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
     },
@@ -5617,14 +5601,6 @@
     },
     {
         "experiment": "exp1533a",
-        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
-    },
-    {
-        "experiment": "exp2465a",
-        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
-    },
-    {
-        "experiment": "exp2466a",
         "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
     },
     {
@@ -5705,14 +5681,6 @@
     },
     {
         "experiment": "exp1533a",
-        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
-    },
-    {
-        "experiment": "exp2465a",
-        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
-    },
-    {
-        "experiment": "exp2466a",
         "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
     },
     {

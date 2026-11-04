@@ -16768,7 +16768,7 @@
   "pk": "exp1526a",
   "fields": {
     "reference": "Jenkins-2016",
-    "specimen": "83",
+    "specimen": "study-level-summary",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16779,7 +16779,7 @@
     "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
     "peak_test_amplitude": "2.5g, PFA",
     "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "",
+    "governing_design_standard": "NFPA-13 (2010)",
     "design_objective": "",
     "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
     "ds_description": "Hanger band slip/drift along pipe",
@@ -16793,7 +16793,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips"
+    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips\nStudy-level example: Jenkins et al. (2016) Table 3 (PDF p.12) lists this damage type as observed somewhere in the 8-test UNR program (two piping designs, each on both floors) without tying it to a test, floor or assembly. edp_value 2.47 g is the program's maximum second-floor PFA (Unmodified Linear motions, Table 2, PDF p.11), not the PFA at which this damage occurred."
   }
 },
 {
@@ -16801,7 +16801,7 @@
   "pk": "exp1527a",
   "fields": {
     "reference": "Jenkins-2016",
-    "specimen": "83",
+    "specimen": "study-level-summary",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16812,7 +16812,7 @@
     "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
     "peak_test_amplitude": "2.5g, PFA",
     "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "",
+    "governing_design_standard": "NFPA-13 (2010)",
     "design_objective": "",
     "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
     "ds_description": "Hanger bend or deform",
@@ -16826,7 +16826,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips"
+    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips\nStudy-level example: Jenkins et al. (2016) Table 3 (PDF p.12) lists this damage type as observed somewhere in the 8-test UNR program (two piping designs, each on both floors) without tying it to a test, floor or assembly. edp_value 2.47 g is the program's maximum second-floor PFA (Unmodified Linear motions, Table 2, PDF p.11), not the PFA at which this damage occurred."
   }
 },
 {
@@ -16834,7 +16834,7 @@
   "pk": "exp1528a",
   "fields": {
     "reference": "Jenkins-2016",
-    "specimen": "83",
+    "specimen": "study-level-summary",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16845,7 +16845,7 @@
     "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
     "peak_test_amplitude": "2.5g, PFA",
     "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "",
+    "governing_design_standard": "NFPA-13 (2010)",
     "design_objective": "",
     "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
     "ds_description": "Hanger band slip/drift along pipe",
@@ -16859,7 +16859,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips"
+    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips\nStudy-level example: Jenkins et al. (2016) Table 3 (PDF p.12) lists this damage type as observed somewhere in the 8-test UNR program (two piping designs, each on both floors) without tying it to a test, floor or assembly. edp_value 2.47 g is the program's maximum second-floor PFA (Unmodified Linear motions, Table 2, PDF p.11), not the PFA at which this damage occurred."
   }
 },
 {
@@ -16867,7 +16867,7 @@
   "pk": "exp1529a",
   "fields": {
     "reference": "Jenkins-2016",
-    "specimen": "83",
+    "specimen": "study-level-summary",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16878,7 +16878,7 @@
     "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
     "peak_test_amplitude": "2.5g, PFA",
     "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "",
+    "governing_design_standard": "NFPA-13 (2010)",
     "design_objective": "",
     "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
     "ds_description": "damage to deck anchor location",
@@ -16892,7 +16892,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Consequential",
-    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips"
+    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips\nStudy-level example: Jenkins et al. (2016) Table 3 (PDF p.12) lists this damage type as observed somewhere in the 8-test UNR program (two piping designs, each on both floors) without tying it to a test, floor or assembly. edp_value 2.47 g is the program's maximum second-floor PFA (Unmodified Linear motions, Table 2, PDF p.11), not the PFA at which this damage occurred."
   }
 },
 {
@@ -16900,7 +16900,7 @@
   "pk": "exp1530a",
   "fields": {
     "reference": "Jenkins-2016",
-    "specimen": "83",
+    "specimen": "study-level-summary",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16911,7 +16911,7 @@
     "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
     "peak_test_amplitude": "2.5g, PFA",
     "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "",
+    "governing_design_standard": "NFPA-13 (2010)",
     "design_objective": "",
     "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
     "ds_description": "Permanent deformation or complete failure of connection at wire restrainers",
@@ -16925,7 +16925,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Consequential",
-    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips"
+    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips\nStudy-level example: Jenkins et al. (2016) Table 3 (PDF p.12) lists this damage type as observed somewhere in the 8-test UNR program (two piping designs, each on both floors) without tying it to a test, floor or assembly. edp_value 2.47 g is the program's maximum second-floor PFA (Unmodified Linear motions, Table 2, PDF p.11), not the PFA at which this damage occurred."
   }
 },
 {
@@ -16933,7 +16933,7 @@
   "pk": "exp1531a",
   "fields": {
     "reference": "Jenkins-2016",
-    "specimen": "83",
+    "specimen": "study-level-summary",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16944,7 +16944,7 @@
     "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
     "peak_test_amplitude": "2.5g, PFA",
     "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "",
+    "governing_design_standard": "NFPA-13 (2010)",
     "design_objective": "",
     "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
     "ds_description": "Complete rupture of braces",
@@ -16958,7 +16958,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Consequential",
-    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips"
+    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips\nStudy-level example: Jenkins et al. (2016) Table 3 (PDF p.12) lists this damage type as observed somewhere in the 8-test UNR program (two piping designs, each on both floors) without tying it to a test, floor or assembly. edp_value 2.47 g is the program's maximum second-floor PFA (Unmodified Linear motions, Table 2, PDF p.11), not the PFA at which this damage occurred."
   }
 },
 {
@@ -16966,7 +16966,7 @@
   "pk": "exp1532a",
   "fields": {
     "reference": "Jenkins-2016",
-    "specimen": "83",
+    "specimen": "study-level-summary",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -16977,7 +16977,7 @@
     "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
     "peak_test_amplitude": "2.5g, PFA",
     "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "",
+    "governing_design_standard": "NFPA-13 (2010)",
     "design_objective": "",
     "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
     "ds_description": "Tearing of ceiling tiles due to interaction between sprinkler heads",
@@ -16991,7 +16991,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips"
+    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips\nStudy-level example: Jenkins et al. (2016) Table 3 (PDF p.12) lists this damage type as observed somewhere in the 8-test UNR program (two piping designs, each on both floors) without tying it to a test, floor or assembly. edp_value 2.47 g is the program's maximum second-floor PFA (Unmodified Linear motions, Table 2, PDF p.11), not the PFA at which this damage occurred."
   }
 },
 {
@@ -16999,7 +16999,7 @@
   "pk": "exp1533a",
   "fields": {
     "reference": "Jenkins-2016",
-    "specimen": "83",
+    "specimen": "study-level-summary",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
@@ -17010,7 +17010,7 @@
     "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
     "peak_test_amplitude": "2.5g, PFA",
     "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "",
+    "governing_design_standard": "NFPA-13 (2010)",
     "design_objective": "",
     "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
     "ds_description": "Loose/fallen sprinkler ring",
@@ -17024,7 +17024,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips"
+    "notes": "1. Maximum Peak Floor Acceleration as Damage Intensity Measure\n2. Maximum inter story drift 2.09%\n3. Median pipe joint rotation = 0.001-0.013 radians\n4. Maximum measured axial load for hangers=1.26 Kips and wire restrainers=0.34 kips\nStudy-level example: Jenkins et al. (2016) Table 3 (PDF p.12) lists this damage type as observed somewhere in the 8-test UNR program (two piping designs, each on both floors) without tying it to a test, floor or assembly. edp_value 2.47 g is the program's maximum second-floor PFA (Unmodified Linear motions, Table 2, PDF p.11), not the PFA at which this damage occurred."
   }
 },
 {
@@ -46394,72 +46394,6 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": ""
-  }
-},
-{
-  "model": "ned_app.experiment",
-  "pk": "exp2465a",
-  "fields": {
-    "reference": "Jenkins-2016",
-    "specimen": "83",
-    "specimen_inspection_sequence": "",
-    "contributor": "NIST",
-    "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
-    "material": "Steel",
-    "size_class": "",
-    "test_type": "Dynamic, uniaxial",
-    "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
-    "peak_test_amplitude": "2.5g, PFA",
-    "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "NFPA-13 (2010)",
-    "design_objective": "",
-    "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
-    "ds_description": "Longitudinal brace connections to pipes slip off",
-    "prior_damage": "",
-    "prior_damage_repaired": "",
-    "edp_metric": "Peak Floor Acceleration, horizontal",
-    "edp_unit": "g",
-    "edp_value": "1.230000",
-    "alt_edp_metric": "",
-    "alt_edp_unit": "",
-    "alt_edp_value": null,
-    "ds_rank": null,
-    "ds_class": "Inconsequential",
-    "notes": ""
-  }
-},
-{
-  "model": "ned_app.experiment",
-  "pk": "exp2466a",
-  "fields": {
-    "reference": "Jenkins-2016",
-    "specimen": "83",
-    "specimen_inspection_sequence": "",
-    "contributor": "NIST",
-    "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
-    "material": "Steel",
-    "size_class": "",
-    "test_type": "Dynamic, uniaxial",
-    "loading_protocol": "Parameters from the AC 156 [ICC, 2010] including, a story height ratio (z/h) of 0.5 and the design spectral\nresponse acceleration at short periods (SDS) of 2.5 g, were used to develop two targeted acceleration spectrum",
-    "peak_test_amplitude": "2.5g, PFA",
-    "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-    "governing_design_standard": "NFPA-13 (2010)",
-    "design_objective": "",
-    "comp_description": "Pressure = 50 psi\nRiser pipe = 4 in diameter\nBranch pipe= 2 in diameter (update if necessary)\narmovers=1 in diameter\nPlenum depth varied from 12 in to 22 in\nHangers = 10mm (3/8 in) dia threaded rods\nBraces = 1 in schedule 40 pipes oriented at 45 degrees\nWire restrainers(splay wires) = 12 g wires @ 45 degrees\nBraces and Wire restrainers connected to concrete deck through 10 mm (3/8 in) Hilti KB-TZ expansion anchors\nThe gap between the sprinkler hed and ceiling tile was either 2 in or no gap.\nThe ceiling system looks like braced.",
-    "ds_description": "Clamps connecting hanger and pipes fail",
-    "prior_damage": "",
-    "prior_damage_repaired": "",
-    "edp_metric": "Peak Floor Acceleration, horizontal",
-    "edp_unit": "g",
-    "edp_value": "1.270000",
-    "alt_edp_metric": "",
-    "alt_edp_unit": "",
-    "alt_edp_value": null,
-    "ds_rank": null,
-    "ds_class": "Inconsequential",
     "notes": ""
   }
 },
@@ -102612,29 +102546,13 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1342,
   "fields": {
-    "experiment": "exp2465a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1343,
-  "fields": {
-    "experiment": "exp2466a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1344,
-  "fields": {
     "experiment": "exp1102a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1345,
+  "pk": 1343,
   "fields": {
     "experiment": "exp1103a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
@@ -102642,9 +102560,25 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1346,
+  "pk": 1344,
   "fields": {
     "experiment": "exp1158a",
+    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
+  }
+},
+{
+  "model": "ned_app.experimentfragilitymodelbridge",
+  "pk": 1345,
+  "fields": {
+    "experiment": "exp1159a",
+    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
+  }
+},
+{
+  "model": "ned_app.experimentfragilitymodelbridge",
+  "pk": 1346,
+  "fields": {
+    "experiment": "exp1160a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102652,7 +102586,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1347,
   "fields": {
-    "experiment": "exp1159a",
+    "experiment": "exp1310a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102660,7 +102594,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1348,
   "fields": {
-    "experiment": "exp1160a",
+    "experiment": "exp1313a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102668,7 +102602,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1349,
   "fields": {
-    "experiment": "exp1310a",
+    "experiment": "exp1321b",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102676,7 +102610,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1350,
   "fields": {
-    "experiment": "exp1313a",
+    "experiment": "exp1321c",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102684,7 +102618,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1351,
   "fields": {
-    "experiment": "exp1321b",
+    "experiment": "exp1317a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102692,7 +102626,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1352,
   "fields": {
-    "experiment": "exp1321c",
+    "experiment": "exp1318a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102700,7 +102634,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1353,
   "fields": {
-    "experiment": "exp1317a",
+    "experiment": "exp1511a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102708,7 +102642,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1354,
   "fields": {
-    "experiment": "exp1318a",
+    "experiment": "exp1525b",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102716,7 +102650,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1355,
   "fields": {
-    "experiment": "exp1511a",
+    "experiment": "exp1516a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102724,7 +102658,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1356,
   "fields": {
-    "experiment": "exp1525b",
+    "experiment": "exp1525c",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102732,7 +102666,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1357,
   "fields": {
-    "experiment": "exp1516a",
+    "experiment": "exp1521a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102740,7 +102674,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1358,
   "fields": {
-    "experiment": "exp1525c",
+    "experiment": "exp1526a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102748,7 +102682,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1359,
   "fields": {
-    "experiment": "exp1521a",
+    "experiment": "exp1527a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102756,7 +102690,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1360,
   "fields": {
-    "experiment": "exp1526a",
+    "experiment": "exp1528a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102764,7 +102698,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1361,
   "fields": {
-    "experiment": "exp1527a",
+    "experiment": "exp1531a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102772,7 +102706,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1362,
   "fields": {
-    "experiment": "exp1528a",
+    "experiment": "exp1532a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102780,7 +102714,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1363,
   "fields": {
-    "experiment": "exp1531a",
+    "experiment": "exp1533a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102788,7 +102722,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1364,
   "fields": {
-    "experiment": "exp1532a",
+    "experiment": "exp2362a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102796,7 +102730,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1365,
   "fields": {
-    "experiment": "exp1533a",
+    "experiment": "exp2363a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102804,7 +102738,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1366,
   "fields": {
-    "experiment": "exp2362a",
+    "experiment": "exp2364a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102812,7 +102746,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1367,
   "fields": {
-    "experiment": "exp2363a",
+    "experiment": "exp2366a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102820,7 +102754,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1368,
   "fields": {
-    "experiment": "exp2364a",
+    "experiment": "exp2367b",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102828,7 +102762,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1369,
   "fields": {
-    "experiment": "exp2366a",
+    "experiment": "exp2367a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102836,7 +102770,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1370,
   "fields": {
-    "experiment": "exp2367b",
+    "experiment": "exp2446a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102844,7 +102778,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1371,
   "fields": {
-    "experiment": "exp2367a",
+    "experiment": "exp2447a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102852,7 +102786,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1372,
   "fields": {
-    "experiment": "exp2446a",
+    "experiment": "exp2448a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102860,7 +102794,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1373,
   "fields": {
-    "experiment": "exp2447a",
+    "experiment": "exp2449a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102868,7 +102802,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1374,
   "fields": {
-    "experiment": "exp2448a",
+    "experiment": "exp2450a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102876,7 +102810,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1375,
   "fields": {
-    "experiment": "exp2449a",
+    "experiment": "exp2451a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102884,7 +102818,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1376,
   "fields": {
-    "experiment": "exp2450a",
+    "experiment": "exp2452a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102892,7 +102826,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1377,
   "fields": {
-    "experiment": "exp2451a",
+    "experiment": "exp2453a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102900,7 +102834,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1378,
   "fields": {
-    "experiment": "exp2452a",
+    "experiment": "exp2464b",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102908,7 +102842,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1379,
   "fields": {
-    "experiment": "exp2453a",
+    "experiment": "exp2454a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102916,7 +102850,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1380,
   "fields": {
-    "experiment": "exp2464b",
+    "experiment": "exp2455a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102924,7 +102858,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1381,
   "fields": {
-    "experiment": "exp2454a",
+    "experiment": "exp2456a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102932,7 +102866,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1382,
   "fields": {
-    "experiment": "exp2455a",
+    "experiment": "exp2457a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102940,7 +102874,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1383,
   "fields": {
-    "experiment": "exp2456a",
+    "experiment": "exp2458a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102948,7 +102882,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1384,
   "fields": {
-    "experiment": "exp2457a",
+    "experiment": "exp2459a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102956,7 +102890,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1385,
   "fields": {
-    "experiment": "exp2458a",
+    "experiment": "exp2460a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102964,7 +102898,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1386,
   "fields": {
-    "experiment": "exp2459a",
+    "experiment": "exp2461a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102972,7 +102906,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1387,
   "fields": {
-    "experiment": "exp2460a",
+    "experiment": "exp2462a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102980,7 +102914,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1388,
   "fields": {
-    "experiment": "exp2461a",
+    "experiment": "exp2463a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102988,7 +102922,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1389,
   "fields": {
-    "experiment": "exp2462a",
+    "experiment": "exp2464a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
   }
 },
@@ -102996,39 +102930,39 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1390,
   "fields": {
-    "experiment": "exp2463a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
+    "experiment": "exp1313a",
+    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1391,
   "fields": {
-    "experiment": "exp2464a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
+    "experiment": "exp1321c",
+    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1392,
   "fields": {
-    "experiment": "exp2465a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
+    "experiment": "exp1318a",
+    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1393,
   "fields": {
-    "experiment": "exp2466a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2"
+    "experiment": "exp1158a",
+    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1394,
   "fields": {
-    "experiment": "exp1313a",
+    "experiment": "exp1159a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103036,7 +102970,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1395,
   "fields": {
-    "experiment": "exp1321c",
+    "experiment": "exp1160a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103044,7 +102978,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1396,
   "fields": {
-    "experiment": "exp1318a",
+    "experiment": "exp1526a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103052,7 +102986,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1397,
   "fields": {
-    "experiment": "exp1158a",
+    "experiment": "exp1527a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103060,7 +102994,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1398,
   "fields": {
-    "experiment": "exp1159a",
+    "experiment": "exp1528a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103068,7 +103002,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1399,
   "fields": {
-    "experiment": "exp1160a",
+    "experiment": "exp1531a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103076,7 +103010,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1400,
   "fields": {
-    "experiment": "exp1526a",
+    "experiment": "exp1532a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103084,7 +103018,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1401,
   "fields": {
-    "experiment": "exp1527a",
+    "experiment": "exp1533a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103092,7 +103026,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1402,
   "fields": {
-    "experiment": "exp1528a",
+    "experiment": "exp2362a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103100,7 +103034,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1403,
   "fields": {
-    "experiment": "exp1531a",
+    "experiment": "exp2363a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103108,7 +103042,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1404,
   "fields": {
-    "experiment": "exp1532a",
+    "experiment": "exp2364a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103116,7 +103050,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1405,
   "fields": {
-    "experiment": "exp1533a",
+    "experiment": "exp1511a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103124,7 +103058,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1406,
   "fields": {
-    "experiment": "exp2465a",
+    "experiment": "exp1516a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103132,7 +103066,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1407,
   "fields": {
-    "experiment": "exp2466a",
+    "experiment": "exp1521a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103140,7 +103074,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1408,
   "fields": {
-    "experiment": "exp2362a",
+    "experiment": "exp1525b",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103148,7 +103082,7 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1409,
   "fields": {
-    "experiment": "exp2363a",
+    "experiment": "exp1525c",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
   }
 },
@@ -103156,61 +103090,13 @@
   "model": "ned_app.experimentfragilitymodelbridge",
   "pk": 1410,
   "fields": {
-    "experiment": "exp2364a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1411,
-  "fields": {
-    "experiment": "exp1511a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1412,
-  "fields": {
-    "experiment": "exp1516a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1413,
-  "fields": {
-    "experiment": "exp1521a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1414,
-  "fields": {
-    "experiment": "exp1525b",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1415,
-  "fields": {
-    "experiment": "exp1525c",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1416,
-  "fields": {
     "experiment": "exp1313a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
   }
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1417,
+  "pk": 1411,
   "fields": {
     "experiment": "exp1321c",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103218,7 +103104,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1418,
+  "pk": 1412,
   "fields": {
     "experiment": "exp1318a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103226,7 +103112,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1419,
+  "pk": 1413,
   "fields": {
     "experiment": "exp1158a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103234,7 +103120,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1420,
+  "pk": 1414,
   "fields": {
     "experiment": "exp1159a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103242,7 +103128,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1421,
+  "pk": 1415,
   "fields": {
     "experiment": "exp1160a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103250,7 +103136,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1422,
+  "pk": 1416,
   "fields": {
     "experiment": "exp1526a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103258,7 +103144,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1423,
+  "pk": 1417,
   "fields": {
     "experiment": "exp1527a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103266,7 +103152,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1424,
+  "pk": 1418,
   "fields": {
     "experiment": "exp1528a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103274,7 +103160,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1425,
+  "pk": 1419,
   "fields": {
     "experiment": "exp1531a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103282,7 +103168,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1426,
+  "pk": 1420,
   "fields": {
     "experiment": "exp1532a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103290,7 +103176,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1427,
+  "pk": 1421,
   "fields": {
     "experiment": "exp1533a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103298,23 +103184,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1428,
-  "fields": {
-    "experiment": "exp2465a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1429,
-  "fields": {
-    "experiment": "exp2466a",
-    "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
-  }
-},
-{
-  "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1430,
+  "pk": 1422,
   "fields": {
     "experiment": "exp2362a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103322,7 +103192,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1431,
+  "pk": 1423,
   "fields": {
     "experiment": "exp2363a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103330,7 +103200,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1432,
+  "pk": 1424,
   "fields": {
     "experiment": "exp2364a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103338,7 +103208,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1433,
+  "pk": 1425,
   "fields": {
     "experiment": "exp1511a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103346,7 +103216,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1434,
+  "pk": 1426,
   "fields": {
     "experiment": "exp1516a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103354,7 +103224,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1435,
+  "pk": 1427,
   "fields": {
     "experiment": "exp1521a",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103362,7 +103232,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1436,
+  "pk": 1428,
   "fields": {
     "experiment": "exp1525b",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
@@ -103370,7 +103240,7 @@
 },
 {
   "model": "ned_app.experimentfragilitymodelbridge",
-  "pk": 1437,
+  "pk": 1429,
   "fields": {
     "experiment": "exp1525c",
     "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6"
