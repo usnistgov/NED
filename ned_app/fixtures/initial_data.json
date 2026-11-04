@@ -17263,11 +17263,11 @@
   "pk": "exp1541a",
   "fields": {
     "reference": "Kim-2021",
-    "specimen": "85",
+    "specimen": "SP01",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
+    "comp_detail": "Braced - pressure joints",
     "material": "Steel",
     "size_class": "",
     "test_type": "Quasi-static Cyclic, uniaxial",
@@ -17276,7 +17276,7 @@
     "location": "Republic of Korea",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP01 with Pressure joints (used in Korea)\nPipe material SUS 304 (KS D 3595) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 283 MPa\nTensile Strength = 631 MPa\nElongation = 56 %\nWater pressure = 2 Mpa ( 290 psi)\nRISER",
+    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP01 with Pressure joints (used in Korea)\nPipe material SUS 304 (KS D 3595) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 283 MPa\nTensile Strength = 631 MPa\nElongation = 56 %\nWater pressure = 2 Mpa ( 290 psi)",
     "ds_description": "The visual inspection performed after the test showed no external deformation, water leak, crack, component separation, and damage in the test specimens.",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -17288,7 +17288,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Interstory drift as DSI"
+    "notes": "Interstory drift as DSI\nMeasurement location: RISER"
   }
 },
 {
@@ -17296,11 +17296,11 @@
   "pk": "exp1542a",
   "fields": {
     "reference": "Kim-2021",
-    "specimen": "85",
+    "specimen": "SP01",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
+    "comp_detail": "Braced - pressure joints",
     "material": "Steel",
     "size_class": "",
     "test_type": "Quasi-static Cyclic, uniaxial",
@@ -17309,7 +17309,7 @@
     "location": "Republic of Korea",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP01 with Pressure joints (used in Korea)\nPipe material SUS 304 (KS D 3595) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 283 MPa\nTensile Strength = 631 MPa\nElongation = 56 %\nWater pressure = 2 Mpa ( 290 psi)\nTEE-JOINT",
+    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP01 with Pressure joints (used in Korea)\nPipe material SUS 304 (KS D 3595) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 283 MPa\nTensile Strength = 631 MPa\nElongation = 56 %\nWater pressure = 2 Mpa ( 290 psi)",
     "ds_description": "The visual inspection performed after the test showed no external deformation, water leak, crack, component separation, and damage in the test specimens.",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -17321,7 +17321,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Joint rotation as DSI"
+    "notes": "Joint rotation as DSI\nMeasurement location: TEE-JOINT"
   }
 },
 {
@@ -17329,11 +17329,11 @@
   "pk": "exp1543a",
   "fields": {
     "reference": "Kim-2021",
-    "specimen": "85",
+    "specimen": "SP01",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
+    "comp_detail": "Braced - pressure joints",
     "material": "Steel",
     "size_class": "",
     "test_type": "Quasi-static Cyclic, uniaxial",
@@ -17342,7 +17342,7 @@
     "location": "Republic of Korea",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP01 with Pressure joints (used in Korea)\nPipe material SUS 304 (KS D 3595) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 283 MPa\nTensile Strength = 631 MPa\nElongation = 56 %\nWater pressure = 2 Mpa ( 290 psi)\nELBOW JOINT1",
+    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP01 with Pressure joints (used in Korea)\nPipe material SUS 304 (KS D 3595) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 283 MPa\nTensile Strength = 631 MPa\nElongation = 56 %\nWater pressure = 2 Mpa ( 290 psi)",
     "ds_description": "The visual inspection performed after the test showed no external deformation, water leak, crack, component separation, and damage in the test specimens.",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -17354,7 +17354,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Joint rotation as DSI"
+    "notes": "Joint rotation as DSI\nMeasurement location: ELBOW JOINT1"
   }
 },
 {
@@ -17362,11 +17362,11 @@
   "pk": "exp1544a",
   "fields": {
     "reference": "Kim-2021",
-    "specimen": "85",
+    "specimen": "SP01",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
+    "comp_detail": "Braced - pressure joints",
     "material": "Steel",
     "size_class": "",
     "test_type": "Quasi-static Cyclic, uniaxial",
@@ -17375,7 +17375,7 @@
     "location": "Republic of Korea",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP01 with Pressure joints (used in Korea)\nPipe material SUS 304 (KS D 3595) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 283 MPa\nTensile Strength = 631 MPa\nElongation = 56 %\nWater pressure = 2 Mpa ( 290 psi)\nELBOW JOINT2",
+    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP01 with Pressure joints (used in Korea)\nPipe material SUS 304 (KS D 3595) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 283 MPa\nTensile Strength = 631 MPa\nElongation = 56 %\nWater pressure = 2 Mpa ( 290 psi)",
     "ds_description": "The visual inspection performed after the test showed no external deformation, water leak, crack, component separation, and damage in the test specimens.",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -17387,7 +17387,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Joint rotation as DSI"
+    "notes": "Joint rotation as DSI\nMeasurement location: ELBOW JOINT2"
   }
 },
 {
@@ -17395,11 +17395,11 @@
   "pk": "exp1545a",
   "fields": {
     "reference": "Kim-2021",
-    "specimen": "85",
+    "specimen": "SP02",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
+    "comp_detail": "Braced - grooved joints",
     "material": "Steel",
     "size_class": "",
     "test_type": "Quasi-static Cyclic, uniaxial",
@@ -17408,7 +17408,7 @@
     "location": "Republic of Korea",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP02 with Grooved joints\nPipe material SUS 304 (KS D 3576) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 309 MPa\nTensile Strength = 719 MPa\nElongation = 60 %\nWater pressure = 2 Mpa ( 290 psi)\nRISER",
+    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP02 with Grooved joints\nPipe material SUS 304 (KS D 3576) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 309 MPa\nTensile Strength = 719 MPa\nElongation = 60 %\nWater pressure = 2 Mpa ( 290 psi)",
     "ds_description": "The visual inspection performed after the test showed no external deformation, water leak, crack, component separation, and damage in the test specimens.",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -17420,7 +17420,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Interstory drift as DSI"
+    "notes": "Interstory drift as DSI\nMeasurement location: RISER"
   }
 },
 {
@@ -17428,11 +17428,11 @@
   "pk": "exp1546a",
   "fields": {
     "reference": "Kim-2021",
-    "specimen": "85",
+    "specimen": "SP02",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
+    "comp_detail": "Braced - grooved joints",
     "material": "Steel",
     "size_class": "",
     "test_type": "Quasi-static Cyclic, uniaxial",
@@ -17441,7 +17441,7 @@
     "location": "Republic of Korea",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP02 with Grooved joints\nPipe material SUS 304 (KS D 3576) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 309 MPa\nTensile Strength = 719 MPa\nElongation = 60 %\nWater pressure = 2 Mpa ( 290 psi)\nTEE JOINT",
+    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP02 with Grooved joints\nPipe material SUS 304 (KS D 3576) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 309 MPa\nTensile Strength = 719 MPa\nElongation = 60 %\nWater pressure = 2 Mpa ( 290 psi)",
     "ds_description": "The visual inspection performed after the test showed no external deformation, water leak, crack, component separation, and damage in the test specimens.",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -17453,7 +17453,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Joint rotation as DSI"
+    "notes": "Joint rotation as DSI\nMeasurement location: TEE JOINT"
   }
 },
 {
@@ -17461,11 +17461,11 @@
   "pk": "exp1547a",
   "fields": {
     "reference": "Kim-2021",
-    "specimen": "85",
+    "specimen": "SP02",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
+    "comp_detail": "Braced - grooved joints",
     "material": "Steel",
     "size_class": "",
     "test_type": "Quasi-static Cyclic, uniaxial",
@@ -17474,7 +17474,7 @@
     "location": "Republic of Korea",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP02 with Grooved joints\nPipe material SUS 304 (KS D 3576) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 309 MPa\nTensile Strength = 719 MPa\nElongation = 60 %\nWater pressure = 2 Mpa ( 290 psi)\nELBOW JOINT1",
+    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP02 with Grooved joints\nPipe material SUS 304 (KS D 3576) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 309 MPa\nTensile Strength = 719 MPa\nElongation = 60 %\nWater pressure = 2 Mpa ( 290 psi)",
     "ds_description": "The visual inspection performed after the test showed no external deformation, water leak, crack, component separation, and damage in the test specimens.",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -17486,7 +17486,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Joint rotation as DSI"
+    "notes": "Joint rotation as DSI\nMeasurement location: ELBOW JOINT1"
   }
 },
 {
@@ -17494,11 +17494,11 @@
   "pk": "exp1548a",
   "fields": {
     "reference": "Kim-2021",
-    "specimen": "85",
+    "specimen": "SP02",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
-    "comp_detail": "Braced",
+    "comp_detail": "Braced - grooved joints",
     "material": "Steel",
     "size_class": "",
     "test_type": "Quasi-static Cyclic, uniaxial",
@@ -17507,7 +17507,7 @@
     "location": "Republic of Korea",
     "governing_design_standard": "",
     "design_objective": "",
-    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP02 with Grooved joints\nPipe material SUS 304 (KS D 3576) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 309 MPa\nTensile Strength = 719 MPa\nElongation = 60 %\nWater pressure = 2 Mpa ( 290 psi)\nELBOW JOINT2",
+    "comp_description": "Height of the pipe system = 3 m (9.84 ft)\nVertical pipe system with two-90 degree elbows and one Tee joint\nOuter diamater = 100mm (4\")\nPipe connections were located within 305 mm (1 ft ) from the floor and 610 mm (2 ft) from the ceiling.\nthe distance between riser pipe and a 4-way brace is within 7.6 m.\nSpecimen SP02 with Grooved joints\nPipe material SUS 304 (KS D 3576) with:\nElastic Modulus = 193000 MPa\nPoisson's ratio = 0.29\nYield Strength = 309 MPa\nTensile Strength = 719 MPa\nElongation = 60 %\nWater pressure = 2 Mpa ( 290 psi)",
     "ds_description": "The visual inspection performed after the test showed no external deformation, water leak, crack, component separation, and damage in the test specimens.",
     "prior_damage": "",
     "prior_damage_repaired": "",
@@ -17519,7 +17519,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Joint rotation as DSI"
+    "notes": "Joint rotation as DSI\nMeasurement location: ELBOW JOINT2"
   }
 },
 {
