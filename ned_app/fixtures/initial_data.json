@@ -6406,7 +6406,7 @@
   "pk": "exp1144a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P10-F",
+    "specimen": "P10-F-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
@@ -6439,7 +6439,7 @@
   "pk": "exp1145a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P10-F",
+    "specimen": "P10-F-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
@@ -6472,7 +6472,7 @@
   "pk": "exp1146a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P11-F",
+    "specimen": "P11-F-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
@@ -6505,7 +6505,7 @@
   "pk": "exp1147a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P11-S",
+    "specimen": "P11-S-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
@@ -6538,7 +6538,7 @@
   "pk": "exp1148a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P11-S",
+    "specimen": "P11-S-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
@@ -6571,7 +6571,7 @@
   "pk": "exp1149a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P11-S",
+    "specimen": "P11-S-braced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
@@ -6604,7 +6604,7 @@
   "pk": "exp1150a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P10-F",
+    "specimen": "P10-F-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
@@ -6637,7 +6637,7 @@
   "pk": "exp1151a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P11-F",
+    "specimen": "P11-F-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
@@ -6670,7 +6670,7 @@
   "pk": "exp1152a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P10-S",
+    "specimen": "P10-S-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
@@ -6703,7 +6703,7 @@
   "pk": "exp1153a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "P11-S",
+    "specimen": "P11-S-unbraced",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "C.10.1.1.A",

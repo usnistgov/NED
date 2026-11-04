@@ -3205,7 +3205,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P10-F",
+        "specimen": "P10-F-braced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
@@ -3235,7 +3235,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P10-F",
+        "specimen": "P10-F-braced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
@@ -3265,7 +3265,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P11-F",
+        "specimen": "P11-F-braced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
@@ -3295,7 +3295,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P11-S",
+        "specimen": "P11-S-braced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
@@ -3325,7 +3325,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P11-S",
+        "specimen": "P11-S-braced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
@@ -3355,7 +3355,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P11-S",
+        "specimen": "P11-S-braced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
@@ -3385,7 +3385,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P10-F",
+        "specimen": "P10-F-unbraced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
@@ -3415,7 +3415,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P11-F",
+        "specimen": "P11-F-unbraced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
@@ -3445,7 +3445,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P10-S",
+        "specimen": "P10-S-unbraced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
@@ -3475,7 +3475,7 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "P11-S",
+        "specimen": "P11-S-unbraced",
         "specimen_inspection_sequence": "",
         "test_type": "Dynamic, uniaxial"
     },
