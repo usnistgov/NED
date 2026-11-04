@@ -10102,7 +10102,7 @@
   "pk": "exp1322a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-6in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10127,7 +10127,7 @@
     "alt_edp_value": "244.750000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 244.75 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 244.75 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 6 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -10135,7 +10135,7 @@
   "pk": "exp1323a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-6in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10160,7 +10160,7 @@
     "alt_edp_value": "304.250000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 304.25 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 304.25 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 6 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -10168,7 +10168,7 @@
   "pk": "exp1324a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-6in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10193,7 +10193,7 @@
     "alt_edp_value": "239.900000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity=239.90 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity=239.90 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 6 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -10201,7 +10201,7 @@
   "pk": "exp1325a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-4in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10226,7 +10226,7 @@
     "alt_edp_value": "124.480000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 124.48 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 124.48 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 4 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -10234,7 +10234,7 @@
   "pk": "exp1326a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-4in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10259,7 +10259,7 @@
     "alt_edp_value": "116.680000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 116.68 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 116.68 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 4 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -10267,7 +10267,7 @@
   "pk": "exp1327a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-4in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10292,7 +10292,7 @@
     "alt_edp_value": "132.300000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity=132.30 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity=132.30 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 4 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -10300,7 +10300,7 @@
   "pk": "exp1328a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-2in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10325,7 +10325,7 @@
     "alt_edp_value": "22.190000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity=22.19 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity=22.19 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 2 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -10333,7 +10333,7 @@
   "pk": "exp1329a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-2in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10358,7 +10358,7 @@
     "alt_edp_value": "24.640000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 24.64 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 24.64 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 2 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -10366,7 +10366,7 @@
   "pk": "exp1330a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-2in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10391,7 +10391,7 @@
     "alt_edp_value": "24.340000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 24.34 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 24.34 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 2 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -10399,7 +10399,7 @@
   "pk": "exp1331a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-1in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10424,7 +10424,7 @@
     "alt_edp_value": "5.430000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 5.43 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 5.43 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 1 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -10432,7 +10432,7 @@
   "pk": "exp1332a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-1in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10457,7 +10457,7 @@
     "alt_edp_value": "7.450000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2,Moment capacity= 7.45 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2,Moment capacity= 7.45 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 1 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -10465,7 +10465,7 @@
   "pk": "exp1333a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-1in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10490,7 +10490,7 @@
     "alt_edp_value": "6.140000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 6.14 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 6.14 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 1 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -10498,7 +10498,7 @@
   "pk": "exp1334a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-0.75in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10523,7 +10523,7 @@
     "alt_edp_value": "2.900000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 2.90 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 2.90 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 3/4 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -10531,7 +10531,7 @@
   "pk": "exp1335a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-0.75in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10556,7 +10556,7 @@
     "alt_edp_value": "3.230000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 3.23 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 3.23 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 3/4 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -10564,7 +10564,7 @@
   "pk": "exp1336a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-0.75in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10589,7 +10589,7 @@
     "alt_edp_value": "3.610000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 3.61 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 3.61 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 3/4 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -10597,7 +10597,7 @@
   "pk": "exp1337a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-2in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10622,7 +10622,7 @@
     "alt_edp_value": "2.410000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 2.41 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 2.41 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 2 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -10630,7 +10630,7 @@
   "pk": "exp1338a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-2in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10655,7 +10655,7 @@
     "alt_edp_value": "2.320000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 2.32 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 2.32 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 2 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -10663,7 +10663,7 @@
   "pk": "exp1339a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-2in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10688,7 +10688,7 @@
     "alt_edp_value": "2.860000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 2.86 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 2.86 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 2 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -10696,7 +10696,7 @@
   "pk": "exp1340a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-1in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10721,7 +10721,7 @@
     "alt_edp_value": "1.620000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 1.62 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 1.62 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 1 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -10729,7 +10729,7 @@
   "pk": "exp1341a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-1in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10754,7 +10754,7 @@
     "alt_edp_value": "1.890000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 1.89 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 1.89 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 1 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -10762,7 +10762,7 @@
   "pk": "exp1342a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-1in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10787,7 +10787,7 @@
     "alt_edp_value": "1.490000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 1.49 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 1.49 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 1 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -10795,7 +10795,7 @@
   "pk": "exp1343a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-0.75in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10820,7 +10820,7 @@
     "alt_edp_value": "0.960000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 0.96 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 0.96 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 3/4 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -10828,7 +10828,7 @@
   "pk": "exp1344a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-0.75in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10853,7 +10853,7 @@
     "alt_edp_value": "0.880000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 0.88 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 0.88 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 3/4 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -10861,7 +10861,7 @@
   "pk": "exp1345a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-0.75in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10886,7 +10886,7 @@
     "alt_edp_value": "0.830000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 0.83 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 0.83 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 3/4 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -10894,7 +10894,7 @@
   "pk": "exp1346a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch40-groove-fit-4in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10919,7 +10919,7 @@
     "alt_edp_value": "77.590000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 77.59 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 77.59 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 40 Steel with Groove-Fit Connections, 4 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -10927,7 +10927,7 @@
   "pk": "exp1347a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch40-groove-fit-4in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10952,7 +10952,7 @@
     "alt_edp_value": "83.890000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 83.89 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 83.89 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 40 Steel with Groove-Fit Connections, 4 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -10960,7 +10960,7 @@
   "pk": "exp1348a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch40-groove-fit-4in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -10985,7 +10985,7 @@
     "alt_edp_value": "80.450000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 80.45 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 80.45 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 40 Steel with Groove-Fit Connections, 4 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -10993,7 +10993,7 @@
   "pk": "exp1349a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch40-groove-fit-2in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11018,7 +11018,7 @@
     "alt_edp_value": "22.210000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 22.21 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 22.21 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 40 Steel with Groove-Fit Connections, 2 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -11026,7 +11026,7 @@
   "pk": "exp1350a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch40-groove-fit-2in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11051,7 +11051,7 @@
     "alt_edp_value": "23.090000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 23.09 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 23.09 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 40 Steel with Groove-Fit Connections, 2 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -11059,7 +11059,7 @@
   "pk": "exp1351a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch40-groove-fit-2in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11084,7 +11084,7 @@
     "alt_edp_value": "22.380000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 22.38 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 22.38 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 40 Steel with Groove-Fit Connections, 2 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -11092,7 +11092,7 @@
   "pk": "exp1352a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch10-groove-fit-4in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11117,7 +11117,7 @@
     "alt_edp_value": "116.180000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 116.18 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 116.18 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 10 Steel with Groove-Fit Connections, 4 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -11125,7 +11125,7 @@
   "pk": "exp1353a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch10-groove-fit-4in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11150,7 +11150,7 @@
     "alt_edp_value": "112.460000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 112.46 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 112.46 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 10 Steel with Groove-Fit Connections, 4 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -11158,7 +11158,7 @@
   "pk": "exp1354a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch10-groove-fit-4in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11183,7 +11183,7 @@
     "alt_edp_value": "122.530000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 122.53 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 122.53 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 10 Steel with Groove-Fit Connections, 4 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -11191,7 +11191,7 @@
   "pk": "exp1355a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch10-groove-fit-2in-cyclic-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11216,7 +11216,7 @@
     "alt_edp_value": "26.110000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 26.11 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 26.11 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 10 Steel with Groove-Fit Connections, 2 in., Cyclic Test No. 1; test record in Appendix A."
   }
 },
 {
@@ -11224,7 +11224,7 @@
   "pk": "exp1356a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch10-groove-fit-2in-cyclic-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11249,7 +11249,7 @@
     "alt_edp_value": "23.400000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 23.40 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 2, Moment capacity= 23.40 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 10 Steel with Groove-Fit Connections, 2 in., Cyclic Test No. 2; test record in Appendix A."
   }
 },
 {
@@ -11257,7 +11257,7 @@
   "pk": "exp1357a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch10-groove-fit-2in-cyclic-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11282,7 +11282,7 @@
     "alt_edp_value": "21.310000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 21.31 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 3, Moment capacity= 21.31 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 10 Steel with Groove-Fit Connections, 2 in., Cyclic Test No. 3; test record in Appendix A."
   }
 },
 {
@@ -11290,7 +11290,7 @@
   "pk": "exp1358a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-6in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11315,7 +11315,7 @@
     "alt_edp_value": "275.150000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 275.15 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 275.15 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 6 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11323,7 +11323,7 @@
   "pk": "exp1359a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-4in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11348,7 +11348,7 @@
     "alt_edp_value": "134.000000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 134.00 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 134.00 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 4 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11356,7 +11356,7 @@
   "pk": "exp1360a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-2in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11381,7 +11381,7 @@
     "alt_edp_value": "20.300000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 20.30 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 20.30 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 2 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11389,7 +11389,7 @@
   "pk": "exp1361a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-1in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11414,7 +11414,7 @@
     "alt_edp_value": "7.650000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 7.65 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 7.65 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 1 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11422,7 +11422,7 @@
   "pk": "exp1362a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "black-iron-threaded-0.75in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11447,7 +11447,7 @@
     "alt_edp_value": "2.340000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 2.23 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 2.23 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Black Iron with Threaded Joints, 3/4 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11455,7 +11455,7 @@
   "pk": "exp1363a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-2in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11480,7 +11480,7 @@
     "alt_edp_value": "8.150000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 8.15 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 8.15 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 2 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11488,7 +11488,7 @@
   "pk": "exp1364a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-1in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11513,7 +11513,7 @@
     "alt_edp_value": "1.700000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 1.70 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 1.70 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 1 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11521,7 +11521,7 @@
   "pk": "exp1365a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "cpvc-cement-0.75in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11546,7 +11546,7 @@
     "alt_edp_value": "0.800000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 0.80 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 0.80 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, CPVC with Cement Joints, 3/4 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11554,7 +11554,7 @@
   "pk": "exp1366a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch40-groove-fit-4in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11579,7 +11579,7 @@
     "alt_edp_value": "109.590000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 109.59 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 109.59 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 40 Steel with Groove-Fit Connections, 4 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11587,7 +11587,7 @@
   "pk": "exp1367a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch40-groove-fit-2in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11612,7 +11612,7 @@
     "alt_edp_value": "19.230000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 19.23 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 19.23 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 40 Steel with Groove-Fit Connections, 2 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
@@ -11620,7 +11620,7 @@
   "pk": "exp1368a",
   "fields": {
     "reference": "Tian_SprinklerTeeJoints-2012",
-    "specimen": "73",
+    "specimen": "steel-sch10-groove-fit-2in-monotonic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.C",
@@ -11645,7 +11645,7 @@
     "alt_edp_value": "31.890000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 31.89 kip-in"
+    "notes": "Rotation of the Tee-joint - Test 1, Moment capacity= 31.89 kip-in\nSpecimen label assigned in NED curation; the paper gives no specimen ids. Paper: Table 3-3, Schedule 10 Steel with Groove-Fit Connections, 2 in., Monotonic Test; test record in Appendix A."
   }
 },
 {
