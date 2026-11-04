@@ -11752,12 +11752,12 @@
   "pk": "exp1372a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "brazed-static-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
     "comp_detail": "Brazed copper joint",
-    "material": "Steel",
+    "material": "Copper",
     "size_class": "2 inch diameter",
     "test_type": "Monotonic, bending",
     "loading_protocol": "",
@@ -11777,7 +11777,7 @@
     "alt_edp_value": "11.253000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 937.748 lb @ 2.005in disp. Est. Rot=2.005in/(half length=36\"), Test 1"
+    "notes": "Four point bending load test \ndamage point: 937.748 lb @ 2.005in disp. Est. Rot=2.005in/(half length=36\"), Test 1\nSpecimen label assigned in NED curation (static test 1 of its configuration). Paper legend id: DEFL 3 in Fig. 13, matched by peak load and displacement."
   }
 },
 {
@@ -11785,12 +11785,12 @@
   "pk": "exp1373a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "brazed-static-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
     "comp_detail": "Brazed copper joint",
-    "material": "Steel",
+    "material": "Copper",
     "size_class": "2 inch diameter",
     "test_type": "Monotonic, bending",
     "loading_protocol": "",
@@ -11810,7 +11810,7 @@
     "alt_edp_value": "12.826000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 1050 lb @ 3.2in disp. Est. Rot=3.2in/(half length=36\"), Test 2"
+    "notes": "Four point bending load test \ndamage point: 1050 lb @ 3.2in disp. Est. Rot=3.2in/(half length=36\"), Test 2\nSpecimen label assigned in NED curation (static test 2 of its configuration). Paper legend id: DEFL 4 in Fig. 13, matched by peak load and displacement."
   }
 },
 {
@@ -11818,7 +11818,7 @@
   "pk": "exp1374a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-rigid-4in-static-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -11843,7 +11843,7 @@
     "alt_edp_value": "121.968000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 10164 lb @ 1.289in disp. Est. Rot=disp/halflength, Test 1"
+    "notes": "Four point bending load test \ndamage point: 10164 lb @ 1.289in disp. Est. Rot=disp/halflength, Test 1\nSpecimen label assigned in NED curation (static test 1 of its configuration). Paper legend id: Test-12d in Fig. 4, matched by peak load and displacement."
   }
 },
 {
@@ -11851,7 +11851,7 @@
   "pk": "exp1375a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-rigid-4in-static-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -11876,7 +11876,7 @@
     "alt_edp_value": "112.656000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 9388 lb @ 1.289in disp. Est. Rot=disp/halflength, Test 2"
+    "notes": "Four point bending load test \ndamage point: 9388 lb @ 1.289in disp. Est. Rot=disp/halflength, Test 2\nSpecimen label assigned in NED curation (static test 2 of its configuration). Paper legend id: Test-5d in Fig. 4, matched by peak load and displacement."
   }
 },
 {
@@ -11884,7 +11884,7 @@
   "pk": "exp1376a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-rigid-4in-static-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -11909,7 +11909,7 @@
     "alt_edp_value": "109.692000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 9141 lb @ 1.322in disp. Est. Rot=disp/halflength, Test 3"
+    "notes": "Four point bending load test \ndamage point: 9141 lb @ 1.322in disp. Est. Rot=disp/halflength, Test 3\nSpecimen label assigned in NED curation (static test 3 of its configuration). Paper legend id: Test-1d in Fig. 4, matched by peak load and displacement."
   }
 },
 {
@@ -11917,7 +11917,7 @@
   "pk": "exp1377a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-rigid-4in-static-4",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -11942,7 +11942,7 @@
     "alt_edp_value": "104.184000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 8682 lb @ 1.369 in disp. Est. Rot=disp/halflength, Test 4"
+    "notes": "Four point bending load test \ndamage point: 8682 lb @ 1.369 in disp. Est. Rot=disp/halflength, Test 4\nSpecimen label assigned in NED curation (static test 4 of its configuration). Paper legend id: Test-15d in Fig. 4, matched by peak load and displacement."
   }
 },
 {
@@ -11950,7 +11950,7 @@
   "pk": "exp1378a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-flexible-4in-static-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -11975,7 +11975,7 @@
     "alt_edp_value": "176.676000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 14723 lb @ 1.773in disp. Est. Rot=disp/halflength, Test 1"
+    "notes": "Four point bending load test \ndamage point: 14723 lb @ 1.773in disp. Est. Rot=disp/halflength, Test 1\nSpecimen label assigned in NED curation (static test 1 of its configuration). Paper legend id: Test-14d in Fig. 5, matched by peak load and displacement."
   }
 },
 {
@@ -11983,7 +11983,7 @@
   "pk": "exp1379a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-flexible-4in-static-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12008,7 +12008,7 @@
     "alt_edp_value": "171.756000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 14313 lb @ 1.779in disp. Est. Rot=disp/halflength, Test 2"
+    "notes": "Four point bending load test \ndamage point: 14313 lb @ 1.779in disp. Est. Rot=disp/halflength, Test 2\nSpecimen label assigned in NED curation (static test 2 of its configuration). Paper legend id: Test-13d in Fig. 5, matched by peak load and displacement."
   }
 },
 {
@@ -12016,7 +12016,7 @@
   "pk": "exp1380a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-flexible-4in-static-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12041,7 +12041,7 @@
     "alt_edp_value": "121.428000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 10119 lb @ 1.189in disp. Est. Rot=disp/halflength, Test 3"
+    "notes": "Four point bending load test \ndamage point: 10119 lb @ 1.189in disp. Est. Rot=disp/halflength, Test 3\nSpecimen label assigned in NED curation (static test 3 of its configuration). Paper legend id: Test-3d in Fig. 5, matched by peak load and displacement."
   }
 },
 {
@@ -12049,7 +12049,7 @@
   "pk": "exp1381a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-flexible-4in-static-4",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12074,7 +12074,7 @@
     "alt_edp_value": "109.392000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 9116 lb @ 1.057in disp. Est. Rot=disp/halflength, Test 4"
+    "notes": "Four point bending load test \ndamage point: 9116 lb @ 1.057in disp. Est. Rot=disp/halflength, Test 4\nSpecimen label assigned in NED curation (static test 4 of its configuration). Paper legend id: Test-16d in Fig. 5, matched by peak load and displacement."
   }
 },
 {
@@ -12082,7 +12082,7 @@
   "pk": "exp1382a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-rigid-2in-static-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12107,7 +12107,7 @@
     "alt_edp_value": "35.388000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 2949 lb @ 2.497in disp. Est. Rot=disp/halflength, Test 1"
+    "notes": "Four point bending load test \ndamage point: 2949 lb @ 2.497in disp. Est. Rot=disp/halflength, Test 1\nSpecimen label assigned in NED curation (static test 1 of its configuration). Paper legend id: Test-10d in Fig. 6, matched by peak load and displacement."
   }
 },
 {
@@ -12115,7 +12115,7 @@
   "pk": "exp1383a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-rigid-2in-static-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12140,7 +12140,7 @@
     "alt_edp_value": "30.432000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 2536 lb @ 1.987 in disp. Est. Rot=disp/halflength, Test 2"
+    "notes": "Four point bending load test \ndamage point: 2536 lb @ 1.987 in disp. Est. Rot=disp/halflength, Test 2\nSpecimen label assigned in NED curation (static test 2 of its configuration). Paper legend id: Test-4d in Fig. 6, matched by peak load and displacement."
   }
 },
 {
@@ -12148,7 +12148,7 @@
   "pk": "exp1384a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-rigid-2in-static-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12173,7 +12173,7 @@
     "alt_edp_value": "29.136000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 2428 lb @ 3in disp. Est. Rot=disp/halflength, Test 3"
+    "notes": "Four point bending load test \ndamage point: 2428 lb @ 3in disp. Est. Rot=disp/halflength, Test 3\nSpecimen label assigned in NED curation (static test 3 of its configuration). Paper legend id: Test-7d in Fig. 6, matched by peak load and displacement."
   }
 },
 {
@@ -12181,7 +12181,7 @@
   "pk": "exp1385a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-rigid-2in-static-4",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12206,7 +12206,7 @@
     "alt_edp_value": "27.132000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 2261 lb @ 2.188 in disp. Est. Rot=disp/halflength, Test 4"
+    "notes": "Four point bending load test \ndamage point: 2261 lb @ 2.188 in disp. Est. Rot=disp/halflength, Test 4\nSpecimen label assigned in NED curation (static test 4 of its configuration). Paper legend id: Test-11d in Fig. 6, matched by peak load and displacement."
   }
 },
 {
@@ -12214,7 +12214,7 @@
   "pk": "exp1386a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-flexible-2in-static-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12239,7 +12239,7 @@
     "alt_edp_value": "36.900000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 3075 lb @ 3.439in disp. Est. Rot=disp/halflength, Test 1"
+    "notes": "Four point bending load test \ndamage point: 3075 lb @ 3.439in disp. Est. Rot=disp/halflength, Test 1\nSpecimen label assigned in NED curation (static test 1 of its configuration). Paper legend id: Test-6d in Fig. 7, probable match by peak load and displacement."
   }
 },
 {
@@ -12247,7 +12247,7 @@
   "pk": "exp1387a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-flexible-2in-static-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12272,7 +12272,7 @@
     "alt_edp_value": "37.908000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 3159 lb @ 2.726in disp. Est. Rot=disp/halflength, Test 2"
+    "notes": "Four point bending load test \ndamage point: 3159 lb @ 2.726in disp. Est. Rot=disp/halflength, Test 2\nSpecimen label assigned in NED curation (static test 2 of its configuration). Paper legend id: Test-2d in Fig. 7, matched by peak load and displacement."
   }
 },
 {
@@ -12280,7 +12280,7 @@
   "pk": "exp1388a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-flexible-2in-static-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12305,7 +12305,7 @@
     "alt_edp_value": "30.120000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 2510 lb @ 2.744 in disp. Est. Rot=disp/halflength, Test 3"
+    "notes": "Four point bending load test \ndamage point: 2510 lb @ 2.744 in disp. Est. Rot=disp/halflength, Test 3\nSpecimen label assigned in NED curation (static test 3 of its configuration). Paper legend id: Test-9d in Fig. 7, matched by peak load and displacement."
   }
 },
 {
@@ -12313,7 +12313,7 @@
   "pk": "exp1389a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-flexible-2in-static-4",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12338,7 +12338,7 @@
     "alt_edp_value": "42.228000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 3519 lb @6.315 in disp. Est. Rot=disp/halflength, Test 4"
+    "notes": "Four point bending load test \ndamage point: 3519 lb @6.315 in disp. Est. Rot=disp/halflength, Test 4\nSpecimen label assigned in NED curation (static test 4 of its configuration). Paper legend id: Test-8d in Fig. 7, matched by peak load and displacement."
   }
 },
 {
@@ -12346,7 +12346,7 @@
   "pk": "exp1390a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "threaded-static-4",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12360,7 +12360,7 @@
     "governing_design_standard": "",
     "design_objective": "",
     "comp_description": "Component level - 6' long pipe - Threaded joint - ASME B16.3 malleable iron fittings on 2\" schedule 40 ASTM A 53 Grade B carbon steel pipe, 150 psi",
-    "ds_description": "Rupture of the first exposed pipe thread, followed by leakage",
+    "ds_description": "Stripping of the engaged thread,",
     "prior_damage": "",
     "prior_damage_repaired": "",
     "edp_metric": "Joint Rotation",
@@ -12371,7 +12371,7 @@
     "alt_edp_value": "37.728000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 3144lb @ 2.188in disp. Est. Rot=disp/halflength, Test 1"
+    "notes": "Four point bending load test \ndamage point: 3144lb @ 2.188in disp. Est. Rot=disp/halflength, Test 4\nSpecimen label assigned in NED curation; the test number is the paper's Fig. 12 legend id (DEFL 4), matched by peak load and displacement.\nDamage state corrected from thread rupture to stripping: the paper says the specimen that stripped is DEFL 4, the one with the longer travel under load (p.2)."
   }
 },
 {
@@ -12379,7 +12379,7 @@
   "pk": "exp1391a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "threaded-static-2",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12404,7 +12404,7 @@
     "alt_edp_value": "37.488000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 3124lb @ 1.57in disp. Est. Rot=disp/halflength, Test 2"
+    "notes": "Four point bending load test \ndamage point: 3124lb @ 1.57in disp. Est. Rot=disp/halflength, Test 2\nSpecimen label assigned in NED curation; the test number is the paper's Fig. 12 legend id (DEFL 2), matched by peak load and displacement."
   }
 },
 {
@@ -12412,7 +12412,7 @@
   "pk": "exp1392a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "threaded-static-3",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12437,7 +12437,7 @@
     "alt_edp_value": "35.304000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 2900lb @ 1.75 in disp. Est. Rot=disp/halflength, Test 3"
+    "notes": "Four point bending load test \ndamage point: 2900lb @ 1.75 in disp. Est. Rot=disp/halflength, Test 3\nSpecimen label assigned in NED curation; the test number is the paper's Fig. 12 legend id (DEFL 3), matched by peak load and displacement."
   }
 },
 {
@@ -12445,7 +12445,7 @@
   "pk": "exp1393a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "threaded-static-1",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12459,7 +12459,7 @@
     "governing_design_standard": "",
     "design_objective": "",
     "comp_description": "Component level - 6' long pipe - Threaded joint - ASME B16.3 malleable iron fittings on 2\" schedule 40 ASTM A 53 Grade B carbon steel pipe, 150 psi",
-    "ds_description": "Stripping of the engaged thread,",
+    "ds_description": "Rupture of the first exposed pipe thread, followed by leakage",
     "prior_damage": "",
     "prior_damage_repaired": "",
     "edp_metric": "Joint Rotation",
@@ -12470,7 +12470,7 @@
     "alt_edp_value": "34.812000",
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "Four point bending load test \ndamage point: 2901lb @ 1.49 in disp. Est. Rot=disp/halflength, Test 4"
+    "notes": "Four point bending load test \ndamage point: 2901lb @ 1.49 in disp. Est. Rot=disp/halflength, Test 1\nSpecimen label assigned in NED curation; the test number is the paper's Fig. 12 legend id (DEFL 1), matched by peak load and displacement.\nDamage state corrected from stripping to thread rupture: the paper says only DEFL 4 stripped; the other three ruptured at the first exposed thread (p.2)."
   }
 },
 {
@@ -12478,7 +12478,7 @@
   "pk": "exp1394a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "threaded-dynamic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12503,7 +12503,7 @@
     "alt_edp_value": null,
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "The maximum seismic excitation of the table, referred to as 100% table capacity, had a 5% damped peak of 7.5g and a zero period acceleration (acceleration at high frequency) of 3.5g.\n- Unreliable because the leak started at 50% of table capacity but tested again at 25% of table capacity\n- 4# specimens"
+    "notes": "The maximum seismic excitation of the table, referred to as 100% table capacity, had a 5% damped peak of 7.5g and a zero period acceleration (acceleration at high frequency) of 3.5g.\n- Unreliable because the leak started at 50% of table capacity but tested again at 25% of table capacity\n- 4# specimens\nSpecimen label assigned in NED curation; the paper gives no specimen ids. This row summarizes the threaded shake-table specimens (Table 2)."
   }
 },
 {
@@ -12511,7 +12511,7 @@
   "pk": "exp1395a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-rigid-dynamic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12536,7 +12536,7 @@
     "alt_edp_value": null,
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "The maximum seismic excitation of the table, referred to as 100% table capacity, had a 5% damped peak of 7.5g and a zero period acceleration (acceleration at high frequency) of 3.5g.\n-8# specimen"
+    "notes": "The maximum seismic excitation of the table, referred to as 100% table capacity, had a 5% damped peak of 7.5g and a zero period acceleration (acceleration at high frequency) of 3.5g.\n-8# specimen\nSpecimen label assigned in NED curation; the paper gives no specimen ids. This row summarizes the rigid grooved-coupling shake-table specimens (Table 1)."
   }
 },
 {
@@ -12544,7 +12544,7 @@
   "pk": "exp1396a",
   "fields": {
     "reference": "Antaki-2004",
-    "specimen": "75",
+    "specimen": "grooved-flexible-dynamic",
     "specimen_inspection_sequence": "",
     "contributor": "NIST",
     "component": "D.40.1.1.D",
@@ -12569,7 +12569,7 @@
     "alt_edp_value": null,
     "ds_rank": 1,
     "ds_class": "Consequential",
-    "notes": "The maximum seismic excitation of the table, referred to as 100% table capacity, had a 5% damped peak of 7.5g and a zero period acceleration (acceleration at high frequency) of 3.5g.\n-8# specimen"
+    "notes": "The maximum seismic excitation of the table, referred to as 100% table capacity, had a 5% damped peak of 7.5g and a zero period acceleration (acceleration at high frequency) of 3.5g.\n-8# specimen\nSpecimen label assigned in NED curation; the paper gives no specimen ids. This row summarizes the flexible grooved-coupling shake-table specimens (Table 1)."
   }
 },
 {
