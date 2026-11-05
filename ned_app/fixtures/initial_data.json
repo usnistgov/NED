@@ -9641,7 +9641,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Fifth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9665,7 +9665,7 @@
     "alt_edp_value": "2.893000",
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9674,7 +9674,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Fifth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9698,7 +9698,7 @@
     "alt_edp_value": "2.843000",
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9707,7 +9707,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Fifth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9731,7 +9731,7 @@
     "alt_edp_value": "2.742000",
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9740,7 +9740,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Sixth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9764,7 +9764,7 @@
     "alt_edp_value": "2.991000",
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9773,7 +9773,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Fifth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9797,7 +9797,7 @@
     "alt_edp_value": "3.094000",
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9806,7 +9806,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Fifth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9830,7 +9830,7 @@
     "alt_edp_value": "1.484000",
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9839,7 +9839,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Sixth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9863,7 +9863,7 @@
     "alt_edp_value": "2.193000",
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9872,7 +9872,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Fifth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9880,7 +9880,7 @@
     "size_class": "",
     "test_type": "Dynamic, 3D",
     "loading_protocol": "Many seismic records",
-    "peak_test_amplitude": "1.22g, PFA",
+    "peak_test_amplitude": "1.18g, PFA",
     "location": "NEES/E-Defense Japan",
     "governing_design_standard": "",
     "design_objective": "",
@@ -9896,7 +9896,7 @@
     "alt_edp_value": "4.760000",
     "ds_rank": 3,
     "ds_class": "Consequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9905,7 +9905,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Sixth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9913,7 +9913,7 @@
     "size_class": "",
     "test_type": "Dynamic, 3D",
     "loading_protocol": "Many seismic records",
-    "peak_test_amplitude": "1.18g, PFA",
+    "peak_test_amplitude": "1.22g, PFA",
     "location": "NEES/E-Defense Japan",
     "governing_design_standard": "",
     "design_objective": "",
@@ -9929,7 +9929,7 @@
     "alt_edp_value": "6.484000",
     "ds_rank": 3,
     "ds_class": "Consequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9938,7 +9938,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Fifth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9962,7 +9962,7 @@
     "alt_edp_value": "6.843000",
     "ds_rank": 3,
     "ds_class": "Consequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -9971,7 +9971,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Sixth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -9995,7 +9995,7 @@
     "alt_edp_value": "7.028000",
     "ds_rank": 3,
     "ds_class": "Consequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -10004,7 +10004,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Sixth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -10028,7 +10028,7 @@
     "alt_edp_value": "6.137000",
     "ds_rank": 3,
     "ds_class": "Consequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -10037,7 +10037,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Fifth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -10061,7 +10061,7 @@
     "alt_edp_value": "4.770000",
     "ds_rank": 2,
     "ds_class": "Consequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
@@ -10070,7 +10070,7 @@
   "fields": {
     "reference": "Ryan-2016",
     "specimen": "Sixth floor piping",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -10094,7 +10094,7 @@
     "alt_edp_value": "2.975000",
     "ds_rank": 2,
     "ds_class": "Consequential",
-    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important"
+    "notes": "3D PFA vector (ie non directional). Contributions of vertical accelerations to damage, which are important\nDamage rating from one of the program's 41 earthquake simulations; the paper does not identify which, so all of this floor's ratings share one test. Damage was rated for each simulation (Fig. 14) but repaired only at the end of each test day, and the system was not restored to full strength after RRS88 (the 5th simulation), so a rating may include damage from earlier simulations."
   }
 },
 {
