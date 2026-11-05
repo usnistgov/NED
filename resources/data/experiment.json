@@ -37316,7 +37316,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "3-NC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "6",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37346,7 +37346,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "3-SC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "6",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37376,7 +37376,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "4-NC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "6",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37496,7 +37496,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "3-NC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "7",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37526,7 +37526,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "3-SC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "7",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37556,7 +37556,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "4-NC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "7",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37586,7 +37586,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "4-SC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "7",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37616,7 +37616,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "5-NC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "7",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37646,7 +37646,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "5-SC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "7",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37696,7 +37696,7 @@
         "edp_value": 0.028,
         "governing_design_standard": "",
         "id": "exp2409a",
-        "loading_protocol": "CNP196",
+        "loading_protocol": "RRS228",
         "location": "NHERI, U of California San Diego",
         "material": "Steel",
         "notes": "",
@@ -37706,7 +37706,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "3-SC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "9",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37726,7 +37726,7 @@
         "edp_value": 0.0273,
         "governing_design_standard": "",
         "id": "exp2410a",
-        "loading_protocol": "CNP196",
+        "loading_protocol": "RRS228",
         "location": "NHERI, U of California San Diego",
         "material": "Wood",
         "notes": "",
@@ -37736,7 +37736,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "4-SC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "9",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37756,7 +37756,7 @@
         "edp_value": 0.0159,
         "governing_design_standard": "",
         "id": "exp2411a",
-        "loading_protocol": "CNP196",
+        "loading_protocol": "RRS228",
         "location": "NHERI, U of California San Diego",
         "material": "Wood",
         "notes": "",
@@ -37766,7 +37766,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "5-NC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "9",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37786,7 +37786,7 @@
         "edp_value": 0.0159,
         "governing_design_standard": "",
         "id": "exp2412a",
-        "loading_protocol": "CNP196",
+        "loading_protocol": "RRS228",
         "location": "NHERI, U of California San Diego",
         "material": "Steel",
         "notes": "",
@@ -37796,7 +37796,7 @@
         "reference": "Wang_CFS_Report-2018",
         "size_class": "",
         "specimen": "5-SC",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "9",
         "test_type": "Dynamic, uniaxial"
     },
     {
