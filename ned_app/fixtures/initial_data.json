@@ -45940,8 +45940,8 @@
   "pk": "exp2452a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "40-25E",
-    "specimen_inspection_sequence": "",
+    "specimen": "40-25E-basic",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -45965,7 +45965,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": ""
+    "notes": "Basic configuration with unbraced arm-overs; non-resonant motion (NRM) at maximum shaking intensity."
   }
 },
 {
@@ -45973,8 +45973,8 @@
   "pk": "exp2453a",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "40-25E",
-    "specimen_inspection_sequence": "",
+    "specimen": "40-25E-arm-overs-braced",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -45998,7 +45998,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": ""
+    "notes": "Configuration with arm-overs braced by 10mm threaded rods; resonant motion RM3 at maximum shaking intensity."
   }
 },
 {
@@ -46369,8 +46369,8 @@
   "pk": "exp2464b",
   "fields": {
     "reference": "Rashid-2022",
-    "specimen": "40-25E",
-    "specimen_inspection_sequence": "",
+    "specimen": "40-25E-long-braced",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -46394,7 +46394,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": ""
+    "notes": "Configuration with a longitudinal brace on the branch pipe and unbraced arm-overs; resonant motion RM3 at maximum shaking intensity."
   }
 },
 {
