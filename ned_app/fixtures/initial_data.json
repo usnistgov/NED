@@ -82009,8 +82009,8 @@
   "pk": "exp3570a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X1.0",
-    "specimen_inspection_sequence": "1.1",
+    "specimen": "X1-L2-line-C",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82034,7 +82034,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "Only Y-direction"
+    "notes": "Only Y-direction\nSpecimen label assigned in NED curation from the door location; the paper identifies it only by observation ID. Paper: Table 3, NCS X1, observation X1.01, MID 17."
   }
 },
 {
@@ -82042,8 +82042,8 @@
   "pk": "exp3571a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X1.1",
-    "specimen_inspection_sequence": "2.1",
+    "specimen": "X1-L2-line-D",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82067,7 +82067,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only Y-direction"
+    "notes": "Only Y-direction\nSpecimen label assigned in NED curation from the door location; the paper identifies it only by observation ID. Paper: Table 3, NCS X1, observation X1.11, MID 18."
   }
 },
 {
@@ -82075,8 +82075,8 @@
   "pk": "exp3572a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X1.2",
-    "specimen_inspection_sequence": "3.1",
+    "specimen": "X1-L3-lines-D-E",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82100,7 +82100,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only Y-direction"
+    "notes": "Only Y-direction\nSpecimen label assigned in NED curation from the door location; the paper identifies it only by observation ID. Paper: Table 3, NCS X1, observation X1.21, MID 18."
   }
 },
 {
@@ -82108,8 +82108,8 @@
   "pk": "exp3573a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X1.3",
-    "specimen_inspection_sequence": "4.1",
+    "specimen": "X1-L6-lines-D-E",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82133,7 +82133,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only Y-direction"
+    "notes": "Only Y-direction\nSpecimen label assigned in NED curation from the door location; the paper identifies it only by observation ID. Paper: Table 3, NCS X1, observation X1.31, MID 18."
   }
 },
 {
@@ -82141,8 +82141,8 @@
   "pk": "exp3574a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X1.4",
-    "specimen_inspection_sequence": "5.1",
+    "specimen": "X1-L9-line-D",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82166,7 +82166,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only Y-direction"
+    "notes": "Only Y-direction\nSpecimen label assigned in NED curation from the door location; the paper identifies it only by observation ID. Paper: Table 3, NCS X1, observation X1.41, MID 17."
   }
 },
 {
@@ -82174,8 +82174,8 @@
   "pk": "exp3575a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X2.0",
-    "specimen_inspection_sequence": "1.1",
+    "specimen": "X2",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up, fire-rated",
@@ -82199,7 +82199,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only X-direction"
+    "notes": "Only X-direction\nPaper: Table 3, NCS X2, observation X2.01, MID 18."
   }
 },
 {
@@ -82207,8 +82207,8 @@
   "pk": "exp3576a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X3.0",
-    "specimen_inspection_sequence": "1.1",
+    "specimen": "X3",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built, resilient",
@@ -82232,7 +82232,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only X-direction"
+    "notes": "Only X-direction\nPaper: Table 3, NCS X3, observation X3.01, MID 18."
   }
 },
 {
@@ -82240,8 +82240,8 @@
   "pk": "exp3577a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X4.0",
-    "specimen_inspection_sequence": "1.1",
+    "specimen": "X4",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built, resilient",
@@ -82265,7 +82265,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only X-direction"
+    "notes": "Only X-direction\nPaper: Table 3, NCS X4, observation X4.01, MID 18."
   }
 },
 {
@@ -82273,8 +82273,8 @@
   "pk": "exp3578a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X5.0",
-    "specimen_inspection_sequence": "1.1",
+    "specimen": "X5",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built, resilient",
@@ -82298,7 +82298,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only X-direction"
+    "notes": "Only X-direction\nPaper: Table 3, NCS X5, observation X5.01, MID 18."
   }
 },
 {
@@ -82306,8 +82306,8 @@
   "pk": "exp3579a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X6.0",
-    "specimen_inspection_sequence": "1.1",
+    "specimen": "X6",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built",
@@ -82331,7 +82331,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only X-direction"
+    "notes": "Only X-direction\nPaper: Table 3, NCS X6, observation X6.01, MID 18."
   }
 },
 {
@@ -82339,8 +82339,8 @@
   "pk": "exp3580a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X7.0",
-    "specimen_inspection_sequence": "1.1",
+    "specimen": "X7",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built",
@@ -82364,7 +82364,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only X-direction"
+    "notes": "Only X-direction\nPaper: Table 3, NCS X7, observation X7.01, MID 18."
   }
 },
 {
@@ -82372,8 +82372,8 @@
   "pk": "exp3581a",
   "fields": {
     "reference": "Singh-2026",
-    "specimen": "X8.0",
-    "specimen_inspection_sequence": "1.1",
+    "specimen": "X8",
+    "specimen_inspection_sequence": "1",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built",
@@ -82397,7 +82397,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "No damage",
-    "notes": "Only X-direction"
+    "notes": "Only X-direction\nPaper: Table 3, NCS X8, observation X8.01, MID 17."
   }
 },
 {
