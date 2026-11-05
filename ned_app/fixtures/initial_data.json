@@ -41585,7 +41585,7 @@
   "fields": {
     "reference": "Sorosh-2024",
     "specimen": "1",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "79",
     "contributor": "NIST",
     "component": "C.20.1.1.A",
     "comp_detail": "Regular (Scissors) - Drift compatible",
@@ -41609,7 +41609,7 @@
     "alt_edp_value": null,
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": "1.2%, 1.2% story drift ratio in each direction"
+    "notes": "1.2%, 1.2% story drift ratio in each direction\nPaper's motion MID79, Northridge scaled to the 975-year return period."
   }
 },
 {
@@ -41618,7 +41618,7 @@
   "fields": {
     "reference": "Sorosh-2024",
     "specimen": "1",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "91",
     "contributor": "NIST",
     "component": "C.20.1.1.A",
     "comp_detail": "Regular (Scissors) - Drift compatible",
@@ -41642,7 +41642,7 @@
     "alt_edp_value": null,
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": ""
+    "notes": "Paper's motion MID91, Tokachi-Oki scaled to the 975-year return period."
   }
 },
 {
@@ -41651,7 +41651,7 @@
   "fields": {
     "reference": "Sorosh-2024",
     "specimen": "1",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "91",
     "contributor": "NIST",
     "component": "C.20.1.1.A",
     "comp_detail": "Regular (Scissors) - Drift compatible",
@@ -41675,7 +41675,7 @@
     "alt_edp_value": null,
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": ""
+    "notes": "Paper's motion MID91, Tokachi-Oki scaled to the 975-year return period."
   }
 },
 {
@@ -41684,7 +41684,7 @@
   "fields": {
     "reference": "Sorosh-2024",
     "specimen": "1",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "91",
     "contributor": "NIST",
     "component": "C.20.1.1.A",
     "comp_detail": "Regular (Scissors) - Drift compatible",
@@ -41708,7 +41708,7 @@
     "alt_edp_value": null,
     "ds_rank": 1,
     "ds_class": "Inconsequential",
-    "notes": ""
+    "notes": "Paper's motion MID91, Tokachi-Oki scaled to the 975-year return period."
   }
 },
 {
