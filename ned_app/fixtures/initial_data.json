@@ -29507,7 +29507,7 @@
   "fields": {
     "reference": "Davies-2011",
     "specimen": "Config12. Specimen 31",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
     "comp_detail": "Full height - Sliding",
@@ -29540,7 +29540,7 @@
   "fields": {
     "reference": "Davies-2011",
     "specimen": "Config12. Specimen 31",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
     "comp_detail": "Full height - Sliding",
@@ -29573,7 +29573,7 @@
   "fields": {
     "reference": "Davies-2011",
     "specimen": "Config12. Specimen 31",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
     "comp_detail": "Full height - Sliding",
@@ -29606,7 +29606,7 @@
   "fields": {
     "reference": "Davies-2011",
     "specimen": "Config12. Specimen 31",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
     "comp_detail": "Full height - Sliding",
@@ -29639,7 +29639,7 @@
   "fields": {
     "reference": "Davies-2011",
     "specimen": "Config12. Specimen 31",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
     "comp_detail": "Full height - Sliding",
@@ -29672,14 +29672,14 @@
   "fields": {
     "reference": "Davies-2011",
     "specimen": "Config12. Specimen 31",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "C.10.1.1.A",
     "comp_detail": "Full height - Sliding",
     "material": "Cold-formed steel stud with gypsum sheathing",
     "size_class": "",
     "test_type": "Quasi-static Cyclic, uniaxial",
-    "loading_protocol": "CFS",
+    "loading_protocol": "The quasi-static testing protocol was developed for evaluating the seismic fragility of primarily driftsensitive components. The amplitude modulation is based on a dynamic loading protocol developed for each level of the UB-NCS that can simultaneously match (1) a target floor response spectrum (FRS) and (2) either a target generalized interstory drift (GID) or a maximum interstory drift, Dmax (Retamales et al. 2008, 2011). Maximum amplitude: +-3%",
     "peak_test_amplitude": "3% drift of specimen",
     "location": "Sliding",
     "governing_design_standard": "",

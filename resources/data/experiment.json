@@ -24086,7 +24086,7 @@
         "reference": "Davies-2011",
         "size_class": "",
         "specimen": "Config12. Specimen 31",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "1",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
     {
@@ -24116,7 +24116,7 @@
         "reference": "Davies-2011",
         "size_class": "",
         "specimen": "Config12. Specimen 31",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "1",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
     {
@@ -24146,7 +24146,7 @@
         "reference": "Davies-2011",
         "size_class": "",
         "specimen": "Config12. Specimen 31",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "1",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
     {
@@ -24176,7 +24176,7 @@
         "reference": "Davies-2011",
         "size_class": "",
         "specimen": "Config12. Specimen 31",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "1",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
     {
@@ -24206,7 +24206,7 @@
         "reference": "Davies-2011",
         "size_class": "",
         "specimen": "Config12. Specimen 31",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "1",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
     {
@@ -24226,7 +24226,7 @@
         "edp_value": 0.00778,
         "governing_design_standard": "",
         "id": "exp1917a",
-        "loading_protocol": "CFS",
+        "loading_protocol": "The quasi-static testing protocol was developed for evaluating the seismic fragility of primarily driftsensitive components. The amplitude modulation is based on a dynamic loading protocol developed for each level of the UB-NCS that can simultaneously match (1) a target floor response spectrum (FRS) and (2) either a target generalized interstory drift (GID) or a maximum interstory drift, Dmax (Retamales et al. 2008, 2011). Maximum amplitude: +-3%",
         "location": "Sliding",
         "material": "Cold-formed steel stud with gypsum sheathing",
         "notes": "If ds_class = unknown then sufficient description of the damage or photo is unavailable to make a decision",
@@ -24236,7 +24236,7 @@
         "reference": "Davies-2011",
         "size_class": "",
         "specimen": "Config12. Specimen 31",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "1",
         "test_type": "Quasi-static Cyclic, uniaxial"
     },
     {
