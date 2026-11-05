@@ -36356,7 +36356,7 @@
         "reference": "Bhatta_NHERIFireSprinkler-2025",
         "size_class": "",
         "specimen": "Level 7",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "6",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -36386,7 +36386,7 @@
         "reference": "Bhatta_NHERIFireSprinkler-2025",
         "size_class": "",
         "specimen": "Level 7",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "6",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -36416,7 +36416,7 @@
         "reference": "Bhatta_NHERIFireSprinkler-2025",
         "size_class": "",
         "specimen": "Level 7",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "6",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -36446,7 +36446,7 @@
         "reference": "Bhatta_NHERIFireSprinkler-2025",
         "size_class": "",
         "specimen": "Level 7",
-        "specimen_inspection_sequence": "2",
+        "specimen_inspection_sequence": "8",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -37826,7 +37826,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 4 ICU breakout door (EW)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "12",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -37856,7 +37856,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 4 ICU breakout door (EW)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "13",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -38036,7 +38036,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 1 access door: NW rolling (open)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "12",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -38066,7 +38066,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 1 access door: NW rolling (open)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "13",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -38096,7 +38096,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 1 access door: SE rolling (closed)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "12",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -38126,7 +38126,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 1 access door: SE rolling (closed)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "13",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -38156,7 +38156,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 1 access door: SW sectional (closed)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "12",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -38186,7 +38186,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 1 access door: SW sectional (closed)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "13",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -38216,7 +38216,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 1 access door: NE sectional (open)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "12",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -38246,7 +38246,7 @@
         "reference": "Pantoli_BNCS_Report2-2013",
         "size_class": "",
         "specimen": "Level 1 access door: NE sectional (open)",
-        "specimen_inspection_sequence": "",
+        "specimen_inspection_sequence": "13",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -71936,7 +71936,7 @@
         "reference": "Singh-2026",
         "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
         "specimen": "X3",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "18",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -71966,7 +71966,7 @@
         "reference": "Singh-2026",
         "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
         "specimen": "X4",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "18",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -71996,7 +71996,7 @@
         "reference": "Singh-2026",
         "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
         "specimen": "X5",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "18",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -72026,7 +72026,7 @@
         "reference": "Singh-2026",
         "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
         "specimen": "X6",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "18",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -72056,7 +72056,7 @@
         "reference": "Singh-2026",
         "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
         "specimen": "X7",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "18",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -72086,7 +72086,7 @@
         "reference": "Singh-2026",
         "size_class": "Insulated glazing units (IGUs). 1.42 m by 1.22 m",
         "specimen": "X8",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "17",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -72116,7 +72116,7 @@
         "reference": "Singh-2026",
         "size_class": "1.02 m by 2.18 m",
         "specimen": "X1-L2-line-C",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "17",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -72146,7 +72146,7 @@
         "reference": "Singh-2026",
         "size_class": "1.02 m by 2.18 m",
         "specimen": "X1-L2-line-D",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "18",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -72176,7 +72176,7 @@
         "reference": "Singh-2026",
         "size_class": "1.02 m by 2.18 m",
         "specimen": "X1-L3-lines-D-E",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "18",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -72206,7 +72206,7 @@
         "reference": "Singh-2026",
         "size_class": "1.02 m by 2.18 m",
         "specimen": "X1-L6-lines-D-E",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "18",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -72236,7 +72236,7 @@
         "reference": "Singh-2026",
         "size_class": "1.02 m by 2.18 m",
         "specimen": "X1-L9-line-D",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "17",
         "test_type": "Dynamic, 3D"
     },
     {
@@ -72266,7 +72266,7 @@
         "reference": "Singh-2026",
         "size_class": "2.15 m by 2.79 m",
         "specimen": "X2",
-        "specimen_inspection_sequence": "1",
+        "specimen_inspection_sequence": "18",
         "test_type": "Dynamic, 3D"
     }
 ]

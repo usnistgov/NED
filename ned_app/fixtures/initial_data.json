@@ -43004,7 +43004,7 @@
   "fields": {
     "reference": "Bhatta_NHERIFireSprinkler-2025",
     "specimen": "Level 7",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "6",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -43037,7 +43037,7 @@
   "fields": {
     "reference": "Bhatta_NHERIFireSprinkler-2025",
     "specimen": "Level 7",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "6",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -43070,7 +43070,7 @@
   "fields": {
     "reference": "Bhatta_NHERIFireSprinkler-2025",
     "specimen": "Level 7",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "6",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -43103,7 +43103,7 @@
   "fields": {
     "reference": "Bhatta_NHERIFireSprinkler-2025",
     "specimen": "Level 7",
-    "specimen_inspection_sequence": "2",
+    "specimen_inspection_sequence": "8",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -44654,7 +44654,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 4 ICU breakout door (EW)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "12",
     "contributor": "NIST",
     "component": "C.10.2.1.B",
     "comp_detail": "Sliding/folding - Not fire-rated",
@@ -44687,7 +44687,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 4 ICU breakout door (EW)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "13",
     "contributor": "NIST",
     "component": "C.10.2.1.B",
     "comp_detail": "Sliding/folding - Not fire-rated",
@@ -44885,7 +44885,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 1 access door: NW rolling (open)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "12",
     "contributor": "NIST",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up/Slide-up - Not fire-rated",
@@ -44918,7 +44918,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 1 access door: NW rolling (open)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "13",
     "contributor": "NIST",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up/Slide-up - Not fire-rated",
@@ -44951,7 +44951,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 1 access door: SE rolling (closed)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "12",
     "contributor": "NIST",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up/Slide-up - Not fire-rated",
@@ -44984,7 +44984,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 1 access door: SE rolling (closed)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "13",
     "contributor": "NIST",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up/Slide-up - Not fire-rated",
@@ -45017,7 +45017,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 1 access door: SW sectional (closed)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "12",
     "contributor": "NIST",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up/Slide-up - Not fire-rated",
@@ -45050,7 +45050,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 1 access door: SW sectional (closed)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "13",
     "contributor": "NIST",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up/Slide-up - Not fire-rated",
@@ -45083,7 +45083,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 1 access door: NE sectional (open)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "12",
     "contributor": "NIST",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up/Slide-up - Not fire-rated",
@@ -45116,7 +45116,7 @@
   "fields": {
     "reference": "Pantoli_BNCS_Report2-2013",
     "specimen": "Level 1 access door: NE sectional (open)",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "13",
     "contributor": "NIST",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up/Slide-up - Not fire-rated",
@@ -82010,7 +82010,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X1-L2-line-C",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "17",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82043,7 +82043,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X1-L2-line-D",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "18",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82076,7 +82076,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X1-L3-lines-D-E",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "18",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82109,7 +82109,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X1-L6-lines-D-E",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "18",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82142,7 +82142,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X1-L9-line-D",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "17",
     "contributor": "Amanpreet Singh",
     "component": "C.10.2.1.A",
     "comp_detail": "Swing, fire-rated",
@@ -82175,7 +82175,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X2",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "18",
     "contributor": "Amanpreet Singh",
     "component": "B.20.3.4.A",
     "comp_detail": "Roll-up, fire-rated",
@@ -82208,7 +82208,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X3",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "18",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built, resilient",
@@ -82241,7 +82241,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X4",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "18",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built, resilient",
@@ -82274,7 +82274,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X5",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "18",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built, resilient",
@@ -82307,7 +82307,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X6",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "18",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built",
@@ -82340,7 +82340,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X7",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "18",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built",
@@ -82373,7 +82373,7 @@
   "fields": {
     "reference": "Singh-2026",
     "specimen": "X8",
-    "specimen_inspection_sequence": "1",
+    "specimen_inspection_sequence": "17",
     "contributor": "Amanpreet Singh",
     "component": "B.20.2.1.A",
     "comp_detail": "Dry-glazed stick built",
