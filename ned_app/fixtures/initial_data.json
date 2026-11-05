@@ -43004,7 +43004,7 @@
   "fields": {
     "reference": "Bhatta_NHERIFireSprinkler-2025",
     "specimen": "Level 7",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -43028,7 +43028,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "Peak test amplite in PFA"
+    "notes": "Peak test amplite in PFA\nPaper's phase II Test 6: Northridge at 67% MCER, Y direction only."
   }
 },
 {
@@ -43037,7 +43037,7 @@
   "fields": {
     "reference": "Bhatta_NHERIFireSprinkler-2025",
     "specimen": "Level 7",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -43061,7 +43061,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "Peak test amplite in PFA"
+    "notes": "Peak test amplite in PFA\nPaper's phase II Test 6: Northridge at 67% MCER, Y direction only."
   }
 },
 {
@@ -43070,7 +43070,7 @@
   "fields": {
     "reference": "Bhatta_NHERIFireSprinkler-2025",
     "specimen": "Level 7",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -43094,7 +43094,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "Peak test amplite in PFA"
+    "notes": "Peak test amplite in PFA\nPaper's phase II Test 6: Northridge at 67% MCER, Y direction only."
   }
 },
 {
@@ -43103,7 +43103,7 @@
   "fields": {
     "reference": "Bhatta_NHERIFireSprinkler-2025",
     "specimen": "Level 7",
-    "specimen_inspection_sequence": "",
+    "specimen_inspection_sequence": "2",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -43127,7 +43127,7 @@
     "alt_edp_value": null,
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": "Peak test amplite in PFA"
+    "notes": "Peak test amplite in PFA\nPaper's phase II Test 8: Northridge at 100% MCER, XYZ."
   }
 },
 {
