@@ -3625,8 +3625,8 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "14",
-        "specimen_inspection_sequence": "",
+        "specimen": "long-piping-system",
+        "specimen_inspection_sequence": "1",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -3655,8 +3655,8 @@
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "14",
-        "specimen_inspection_sequence": "",
+        "specimen": "long-piping-system",
+        "specimen_inspection_sequence": "2",
         "test_type": "Dynamic, uniaxial"
     },
     {
@@ -3679,14 +3679,14 @@
         "loading_protocol": "NL-1 : The AC156 [12] spectrum with the maximum parameters of ARIG-H=2.0g, AFLX-H=4.0g, SDS=2.5g, and z/h=0.5 was considered as the target spectrum for the full-scale motion.",
         "location": "Nevada",
         "material": "Steel",
-        "notes": "",
+        "notes": "Paper test NL-1; test order is its run position in the program (L-1 to L-6, then NL-1 to NL-3). The short system was also in the earlier linear tests L-5 and L-6, which have no NED rows.",
         "peak_test_amplitude": "1.41 g PFA, 2.97 % ISD",
         "prior_damage": "",
         "prior_damage_repaired": "",
         "reference": "Rahmanishamsi_CPP_TestBed-2014",
         "size_class": "",
-        "specimen": "14",
-        "specimen_inspection_sequence": "",
+        "specimen": "short-piping-system",
+        "specimen_inspection_sequence": "7",
         "test_type": "Dynamic, uniaxial"
     },
     {

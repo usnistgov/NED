@@ -6868,8 +6868,8 @@
   "pk": "exp1158a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "14",
-    "specimen_inspection_sequence": "",
+    "specimen": "long-piping-system",
+    "specimen_inspection_sequence": "1",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -6901,8 +6901,8 @@
   "pk": "exp1159a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "14",
-    "specimen_inspection_sequence": "",
+    "specimen": "long-piping-system",
+    "specimen_inspection_sequence": "2",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -6934,8 +6934,8 @@
   "pk": "exp1160a",
   "fields": {
     "reference": "Rahmanishamsi_CPP_TestBed-2014",
-    "specimen": "14",
-    "specimen_inspection_sequence": "",
+    "specimen": "short-piping-system",
+    "specimen_inspection_sequence": "7",
     "contributor": "NIST",
     "component": "D.40.1.1.A",
     "comp_detail": "Braced",
@@ -6959,7 +6959,7 @@
     "alt_edp_value": "1.270000",
     "ds_rank": null,
     "ds_class": "Inconsequential",
-    "notes": ""
+    "notes": "Paper test NL-1; test order is its run position in the program (L-1 to L-6, then NL-1 to NL-3). The short system was also in the earlier linear tests L-5 and L-6, which have no NED rows."
   }
 },
 {
