@@ -7,8 +7,10 @@ from ned_app.models import (
     ComponentFragilityModelBridge,
     Experiment,
     ExperimentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
+    Program,
     Reference,
 )
 
@@ -74,3 +76,16 @@ class ExperimentFragilityModelBridgeAdmin(admin.ModelAdmin):
 class ComponentFragilityModelBridgeAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
     list_display = ('component', 'fragility_model')
+
+
+@admin.register(Facility)
+class FacilityAdmin(admin.ModelAdmin):
+    # how column data is displayed in the report for all entered data
+    list_display = ('label', 'name', 'location')
+
+
+@admin.register(Program)
+class ProgramAdmin(admin.ModelAdmin):
+    # how column data is displayed in the report for all entered data
+    list_display = ('program_id', 'reference', 'name')
+    readonly_fields = ('program_id',)

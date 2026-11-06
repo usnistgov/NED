@@ -1,8 +1,11 @@
 from django.core.exceptions import ValidationError
+from django.db import IntegrityError, transaction
 from django.test import TestCase
 
 from ned_app.models import (
     Component,
+    Facility,
+    Program,
     Reference,
     derive_reference_id,
     normalize_author_token,
@@ -547,3 +550,47 @@ class ComponentModelTest(TestCase):
                 'test-1',
             ]
         ).delete()
+
+
+class ProgramModelTest(TestCase):
+    """Test cases for Program, focusing on the derived program_id."""
+
+    def setUp(self):
+        self.reference = Reference.objects.create(
+            reference_id='Smith-2020',
+            csl_data={
+                'type': 'article-journal',
+                'id': 'smith-2020',
+                'title': 'Test Article',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2020]]},
+            },
+        )
+
+    def test_program_id_defaults_to_reference_id(self):
+        program = Program.objects.create(reference=self.reference)
+        self.assertEqual(program.program_id, 'Smith-2020')
+
+    def test_program_id_uses_label_when_set(self):
+        program = Program.objects.create(reference=self.reference, label='CFS10')
+        self.assertEqual(program.program_id, 'CFS10')
+
+    def test_program_id_is_recomputed_on_every_save(self):
+        program = Program.objects.create(reference=self.reference)
+        program.label = 'CFS10'
+        program.save()
+        self.assertEqual(Program.objects.get(pk=program.pk).program_id, 'CFS10')
+
+    def test_program_id_differing_only_in_case_is_rejected(self):
+        Program.objects.create(reference=self.reference, label='CFS10')
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            Program.objects.create(reference=self.reference, label='cfs10')
+
+
+class FacilityModelTest(TestCase):
+    """Test cases for Facility."""
+
+    def test_label_differing_only_in_case_is_rejected(self):
+        Facility.objects.create(label='UB_NCS')
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            Facility.objects.create(label='ub_ncs')

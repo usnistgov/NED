@@ -8,9 +8,11 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models.functions import Lower
 from django.utils.translation import gettext as _
 
 from ned_app.validators import (
+    validate_label,
     validate_nistir_component_id,
     validate_positive,
     validate_reference_label,
@@ -931,4 +933,96 @@ class Component(models.Model):
                 if subelement_key in labels:
                     self.subelement = f'{parts[3]} - {labels[subelement_key]}'
 
+        super().save(*args, **kwargs)
+
+
+class Facility(models.Model):
+    """
+    A laboratory or test facility where specimens were tested.
+
+    Attributes:
+        label (str): Short identifier, unique database-wide regardless of case.
+        name (str): The facility's full official title.
+        location (str): Where the facility is.
+        notes (str): Free-text notes.
+    """
+
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        unique=True,
+        validators=[validate_label],
+        help_text='Short identifier for the facility, e.g. UCSD_LHPOST.',
+    )
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        blank=True,
+        help_text="The facility's full official title.",
+    )
+    location = models.CharField(
+        _('location'),
+        max_length=255,
+        blank=True,
+        help_text='Where the facility is.',
+    )
+    notes = models.TextField(_('notes'), blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Facilities'
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(Lower('label'), name='facility_label_ci_unique'),
+        ]
+
+    def __str__(self):
+        return self.label
+
+
+class Program(models.Model):
+    """
+    A test program: a body of tests documented by one reference.
+
+    Attributes:
+        label (str): Optional short identifier; blank for one program per reference.
+        program_id (str): Derived identity, the label if set, else the reference id.
+        name (str): The program's descriptive name.
+        notes (str): Free-text notes.
+        reference (Reference): The reference that documents the program.
+    """
+
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        blank=True,
+        validators=[validate_label],
+        help_text='Optional short identifier; leave blank to use the reference id.',
+    )
+    program_id = models.CharField(
+        _('program id'),
+        max_length=255,
+        unique=True,
+        editable=False,
+        help_text='Derived: the label if set, else the reference id.',
+    )
+    name = models.CharField(_('name'), max_length=255, blank=True)
+    notes = models.TextField(_('notes'), blank=True)
+    reference = models.ForeignKey(
+        'Reference',
+        on_delete=models.PROTECT,
+        to_field='reference_id',
+        help_text='The reference that documents the program.',
+    )
+
+    class Meta:
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(
+                Lower('program_id'), name='program_id_ci_unique'
+            ),
+        ]
+
+    def __str__(self):
+        return self.program_id
+
+    def save(self, *args, **kwargs):
+        self.program_id = self.label or self.reference_id
         super().save(*args, **kwargs)

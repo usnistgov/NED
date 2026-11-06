@@ -50,6 +50,26 @@ def validate_reference_label(value):
         )
 
 
+def validate_label(value):
+    """
+    Validate a label that forms part of a derived id (facility, program, specimen, ...).
+
+    A label is 1-100 characters from letters, digits, '_', '.' and '-'. It never
+    holds whitespace or '|', the separator of the derived ids.
+
+    Args:
+        value (str): The label to validate.
+
+    Raises:
+        ValidationError: If the label is empty, too long, or has another character.
+    """
+    if not re.fullmatch(r'[A-Za-z0-9_.-]{1,100}', value):
+        raise ValidationError(
+            f'label "{value}" must be 1-100 characters, using only letters, '
+            f"digits, '_', '.' and '-'."
+        )
+
+
 # Global variable to cache the labels for efficiency
 _nistir_labels = None
 
