@@ -362,6 +362,9 @@ class Observation(models.Model):
         ds_rank (int): Integer rank ordering this observed damage with other damage observed in the same specimen.
         ds_class (str): General identification of damage as consequential or not.
         notes (str): Additional notes providing context for damage observations.
+        test (Test): The test this observation belongs to.
+        label (str): Identifier within the test, and the observations' sort key.
+        damage_location (str): Where on the specimen the damage was observed.
     """
 
     id = models.CharField(_('id'), primary_key=True, max_length=255)
@@ -529,6 +532,27 @@ class Observation(models.Model):
         _('notes'),
         blank=True,
         help_text='Additional notes providing context for damage observations.',
+    )
+    test = models.ForeignKey(
+        'Test',
+        on_delete=models.PROTECT,
+        to_field='test_id',
+        null=True,
+        blank=True,
+        help_text='The test this observation belongs to.',
+    )
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        blank=True,
+        validators=[validate_label],
+        help_text='Identifier within the test; observations are ordered by label.',
+    )
+    damage_location = models.CharField(
+        _('damage location'),
+        max_length=255,
+        blank=True,
+        help_text='Where on the specimen the damage was observed.',
     )
 
     class Meta:
@@ -1252,3 +1276,23 @@ class Test(models.Model):
     def save(self, *args, **kwargs):
         self.test_id = f'{self.specimen_id}|{self.label}'
         super().save(*args, **kwargs)
+
+    @property
+    def damaged_by_earlier_test(self):
+        """Whether an earlier test holds observations; None if the order can't tell (design 2.2)."""
+        others = self.specimen.test_set.exclude(pk=self.pk)
+        if (
+            self.test_order is not None
+            and Observation.objects.filter(
+                test__specimen=self.specimen, test__test_order__lt=self.test_order
+            ).exists()
+        ):
+            return True
+        if not others.exists():
+            return False
+        if (
+            self.test_order is not None
+            and not others.filter(test_order__isnull=True).exists()
+        ):
+            return False
+        return None

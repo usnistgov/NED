@@ -5,6 +5,7 @@ from django.test import TestCase
 from ned_app.models import (
     Component,
     Facility,
+    Observation,
     Program,
     Reference,
     Specimen,
@@ -677,3 +678,86 @@ class SpecimenAndTestModelTest(TestCase):
 
     def test_effective_reference_falls_back_to_program(self):
         self.assertEqual(self.specimen.effective_reference_id, 'Smith-2020')
+
+
+class DamagedByEarlierTestTest(TestCase):
+    """Test cases for Test.damaged_by_earlier_test, in every case of design 2.2."""
+
+    def setUp(self):
+        self.reference = Reference.objects.create(
+            reference_id='Smith-2020',
+            csl_data={
+                'type': 'article-journal',
+                'id': 'smith-2020',
+                'title': 'Test Article',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2020]]},
+            },
+        )
+        self.component = Component.objects.create(
+            component_id='C.10.1.1', name='Fixed Partitions'
+        )
+        self.specimen = Specimen.objects.create(
+            program=Program.objects.create(reference=self.reference),
+            facility=Facility.objects.create(label='UB_NCS'),
+            component=self.component,
+            label='S1',
+            comp_description='Partition wall',
+        )
+
+    def make_test(self, label, test_order=None):
+        return Test.objects.create(
+            specimen=self.specimen,
+            label=label,
+            test_order=test_order,
+            test_type='Quasi-static Cyclic, uniaxial',
+        )
+
+    def observe(self, test):
+        Observation.objects.create(
+            id=f'obs-{test.label}',
+            reference=self.reference,
+            component=self.component,
+            test_type=test.test_type,
+            comp_description='Partition wall',
+            ds_description='Crack',
+            edp_metric='Story Drift Ratio',
+            edp_unit='Ratio',
+            ds_class='Inconsequential',
+            test=test,
+        )
+
+    def test_true_when_an_earlier_test_holds_observations(self):
+        first = self.make_test('1', test_order=1)
+        second = self.make_test('2', test_order=2)
+        self.observe(first)
+        self.assertIs(second.damaged_by_earlier_test, True)
+
+    def test_true_wins_over_an_unordered_sibling(self):
+        first = self.make_test('1', test_order=1)
+        second = self.make_test('2', test_order=2)
+        self.make_test('a')
+        self.observe(first)
+        self.assertIs(second.damaged_by_earlier_test, True)
+
+    def test_false_for_a_lone_test(self):
+        self.assertIs(self.make_test('a').damaged_by_earlier_test, False)
+
+    def test_false_for_the_lowest_ordered_test(self):
+        first = self.make_test('7', test_order=7)
+        self.observe(self.make_test('8', test_order=8))
+        self.assertIs(first.damaged_by_earlier_test, False)
+
+    def test_false_when_earlier_tests_hold_no_observations(self):
+        self.make_test('1', test_order=1)
+        self.assertIs(
+            self.make_test('2', test_order=2).damaged_by_earlier_test, False
+        )
+
+    def test_none_when_the_order_is_not_recorded(self):
+        ordered = self.make_test('1', test_order=1)
+        unordered = self.make_test('a')
+        self.observe(unordered)
+        # Neither side can rule out earlier damage.
+        self.assertIsNone(unordered.damaged_by_earlier_test)
+        self.assertIsNone(ordered.damaged_by_earlier_test)
