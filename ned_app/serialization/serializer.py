@@ -9,11 +9,15 @@ from rest_framework import serializers
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
     Observation,
     ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
 )
 from ned_app.validators import (
     validate_nistir_component_id,
@@ -184,11 +188,134 @@ class FragilityModelSerializer(serializers.ModelSerializer):
         ]
 
 
+class FacilitySerializer(serializers.ModelSerializer):
+    """
+    Serializer for Facility.
+
+    A facility has no parent, so its label is its identity and is writable.
+    """
+
+    class Meta:
+        model = Facility
+        fields: ClassVar[list[str]] = [
+            'label',
+            'name',
+            'location',
+            'notes',
+        ]
+
+
+class ProgramSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Program.
+
+    program_id is read-only: it is always derived on save() from the label, or
+    the reference id when the label is blank. The reference field uses
+    SlugRelatedField for natural key lookup.
+    """
+
+    program_id = serializers.CharField(read_only=True)
+    reference = serializers.SlugRelatedField(
+        slug_field='reference_id', queryset=Reference.objects.all()
+    )
+
+    class Meta:
+        model = Program
+        fields: ClassVar[list[str]] = [
+            'program_id',
+            'label',
+            'name',
+            'notes',
+            'reference',
+        ]
+
+
+class SpecimenSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Specimen.
+
+    specimen_id is read-only: it is always derived on save() as
+    '{program_id}|{label}'. Foreign keys use natural keys; reference is an
+    optional override of the program's reference.
+    """
+
+    specimen_id = serializers.CharField(read_only=True)
+    program = serializers.SlugRelatedField(
+        slug_field='program_id', queryset=Program.objects.all()
+    )
+    facility = serializers.SlugRelatedField(
+        slug_field='label', queryset=Facility.objects.all()
+    )
+    reference = serializers.SlugRelatedField(
+        slug_field='reference_id',
+        queryset=Reference.objects.all(),
+        allow_null=True,
+        required=False,
+    )
+    component = serializers.SlugRelatedField(
+        slug_field='component_id', queryset=Component.objects.all()
+    )
+
+    class Meta:
+        model = Specimen
+        fields: ClassVar[list[str]] = [
+            'specimen_id',
+            'program',
+            'facility',
+            'reference',
+            'label',
+            'name',
+            'contributor',
+            'component',
+            'comp_detail',
+            'material',
+            'size_class',
+            'governing_design_standard',
+            'design_objective',
+            'comp_description',
+            'notes',
+        ]
+
+
+class TestSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Test.
+
+    test_id is read-only: it is always derived on save() as
+    '{specimen_id}|{label}'. The specimen field uses SlugRelatedField for
+    natural key lookup.
+    """
+
+    # Not a test case: keep pytest from collecting this class.
+    __test__ = False
+
+    test_id = serializers.CharField(read_only=True)
+    specimen = serializers.SlugRelatedField(
+        slug_field='specimen_id', queryset=Specimen.objects.all()
+    )
+
+    class Meta:
+        model = Test
+        fields: ClassVar[list[str]] = [
+            'test_id',
+            'specimen',
+            'label',
+            'test_order',
+            'test_type',
+            'loading_protocol',
+            'peak_test_amplitude',
+            'prior_damage',
+            'prior_damage_repaired',
+            'notes',
+        ]
+
+
 class ObservationSerializer(serializers.ModelSerializer):
     """
-    Serializer for Observation with reference and component relationships.
+    Serializer for Observation with reference, component and test relationships.
 
-    Uses natural keys for foreign key lookups: reference.reference_id and component.component_id.
+    Uses natural keys for foreign key lookups: reference.reference_id,
+    component.component_id and test.test_id. test is optional.
     """
 
     reference = serializers.SlugRelatedField(
@@ -196,6 +323,12 @@ class ObservationSerializer(serializers.ModelSerializer):
     )
     component = serializers.SlugRelatedField(
         slug_field='component_id', queryset=Component.objects.all()
+    )
+    test = serializers.SlugRelatedField(
+        slug_field='test_id',
+        queryset=Test.objects.all(),
+        allow_null=True,
+        required=False,
     )
 
     class Meta:
@@ -229,6 +362,9 @@ class ObservationSerializer(serializers.ModelSerializer):
             'ds_rank',
             'ds_class',
             'notes',
+            'test',
+            'label',
+            'damage_location',
         ]
 
 

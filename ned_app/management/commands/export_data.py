@@ -7,11 +7,15 @@ from django.core.management.base import BaseCommand
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
     Observation,
     ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
 )
 
 
@@ -42,9 +46,10 @@ class Command(BaseCommand):
     """
     Django management command to export all database data to canonical JSON files.
 
-    This command exports data from all models (Reference, Component, Observation,
-    FragilityModel, ObservationFragilityModelBridge, FragilityCurve) to separate
-    JSON files in the specified output directory.
+    This command exports data from all models (Reference, Component, Facility,
+    Program, Specimen, Test, Observation, FragilityModel,
+    ComponentFragilityModelBridge, ObservationFragilityModelBridge,
+    FragilityCurve) to separate JSON files in the specified output directory.
     """
 
     help = 'Exports all data from the database to canonical JSON files'
@@ -77,6 +82,10 @@ class Command(BaseCommand):
 
         self.export_reference_data(output_dir)
         self.export_component_data(output_dir)
+        self.export_facility_data(output_dir)
+        self.export_program_data(output_dir)
+        self.export_specimen_data(output_dir)
+        self.export_test_data(output_dir)
         self.export_observation_data(output_dir)
         self.export_fragility_model_data(output_dir)
         self.export_component_fragility_bridge_data(output_dir)
@@ -140,6 +149,128 @@ class Command(BaseCommand):
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
 
+    def export_facility_data(self, output_dir):
+        """
+        Export Facility model data to JSON file.
+
+        The label is the facility's identity and is written as stored.
+
+        Args:
+            output_dir (str): Directory where the JSON file will be saved.
+        """
+        self.stdout.write('Exporting Facility data...')
+        facilities = Facility.objects.all()
+
+        data = []
+        for fac in facilities:
+            fac_data = {
+                'label': fac.label,
+                'name': fac.name,
+                'location': fac.location,
+                'notes': fac.notes,
+            }
+            data.append(fac_data)
+
+        file_path = os.path.join(output_dir, 'facility.json')
+        with open(file_path, 'w') as f:
+            json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
+
+    def export_program_data(self, output_dir):
+        """
+        Export Program model data to JSON file.
+
+        Excludes the derived program_id, which ingest rebuilds from the label
+        or the reference.
+
+        Args:
+            output_dir (str): Directory where the JSON file will be saved.
+        """
+        self.stdout.write('Exporting Program data...')
+        programs = Program.objects.all()
+
+        data = []
+        for prog in programs:
+            prog_data = {
+                'label': prog.label,
+                'name': prog.name,
+                'notes': prog.notes,
+                'reference': prog.reference_id,
+            }
+            data.append(prog_data)
+
+        file_path = os.path.join(output_dir, 'program.json')
+        with open(file_path, 'w') as f:
+            json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
+
+    def export_specimen_data(self, output_dir):
+        """
+        Export Specimen model data to JSON file.
+
+        Excludes the derived specimen_id, which ingest rebuilds from the
+        program and the label. Foreign keys are written as stored strings.
+
+        Args:
+            output_dir (str): Directory where the JSON file will be saved.
+        """
+        self.stdout.write('Exporting Specimen data...')
+        specimens = Specimen.objects.all()
+
+        data = []
+        for sp in specimens:
+            sp_data = {
+                'program': sp.program_id,
+                'facility': sp.facility_id,
+                'reference': sp.reference_id,
+                'label': sp.label,
+                'name': sp.name,
+                'contributor': sp.contributor,
+                'component': sp.component_id,
+                'comp_detail': sp.comp_detail,
+                'material': sp.material,
+                'size_class': sp.size_class,
+                'governing_design_standard': sp.governing_design_standard,
+                'design_objective': sp.design_objective,
+                'comp_description': sp.comp_description,
+                'notes': sp.notes,
+            }
+            data.append(sp_data)
+
+        file_path = os.path.join(output_dir, 'specimen.json')
+        with open(file_path, 'w') as f:
+            json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
+
+    def export_test_data(self, output_dir):
+        """
+        Export Test model data to JSON file.
+
+        Excludes the derived test_id, which ingest rebuilds from the specimen
+        and the label.
+
+        Args:
+            output_dir (str): Directory where the JSON file will be saved.
+        """
+        self.stdout.write('Exporting Test data...')
+        tests = Test.objects.all()
+
+        data = []
+        for t in tests:
+            t_data = {
+                'specimen': t.specimen_id,
+                'label': t.label,
+                'test_order': t.test_order,
+                'test_type': t.test_type,
+                'loading_protocol': t.loading_protocol,
+                'peak_test_amplitude': t.peak_test_amplitude,
+                'prior_damage': t.prior_damage,
+                'prior_damage_repaired': t.prior_damage_repaired,
+                'notes': t.notes,
+            }
+            data.append(t_data)
+
+        file_path = os.path.join(output_dir, 'test.json')
+        with open(file_path, 'w') as f:
+            json.dump(data, f, indent=4, sort_keys=True, cls=DecimalEncoder)
+
     def export_observation_data(self, output_dir):
         """
         Export Observation model data to JSON file.
@@ -181,6 +312,9 @@ class Command(BaseCommand):
                 'ds_rank': exp.ds_rank,
                 'ds_class': exp.ds_class,
                 'notes': exp.notes,
+                'test': exp.test_id,
+                'label': exp.label,
+                'damage_location': exp.damage_location,
             }
             data.append(exp_data)
 

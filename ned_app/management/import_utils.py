@@ -8,6 +8,9 @@ from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
 
 _INT_FIELDS = {'ds_rank', 'num_observations'}
 _FLOAT_FIELDS = {'edp_value', 'alt_edp_value', 'median', 'beta', 'probability'}
+# Nullable foreign keys: a blank cell means no link, written as null (as
+# export_data writes it), not as an empty string.
+_NULLABLE_FK_FIELDS = {'test'}
 
 
 def load_json(filename):
@@ -182,7 +185,11 @@ def coerce_value(field, val):
         int | float | bool | str | None: The coerced value.
     """
     if val == '' or val is None:
-        if field in _INT_FIELDS or field in _FLOAT_FIELDS:
+        if (
+            field in _INT_FIELDS
+            or field in _FLOAT_FIELDS
+            or field in _NULLABLE_FK_FIELDS
+        ):
             return None
         return val
     if field in _INT_FIELDS:

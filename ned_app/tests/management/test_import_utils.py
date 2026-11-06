@@ -28,6 +28,11 @@ class CoerceValueTests(SimpleTestCase):
         self.assertIsNone(import_utils.coerce_value('ds_rank', ''))
         self.assertIsNone(import_utils.coerce_value('edp_value', ''))
 
+    def test_empty_nullable_foreign_key_becomes_none(self):
+        # A blank 'test' means no link: null, as export_data writes it.
+        self.assertIsNone(import_utils.coerce_value('test', ''))
+        self.assertEqual(import_utils.coerce_value('test', 'P|S1|T1'), 'P|S1|T1')
+
     def test_unparseable_numeric_passes_through(self):
         # Producing valid JSON is the goal; bad types surface at ingest.
         self.assertEqual(import_utils.coerce_value('ds_rank', 'abc'), 'abc')

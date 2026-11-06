@@ -134,12 +134,16 @@ class ImportModelCommandTests(TransactionTestCase):
             input_file=_template('observation_template.csv'),
             stdout=StringIO(),
         )
+        # A blank test cell is written as null, matching export_data.
+        self.assertIsNone(self._read_json('observation.json')[0]['test'])
+
         call_command('ingest', stdout=StringIO(), stderr=StringIO())
 
         exp = Observation.objects.get(id='exp001')
         self.assertEqual(exp.reference.reference_id, 'Smith-2020')
         self.assertEqual(exp.component.component_id, 'D.50.2.1.A')
         self.assertEqual(exp.edp_value, Decimal('0.45'))
+        self.assertIsNone(exp.test)
 
     def test_bridge_template_converts_to_expected_record(self):
         # The bridge uses the generic conversion path; verify the appended

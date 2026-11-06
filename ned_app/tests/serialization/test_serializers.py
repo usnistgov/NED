@@ -9,20 +9,28 @@ from rest_framework.exceptions import ValidationError
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
     Observation,
     ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
 )
 from ned_app.serialization.serializer import (
     ComponentFragilityModelBridgeSerializer,
     ComponentSerializer,
+    FacilitySerializer,
     FragilityCurveSerializer,
     FragilityModelSerializer,
     ObservationFragilityModelBridgeSerializer,
     ObservationSerializer,
+    ProgramSerializer,
     ReferenceSerializer,
+    SpecimenSerializer,
+    TestSerializer,
 )
 
 
@@ -874,6 +882,179 @@ class FragilityCurveSerializerTest(TestCase):
             fragility_model_id__startswith='test-ref-001|test-fm-'
         ).delete()
         Reference.objects.filter(reference_id__startswith='test-ref-').delete()
+
+
+class HierarchySerializerTest(TestCase):
+    """
+    Test cases for the Facility, Program, Specimen and Test serializers.
+
+    Each resolves its foreign keys by natural key (the parent's derived id)
+    and rejects a record missing a required foreign key.
+    """
+
+    def setUp(self):
+        """Set up test data."""
+        self.reference = Reference.objects.create(
+            reference_id='test-ref-001',
+            csl_data={
+                'type': 'article-journal',
+                'title': 'Test Reference',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2023]]},
+            },
+        )
+        self.other_reference = Reference.objects.create(
+            reference_id='test-ref-002',
+            csl_data={
+                'type': 'article-journal',
+                'title': 'Other Reference',
+                'author': [{'family': 'Doe', 'given': 'Jane'}],
+                'issued': {'date-parts': [[2024]]},
+            },
+        )
+        self.component = Component.objects.create(
+            component_id='A.10.1.1', name='Test Component'
+        )
+        self.facility = Facility.objects.create(label='Lab')
+        self.program = Program.objects.create(reference=self.reference)
+        self.specimen = Specimen.objects.create(
+            program=self.program,
+            facility=self.facility,
+            label='S1',
+            component=self.component,
+            comp_description='Test specimen',
+        )
+
+    def _specimen_data(self, **overrides):
+        data = {
+            'program': 'test-ref-001',
+            'facility': 'Lab',
+            'label': 'S2',
+            'component': 'A.10.1.1',
+            'comp_description': 'Another specimen',
+        }
+        data.update(overrides)
+        return data
+
+    def test_facility_serializer_creates_facility(self):
+        serializer = FacilitySerializer(data={'label': 'UCSD_LHPOST'})
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(serializer.save().label, 'UCSD_LHPOST')
+
+    def test_program_serializer_resolves_reference(self):
+        serializer = ProgramSerializer(
+            data={'label': 'P1', 'reference': 'test-ref-001'}
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        program = serializer.save()
+        self.assertEqual(program.reference, self.reference)
+        self.assertEqual(program.program_id, 'P1')
+
+    def test_program_serializer_ignores_supplied_program_id(self):
+        serializer = ProgramSerializer(
+            data={
+                'label': 'P1',
+                'reference': 'test-ref-001',
+                'program_id': 'something-else',
+            }
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(serializer.save().program_id, 'P1')
+
+    def test_program_serializer_rejects_missing_reference(self):
+        serializer = ProgramSerializer(data={'label': 'P1'})
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('reference', serializer.errors)
+
+    def test_specimen_serializer_resolves_natural_keys(self):
+        serializer = SpecimenSerializer(
+            data=self._specimen_data(reference='test-ref-002')
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        specimen = serializer.save()
+        self.assertEqual(specimen.program, self.program)
+        self.assertEqual(specimen.facility, self.facility)
+        self.assertEqual(specimen.reference, self.other_reference)
+        self.assertEqual(specimen.component, self.component)
+        self.assertEqual(specimen.specimen_id, 'test-ref-001|S2')
+
+    def test_specimen_serializer_accepts_missing_or_null_reference(self):
+        for data in (
+            self._specimen_data(label='S2'),
+            self._specimen_data(label='S3', reference=None),
+        ):
+            with self.subTest(label=data['label']):
+                serializer = SpecimenSerializer(data=data)
+                self.assertTrue(serializer.is_valid(), serializer.errors)
+                self.assertIsNone(serializer.save().reference)
+
+    def test_specimen_serializer_rejects_missing_required_foreign_keys(self):
+        for field in ('program', 'facility', 'component'):
+            with self.subTest(field=field):
+                data = self._specimen_data()
+                del data[field]
+                serializer = SpecimenSerializer(data=data)
+                self.assertFalse(serializer.is_valid())
+                self.assertIn(field, serializer.errors)
+
+    def test_test_serializer_resolves_specimen(self):
+        serializer = TestSerializer(
+            data={
+                'specimen': 'test-ref-001|S1',
+                'label': 'T1',
+                'test_type': 'Dynamic, uniaxial',
+            }
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        test = serializer.save()
+        self.assertEqual(test.specimen, self.specimen)
+        self.assertEqual(test.test_id, 'test-ref-001|S1|T1')
+        self.assertIsNone(test.test_order)
+
+    def test_test_serializer_rejects_missing_specimen(self):
+        serializer = TestSerializer(
+            data={'label': 'T1', 'test_type': 'Dynamic, uniaxial'}
+        )
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('specimen', serializer.errors)
+
+    def test_observation_serializer_resolves_optional_test(self):
+        test = Test.objects.create(
+            specimen=self.specimen, label='T1', test_type='Dynamic, uniaxial'
+        )
+        base = {
+            'reference': 'test-ref-001',
+            'component': 'A.10.1.1',
+            'test_type': 'Dynamic, uniaxial',
+            'comp_description': 'Test component description',
+            'ds_description': 'Test damage state description',
+            'edp_metric': 'Story Drift Ratio',
+            'edp_unit': 'Ratio',
+            'ds_class': 'Consequential',
+        }
+
+        linked = ObservationSerializer(
+            data={**base, 'id': 'test-exp-001', 'test': 'test-ref-001|S1|T1'}
+        )
+        self.assertTrue(linked.is_valid(), linked.errors)
+        self.assertEqual(linked.save().test, test)
+
+        unlinked = ObservationSerializer(data={**base, 'id': 'test-exp-002'})
+        self.assertTrue(unlinked.is_valid(), unlinked.errors)
+        self.assertIsNone(unlinked.save().test)
+
+        missing = ObservationSerializer(
+            data={**base, 'id': 'test-exp-003', 'test': 'test-ref-001|S1|T9'}
+        )
+        self.assertFalse(missing.is_valid())
+        self.assertIn('test', missing.errors)
 
 
 class ChoicesValidationTest(TestCase):

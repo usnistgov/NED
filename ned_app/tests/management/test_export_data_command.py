@@ -3,18 +3,71 @@ import os
 import tempfile
 from decimal import Decimal
 
+from django.apps import apps
 from django.core.management import call_command
 from django.test import TestCase
 
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
     Observation,
     ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
 )
+from ned_app.serialization.serializer import (
+    ComponentFragilityModelBridgeSerializer,
+    ComponentSerializer,
+    FacilitySerializer,
+    FragilityCurveSerializer,
+    FragilityModelSerializer,
+    ObservationFragilityModelBridgeSerializer,
+    ObservationSerializer,
+    ProgramSerializer,
+    ReferenceSerializer,
+    SpecimenSerializer,
+    TestSerializer,
+)
+
+# Every model, with the serializer ingest reads it through and the file
+# export_data writes it to. test_export_keys_match_serializer_fields asserts
+# this covers every model in the app.
+EXPORTED_MODELS = {
+    Reference: (ReferenceSerializer, 'reference.json'),
+    Component: (ComponentSerializer, 'component.json'),
+    Facility: (FacilitySerializer, 'facility.json'),
+    Program: (ProgramSerializer, 'program.json'),
+    Specimen: (SpecimenSerializer, 'specimen.json'),
+    Test: (TestSerializer, 'test.json'),
+    Observation: (ObservationSerializer, 'observation.json'),
+    FragilityModel: (FragilityModelSerializer, 'fragility_model.json'),
+    ComponentFragilityModelBridge: (
+        ComponentFragilityModelBridgeSerializer,
+        'component_fragility_model_bridge.json',
+    ),
+    ObservationFragilityModelBridge: (
+        ObservationFragilityModelBridgeSerializer,
+        'observation_fragility_model_bridge.json',
+    ),
+    FragilityCurve: (FragilityCurveSerializer, 'fragility_curve.json'),
+}
+
+# Writable serializer fields that export_data deliberately does not write.
+EXPORT_EXCEPTIONS = {
+    Reference: {
+        # Denormalized from csl_data on save(); never exported.
+        'title',
+        'author',
+        'year',
+        # Exported only when set, and the setUp Reference has none.
+        'reference_label',
+    },
+}
 
 
 class ExportDataCommandTest(TestCase):
@@ -44,10 +97,37 @@ class ExportDataCommandTest(TestCase):
             },
         )
 
+        self.facility = Facility.objects.create(
+            label='Test_Lab', name='Test Laboratory', location='Test City'
+        )
+
+        self.program = Program.objects.create(
+            label='Test_Program', name='Test program', reference=self.reference
+        )
+
+        self.specimen = Specimen.objects.create(
+            program=self.program,
+            facility=self.facility,
+            label='S1',
+            name='Specimen 1',
+            component=self.component,
+            comp_description='Test specimen description',
+        )
+
+        self.test = Test.objects.create(
+            specimen=self.specimen,
+            label='T1',
+            test_order=1,
+            test_type='Dynamic, uniaxial',
+        )
+
         self.experiment = Observation.objects.create(
             id='test-exp-001',
             reference=self.reference,
             component=self.component,
+            test=self.test,
+            label='01',
+            damage_location='Base track',
             specimen='Test specimen',
             specimen_inspection_sequence='1st test',
             contributor='Test contributor',
@@ -118,6 +198,10 @@ class ExportDataCommandTest(TestCase):
         expected_files = [
             'reference.json',
             'component.json',
+            'facility.json',
+            'program.json',
+            'specimen.json',
+            'test.json',
             'observation.json',
             'fragility_model.json',
             'component_fragility_model_bridge.json',
@@ -259,6 +343,9 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(exp_data['ds_class'], 'Consequential')
             self.assertIn('notes', exp_data)
             self.assertEqual(exp_data['notes'], 'Test notes about the experiment.')
+            self.assertEqual(exp_data['test'], 'Test_Program|S1|T1')
+            self.assertEqual(exp_data['label'], '01')
+            self.assertEqual(exp_data['damage_location'], 'Base track')
 
         with open(os.path.join(self.temp_dir, 'fragility_model.json'), 'r') as f:
             fragility_model_data = json.load(f)
@@ -364,6 +451,71 @@ class ExportDataCommandTest(TestCase):
             self.assertNotIn('edp_unit', curve)
             self.assertNotIn('reference', curve)
 
+    def test_hierarchy_exports_parents_as_stored_strings(self):
+        """Parent foreign keys are written as stored strings; own derived ids are not."""
+        call_command('export_data', output_dir=self.temp_dir)
+
+        def read(filename):
+            with open(os.path.join(self.temp_dir, filename), 'r') as f:
+                return json.load(f)
+
+        self.assertEqual(
+            read('facility.json'),
+            [
+                {
+                    'label': 'Test_Lab',
+                    'location': 'Test City',
+                    'name': 'Test Laboratory',
+                    'notes': '',
+                }
+            ],
+        )
+        [program] = read('program.json')
+        self.assertEqual(program['reference'], 'test-ref-001')
+        self.assertEqual(program['label'], 'Test_Program')
+        self.assertNotIn('program_id', program)
+
+        [specimen] = read('specimen.json')
+        self.assertEqual(specimen['program'], 'Test_Program')
+        self.assertEqual(specimen['facility'], 'Test_Lab')
+        self.assertIsNone(specimen['reference'])
+        self.assertEqual(specimen['component'], 'B.20.1.1.A')
+        self.assertNotIn('specimen_id', specimen)
+
+        [test] = read('test.json')
+        self.assertEqual(test['specimen'], 'Test_Program|S1')
+        self.assertEqual(test['test_order'], 1)
+        self.assertNotIn('test_id', test)
+
+    def test_export_keys_match_serializer_fields(self):
+        """
+        Each exported file's keys equal its serializer's writable fields.
+
+        Guards the field-list rule: a field added to a model must be added to
+        both its serializer and its export method, or it is silently dropped
+        on the JSON round trip. Deliberate differences live in
+        EXPORT_EXCEPTIONS.
+        """
+        self.assertCountEqual(
+            EXPORTED_MODELS, apps.get_app_config('ned_app').get_models()
+        )
+
+        call_command('export_data', output_dir=self.temp_dir)
+
+        for model, (serializer_class, filename) in EXPORTED_MODELS.items():
+            with self.subTest(model=model.__name__):
+                with open(os.path.join(self.temp_dir, filename), 'r') as f:
+                    records = json.load(f)
+                self.assertTrue(records, f'{filename} exported no records')
+                writable = {
+                    name
+                    for name, field in serializer_class().fields.items()
+                    if not field.read_only
+                }
+                expected = writable - EXPORT_EXCEPTIONS.get(model, set())
+                for record in records:
+                    self.assertEqual(set(record), expected)
+
     def tearDown(self):
         """Clean up test data and temporary files."""
         FragilityCurve.objects.all().delete()
@@ -371,6 +523,10 @@ class ExportDataCommandTest(TestCase):
         ComponentFragilityModelBridge.objects.all().delete()
         FragilityModel.objects.all().delete()
         Observation.objects.all().delete()
+        Test.objects.all().delete()
+        Specimen.objects.all().delete()
+        Program.objects.all().delete()
+        Facility.objects.all().delete()
         Reference.objects.all().delete()
         Component.objects.all().delete()
 

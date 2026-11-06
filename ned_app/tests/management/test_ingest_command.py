@@ -24,6 +24,7 @@ from ned_app.models import (
     Observation,
     ObservationFragilityModelBridge,
     Reference,
+    Specimen,
 )
 
 
@@ -544,6 +545,127 @@ class IngestCommandTests(TransactionTestCase):
 
             self.assertIn('Error processing Observation', stderr_value)
             self.assertIn('exp-001', stderr_value)
+
+    def test_ingest_reports_unresolved_foreign_key_on_new_model(self):
+        """A Specimen whose program doesn't exist fails that record only."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            files_data = {
+                'component.json': [{'component_id': 'B.20.1.1.A', 'name': 'Wall'}],
+                'facility.json': [
+                    {'label': 'Lab', 'name': '', 'location': '', 'notes': ''}
+                ],
+                # No program.json: the specimen's program is the only error.
+                'specimen.json': [
+                    {
+                        'program': 'Missing-2020',
+                        'facility': 'Lab',
+                        'label': 'S1',
+                        'component': 'B.20.1.1.A',
+                        'comp_description': 'Wall panel',
+                    }
+                ],
+            }
+            for filename, data in files_data.items():
+                with open(os.path.join(temp_dir, filename), 'w') as f:
+                    json.dump(data, f)
+
+            def mock_build_path(filename):
+                return os.path.join(temp_dir, filename)
+
+            stdout = StringIO()
+            stderr = StringIO()
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError) as ctx,
+            ):
+                call_command('ingest', stdout=stdout, stderr=stderr)
+
+            stderr_value = stderr.getvalue()
+            self.assertIn(
+                'Error processing Specimen [specimen_id=Missing-2020|S1]:',
+                stderr_value,
+            )
+            self.assertIn('program:', stderr_value)
+            self.assertIn('does not exist', stderr_value)
+            self.assertNotIn('facility:', stderr_value)
+            self.assertNotIn('component:', stderr_value)
+            self.assertIn(
+                'Specimen processing complete: 0 created, 0 updated, 1 failed.',
+                stdout.getvalue(),
+            )
+            self.assertIn('1 failure(s)', str(ctx.exception))
+            self.assertEqual(Specimen.objects.count(), 0)
+
+    def test_ingest_reports_case_only_label_clash_per_record(self):
+        """
+        A specimen label differing from another only in case is reported for
+        that record, not as a crash, and the records after it still load.
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+
+            def specimen(label):
+                return {
+                    'program': 'Smith-2020',
+                    'facility': 'Lab',
+                    'label': label,
+                    'component': 'B.20.1.1.A',
+                    'comp_description': 'Wall panel',
+                }
+
+            files_data = {
+                'reference.json': [
+                    {
+                        'study_type': 'Experiment',
+                        'csl_data': {
+                            'type': 'article-journal',
+                            'title': 'T',
+                            'author': [{'family': 'Smith', 'given': 'John'}],
+                            'issued': {'date-parts': [[2020]]},
+                        },
+                    }
+                ],
+                'component.json': [{'component_id': 'B.20.1.1.A', 'name': 'Wall'}],
+                'facility.json': [
+                    {'label': 'Lab', 'name': '', 'location': '', 'notes': ''}
+                ],
+                'program.json': [
+                    {'label': '', 'name': '', 'notes': '', 'reference': 'Smith-2020'}
+                ],
+                'specimen.json': [specimen('S6'), specimen('s6'), specimen('S7')],
+            }
+            for filename, data in files_data.items():
+                with open(os.path.join(temp_dir, filename), 'w') as f:
+                    json.dump(data, f)
+
+            def mock_build_path(filename):
+                return os.path.join(temp_dir, filename)
+
+            stdout = StringIO()
+            stderr = StringIO()
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError),
+            ):
+                call_command('ingest', stdout=stdout, stderr=stderr)
+
+            self.assertIn(
+                'Error processing Specimen [specimen_id=Smith-2020|s6]:',
+                stderr.getvalue(),
+            )
+            self.assertIn(
+                'Specimen processing complete: 2 created, 0 updated, 1 failed.',
+                stdout.getvalue(),
+            )
+            self.assertEqual(
+                sorted(Specimen.objects.values_list('label', flat=True)),
+                ['S6', 'S7'],
+            )
 
     def test_ingest_is_idempotent(self):
         """Test that running ingest multiple times doesn't create duplicates and updates changed records."""

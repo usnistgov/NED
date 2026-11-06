@@ -3,26 +3,35 @@ import os
 
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand, CommandError
+from django.db import transaction
 
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
     Observation,
     ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
     derive_reference_id,
 )
 from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
 from ned_app.serialization.serializer import (
     ComponentFragilityModelBridgeSerializer,
     ComponentSerializer,
+    FacilitySerializer,
     FragilityCurveSerializer,
     FragilityModelSerializer,
     ObservationFragilityModelBridgeSerializer,
     ObservationSerializer,
+    ProgramSerializer,
     ReferenceSerializer,
+    SpecimenSerializer,
+    TestSerializer,
 )
 
 
@@ -125,6 +134,41 @@ class Command(BaseCommand):
                 'lookup_field': ['component_id'],
             },
             {
+                'model': Facility,
+                'serializer': FacilitySerializer,
+                'file': 'facility.json',
+                'lookup_field': ['label'],
+            },
+            {
+                'model': Program,
+                'serializer': ProgramSerializer,
+                'file': 'program.json',
+                'lookup_field': ['program_id'],
+                # Derived ids below are not stored in the JSON either; each is
+                # rebuilt from the record's label and its parent's stored id.
+                'lookup_deriver': lambda item: {
+                    'program_id': item.get('label') or item['reference']
+                },
+            },
+            {
+                'model': Specimen,
+                'serializer': SpecimenSerializer,
+                'file': 'specimen.json',
+                'lookup_field': ['specimen_id'],
+                'lookup_deriver': lambda item: {
+                    'specimen_id': f'{item["program"]}|{item["label"]}'
+                },
+            },
+            {
+                'model': Test,
+                'serializer': TestSerializer,
+                'file': 'test.json',
+                'lookup_field': ['test_id'],
+                'lookup_deriver': lambda item: {
+                    'test_id': f'{item["specimen"]}|{item["label"]}'
+                },
+            },
+            {
                 'model': FragilityModel,
                 'serializer': FragilityModelSerializer,
                 'file': 'fragility_model.json',
@@ -224,14 +268,14 @@ class Command(BaseCommand):
             try:
                 if lookup_deriver is not None:
                     # The lookup key is not stored in the JSON; compute it. A
-                    # malformed record (e.g. missing csl_data or its year) can't
-                    # be keyed — surface a clear message, not a bare KeyError.
+                    # malformed record (e.g. missing csl_data, or a missing
+                    # label or parent) can't be keyed — surface a clear
+                    # message, not a bare KeyError.
                     try:
                         lookup_params = lookup_deriver(item)
                     except (KeyError, IndexError, TypeError) as exc:
                         raise ValueError(
-                            'could not derive the lookup key from the record '
-                            f'(malformed csl_data?): {exc!r}'
+                            f'could not derive the lookup id from the record: {exc!r}'
                         ) from exc
                     have_lookup = True
                 else:
@@ -253,7 +297,11 @@ class Command(BaseCommand):
                     serializer = serializer_class(data=item)
 
                 serializer.is_valid(raise_exception=True)
-                serializer.save()
+                # A savepoint per record: a database error (e.g. a case-only
+                # label clash, which DRF doesn't validate for the Lower(...)
+                # constraints) fails this record only, and the rest continue.
+                with transaction.atomic():
+                    serializer.save()
 
                 if instance:
                     updated_count += 1

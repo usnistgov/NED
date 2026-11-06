@@ -4,36 +4,225 @@ import tempfile
 from typing import ClassVar
 from unittest.mock import patch
 
+from django.apps import apps
+from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import SimpleTestCase, TransactionTestCase, tag
 
 from ned_app.models import (
     Component,
+    ComponentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
     Observation,
     ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
     derive_reference_id,
 )
+from ned_app.validators import validate_label
+
+# How each hierarchy file's derived id is rebuilt from a record, as ingest
+# derives it for its lookup.
+DERIVE_ID = {
+    'facility': lambda r: r['label'],
+    'program': lambda r: r.get('label') or r['reference'],
+    'specimen': lambda r: f'{r["program"]}|{r["label"]}',
+    'test': lambda r: f'{r["specimen"]}|{r["label"]}',
+}
+
+
+def derived_id_problems(records, derive):
+    """
+    Check that every record's derived id can be derived and is unique.
+
+    Uniqueness ignores case, as the Lower(...) constraints do.
+
+    Args:
+        records (list[dict]): Records from one JSON file.
+        derive (callable): Builds a record's derived id.
+
+    Returns:
+        list[str]: One line per problem; empty when the records are clean.
+    """
+    seen = {}
+    problems = []
+    for index, record in enumerate(records):
+        try:
+            derived = derive(record)
+        except (KeyError, TypeError) as exc:
+            problems.append(f'record {index}: id cannot be derived ({exc!r})')
+            continue
+        if derived.lower() in seen:
+            problems.append(
+                f'{derived}: duplicates {seen[derived.lower()]} (ignoring case)'
+            )
+        else:
+            seen[derived.lower()] = derived
+    return problems
+
+
+def label_problems(records, allow_blank=False):
+    """
+    Check that every label passes validate_label.
+
+    Args:
+        records (list[dict]): Records from one JSON file.
+        allow_blank (bool): Skip blank labels (a program's label is optional).
+
+    Returns:
+        list[str]: One line per problem; empty when the records are clean.
+    """
+    problems = []
+    for index, record in enumerate(records):
+        label = record.get('label', '')
+        if allow_blank and not label:
+            continue
+        try:
+            validate_label(label)
+        except ValidationError as exc:
+            problems.append(f'record {index}: label {label!r}: {exc.messages[0]}')
+    return problems
+
+
+def parent_problems(records, field, parent_ids, nullable=False):
+    """
+    Check that every record's parent string matches a parent id exactly.
+
+    Foreign-key lookups are exact, so a parent that differs only in case does
+    not resolve, even though uniqueness ignores case.
+
+    Args:
+        records (list[dict]): Records from one JSON file.
+        field (str): The foreign-key key in each record.
+        parent_ids (set[str]): Every id in the parent file.
+        nullable (bool): Allow a null parent (an optional foreign key).
+
+    Returns:
+        list[str]: One line per problem; empty when the records are clean.
+    """
+    problems = []
+    for index, record in enumerate(records):
+        value = record.get(field)
+        if value is None and nullable:
+            continue
+        if value not in parent_ids:
+            problems.append(f'record {index}: {field} {value!r} does not resolve')
+    return problems
+
+
+def derivable_ids(records, derive):
+    """
+    Return the ids derivable from the records, skipping any that can't be.
+
+    Args:
+        records (list[dict]): Records from one JSON file.
+        derive (callable): Builds a record's derived id.
+
+    Returns:
+        set[str]: The derived ids.
+    """
+    ids = set()
+    for record in records:
+        try:
+            ids.add(derive(record))
+        except (KeyError, TypeError):
+            continue
+    return ids
 
 
 @tag('integrity')
 class DataIntegrityTests(TransactionTestCase):
     fixtures: ClassVar[list[str]] = ['initial_data.json']
+    # The round trip keys rows by pk, and flush resets the sequences before
+    # ingest recreates the rows. Start from reset sequences too, so the rows
+    # seeded here get the same pks as their re-ingested copies.
+    reset_sequences = True
 
     def setUp(self):
         self.temp_dir_path = tempfile.mkdtemp()
 
-    def test_db_round_trip(self):
-        initial_references = list(Reference.objects.all())
-        initial_components = list(Component.objects.all())
-        initial_fragility_models = list(FragilityModel.objects.all())
-        initial_experiments = list(Observation.objects.all())
-        initial_exp_frag_bridges = list(
-            ObservationFragilityModelBridge.objects.all()
+    # Every model in the app, in ingest order. test_db_round_trip asserts this
+    # list is complete, so a new model can't be left out of the round trip.
+    ROUND_TRIP_MODELS: ClassVar[list] = [
+        Reference,
+        Component,
+        Facility,
+        Program,
+        Specimen,
+        Test,
+        FragilityModel,
+        ComponentFragilityModelBridge,
+        Observation,
+        ObservationFragilityModelBridge,
+        FragilityCurve,
+    ]
+
+    def _seed_hierarchy(self):
+        """
+        Seed synthetic Facility/Program/Specimen/Test rows and link an observation.
+
+        The hierarchy tables are empty in the canonical data until the
+        conversion runs, so without these rows their round trip would pass
+        on empty tables.
+        """
+        reference, other_reference = Reference.objects.order_by('pk')[:2]
+        component = Component.objects.order_by('pk').first()
+        facility = Facility.objects.create(
+            label='Synthetic_Lab', name='Synthetic Lab', location='Nowhere'
         )
-        initial_fragility_curves = list(FragilityCurve.objects.all())
+        unlabelled_program = Program.objects.create(reference=reference)
+        labelled_program = Program.objects.create(
+            label='Synthetic_Program', name='A program', reference=reference
+        )
+        specimen = Specimen.objects.create(
+            program=unlabelled_program,
+            facility=facility,
+            label='S1',
+            component=component,
+            comp_description='Synthetic specimen',
+        )
+        Specimen.objects.create(
+            program=labelled_program,
+            facility=facility,
+            reference=other_reference,
+            label='S2',
+            component=component,
+            comp_description='Synthetic specimen with its own reference',
+        )
+        ordered_test = Test.objects.create(
+            specimen=specimen,
+            label='T1',
+            test_order=1,
+            test_type='Dynamic, uniaxial',
+        )
+        Test.objects.create(
+            specimen=specimen,
+            label='T2',
+            test_type='Dynamic, uniaxial',
+        )
+        observation = Observation.objects.order_by('pk').first()
+        observation.test = ordered_test
+        observation.label = '01'
+        observation.damage_location = 'Base'
+        observation.save()
+
+    def test_db_round_trip(self):
+        self.assertCountEqual(
+            self.ROUND_TRIP_MODELS, apps.get_app_config('ned_app').get_models()
+        )
+
+        self._seed_hierarchy()
+
+        initial_rows = {}
+        for model in self.ROUND_TRIP_MODELS:
+            initial_rows[model] = list(model.objects.all())
+            self.assertTrue(
+                initial_rows[model], f'{model.__name__} has no rows to round-trip'
+            )
 
         call_command('export_data', output_dir=self.temp_dir_path)
 
@@ -48,96 +237,33 @@ class DataIntegrityTests(TransactionTestCase):
         ):
             call_command('ingest')
 
-        final_references = list(Reference.objects.all())
-        final_components = list(Component.objects.all())
-        final_fragility_models = list(FragilityModel.objects.all())
-        final_experiments = list(Observation.objects.all())
-        final_exp_frag_bridges = list(ObservationFragilityModelBridge.objects.all())
-        final_fragility_curves = list(FragilityCurve.objects.all())
+        def field_values(row):
+            return {k: v for k, v in row.__dict__.items() if k != '_state'}
 
-        self.assertEqual(len(initial_references), len(final_references))
-        self.assertEqual(len(initial_components), len(final_components))
-        self.assertEqual(len(initial_fragility_models), len(final_fragility_models))
-        self.assertEqual(len(initial_experiments), len(final_experiments))
-        self.assertEqual(len(initial_exp_frag_bridges), len(final_exp_frag_bridges))
-        self.assertEqual(len(initial_fragility_curves), len(final_fragility_curves))
+        # Keyed by .pk, which works for string and integer keys alike.
+        for model in self.ROUND_TRIP_MODELS:
+            final_rows = {row.pk: row for row in model.objects.all()}
+            self.assertEqual(
+                len(initial_rows[model]), len(final_rows), model.__name__
+            )
+            for initial_row in initial_rows[model]:
+                self.assertEqual(
+                    field_values(initial_row),
+                    field_values(final_rows[initial_row.pk]),
+                )
 
-        final_references_dict = {ref.id: ref for ref in final_references}
-        final_components_dict = {comp.id: comp for comp in final_components}
-        final_fragility_models_dict = {fm.id: fm for fm in final_fragility_models}
-        final_experiments_dict = {exp.id: exp for exp in final_experiments}
-        final_exp_frag_bridges_dict = {
-            bridge.id: bridge for bridge in final_exp_frag_bridges
-        }
-        final_fragility_curves_dict = {
-            curve.id: curve for curve in final_fragility_curves
-        }
-
-        for initial_ref in initial_references:
-            final_ref = final_references_dict[initial_ref.id]
-            initial_dict = {
-                k: v for k, v in initial_ref.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_ref.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_comp in initial_components:
-            final_comp = final_components_dict[initial_comp.id]
-            initial_dict = {
-                k: v for k, v in initial_comp.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_comp.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_fm in initial_fragility_models:
-            final_fm = final_fragility_models_dict[initial_fm.id]
-            initial_dict = {
-                k: v for k, v in initial_fm.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_fm.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_exp in initial_experiments:
-            final_exp = final_experiments_dict[initial_exp.id]
-            initial_dict = {
-                k: v for k, v in initial_exp.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_exp.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_exp_frag_bridge in initial_exp_frag_bridges:
-            final_exp_frag_bridge = final_exp_frag_bridges_dict[
-                initial_exp_frag_bridge.id
-            ]
-            initial_dict = {
-                k: v
-                for k, v in initial_exp_frag_bridge.__dict__.items()
-                if k != '_state'
-            }
-            final_dict = {
-                k: v
-                for k, v in final_exp_frag_bridge.__dict__.items()
-                if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_curve in initial_fragility_curves:
-            final_curve = final_fragility_curves_dict[initial_curve.id]
-            initial_dict = {
-                k: v for k, v in initial_curve.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_curve.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
+        # A second ingest must find every row by its lookup (derived ids
+        # included) and create nothing.
+        counts = {model: model.objects.count() for model in self.ROUND_TRIP_MODELS}
+        with patch(
+            'ned_app.management.commands.ingest.build_json_data_file_path',
+            side_effect=mock_build_json_data_file_path,
+        ):
+            call_command('ingest')
+        self.assertEqual(
+            counts,
+            {model: model.objects.count() for model in self.ROUND_TRIP_MODELS},
+        )
 
     def test_json_to_db_to_json_round_trip_is_lossless(self):
         temp_export_dir = tempfile.mkdtemp()
@@ -171,6 +297,10 @@ class DataIntegrityTests(TransactionTestCase):
                     x['fragility_model'],
                     x['ds_rank'],
                 ),
+                'facility.json': lambda x: x['label'].lower(),
+                'program.json': lambda x: (x['reference'], x['label']),
+                'specimen.json': lambda x: (x['program'], x['label'].lower()),
+                'test.json': lambda x: (x['specimen'], x['label'].lower()),
             }
 
             for json_file, sort_func in json_files.items():
@@ -258,6 +388,145 @@ class CanonicalReferenceDataTests(SimpleTestCase):
             'reference.json has references whose derived id is missing or '
             'duplicated (add a reference_label / fix csl_data):\n'
             + '\n'.join(problems),
+        )
+
+
+class CanonicalHierarchyDataTests(SimpleTestCase):
+    """
+    Guards on the canonical facility, program, specimen and test files.
+
+    Derived ids are rebuilt at ingest and every child file stores its parent's
+    derived id, so these checks catch an id that can't be built, a case-only
+    duplicate and a dangling parent before ingest does. The guards themselves
+    are unit-tested in HierarchyGuardTests, since the files may be empty.
+    """
+
+    DATA_DIR = 'resources/data'
+
+    def _load(self, name):
+        path = os.path.join(self.DATA_DIR, f'{name}.json')
+        with open(path, 'r', encoding='utf-8') as f:
+            return [r for r in json.load(f) if '_comment' not in r]
+
+    def setUp(self):
+        self.records = {
+            name: self._load(name)
+            for name in (
+                'reference',
+                'component',
+                'facility',
+                'program',
+                'specimen',
+                'test',
+                'observation',
+            )
+        }
+        self.ids = {
+            name: derivable_ids(self.records[name], derive)
+            for name, derive in DERIVE_ID.items()
+        }
+        self.ids['reference'] = derivable_ids(
+            self.records['reference'],
+            lambda r: derive_reference_id(
+                r.get('reference_label', '') or '', r['csl_data']
+            ),
+        )
+        self.ids['component'] = {
+            r['component_id'] for r in self.records['component']
+        }
+
+    def test_derived_ids_are_derivable_and_unique(self):
+        for name, derive in DERIVE_ID.items():
+            with self.subTest(file=f'{name}.json'):
+                self.assertEqual(derived_id_problems(self.records[name], derive), [])
+
+    def test_labels_are_valid(self):
+        # Specimen and test labels are required; a program's label is optional
+        # (blank on every converted program).
+        for name in ('facility', 'specimen', 'test'):
+            with self.subTest(file=f'{name}.json'):
+                self.assertEqual(label_problems(self.records[name]), [])
+        with self.subTest(file='program.json'):
+            self.assertEqual(
+                label_problems(self.records['program'], allow_blank=True), []
+            )
+
+    def test_parents_resolve_with_exact_case(self):
+        # (file, foreign-key key, parent file, nullable)
+        checks = [
+            ('program', 'reference', 'reference', False),
+            ('specimen', 'program', 'program', False),
+            ('specimen', 'facility', 'facility', False),
+            ('specimen', 'reference', 'reference', True),
+            ('specimen', 'component', 'component', False),
+            ('test', 'specimen', 'specimen', False),
+            ('observation', 'test', 'test', True),
+        ]
+        for name, field, parent, nullable in checks:
+            with self.subTest(file=f'{name}.json', field=field):
+                self.assertEqual(
+                    parent_problems(
+                        self.records[name], field, self.ids[parent], nullable
+                    ),
+                    [],
+                )
+
+
+class HierarchyGuardTests(SimpleTestCase):
+    """Unit tests for the hierarchy guard helpers, on small bad inputs."""
+
+    def test_clean_records_pass(self):
+        programs = [
+            {'label': '', 'reference': 'Smith-2020'},
+            {'label': 'P1', 'reference': 'Smith-2020'},
+        ]
+        self.assertEqual(derived_id_problems(programs, DERIVE_ID['program']), [])
+        self.assertEqual(label_problems(programs, allow_blank=True), [])
+        self.assertEqual(parent_problems(programs, 'reference', {'Smith-2020'}), [])
+
+    def test_case_only_duplicate_id_is_reported(self):
+        specimens = [
+            {'program': 'P1', 'label': 'S6'},
+            {'program': 'P1', 'label': 's6'},
+        ]
+        problems = derived_id_problems(specimens, DERIVE_ID['specimen'])
+        self.assertEqual(len(problems), 1)
+        self.assertIn('P1|s6', problems[0])
+
+    def test_underivable_id_is_reported(self):
+        tests = [{'label': 'T1'}]
+        problems = derived_id_problems(tests, DERIVE_ID['test'])
+        self.assertEqual(len(problems), 1)
+        self.assertIn('cannot be derived', problems[0])
+
+    def test_bad_label_is_reported(self):
+        tests = [{'specimen': 'P1|S1', 'label': 'T 1'}]
+        self.assertEqual(len(label_problems(tests)), 1)
+
+    def test_blank_label_is_reported_unless_allowed(self):
+        records = [{'label': ''}]
+        self.assertEqual(len(label_problems(records)), 1)
+        self.assertEqual(label_problems(records, allow_blank=True), [])
+
+    def test_wrong_case_parent_is_reported(self):
+        tests = [{'specimen': 'P1|s1', 'label': 'T1'}]
+        problems = parent_problems(tests, 'specimen', {'P1|S1'})
+        self.assertEqual(len(problems), 1)
+        self.assertIn("'P1|s1'", problems[0])
+
+    def test_unresolved_observation_test_is_reported(self):
+        observations = [
+            {'id': 'a', 'test': None},
+            {'id': 'b', 'test': 'P1|S1|T9'},
+        ]
+        problems = parent_problems(observations, 'test', {'P1|S1|T1'}, nullable=True)
+        self.assertEqual(problems, ["record 1: test 'P1|S1|T9' does not resolve"])
+
+    def test_null_parent_is_reported_unless_nullable(self):
+        specimens = [{'program': 'P1', 'label': 'S1', 'reference': None}]
+        self.assertEqual(len(parent_problems(specimens, 'reference', set())), 1)
+        self.assertEqual(
+            parent_problems(specimens, 'reference', set(), nullable=True), []
         )
 
 
