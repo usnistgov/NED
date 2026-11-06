@@ -12,6 +12,8 @@ from ned_app.models import (
     FragilityModel,
     Program,
     Reference,
+    Specimen,
+    Test,
 )
 
 
@@ -89,3 +91,17 @@ class ProgramAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
     list_display = ('program_id', 'reference', 'name')
     readonly_fields = ('program_id',)
+
+
+@admin.register(Specimen)
+class SpecimenAdmin(admin.ModelAdmin):
+    # how column data is displayed in the report for all entered data
+    list_display = ('specimen_id', 'program', 'facility', 'name')
+    readonly_fields = ('specimen_id',)
+
+
+@admin.register(Test)
+class TestAdmin(admin.ModelAdmin):
+    # how column data is displayed in the report for all entered data
+    list_display = ('test_id', 'specimen', 'test_order', 'test_type')
+    readonly_fields = ('test_id',)

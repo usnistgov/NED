@@ -1026,3 +1026,229 @@ class Program(models.Model):
     def save(self, *args, **kwargs):
         self.program_id = self.label or self.reference_id
         super().save(*args, **kwargs)
+
+
+class Specimen(models.Model):
+    """
+    A physical specimen tested in a program, at one facility.
+
+    Attributes:
+        specimen_id (str): Derived identity, '{program_id}|{label}'.
+        program (Program): The program the specimen belongs to.
+        facility (Facility): Where the specimen was tested.
+        reference (Reference): Optional override, for a specimen documented by its own report.
+        label (str): Short identifier, unique within the program regardless of case.
+        name (str): The specimen's name as the reference writes it.
+        contributor (str): Individual or institution that documented the specimen.
+        component (id): Identifier of the component type.
+        comp_detail, material, size_class (str): Component subcategorization tags.
+        design_objective, governing_design_standard, comp_description (str): Design context.
+        notes (str): Free-text notes.
+    """
+
+    specimen_id = models.CharField(
+        _('specimen id'),
+        max_length=255,
+        unique=True,
+        editable=False,
+        help_text="Derived: '{program_id}|{label}'.",
+    )
+    program = models.ForeignKey(
+        'Program',
+        on_delete=models.PROTECT,
+        to_field='program_id',
+        help_text='The program the specimen belongs to.',
+    )
+    facility = models.ForeignKey(
+        'Facility',
+        on_delete=models.PROTECT,
+        to_field='label',
+        help_text='Where the specimen was tested.',
+    )
+    reference = models.ForeignKey(
+        'Reference',
+        on_delete=models.PROTECT,
+        to_field='reference_id',
+        null=True,
+        blank=True,
+        help_text="Optional: set only when the specimen is documented by a different reference than its program's.",
+    )
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        validators=[validate_label],
+        help_text='Short identifier, unique within the program.',
+    )
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        blank=True,
+        help_text='ID or name of the specimen as recorded in the reference.',
+    )
+    contributor = models.CharField(
+        _('contributor'),
+        max_length=50,
+        blank=True,
+        help_text='Individual or institution responsible for documenting this specimen in the database.',
+    )
+    component = models.ForeignKey(
+        'Component',
+        on_delete=models.PROTECT,
+        to_field='component_id',
+        help_text='Identifier of the component type',
+    )
+    comp_detail = models.CharField(
+        _('component detail tag'),
+        max_length=100,
+        blank=True,
+        help_text='Classification or short description of the component attachment detailing.',
+    )
+    material = models.CharField(
+        _('material classification tag'),
+        max_length=100,
+        blank=True,
+        help_text='Classification or short description of the component material (if applicable).',
+    )
+    size_class = models.CharField(
+        _('size classification tag'),
+        max_length=100,
+        blank=True,
+        help_text='Classification or short description of the general size of this particular component compared to others of the same type (if applicable).',
+    )
+    governing_design_standard = models.CharField(
+        _('governing design standard'),
+        max_length=255,
+        blank=True,
+        help_text='Name of the standard governing the design of the specimen, if applicable.',
+    )
+    design_objective = models.TextField(
+        _('design objective'),
+        blank=True,
+        help_text='General description of the performance level to which the specimen was designed, e.g., code compliant, common construction practice, low-damage-design, or meeting a certain damage objective under a specific loading condition.',
+    )
+    comp_description = models.TextField(
+        _('component description'),
+        blank=False,
+        help_text='General description of the type of component.',
+    )
+    notes = models.TextField(_('notes'), blank=True)
+
+    class Meta:
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(
+                Lower('label'),
+                models.F('program'),
+                name='specimen_label_ci_unique_in_program',
+            ),
+        ]
+
+    def __str__(self):
+        return self.specimen_id
+
+    def save(self, *args, **kwargs):
+        self.specimen_id = f'{self.program_id}|{self.label}'
+        super().save(*args, **kwargs)
+
+    @property
+    def effective_reference_id(self):
+        """The specimen's own reference if set, else its program's."""
+        return self.reference_id or self.program.reference_id
+
+    @property
+    def number_of_tests(self):
+        return self.test_set.count()
+
+
+class Test(models.Model):
+    """
+    One test of a specimen: a loading run whose damage is recorded as observations.
+
+    Attributes:
+        test_id (str): Derived identity, '{specimen_id}|{label}'.
+        specimen (Specimen): The specimen tested.
+        label (str): Short identifier, unique within the specimen regardless of case.
+        test_order (int): The test's place in the specimen's test order; null if not recorded.
+        test_type (str): The type of test generally describing the loading condition.
+        loading_protocol (str): The ground motion or loading protocol used.
+        peak_test_amplitude (str): The maximum amplitude of the test.
+        prior_damage (str): The specimen's condition entering this test.
+        prior_damage_repaired (str): Whether prior damage was repaired before this test.
+        notes (str): Free-text notes.
+    """
+
+    # Not a test case: keep pytest from collecting this class.
+    __test__ = False
+
+    test_id = models.CharField(
+        _('test id'),
+        max_length=255,
+        unique=True,
+        editable=False,
+        help_text="Derived: '{specimen_id}|{label}'.",
+    )
+    specimen = models.ForeignKey(
+        'Specimen',
+        on_delete=models.PROTECT,
+        to_field='specimen_id',
+        help_text='The specimen tested.',
+    )
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        validators=[validate_label],
+        help_text='Short identifier, unique within the specimen.',
+    )
+    test_order = models.PositiveIntegerField(
+        _('test order'),
+        null=True,
+        blank=True,
+        help_text="The test's place in the specimen's test order, as the reference numbers it; blank if not recorded.",
+    )
+    test_type = models.CharField(
+        _('test type'),
+        max_length=50,
+        choices=TestTypeChoices.choices,
+        help_text='The type of test generally describing the condition under which the specimen was loaded.',
+    )
+    loading_protocol = models.TextField(
+        _('loading protocol'),
+        blank=True,
+        help_text='Name, ID, or general description of the ground motion or loading protocol used in the test.',
+    )
+    peak_test_amplitude = models.CharField(
+        _('peak test amplitude'),
+        max_length=255,
+        blank=True,
+        help_text='The maximum amplitude to which this test was performed.',
+    )
+    prior_damage = models.TextField(
+        _('prior damage'),
+        blank=True,
+        help_text='The condition the specimen was in entering this test, including damage from outside the database.',
+    )
+    prior_damage_repaired = models.TextField(
+        _('is prior damage repaired'),
+        blank=True,
+        help_text='Whether the prior damage entering this test was repaired before it.',
+    )
+    notes = models.TextField(_('notes'), blank=True)
+
+    class Meta:
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(
+                Lower('label'),
+                models.F('specimen'),
+                name='test_label_ci_unique_in_specimen',
+            ),
+            models.UniqueConstraint(
+                fields=['specimen', 'test_order'],
+                name='test_order_unique_in_specimen',
+            ),
+        ]
+
+    def __str__(self):
+        return self.test_id
+
+    def save(self, *args, **kwargs):
+        self.test_id = f'{self.specimen_id}|{self.label}'
+        super().save(*args, **kwargs)

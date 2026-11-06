@@ -7,6 +7,8 @@ from ned_app.models import (
     Facility,
     Program,
     Reference,
+    Specimen,
+    Test,
     derive_reference_id,
     normalize_author_token,
 )
@@ -594,3 +596,84 @@ class FacilityModelTest(TestCase):
         Facility.objects.create(label='UB_NCS')
         with self.assertRaises(IntegrityError), transaction.atomic():
             Facility.objects.create(label='ub_ncs')
+
+
+class SpecimenAndTestModelTest(TestCase):
+    """Test cases for Specimen and Test, focusing on derived ids and constraints."""
+
+    def setUp(self):
+        reference = Reference.objects.create(
+            reference_id='Smith-2020',
+            csl_data={
+                'type': 'article-journal',
+                'id': 'smith-2020',
+                'title': 'Test Article',
+                'author': [{'family': 'Smith', 'given': 'John'}],
+                'issued': {'date-parts': [[2020]]},
+            },
+        )
+        self.component = Component.objects.create(
+            component_id='C.10.1.1', name='Fixed Partitions'
+        )
+        self.program = Program.objects.create(reference=reference)
+        self.facility = Facility.objects.create(label='UB_NCS')
+        self.specimen = self.make_specimen('S1')
+
+    def make_specimen(self, label):
+        return Specimen.objects.create(
+            program=self.program,
+            facility=self.facility,
+            component=self.component,
+            label=label,
+            comp_description='Partition wall',
+        )
+
+    def make_test(self, label, test_order=None):
+        return Test.objects.create(
+            specimen=self.specimen,
+            label=label,
+            test_order=test_order,
+            test_type='Quasi-static Cyclic, uniaxial',
+        )
+
+    def test_ids_are_derived(self):
+        test = self.make_test('7', test_order=7)
+        self.assertEqual(self.specimen.specimen_id, 'Smith-2020|S1')
+        self.assertEqual(test.test_id, 'Smith-2020|S1|7')
+
+    def test_relabelling_updates_the_id_on_the_same_row(self):
+        # Only for a row with no children; relabelling a parent is rename_identity's job.
+        test = self.make_test('a')
+        test.label = 'b'
+        test.save()
+        self.assertEqual(Test.objects.get(pk=test.pk).test_id, 'Smith-2020|S1|b')
+        self.assertEqual(Test.objects.count(), 1)
+
+        specimen = self.make_specimen('S2')
+        specimen.label = 'S3'
+        specimen.save()
+        self.assertEqual(
+            Specimen.objects.get(pk=specimen.pk).specimen_id, 'Smith-2020|S3'
+        )
+
+    def test_specimen_label_differing_only_in_case_is_rejected(self):
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            self.make_specimen('s1')
+
+    def test_test_label_differing_only_in_case_is_rejected(self):
+        self.make_test('A')
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            self.make_test('a')
+
+    def test_duplicate_test_order_is_rejected(self):
+        self.make_test('7', test_order=7)
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            self.make_test('x', test_order=7)
+
+    def test_two_null_test_orders_are_accepted(self):
+        self.make_test('a')
+        self.make_test('b')
+        self.assertEqual(self.specimen.number_of_tests, 2)
+
+    def test_effective_reference_falls_back_to_program(self):
+        self.assertEqual(self.specimen.effective_reference_id, 'Smith-2020')
