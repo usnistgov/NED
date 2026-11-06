@@ -19,10 +19,10 @@ from ned_app.management.commands.ingest import _format_errors
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
     Reference,
 )
 
@@ -139,11 +139,11 @@ class IngestCommandTests(TransactionTestCase):
 
             bridge_data = [
                 {
-                    'experiment': 'exp-001',
+                    'observation': 'exp-001',
                     'fragility_model': 'Smith-2020|fm-001',
                 },
                 {
-                    'experiment': 'exp-002',
+                    'observation': 'exp-002',
                     'fragility_model': 'Doe-2021|fm-002',
                 },
             ]
@@ -186,8 +186,8 @@ class IngestCommandTests(TransactionTestCase):
                 'component.json': component_data,
                 'fragility_model.json': fragility_model_data,
                 'component_fragility_model_bridge.json': component_fragility_bridge_data,
-                'experiment.json': experiment_data,
-                'experiment_fragility_model_bridge.json': bridge_data,
+                'observation.json': experiment_data,
+                'observation_fragility_model_bridge.json': bridge_data,
                 'fragility_curve.json': fragility_curve_data,
             }
 
@@ -209,15 +209,15 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(Component.objects.count(), 2)
             self.assertEqual(FragilityModel.objects.count(), 2)
             self.assertEqual(ComponentFragilityModelBridge.objects.count(), 2)
-            self.assertEqual(Experiment.objects.count(), 2)
-            self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 2)
+            self.assertEqual(Observation.objects.count(), 2)
+            self.assertEqual(ObservationFragilityModelBridge.objects.count(), 2)
             self.assertEqual(FragilityCurve.objects.count(), 3)
 
-            exp_001 = Experiment.objects.get(id='exp-001')
+            exp_001 = Observation.objects.get(id='exp-001')
             self.assertEqual(exp_001.reference.reference_id, 'Smith-2020')
             self.assertEqual(exp_001.component.component_id, 'B.20.1.1.A')
 
-            exp_002 = Experiment.objects.get(id='exp-002')
+            exp_002 = Observation.objects.get(id='exp-002')
             self.assertEqual(exp_002.reference.reference_id, 'Smith-2020')
             self.assertEqual(exp_002.component.component_id, 'D.30.3.2.B')
 
@@ -239,20 +239,20 @@ class IngestCommandTests(TransactionTestCase):
                 cfm_bridge_2.fragility_model.fragility_model_id, 'Doe-2021|fm-002'
             )
 
-            bridge_1 = ExperimentFragilityModelBridge.objects.get(
-                experiment__id='exp-001',
+            bridge_1 = ObservationFragilityModelBridge.objects.get(
+                observation__id='exp-001',
                 fragility_model__fragility_model_id='Smith-2020|fm-001',
             )
-            self.assertEqual(bridge_1.experiment.id, 'exp-001')
+            self.assertEqual(bridge_1.observation.id, 'exp-001')
             self.assertEqual(
                 bridge_1.fragility_model.fragility_model_id, 'Smith-2020|fm-001'
             )
 
-            bridge_2 = ExperimentFragilityModelBridge.objects.get(
-                experiment__id='exp-002',
+            bridge_2 = ObservationFragilityModelBridge.objects.get(
+                observation__id='exp-002',
                 fragility_model__fragility_model_id='Doe-2021|fm-002',
             )
-            self.assertEqual(bridge_2.experiment.id, 'exp-002')
+            self.assertEqual(bridge_2.observation.id, 'exp-002')
             self.assertEqual(
                 bridge_2.fragility_model.fragility_model_id, 'Doe-2021|fm-002'
             )
@@ -514,7 +514,7 @@ class IngestCommandTests(TransactionTestCase):
             with open(component_file, 'w') as f:
                 json.dump(component_data, f)
 
-            experiment_file = os.path.join(temp_dir, 'experiment.json')
+            experiment_file = os.path.join(temp_dir, 'observation.json')
             with open(experiment_file, 'w') as f:
                 json.dump(experiment_data, f)
 
@@ -540,9 +540,9 @@ class IngestCommandTests(TransactionTestCase):
                 Component.objects.filter(component_id='B.20.1.1.A').exists()
             )
 
-            self.assertEqual(Experiment.objects.count(), 0)
+            self.assertEqual(Observation.objects.count(), 0)
 
-            self.assertIn('Error processing Experiment', stderr_value)
+            self.assertIn('Error processing Observation', stderr_value)
             self.assertIn('exp-001', stderr_value)
 
     def test_ingest_is_idempotent(self):
@@ -598,7 +598,7 @@ class IngestCommandTests(TransactionTestCase):
             ]
 
             bridge_data = [
-                {'experiment': 'exp-idem', 'fragility_model': 'Test-2025|fm-idem'}
+                {'observation': 'exp-idem', 'fragility_model': 'Test-2025|fm-idem'}
             ]
 
             fragility_curve_data = [
@@ -616,8 +616,8 @@ class IngestCommandTests(TransactionTestCase):
                 'component.json': component_data,
                 'fragility_model.json': fragility_model_data,
                 'component_fragility_model_bridge.json': component_fragility_bridge_data,
-                'experiment.json': experiment_data,
-                'experiment_fragility_model_bridge.json': bridge_data,
+                'observation.json': experiment_data,
+                'observation_fragility_model_bridge.json': bridge_data,
                 'fragility_curve.json': fragility_curve_data,
             }
 
@@ -640,8 +640,8 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(Component.objects.count(), 1)
                 self.assertEqual(FragilityModel.objects.count(), 1)
                 self.assertEqual(ComponentFragilityModelBridge.objects.count(), 1)
-                self.assertEqual(Experiment.objects.count(), 1)
-                self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
+                self.assertEqual(Observation.objects.count(), 1)
+                self.assertEqual(ObservationFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
 
                 ref = Reference.objects.get(reference_id='Test-2025')
@@ -655,13 +655,13 @@ class IngestCommandTests(TransactionTestCase):
                 )
                 self.assertEqual(fm.comp_description, 'Original FM Description')
 
-                exp = Experiment.objects.get(id='exp-idem')
+                exp = Observation.objects.get(id='exp-idem')
                 self.assertEqual(exp.ds_description, 'Original EXP Description')
 
-                bridge = ExperimentFragilityModelBridge.objects.get(
-                    experiment=exp, fragility_model=fm
+                bridge = ObservationFragilityModelBridge.objects.get(
+                    observation=exp, fragility_model=fm
                 )
-                self.assertEqual(bridge.experiment.id, 'exp-idem')
+                self.assertEqual(bridge.observation.id, 'exp-idem')
 
                 fc = FragilityCurve.objects.get(fragility_model=fm, ds_rank=1)
                 self.assertEqual(fc.ds_description, 'Original FC Description')
@@ -673,8 +673,8 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(Component.objects.count(), 1)
                 self.assertEqual(FragilityModel.objects.count(), 1)
                 self.assertEqual(ComponentFragilityModelBridge.objects.count(), 1)
-                self.assertEqual(Experiment.objects.count(), 1)
-                self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
+                self.assertEqual(Observation.objects.count(), 1)
+                self.assertEqual(ObservationFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
 
                 # --- 4. Update Data and Files ---
@@ -698,8 +698,8 @@ class IngestCommandTests(TransactionTestCase):
                 self.assertEqual(Component.objects.count(), 1)
                 self.assertEqual(FragilityModel.objects.count(), 1)
                 self.assertEqual(ComponentFragilityModelBridge.objects.count(), 1)
-                self.assertEqual(Experiment.objects.count(), 1)
-                self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 1)
+                self.assertEqual(Observation.objects.count(), 1)
+                self.assertEqual(ObservationFragilityModelBridge.objects.count(), 1)
                 self.assertEqual(FragilityCurve.objects.count(), 1)
 
                 # --- 6. Verify Updates in Database ---
@@ -717,7 +717,7 @@ class IngestCommandTests(TransactionTestCase):
                 fm.refresh_from_db()
                 self.assertEqual(fm.comp_description, 'Updated FM Description')
 
-                exp = Experiment.objects.get(id='exp-idem')
+                exp = Observation.objects.get(id='exp-idem')
                 exp.refresh_from_db()
                 self.assertEqual(exp.ds_description, 'Updated EXP Description')
 
@@ -861,8 +861,8 @@ class IngestCommandTests(TransactionTestCase):
 
     def test_ingest_rejects_invalid_choice_in_experiment(self):
         """
-        Verify that ingestion rejects an Experiment with an invalid
-        test_type while still persisting a sibling valid Experiment in
+        Verify that ingestion rejects an Observation with an invalid
+        test_type while still persisting a sibling valid Observation in
         the same file.
 
         Complements test_ingest_rejects_invalid_choice_in_fragility_model
@@ -919,7 +919,7 @@ class IngestCommandTests(TransactionTestCase):
             files_data = {
                 'reference.json': reference_data,
                 'component.json': component_data,
-                'experiment.json': experiment_data,
+                'observation.json': experiment_data,
             }
 
             for filename, data in files_data.items():
@@ -945,13 +945,13 @@ class IngestCommandTests(TransactionTestCase):
             stderr_value = stderr.getvalue()
 
             # The bad record was reported as failed.
-            self.assertIn('Error processing Experiment', stderr_value)
+            self.assertIn('Error processing Observation', stderr_value)
             self.assertIn('exp-bad', stderr_value)
 
-            # Only the valid Experiment was persisted.
-            self.assertEqual(Experiment.objects.count(), 1)
-            self.assertTrue(Experiment.objects.filter(id='exp-good').exists())
-            self.assertFalse(Experiment.objects.filter(id='exp-bad').exists())
+            # Only the valid Observation was persisted.
+            self.assertEqual(Observation.objects.count(), 1)
+            self.assertTrue(Observation.objects.filter(id='exp-good').exists())
+            self.assertFalse(Observation.objects.filter(id='exp-bad').exists())
 
     def test_ingest_handles_empty_data_directory(self):
         """Test that the command handles empty data directory (no files found) gracefully."""
@@ -982,8 +982,8 @@ class IngestCommandTests(TransactionTestCase):
             self.assertEqual(Reference.objects.count(), 0)
             self.assertEqual(Component.objects.count(), 0)
             self.assertEqual(FragilityModel.objects.count(), 0)
-            self.assertEqual(Experiment.objects.count(), 0)
-            self.assertEqual(ExperimentFragilityModelBridge.objects.count(), 0)
+            self.assertEqual(Observation.objects.count(), 0)
+            self.assertEqual(ObservationFragilityModelBridge.objects.count(), 0)
             self.assertEqual(FragilityCurve.objects.count(), 0)
 
     def test_ingest_fails_loudly_and_labels_records_by_lookup_field(self):
@@ -1068,7 +1068,7 @@ class IngestCommandTests(TransactionTestCase):
             files_data = {
                 'reference.json': reference_data,
                 'component.json': component_data,
-                'experiment.json': experiment_data,
+                'observation.json': experiment_data,
             }
             for filename, data in files_data.items():
                 with open(os.path.join(temp_dir, filename), 'w') as f:
@@ -1088,7 +1088,7 @@ class IngestCommandTests(TransactionTestCase):
                 call_command('ingest', stdout=StringIO(), stderr=stderr)
 
             stderr_value = stderr.getvalue()
-            self.assertIn('Error processing Experiment [id=exp-bad]:', stderr_value)
+            self.assertIn('Error processing Observation [id=exp-bad]:', stderr_value)
             self.assertIn('test_type:', stderr_value)
             self.assertIn('is not a valid choice', stderr_value)
             # The raw ErrorDetail wrapper must not leak through.

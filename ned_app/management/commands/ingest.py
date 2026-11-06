@@ -7,10 +7,10 @@ from django.core.management.base import BaseCommand, CommandError
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
     Reference,
     derive_reference_id,
 )
@@ -18,10 +18,10 @@ from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
 from ned_app.serialization.serializer import (
     ComponentFragilityModelBridgeSerializer,
     ComponentSerializer,
-    ExperimentFragilityModelBridgeSerializer,
-    ExperimentSerializer,
     FragilityCurveSerializer,
     FragilityModelSerializer,
+    ObservationFragilityModelBridgeSerializer,
+    ObservationSerializer,
     ReferenceSerializer,
 )
 
@@ -137,16 +137,16 @@ class Command(BaseCommand):
                 'lookup_field': ['component', 'fragility_model'],
             },
             {
-                'model': Experiment,
-                'serializer': ExperimentSerializer,
-                'file': 'experiment.json',
+                'model': Observation,
+                'serializer': ObservationSerializer,
+                'file': 'observation.json',
                 'lookup_field': ['id'],
             },
             {
-                'model': ExperimentFragilityModelBridge,
-                'serializer': ExperimentFragilityModelBridgeSerializer,
-                'file': 'experiment_fragility_model_bridge.json',
-                'lookup_field': ['experiment', 'fragility_model'],
+                'model': ObservationFragilityModelBridge,
+                'serializer': ObservationFragilityModelBridgeSerializer,
+                'file': 'observation_fragility_model_bridge.json',
+                'lookup_field': ['observation', 'fragility_model'],
             },
             {
                 'model': FragilityCurve,

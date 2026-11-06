@@ -1,0 +1,5718 @@
+[
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1001a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1002a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1003a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1004a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1005a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1006a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1007a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1008a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1009a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1010a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1011a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1012a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1013a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1014a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1015a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1016a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1017a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1018a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1019a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1020a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1070a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1071a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1072a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1073a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1074a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1075a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1076a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1077a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1078a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1079a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1080a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1081a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1082a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1083a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1084a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1085a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1086a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1087a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1088a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1089a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1105a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1106a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1107a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1108a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1109a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1110a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1126a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1127a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1128a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1129a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1130a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1131a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1132a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1133a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1135a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1136a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1137a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1138a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1139a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1144a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1145a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1146a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1147a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1148a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1149a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1150a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1151a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1152a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1153a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1154a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1155a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1156a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1157a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1549a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1550a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1551a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1552a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1553a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1554a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1555a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1556a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1557a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1558a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1559a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1560a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1561a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1562a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1563a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1564a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1565a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1566a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1567a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1568a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1569a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1570a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1571a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1572a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1573a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1574a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1575a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1576a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1577a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1578a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1579a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1580a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1581a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1582a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1583a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1584a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1585a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1586a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1587a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1588a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1589a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1590a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1591a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1592a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp1593a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1749a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1750a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1751a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1752a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1753a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1754a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1755a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1756a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1757a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1758a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1759a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1760a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1761a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1762a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1763a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1764a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1765a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1791a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1792a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1793a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1794a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1795a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1796a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1797a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1798a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1799a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1800a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1801a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1802a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1803a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1804a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1805a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1806a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1807a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1808a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1809a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1810a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1811a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1812a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1813a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1814a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1821a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1822a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1823a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1824a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1825a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp1826a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1827a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1828a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1829a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1830a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1831a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1832a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1833a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1834a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1835a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1836a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1837a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1838a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1839a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1840a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1841a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1842a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1843a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1844a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1845a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1846a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1847a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1848a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1849a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1850a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1851a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1852a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1853a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1854a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1855a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1856a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1857a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1858a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1859a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1860a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1861a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1862a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1863a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1864a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1865a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1866a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1867a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1868a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1869a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1870a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1871a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1872a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1873a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1874a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1875a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1876a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1877a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1878a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1879a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1880a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1881a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1882a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1883a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1884a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1885a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1886a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1887a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1888a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1889a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1890a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1891a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1892a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1893a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1894a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1895a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1896a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1897a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1898a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1899a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1900a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1901a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1902a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1903a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1904a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1905a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1906a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1907a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1908a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1909a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1910a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp1911a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1912a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1913a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1914a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1915a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1916a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1917a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1918a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1919a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1920a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1921a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001c",
+        "observation": "exp1922a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1938a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1939a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1940a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1941a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1942a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001b",
+        "observation": "exp1943a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp2294a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp2294a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp2295a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp2295a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp2296a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp2296a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp2297a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp2297a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2554a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2555a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2556a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2557a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2558a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2559a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2560a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2561a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2562a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2563a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2564a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2565a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2566a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2567a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2568a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2569a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2570a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2571a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2572a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2573a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2574a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2575a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2576a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2577a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2578a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2579a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2580a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2581a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2582a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2583a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2584a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2585a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2586a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2587a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2588a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2581b"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2589a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2590a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2591a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2592a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2593a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2594a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2595a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2596a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2597a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2598a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2599a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2600a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2601a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2602a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2603a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2604a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2605a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2606a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2607a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2608a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2609a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2610a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2611a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2612a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2613a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2614a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2615a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2616a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2617a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2618a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2619a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2620a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2621a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2622a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2623a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2624a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2625a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2626a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2627a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2628a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2629a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2630a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2631a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2632a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2633a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2634a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2635a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2636a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2637a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2638a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2639a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2640a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2641a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2642a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2643a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2644a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2645a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2646a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2647a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2648a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2649a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2650a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2651a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2652a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2653a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2654a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2655a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2656a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2657a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2658a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2659a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2660a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2661a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2662a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2663a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2664a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2665a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2666a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2667a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2668a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2669a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2670a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2671a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2672a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2673a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2674a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2675a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2676a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2677a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2678a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2679a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2680a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2681a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2682a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2683a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2684a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2685a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2686a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2687a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2688a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2689a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2690a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2691a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2692a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2693a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2694a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2695a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2696a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2697a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2698a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2699a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2700a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2701a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2702a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2703a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2704a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2705a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2706a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2707a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2708a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2709a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2710a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2711a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2712a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2713a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2714a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2715a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2716a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2717a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2718a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2719a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2720a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2721a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2722a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2723a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2724a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2725a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2726a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2727a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2728a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2729a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2730a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2731a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2732a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2733a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2734a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2735a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2736a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2737a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2738a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2739a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2740a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2741a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2742a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2743a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2744a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2745a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2746a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2747a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2748a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2749a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2750a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2751a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2752a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2753a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2754a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2755a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2756a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2757a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2758a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2759a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2760a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2761a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2762a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2763a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2764a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2765a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2766a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2767a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2768a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2769a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2770a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2771a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2772a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2773a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2774a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2775a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2776a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2777a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2778a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2779a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2780a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2781a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2782a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2783a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2784a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2785a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2786a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2787a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2788a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2789a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2790a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2791a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2792a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2793a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2794a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2795a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2796a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2797a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2798a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2799a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2800a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2801a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2802a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2803a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2804a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2805a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2806a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2807a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2808a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2809a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2810a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2811a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2812a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2813a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2814a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2815a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2816a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2817a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2818a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2819a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2820a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2821a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2822a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2823a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2824a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2825a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2826a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2827a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2828a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2829a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2830a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2831a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2832a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2833a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2834a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2835a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2836a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp2837a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2838a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2839a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2840a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2841a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2842a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2843a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2844a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2845a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2846a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2847a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2848a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2849a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2850a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2851a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2852a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2853a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2854a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2855a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2856a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2857a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2858a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2859a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2860a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2861a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2862a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2863a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2864a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2865a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2866a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2867a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2868a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2869a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2870a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2871a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2872a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2873a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2874a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2875a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2876a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2877a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2878a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2879a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2880a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2881a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2882a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2883a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2884a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2885a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2886a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2887a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2888a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2889a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2890a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2891a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2892a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2893a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2894a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2895a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2896a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2897a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2898a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2899a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2900a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2901a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2902a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2903a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2904a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2905a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2906a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2907a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2908a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2909a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2910a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2911a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2912a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2913a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2914a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2915a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2916a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2917a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2918a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2919a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2920a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2921a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2922a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2923a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2924a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2925a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2926a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2927a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2928a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2929a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2930a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2931a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp2932a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2933a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2934a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2935a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2936a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2937a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2938a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2939a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2940a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2941a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2942a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2943a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2944a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2945a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2946a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2947a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2948a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2949a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2950a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2951a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2952a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2953a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2954a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2955a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2956a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2957a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2958a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2959a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2960a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2961a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2962a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2963a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2964a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2965a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2966a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2967a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2968a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2969a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2970a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2971a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2972a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2973a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2974a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2975a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2976a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2977a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2978a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2979a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2980a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2981a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2982a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2983a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2984a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2985a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2986a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2987a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2988a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2989a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2990a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2991a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2992a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2993a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2994a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2995a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2996a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2997a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2998a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp2999a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3000a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3001a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3002a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3003a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3004a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3005a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3006a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3007a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3008a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3009a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3010a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3011a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3012a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3013a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3014a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3015a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3016a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3017a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3018a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3019a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3020a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3021a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3022a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3023a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3024a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3025a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3026a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3027a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3028a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3029a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3030a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3031a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3032a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3033a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3034a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3035a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3036a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3037a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3038a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3039a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3040a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3041a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3042a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3043a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3044a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3045a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3046a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3047a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3048a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3049a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3050a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3051a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3052a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3053a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3054a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3055a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3056a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3057a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3058a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3059a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3060a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3061a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3062a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3063a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3064a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3065a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3066a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3067a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3068a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3069a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3070a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3071a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3072a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3073a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3074a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3075a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3076a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3077a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3078a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3079a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3080a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3081a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3082a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3083a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3084a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3085a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3086a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3087a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3088a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3089a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3090a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3091a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3092a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3093a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3094a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3095a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3096a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3097a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3098a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3099a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3100a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3101a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3102a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3103a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3104a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3105a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3106a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3107a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3108a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3109a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3110a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3111a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3112a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3113a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3114a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3115a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.001",
+        "observation": "exp3116a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3117a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3118a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3119a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3120a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3121a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3122a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3123a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3124a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3125a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3126a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3127a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3128a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3129a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3130a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3131a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3132a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3133a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3134a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3135a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3136a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3137a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3138a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3139a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3140a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3141a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3142a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3143a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3144a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3145a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3146a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3147a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3148a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3149a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3150a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3151a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3152a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3153a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3154a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3155a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3156a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3157a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3158a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3159a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3160a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3161a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3162a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3163a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3164a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3165a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3166a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3167a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3168a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3169a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3170a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3171a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3172a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3173a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3174a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3175a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3176a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3177a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3178a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3179a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3180a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3181a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3182a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3183a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3184a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3185a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3186a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3187a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3188a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3189a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3190a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3191a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3192a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3193a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.002",
+        "observation": "exp3194a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3195a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3196a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3197a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3198a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3199a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3200a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3201a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3202a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3203a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3204a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3205a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3206a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3207a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3208a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3209a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3210a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3211a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3212a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3213a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3214a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3215a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3216a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3217a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3218a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3219a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3220a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3221a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3222a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3223a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3224a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3225a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3226a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2023.001",
+        "observation": "exp3227a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3228a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3229a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3230a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3231a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3232a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3233a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3234a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3235a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3236a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3237a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3238a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3239a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3240a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3241a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3242a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3243a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3244a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3245a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3246a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3247a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3248a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3249a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3250a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3251a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3252a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3253a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3254a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3255a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3256a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3257a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3258a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3259a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3260a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3261a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3262a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3263a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3264a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3265a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3266a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3267a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3268a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3269a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3270a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3271a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3272a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3273a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3274a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3275a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3276a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3277a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3278a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3279a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3280a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3281a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3282a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3283a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3284a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3285a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3286a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|B2022.002",
+        "observation": "exp3287a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp3288a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp3288a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp3289a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp3289a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp3290a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp3290a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp3291a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp3291a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp3292a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp3292a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001a",
+        "observation": "exp3293a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.001b",
+        "observation": "exp3293a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011a",
+        "observation": "exp3294a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011b",
+        "observation": "exp3294a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011a",
+        "observation": "exp3295a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011b",
+        "observation": "exp3295a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011a",
+        "observation": "exp3296a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011b",
+        "observation": "exp3296a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011a",
+        "observation": "exp3297a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011b",
+        "observation": "exp3297a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011a",
+        "observation": "exp3298a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011b",
+        "observation": "exp3298a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011a",
+        "observation": "exp3299a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011b",
+        "observation": "exp3299a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011a",
+        "observation": "exp3300a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011b",
+        "observation": "exp3300a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011a",
+        "observation": "exp3301a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011b",
+        "observation": "exp3301a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011a",
+        "observation": "exp3302a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.011b",
+        "observation": "exp3302a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031a",
+        "observation": "exp3303a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031b",
+        "observation": "exp3303a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031a",
+        "observation": "exp3304a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031b",
+        "observation": "exp3304a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031a",
+        "observation": "exp3305a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031b",
+        "observation": "exp3305a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031a",
+        "observation": "exp3306a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031b",
+        "observation": "exp3306a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031a",
+        "observation": "exp3307a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031b",
+        "observation": "exp3307a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031a",
+        "observation": "exp3308a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031b",
+        "observation": "exp3308a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031a",
+        "observation": "exp3309a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031b",
+        "observation": "exp3309a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031a",
+        "observation": "exp3310a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C2011.031b",
+        "observation": "exp3310a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3311a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3312a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3313a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3314a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3315a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3316a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3317a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3318a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3319a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3320a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3321a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3322a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3323a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3324a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3325a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3326a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3327a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3328a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3329a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3330a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3331a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3332a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3333a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3334a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3335a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3336a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3337a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3338a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3339a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3340a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3341a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3342a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3343a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3344a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3345a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3346a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3347a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3348a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3349a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3350a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3351a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3352a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3353a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3354a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3355a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3356a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3357a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3358a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3359a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3360a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3361a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3362a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3363a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3364a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3365a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3366a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3367a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3368a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3369a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3370a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3371a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3372a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3373a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3374a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3375a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3376a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3377a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3378a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3379a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3380a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3381a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3382a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3383a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3384a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3385a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3386a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3387a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3388a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3389a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3390a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3391a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3392a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3393a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3394a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3395a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3396a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3397a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3398a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3399a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3400a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3401a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3402a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3403a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3404a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3405a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3406a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3407a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3408a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3409a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3410a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3411a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3412a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3413a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3414a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3415a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3416a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3417a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3418a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3419a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3420a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3421a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3422a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3423a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3424a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3425a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3426a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3427a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3428a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3429a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3430a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3431a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3432a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3433a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3434a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3435a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3436a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3437a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3438a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3439a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3440a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3441a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3442a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3443a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3444a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3445a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3446a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3447a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3448a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3449a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3450a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3451a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3452a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3453a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3454a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3455a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3456a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3457a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3458a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3459a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3460a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3461a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3462a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3463a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3464a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3465a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3466a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3467a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3468a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3469a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3470a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3471a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3472a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3473a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3474a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3475a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3476a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3477a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3478a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3479a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3480a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3481a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3482a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3483a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3484a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3485a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3486a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3487a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C3032.003b",
+        "observation": "exp3488a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3489a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3490a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3491a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3492a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3493a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3494a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3495a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3496a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3497a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3498a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3499a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3500a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3501a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3502a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3503a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3504a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3505a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3506a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3507a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3508a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3509a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3510a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3511a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3512a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3513a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3514a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3515a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3516a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3517a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3518a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3519a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3520a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3521a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3522a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3523a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3524a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3525a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3526a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3527a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3528a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3529a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3530a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3531a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001a",
+        "observation": "exp3532a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3533a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3534a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3535a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3536a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3537a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3538a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3539a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3540a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3541a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3542a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3543a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3544a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3545a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3546a"
+    },
+    {
+        "fragility_model": "FEMA_P58-2018|C1011.001d",
+        "observation": "exp3547a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1102a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1103a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1158a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1159a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1160a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1310a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1313a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1321b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1321c"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1317a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1318a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1511a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1525b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1516a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1525c"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1521a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1526a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1527a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1528a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1531a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1532a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp1533a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2362a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2363a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2364a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2366a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2367b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2367a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2446a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2447a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2448a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2449a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2450a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2451a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2452a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2453a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2464b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2454a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2455a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2456a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2457a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2458a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2459a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2460a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2461a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2462a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2463a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|1",
+        "observation": "exp2464a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1102a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1103a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1158a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1159a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1160a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1310a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1313a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1321b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1321c"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1317a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1318a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1511a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1525b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1516a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1525c"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1521a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1526a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1527a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1528a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1531a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1532a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp1533a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2362a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2363a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2364a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2366a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2367b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2367a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2446a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2447a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2448a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2449a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2450a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2451a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2452a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2453a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2464b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2454a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2455a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2456a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2457a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2458a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2459a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2460a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2461a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2462a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2463a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|2",
+        "observation": "exp2464a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1313a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1321c"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1318a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1158a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1159a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1160a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1526a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1527a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1528a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1531a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1532a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1533a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp2362a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp2363a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp2364a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1511a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1516a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1521a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1525b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|5",
+        "observation": "exp1525c"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1313a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1321c"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1318a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1158a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1159a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1160a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1526a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1527a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1528a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1531a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1532a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1533a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp2362a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp2363a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp2364a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1511a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1516a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1521a"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1525b"
+    },
+    {
+        "fragility_model": "Bhatta_SprinklerFragilityFunctions-2026|6",
+        "observation": "exp1525c"
+    }
+]

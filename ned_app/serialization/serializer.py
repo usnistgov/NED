@@ -9,10 +9,10 @@ from rest_framework import serializers
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
     Reference,
 )
 from ned_app.validators import (
@@ -184,9 +184,9 @@ class FragilityModelSerializer(serializers.ModelSerializer):
         ]
 
 
-class ExperimentSerializer(serializers.ModelSerializer):
+class ObservationSerializer(serializers.ModelSerializer):
     """
-    Serializer for Experiment with reference and component relationships.
+    Serializer for Observation with reference and component relationships.
 
     Uses natural keys for foreign key lookups: reference.reference_id and component.component_id.
     """
@@ -199,7 +199,7 @@ class ExperimentSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = Experiment
+        model = Observation
         fields: ClassVar[list[str]] = [
             'id',
             'reference',
@@ -232,25 +232,25 @@ class ExperimentSerializer(serializers.ModelSerializer):
         ]
 
 
-class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
+class ObservationFragilityModelBridgeSerializer(serializers.ModelSerializer):
     """
-    Serializer for ExperimentFragilityModelBridge relationship.
+    Serializer for ObservationFragilityModelBridge relationship.
 
     Manages the many-to-many relationship between experiments and fragility models.
     """
 
-    experiment = serializers.SlugRelatedField(
-        slug_field='id', queryset=Experiment.objects.all()
+    observation = serializers.SlugRelatedField(
+        slug_field='id', queryset=Observation.objects.all()
     )
     fragility_model = serializers.SlugRelatedField(
         slug_field='fragility_model_id', queryset=FragilityModel.objects.all()
     )
 
     class Meta:
-        model = ExperimentFragilityModelBridge
+        model = ObservationFragilityModelBridge
         fields: ClassVar[list[str]] = [
             'id',
-            'experiment',
+            'observation',
             'fragility_model',
         ]
 

@@ -9,19 +9,19 @@ from rest_framework.exceptions import ValidationError
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
     Reference,
 )
 from ned_app.serialization.serializer import (
     ComponentFragilityModelBridgeSerializer,
     ComponentSerializer,
-    ExperimentFragilityModelBridgeSerializer,
-    ExperimentSerializer,
     FragilityCurveSerializer,
     FragilityModelSerializer,
+    ObservationFragilityModelBridgeSerializer,
+    ObservationSerializer,
     ReferenceSerializer,
 )
 
@@ -480,8 +480,8 @@ class FragilityModelSerializerTest(TestCase):
         Reference.objects.filter(reference_id__startswith='test-ref-fm-').delete()
 
 
-class ExperimentSerializerTest(TestCase):
-    """Test cases for the ExperimentSerializer, focusing on foreign key validation."""
+class ObservationSerializerTest(TestCase):
+    """Test cases for the ObservationSerializer, focusing on foreign key validation."""
 
     def setUp(self):
         """Set up test data."""
@@ -515,7 +515,7 @@ class ExperimentSerializerTest(TestCase):
             'ds_class': 'Consequential',
         }
 
-        serializer = ExperimentSerializer(data=valid_data)
+        serializer = ObservationSerializer(data=valid_data)
 
         self.assertTrue(serializer.is_valid())
         experiment = serializer.save()
@@ -533,7 +533,7 @@ class ExperimentSerializerTest(TestCase):
             'component': 'A.10.1.1',
         }
 
-        serializer = ExperimentSerializer(data=invalid_data)
+        serializer = ObservationSerializer(data=invalid_data)
 
         self.assertFalse(serializer.is_valid())
         self.assertIn('reference', serializer.errors)
@@ -546,20 +546,20 @@ class ExperimentSerializerTest(TestCase):
             'component': 'Z.99.9.9',
         }
 
-        serializer = ExperimentSerializer(data=invalid_data)
+        serializer = ObservationSerializer(data=invalid_data)
 
         self.assertFalse(serializer.is_valid())
         self.assertIn('component', serializer.errors)
 
     def tearDown(self):
         """Clean up test data after each test."""
-        Experiment.objects.filter(id__startswith='test-exp-').delete()
+        Observation.objects.filter(id__startswith='test-exp-').delete()
         Reference.objects.filter(reference_id__startswith='test-ref-').delete()
         Component.objects.filter(component_id='A.10.1.1').delete()
 
 
-class ExperimentFragilityModelBridgeSerializerTest(TestCase):
-    """Test cases for the ExperimentFragilityModelBridgeSerializer, focusing on foreign key validation."""
+class ObservationFragilityModelBridgeSerializerTest(TestCase):
+    """Test cases for the ObservationFragilityModelBridgeSerializer, focusing on foreign key validation."""
 
     def setUp(self):
         """Set up test data."""
@@ -579,7 +579,7 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
             },
         )
 
-        self.experiment = Experiment.objects.create(
+        self.experiment = Observation.objects.create(
             id='test-exp-001',
             reference=self.reference,
             component=self.component,
@@ -594,54 +594,54 @@ class ExperimentFragilityModelBridgeSerializerTest(TestCase):
         )
 
     def test_serializer_creates_bridge_with_valid_foreign_keys(self):
-        """Test that serializer successfully validates and saves with valid experiment and fragility_model IDs."""
+        """Test that serializer successfully validates and saves with valid observation and fragility_model IDs."""
         valid_data = {
-            'experiment': 'test-exp-001',
+            'observation': 'test-exp-001',
             'fragility_model': 'test-ref-001|test-fm-001',
         }
 
-        serializer = ExperimentFragilityModelBridgeSerializer(data=valid_data)
+        serializer = ObservationFragilityModelBridgeSerializer(data=valid_data)
 
         self.assertTrue(serializer.is_valid())
         bridge = serializer.save()
 
         self.assertIsNotNone(bridge)
-        self.assertEqual(bridge.experiment.id, 'test-exp-001')
+        self.assertEqual(bridge.observation.id, 'test-exp-001')
         self.assertEqual(
             bridge.fragility_model.fragility_model_id, 'test-ref-001|test-fm-001'
         )
 
     def test_serializer_rejects_nonexistent_experiment(self):
-        """Test that serializer rejects data with a non-existent experiment ID."""
+        """Test that serializer rejects data with a non-existent observation ID."""
         invalid_data = {
-            'experiment': 'nonexistent-exp',
+            'observation': 'nonexistent-exp',
             'fragility_model': 'test-ref-001|test-fm-001',
         }
 
-        serializer = ExperimentFragilityModelBridgeSerializer(data=invalid_data)
+        serializer = ObservationFragilityModelBridgeSerializer(data=invalid_data)
 
         self.assertFalse(serializer.is_valid())
-        self.assertIn('experiment', serializer.errors)
+        self.assertIn('observation', serializer.errors)
 
     def test_serializer_rejects_nonexistent_fragility_model(self):
         """Test that serializer rejects data with a non-existent fragility_model ID."""
         invalid_data = {
-            'experiment': 'test-exp-001',
+            'observation': 'test-exp-001',
             'fragility_model': 'nonexistent-fm',
         }
 
-        serializer = ExperimentFragilityModelBridgeSerializer(data=invalid_data)
+        serializer = ObservationFragilityModelBridgeSerializer(data=invalid_data)
 
         self.assertFalse(serializer.is_valid())
         self.assertIn('fragility_model', serializer.errors)
 
     def tearDown(self):
         """Clean up test data after each test."""
-        ExperimentFragilityModelBridge.objects.all().delete()
+        ObservationFragilityModelBridge.objects.all().delete()
         FragilityModel.objects.filter(
             fragility_model_id__startswith='test-ref-001|test-fm-'
         ).delete()
-        Experiment.objects.filter(id__startswith='test-exp-').delete()
+        Observation.objects.filter(id__startswith='test-exp-').delete()
         Reference.objects.filter(reference_id__startswith='test-ref-').delete()
         Component.objects.filter(component_id='A.10.1.1').delete()
 
@@ -939,7 +939,7 @@ class ChoicesValidationTest(TestCase):
         self.assertIn('study_type', serializer.errors)
 
     # ------------------------------------------------------------------
-    # Experiment → TestTypeChoices, EDPMetricChoices, EDPUnitChoices,
+    # Observation → TestTypeChoices, EDPMetricChoices, EDPUnitChoices,
     # DSClassChoices
     # ------------------------------------------------------------------
     def _valid_experiment_data(self):
@@ -956,41 +956,41 @@ class ChoicesValidationTest(TestCase):
         }
 
     def test_experiment_rejects_invalid_test_type(self):
-        """ExperimentSerializer must reject an invalid test_type value."""
+        """ObservationSerializer must reject an invalid test_type value."""
         data = self._valid_experiment_data()
         data['test_type'] = self.INVALID
 
-        serializer = ExperimentSerializer(data=data)
+        serializer = ObservationSerializer(data=data)
 
         self.assertFalse(serializer.is_valid())
         self.assertIn('test_type', serializer.errors)
 
     def test_experiment_rejects_invalid_edp_metric(self):
-        """ExperimentSerializer must reject an invalid edp_metric value."""
+        """ObservationSerializer must reject an invalid edp_metric value."""
         data = self._valid_experiment_data()
         data['edp_metric'] = self.INVALID
 
-        serializer = ExperimentSerializer(data=data)
+        serializer = ObservationSerializer(data=data)
 
         self.assertFalse(serializer.is_valid())
         self.assertIn('edp_metric', serializer.errors)
 
     def test_experiment_rejects_invalid_edp_unit(self):
-        """ExperimentSerializer must reject an invalid edp_unit value."""
+        """ObservationSerializer must reject an invalid edp_unit value."""
         data = self._valid_experiment_data()
         data['edp_unit'] = self.INVALID
 
-        serializer = ExperimentSerializer(data=data)
+        serializer = ObservationSerializer(data=data)
 
         self.assertFalse(serializer.is_valid())
         self.assertIn('edp_unit', serializer.errors)
 
     def test_experiment_rejects_invalid_ds_class(self):
-        """ExperimentSerializer must reject an invalid ds_class value."""
+        """ObservationSerializer must reject an invalid ds_class value."""
         data = self._valid_experiment_data()
         data['ds_class'] = self.INVALID
 
-        serializer = ExperimentSerializer(data=data)
+        serializer = ObservationSerializer(data=data)
 
         self.assertFalse(serializer.is_valid())
         self.assertIn('ds_class', serializer.errors)

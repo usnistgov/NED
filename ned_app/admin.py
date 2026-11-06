@@ -5,11 +5,11 @@ from django.utils.translation import gettext as _
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
     Facility,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
     Program,
     Reference,
     Specimen,
@@ -31,8 +31,8 @@ class ReferenceAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Experiment)
-class ExperimentAdmin(admin.ModelAdmin):
+@admin.register(Observation)
+class ObservationAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
     list_display = ('id', 'reference', 'specimen')
 
@@ -68,10 +68,10 @@ class FragilityModelAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(ExperimentFragilityModelBridge)
-class ExperimentFragilityModelBridgeAdmin(admin.ModelAdmin):
+@admin.register(ObservationFragilityModelBridge)
+class ObservationFragilityModelBridgeAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('experiment', 'fragility_model')
+    list_display = ('observation', 'fragility_model')
 
 
 @admin.register(ComponentFragilityModelBridge)

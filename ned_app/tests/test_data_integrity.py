@@ -9,10 +9,10 @@ from django.test import SimpleTestCase, TransactionTestCase, tag
 
 from ned_app.models import (
     Component,
-    Experiment,
-    ExperimentFragilityModelBridge,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
     Reference,
     derive_reference_id,
 )
@@ -29,8 +29,10 @@ class DataIntegrityTests(TransactionTestCase):
         initial_references = list(Reference.objects.all())
         initial_components = list(Component.objects.all())
         initial_fragility_models = list(FragilityModel.objects.all())
-        initial_experiments = list(Experiment.objects.all())
-        initial_exp_frag_bridges = list(ExperimentFragilityModelBridge.objects.all())
+        initial_experiments = list(Observation.objects.all())
+        initial_exp_frag_bridges = list(
+            ObservationFragilityModelBridge.objects.all()
+        )
         initial_fragility_curves = list(FragilityCurve.objects.all())
 
         call_command('export_data', output_dir=self.temp_dir_path)
@@ -49,8 +51,8 @@ class DataIntegrityTests(TransactionTestCase):
         final_references = list(Reference.objects.all())
         final_components = list(Component.objects.all())
         final_fragility_models = list(FragilityModel.objects.all())
-        final_experiments = list(Experiment.objects.all())
-        final_exp_frag_bridges = list(ExperimentFragilityModelBridge.objects.all())
+        final_experiments = list(Observation.objects.all())
+        final_exp_frag_bridges = list(ObservationFragilityModelBridge.objects.all())
         final_fragility_curves = list(FragilityCurve.objects.all())
 
         self.assertEqual(len(initial_references), len(final_references))
@@ -156,13 +158,13 @@ class DataIntegrityTests(TransactionTestCase):
                     x['reference'],
                     x['model_id'],
                 ),
-                'experiment.json': lambda x: x['id'],
+                'observation.json': lambda x: x['id'],
                 'component_fragility_model_bridge.json': lambda x: (
                     x['component'],
                     x['fragility_model'],
                 ),
-                'experiment_fragility_model_bridge.json': lambda x: (
-                    x['experiment'],
+                'observation_fragility_model_bridge.json': lambda x: (
+                    x['observation'],
                     x['fragility_model'],
                 ),
                 'fragility_curve.json': lambda x: (

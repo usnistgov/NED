@@ -114,16 +114,16 @@ The `query_to_csv` management command allows you to export any database table to
 
 **Export all records from a table:**
 ```bash
-python manage.py query_to_csv --model Experiment --output_file exports/all_experiments.csv
+python manage.py query_to_csv --model Observation --output_file exports/all_experiments.csv
 ```
 
-This exports all fields from the Experiment table to a CSV file. The output directory will be created automatically if it doesn't exist.
+This exports all fields from the Observation table to a CSV file. The output directory will be created automatically if it doesn't exist.
 
 #### Available Parameters
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `--model` | Yes | Model name to query (e.g., `Experiment`, `Reference`, `Component`, `FragilityModel`) |
+| `--model` | Yes | Model name to query (e.g., `Observation`, `Reference`, `Component`, `FragilityModel`) |
 | `--output_file` | Yes | Path where the CSV file will be saved |
 | `--fields` | No | Comma-separated list of specific fields to export (default: all fields) |
 | `--filter` | No | Comma-separated key=value pairs to filter results |
@@ -132,21 +132,21 @@ This exports all fields from the Experiment table to a CSV file. The output dire
 
 **Export specific fields only:**
 ```bash
-python manage.py query_to_csv --model Experiment \
+python manage.py query_to_csv --model Observation \
   --output_file exports/experiment_summary.csv \
   --fields id,specimen,material,test_type
 ```
 
 **Export with filters (AND logic):**
 ```bash
-python manage.py query_to_csv --model Experiment \
+python manage.py query_to_csv --model Observation \
   --output_file exports/steel_tensile_tests.csv \
   --filter material=Steel,test_type=Tensile
 ```
 
 **Combine field selection and filtering:**
 ```bash
-python manage.py query_to_csv --model Experiment \
+python manage.py query_to_csv --model Observation \
   --output_file exports/filtered_data.csv \
   --fields id,specimen,material,peak_demand \
   --filter contributor=John,ds_class=Consequential
@@ -173,8 +173,8 @@ This will display a complete list of queryable models. Use the exact model name 
 **"Model not found" error:**
 ```bash
 # Ensure the model name matches exactly (case-sensitive)
-python manage.py query_to_csv --model experiment  # ❌ Wrong (lowercase)
-python manage.py query_to_csv --model Experiment  # ✅ Correct
+python manage.py query_to_csv --model observation  # ❌ Wrong (lowercase)
+python manage.py query_to_csv --model Observation  # ✅ Correct
 ```
 
 **No data exported:**
@@ -182,20 +182,20 @@ Check your filter conditions. If a filter returns no results, the command will r
 
 ```bash
 # Debug: Export all records first to see what values exist
-python manage.py query_to_csv --model Experiment --output_file test.csv
+python manage.py query_to_csv --model Observation --output_file test.csv
 
 # Then apply filters based on actual values in the data
-python manage.py query_to_csv --model Experiment --output_file filtered.csv --filter material=Steel
+python manage.py query_to_csv --model Observation --output_file filtered.csv --filter material=Steel
 ```
 
 **File path issues on Windows:**
 Use forward slashes or raw strings in PowerShell:
 ```powershell
 # Using forward slashes
-python manage.py query_to_csv --model Experiment --output_file exports/data.csv
+python manage.py query_to_csv --model Observation --output_file exports/data.csv
 
 # Or escape backslashes
-python manage.py query_to_csv --model Experiment --output_file exports\\data.csv
+python manage.py query_to_csv --model Observation --output_file exports\\data.csv
 ```
 
 
@@ -207,19 +207,19 @@ The NED database includes a management command for importing new records from CS
 
 ### Using the `import_model` Command
 
-Use `import_model` to import **Reference**, **Experiment**, or **ExperimentFragilityModelBridge** records from a CSV. For fragility models, curves, and component links, use [`import_fragility`](#using-the-import_fragility-command) instead.
+Use `import_model` to import **Reference**, **Observation**, or **ObservationFragilityModelBridge** records from a CSV. For fragility models, curves, and component links, use [`import_fragility`](#using-the-import_fragility-command) instead.
 
 #### Basic Usage
 
 ```bash
-python manage.py import_model --model Experiment --input_file my_data.csv
+python manage.py import_model --model Observation --input_file my_data.csv
 ```
 
 #### Available Parameters
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `--model` | Yes | Model name to import (`Reference`, `Experiment`, or `ExperimentFragilityModelBridge`) |
+| `--model` | Yes | Model name to import (`Reference`, `Observation`, or `ObservationFragilityModelBridge`) |
 | `--input_file` | Yes | Path to the CSV file containing new records |
 | `--dry_run` | No | Report what would be appended without writing any changes |
 | `--list-models` | No | Show all models that support CSV import |
@@ -254,7 +254,7 @@ CSV templates with example rows are provided in `resources/import_templates/`. C
   - `reference` → the generated id of the reference it belongs to (e.g., `Smith-2020`)
   - `component` → the `component_id` (e.g., `D.50.2.1.A`)
   - `fragility_model` → the full `fragility_model_id` (e.g., `Smith-2020|fra001`)
-  - `experiment` → the experiment `id`
+  - `observation` → the observation `id`
 - **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
 - **Optional numeric fields** (e.g., `alt_edp_value`) may be left blank; they will be stored as `null`.
 - **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
@@ -265,7 +265,7 @@ CSV templates with example rows are provided in `resources/import_templates/`. C
 
 **Preview an import without writing changes:**
 ```bash
-python manage.py import_model --model Experiment \
+python manage.py import_model --model Observation \
   --input_file my_experiments.csv \
   --dry_run
 ```
@@ -278,7 +278,7 @@ python manage.py import_model --model Reference \
 
 **Import experiments:**
 ```bash
-python manage.py import_model --model Experiment \
+python manage.py import_model --model Observation \
   --input_file my_experiments.csv
 ```
 
@@ -289,13 +289,13 @@ python manage.py import_fragility --input_file my_fragilities.csv
 
 ### Tips
 
-- **Import order matters for foreign keys.** Import `Reference` records before `Experiment` records that reference them; `ingest` resolves foreign keys by natural key, so the target records must already be present.
+- **Import order matters for foreign keys.** Import `Reference` records before `Observation` records that reference them; `ingest` resolves foreign keys by natural key, so the target records must already be present.
 - **Use `--dry_run` first** to preview which records would be appended (and surface the column warning) before changing the JSON files.
 - **Always run `ingest` and the test suite after importing** — they are where invalid values, choices, and foreign keys are caught.
 - **Commit after each successful batch.** Once `ingest` and the tests pass, commit before starting the next import. Each commit is a safe checkpoint: if a later batch fails validation, you can restore to it without losing the batches you already verified.
 - **Windows path syntax**: Use forward slashes or quoted backslashes in PowerShell:
   ```powershell
-  python manage.py import_model --model Experiment --input_file exports/my_data.csv
+  python manage.py import_model --model Observation --input_file exports/my_data.csv
   ```
 
 ### Recovering from a failed import
@@ -387,20 +387,20 @@ Directly edit the JSON files in the `resources/data/` directory.
 *   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
 *   **Templates:** Check `resources/example_data/` for examples of proper formatting.
 
-> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Use `reference_label` (letters, digits, and underscores only — no hyphens, not a bare year, at most 100 characters) to choose the token yourself — for an institutional author (e.g. `FEMA_P58`) or one author's multiple works (e.g. `Bhatta_CladdingCyclic`). **A distinguishing `reference_label` is required whenever two references would otherwise derive the same id** (same first-author surname and year); without one they collide and silently merge on ingest, so a data-integrity test rejects duplicate derived ids. Any `reference_id`, or any `id` inside `csl_data`, that you include is **ignored and stripped on ingest**, so a stored value can never disagree with the derived id. Records in `experiment.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
+> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Use `reference_label` (letters, digits, and underscores only — no hyphens, not a bare year, at most 100 characters) to choose the token yourself — for an institutional author (e.g. `FEMA_P58`) or one author's multiple works (e.g. `Bhatta_CladdingCyclic`). **A distinguishing `reference_label` is required whenever two references would otherwise derive the same id** (same first-author surname and year); without one they collide and silently merge on ingest, so a data-integrity test rejects duplicate derived ids. Any `reference_id`, or any `id` inside `csl_data`, that you include is **ignored and stripped on ingest**, so a stored value can never disagree with the derived id. Records in `observation.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
 
 **Option B — Import from CSV** (useful for larger datasets or contributors who prefer spreadsheet tools):
 Populate a CSV template from `resources/import_templates/` and use the appropriate import command:
 ```bash
 # References, experiments, and experiment-fragility links
-python manage.py import_model --model Experiment --input_file my_data.csv
+python manage.py import_model --model Observation --input_file my_data.csv
 
 # Fragility models, curves, and component links (all in one flat CSV)
 python manage.py import_fragility --input_file my_fragilities.csv
 ```
 See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
 *   **Common Files:**
-    *   `experiment.json`: For new experimental results.
+    *   `observation.json`: For new experimental results.
     *   `reference.json`: For new bibliographic references.
     *   `fragility_model.json`: For new fragility functions.
 *   **Editing Existing Records:** Only modify field values; do **not** change the data structure or schema.    

@@ -1,6 +1,6 @@
 [
   {
-    "_comment": "This is an example for an Experiment object. The id should be unique, component references a component_id, and reference references a Reference by its reference_id (see reference.json, which derives 'Smith-2020').",
+    "_comment": "This is an example for an Observation object. The id should be unique, component references a component_id, and reference references a Reference by its reference_id (see reference.json, which derives 'Smith-2020').",
     "id": "exp001",
     "reference": "Smith-2020",
     "specimen": "1",

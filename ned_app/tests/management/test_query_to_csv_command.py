@@ -16,7 +16,7 @@ from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.test import TestCase
 
-from ned_app.models import Component, Experiment, Reference
+from ned_app.models import Component, Observation, Reference
 
 
 class QueryToCsvCommandTests(TestCase):
@@ -44,7 +44,7 @@ class QueryToCsvCommandTests(TestCase):
         self._make_experiment('exp002', material='CPVC', notes='ratio=0.5')
 
     def _make_experiment(self, exp_id, material, notes):
-        return Experiment.objects.create(
+        return Observation.objects.create(
             id=exp_id,
             reference=self.reference,
             component=self.component,
@@ -72,7 +72,7 @@ class QueryToCsvCommandTests(TestCase):
     def test_fk_columns_use_natural_keys(self):
         call_command(
             'query_to_csv',
-            model='Experiment',
+            model='Observation',
             output_file=self.output_file,
             fields='id,reference,component',
             stdout=StringIO(),
@@ -88,7 +88,7 @@ class QueryToCsvCommandTests(TestCase):
     def test_fields_selection_limits_columns(self):
         call_command(
             'query_to_csv',
-            model='Experiment',
+            model='Observation',
             output_file=self.output_file,
             fields='id,material',
             stdout=StringIO(),
@@ -99,7 +99,7 @@ class QueryToCsvCommandTests(TestCase):
     def test_filter_basic(self):
         call_command(
             'query_to_csv',
-            model='Experiment',
+            model='Observation',
             output_file=self.output_file,
             filter='material=Steel',
             stdout=StringIO(),
@@ -112,7 +112,7 @@ class QueryToCsvCommandTests(TestCase):
         # split('=', 1) must keep 'ratio=0.5' intact as the value.
         call_command(
             'query_to_csv',
-            model='Experiment',
+            model='Observation',
             output_file=self.output_file,
             filter='notes=ratio=0.5',
             stdout=StringIO(),
@@ -127,7 +127,7 @@ class QueryToCsvCommandTests(TestCase):
         with self.assertRaises(CommandError) as cm:
             call_command(
                 'query_to_csv',
-                model='Experiment',
+                model='Observation',
                 output_file=self.output_file,
                 filter='bogus_field=x',
                 stderr=StringIO(),
@@ -139,7 +139,7 @@ class QueryToCsvCommandTests(TestCase):
         with self.assertRaises(CommandError) as cm:
             call_command(
                 'query_to_csv',
-                model='Experiment',
+                model='Observation',
                 output_file=self.output_file,
                 fields='id,bogus_field',
                 stderr=StringIO(),
@@ -151,7 +151,7 @@ class QueryToCsvCommandTests(TestCase):
         with self.assertRaises(CommandError) as cm:
             call_command(
                 'query_to_csv',
-                model='Experiment',
+                model='Observation',
                 output_file=self.output_file,
                 filter='no_equals_sign',
                 stderr=StringIO(),
@@ -174,7 +174,7 @@ class QueryToCsvCommandTests(TestCase):
         out = StringIO()
         call_command(
             'query_to_csv',
-            model='Experiment',
+            model='Observation',
             output_file=self.output_file,
             filter='material=DoesNotExist',
             stdout=out,
@@ -188,7 +188,7 @@ class QueryToCsvCommandTests(TestCase):
     def test_list_models(self):
         out = StringIO()
         call_command('query_to_csv', list_models=True, stdout=out)
-        self.assertIn('Experiment', out.getvalue())
+        self.assertIn('Observation', out.getvalue())
         self.assertIn('Reference', out.getvalue())
 
     # -- JSONField encoding + Excel BOM --------------------------------
@@ -210,7 +210,7 @@ class QueryToCsvCommandTests(TestCase):
     def test_output_written_with_utf8_bom(self):
         call_command(
             'query_to_csv',
-            model='Experiment',
+            model='Observation',
             output_file=self.output_file,
             fields='id',
             stdout=StringIO(),

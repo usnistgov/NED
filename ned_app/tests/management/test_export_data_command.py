@@ -9,10 +9,10 @@ from django.test import TestCase
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
     Reference,
 )
 
@@ -44,7 +44,7 @@ class ExportDataCommandTest(TestCase):
             },
         )
 
-        self.experiment = Experiment.objects.create(
+        self.experiment = Observation.objects.create(
             id='test-exp-001',
             reference=self.reference,
             component=self.component,
@@ -96,8 +96,8 @@ class ExportDataCommandTest(TestCase):
             )
         )
 
-        self.bridge = ExperimentFragilityModelBridge.objects.create(
-            experiment=self.experiment, fragility_model=self.fragility_model
+        self.bridge = ObservationFragilityModelBridge.objects.create(
+            observation=self.experiment, fragility_model=self.fragility_model
         )
 
         self.fragility_curve = FragilityCurve.objects.create(
@@ -118,10 +118,10 @@ class ExportDataCommandTest(TestCase):
         expected_files = [
             'reference.json',
             'component.json',
-            'experiment.json',
+            'observation.json',
             'fragility_model.json',
             'component_fragility_model_bridge.json',
-            'experiment_fragility_model_bridge.json',
+            'observation_fragility_model_bridge.json',
             'fragility_curve.json',
         ]
 
@@ -189,7 +189,7 @@ class ExportDataCommandTest(TestCase):
             self.assertNotIn('element', comp_data)
             self.assertNotIn('subelement', comp_data)
 
-        with open(os.path.join(self.temp_dir, 'experiment.json'), 'r') as f:
+        with open(os.path.join(self.temp_dir, 'observation.json'), 'r') as f:
             experiment_data = json.load(f)
             self.assertEqual(len(experiment_data), 1)
             exp_data = experiment_data[0]
@@ -315,22 +315,22 @@ class ExportDataCommandTest(TestCase):
             )
 
         with open(
-            os.path.join(self.temp_dir, 'experiment_fragility_model_bridge.json'),
+            os.path.join(self.temp_dir, 'observation_fragility_model_bridge.json'),
             'r',
         ) as f:
             bridge_data = json.load(f)
             self.assertEqual(len(bridge_data), 1)
             bridge = bridge_data[0]
 
-            self.assertIn('experiment', bridge)
-            self.assertEqual(bridge['experiment'], 'test-exp-001')
+            self.assertIn('observation', bridge)
+            self.assertEqual(bridge['observation'], 'test-exp-001')
             self.assertIn('fragility_model', bridge)
             self.assertEqual(bridge['fragility_model'], 'test-ref-001|test-fm-001')
 
             self.assertEqual(
                 len(bridge.keys()),
                 2,
-                'ExperimentFragilityModelBridge should only have 2 fields',
+                'ObservationFragilityModelBridge should only have 2 fields',
             )
 
         with open(os.path.join(self.temp_dir, 'fragility_curve.json'), 'r') as f:
@@ -367,10 +367,10 @@ class ExportDataCommandTest(TestCase):
     def tearDown(self):
         """Clean up test data and temporary files."""
         FragilityCurve.objects.all().delete()
-        ExperimentFragilityModelBridge.objects.all().delete()
+        ObservationFragilityModelBridge.objects.all().delete()
         ComponentFragilityModelBridge.objects.all().delete()
         FragilityModel.objects.all().delete()
-        Experiment.objects.all().delete()
+        Observation.objects.all().delete()
         Reference.objects.all().delete()
         Component.objects.all().delete()
 

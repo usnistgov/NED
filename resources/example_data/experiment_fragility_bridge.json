@@ -1,7 +1,0 @@
-[
-  {
-    "_comment": "This is an example for an ExperimentFragilityModelBridge object. It links an Experiment (by id) to a FragilityModel (by fragility_model_id).",
-    "experiment": "exp001",
-    "fragility_model": "Smith-2020|fra1001"
-  }
-]

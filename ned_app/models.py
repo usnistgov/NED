@@ -330,7 +330,7 @@ class Reference(models.Model):
         super().save(*args, **kwargs)
 
 
-class Experiment(models.Model):
+class Observation(models.Model):
     """
     A model representing an experimental observation of component damage.
 
@@ -657,17 +657,17 @@ class FragilityModel(models.Model):
         super().save(*args, **kwargs)
 
 
-class ExperimentFragilityModelBridge(models.Model):
+class ObservationFragilityModelBridge(models.Model):
     """
     A bridge model facilitating a many-to-many relationship between experiments and fragility models.
 
     Attributes:
-        experiment (str): Experiment model ID.
+        observation (str): Observation model ID.
         fragility_model (str): fragility model ID.
     """
 
-    experiment = models.ForeignKey(
-        'Experiment', on_delete=models.PROTECT, help_text='Experiment model ID'
+    observation = models.ForeignKey(
+        'Observation', on_delete=models.PROTECT, help_text='Experiment model ID'
     )
     fragility_model = models.ForeignKey(
         'FragilityModel',
@@ -681,7 +681,7 @@ class ExperimentFragilityModelBridge(models.Model):
         verbose_name_plural = 'Experiment - Fragility Pairs'
 
     def __str__(self):
-        return f'{self.experiment}_{self.fragility_model}'
+        return f'{self.observation}_{self.fragility_model}'
 
 
 class ComponentFragilityModelBridge(models.Model):

@@ -43,7 +43,7 @@ CREATE TABLE ned_app_reference (
     csl_data TEXT NOT NULL
 );
 
-CREATE TABLE ned_app_experiment (
+CREATE TABLE ned_app_observation (
     id VARCHAR(255) PRIMARY KEY,
     reference_id VARCHAR(255) NOT NULL REFERENCES ned_app_reference(reference_id),
     component_id VARCHAR(20) NOT NULL REFERENCES ned_app_component(component_id),
@@ -90,9 +90,9 @@ CREATE TABLE ned_app_fragilitymodel (
     edp_unit VARCHAR(255)
 );
 
-CREATE TABLE ned_app_experimentfragilitymodelbridge (
+CREATE TABLE ned_app_observationfragilitymodelbridge (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    experiment_id VARCHAR(255) NOT NULL REFERENCES ned_app_experiment(id),
+    observation_id VARCHAR(255) NOT NULL REFERENCES ned_app_observation(id),
     fragility_model_id VARCHAR(255) NOT NULL
         REFERENCES ned_app_fragilitymodel(fragility_model_id)
 );
@@ -221,7 +221,7 @@ def _seed(conn: sqlite3.Connection) -> None:
     )
 
     conn.executemany(
-        'INSERT INTO ned_app_experiment '
+        'INSERT INTO ned_app_observation '
         '(id, reference_id, component_id, specimen, test_type, '
         'comp_description, ds_description, edp_metric, edp_unit, edp_value, '
         'ds_rank, ds_class) '
@@ -342,8 +342,8 @@ def _seed(conn: sqlite3.Connection) -> None:
         ],
     )
     conn.execute(
-        'INSERT INTO ned_app_experimentfragilitymodelbridge '
-        '(experiment_id, fragility_model_id) VALUES (?, ?)',
+        'INSERT INTO ned_app_observationfragilitymodelbridge '
+        '(observation_id, fragility_model_id) VALUES (?, ?)',
         ('EXP-001', 'Smith-2020|M1'),
     )
 

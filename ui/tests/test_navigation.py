@@ -107,7 +107,7 @@ def _pick_experiment_with_component(db_path: str) -> tuple[str, str]:
     try:
         row = conn.execute("""
             SELECT e.id, c.id
-            FROM ned_app_experiment e
+            FROM ned_app_observation e
             JOIN ned_app_component c ON c.component_id = e.component_id
             ORDER BY e.id
             LIMIT 1

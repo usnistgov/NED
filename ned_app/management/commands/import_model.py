@@ -10,8 +10,8 @@ from ned_app.management.import_utils import (
     write_json,
 )
 from ned_app.serialization.serializer import (
-    ExperimentFragilityModelBridgeSerializer,
-    ExperimentSerializer,
+    ObservationFragilityModelBridgeSerializer,
+    ObservationSerializer,
     ReferenceSerializer,
 )
 
@@ -23,15 +23,15 @@ _MODEL_CONFIG = {
         # ingest and in the data-integrity tests.
         'serializer': ReferenceSerializer,
     },
-    'Experiment': {
-        'json_file': 'experiment.json',
+    'Observation': {
+        'json_file': 'observation.json',
         'pk_fields': ['id'],
-        'serializer': ExperimentSerializer,
+        'serializer': ObservationSerializer,
     },
-    'ExperimentFragilityModelBridge': {
-        'json_file': 'experiment_fragility_model_bridge.json',
-        'pk_fields': ['experiment', 'fragility_model'],
-        'serializer': ExperimentFragilityModelBridgeSerializer,
+    'ObservationFragilityModelBridge': {
+        'json_file': 'observation_fragility_model_bridge.json',
+        'pk_fields': ['observation', 'fragility_model'],
+        'serializer': ObservationFragilityModelBridgeSerializer,
     },
 }
 
@@ -189,7 +189,7 @@ class Command(BaseCommand):
             type=str,
             required=False,
             help=(
-                'Model name to import (e.g., Experiment, Reference). '
+                'Model name to import (e.g., Observation, Reference). '
                 'Use --list-models to see all importable models.'
             ),
         )
@@ -293,7 +293,7 @@ class Command(BaseCommand):
             new_records.append(record)
 
         # Report skipped rows so a dropped record is never silently discarded.
-        # (Only models with a stored dedupe key reach here — Experiment and the
+        # (Only models with a stored dedupe key reach here — Observation and the
         # bridge; References have no dedupe key and are always appended.)
         if skipped_existing:
             self.stdout.write(

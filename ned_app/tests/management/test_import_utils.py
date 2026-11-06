@@ -226,7 +226,7 @@ class RowToRecordTests(SimpleTestCase):
 
     def test_non_reference_coerces_numerics(self):
         row = {'id': 'exp1', 'ds_rank': '2', 'edp_value': '0.45'}
-        record = import_model._row_to_record(row, 'Experiment')
+        record = import_model._row_to_record(row, 'Observation')
         self.assertEqual(record['ds_rank'], 2)
         self.assertEqual(record['edp_value'], 0.45)
         self.assertEqual(record['id'], 'exp1')

@@ -20,7 +20,7 @@ SELECT
     COUNT(DISTINCT e.id)                    AS "# Tests",
     COUNT(DISTINCT b.fragility_model_id)    AS "# Fragility Models"
 FROM ned_app_component c
-LEFT JOIN ned_app_experiment e
+LEFT JOIN ned_app_observation e
        ON e.component_id = c.component_id
 LEFT JOIN ned_app_componentfragilitymodelbridge b
        ON b.component_id = c.component_id
@@ -137,11 +137,11 @@ def get_component_fragility_models(component_id: str) -> pd.DataFrame:
                 fm.material             AS "Material",
                 fm.size_class           AS "Size Class",
                 fm.comp_description     AS "Component Description",
-                COUNT(DISTINCT efmb.experiment_id) AS "Number of Tests"
+                COUNT(DISTINCT efmb.observation_id) AS "Number of Tests"
             FROM ned_app_componentfragilitymodelbridge b
             JOIN ned_app_fragilitymodel fm ON fm.fragility_model_id = b.fragility_model_id
             JOIN ned_app_component c ON c.component_id = b.component_id
-            LEFT JOIN ned_app_experimentfragilitymodelbridge efmb
+            LEFT JOIN ned_app_observationfragilitymodelbridge efmb
                    ON efmb.fragility_model_id = fm.fragility_model_id
             WHERE c.id = ?
             GROUP BY fm.fragility_model_id, c.name, fm.comp_detail, fm.material,
@@ -237,7 +237,7 @@ def get_component_for_experiment(experiment_id: str) -> str | None:
         df = pd.read_sql(
             """
             SELECT c.id
-            FROM ned_app_experiment e
+            FROM ned_app_observation e
             JOIN ned_app_component c ON c.component_id = e.component_id
             WHERE e.id = ?
             """,
@@ -358,8 +358,8 @@ def get_fragility_model_experiments(fragility_model_id: str) -> pd.DataFrame:
                 e.ds_class              AS "DS Class",
                 e.reference_id          AS "Reference ID",
                 c.subelement            AS "NISTIR Subelement"
-            FROM ned_app_experimentfragilitymodelbridge b
-            JOIN ned_app_experiment e ON e.id = b.experiment_id
+            FROM ned_app_observationfragilitymodelbridge b
+            JOIN ned_app_observation e ON e.id = b.observation_id
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE b.fragility_model_id = ?
@@ -413,8 +413,8 @@ def get_fragility_model_experiments_export(fragility_model_id: str) -> pd.DataFr
                 r.title                     AS "title",
                 r.csl_data                  AS "csl_data",
                 r.study_type                AS "Study Type"
-            FROM ned_app_experimentfragilitymodelbridge b
-            JOIN ned_app_experiment e ON e.id = b.experiment_id
+            FROM ned_app_observationfragilitymodelbridge b
+            JOIN ned_app_observation e ON e.id = b.observation_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE b.fragility_model_id = ?
             ORDER BY e.reference_id, e.specimen, e.ds_rank
@@ -460,7 +460,7 @@ def get_fragility_model_available_experiments(
                 e.ds_class              AS "DS Class",
                 e.reference_id          AS "Reference ID",
                 c.subelement            AS "NISTIR Subelement"
-            FROM ned_app_experiment e
+            FROM ned_app_observation e
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE e.component_id IN (
@@ -469,8 +469,8 @@ def get_fragility_model_available_experiments(
                 WHERE b.fragility_model_id = ?
             )
             AND e.id NOT IN (
-                SELECT efmb.experiment_id
-                FROM ned_app_experimentfragilitymodelbridge efmb
+                SELECT efmb.observation_id
+                FROM ned_app_observationfragilitymodelbridge efmb
                 WHERE efmb.fragility_model_id = ?
             )
             ORDER BY e.reference_id, e.specimen, e.ds_rank
@@ -527,7 +527,7 @@ def get_fragility_model_available_experiments_export(
                 r.title                     AS "title",
                 r.csl_data                  AS "csl_data",
                 r.study_type                AS "Study Type"
-            FROM ned_app_experiment e
+            FROM ned_app_observation e
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE e.component_id IN (
                 SELECT b.component_id
@@ -535,8 +535,8 @@ def get_fragility_model_available_experiments_export(
                 WHERE b.fragility_model_id = ?
             )
             AND e.id NOT IN (
-                SELECT efmb.experiment_id
-                FROM ned_app_experimentfragilitymodelbridge efmb
+                SELECT efmb.observation_id
+                FROM ned_app_observationfragilitymodelbridge efmb
                 WHERE efmb.fragility_model_id = ?
             )
             ORDER BY e.reference_id, e.specimen, e.ds_rank
@@ -576,13 +576,13 @@ def get_experiment_fragility_models(experiment_id: str) -> pd.DataFrame:
                 fm.size_class           AS "Size Class",
                 fm.comp_description     AS "Component Description",
                 (
-                    SELECT COUNT(DISTINCT efmb.experiment_id)
-                    FROM ned_app_experimentfragilitymodelbridge efmb
+                    SELECT COUNT(DISTINCT efmb.observation_id)
+                    FROM ned_app_observationfragilitymodelbridge efmb
                     WHERE efmb.fragility_model_id = fm.fragility_model_id
                 )                       AS "Number of Tests"
-            FROM ned_app_experimentfragilitymodelbridge b
+            FROM ned_app_observationfragilitymodelbridge b
             JOIN ned_app_fragilitymodel fm ON fm.fragility_model_id = b.fragility_model_id
-            WHERE b.experiment_id = ?
+            WHERE b.observation_id = ?
             ORDER BY fm.fragility_model_id
             """,
             conn,
@@ -619,7 +619,7 @@ def get_component_experiments(component_id: str) -> pd.DataFrame:
                 e.ds_class              AS "DS Class",
                 e.reference_id          AS "Reference ID",
                 c.subelement            AS "NISTIR Subelement"
-            FROM ned_app_experiment e
+            FROM ned_app_observation e
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE c.id = ?
@@ -673,7 +673,7 @@ def get_component_experiments_export(component_id: str) -> pd.DataFrame:
                 r.title                     AS "title",
                 r.csl_data                  AS "csl_data",
                 r.study_type                AS "Study Type"
-            FROM ned_app_experiment e
+            FROM ned_app_observation e
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE c.id = ?
@@ -720,7 +720,7 @@ def get_experiment_detail(experiment_id: str) -> pd.DataFrame:
                 e.prior_damage_repaired     AS "Prior Damage Repaired",
                 e.notes                     AS "Notes",
                 e.reference_id              AS "reference_id"
-            FROM ned_app_experiment e
+            FROM ned_app_observation e
             WHERE e.id = ?
             """,
             conn,

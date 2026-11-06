@@ -27,7 +27,7 @@ class Command(BaseCommand):
             '--model',
             type=str,
             required=False,
-            help='Model name (e.g., Experiment, Reference, Component)',
+            help='Model name (e.g., Observation, Reference, Component)',
         )
         parser.add_argument(
             '--output_file',
