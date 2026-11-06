@@ -40,7 +40,6 @@ CREATE TABLE ned_app_reference (
     year INTEGER NOT NULL,
     study_type VARCHAR(50) NOT NULL,
     comp_type VARCHAR(255),
-    pdf_saved BOOLEAN,
     csl_data TEXT NOT NULL
 );
 
@@ -186,7 +185,7 @@ def _seed(conn: sqlite3.Connection) -> None:
     conn.executemany(
         'INSERT INTO ned_app_reference '
         '(reference_id, reference_label, title, author, year, study_type, '
-        'comp_type, pdf_saved, csl_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'comp_type, csl_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         [
             (
                 'Smith-2020',
@@ -196,7 +195,6 @@ def _seed(conn: sqlite3.Connection) -> None:
                 2020,
                 'Experiment',
                 '',
-                0,
                 json.dumps({'DOI': '10.1000/xyz123'}),
             ),
             (
@@ -207,7 +205,6 @@ def _seed(conn: sqlite3.Connection) -> None:
                 2021,
                 'Analytical Study',
                 '',
-                0,
                 json.dumps({'URL': 'https://example.com/paper'}),
             ),
             (
@@ -218,7 +215,6 @@ def _seed(conn: sqlite3.Connection) -> None:
                 2022,
                 'Experiment',
                 '',
-                0,
                 json.dumps({'DOI': '10.1000/abc789'}),
             ),
         ],

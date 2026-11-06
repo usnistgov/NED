@@ -30,7 +30,6 @@ class QueryToCsvCommandTests(TestCase):
         self.reference = Reference.objects.create(
             study_type='Experiment',
             comp_type='Sprinkler systems',
-            pdf_saved=True,
             csl_data={
                 'type': 'article-journal',
                 'title': 'A Title',
