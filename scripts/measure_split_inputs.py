@@ -6,8 +6,8 @@ refuse, plus the figures for the decision log's "Measured facts" appendix, so th
 Stage 0 curation pass can watch its own progress. Nothing is written.
 
 The grouping and normalization helpers here (``normalize``, ``slugify``,
-``specimen_key``, ``test_key``) are the single definition of those rules:
-``stage0_normalize.py`` imports them, and the Stage 6 conversion tool will too.
+``specimen_key``, ``test_key``) are the single definition of those rules, and
+the Stage 6 conversion tool will import them.
 
 Usage (run from the repository root):
 
