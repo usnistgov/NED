@@ -284,7 +284,6 @@ class Command(BaseCommand):
         data = []
         for exp in experiments:
             exp_data = {
-                'id': exp.id,
                 'reference': exp.reference_id,
                 'specimen': exp.specimen,
                 'specimen_inspection_sequence': exp.specimen_inspection_sequence,

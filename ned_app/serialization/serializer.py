@@ -314,10 +314,12 @@ class ObservationSerializer(serializers.ModelSerializer):
     """
     Serializer for Observation with reference, component and test relationships.
 
-    Uses natural keys for foreign key lookups: reference.reference_id,
-    component.component_id and test.test_id. test is optional.
+    observation_id is read-only: it is always derived on save() as
+    '{test_id}|{label}'. Uses natural keys for foreign key lookups:
+    reference.reference_id, component.component_id and test.test_id.
     """
 
+    observation_id = serializers.CharField(read_only=True)
     reference = serializers.SlugRelatedField(
         slug_field='reference_id', queryset=Reference.objects.all()
     )
@@ -325,16 +327,13 @@ class ObservationSerializer(serializers.ModelSerializer):
         slug_field='component_id', queryset=Component.objects.all()
     )
     test = serializers.SlugRelatedField(
-        slug_field='test_id',
-        queryset=Test.objects.all(),
-        allow_null=True,
-        required=False,
+        slug_field='test_id', queryset=Test.objects.all()
     )
 
     class Meta:
         model = Observation
         fields: ClassVar[list[str]] = [
-            'id',
+            'observation_id',
             'reference',
             'specimen',
             'specimen_inspection_sequence',
@@ -376,7 +375,7 @@ class ObservationFragilityModelBridgeSerializer(serializers.ModelSerializer):
     """
 
     observation = serializers.SlugRelatedField(
-        slug_field='id', queryset=Observation.objects.all()
+        slug_field='observation_id', queryset=Observation.objects.all()
     )
     fragility_model = serializers.SlugRelatedField(
         slug_field='fragility_model_id', queryset=FragilityModel.objects.all()

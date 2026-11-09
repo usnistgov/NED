@@ -70,8 +70,8 @@ class TestGetComponents:
 
     def test_test_and_fragility_model_counts(self, db_module):
         df = db_module.get_components().set_index('ID')
-        # B2011 has two experiments (EXP-001, EXP-003) and one fragility
-        # model, linked through both bridge tables.
+        # B2011 has two experiments (Smith-2020|S1|1|01, Smith-2020|S3|1|01)
+        # and one fragility model, linked through both bridge tables.
         assert df.loc['B2011', '# Tests'] == 2
         assert df.loc['B2011', '# Fragility Models'] == 1
         # B3010 has neither.
@@ -209,23 +209,23 @@ class TestGetFragilityCurves:
 class TestGetFragilityModelExperiments:
     def test_returns_experiments_linked_via_bridge(self, db_module):
         df = db_module.get_fragility_model_experiments('Smith-2020|M1')
-        assert df['experiment_id'].tolist() == ['EXP-001']
+        assert df['experiment_id'].tolist() == ['Smith-2020|S1|1|01']
         assert df.iloc[0]['Source'] == 'Smith, 2020'
 
 
 class TestGetFragilityModelAvailableExperiments:
     def test_returns_same_component_experiments_not_linked(self, db_module):
         df = db_module.get_fragility_model_available_experiments('Smith-2020|M1')
-        assert df['experiment_id'].tolist() == ['EXP-003']
+        assert df['experiment_id'].tolist() == ['Smith-2020|S3|1|01']
         assert df.iloc[0]['Source'] == 'Smith, 2020'
 
     def test_excludes_experiments_on_other_components(self, db_module):
         df = db_module.get_fragility_model_available_experiments('Smith-2020|M1')
-        assert 'EXP-002' not in df['experiment_id'].tolist()
+        assert 'Jones-2021|S2|1|01' not in df['experiment_id'].tolist()
 
     def test_excludes_experiment_already_linked_to_the_model(self, db_module):
         df = db_module.get_fragility_model_available_experiments('Smith-2020|M1')
-        assert 'EXP-001' not in df['experiment_id'].tolist()
+        assert 'Smith-2020|S1|1|01' not in df['experiment_id'].tolist()
 
 
 class TestGetFragilityModelAvailableExperimentsExport:
@@ -233,7 +233,7 @@ class TestGetFragilityModelAvailableExperimentsExport:
         df = db_module.get_fragility_model_available_experiments_export(
             'Smith-2020|M1'
         )
-        assert df['Experiment ID'].tolist() == ['EXP-003']
+        assert df['Experiment ID'].tolist() == ['Smith-2020|S3|1|01']
         row = df.iloc[0]
         assert row['author'] == 'Smith'
         assert row['year'] == 2020
@@ -242,23 +242,26 @@ class TestGetFragilityModelAvailableExperimentsExport:
 
 class TestGetExperimentFragilityModels:
     def test_reverse_lookup_from_experiment(self, db_module):
-        df = db_module.get_experiment_fragility_models('EXP-001')
+        df = db_module.get_experiment_fragility_models('Smith-2020|S1|1|01')
         assert df['Fragility Model ID'].tolist() == ['Smith-2020|M1']
         assert df.iloc[0]['Component Type'] == 'Curtain Wall'
 
     def test_number_of_tests_counts_linked_experiments(self, db_module):
-        df = db_module.get_experiment_fragility_models('EXP-001')
+        df = db_module.get_experiment_fragility_models('Smith-2020|S1|1|01')
         assert df.iloc[0]['Number of Tests'] == 1
 
     def test_experiment_without_models_returns_empty(self, db_module):
-        df = db_module.get_experiment_fragility_models('EXP-002')
+        df = db_module.get_experiment_fragility_models('Jones-2021|S2|1|01')
         assert df.empty
 
 
 class TestGetComponentExperiments:
     def test_returns_experiments_for_component(self, db_module):
         df = db_module.get_component_experiments('B2011')
-        assert df['experiment_id'].tolist() == ['EXP-001', 'EXP-003']
+        assert df['experiment_id'].tolist() == [
+            'Smith-2020|S1|1|01',
+            'Smith-2020|S3|1|01',
+        ]
         assert df.iloc[0]['NISTIR Subelement'] == '1 - Curtain Walls'
 
 
@@ -274,7 +277,7 @@ class TestGetComponentExperimentsExport:
 
 class TestGetExperimentDetail:
     def test_returns_full_experiment_row(self, db_module):
-        df = db_module.get_experiment_detail('EXP-001')
+        df = db_module.get_experiment_detail('Smith-2020|S1|1|01')
         row = df.iloc[0]
         assert row['Specimen'] == 'S1'
         assert row['reference_id'] == 'Smith-2020'

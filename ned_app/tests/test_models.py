@@ -600,10 +600,10 @@ class FacilityModelTest(TestCase):
 
 
 class SpecimenAndTestModelTest(TestCase):
-    """Test cases for Specimen and Test, focusing on derived ids and constraints."""
+    """Test cases for Specimen, Test and Observation derived ids and constraints."""
 
     def setUp(self):
-        reference = Reference.objects.create(
+        self.reference = reference = Reference.objects.create(
             reference_id='Smith-2020',
             csl_data={
                 'type': 'article-journal',
@@ -637,10 +637,29 @@ class SpecimenAndTestModelTest(TestCase):
             test_type='Quasi-static Cyclic, uniaxial',
         )
 
+    def make_observation(self, test, label):
+        return Observation.objects.create(
+            reference=self.reference,
+            component=self.component,
+            test_type=test.test_type,
+            comp_description='Partition wall',
+            ds_description='Crack',
+            edp_metric='Story Drift Ratio',
+            edp_unit='Ratio',
+            ds_class='Inconsequential',
+            test=test,
+            label=label,
+        )
+
     def test_ids_are_derived(self):
         test = self.make_test('7', test_order=7)
+        observation = self.make_observation(test, '01')
         self.assertEqual(self.specimen.specimen_id, 'Smith-2020|S1')
         self.assertEqual(test.test_id, 'Smith-2020|S1|7')
+        self.assertEqual(observation.observation_id, 'Smith-2020|S1|7|01')
+        self.assertEqual(str(observation), 'Smith-2020|S1|7|01')
+        # The primary key is an internal integer.
+        self.assertIsInstance(observation.pk, int)
 
     def test_relabelling_updates_the_id_on_the_same_row(self):
         # Only for a row with no children; relabelling a parent is rename_identity's job.
@@ -657,6 +676,15 @@ class SpecimenAndTestModelTest(TestCase):
             Specimen.objects.get(pk=specimen.pk).specimen_id, 'Smith-2020|S3'
         )
 
+        observation = self.make_observation(test, '01')
+        observation.label = '02'
+        observation.save()
+        self.assertEqual(
+            Observation.objects.get(pk=observation.pk).observation_id,
+            'Smith-2020|S1|b|02',
+        )
+        self.assertEqual(Observation.objects.count(), 1)
+
     def test_specimen_label_differing_only_in_case_is_rejected(self):
         with self.assertRaises(IntegrityError), transaction.atomic():
             self.make_specimen('s1')
@@ -665,6 +693,12 @@ class SpecimenAndTestModelTest(TestCase):
         self.make_test('A')
         with self.assertRaises(IntegrityError), transaction.atomic():
             self.make_test('a')
+
+    def test_observation_label_differing_only_in_case_is_rejected(self):
+        test = self.make_test('a')
+        self.make_observation(test, 'x01')
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            self.make_observation(test, 'X01')
 
     def test_duplicate_test_order_is_rejected(self):
         self.make_test('7', test_order=7)
@@ -715,7 +749,6 @@ class DamagedByEarlierTestTest(TestCase):
 
     def observe(self, test):
         Observation.objects.create(
-            id=f'obs-{test.label}',
             reference=self.reference,
             component=self.component,
             test_type=test.test_type,
@@ -725,6 +758,7 @@ class DamagedByEarlierTestTest(TestCase):
             edp_unit='Ratio',
             ds_class='Inconsequential',
             test=test,
+            label='01',
         )
 
     def test_true_when_an_earlier_test_holds_observations(self):

@@ -106,10 +106,10 @@ def _pick_experiment_with_component(db_path: str) -> tuple[str, str]:
     conn = sqlite3.connect(db_path)
     try:
         row = conn.execute("""
-            SELECT e.id, c.id
+            SELECT e.observation_id, c.id
             FROM ned_app_observation e
             JOIN ned_app_component c ON c.component_id = e.component_id
-            ORDER BY e.id
+            ORDER BY e.observation_id
             LIMIT 1
         """).fetchone()
     finally:

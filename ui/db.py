@@ -17,7 +17,7 @@ SELECT
     c.element                               AS "Element",
     c.subelement                            AS "Subelement",
     c.name                                  AS "Name",
-    COUNT(DISTINCT e.id)                    AS "# Tests",
+    COUNT(DISTINCT e.observation_id)        AS "# Tests",
     COUNT(DISTINCT b.fragility_model_id)    AS "# Fragility Models"
 FROM ned_app_component c
 LEFT JOIN ned_app_observation e
@@ -239,7 +239,7 @@ def get_component_for_experiment(experiment_id: str) -> str | None:
             SELECT c.id
             FROM ned_app_observation e
             JOIN ned_app_component c ON c.component_id = e.component_id
-            WHERE e.id = ?
+            WHERE e.observation_id = ?
             """,
             conn,
             params=(experiment_id,),
@@ -338,7 +338,7 @@ def get_fragility_model_experiments(fragility_model_id: str) -> pd.DataFrame:
         return pd.read_sql(
             """
             SELECT
-                e.id                    AS "experiment_id",
+                e.observation_id        AS "experiment_id",
                 r.author || ', ' || r.year AS "Source",
                 COALESCE(
                     json_extract(r.csl_data, '$.DOI'),
@@ -359,11 +359,11 @@ def get_fragility_model_experiments(fragility_model_id: str) -> pd.DataFrame:
                 e.reference_id          AS "Reference ID",
                 c.subelement            AS "NISTIR Subelement"
             FROM ned_app_observationfragilitymodelbridge b
-            JOIN ned_app_observation e ON e.id = b.observation_id
+            JOIN ned_app_observation e ON e.observation_id = b.observation_id
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE b.fragility_model_id = ?
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(fragility_model_id,),
@@ -382,7 +382,7 @@ def get_fragility_model_experiments_export(fragility_model_id: str) -> pd.DataFr
         return pd.read_sql(
             """
             SELECT
-                e.id                        AS "Experiment ID",
+                e.observation_id            AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
                 e.contributor               AS "Contributor",
@@ -414,10 +414,10 @@ def get_fragility_model_experiments_export(fragility_model_id: str) -> pd.DataFr
                 r.csl_data                  AS "csl_data",
                 r.study_type                AS "Study Type"
             FROM ned_app_observationfragilitymodelbridge b
-            JOIN ned_app_observation e ON e.id = b.observation_id
+            JOIN ned_app_observation e ON e.observation_id = b.observation_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE b.fragility_model_id = ?
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(fragility_model_id,),
@@ -440,7 +440,7 @@ def get_fragility_model_available_experiments(
         return pd.read_sql(
             """
             SELECT
-                e.id                    AS "experiment_id",
+                e.observation_id        AS "experiment_id",
                 r.author || ', ' || r.year AS "Source",
                 COALESCE(
                     json_extract(r.csl_data, '$.DOI'),
@@ -468,12 +468,12 @@ def get_fragility_model_available_experiments(
                 FROM ned_app_componentfragilitymodelbridge b
                 WHERE b.fragility_model_id = ?
             )
-            AND e.id NOT IN (
+            AND e.observation_id NOT IN (
                 SELECT efmb.observation_id
                 FROM ned_app_observationfragilitymodelbridge efmb
                 WHERE efmb.fragility_model_id = ?
             )
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(fragility_model_id, fragility_model_id),
@@ -496,7 +496,7 @@ def get_fragility_model_available_experiments_export(
         return pd.read_sql(
             """
             SELECT
-                e.id                        AS "Experiment ID",
+                e.observation_id            AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
                 e.contributor               AS "Contributor",
@@ -534,12 +534,12 @@ def get_fragility_model_available_experiments_export(
                 FROM ned_app_componentfragilitymodelbridge b
                 WHERE b.fragility_model_id = ?
             )
-            AND e.id NOT IN (
+            AND e.observation_id NOT IN (
                 SELECT efmb.observation_id
                 FROM ned_app_observationfragilitymodelbridge efmb
                 WHERE efmb.fragility_model_id = ?
             )
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(fragility_model_id, fragility_model_id),
@@ -599,7 +599,7 @@ def get_component_experiments(component_id: str) -> pd.DataFrame:
         return pd.read_sql(
             """
             SELECT
-                e.id                    AS "experiment_id",
+                e.observation_id        AS "experiment_id",
                 r.author || ', ' || r.year AS "Source",
                 COALESCE(
                     json_extract(r.csl_data, '$.DOI'),
@@ -623,7 +623,7 @@ def get_component_experiments(component_id: str) -> pd.DataFrame:
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE c.id = ?
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(component_id,),
@@ -642,7 +642,7 @@ def get_component_experiments_export(component_id: str) -> pd.DataFrame:
         return pd.read_sql(
             """
             SELECT
-                e.id                        AS "Experiment ID",
+                e.observation_id            AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
                 e.contributor               AS "Contributor",
@@ -677,7 +677,7 @@ def get_component_experiments_export(component_id: str) -> pd.DataFrame:
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE c.id = ?
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(component_id,),
@@ -693,7 +693,7 @@ def get_experiment_detail(experiment_id: str) -> pd.DataFrame:
         return pd.read_sql(
             """
             SELECT
-                e.id                        AS "Experiment ID",
+                e.observation_id            AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
                 e.contributor               AS "Contributor",
@@ -721,7 +721,7 @@ def get_experiment_detail(experiment_id: str) -> pd.DataFrame:
                 e.notes                     AS "Notes",
                 e.reference_id              AS "reference_id"
             FROM ned_app_observation e
-            WHERE e.id = ?
+            WHERE e.observation_id = ?
             """,
             conn,
             params=(experiment_id,),

@@ -44,7 +44,8 @@ CREATE TABLE ned_app_reference (
 );
 
 CREATE TABLE ned_app_observation (
-    id VARCHAR(255) PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    observation_id VARCHAR(255) UNIQUE NOT NULL,
     reference_id VARCHAR(255) NOT NULL REFERENCES ned_app_reference(reference_id),
     component_id VARCHAR(20) NOT NULL REFERENCES ned_app_component(component_id),
     specimen VARCHAR(255),
@@ -92,7 +93,8 @@ CREATE TABLE ned_app_fragilitymodel (
 
 CREATE TABLE ned_app_observationfragilitymodelbridge (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    observation_id VARCHAR(255) NOT NULL REFERENCES ned_app_observation(id),
+    observation_id VARCHAR(255) NOT NULL
+        REFERENCES ned_app_observation(observation_id),
     fragility_model_id VARCHAR(255) NOT NULL
         REFERENCES ned_app_fragilitymodel(fragility_model_id)
 );
@@ -127,8 +129,9 @@ def _seed(conn: sqlite3.Connection) -> None:
     exercised), a component with no subelement (fillna('—') path), one fully
     wired-up component -> experiment -> fragility model -> curve chain (via
     both bridge tables) for the relational queries, and a second experiment
-    (EXP-003) on that same component that is *not* linked to the fragility
+    (Smith-2020|S3|1|01) on that same component that is *not* linked to the fragility
     model, so there's an "available but unused" experiment to query for.
+    Experiment ids are derived observation_ids ('{test_id}|{label}').
 
     D2010 additionally carries 2 experiments and 2 fragility models. The
     components query LEFT JOINs both off the same component in one
@@ -222,13 +225,13 @@ def _seed(conn: sqlite3.Connection) -> None:
 
     conn.executemany(
         'INSERT INTO ned_app_observation '
-        '(id, reference_id, component_id, specimen, test_type, '
+        '(observation_id, reference_id, component_id, specimen, test_type, '
         'comp_description, ds_description, edp_metric, edp_unit, edp_value, '
         'ds_rank, ds_class) '
         'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
             (
-                'EXP-001',
+                'Smith-2020|S1|1|01',
                 'Smith-2020',
                 'B.20.1.1',
                 'S1',
@@ -242,7 +245,7 @@ def _seed(conn: sqlite3.Connection) -> None:
                 'Consequential',
             ),
             (
-                'EXP-002',
+                'Jones-2021|S2|1|01',
                 'Jones-2021',
                 'B.20.1.2',
                 'S2',
@@ -256,7 +259,7 @@ def _seed(conn: sqlite3.Connection) -> None:
                 'No damage',
             ),
             (
-                'EXP-003',
+                'Smith-2020|S3|1|01',
                 'Smith-2020',
                 'B.20.1.1',
                 'S3',
@@ -270,7 +273,7 @@ def _seed(conn: sqlite3.Connection) -> None:
                 'No damage',
             ),
             (
-                'EXP-004',
+                'Lee-2022|S1|1|01',
                 'Lee-2022',
                 'D.20.1.0',
                 'S1',
@@ -284,7 +287,7 @@ def _seed(conn: sqlite3.Connection) -> None:
                 'Consequential',
             ),
             (
-                'EXP-005',
+                'Lee-2022|S2|1|01',
                 'Lee-2022',
                 'D.20.1.0',
                 'S2',
@@ -344,7 +347,7 @@ def _seed(conn: sqlite3.Connection) -> None:
     conn.execute(
         'INSERT INTO ned_app_observationfragilitymodelbridge '
         '(observation_id, fragility_model_id) VALUES (?, ?)',
-        ('EXP-001', 'Smith-2020|M1'),
+        ('Smith-2020|S1|1|01', 'Smith-2020|M1'),
     )
 
     conn.execute(

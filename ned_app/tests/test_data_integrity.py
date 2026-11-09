@@ -32,6 +32,7 @@ DERIVE_ID = {
     'program': lambda r: r.get('label') or r['reference'],
     'specimen': lambda r: f'{r["program"]}|{r["label"]}',
     'test': lambda r: f'{r["specimen"]}|{r["label"]}',
+    'observation': lambda r: f'{r["test"]}|{r["label"]}',
 }
 
 
@@ -206,7 +207,14 @@ class DataIntegrityTests(TransactionTestCase):
             label='T2',
             test_type='Dynamic, uniaxial',
         )
-        observation = Observation.objects.order_by('pk').first()
+        # Relabelling re-derives the observation_id, so pick an observation
+        # with no bridge rows; otherwise they would be left dangling.
+        observation = (
+            Observation.objects
+            .exclude(observationfragilitymodelbridge__isnull=False)
+            .order_by('pk')
+            .first()
+        )
         observation.test = ordered_test
         observation.label = '01'
         observation.damage_location = 'Base'
@@ -286,7 +294,7 @@ class DataIntegrityTests(TransactionTestCase):
                     x['reference'],
                     x['model_id'],
                 ),
-                'observation.json': lambda x: x['id'],
+                'observation.json': lambda x: (x['test'], x['label'].lower()),
                 'component_fragility_model_bridge.json': lambda x: (
                     x['component'],
                     x['fragility_model'],
@@ -395,7 +403,8 @@ class CanonicalReferenceDataTests(SimpleTestCase):
 
 class CanonicalHierarchyDataTests(SimpleTestCase):
     """
-    Guards on the canonical facility, program, specimen and test files.
+    Guards on the canonical facility, program, specimen, test and observation
+    files, and the observation bridge.
 
     Derived ids are rebuilt at ingest and every child file stores its parent's
     derived id, so these checks catch an id that can't be built, a case-only
@@ -421,6 +430,7 @@ class CanonicalHierarchyDataTests(SimpleTestCase):
                 'specimen',
                 'test',
                 'observation',
+                'observation_fragility_model_bridge',
             )
         }
         self.ids = {
@@ -443,9 +453,9 @@ class CanonicalHierarchyDataTests(SimpleTestCase):
                 self.assertEqual(derived_id_problems(self.records[name], derive), [])
 
     def test_labels_are_valid(self):
-        # Specimen and test labels are required; a program's label is optional
-        # (blank on every converted program).
-        for name in ('facility', 'specimen', 'test'):
+        # Specimen, test and observation labels are required; a program's
+        # label is optional (blank on every converted program).
+        for name in ('facility', 'specimen', 'test', 'observation'):
             with self.subTest(file=f'{name}.json'):
                 self.assertEqual(label_problems(self.records[name]), [])
         with self.subTest(file='program.json'):
@@ -462,7 +472,15 @@ class CanonicalHierarchyDataTests(SimpleTestCase):
             ('specimen', 'reference', 'reference', True),
             ('specimen', 'component', 'component', False),
             ('test', 'specimen', 'specimen', False),
-            ('observation', 'test', 'test', True),
+            ('observation', 'test', 'test', False),
+            # Ingest's lookups are case-sensitive, so a bridge row must match
+            # an observation_id exactly.
+            (
+                'observation_fragility_model_bridge',
+                'observation',
+                'observation',
+                False,
+            ),
         ]
         for name, field, parent, nullable in checks:
             with self.subTest(file=f'{name}.json', field=field):
@@ -518,11 +536,20 @@ class HierarchyGuardTests(SimpleTestCase):
 
     def test_unresolved_observation_test_is_reported(self):
         observations = [
-            {'id': 'a', 'test': None},
-            {'id': 'b', 'test': 'P1|S1|T9'},
+            {'test': 'P1|S1|T1', 'label': '01'},
+            {'test': 'P1|S1|T9', 'label': '01'},
         ]
-        problems = parent_problems(observations, 'test', {'P1|S1|T1'}, nullable=True)
+        problems = parent_problems(observations, 'test', {'P1|S1|T1'})
         self.assertEqual(problems, ["record 1: test 'P1|S1|T9' does not resolve"])
+
+    def test_case_only_duplicate_observation_id_is_reported(self):
+        observations = [
+            {'test': 'P1|S1|T1', 'label': 'a01'},
+            {'test': 'P1|S1|T1', 'label': 'A01'},
+        ]
+        problems = derived_id_problems(observations, DERIVE_ID['observation'])
+        self.assertEqual(len(problems), 1)
+        self.assertIn('P1|S1|T1|A01', problems[0])
 
     def test_null_parent_is_reported_unless_nullable(self):
         specimens = [{'program': 'P1', 'label': 'S1', 'reference': None}]
@@ -595,3 +622,35 @@ class ArchiveSnapshotTests(SimpleTestCase):
         # Every record keeps its pre-split id, which the audit matches on.
         ids = [r['id'] for r in records]
         self.assertEqual(len(set(ids)), len(ids))
+
+
+class ObservationIdMapTests(SimpleTestCase):
+    """
+    Guards the old id -> observation_id map (resources/archive/, Stage 10).
+
+    The audit and the Streamlit baseline comparison match pre-split records
+    to current ones through it.
+    """
+
+    ID_MAP_JSON = 'resources/archive/observation_id_map.json'
+    SNAPSHOT_JSON = 'resources/archive/observation_pre_split.json'
+    OBSERVATION_JSON = 'resources/data/observation.json'
+
+    def _load(self, path):
+        with open(path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+    def test_one_entry_per_archived_observation(self):
+        id_map = self._load(self.ID_MAP_JSON)
+        snapshot_ids = {r['id'] for r in self._load(self.SNAPSHOT_JSON)}
+        self.assertEqual(set(id_map), snapshot_ids)
+
+    def test_values_are_unique_current_observation_ids(self):
+        # A subset, not equality, so observations added later don't break it.
+        # Exact case: the ids are matched as stored.
+        values = list(self._load(self.ID_MAP_JSON).values())
+        self.assertEqual(len(set(values)), len(values))
+        current = derivable_ids(
+            self._load(self.OBSERVATION_JSON), DERIVE_ID['observation']
+        )
+        self.assertEqual(sorted(set(values) - current), [])

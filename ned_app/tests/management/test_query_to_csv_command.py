@@ -16,7 +16,15 @@ from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.test import TestCase
 
-from ned_app.models import Component, Observation, Reference
+from ned_app.models import (
+    Component,
+    Facility,
+    Observation,
+    Program,
+    Reference,
+    Specimen,
+    Test,
+)
 
 
 class QueryToCsvCommandTests(TestCase):
@@ -40,12 +48,23 @@ class QueryToCsvCommandTests(TestCase):
         self.component = Component.objects.create(
             component_id='D.50.2.1.A', name='CPVC sprinkler pipe'
         )
-        self._make_experiment('exp001', material='Steel', notes='plain')
-        self._make_experiment('exp002', material='CPVC', notes='ratio=0.5')
+        specimen = Specimen.objects.create(
+            program=Program.objects.create(reference=self.reference),
+            facility=Facility.objects.create(label='Lab'),
+            label='SP-1',
+            component=self.component,
+            comp_description='CPVC sprinkler pipe',
+        )
+        self.test = Test.objects.create(
+            specimen=specimen, label='a', test_type='Dynamic, uniaxial'
+        )
+        self._make_experiment('01', material='Steel', notes='plain')
+        self._make_experiment('02', material='CPVC', notes='ratio=0.5')
 
-    def _make_experiment(self, exp_id, material, notes):
+    def _make_experiment(self, label, material, notes):
         return Observation.objects.create(
-            id=exp_id,
+            test=self.test,
+            label=label,
             reference=self.reference,
             component=self.component,
             specimen='SP-1',
@@ -74,14 +93,17 @@ class QueryToCsvCommandTests(TestCase):
             'query_to_csv',
             model='Observation',
             output_file=self.output_file,
-            fields='id,reference,component',
+            fields='observation_id,reference,component,test',
             stdout=StringIO(),
         )
-        rows = {r['id']: r for r in self._read_rows()}
+        rows = {r['observation_id']: r for r in self._read_rows()}
         # reference must be the reference_id natural key, not the auto PK int;
-        # component must be the component_id, not the concatenated id PK.
-        self.assertEqual(rows['exp001']['reference'], 'Smith-2020')
-        self.assertEqual(rows['exp001']['component'], 'D.50.2.1.A')
+        # component must be the component_id, not the concatenated id PK; test
+        # must be the test_id.
+        row = rows['Smith-2020|SP-1|a|01']
+        self.assertEqual(row['reference'], 'Smith-2020')
+        self.assertEqual(row['component'], 'D.50.2.1.A')
+        self.assertEqual(row['test'], 'Smith-2020|SP-1|a')
 
     # -- field selection / filtering -----------------------------------
 
@@ -90,11 +112,11 @@ class QueryToCsvCommandTests(TestCase):
             'query_to_csv',
             model='Observation',
             output_file=self.output_file,
-            fields='id,material',
+            fields='observation_id,material',
             stdout=StringIO(),
         )
         rows = self._read_rows()
-        self.assertEqual(set(rows[0].keys()), {'id', 'material'})
+        self.assertEqual(set(rows[0].keys()), {'observation_id', 'material'})
 
     def test_filter_basic(self):
         call_command(
@@ -106,7 +128,7 @@ class QueryToCsvCommandTests(TestCase):
         )
         rows = self._read_rows()
         self.assertEqual(len(rows), 1)
-        self.assertEqual(rows[0]['id'], 'exp001')
+        self.assertEqual(rows[0]['observation_id'], 'Smith-2020|SP-1|a|01')
 
     def test_filter_value_containing_equals(self):
         # split('=', 1) must keep 'ratio=0.5' intact as the value.
@@ -119,7 +141,7 @@ class QueryToCsvCommandTests(TestCase):
         )
         rows = self._read_rows()
         self.assertEqual(len(rows), 1)
-        self.assertEqual(rows[0]['id'], 'exp002')
+        self.assertEqual(rows[0]['observation_id'], 'Smith-2020|SP-1|a|02')
 
     # -- friendly error handling ---------------------------------------
 
@@ -141,7 +163,7 @@ class QueryToCsvCommandTests(TestCase):
                 'query_to_csv',
                 model='Observation',
                 output_file=self.output_file,
-                fields='id,bogus_field',
+                fields='observation_id,bogus_field',
                 stderr=StringIO(),
             )
         self.assertIn("Field 'bogus_field' does not exist", str(cm.exception))
@@ -212,7 +234,7 @@ class QueryToCsvCommandTests(TestCase):
             'query_to_csv',
             model='Observation',
             output_file=self.output_file,
-            fields='id',
+            fields='observation_id',
             stdout=StringIO(),
         )
         with open(self.output_file, 'rb') as f:

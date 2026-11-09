@@ -184,7 +184,10 @@ class Command(BaseCommand):
                 'model': Observation,
                 'serializer': ObservationSerializer,
                 'file': 'observation.json',
-                'lookup_field': ['id'],
+                'lookup_field': ['observation_id'],
+                'lookup_deriver': lambda item: {
+                    'observation_id': f'{item["test"]}|{item["label"]}'
+                },
             },
             {
                 'model': ObservationFragilityModelBridge,

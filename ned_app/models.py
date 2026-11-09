@@ -335,6 +335,7 @@ class Observation(models.Model):
     A model representing an experimental observation of component damage.
 
     Attributes:
+        observation_id (str): Derived identity, '{test_id}|{label}'.
         reference (id): ID of the published reference documenting this experimental observation.
         specimen (str): ID or name of the specimen as recorded in the reference.
         specimen_inspection_sequence (str): The ith test of this specimen.
@@ -367,7 +368,13 @@ class Observation(models.Model):
         damage_location (str): Where on the specimen the damage was observed.
     """
 
-    id = models.CharField(_('id'), primary_key=True, max_length=255)
+    observation_id = models.CharField(
+        _('observation id'),
+        max_length=255,
+        unique=True,
+        editable=False,
+        help_text="Derived: '{test_id}|{label}'.",
+    )
     reference = models.ForeignKey(
         'Reference',
         on_delete=models.PROTECT,
@@ -537,14 +544,11 @@ class Observation(models.Model):
         'Test',
         on_delete=models.PROTECT,
         to_field='test_id',
-        null=True,
-        blank=True,
         help_text='The test this observation belongs to.',
     )
     label = models.CharField(
         _('label'),
         max_length=100,
-        blank=True,
         validators=[validate_label],
         help_text='Identifier within the test; observations are ordered by label.',
     )
@@ -558,9 +562,20 @@ class Observation(models.Model):
     class Meta:
         verbose_name = 'Experiment'
         verbose_name_plural = 'Experiments'
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(
+                Lower('label'),
+                models.F('test'),
+                name='observation_label_ci_unique_in_test',
+            ),
+        ]
 
     def __str__(self):
-        return self.id
+        return self.observation_id
+
+    def save(self, *args, **kwargs):
+        self.observation_id = f'{self.test_id}|{self.label}'
+        super().save(*args, **kwargs)
 
 
 class FragilityModel(models.Model):
@@ -686,12 +701,15 @@ class ObservationFragilityModelBridge(models.Model):
     A bridge model facilitating a many-to-many relationship between experiments and fragility models.
 
     Attributes:
-        observation (str): Observation model ID.
+        observation (str): Observation ID (observation_id).
         fragility_model (str): fragility model ID.
     """
 
     observation = models.ForeignKey(
-        'Observation', on_delete=models.PROTECT, help_text='Experiment model ID'
+        'Observation',
+        on_delete=models.PROTECT,
+        to_field='observation_id',
+        help_text='Experiment model ID',
     )
     fragility_model = models.ForeignKey(
         'FragilityModel',

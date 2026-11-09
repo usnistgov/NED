@@ -1,7 +1,6 @@
 [
   {
-    "_comment": "This is an example for an Observation object. The id should be unique, component references a component_id, and reference references a Reference by its reference_id (see reference.json, which derives 'Smith-2020').",
-    "id": "exp001",
+    "_comment": "This is an example for an Observation object. It has no stored id: its observation_id is derived at ingest as '{test}|{label}' (here 'Smith-2020|1|A|01'), so the label must be unique within the test. test references a Test by its test_id, component references a component_id, and reference references a Reference by its reference_id (see reference.json, which derives 'Smith-2020').",
     "reference": "Smith-2020",
     "specimen": "1",
     "specimen_inspection_sequence": "A",
@@ -28,6 +27,8 @@
     "alt_edp_value": 1.5,
     "ds_rank": 2,
     "ds_class": "Consequential",
-    "notes": "Additional notes about the experiment"
+    "notes": "Additional notes about the experiment",
+    "test": "Smith-2020|1|A",
+    "label": "01"
   }
 ]

@@ -194,11 +194,17 @@ def to_legacy_names(tables):
 
 
 def to_observation_ids(tables):
-    """Drop the old ids as Stage 10 will; return the id map it writes."""
+    """Drop the old ids as Stage 10 did; return the id map it wrote."""
     return {
         obs.pop('id'): f'{obs["test"]}|{obs["label"]}'
         for obs in tables['observation']
     }
+
+
+def id_map_of(directory):
+    """Return the old id -> observation_id map of converted JSON in ``directory``."""
+    observations = json.loads((directory / 'observation.json').read_text('utf-8'))
+    return {o['id']: f'{o["test"]}|{o["label"]}' for o in observations}
 
 
 class AuditCases:
@@ -206,6 +212,8 @@ class AuditCases:
 
     ref = REF
     component = COMPONENT
+    # How a clean audit matches observations to the snapshot.
+    matched_by = 'old id'
 
     def rows(self):
         return clean_rows(self.ref, self.component)
@@ -237,7 +245,7 @@ class AuditCases:
         self.assertTrue(result.passed, result.failures)
         self.assertEqual(result.rebuilt_records, 6)
         self.assertEqual(result.actual, set())
-        self.assertEqual(result.matched_by, 'old id')
+        self.assertEqual(result.matched_by, self.matched_by)
 
     def test_accepted_collapse_that_materializes(self):
         rows = self.rows()
@@ -585,7 +593,13 @@ class NormalizedCommandLineTests(SimpleTestCase):
 
 class DatabaseAuditTests(AuditCases, TestCase):
     """The same cases through ingest: the converted JSON (plus one real reference
-    and component) is ingested into the test database and audited there."""
+    and component) is ingested into the test database and audited there.
+
+    Database rows carry no old id since Stage 10, so the audit matches them
+    through an id map built from the converted JSON, as Stage 10 built the real
+    one."""
+
+    matched_by = 'id map'
 
     @classmethod
     def setUpClass(cls):
@@ -630,10 +644,28 @@ class DatabaseAuditTests(AuditCases, TestCase):
             split = convert(Path(tmp), rows, convert_accepted)
             if edit:
                 edit_tables(split, edit)
+            self.id_map = id_map_of(split)
             self.ingest_errors = self.ingest(split)
         tables = audit_split.load_database()
         accepted = convert_accepted if audit_accepted is None else audit_accepted
         return self.audit_loaded(tables, rows, after, accepted, snapshot)
+
+    def audit_loaded(self, tables, rows, after, accepted, snapshot):
+        # Lend each row its old id while ``after`` runs, so the shared helpers
+        # find rows by it (and drop it) as they do in normalized mode. If
+        # ``after`` left the ids alone, match through the built id map;
+        # otherwise use whatever map ``after`` returned.
+        old_id_of = {new: old for old, new in self.id_map.items()}
+        for obs in tables['observation']:
+            obs['id'] = old_id_of.get(obs['observation_id'])
+        id_map = after(tables) if after else None
+        if all('id' in obs for obs in tables['observation']):
+            for obs in tables['observation']:
+                del obs['id']
+            id_map = self.id_map
+        return audit_split.audit(
+            tables, rows if snapshot is None else snapshot, list(accepted), id_map
+        )
 
     def test_clean_pass(self):
         super().test_clean_pass()
@@ -641,13 +673,37 @@ class DatabaseAuditTests(AuditCases, TestCase):
 
     def test_duplicated_test_label_exact_merges_and_fails(self):
         # Ingest looks tests up by test_id, so an exact duplicate silently
-        # updates the first test; the audit sees the merged values.
+        # updates the first test. Observations are looked up by observation_id
+        # too, so e5 (b|01, now a|01) overwrites e4 (a|01) and e4 is missing.
         old, new = f'{self.ref}|Spec_2|b', f'{self.ref}|Spec_2|a'
         result = self.run_audit(self.rows(), edit=rename_test(old, new))
         self.assertFalse(result.passed)
-        self.assertEqual(
-            result.unexpected, {('e4', 'peak_test_amplitude', '5% drift')}
-        )
+        self.assertEqual(result.missing, ['`e4`'])
+        self.assertEqual(result.unexpected, set())
+
+    def test_duplicated_observation_label_fails(self):
+        # Ingest looks observations up by observation_id, so the duplicate never
+        # reaches the database: an exact one silently updates e5's row with
+        # e6's values, and the case-insensitive constraint rejects a case
+        # variant. Either way one observation is missing.
+        ref = self.ref
+        for first, second, missing in (('01', '01', 'e5'), ('x', 'X', 'e6')):
+            with self.subTest(labels=(first, second)):
+
+                def edit(tables, first=first, second=second):
+                    by_id(tables, 'e5')['label'] = first
+                    by_id(tables, 'e6')['label'] = second
+
+                result = self.run_audit(self.rows(), edit=edit)
+                self.assertFalse(result.passed)
+                self.assertEqual(result.duplicate_ids, [])
+                self.assertEqual(result.missing, [f'`{missing}`'])
+                self.assertEqual(result.unexpected, set())
+                if first != second:
+                    self.assertIn(
+                        f'observation_id={ref}|Spec_2|b|{second}',
+                        self.ingest_errors,
+                    )
 
     def test_duplicated_test_label_case_variant_is_rejected_and_fails(self):
         # The case-insensitive constraint rejects the second test, so its
@@ -662,14 +718,20 @@ class DatabaseAuditTests(AuditCases, TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             tmp = Path(tmp)
             rows = self.rows()
-            self.ingest(convert(tmp, rows))
+            split = convert(tmp, rows)
+            self.ingest(split)
             write_json(tmp / 'snapshot.json', rows)
+            # Pass the id map explicitly: the default is the real
+            # resources/archive/observation_id_map.json.
+            write_json(tmp / 'id_map.json', id_map_of(split))
             args = ['--database', '--snapshot', str(tmp / 'snapshot.json')]
             args += ['--accepted', str(tmp / 'none.json')]
+            args += ['--id-map', str(tmp / 'id_map.json')]
             out = io.StringIO()
             with contextlib.redirect_stdout(out):
                 self.assertEqual(audit_split.main(args), 0, out.getvalue())
             self.assertIn('Source: database', out.getvalue())
+            self.assertIn('Matched by: id map', out.getvalue())
 
             # Change a specimen in the database only; Observation.material keeps
             # the snapshot value, and must not mask the change.

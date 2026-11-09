@@ -122,7 +122,6 @@ class ExportDataCommandTest(TestCase):
         )
 
         self.experiment = Observation.objects.create(
-            id='test-exp-001',
             reference=self.reference,
             component=self.component,
             test=self.test,
@@ -278,8 +277,10 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(len(experiment_data), 1)
             exp_data = experiment_data[0]
 
-            self.assertIn('id', exp_data)
-            self.assertEqual(exp_data['id'], 'test-exp-001')
+            # observation_id is derived at ingest; neither it nor the integer
+            # pk is exported.
+            self.assertNotIn('id', exp_data)
+            self.assertNotIn('observation_id', exp_data)
             self.assertIn('reference', exp_data)
             self.assertEqual(exp_data['reference'], 'test-ref-001')
             self.assertIn('component', exp_data)
@@ -410,7 +411,7 @@ class ExportDataCommandTest(TestCase):
             bridge = bridge_data[0]
 
             self.assertIn('observation', bridge)
-            self.assertEqual(bridge['observation'], 'test-exp-001')
+            self.assertEqual(bridge['observation'], 'Test_Program|S1|T1|01')
             self.assertIn('fragility_model', bridge)
             self.assertEqual(bridge['fragility_model'], 'test-ref-001|test-fm-001')
 

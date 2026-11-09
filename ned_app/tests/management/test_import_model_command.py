@@ -3,7 +3,7 @@ Tests for the import_model management command.
 
 Covers the keystone contract (template -> import -> ingest produces correct
 records) and the importer's own behaviors (append, dry-run, column warnings, and
-stored-key dedupe for Observation/the bridge). References have no dedupe key —
+stored-key dedupe for the bridge). References have no dedupe key —
 their derived id is validated at ingest and by the data-integrity tests, not
 here. Validation itself is delegated to ingest and is not retested here.
 """
@@ -12,7 +12,6 @@ import json
 import os
 import shutil
 import tempfile
-from decimal import Decimal
 from io import StringIO
 from unittest.mock import patch
 
@@ -21,7 +20,7 @@ from django.core.management.base import CommandError
 from django.test import TransactionTestCase
 
 from ned_app.management import import_utils
-from ned_app.models import Component, Observation, Reference
+from ned_app.models import Reference
 
 TEMPLATE_DIR = 'resources/import_templates'
 
@@ -122,28 +121,18 @@ class ImportModelCommandTests(TransactionTestCase):
             Reference.objects.filter(reference_id='FEMA_P58-2020').exists()
         )
 
-    def test_experiment_template_imports_and_ingests(self):
-        self._make_reference()
-        Component.objects.create(
-            component_id='D.50.2.1.A', name='CPVC sprinkler pipe'
-        )
-
-        call_command(
-            'import_model',
-            model='Observation',
-            input_file=_template('observation_template.csv'),
-            stdout=StringIO(),
-        )
-        # A blank test cell is written as null, matching export_data.
-        self.assertIsNone(self._read_json('observation.json')[0]['test'])
-
-        call_command('ingest', stdout=StringIO(), stderr=StringIO())
-
-        exp = Observation.objects.get(id='exp001')
-        self.assertEqual(exp.reference.reference_id, 'Smith-2020')
-        self.assertEqual(exp.component.component_id, 'D.50.2.1.A')
-        self.assertEqual(exp.edp_value, Decimal('0.45'))
-        self.assertIsNone(exp.test)
+    def test_observation_import_is_rejected(self):
+        # Observation import is paused until the flat observation importer
+        # (Stage 14): observations no longer carry a stored id.
+        with self.assertRaises(CommandError) as cm:
+            call_command(
+                'import_model',
+                model='Observation',
+                input_file=_template('observation_template.csv'),
+                stdout=StringIO(),
+            )
+        self.assertIn('does not support CSV import', str(cm.exception))
+        self.assertFalse(os.path.exists(self._json_path('observation.json')))
 
     def test_bridge_template_converts_to_expected_record(self):
         # The bridge uses the generic conversion path; verify the appended
@@ -157,7 +146,43 @@ class ImportModelCommandTests(TransactionTestCase):
         records = self._read_json('observation_fragility_model_bridge.json')
         self.assertEqual(
             records,
-            [{'observation': 'exp001', 'fragility_model': 'Smith-2020|fra001'}],
+            [
+                {
+                    'observation': 'Smith-2020|S1|a|01',
+                    'fragility_model': 'Smith-2020|fra001',
+                }
+            ],
+        )
+
+    def test_bridge_dedupe_by_stored_key(self):
+        # Models with a stored natural key (the bridge's observation +
+        # fragility_model) dedupe against the existing JSON and within the CSV,
+        # reported so no drop is silent.
+        existing = {'observation': 'Smith-2020|S1|a|01', 'fragility_model': 'M|1'}
+        self._write_json('observation_fragility_model_bridge.json', [existing])
+        rows = (
+            'observation,fragility_model\n'
+            'Smith-2020|S1|a|01,M|1\n'  # already present
+            'Smith-2020|S1|a|02,M|1\n'  # new
+            'Smith-2020|S1|a|02,M|1\n'  # dup within CSV
+        )
+        path = self._write_csv('dup_bridge.csv', rows)
+
+        out = StringIO()
+        call_command(
+            'import_model',
+            model='ObservationFragilityModelBridge',
+            input_file=path,
+            stdout=out,
+        )
+        value = out.getvalue()
+        self.assertIn('already present', value)
+        self.assertIn('within this CSV', value)
+        # Only the one genuinely new pair is appended.
+        records = self._read_json('observation_fragility_model_bridge.json')
+        self.assertEqual(
+            sorted(r['observation'] for r in records),
+            ['Smith-2020|S1|a|01', 'Smith-2020|S1|a|02'],
         )
 
     # -- Tier 1.2: drift guard — accepted columns vs template header ----
@@ -170,7 +195,6 @@ class ImportModelCommandTests(TransactionTestCase):
 
         templates = {
             'Reference': 'reference_template.csv',
-            'Observation': 'observation_template.csv',
             'ObservationFragilityModelBridge': (
                 'observation_fragility_bridge_template.csv'
             ),
@@ -201,29 +225,6 @@ class ImportModelCommandTests(TransactionTestCase):
         call_command('import_model', model='Reference', input_file=path, stdout=out)
         self.assertEqual(len(self._read_json('reference.json')), 2)
         self.assertNotIn('duplicate', out.getvalue().lower())
-
-    def test_experiment_dedupe_by_stored_key(self):
-        # Models with a stored natural key (Observation id) still dedupe — against
-        # the existing JSON and within the CSV — reported so no drop is silent.
-        self._write_json('observation.json', [{'id': 'exp001'}])
-        header = 'id,reference,component,test_type\n'
-        rows = (
-            'exp001,Smith-2020,D.50.2.1.A,"Dynamic, uniaxial"\n'  # already present
-            'exp002,Smith-2020,D.50.2.1.A,"Dynamic, uniaxial"\n'  # new
-            'exp002,Smith-2020,D.50.2.1.A,"Dynamic, uniaxial"\n'  # dup within CSV
-        )
-        path = self._write_csv('dup_exp.csv', header + rows)
-
-        out = StringIO()
-        call_command(
-            'import_model', model='Observation', input_file=path, stdout=out
-        )
-        value = out.getvalue()
-        self.assertIn('already present', value)  # exp001
-        self.assertIn('within this CSV', value)  # the second exp002
-        # Only the one genuinely new experiment (exp002) is appended.
-        ids = [r['id'] for r in self._read_json('observation.json')]
-        self.assertEqual(sorted(ids), ['exp001', 'exp002'])
 
     def test_dry_run_writes_nothing(self):
         call_command(
