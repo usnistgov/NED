@@ -318,14 +318,9 @@ class Reference(models.Model):
                         else:  # 3 or more authors
                             self.author = f'{family_names[0]} et al.'
 
-        # Auto-generate the reference id from the label (or first-author
-        # surname) and year when it is not explicitly set. reference_id is not
-        # stored in the source JSON, so the ingest pipeline always derives it;
-        # an explicitly provided id (e.g. in tests/admin) is respected.
-        if not self.reference_id:
-            self.reference_id = derive_reference_id(
-                self.reference_label, self.csl_data
-            )
+        # Always re-derive the id from the label (or first-author surname) and
+        # year, so it can't go stale after an edit; rename_identity cascades it.
+        self.reference_id = derive_reference_id(self.reference_label, self.csl_data)
 
         super().save(*args, **kwargs)
 

@@ -82,7 +82,6 @@ class ExportDataCommandTest(TestCase):
         )
 
         self.reference = Reference.objects.create(
-            reference_id='test-ref-001',
             study_type='Experiment',
             comp_type='Test Component Type',
             csl_data={
@@ -323,7 +322,7 @@ class ExportDataCommandTest(TestCase):
             fm_data = fragility_model_data[0]
 
             self.assertIn('reference', fm_data)
-            self.assertEqual(fm_data['reference'], 'test-ref-001')
+            self.assertEqual(fm_data['reference'], 'Smith-2023')
             self.assertIn('model_id', fm_data)
             self.assertEqual(fm_data['model_id'], 'test-fm-001')
             self.assertNotIn('component', fm_data)
@@ -361,9 +360,7 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('component', cfm_bridge)
             self.assertEqual(cfm_bridge['component'], 'B.20.1.1.A')
             self.assertIn('fragility_model', cfm_bridge)
-            self.assertEqual(
-                cfm_bridge['fragility_model'], 'test-ref-001|test-fm-001'
-            )
+            self.assertEqual(cfm_bridge['fragility_model'], 'Smith-2023|test-fm-001')
 
             self.assertEqual(
                 len(cfm_bridge.keys()),
@@ -382,7 +379,7 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('observation', bridge)
             self.assertEqual(bridge['observation'], 'Test_Program|S1|T1|01')
             self.assertIn('fragility_model', bridge)
-            self.assertEqual(bridge['fragility_model'], 'test-ref-001|test-fm-001')
+            self.assertEqual(bridge['fragility_model'], 'Smith-2023|test-fm-001')
 
             self.assertEqual(
                 len(bridge.keys()),
@@ -396,7 +393,7 @@ class ExportDataCommandTest(TestCase):
             curve = curve_data[0]
 
             self.assertIn('fragility_model', curve)
-            self.assertEqual(curve['fragility_model'], 'test-ref-001|test-fm-001')
+            self.assertEqual(curve['fragility_model'], 'Smith-2023|test-fm-001')
             self.assertIn('basis', curve)
             self.assertEqual(curve['basis'], 'Experiment')
             self.assertIn('num_observations', curve)
@@ -441,7 +438,7 @@ class ExportDataCommandTest(TestCase):
             ],
         )
         [program] = read('program.json')
-        self.assertEqual(program['reference'], 'test-ref-001')
+        self.assertEqual(program['reference'], 'Smith-2023')
         self.assertEqual(program['label'], 'Test_Program')
         self.assertNotIn('program_id', program)
 

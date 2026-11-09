@@ -5,11 +5,17 @@ from typing import ClassVar
 from unittest.mock import patch
 
 from django.apps import apps
-from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.db import connection
 from django.test import SimpleTestCase, TestCase, TransactionTestCase, tag
 
+from ned_app.json_guards import (
+    DERIVE_ID,
+    check_data_dir,
+    derived_id_problems,
+    label_problems,
+    parent_problems,
+)
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
@@ -22,118 +28,7 @@ from ned_app.models import (
     Reference,
     Specimen,
     Test,
-    derive_reference_id,
 )
-from ned_app.validators import validate_label
-
-# How each hierarchy file's derived id is rebuilt from a record, as ingest
-# derives it for its lookup.
-DERIVE_ID = {
-    'facility': lambda r: r['label'],
-    'program': lambda r: r.get('label') or r['reference'],
-    'specimen': lambda r: f'{r["program"]}|{r["label"]}',
-    'test': lambda r: f'{r["specimen"]}|{r["label"]}',
-    'observation': lambda r: f'{r["test"]}|{r["label"]}',
-}
-
-
-def derived_id_problems(records, derive):
-    """
-    Check that every record's derived id can be derived and is unique.
-
-    Uniqueness ignores case, as the Lower(...) constraints do.
-
-    Args:
-        records (list[dict]): Records from one JSON file.
-        derive (callable): Builds a record's derived id.
-
-    Returns:
-        list[str]: One line per problem; empty when the records are clean.
-    """
-    seen = {}
-    problems = []
-    for index, record in enumerate(records):
-        try:
-            derived = derive(record)
-        except (KeyError, TypeError) as exc:
-            problems.append(f'record {index}: id cannot be derived ({exc!r})')
-            continue
-        if derived.lower() in seen:
-            problems.append(
-                f'{derived}: duplicates {seen[derived.lower()]} (ignoring case)'
-            )
-        else:
-            seen[derived.lower()] = derived
-    return problems
-
-
-def label_problems(records, allow_blank=False):
-    """
-    Check that every label passes validate_label.
-
-    Args:
-        records (list[dict]): Records from one JSON file.
-        allow_blank (bool): Skip blank labels (a program's label is optional).
-
-    Returns:
-        list[str]: One line per problem; empty when the records are clean.
-    """
-    problems = []
-    for index, record in enumerate(records):
-        label = record.get('label', '')
-        if allow_blank and not label:
-            continue
-        try:
-            validate_label(label)
-        except ValidationError as exc:
-            problems.append(f'record {index}: label {label!r}: {exc.messages[0]}')
-    return problems
-
-
-def parent_problems(records, field, parent_ids, nullable=False):
-    """
-    Check that every record's parent string matches a parent id exactly.
-
-    Foreign-key lookups are exact, so a parent that differs only in case does
-    not resolve, even though uniqueness ignores case.
-
-    Args:
-        records (list[dict]): Records from one JSON file.
-        field (str): The foreign-key key in each record.
-        parent_ids (set[str]): Every id in the parent file.
-        nullable (bool): Allow a null parent (an optional foreign key).
-
-    Returns:
-        list[str]: One line per problem; empty when the records are clean.
-    """
-    problems = []
-    for index, record in enumerate(records):
-        value = record.get(field)
-        if value is None and nullable:
-            continue
-        if value not in parent_ids:
-            problems.append(f'record {index}: {field} {value!r} does not resolve')
-    return problems
-
-
-def derivable_ids(records, derive):
-    """
-    Return the ids derivable from the records, skipping any that can't be.
-
-    Args:
-        records (list[dict]): Records from one JSON file.
-        derive (callable): Builds a record's derived id.
-
-    Returns:
-        set[str]: The derived ids.
-    """
-    ids = set()
-    for record in records:
-        try:
-            ids.add(derive(record))
-        except (KeyError, TypeError):
-            continue
-    return ids
 
 
 @tag('integrity')
@@ -343,8 +238,8 @@ class CanonicalReferenceDataTests(SimpleTestCase):
     """
     Guards on the canonical reference.json source data (no DB needed).
 
-    reference_id is derived at ingest, not stored. These checks make the two
-    failure modes of that scheme legible at test time.
+    reference_id is derived at ingest, not stored; the derived ids themselves
+    are checked by CanonicalHierarchyDataTests.
     """
 
     REFERENCE_JSON = 'resources/data/reference.json'
@@ -370,127 +265,26 @@ class CanonicalReferenceDataTests(SimpleTestCase):
             + '\n'.join(offenders),
         )
 
-    def test_derived_reference_ids_are_derivable_and_unique(self):
-        # The importer appends references without deriving/deduping, so this is
-        # the first place a bad id shows up. Two references deriving the same id
-        # would silently merge on ingest; a record whose csl_data can't be keyed
-        # would fail ingest cryptically. Catch both here with a clean message,
-        # not a raw KeyError.
-        seen = {}
-        problems = []
-        for ref in self._load_references():
-            title = ref.get('csl_data', {}).get('title', '<no title>')
-            try:
-                derived = derive_reference_id(
-                    ref.get('reference_label', '') or '', ref['csl_data']
-                )
-            except (KeyError, IndexError, TypeError) as exc:
-                problems.append(
-                    f'{title!r}: reference_id cannot be derived ({exc!r})'
-                )
-                continue
-            if derived in seen:
-                problems.append(f'{derived}: {seen[derived]!r} vs {title!r}')
-            else:
-                seen[derived] = title
-        self.assertEqual(
-            problems,
-            [],
-            'reference.json has references whose derived id is missing or '
-            'duplicated (add a reference_label / fix csl_data):\n'
-            + '\n'.join(problems),
-        )
-
 
 class CanonicalHierarchyDataTests(SimpleTestCase):
     """
-    Guards on the canonical facility, program, specimen, test and observation
-    files, and the observation bridge.
+    Runs the JSON guards (ned_app.json_guards) on the canonical data.
 
     Derived ids are rebuilt at ingest and every child file stores its parent's
-    derived id, so these checks catch an id that can't be built, a case-only
-    duplicate and a dangling parent before ingest does. The guards themselves
-    are unit-tested in HierarchyGuardTests, since the files may be empty.
+    derived id, so the guards catch an id that can't be built, a case-only
+    duplicate and a dangling parent before ingest does. Two references deriving
+    the same id would otherwise merge silently on ingest. The guards themselves
+    are unit-tested in HierarchyGuardTests.
     """
 
-    DATA_DIR = 'resources/data'
-
-    def _load(self, name):
-        path = os.path.join(self.DATA_DIR, f'{name}.json')
-        with open(path, 'r', encoding='utf-8') as f:
-            return [r for r in json.load(f) if '_comment' not in r]
-
-    def setUp(self):
-        self.records = {
-            name: self._load(name)
-            for name in (
-                'reference',
-                'component',
-                'facility',
-                'program',
-                'specimen',
-                'test',
-                'observation',
-                'observation_fragility_model_bridge',
-            )
-        }
-        self.ids = {
-            name: derivable_ids(self.records[name], derive)
-            for name, derive in DERIVE_ID.items()
-        }
-        self.ids['reference'] = derivable_ids(
-            self.records['reference'],
-            lambda r: derive_reference_id(
-                r.get('reference_label', '') or '', r['csl_data']
-            ),
+    def test_canonical_data_passes_the_json_guards(self):
+        problems = check_data_dir('resources/data')
+        self.assertEqual(
+            problems,
+            [],
+            'resources/data/ fails the JSON guards (fix the data, or add a '
+            'reference_label for a duplicate reference id):\n' + '\n'.join(problems),
         )
-        self.ids['component'] = {
-            r['component_id'] for r in self.records['component']
-        }
-
-    def test_derived_ids_are_derivable_and_unique(self):
-        for name, derive in DERIVE_ID.items():
-            with self.subTest(file=f'{name}.json'):
-                self.assertEqual(derived_id_problems(self.records[name], derive), [])
-
-    def test_labels_are_valid(self):
-        # Specimen, test and observation labels are required; a program's
-        # label is optional (blank on every converted program).
-        for name in ('facility', 'specimen', 'test', 'observation'):
-            with self.subTest(file=f'{name}.json'):
-                self.assertEqual(label_problems(self.records[name]), [])
-        with self.subTest(file='program.json'):
-            self.assertEqual(
-                label_problems(self.records['program'], allow_blank=True), []
-            )
-
-    def test_parents_resolve_with_exact_case(self):
-        # (file, foreign-key key, parent file, nullable)
-        checks = [
-            ('program', 'reference', 'reference', False),
-            ('specimen', 'program', 'program', False),
-            ('specimen', 'facility', 'facility', False),
-            ('specimen', 'reference', 'reference', True),
-            ('specimen', 'component', 'component', False),
-            ('test', 'specimen', 'specimen', False),
-            ('observation', 'test', 'test', False),
-            # Ingest's lookups are case-sensitive, so a bridge row must match
-            # an observation_id exactly.
-            (
-                'observation_fragility_model_bridge',
-                'observation',
-                'observation',
-                False,
-            ),
-        ]
-        for name, field, parent, nullable in checks:
-            with self.subTest(file=f'{name}.json', field=field):
-                self.assertEqual(
-                    parent_problems(
-                        self.records[name], field, self.ids[parent], nullable
-                    ),
-                    [],
-                )
 
 
 class HierarchyGuardTests(SimpleTestCase):
@@ -558,6 +352,41 @@ class HierarchyGuardTests(SimpleTestCase):
         self.assertEqual(
             parent_problems(specimens, 'reference', set(), nullable=True), []
         )
+
+    def test_check_data_dir_names_the_file(self):
+        files = {
+            'reference.json': [
+                {
+                    'csl_data': {
+                        'author': [{'family': 'Smith'}],
+                        'issued': {'date-parts': [[2020]]},
+                    }
+                }
+            ],
+            'component.json': [{'component_id': 'A.10.1.1'}],
+            'facility.json': [{'label': 'Lab'}],
+            'program.json': [{'label': '', 'reference': 'Smith-2020'}],
+            'specimen.json': [
+                {
+                    'program': 'Smith-2020',
+                    'facility': 'Lab',
+                    'reference': None,
+                    'component': 'A.10.1.1',
+                    'label': 'S1',
+                }
+            ],
+            'test.json': [{'specimen': 'smith-2020|S1', 'label': 'T1'}],
+            'observation.json': [],
+            'observation_fragility_model_bridge.json': [],
+        }
+        with tempfile.TemporaryDirectory() as data_dir:
+            for name, records in files.items():
+                with open(os.path.join(data_dir, name), 'w') as f:
+                    json.dump(records, f)
+            self.assertEqual(
+                check_data_dir(data_dir),
+                ["test.json: record 0: specimen 'smith-2020|S1' does not resolve"],
+            )
 
 
 class CanonicalJsonFormatTests(SimpleTestCase):

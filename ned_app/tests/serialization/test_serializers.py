@@ -445,10 +445,9 @@ class FragilityModelSerializerTest(TestCase):
     def setUp(self):
         """Set up test data."""
         self.reference = Reference.objects.create(
-            reference_id='test-ref-fm-001',
             csl_data={
                 'type': 'article-journal',
-                'id': 'test-ref-fm-001',
+                'id': 'Smith-2023',
                 'title': 'Test Reference',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2023]]},
@@ -458,7 +457,7 @@ class FragilityModelSerializerTest(TestCase):
     def test_serializer_creates_fragility_model(self):
         """Test that serializer successfully validates and saves a fragility model."""
         valid_data = {
-            'reference': 'test-ref-fm-001',
+            'reference': 'Smith-2023',
             'model_id': 'test-fm-001',
             'comp_description': 'Test fragility model description',
             'edp_metric': 'Story Drift Ratio',
@@ -472,7 +471,7 @@ class FragilityModelSerializerTest(TestCase):
 
         self.assertIsNotNone(fragility_model)
         self.assertEqual(
-            fragility_model.fragility_model_id, 'test-ref-fm-001|test-fm-001'
+            fragility_model.fragility_model_id, 'Smith-2023|test-fm-001'
         )
 
     def test_serializer_excludes_component_field(self):
@@ -483,9 +482,9 @@ class FragilityModelSerializerTest(TestCase):
     def tearDown(self):
         """Clean up test data after each test."""
         FragilityModel.objects.filter(
-            fragility_model_id__startswith='test-'
+            fragility_model_id__startswith='Smith-2023|test-'
         ).delete()
-        Reference.objects.filter(reference_id__startswith='test-ref-fm-').delete()
+        Reference.objects.filter(reference_id__startswith='Smith-').delete()
 
 
 def _make_test(reference, component):
@@ -522,10 +521,9 @@ class ObservationSerializerTest(TestCase):
         )
 
         self.reference = Reference.objects.create(
-            reference_id='test-ref-001',
             csl_data={
                 'type': 'article-journal',
-                'id': 'test-ref-001',
+                'id': 'Smith-2023',
                 'title': 'Test Reference',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2023]]},
@@ -540,7 +538,7 @@ class ObservationSerializerTest(TestCase):
             'edp_metric': 'Story Drift Ratio',
             'edp_unit': 'Ratio',
             'ds_class': 'Consequential',
-            'test': 'test-ref-001|S1|T1',
+            'test': 'Smith-2023|S1|T1',
             'label': '01',
         }
 
@@ -550,7 +548,7 @@ class ObservationSerializerTest(TestCase):
         experiment = serializer.save()
 
         self.assertIsNotNone(experiment)
-        self.assertEqual(experiment.observation_id, 'test-ref-001|S1|T1|01')
+        self.assertEqual(experiment.observation_id, 'Smith-2023|S1|T1|01')
         self.assertEqual(experiment.test, self.test)
 
     def test_serializer_exposes_observation_id_read_only(self):
@@ -562,7 +560,7 @@ class ObservationSerializerTest(TestCase):
     def tearDown(self):
         """Clean up test data after each test."""
         _delete_hierarchy()
-        Reference.objects.filter(reference_id__startswith='test-ref-').delete()
+        Reference.objects.filter(reference_id__startswith='Smith-').delete()
         Component.objects.filter(component_id='A.10.1.1').delete()
 
 
@@ -577,10 +575,9 @@ class ObservationFragilityModelBridgeSerializerTest(TestCase):
         )
 
         self.reference = Reference.objects.create(
-            reference_id='test-ref-001',
             csl_data={
                 'type': 'article-journal',
-                'id': 'test-ref-001',
+                'id': 'Smith-2023',
                 'title': 'Test Reference',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2023]]},
@@ -603,8 +600,8 @@ class ObservationFragilityModelBridgeSerializerTest(TestCase):
     def test_serializer_creates_bridge_with_valid_foreign_keys(self):
         """Test that serializer successfully validates and saves with valid observation and fragility_model IDs."""
         valid_data = {
-            'observation': 'test-ref-001|S1|T1|01',
-            'fragility_model': 'test-ref-001|test-fm-001',
+            'observation': 'Smith-2023|S1|T1|01',
+            'fragility_model': 'Smith-2023|test-fm-001',
         }
 
         serializer = ObservationFragilityModelBridgeSerializer(data=valid_data)
@@ -614,16 +611,16 @@ class ObservationFragilityModelBridgeSerializerTest(TestCase):
 
         self.assertIsNotNone(bridge)
         self.assertEqual(bridge.observation, self.experiment)
-        self.assertEqual(bridge.observation_id, 'test-ref-001|S1|T1|01')
+        self.assertEqual(bridge.observation_id, 'Smith-2023|S1|T1|01')
         self.assertEqual(
-            bridge.fragility_model.fragility_model_id, 'test-ref-001|test-fm-001'
+            bridge.fragility_model.fragility_model_id, 'Smith-2023|test-fm-001'
         )
 
     def test_serializer_rejects_nonexistent_experiment(self):
         """Test that serializer rejects data with a non-existent observation ID."""
         invalid_data = {
             'observation': 'nonexistent-exp',
-            'fragility_model': 'test-ref-001|test-fm-001',
+            'fragility_model': 'Smith-2023|test-fm-001',
         }
 
         serializer = ObservationFragilityModelBridgeSerializer(data=invalid_data)
@@ -634,7 +631,7 @@ class ObservationFragilityModelBridgeSerializerTest(TestCase):
     def test_serializer_rejects_nonexistent_fragility_model(self):
         """Test that serializer rejects data with a non-existent fragility_model ID."""
         invalid_data = {
-            'observation': 'test-ref-001|S1|T1|01',
+            'observation': 'Smith-2023|S1|T1|01',
             'fragility_model': 'nonexistent-fm',
         }
 
@@ -647,10 +644,10 @@ class ObservationFragilityModelBridgeSerializerTest(TestCase):
         """Clean up test data after each test."""
         ObservationFragilityModelBridge.objects.all().delete()
         FragilityModel.objects.filter(
-            fragility_model_id__startswith='test-ref-001|test-fm-'
+            fragility_model_id__startswith='Smith-2023|test-fm-'
         ).delete()
         _delete_hierarchy()
-        Reference.objects.filter(reference_id__startswith='test-ref-').delete()
+        Reference.objects.filter(reference_id__startswith='Smith-').delete()
         Component.objects.filter(component_id='A.10.1.1').delete()
 
 
@@ -665,10 +662,9 @@ class ComponentFragilityModelBridgeSerializerTest(TestCase):
         )
 
         self.reference = Reference.objects.create(
-            reference_id='test-ref-001',
             csl_data={
                 'type': 'article-journal',
-                'id': 'test-ref-001',
+                'id': 'Smith-2023',
                 'title': 'Test Reference',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2023]]},
@@ -687,7 +683,7 @@ class ComponentFragilityModelBridgeSerializerTest(TestCase):
         """Test that serializer successfully validates and saves with valid component and fragility_model IDs."""
         valid_data = {
             'component': 'A.10.1.1',
-            'fragility_model': 'test-ref-001|test-fm-001',
+            'fragility_model': 'Smith-2023|test-fm-001',
         }
 
         serializer = ComponentFragilityModelBridgeSerializer(data=valid_data)
@@ -698,14 +694,14 @@ class ComponentFragilityModelBridgeSerializerTest(TestCase):
         self.assertIsNotNone(bridge)
         self.assertEqual(bridge.component.component_id, 'A.10.1.1')
         self.assertEqual(
-            bridge.fragility_model.fragility_model_id, 'test-ref-001|test-fm-001'
+            bridge.fragility_model.fragility_model_id, 'Smith-2023|test-fm-001'
         )
 
     def test_serializer_rejects_nonexistent_component(self):
         """Test that serializer rejects data with a non-existent component ID."""
         invalid_data = {
             'component': 'Z.99.9.9',
-            'fragility_model': 'test-ref-001|test-fm-001',
+            'fragility_model': 'Smith-2023|test-fm-001',
         }
 
         serializer = ComponentFragilityModelBridgeSerializer(data=invalid_data)
@@ -729,9 +725,9 @@ class ComponentFragilityModelBridgeSerializerTest(TestCase):
         """Clean up test data after each test."""
         ComponentFragilityModelBridge.objects.all().delete()
         FragilityModel.objects.filter(
-            fragility_model_id__startswith='test-ref-001|test-fm-'
+            fragility_model_id__startswith='Smith-2023|test-fm-'
         ).delete()
-        Reference.objects.filter(reference_id__startswith='test-ref-').delete()
+        Reference.objects.filter(reference_id__startswith='Smith-').delete()
         Component.objects.filter(component_id='A.10.1.1').delete()
 
 
@@ -741,10 +737,9 @@ class FragilityCurveSerializerTest(TestCase):
     def setUp(self):
         """Set up test data."""
         self.reference = Reference.objects.create(
-            reference_id='test-ref-001',
             csl_data={
                 'type': 'article-journal',
-                'id': 'test-ref-001',
+                'id': 'Smith-2023',
                 'title': 'Test Reference',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2023]]},
@@ -762,7 +757,7 @@ class FragilityCurveSerializerTest(TestCase):
     def test_serializer_creates_fragility_curve_with_valid_foreign_keys(self):
         """Test that serializer successfully validates and saves with valid fragility_model ID."""
         valid_data = {
-            'fragility_model': 'test-ref-001|test-fm-001',
+            'fragility_model': 'Smith-2023|test-fm-001',
             'ds_description': 'Test damage state description',
             'median': 0.01,
             'beta': 0.5,
@@ -777,7 +772,7 @@ class FragilityCurveSerializerTest(TestCase):
         self.assertIsNotNone(fragility_curve)
         self.assertEqual(
             fragility_curve.fragility_model.fragility_model_id,
-            'test-ref-001|test-fm-001',
+            'Smith-2023|test-fm-001',
         )
 
     def test_serializer_rejects_nonexistent_fragility_model(self):
@@ -798,7 +793,7 @@ class FragilityCurveSerializerTest(TestCase):
     def test_serializer_rejects_negative_beta(self):
         """A negative lognormal dispersion is physically invalid and rejected."""
         data = {
-            'fragility_model': 'test-ref-001|test-fm-001',
+            'fragility_model': 'Smith-2023|test-fm-001',
             'ds_description': 'Test damage state description',
             'median': 0.01,
             'beta': -0.4,
@@ -813,7 +808,7 @@ class FragilityCurveSerializerTest(TestCase):
     def test_serializer_rejects_zero_beta(self):
         """A zero dispersion is a degenerate lognormal and is rejected."""
         data = {
-            'fragility_model': 'test-ref-001|test-fm-001',
+            'fragility_model': 'Smith-2023|test-fm-001',
             'ds_description': 'Test damage state description',
             'median': 0.01,
             'beta': 0,
@@ -830,7 +825,7 @@ class FragilityCurveSerializerTest(TestCase):
         for bad_median in (-0.5, 0):
             with self.subTest(median=bad_median):
                 data = {
-                    'fragility_model': 'test-ref-001|test-fm-001',
+                    'fragility_model': 'Smith-2023|test-fm-001',
                     'ds_description': 'Test damage state description',
                     'median': bad_median,
                     'beta': 0.5,
@@ -847,7 +842,7 @@ class FragilityCurveSerializerTest(TestCase):
         for bad_probability in (-0.1, 1.5):
             with self.subTest(probability=bad_probability):
                 data = {
-                    'fragility_model': 'test-ref-001|test-fm-001',
+                    'fragility_model': 'Smith-2023|test-fm-001',
                     'ds_description': 'Test damage state description',
                     'median': 0.5,
                     'beta': 0.5,
@@ -864,7 +859,7 @@ class FragilityCurveSerializerTest(TestCase):
         for good_probability in (0, 1.0):
             with self.subTest(probability=good_probability):
                 data = {
-                    'fragility_model': 'test-ref-001|test-fm-001',
+                    'fragility_model': 'Smith-2023|test-fm-001',
                     'ds_description': 'Test damage state description',
                     'median': 0.5,
                     'beta': 0.5,
@@ -879,9 +874,9 @@ class FragilityCurveSerializerTest(TestCase):
         """Clean up test data after each test."""
         FragilityCurve.objects.all().delete()
         FragilityModel.objects.filter(
-            fragility_model_id__startswith='test-ref-001|test-fm-'
+            fragility_model_id__startswith='Smith-2023|test-fm-'
         ).delete()
-        Reference.objects.filter(reference_id__startswith='test-ref-').delete()
+        Reference.objects.filter(reference_id__startswith='Smith-').delete()
 
 
 class HierarchySerializerTest(TestCase):
@@ -895,7 +890,6 @@ class HierarchySerializerTest(TestCase):
     def setUp(self):
         """Set up test data."""
         self.reference = Reference.objects.create(
-            reference_id='test-ref-001',
             csl_data={
                 'type': 'article-journal',
                 'title': 'Test Reference',
@@ -904,7 +898,6 @@ class HierarchySerializerTest(TestCase):
             },
         )
         self.other_reference = Reference.objects.create(
-            reference_id='test-ref-002',
             csl_data={
                 'type': 'article-journal',
                 'title': 'Other Reference',
@@ -927,7 +920,7 @@ class HierarchySerializerTest(TestCase):
 
     def _specimen_data(self, **overrides):
         data = {
-            'program': 'test-ref-001',
+            'program': 'Smith-2023',
             'facility': 'Lab',
             'label': 'S2',
             'component': 'A.10.1.1',
@@ -944,7 +937,7 @@ class HierarchySerializerTest(TestCase):
 
     def test_program_serializer_resolves_reference(self):
         serializer = ProgramSerializer(
-            data={'label': 'P1', 'reference': 'test-ref-001'}
+            data={'label': 'P1', 'reference': 'Smith-2023'}
         )
 
         self.assertTrue(serializer.is_valid(), serializer.errors)
@@ -956,7 +949,7 @@ class HierarchySerializerTest(TestCase):
         serializer = ProgramSerializer(
             data={
                 'label': 'P1',
-                'reference': 'test-ref-001',
+                'reference': 'Smith-2023',
                 'program_id': 'something-else',
             }
         )
@@ -972,7 +965,7 @@ class HierarchySerializerTest(TestCase):
 
     def test_specimen_serializer_resolves_natural_keys(self):
         serializer = SpecimenSerializer(
-            data=self._specimen_data(reference='test-ref-002')
+            data=self._specimen_data(reference='Doe-2024')
         )
 
         self.assertTrue(serializer.is_valid(), serializer.errors)
@@ -981,7 +974,7 @@ class HierarchySerializerTest(TestCase):
         self.assertEqual(specimen.facility, self.facility)
         self.assertEqual(specimen.reference, self.other_reference)
         self.assertEqual(specimen.component, self.component)
-        self.assertEqual(specimen.specimen_id, 'test-ref-001|S2')
+        self.assertEqual(specimen.specimen_id, 'Smith-2023|S2')
 
     def test_specimen_serializer_accepts_missing_or_null_reference(self):
         for data in (
@@ -1017,7 +1010,7 @@ class HierarchySerializerTest(TestCase):
     def test_test_serializer_resolves_specimen(self):
         serializer = TestSerializer(
             data={
-                'specimen': 'test-ref-001|S1',
+                'specimen': 'Smith-2023|S1',
                 'label': 'T1',
                 'test_type': 'Dynamic, uniaxial',
             }
@@ -1026,7 +1019,7 @@ class HierarchySerializerTest(TestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
         test = serializer.save()
         self.assertEqual(test.specimen, self.specimen)
-        self.assertEqual(test.test_id, 'test-ref-001|S1|T1')
+        self.assertEqual(test.test_id, 'Smith-2023|S1|T1')
         self.assertIsNone(test.test_order)
 
     def test_test_serializer_rejects_missing_specimen(self):
@@ -1049,12 +1042,12 @@ class HierarchySerializerTest(TestCase):
         }
 
         linked = ObservationSerializer(
-            data={**base, 'label': '01', 'test': 'test-ref-001|S1|T1'}
+            data={**base, 'label': '01', 'test': 'Smith-2023|S1|T1'}
         )
         self.assertTrue(linked.is_valid(), linked.errors)
         observation = linked.save()
         self.assertEqual(observation.test, test)
-        self.assertEqual(observation.observation_id, 'test-ref-001|S1|T1|01')
+        self.assertEqual(observation.observation_id, 'Smith-2023|S1|T1|01')
 
         for data in (
             {**base, 'label': '02'},
@@ -1066,14 +1059,12 @@ class HierarchySerializerTest(TestCase):
                 self.assertIn('test', unlinked.errors)
 
         missing = ObservationSerializer(
-            data={**base, 'label': '04', 'test': 'test-ref-001|S1|T9'}
+            data={**base, 'label': '04', 'test': 'Smith-2023|S1|T9'}
         )
         self.assertFalse(missing.is_valid())
         self.assertIn('test', missing.errors)
 
-        unlabelled = ObservationSerializer(
-            data={**base, 'test': 'test-ref-001|S1|T1'}
-        )
+        unlabelled = ObservationSerializer(data={**base, 'test': 'Smith-2023|S1|T1'})
         self.assertFalse(unlabelled.is_valid())
         self.assertIn('label', unlabelled.errors)
 
@@ -1097,10 +1088,9 @@ class ChoicesValidationTest(TestCase):
     def setUp(self):
         """Set up shared test fixtures."""
         self.reference = Reference.objects.create(
-            reference_id='test-choices-ref-001',
             csl_data={
                 'type': 'article-journal',
-                'id': 'test-choices-ref-001',
+                'id': 'Smith-2023',
                 'title': 'Choices Validation Reference',
                 'author': [{'family': 'Smith', 'given': 'John'}],
                 'issued': {'date-parts': [[2023]]},
@@ -1199,7 +1189,7 @@ class ChoicesValidationTest(TestCase):
     # ------------------------------------------------------------------
     def _valid_fragility_model_data(self):
         return {
-            'reference': 'test-choices-ref-001',
+            'reference': 'Smith-2023',
             'model_id': 'test-choices-fm-002',
             'comp_description': 'Test fragility model description',
             'edp_metric': 'Story Drift Ratio',
@@ -1232,7 +1222,7 @@ class ChoicesValidationTest(TestCase):
     def test_fragility_curve_rejects_invalid_basis(self):
         """FragilityCurveSerializer must reject an invalid basis value."""
         data = {
-            'fragility_model': 'test-choices-ref-001|test-choices-fm-001',
+            'fragility_model': 'Smith-2023|test-choices-fm-001',
             'basis': self.INVALID,
             'ds_description': 'Test damage state description',
             'median': 0.01,

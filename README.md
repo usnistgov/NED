@@ -26,6 +26,7 @@ This repository provides remote hosting and version control for the development 
 - [Contributors Guide](#contributors-guide)
   - [Local Development Setup](#local-development-setup)
   - [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data)
+  - [Changing an identifier](#changing-an-identifier)
   - [How to Modify the Database Structure](#how-to-modify-the-database-structure)
   - [Launch the Django Admin](#launch-the-django-admin)
 - [Architecture Overview](#architecture-overview)
@@ -420,7 +421,7 @@ If modifying existing data:
     *   Correcting spelling or grammar in descriptions
     *   Updating numeric values or material classifications
     *   Adding or refining component details
-    *   Correcting references or citations
+    *   Correcting references or citations (a change to a citation, a `reference_label` or any `label` goes through `rename_identity`: see [Changing an identifier](#changing-an-identifier))
 
 > **For large or systematic edits, use a script — don't hand-edit or use the Django admin.** When a change touches many records (e.g. renaming a stored *value* across the dataset, or recomputing a derived field), write a small script that performs the edit and commit it together with the resulting JSON change, so a reviewer can see the logic behind the diff. Remove the script in a follow-up commit once the change is merged. Large opaque hand-edits — and the Django admin, whose changes leave no reviewable logic and bypass the ingest validation and id-derivation rules — make the diff challenging to audit. This applies to values only: a **field name** is part of the schema, so renaming one is a migration, not a scripted edit of the JSON.
 
@@ -466,6 +467,36 @@ Commit your changes and open a Pull Request (PR) to the `main` branch.
 #### What Happens Next? (The Review Process)
 A project maintainer will review your PR. They will check the "JSON Diff" to see exactly what data is entering the system or what data changed and ensure the automated tests pass. Once approved and merged, your data is effectively "published" and will be live on the next deployment!
 
+
+### Changing an identifier
+Labels and citations are identities. Every child file stores its parent's derived id (an observation's `test` is e.g. `Smith-2020|S1|a`), and a fragility model's id embeds its `reference_id`. So **never hand-edit a `label`, a `reference_label` or a citation (`csl_data`) in the JSON**: the children would still name the old id and fail at `ingest`. Use `rename_identity` instead. In one transaction it saves the record and rewrites every descendant's foreign keys and derived ids, then it exports `resources/data/`.
+
+1. **Build a fresh database from the current JSON first** (`rm db.sqlite3 && python manage.py migrate && python manage.py ingest`). The command exports the database over the JSON, so it refuses to run unless an export already matches `resources/data/` byte for byte.
+2. **Run the command.** Quote ids that contain `|`:
+```bash
+python manage.py rename_identity facility    UCSD_Lab --label UCSD_LHPOST
+python manage.py rename_identity facility    UCSD_lab2 --merge_into UCSD_LHPOST [--force]
+python manage.py rename_identity program     Smith-2020 --label Smith_Walls   # --label '' clears it
+python manage.py rename_identity specimen    "Smith-2020|S1" --label S1a
+python manage.py rename_identity test        "Smith-2020|S1|a" --label b
+python manage.py rename_identity observation "Smith-2020|S1|a|01" --label 02
+python manage.py rename_identity reference   Smith-2020 [--reference_label Smith_Walls] [--csl_json corrected.json]
+```
+   `--data_dir` points it at another data directory (default `resources/data/`).
+3. **Regenerate the fixture, run the checks, and commit.** The command prints the fixture commands (see [Validate Locally](#3-validate-locally-recommended)) but doesn't run them, since they need a fresh build: do it once per batch of renames, run the test suite, and commit the data and the fixture together.
+
+**What follows a rename:**
+*   a **reference**: its programs (an unlabelled program's id *is* the reference id, so it changes with everything under it; a labelled program keeps its id), specimens that override their program's reference, and its fragility models with their curves and both bridge files;
+*   a **facility**: its specimens;
+*   a **program**, **specimen**, **test** or **observation**: everything below it, down to the observation–fragility links.
+
+**Rules and notes:**
+*   A new id that already exists, even in a different case, is refused and nothing is written. Ids are unique regardless of case, so a program label can't take a reference id either. A **case-only rename** of the record itself (`s1` → `S1`) is allowed, and its children are rewritten to match.
+*   A rename that changes nothing writes nothing. A failure part-way rolls everything back.
+*   `--csl_json` replaces the citation with the one CSL-JSON object in the file. It is validated as `ingest` validates it, and any `id` in it is dropped. `--reference_label` and `--csl_json` can be combined.
+*   `--merge_into` (facilities only) repoints the facility's specimens to the target and deletes it. It refuses if the facility has a non-blank `name`, `location` or `notes` that differs from the target's; `--force` discards them, and the command prints what it discards.
+*   **Renaming an observation changes its display order**, since observations are shown in label order.
+*   Old ids don't follow a rename: `resources/archive/observation_id_map.json` (old `exp…` ids, as of the observation split) and deep links published with an old id still name it.
 
 ### How to Modify the Database Structure
 
