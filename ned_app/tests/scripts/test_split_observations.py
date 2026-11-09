@@ -14,6 +14,7 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import ClassVar
+from unittest.mock import patch
 
 from django.test import SimpleTestCase
 
@@ -559,3 +560,41 @@ class OutputTests(SimpleTestCase):
             self.assertNotEqual((out / 'report.md').read_text('utf-8'), 'old')
             # Now it holds data files, so a second run is refused.
             self.assertEqual(convert_in(tmp, self.rows, out), 2)
+
+
+class PostSplitInputTests(SimpleTestCase):
+    """The live data is split since Stage 8: both scripts' main() stop on it
+    with a message instead of failing on a missing key."""
+
+    def post_split_input(self, tmp):
+        """Write a post-split observation.json (a test, no id); return its folder."""
+        record = {k: v for k, v in row('e1').items() if k != 'id'}
+        write_input(
+            tmp / 'input', [{**record, 'test': f'{REF}|S1|a', 'label': '01'}]
+        )
+        return tmp / 'input'
+
+    def test_convert_stops_on_post_split_input(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            argv = ['convert', '--input', str(self.post_split_input(tmp))]
+            argv += ['--accepted', str(tmp / 'none.json')]
+            argv += ['--output', str(tmp / 'out')]
+            err = io.StringIO()
+            with contextlib.redirect_stderr(err):
+                self.assertEqual(so.main(argv), 2)
+            self.assertIn('post-split observations', err.getvalue())
+            self.assertIn('observation_pre_split.json', err.getvalue())
+            self.assertFalse((tmp / 'out').exists())
+
+    def test_measure_stops_on_post_split_input(self):
+        import measure_split_inputs
+
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            argv = ['measure_split_inputs.py', '--data-dir']
+            argv += [str(self.post_split_input(tmp))]
+            err = io.StringIO()
+            with patch.object(sys, 'argv', argv), contextlib.redirect_stderr(err):
+                self.assertEqual(measure_split_inputs.main(), 2)
+            self.assertIn('post-split observations', err.getvalue())

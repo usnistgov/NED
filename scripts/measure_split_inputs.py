@@ -9,12 +9,15 @@ The grouping and normalization helpers here (``normalize``, ``slugify``,
 ``specimen_key``, ``test_key``) are the single definition of those rules, and
 the Stage 6 conversion tool will import them.
 
+The live ``resources/data`` is split since Stage 8, so ``--data-dir`` is a folder
+holding ``resources/archive/observation_pre_split.json`` as ``observation.json``.
+
 Usage (run from the repository root):
 
-    python scripts/measure_split_inputs.py
-    python scripts/measure_split_inputs.py --limit 0          # every detail row
-    python scripts/measure_split_inputs.py --strict           # exit 1 if blocking
-    python scripts/measure_split_inputs.py --json build/measure.json
+    python scripts/measure_split_inputs.py --data-dir build/pre_split
+    python scripts/measure_split_inputs.py --data-dir ... --limit 0   # every row
+    python scripts/measure_split_inputs.py --data-dir ... --strict    # exit 1 if blocking
+    python scripts/measure_split_inputs.py --data-dir ... --json build/measure.json
 """
 
 from __future__ import annotations
@@ -27,7 +30,6 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 NED = Path(__file__).resolve().parent.parent
-DEFAULT_DATA_DIR = NED / 'resources' / 'data'
 DEFAULT_ACCEPTED = NED / 'resources' / 'archive' / 'split_accepted_collapses.json'
 
 # Columns that move to Specimen, and must therefore be constant within a specimen.
@@ -406,7 +408,7 @@ def report(source: Path, result: dict, limit: int) -> None:
 def main() -> int:
     """Run the measurements and print or save them."""
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('--data-dir', type=Path, default=DEFAULT_DATA_DIR)
+    parser.add_argument('--data-dir', type=Path, required=True)
     parser.add_argument(
         '--accepted',
         type=Path,
@@ -428,6 +430,16 @@ def main() -> int:
     args = parser.parse_args()
 
     source, rows = load_rows(args.data_dir)
+    # The live data is split since Stage 8; these rules read the pre-split shape.
+    if any('test' in r and 'id' not in r for r in rows):
+        print(
+            f'{source} holds post-split observations (a test key and no id). '
+            'Measure the pre-split archive instead: copy '
+            'resources/archive/observation_pre_split.json into an empty folder '
+            'as observation.json and pass that folder as --data-dir.',
+            file=sys.stderr,
+        )
+        return 2
     result = measure(rows, load_accepted(args.accepted))
     report(source, result, args.limit)
     if args.json:

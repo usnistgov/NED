@@ -4,8 +4,8 @@ Unit tests for scripts/audit_split.py, the Experiment-split reconstruction audit
 Each test builds its own small flat fixture (shaped like Stage 5's
 observation.json), converts it with Stage 6's tool, optionally tampers with the
 result, and audits it against the fixture as the snapshot. The cases run in both
-modes: normalized (the converted JSON) and database (the same JSON ingested into
-the test database). The audit itself never imports the conversion tool; only
+modes: normalized (the converted JSON) and database (the same JSON, reshaped as
+stored since Stage 12, ingested into the test database). The audit itself never imports the conversion tool; only
 these tests do, to produce its input.
 """
 
@@ -33,6 +33,24 @@ DATA = Path(__file__).resolve().parents[3] / 'resources' / 'data'
 REF = 'Smith-2020'
 COMPONENT = 'B.20.1.1.A'
 LEGACY = ('ds_rank', 'prior_damage', 'prior_damage_repaired')
+# The Observation fields the Stage 12 cutover dropped (they live in the hierarchy).
+MOVED = (
+    'reference',
+    'specimen',
+    'specimen_inspection_sequence',
+    'contributor',
+    'component',
+    'comp_detail',
+    'material',
+    'size_class',
+    'test_type',
+    'loading_protocol',
+    'peak_test_amplitude',
+    'location',
+    'governing_design_standard',
+    'design_objective',
+    'comp_description',
+)
 TABLE_FILES = ('facility', 'program', 'specimen', 'test', 'observation')
 
 
@@ -187,10 +205,24 @@ def rename_test(old, new):
 
 
 def to_legacy_names(tables):
-    """Rename the kept Observation columns as the Stage 12 cutover will."""
+    """Rename the kept Observation columns as the Stage 12 cutover did.
+
+    Rows that already have the legacy_ names (read from the database) pass
+    through unchanged.
+    """
     for obs in tables['observation']:
         for name in LEGACY:
-            obs[f'legacy_{name}'] = obs.pop(name)
+            if name in obs:
+                obs[f'legacy_{name}'] = obs.pop(name)
+
+
+def to_cutover_shape(tables):
+    """Reshape converted observations as stored since Stage 12: no old id, no
+    moved fields, and the kept columns under their legacy_ names."""
+    for obs in tables['observation']:
+        for name in ('id', *MOVED):
+            del obs[name]
+    to_legacy_names(tables)
 
 
 def to_observation_ids(tables):
@@ -291,8 +323,9 @@ class AuditCases:
         self.assertEqual(result.unexpected, {('e1', 'ds_description', 'Tampered')})
 
     def test_tampered_parent_cells_fail(self):
-        # The moved columns are still on Observation, unchanged; the audit must
-        # read Specimen and Test, not pass them against themselves.
+        # In normalized mode the moved columns are still on Observation,
+        # unchanged; the audit must read Specimen and Test, not pass them
+        # against themselves.
         ref = self.ref
 
         def edit(tables):
@@ -595,9 +628,10 @@ class DatabaseAuditTests(AuditCases, TestCase):
     """The same cases through ingest: the converted JSON (plus one real reference
     and component) is ingested into the test database and audited there.
 
-    Database rows carry no old id since Stage 10, so the audit matches them
-    through an id map built from the converted JSON, as Stage 10 built the real
-    one."""
+    Ingest takes observations in the shape stored since Stage 12, so they are
+    reshaped first. Database rows carry no old id since Stage 10, so the audit
+    matches them through an id map built from the converted JSON, as Stage 10
+    built the real one."""
 
     matched_by = 'id map'
 
@@ -616,13 +650,20 @@ class DatabaseAuditTests(AuditCases, TestCase):
         cls.component = COMPONENT
 
     def ingest(self, directory):
-        """Ingest ``directory``; return what ingest wrote to stderr."""
-        write_json(directory / 'reference.json', [self.reference])
-        write_json(directory / 'component.json', [self.component_record])
+        """Ingest the converted JSON in ``directory``, reshaped as stored since
+        Stage 12, from a sibling folder; return what ingest wrote to stderr."""
+        tables = audit_split.load_normalized(directory)
+        to_cutover_shape(tables)
+        source = directory.parent / 'ingest'
+        source.mkdir()
+        for name in TABLE_FILES:
+            write_json(source / f'{name}.json', tables[name])
+        write_json(source / 'reference.json', [self.reference])
+        write_json(source / 'component.json', [self.component_record])
         err = io.StringIO()
         with patch(
             'ned_app.management.commands.ingest.build_json_data_file_path',
-            side_effect=lambda name: str(directory / name),
+            side_effect=lambda name: str(source / name),
         ):
             try:
                 call_command('ingest', stdout=io.StringIO(), stderr=err)
@@ -733,8 +774,8 @@ class DatabaseAuditTests(AuditCases, TestCase):
             self.assertIn('Source: database', out.getvalue())
             self.assertIn('Matched by: id map', out.getvalue())
 
-            # Change a specimen in the database only; Observation.material keeps
-            # the snapshot value, and must not mask the change.
+            # Change a specimen in the database only; the audit must read it
+            # there.
             Specimen.objects.filter(label='S1').update(material='Tampered')
             out = io.StringIO()
             with contextlib.redirect_stdout(out):

@@ -312,20 +312,13 @@ class TestSerializer(serializers.ModelSerializer):
 
 class ObservationSerializer(serializers.ModelSerializer):
     """
-    Serializer for Observation with reference, component and test relationships.
+    Serializer for Observation with its test relationship.
 
     observation_id is read-only: it is always derived on save() as
-    '{test_id}|{label}'. Uses natural keys for foreign key lookups:
-    reference.reference_id, component.component_id and test.test_id.
+    '{test_id}|{label}'. The test is looked up by its natural key, test_id.
     """
 
     observation_id = serializers.CharField(read_only=True)
-    reference = serializers.SlugRelatedField(
-        slug_field='reference_id', queryset=Reference.objects.all()
-    )
-    component = serializers.SlugRelatedField(
-        slug_field='component_id', queryset=Component.objects.all()
-    )
     test = serializers.SlugRelatedField(
         slug_field='test_id', queryset=Test.objects.all()
     )
@@ -334,31 +327,16 @@ class ObservationSerializer(serializers.ModelSerializer):
         model = Observation
         fields: ClassVar[list[str]] = [
             'observation_id',
-            'reference',
-            'specimen',
-            'specimen_inspection_sequence',
-            'contributor',
-            'component',
-            'comp_detail',
-            'material',
-            'size_class',
-            'test_type',
-            'loading_protocol',
-            'peak_test_amplitude',
-            'location',
-            'governing_design_standard',
-            'design_objective',
-            'comp_description',
             'ds_description',
-            'prior_damage',
-            'prior_damage_repaired',
+            'legacy_prior_damage',
+            'legacy_prior_damage_repaired',
             'edp_metric',
             'edp_unit',
             'edp_value',
             'alt_edp_metric',
             'alt_edp_unit',
             'alt_edp_value',
-            'ds_rank',
+            'legacy_ds_rank',
             'ds_class',
             'notes',
             'test',

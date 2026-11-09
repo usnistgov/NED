@@ -19,9 +19,12 @@ minted label follows a fully specified sort: two runs over the same input write
 byte-identical files. Reference ids are taken as stored in each observation's
 ``reference`` (reference.json holds no ids), so the tool needs no Django.
 
+The live ``resources/data`` is split since Stage 8, so ``--input`` is a folder
+holding ``resources/archive/observation_pre_split.json`` as ``observation.json``.
+
 Usage (run from the repository root):
 
-    python scripts/split_observations.py convert --input resources/data \
+    python scripts/split_observations.py convert --input build/pre_split \
         --accepted resources/archive/split_accepted_collapses.json \
         --output build/split
     python scripts/split_observations.py convert ... --check   # report only
@@ -674,6 +677,19 @@ def main(argv: list[str] | None = None) -> int:
         '--check', action='store_true', help='validate and write the report only'
     )
     args = parser.parse_args(argv)
+    # The live data is split since Stage 8; the conversion reads the pre-split shape.
+    source = args.input / 'observation.json'
+    if source.is_file():
+        rows = json.loads(source.read_text(encoding='utf-8'))
+        if any('test' in r and 'id' not in r for r in rows):
+            print(
+                f'{source} holds post-split observations (a test key and no id). '
+                'Convert the pre-split archive instead: copy '
+                'resources/archive/observation_pre_split.json into an empty '
+                'folder as observation.json and pass that folder as --input.',
+                file=sys.stderr,
+            )
+            return 2
     return convert(args.input, args.accepted, args.output, args.check)
 
 

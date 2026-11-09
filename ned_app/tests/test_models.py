@@ -639,10 +639,6 @@ class SpecimenAndTestModelTest(TestCase):
 
     def make_observation(self, test, label):
         return Observation.objects.create(
-            reference=self.reference,
-            component=self.component,
-            test_type=test.test_type,
-            comp_description='Partition wall',
             ds_description='Crack',
             edp_metric='Story Drift Ratio',
             edp_unit='Ratio',
@@ -749,10 +745,6 @@ class DamagedByEarlierTestTest(TestCase):
 
     def observe(self, test):
         Observation.objects.create(
-            reference=self.reference,
-            component=self.component,
-            test_type=test.test_type,
-            comp_description='Partition wall',
             ds_description='Crack',
             edp_metric='Story Drift Ratio',
             edp_unit='Ratio',

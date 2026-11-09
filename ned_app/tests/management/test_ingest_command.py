@@ -149,11 +149,6 @@ class IngestCommandTests(TransactionTestCase):
 
             experiment_data = [
                 {
-                    'reference': 'Smith-2020',
-                    'component': 'B.20.1.1.A',
-                    'specimen': 'Specimen-A',
-                    'test_type': 'Quasi-static Cyclic, uniaxial',
-                    'comp_description': 'CFS wall panel test',
                     'ds_description': 'Buckling of studs',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
@@ -163,11 +158,6 @@ class IngestCommandTests(TransactionTestCase):
                     'label': '01',
                 },
                 {
-                    'reference': 'Smith-2020',
-                    'component': 'D.30.3.2.B',
-                    'specimen': 'Specimen-B',
-                    'test_type': 'Dynamic, uniaxial',
-                    'comp_description': 'Water heater shake table test',
                     'ds_description': 'Tank rupture',
                     'edp_metric': 'Peak Floor Acceleration, horizontal',
                     'edp_unit': 'g',
@@ -261,14 +251,14 @@ class IngestCommandTests(TransactionTestCase):
             exp_001 = Observation.objects.get(
                 observation_id='Smith-2020|Specimen-A|a|01'
             )
-            self.assertEqual(exp_001.reference.reference_id, 'Smith-2020')
-            self.assertEqual(exp_001.component.component_id, 'B.20.1.1.A')
+            self.assertEqual(exp_001.test.test_id, 'Smith-2020|Specimen-A|a')
+            self.assertEqual(exp_001.test.specimen.component_id, 'B.20.1.1.A')
 
             exp_002 = Observation.objects.get(
                 observation_id='Smith-2020|Specimen-B|a|01'
             )
-            self.assertEqual(exp_002.reference.reference_id, 'Smith-2020')
-            self.assertEqual(exp_002.component.component_id, 'D.30.3.2.B')
+            self.assertEqual(exp_002.test.test_id, 'Smith-2020|Specimen-B|a')
+            self.assertEqual(exp_002.test.specimen.component_id, 'D.30.3.2.B')
 
             cfm_bridge_1 = ComponentFragilityModelBridge.objects.get(
                 component__component_id='B.20.1.1.A',
@@ -545,11 +535,6 @@ class IngestCommandTests(TransactionTestCase):
 
             experiment_data = [
                 {
-                    'reference': 'Smith-2020',  # Non-existent reference
-                    'component': 'INVALID.COMPONENT',  # Non-existent component
-                    'specimen': 'Specimen-A',
-                    'test_type': 'Quasi-static Cyclic, uniaxial',
-                    'comp_description': 'Test',
                     'ds_description': 'Damage',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
@@ -755,10 +740,6 @@ class IngestCommandTests(TransactionTestCase):
 
             experiment_data = [
                 {
-                    'reference': 'Test-2025',
-                    'component': 'A.10.1.1',
-                    'test_type': 'Quasi-static Cyclic, uniaxial',
-                    'comp_description': 'A typical steel frame component.',
                     'ds_description': 'Original EXP Description',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
@@ -1038,12 +1019,12 @@ class IngestCommandTests(TransactionTestCase):
     def test_ingest_rejects_invalid_choice_in_experiment(self):
         """
         Verify that ingestion rejects an Observation with an invalid
-        test_type while still persisting a sibling valid Observation in
+        ds_class while still persisting a sibling valid Observation in
         the same file.
 
         Complements test_ingest_rejects_invalid_choice_in_fragility_model
-        by exercising a different choice field (test_type, backed by
-        TestTypeChoices) on a different model.
+        by exercising a different choice field (ds_class, backed by
+        DSClassChoices) on a different model.
         """
         with tempfile.TemporaryDirectory() as temp_dir:
             reference_data = [
@@ -1067,10 +1048,6 @@ class IngestCommandTests(TransactionTestCase):
 
             experiment_data = [
                 {
-                    'reference': 'Smith-2020',
-                    'component': 'B.20.1.1.A',
-                    'test_type': 'Quasi-static Cyclic, uniaxial',
-                    'comp_description': 'Valid experiment',
                     'ds_description': 'Cracking',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
@@ -1080,15 +1057,11 @@ class IngestCommandTests(TransactionTestCase):
                     'label': 'good',
                 },
                 {
-                    'reference': 'Smith-2020',
-                    'component': 'B.20.1.1.A',
-                    'test_type': '__INVALID_TEST_TYPE__',
-                    'comp_description': 'Invalid experiment',
                     'ds_description': 'Cracking',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
                     'edp_value': '0.025',
-                    'ds_class': 'Consequential',
+                    'ds_class': '__INVALID_DS_CLASS__',
                     'test': 'Smith-2020|S1|a',
                     'label': 'bad',
                 },
@@ -1139,6 +1112,74 @@ class IngestCommandTests(TransactionTestCase):
                     observation_id='Smith-2020|S1|a|bad'
                 ).exists()
             )
+
+    def test_ingest_rejects_unknown_observation_keys(self):
+        """
+        An observation.json record with a key outside the serializer's fields
+        (an old name, or a field that moved to the hierarchy) fails, naming the
+        record and the key, rather than silently dropping the value.
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            reference_data = [
+                {
+                    'study_type': 'Experiment',
+                    'csl_data': {
+                        'type': 'article-journal',
+                        'title': 'T',
+                        'author': [{'family': 'Smith', 'given': 'John'}],
+                        'issued': {'date-parts': [[2020]]},
+                    },
+                }
+            ]
+            component_data = [{'component_id': 'B.20.1.1.A', 'name': 'Wall'}]
+            base = {
+                'ds_description': 'Cracking',
+                'edp_metric': 'Story Drift Ratio',
+                'edp_unit': 'Ratio',
+                'ds_class': 'Consequential',
+                'test': 'Smith-2020|S1|a',
+            }
+            experiment_data = [
+                {**base, 'label': 'new', 'legacy_ds_rank': 2},
+                {**base, 'label': 'commented', '_comment': 'allowed'},
+                {**base, 'label': 'old', 'ds_rank': 2, 'material': 'Steel'},
+            ]
+
+            files_data = {
+                'reference.json': reference_data,
+                'component.json': component_data,
+                **_hierarchy_files('Smith-2020', {'S1': 'B.20.1.1.A'}),
+                'observation.json': experiment_data,
+            }
+            for filename, data in files_data.items():
+                with open(os.path.join(temp_dir, filename), 'w') as f:
+                    json.dump(data, f)
+
+            def mock_build_path(filename):
+                return os.path.join(temp_dir, filename)
+
+            stderr = StringIO()
+            with (
+                patch(
+                    'ned_app.management.commands.ingest.build_json_data_file_path',
+                    side_effect=mock_build_path,
+                ),
+                self.assertRaises(CommandError),
+            ):
+                call_command('ingest', stdout=StringIO(), stderr=stderr)
+
+            stderr_value = stderr.getvalue()
+            self.assertIn(
+                'Error processing Observation [observation_id=Smith-2020|S1|a|old]:',
+                stderr_value,
+            )
+            self.assertIn("unknown key(s) 'ds_rank', 'material'", stderr_value)
+            self.assertNotIn('commented', stderr_value)
+            self.assertEqual(
+                sorted(Observation.objects.values_list('label', flat=True)),
+                ['commented', 'new'],
+            )
+            self.assertEqual(Observation.objects.get(label='new').legacy_ds_rank, 2)
 
     def test_ingest_handles_empty_data_directory(self):
         """Test that the command handles empty data directory (no files found) gracefully."""
@@ -1239,15 +1280,11 @@ class IngestCommandTests(TransactionTestCase):
             component_data = [{'component_id': 'B.20.1.1.A', 'name': 'Wall'}]
             experiment_data = [
                 {
-                    'reference': 'Smith-2020',
-                    'component': 'B.20.1.1.A',
-                    'test_type': '__INVALID_TEST_TYPE__',
-                    'comp_description': 'x',
                     'ds_description': 'y',
                     'edp_metric': 'Story Drift Ratio',
                     'edp_unit': 'Ratio',
                     'edp_value': '0.1',
-                    'ds_class': 'Consequential',
+                    'ds_class': '__INVALID_DS_CLASS__',
                     'test': 'Smith-2020|S1|a',
                     'label': 'bad',
                 }
@@ -1281,7 +1318,7 @@ class IngestCommandTests(TransactionTestCase):
                 'Error processing Observation [observation_id=Smith-2020|S1|a|bad]:',
                 stderr_value,
             )
-            self.assertIn('test_type:', stderr_value)
+            self.assertIn('ds_class:', stderr_value)
             self.assertIn('is not a valid choice', stderr_value)
             # The raw ErrorDetail wrapper must not leak through.
             self.assertNotIn('ErrorDetail', stderr_value)

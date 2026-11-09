@@ -26,6 +26,9 @@ def _connect() -> sqlite3.Connection:
     try:
         with open(_FLAT_VIEW_SQL, encoding='utf-8') as f:
             conn.execute(f.read())
+        # SQLite checks a view's columns only when it is read, so probe it
+        # here: a database built before the cutover fails at connect.
+        conn.execute('SELECT * FROM ned_app_observation_flat LIMIT 0')
     except Exception:
         conn.close()
         raise

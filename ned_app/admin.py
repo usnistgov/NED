@@ -34,7 +34,7 @@ class ReferenceAdmin(admin.ModelAdmin):
 @admin.register(Observation)
 class ObservationAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('observation_id', 'reference', 'specimen')
+    list_display = ('observation_id', 'test', 'label')
 
 
 @admin.register(Component)

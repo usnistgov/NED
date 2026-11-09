@@ -534,12 +534,8 @@ class ObservationSerializerTest(TestCase):
         self.test = _make_test(self.reference, self.component)
 
     def test_serializer_creates_experiment_with_valid_foreign_keys(self):
-        """Test that serializer successfully validates and saves with valid component and reference IDs."""
+        """Test that serializer successfully validates and saves with a valid test ID."""
         valid_data = {
-            'reference': 'test-ref-001',
-            'component': 'A.10.1.1',
-            'test_type': 'Quasi-static Cyclic, uniaxial',
-            'comp_description': 'Test component description',
             'ds_description': 'Test damage state description',
             'edp_metric': 'Story Drift Ratio',
             'edp_unit': 'Ratio',
@@ -555,32 +551,7 @@ class ObservationSerializerTest(TestCase):
 
         self.assertIsNotNone(experiment)
         self.assertEqual(experiment.observation_id, 'test-ref-001|S1|T1|01')
-        self.assertEqual(experiment.reference.reference_id, 'test-ref-001')
-        self.assertEqual(experiment.component.component_id, 'A.10.1.1')
-
-    def test_serializer_rejects_nonexistent_reference(self):
-        """Test that serializer rejects data with a non-existent reference ID."""
-        invalid_data = {
-            'reference': 'nonexistent-ref',
-            'component': 'A.10.1.1',
-        }
-
-        serializer = ObservationSerializer(data=invalid_data)
-
-        self.assertFalse(serializer.is_valid())
-        self.assertIn('reference', serializer.errors)
-
-    def test_serializer_rejects_nonexistent_component(self):
-        """Test that serializer rejects data with a non-existent component ID."""
-        invalid_data = {
-            'reference': 'test-ref-001',
-            'component': 'Z.99.9.9',
-        }
-
-        serializer = ObservationSerializer(data=invalid_data)
-
-        self.assertFalse(serializer.is_valid())
-        self.assertIn('component', serializer.errors)
+        self.assertEqual(experiment.test, self.test)
 
     def test_serializer_exposes_observation_id_read_only(self):
         """observation_id is serialized but never taken from the input."""
@@ -617,8 +588,6 @@ class ObservationFragilityModelBridgeSerializerTest(TestCase):
         )
 
         self.experiment = Observation.objects.create(
-            reference=self.reference,
-            component=self.component,
             test=_make_test(self.reference, self.component),
             label='01',
         )
@@ -1024,6 +993,18 @@ class HierarchySerializerTest(TestCase):
                 self.assertTrue(serializer.is_valid(), serializer.errors)
                 self.assertIsNone(serializer.save().reference)
 
+    def test_specimen_serializer_rejects_nonexistent_foreign_keys(self):
+        for field, value in (
+            ('reference', 'nonexistent-ref'),
+            ('component', 'Z.99.9.9'),
+        ):
+            with self.subTest(field=field):
+                serializer = SpecimenSerializer(
+                    data=self._specimen_data(**{field: value})
+                )
+                self.assertFalse(serializer.is_valid())
+                self.assertIn(field, serializer.errors)
+
     def test_specimen_serializer_rejects_missing_required_foreign_keys(self):
         for field in ('program', 'facility', 'component'):
             with self.subTest(field=field):
@@ -1061,10 +1042,6 @@ class HierarchySerializerTest(TestCase):
             specimen=self.specimen, label='T1', test_type='Dynamic, uniaxial'
         )
         base = {
-            'reference': 'test-ref-001',
-            'component': 'A.10.1.1',
-            'test_type': 'Dynamic, uniaxial',
-            'comp_description': 'Test component description',
             'ds_description': 'Test damage state description',
             'edp_metric': 'Story Drift Ratio',
             'edp_unit': 'Ratio',
@@ -1164,31 +1141,28 @@ class ChoicesValidationTest(TestCase):
         self.assertIn('study_type', serializer.errors)
 
     # ------------------------------------------------------------------
-    # Observation → TestTypeChoices, EDPMetricChoices, EDPUnitChoices,
-    # DSClassChoices
+    # Test.test_type → TestTypeChoices
+    # ------------------------------------------------------------------
+    def test_test_rejects_invalid_test_type(self):
+        """TestSerializer must reject an invalid test_type value."""
+        data = {'label': 'T1', 'test_type': self.INVALID}
+
+        serializer = TestSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn('test_type', serializer.errors)
+
+    # ------------------------------------------------------------------
+    # Observation → EDPMetricChoices, EDPUnitChoices, DSClassChoices
     # ------------------------------------------------------------------
     def _valid_experiment_data(self):
         return {
-            'reference': 'test-choices-ref-001',
-            'component': 'A.10.1.1',
-            'test_type': 'Quasi-static Cyclic, uniaxial',
-            'comp_description': 'Test component description',
             'ds_description': 'Test damage state description',
             'edp_metric': 'Story Drift Ratio',
             'edp_unit': 'Ratio',
             'ds_class': 'Consequential',
             'label': '01',
         }
-
-    def test_experiment_rejects_invalid_test_type(self):
-        """ObservationSerializer must reject an invalid test_type value."""
-        data = self._valid_experiment_data()
-        data['test_type'] = self.INVALID
-
-        serializer = ObservationSerializer(data=data)
-
-        self.assertFalse(serializer.is_valid())
-        self.assertIn('test_type', serializer.errors)
 
     def test_experiment_rejects_invalid_edp_metric(self):
         """ObservationSerializer must reject an invalid edp_metric value."""

@@ -110,7 +110,13 @@ class ExportDataCommandTest(TestCase):
             facility=self.facility,
             label='S1',
             name='Specimen 1',
+            contributor='Test contributor',
             component=self.component,
+            comp_detail='Detailed connection',
+            material='Steel',
+            size_class='Medium',
+            governing_design_standard='ASCE 7-16',
+            design_objective='Life safety performance level',
             comp_description='Test specimen description',
         )
 
@@ -119,37 +125,24 @@ class ExportDataCommandTest(TestCase):
             label='T1',
             test_order=1,
             test_type='Dynamic, uniaxial',
+            loading_protocol='FEMA P-695',
+            peak_test_amplitude='2.5% drift',
         )
 
         self.experiment = Observation.objects.create(
-            reference=self.reference,
-            component=self.component,
             test=self.test,
             label='01',
             damage_location='Base track',
-            specimen='Test specimen',
-            specimen_inspection_sequence='1st test',
-            contributor='Test contributor',
-            test_type='Dynamic, uniaxial',
-            comp_detail='Detailed connection',
-            material='Steel',
-            size_class='Medium',
-            loading_protocol='FEMA P-695',
-            peak_test_amplitude='2.5% drift',
-            location='University Test Lab',
-            governing_design_standard='ASCE 7-16',
-            design_objective='Life safety performance level',
-            comp_description='Test component description',
             ds_description='Test damage state description',
-            prior_damage='No prior damage',
-            prior_damage_repaired='N/A',
+            legacy_prior_damage='No prior damage',
+            legacy_prior_damage_repaired='N/A',
             edp_metric='Story Drift Ratio',
             edp_unit='Ratio',
             edp_value=Decimal('0.01'),
             alt_edp_metric='Peak Floor Acceleration, horizontal',
             alt_edp_unit='g',
             alt_edp_value=Decimal('0.35'),
-            ds_rank=2,
+            legacy_ds_rank=2,
             ds_class='Consequential',
             notes='Test notes about the experiment.',
         )
@@ -281,49 +274,25 @@ class ExportDataCommandTest(TestCase):
             # pk is exported.
             self.assertNotIn('id', exp_data)
             self.assertNotIn('observation_id', exp_data)
-            self.assertIn('reference', exp_data)
-            self.assertEqual(exp_data['reference'], 'test-ref-001')
-            self.assertIn('component', exp_data)
-            self.assertEqual(exp_data['component'], 'B.20.1.1.A')
+            # The moved fields are exported with Specimen, Test and Facility.
+            for moved in (
+                'reference',
+                'component',
+                'specimen',
+                'specimen_inspection_sequence',
+                'test_type',
+                'material',
+                'location',
+            ):
+                self.assertNotIn(moved, exp_data)
 
-            self.assertIn('specimen', exp_data)
-            self.assertEqual(exp_data['specimen'], 'Test specimen')
-            self.assertIn('specimen_inspection_sequence', exp_data)
-            self.assertEqual(exp_data['specimen_inspection_sequence'], '1st test')
-            self.assertIn('contributor', exp_data)
-            self.assertEqual(exp_data['contributor'], 'Test contributor')
-            self.assertIn('test_type', exp_data)
-            self.assertEqual(exp_data['test_type'], 'Dynamic, uniaxial')
-            self.assertIn('comp_detail', exp_data)
-            self.assertEqual(exp_data['comp_detail'], 'Detailed connection')
-            self.assertIn('material', exp_data)
-            self.assertEqual(exp_data['material'], 'Steel')
-            self.assertIn('size_class', exp_data)
-            self.assertEqual(exp_data['size_class'], 'Medium')
-            self.assertIn('loading_protocol', exp_data)
-            self.assertEqual(exp_data['loading_protocol'], 'FEMA P-695')
-            self.assertIn('peak_test_amplitude', exp_data)
-            self.assertEqual(exp_data['peak_test_amplitude'], '2.5% drift')
-            self.assertIn('location', exp_data)
-            self.assertEqual(exp_data['location'], 'University Test Lab')
-            self.assertIn('governing_design_standard', exp_data)
-            self.assertEqual(exp_data['governing_design_standard'], 'ASCE 7-16')
-            self.assertIn('design_objective', exp_data)
-            self.assertEqual(
-                exp_data['design_objective'], 'Life safety performance level'
-            )
-            self.assertIn('comp_description', exp_data)
-            self.assertEqual(
-                exp_data['comp_description'], 'Test component description'
-            )
             self.assertIn('ds_description', exp_data)
             self.assertEqual(
                 exp_data['ds_description'], 'Test damage state description'
             )
-            self.assertIn('prior_damage', exp_data)
-            self.assertEqual(exp_data['prior_damage'], 'No prior damage')
-            self.assertIn('prior_damage_repaired', exp_data)
-            self.assertEqual(exp_data['prior_damage_repaired'], 'N/A')
+            self.assertEqual(exp_data['legacy_prior_damage'], 'No prior damage')
+            self.assertEqual(exp_data['legacy_prior_damage_repaired'], 'N/A')
+            self.assertNotIn('prior_damage', exp_data)
             self.assertIn('edp_metric', exp_data)
             self.assertEqual(exp_data['edp_metric'], 'Story Drift Ratio')
             self.assertIn('edp_unit', exp_data)
@@ -338,8 +307,8 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(exp_data['alt_edp_unit'], 'g')
             self.assertIn('alt_edp_value', exp_data)
             self.assertEqual(float(exp_data['alt_edp_value']), 0.35)
-            self.assertIn('ds_rank', exp_data)
-            self.assertEqual(exp_data['ds_rank'], 2)
+            self.assertEqual(exp_data['legacy_ds_rank'], 2)
+            self.assertNotIn('ds_rank', exp_data)
             self.assertIn('ds_class', exp_data)
             self.assertEqual(exp_data['ds_class'], 'Consequential')
             self.assertIn('notes', exp_data)
@@ -481,11 +450,22 @@ class ExportDataCommandTest(TestCase):
         self.assertEqual(specimen['facility'], 'Test_Lab')
         self.assertIsNone(specimen['reference'])
         self.assertEqual(specimen['component'], 'B.20.1.1.A')
+        self.assertEqual(specimen['contributor'], 'Test contributor')
+        self.assertEqual(specimen['comp_detail'], 'Detailed connection')
+        self.assertEqual(specimen['material'], 'Steel')
+        self.assertEqual(specimen['size_class'], 'Medium')
+        self.assertEqual(specimen['governing_design_standard'], 'ASCE 7-16')
+        self.assertEqual(
+            specimen['design_objective'], 'Life safety performance level'
+        )
         self.assertNotIn('specimen_id', specimen)
 
         [test] = read('test.json')
         self.assertEqual(test['specimen'], 'Test_Program|S1')
         self.assertEqual(test['test_order'], 1)
+        self.assertEqual(test['test_type'], 'Dynamic, uniaxial')
+        self.assertEqual(test['loading_protocol'], 'FEMA P-695')
+        self.assertEqual(test['peak_test_amplitude'], '2.5% drift')
         self.assertNotIn('test_id', test)
 
     def test_export_keys_match_serializer_fields(self):

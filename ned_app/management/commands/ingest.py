@@ -188,6 +188,9 @@ class Command(BaseCommand):
                 'lookup_deriver': lambda item: {
                     'observation_id': f'{item["test"]}|{item["label"]}'
                 },
+                # Old-shape keys (e.g. ds_rank, now legacy_ds_rank) would
+                # otherwise be dropped silently, losing their values.
+                'reject_unknown_keys': True,
             },
             {
                 'model': ObservationFragilityModelBridge,
@@ -211,6 +214,7 @@ class Command(BaseCommand):
                 data_file=config['file'],
                 lookup_field=config['lookup_field'],
                 lookup_deriver=config.get('lookup_deriver'),
+                reject_unknown_keys=config.get('reject_unknown_keys', False),
             )
 
         if total_failed:
@@ -230,6 +234,7 @@ class Command(BaseCommand):
         data_file,
         lookup_field,
         lookup_deriver=None,
+        reject_unknown_keys=False,
     ):
         """
         Process a JSON data file for a given model.
@@ -242,6 +247,8 @@ class Command(BaseCommand):
             serializer_class: The serializer class for validation and saving.
             data_file (str): The name of the JSON file to process.
             lookup_field (list): List of field names used to identify existing records.
+            reject_unknown_keys (bool): Fail any record with a key that is not
+                one of the serializer's fields (``_comment`` is allowed).
 
         Returns:
             int: The number of failures (unreadable file or invalid records).
@@ -266,6 +273,7 @@ class Command(BaseCommand):
             self.stderr.write(f'Error: Invalid JSON in {data_filepath}: {ex}')
             return 1
 
+        known_keys = {*serializer_class.Meta.fields, '_comment'}
         for item in data:
             lookup_params = None
             try:
@@ -286,6 +294,13 @@ class Command(BaseCommand):
                         field: item.get(field) for field in lookup_field
                     }
                     have_lookup = all(field in item for field in lookup_field)
+                if reject_unknown_keys:
+                    unknown = sorted(set(item) - known_keys)
+                    if unknown:
+                        raise ValueError(
+                            f'unknown key(s) {", ".join(map(repr, unknown))}: not '
+                            f'{model_name} fields (renamed or moved to another table?)'
+                        )
                 instance = None
 
                 if have_lookup:

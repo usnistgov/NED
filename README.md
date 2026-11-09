@@ -51,7 +51,7 @@ The goal of this project is to develop a robust and scalable database of fragili
 - **uv.lock** - Locked, exact versions for every dependency; `uv sync` installs from this file.
 
 ### Data Schema
-A human-readable data dictionary describing every attribute of the main tables (definitions, accepted values, and bounds) is provided in [ui/assets/data_dictionary.md](ui/assets/data_dictionary.md); it lives under `ui/` so the same document is also rendered as the *Data dictionary* page of the browser UI. The authoritative schema definition lives in the docstrings and field declarations in ned_app/models.py. The overview below provides a brief description of two of the fields found in the experiment model.
+A human-readable data dictionary describing every attribute of the main tables (definitions, accepted values, and bounds) is provided in [ui/assets/data_dictionary.md](ui/assets/data_dictionary.md); it lives under `ui/` so the same document is also rendered as the *Data dictionary* page of the browser UI. The authoritative schema definition lives in the docstrings and field declarations in ned_app/models.py. The overview below provides a brief description of two of the fields found in the specimen model.
 
 #### Component Subcategorization Hierarchy
 To categorize building components, we rely on the UNIFORMAT II element classification system (NISTIR 6389). However, this system only classifies nonstructural components at a high level, and further detail is needed to adequately separate different types of components within each category for the purpose of assessing building performance.  Therefore, we propose a new subcategorization hierarchy consisting of four nested component attributes:
@@ -134,22 +134,29 @@ This exports all fields from the Observation table to a CSV file. The output dir
 ```bash
 python manage.py query_to_csv --model Observation \
   --output_file exports/experiment_summary.csv \
-  --fields observation_id,specimen,material,test_type
+  --fields observation_id,test,ds_class,edp_value
 ```
 
 **Export with filters (AND logic):**
+
+Filters apply to the model being exported. Specimen-level fields (such as `material` and `contributor`) are filtered on `Specimen`, and test-level fields (such as `test_type`) on `Test`:
 ```bash
-python manage.py query_to_csv --model Observation \
-  --output_file exports/steel_tensile_tests.csv \
-  --filter material=Steel,test_type=Tensile
+python manage.py query_to_csv --model Specimen \
+  --output_file exports/steel_specimens.csv \
+  --filter material=Steel,contributor=John
+
+python manage.py query_to_csv --model Test \
+  --output_file exports/monotonic_tests.csv \
+  --filter test_type__startswith=Monotonic
 ```
+Filter values can't contain commas (commas separate the filters), so a test type such as `Monotonic, tension` is matched with a lookup like `__startswith`.
 
 **Combine field selection and filtering:**
 ```bash
-python manage.py query_to_csv --model Observation \
+python manage.py query_to_csv --model Specimen \
   --output_file exports/filtered_data.csv \
-  --fields observation_id,specimen,material,peak_demand \
-  --filter contributor=John,ds_class=Consequential
+  --fields specimen_id,name,material,component \
+  --filter contributor=John
 ```
 
 #### Available Models
@@ -182,10 +189,10 @@ Check your filter conditions. If a filter returns no results, the command will r
 
 ```bash
 # Debug: Export all records first to see what values exist
-python manage.py query_to_csv --model Observation --output_file test.csv
+python manage.py query_to_csv --model Specimen --output_file test.csv
 
 # Then apply filters based on actual values in the data
-python manage.py query_to_csv --model Observation --output_file filtered.csv --filter material=Steel
+python manage.py query_to_csv --model Specimen --output_file filtered.csv --filter material=Steel
 ```
 
 **File path issues on Windows:**
@@ -389,7 +396,7 @@ Directly edit the JSON files in the `resources/data/` directory.
 *   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
 *   **Templates:** Check `resources/example_data/` for examples of proper formatting.
 
-> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Use `reference_label` (letters, digits, and underscores only — no hyphens, not a bare year, at most 100 characters) to choose the token yourself — for an institutional author (e.g. `FEMA_P58`) or one author's multiple works (e.g. `Bhatta_CladdingCyclic`). **A distinguishing `reference_label` is required whenever two references would otherwise derive the same id** (same first-author surname and year); without one they collide and silently merge on ingest, so a data-integrity test rejects duplicate derived ids. Any `reference_id`, or any `id` inside `csl_data`, that you include is **ignored and stripped on ingest**, so a stored value can never disagree with the derived id. Records in `observation.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
+> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Use `reference_label` (letters, digits, and underscores only — no hyphens, not a bare year, at most 100 characters) to choose the token yourself — for an institutional author (e.g. `FEMA_P58`) or one author's multiple works (e.g. `Bhatta_CladdingCyclic`). **A distinguishing `reference_label` is required whenever two references would otherwise derive the same id** (same first-author surname and year); without one they collide and silently merge on ingest, so a data-integrity test rejects duplicate derived ids. Any `reference_id`, or any `id` inside `csl_data`, that you include is **ignored and stripped on ingest**, so a stored value can never disagree with the derived id. Records in `program.json`, `specimen.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
 
 **Option B — Import from CSV** (useful for larger datasets or contributors who prefer spreadsheet tools):
 Populate a CSV template from `resources/import_templates/` and use the appropriate import command:
@@ -445,7 +452,7 @@ PYTHONUTF8=1 python manage.py dumpdata ned_app --indent 2 --output ned_app/fixtu
 ```bash
 python manage.py test ned_app.tests
 ```
-*   *What this checks:* It verifies that all Foreign Keys match (e.g., every experiment points to a valid component ID) and that Primary Keys are unique.
+*   *What this checks:* It verifies that all Foreign Keys match (e.g., every specimen points to a valid component ID) and that Primary Keys are unique.
 
 #### 4. Submit a Pull Request
 Commit your changes and open a Pull Request (PR) to the `main` branch. 

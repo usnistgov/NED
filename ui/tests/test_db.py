@@ -318,3 +318,20 @@ class TestObservationFlatView:
             conn.close()
         assert selected
         assert selected <= columns, sorted(selected - columns)
+
+    def test_connect_fails_on_a_database_from_before_the_cutover(
+        self, db_module, fixture_db_path
+    ):
+        # Before the cutover the column was ds_rank. SQLite accepts the view
+        # anyway, so only _connect()'s probe turns this into an error.
+        conn = sqlite3.connect(fixture_db_path)
+        try:
+            conn.execute(
+                'ALTER TABLE ned_app_observation '
+                'RENAME COLUMN legacy_ds_rank TO ds_rank'
+            )
+            conn.commit()
+        finally:
+            conn.close()
+        with pytest.raises(sqlite3.OperationalError, match='legacy_ds_rank'):
+            db_module._connect()

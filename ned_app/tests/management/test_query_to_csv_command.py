@@ -48,35 +48,37 @@ class QueryToCsvCommandTests(TestCase):
         self.component = Component.objects.create(
             component_id='D.50.2.1.A', name='CPVC sprinkler pipe'
         )
-        specimen = Specimen.objects.create(
-            program=Program.objects.create(reference=self.reference),
-            facility=Facility.objects.create(label='Lab'),
-            label='SP-1',
-            component=self.component,
-            comp_description='CPVC sprinkler pipe',
-        )
+        program = Program.objects.create(reference=self.reference)
+        facility = Facility.objects.create(label='Lab')
+        specimen = self._make_specimen(program, facility, 'SP-1', material='Steel')
+        self._make_specimen(program, facility, 'SP-2', material='CPVC')
         self.test = Test.objects.create(
             specimen=specimen, label='a', test_type='Dynamic, uniaxial'
         )
-        self._make_experiment('01', material='Steel', notes='plain')
-        self._make_experiment('02', material='CPVC', notes='ratio=0.5')
+        self._make_experiment('01', notes='plain')
+        self._make_experiment('02', notes='ratio=0.5')
 
-    def _make_experiment(self, label, material, notes):
+    def _make_specimen(self, program, facility, label, material):
+        return Specimen.objects.create(
+            program=program,
+            facility=facility,
+            reference=self.reference,
+            label=label,
+            contributor='Contributor',
+            component=self.component,
+            material=material,
+            comp_description='CPVC sprinkler pipe',
+        )
+
+    def _make_experiment(self, label, notes):
         return Observation.objects.create(
             test=self.test,
             label=label,
-            reference=self.reference,
-            component=self.component,
-            specimen='SP-1',
-            contributor='Contributor',
-            test_type='Dynamic, uniaxial',
-            material=material,
-            comp_description='CPVC sprinkler pipe',
             ds_description='Leakage',
             edp_metric='Peak Floor Acceleration, horizontal',
             edp_unit='g',
             edp_value=Decimal('0.45'),
-            ds_rank=1,
+            legacy_ds_rank=1,
             ds_class='Consequential',
             notes=notes,
         )
@@ -91,44 +93,56 @@ class QueryToCsvCommandTests(TestCase):
     def test_fk_columns_use_natural_keys(self):
         call_command(
             'query_to_csv',
+            model='Specimen',
+            output_file=self.output_file,
+            fields='specimen_id,program,facility,reference,component',
+            stdout=StringIO(),
+        )
+        rows = {r['specimen_id']: r for r in self._read_rows()}
+        # reference must be the reference_id natural key, not the auto PK int;
+        # component must be the component_id, not the concatenated id PK; the
+        # program and facility must be their program_id and label.
+        row = rows['Smith-2020|SP-1']
+        self.assertEqual(row['program'], 'Smith-2020')
+        self.assertEqual(row['facility'], 'Lab')
+        self.assertEqual(row['reference'], 'Smith-2020')
+        self.assertEqual(row['component'], 'D.50.2.1.A')
+
+        # An observation's test must be the test_id.
+        call_command(
+            'query_to_csv',
             model='Observation',
             output_file=self.output_file,
-            fields='observation_id,reference,component,test',
+            fields='observation_id,test',
             stdout=StringIO(),
         )
         rows = {r['observation_id']: r for r in self._read_rows()}
-        # reference must be the reference_id natural key, not the auto PK int;
-        # component must be the component_id, not the concatenated id PK; test
-        # must be the test_id.
-        row = rows['Smith-2020|SP-1|a|01']
-        self.assertEqual(row['reference'], 'Smith-2020')
-        self.assertEqual(row['component'], 'D.50.2.1.A')
-        self.assertEqual(row['test'], 'Smith-2020|SP-1|a')
+        self.assertEqual(rows['Smith-2020|SP-1|a|01']['test'], 'Smith-2020|SP-1|a')
 
     # -- field selection / filtering -----------------------------------
 
     def test_fields_selection_limits_columns(self):
         call_command(
             'query_to_csv',
-            model='Observation',
+            model='Specimen',
             output_file=self.output_file,
-            fields='observation_id,material',
+            fields='specimen_id,material',
             stdout=StringIO(),
         )
         rows = self._read_rows()
-        self.assertEqual(set(rows[0].keys()), {'observation_id', 'material'})
+        self.assertEqual(set(rows[0].keys()), {'specimen_id', 'material'})
 
     def test_filter_basic(self):
         call_command(
             'query_to_csv',
-            model='Observation',
+            model='Specimen',
             output_file=self.output_file,
             filter='material=Steel',
             stdout=StringIO(),
         )
         rows = self._read_rows()
         self.assertEqual(len(rows), 1)
-        self.assertEqual(rows[0]['observation_id'], 'Smith-2020|SP-1|a|01')
+        self.assertEqual(rows[0]['specimen_id'], 'Smith-2020|SP-1')
 
     def test_filter_value_containing_equals(self):
         # split('=', 1) must keep 'ratio=0.5' intact as the value.
@@ -196,7 +210,7 @@ class QueryToCsvCommandTests(TestCase):
         out = StringIO()
         call_command(
             'query_to_csv',
-            model='Observation',
+            model='Specimen',
             output_file=self.output_file,
             filter='material=DoesNotExist',
             stdout=out,
