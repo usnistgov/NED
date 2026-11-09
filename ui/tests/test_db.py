@@ -1,4 +1,6 @@
+import re
 import sqlite3
+from pathlib import Path
 
 import pandas as pd
 import pytest
@@ -282,3 +284,37 @@ class TestGetExperimentDetail:
         assert row['Specimen'] == 'S1'
         assert row['reference_id'] == 'Smith-2020'
         assert row['DS Class'] == 'Consequential'
+
+
+class TestObservationFlatView:
+    """The ned_app_observation_flat view (ui/sql/observation_flat.sql) that
+    _connect() creates, and that ui/db.py's observation queries read."""
+
+    def test_one_row_per_observation(self, db_module):
+        conn = db_module._connect()
+        try:
+            observations = conn.execute(
+                'SELECT observation_id FROM ned_app_observation'
+            ).fetchall()
+            rows = conn.execute(
+                'SELECT observation_id FROM ned_app_observation_flat'
+            ).fetchall()
+        finally:
+            conn.close()
+        assert observations
+        assert sorted(rows) == sorted(observations)
+
+    def test_columns_cover_every_column_db_py_selects(self, db_module):
+        # Every observation query aliases the view as `e`, so scanning for
+        # `e.<column>` finds everything ui/db.py reads from it. The lookahead
+        # skips the "e.g." in its docstrings.
+        source = Path(db_module.__file__).read_text(encoding='utf-8')
+        selected = set(re.findall(r'\be\.(\w+)\b(?!\.)', source))
+        conn = db_module._connect()
+        try:
+            cursor = conn.execute('SELECT * FROM ned_app_observation_flat LIMIT 0')
+            columns = {d[0] for d in cursor.description}
+        finally:
+            conn.close()
+        assert selected
+        assert selected <= columns, sorted(selected - columns)

@@ -102,12 +102,19 @@ def _pick_fragility_model_with_component(db_path: str) -> tuple[str, str]:
     return row
 
 
-def _pick_experiment_with_component(db_path: str) -> tuple[str, str]:
-    conn = sqlite3.connect(db_path)
+def _pick_experiment_with_component() -> tuple[str, str]:
+    """An (observation_id, component id) pair from the fixture database.
+
+    The component is a specimen field, so this reads it through
+    ``db._connect()`` and the flat observation view, as the app does. Needs
+    the ``app_db`` fixture, which points ``db`` at the fixture database."""
+    import db
+
+    conn = db._connect()
     try:
         row = conn.execute("""
             SELECT e.observation_id, c.id
-            FROM ned_app_observation e
+            FROM ned_app_observation_flat e
             JOIN ned_app_component c ON c.component_id = e.component_id
             ORDER BY e.observation_id
             LIMIT 1
@@ -168,7 +175,7 @@ def test_fragility_model_only_deep_link_backfills_component(app_db):
 def test_experiment_only_deep_link_backfills_component(app_db):
     """Same backfill, via the experiment -> component bridge instead of the
     fragility-model one."""
-    experiment_id, expected_component = _pick_experiment_with_component(app_db)
+    experiment_id, expected_component = _pick_experiment_with_component()
     at = AppTest.from_file(str(_APP_PATH))
     at.query_params['experiment'] = experiment_id
     at.run(timeout=_RUN_TIMEOUT)
@@ -183,7 +190,7 @@ def test_component_deep_link_renders_component_detail(app_db):
     """The third deep-link param. Unlike the two above there's nothing to
     backfill, so this just pins that `?component=` resolves to the detail
     page for that component and not to the default (Home) page."""
-    _, component_id = _pick_experiment_with_component(app_db)
+    _, component_id = _pick_experiment_with_component()
     at = AppTest.from_file(str(_APP_PATH))
     at.query_params['component'] = component_id
     at.run(timeout=_RUN_TIMEOUT)
@@ -216,7 +223,7 @@ def test_legacy_redirect_fires_once_per_session(app_db):
     # This has to be a *real* experiment id: the experiment view bails out
     # at its "not found" warning before drawing its header, so a bogus id
     # would make the assertion below hold whether or not the guard works.
-    experiment_id, _ = _pick_experiment_with_component(app_db)
+    experiment_id, _ = _pick_experiment_with_component()
     at.query_params.clear()
     at.query_params['experiment'] = experiment_id
     at.run(timeout=_RUN_TIMEOUT)

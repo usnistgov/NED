@@ -1,13 +1,17 @@
 import json
 import os
+import sys
 import tempfile
+from decimal import Decimal
+from pathlib import Path
 from typing import ClassVar
 from unittest.mock import patch
 
 from django.apps import apps
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
-from django.test import SimpleTestCase, TransactionTestCase, tag
+from django.db import connection
+from django.test import SimpleTestCase, TestCase, TransactionTestCase, tag
 
 from ned_app.models import (
     Component,
@@ -24,6 +28,12 @@ from ned_app.models import (
     derive_reference_id,
 )
 from ned_app.validators import validate_label
+
+SCRIPTS = Path(__file__).resolve().parents[2] / 'scripts'
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
+
+import audit_split
 
 # How each hierarchy file's derived id is rebuilt from a record, as ingest
 # derives it for its lookup.
@@ -654,3 +664,118 @@ class ObservationIdMapTests(SimpleTestCase):
             self._load(self.OBSERVATION_JSON), DERIVE_ID['observation']
         )
         self.assertEqual(sorted(set(values) - current), [])
+
+
+@tag('integrity')
+class ObservationFlatViewArchiveTests(TransactionTestCase):
+    """
+    Compares the UI's flat observation view with the pre-split archive.
+
+    Reads only the view's aliased columns, so it holds when the columns behind them
+    are dropped or renamed.
+    """
+
+    VIEW_SQL = Path(__file__).resolve().parents[2] / 'ui/sql/observation_flat.sql'
+    SNAPSHOT_JSON = 'resources/archive/observation_pre_split.json'
+    ID_MAP_JSON = 'resources/archive/observation_id_map.json'
+
+    # The view's columns, other than observation_id, by their archive field.
+    COLUMNS: ClassVar[dict[str, str]] = {
+        'reference': 'reference_id',
+        'specimen': 'specimen',
+        'specimen_inspection_sequence': 'specimen_inspection_sequence',
+        'contributor': 'contributor',
+        'component': 'component_id',
+        'comp_detail': 'comp_detail',
+        'material': 'material',
+        'size_class': 'size_class',
+        'governing_design_standard': 'governing_design_standard',
+        'design_objective': 'design_objective',
+        'comp_description': 'comp_description',
+        'test_type': 'test_type',
+        'loading_protocol': 'loading_protocol',
+        'peak_test_amplitude': 'peak_test_amplitude',
+        'location': 'location',
+        'prior_damage_repaired': 'prior_damage_repaired',
+        'prior_damage': 'prior_damage',
+        'ds_rank': 'ds_rank',
+        'ds_description': 'ds_description',
+        'ds_class': 'ds_class',
+        'edp_metric': 'edp_metric',
+        'edp_unit': 'edp_unit',
+        'edp_value': 'edp_value',
+        'alt_edp_metric': 'alt_edp_metric',
+        'alt_edp_unit': 'alt_edp_unit',
+        'alt_edp_value': 'alt_edp_value',
+        'notes': 'notes',
+    }
+    # Compared as numbers: the view renders the sequence '7' where the archive
+    # held '7.0', and decimals may come back as float or Decimal.
+    NUMERIC: ClassVar[set[str]] = {
+        'specimen_inspection_sequence',
+        'ds_rank',
+        'edp_value',
+        'alt_edp_value',
+    }
+
+    def _load(self, path):
+        with open(path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+    def _cell(self, fld, value):
+        """A cell as compared; blank and null numbers stay as they are."""
+        if fld in self.NUMERIC and value not in {None, ''}:
+            return Decimal(str(value))
+        return value
+
+    def _view_rows(self):
+        """The view's rows by observation_id, keyed by archive field."""
+        columns = ', '.join(self.COLUMNS.values())
+        with connection.cursor() as cursor:
+            # execute, not executescript, which would commit; and no params,
+            # so nothing in the SQL is read as a placeholder.
+            cursor.execute(self.VIEW_SQL.read_text(encoding='utf-8'))
+            try:
+                cursor.execute(
+                    f'SELECT observation_id, {columns} FROM ned_app_observation_flat'
+                )
+                rows = cursor.fetchall()
+            finally:
+                # TEMP, so it would otherwise outlive this test on the
+                # connection.
+                cursor.execute('DROP VIEW IF EXISTS temp.ned_app_observation_flat')
+        return {row[0]: dict(zip(self.COLUMNS, row[1:])) for row in rows}
+
+    def test_view_matches_the_archive(self):
+        call_command('ingest')
+        rows = self._view_rows()
+        snapshot = self._load(self.SNAPSHOT_JSON)
+        id_map = self._load(self.ID_MAP_JSON)
+        expected, unmatched_entries = audit_split.expected_differences(
+            snapshot, audit_split.load_accepted(audit_split.DEFAULT_ACCEPTED)
+        )
+
+        # Archived observations only: ones added since have no archived record.
+        missing = []
+        actual = set()
+        for record in snapshot:
+            row = rows.get(id_map[record['id']])
+            if row is None:
+                missing.append(record['id'])
+                continue
+            for fld, value in row.items():
+                if self._cell(fld, record[fld]) != self._cell(fld, value):
+                    actual.add((record['id'], fld, value))
+
+        self.assertEqual(missing, [])
+        self.assertEqual(unmatched_entries, [])
+        self.assertEqual(actual, expected)
+
+
+class NoStoredViewTests(TestCase):
+    """A stored view would break the migrations that drop the columns it reads."""
+
+    def test_migrated_database_stores_no_view(self):
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT name FROM sqlite_master WHERE type = 'view'")
+            self.assertEqual(cursor.fetchall(), [])
