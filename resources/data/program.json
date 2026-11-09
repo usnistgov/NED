@@ -1,1 +1,380 @@
-[]
+[
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Antaki-2004"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "ArayaLetelier-2012"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Arifin-2020"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Astroza-2015"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "BadilloAlmaraz-2006"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Baird-2014"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Bhatta-2021"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Bhatta_CladdingCyclic-2022"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Bhatta_CladdingDesign-2022"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Bhatta_ConcealedJoint-2023"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Bhatta_DualSlotPartition-2023"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Bhatta_NHERIFireSprinkler-2025"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Bhatta_SlottedBracketPartition-2023"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Bhatta_TwoStoryCladding-2022"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Blasi-2018"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Chang-2021"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Cong-2021"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Davies-2011"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Goodwin_HospitalPipingThesis-2004"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Goodwin_PipingWeldedThreaded-2007"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "He_GISBushings-2022"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Higgins_PrefabSteelStairs-2009"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Higgins_StairFragilityFunctions-2011"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Hou-2021"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Huang-2017"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Jenkins-2016"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Ju_ThreadedTee-2015"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Kim-2021"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Lee-2007"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Lin-2016"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "McMullin_BNCSCladding-2012"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "McMullin_GypsumWallsCUREE-2002"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Memari_ArchGlassFragility-2011"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Memari_CurtainWallIGU-2003"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Memari_RoundedCorners-2006"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Memari_SiliconeGlazing-2006"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Mosqueda-2016"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "OBrien-2009"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Pali-2018"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Pantoli_APC_PanelsAndConnections-2016"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Pantoli_BNCS_Report2-2013"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Pantoli_NCS_DamageStates-2016"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Petrone-2016"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Rahmanishamsi_CPP_DamageStates-2014"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Rahmanishamsi_CPP_TestBed-2014"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Rashid-2022"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Restrepo-2011"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Ryan-2016"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Ryu-2012"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Ryu-2019"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Singh-2026"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Sorosh-2024"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Soroushian_FireSprinklerPipingFragility-2013"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Soroushian_SuspendedCeilingFragility-2019"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Tasligedik-2014"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Tian_SprinklerPipingUB_NCS-2015"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Tian_SprinklerTeeJoints-2012"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Wang_CFS_Report-2018"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Wang_ElevatorSystem-2016"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Wang_GroovedPiping-2019"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Zaghi-2012"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Zhang_StairHDRBearings-2023"
+    },
+    {
+        "label": "",
+        "name": "",
+        "notes": "",
+        "reference": "Zhang_StairSlidingJoint-2024"
+    }
+]

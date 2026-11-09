@@ -165,11 +165,13 @@ class DataIntegrityTests(TransactionTestCase):
         """
         Seed synthetic Facility/Program/Specimen/Test rows and link an observation.
 
-        The hierarchy tables are empty in the canonical data until the
-        conversion runs, so without these rows their round trip would pass
-        on empty tables.
+        The converted data never has a labelled program or a specimen with its
+        own reference, so these rows cover those cases. They use references
+        with no program yet, so the unlabelled program doesn't clash.
         """
-        reference, other_reference = Reference.objects.order_by('pk')[:2]
+        reference, other_reference = Reference.objects.filter(
+            program__isnull=True
+        ).order_by('pk')[:2]
         component = Component.objects.order_by('pk').first()
         facility = Facility.objects.create(
             label='Synthetic_Lab', name='Synthetic Lab', location='Nowhere'
@@ -571,3 +573,25 @@ class CanonicalJsonFormatTests(SimpleTestCase):
             'hand:\n    python manage.py export_data --output_dir '
             'resources/data/',
         )
+
+
+class ArchiveSnapshotTests(SimpleTestCase):
+    """
+    Guards the frozen pre-split snapshot (resources/archive/, Stage 8).
+
+    The reconstruction audit and the record-count acceptance checks compare
+    against this file, so losing, emptying or replacing it would make them
+    compare against the wrong baseline.
+    """
+
+    SNAPSHOT_JSON = 'resources/archive/observation_pre_split.json'
+    # Observation rows in resources/data/observation.json when it was frozen.
+    EXPECTED_RECORDS = 2409
+
+    def test_snapshot_exists_with_the_frozen_record_count(self):
+        with open(self.SNAPSHOT_JSON, 'r', encoding='utf-8') as f:
+            records = json.load(f)
+        self.assertEqual(len(records), self.EXPECTED_RECORDS)
+        # Every record keeps its pre-split id, which the audit matches on.
+        ids = [r['id'] for r in records]
+        self.assertEqual(len(set(ids)), len(ids))

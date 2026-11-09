@@ -1,1 +1,200 @@
-[]
+[
+    {
+        "label": "Buffalo_New_York",
+        "location": "Buffalo, New York",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Buffalo_NY",
+        "location": "Buffalo, NY",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Cal_Poly_San_Luis_Obispo",
+        "location": "Cal Poly San Luis Obispo",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "California",
+        "location": "California",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "China",
+        "location": "China",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "E-defense_shake_table_in_Japan",
+        "location": "E-defense shake table in Japan",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Europe_Italy",
+        "location": "Europe, Italy",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Japan",
+        "location": "Japan",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "laboratory_of_Stanford_University_s_John_A._Blume_Earthquake_Engineering_Center",
+        "location": "laboratory of Stanford University\u2019s John A. Blume Earthquake Engineering Center",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "NEES_E-Defense_Japan",
+        "location": "NEES/E-Defense Japan",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "NEES_University_of_Nevada_Reno",
+        "location": "NEES, University of Nevada, Reno",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Nevada",
+        "location": "Nevada",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Nevada_Reno",
+        "location": "Nevada, Reno",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "New_York",
+        "location": "New York",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "New_Zealand",
+        "location": "New Zealand",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "NHERI_U_of_California_San_Diego",
+        "location": "NHERI, U of California San Diego",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Oregon_State_Uni",
+        "location": "Oregon State Uni",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Penn_State_Univ.",
+        "location": "Penn State Univ.",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Republic_of_Korea",
+        "location": "Republic of Korea",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "San_Diego",
+        "location": "San Diego",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Taiwan",
+        "location": "Taiwan",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "U_of_Nevada_Reno",
+        "location": "U of Nevada, Reno",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "UB_New_York",
+        "location": "UB, New York",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "UCSD_California",
+        "location": "UCSD, California",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Univ._of_Canterbury_New_Zealand",
+        "location": "Univ. of Canterbury, New Zealand",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "University_at_Buffalo",
+        "location": "University at Buffalo",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "University_at_Buffalo_Nonstructural_Component_Simulator_UB-NCS",
+        "location": "University at Buffalo Nonstructural Component Simulator (UB-NCS)",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "University_at_Buffalo_Nonstructural_Component_Simulator_UB-NCS_.",
+        "location": "University at Buffalo Nonstructural Component Simulator (UB-NCS).",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "University_of_Canterbury_New_Zealand",
+        "location": "University of Canterbury, New Zealand",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "University_of_Naples_Italy",
+        "location": "University of Naples, Italy",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "University_of_Nevada_Reno_Network_for_Earthquake_Engineering_Simulation_site",
+        "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "UNR-NEES_site",
+        "location": "UNR-NEES site",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "US",
+        "location": "US",
+        "name": "",
+        "notes": ""
+    }
+]
