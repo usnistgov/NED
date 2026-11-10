@@ -4,7 +4,7 @@ CREATE TEMP VIEW IF NOT EXISTS ned_app_observation_flat AS
 SELECT
     o.observation_id                              AS observation_id,
     COALESCE(sp.reference_id, pr.reference_id)    AS reference_id,
-    sp.name                                       AS specimen,
+    COALESCE(NULLIF(sp.name, ''), sp.label)       AS specimen,
     COALESCE(CAST(t.test_order AS TEXT), '')      AS specimen_inspection_sequence,
     sp.contributor                                AS contributor,
     sp.component_id                               AS component_id,

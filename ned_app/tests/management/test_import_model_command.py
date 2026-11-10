@@ -122,8 +122,7 @@ class ImportModelCommandTests(TransactionTestCase):
         )
 
     def test_observation_import_is_rejected(self):
-        # Observation import is paused until the flat observation importer
-        # (Stage 14): observations no longer carry a stored id.
+        # Observations are imported with import_observation instead.
         with self.assertRaises(CommandError) as cm:
             call_command(
                 'import_model',
@@ -148,7 +147,7 @@ class ImportModelCommandTests(TransactionTestCase):
             records,
             [
                 {
-                    'observation': 'Smith-2020|S1|a|01',
+                    'observation': 'Smith-2020|W1|1|obs01',
                     'fragility_model': 'Smith-2020|fra001',
                 }
             ],

@@ -10,6 +10,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import IntegrityError, connection, transaction
 
 from ned_app.management.commands.ingest import _flatten_detail
+from ned_app.management.import_utils import FIXTURE_STEPS
 from ned_app.models import (
     ComponentFragilityModelBridge,
     Facility,
@@ -72,15 +73,6 @@ LEVEL_OPTIONS = {
     'reference': {'reference_label', 'csl_json'},
 }
 OTHER_LEVEL_OPTIONS = {'label'}
-
-FIXTURE_STEPS = (
-    'Regenerate the fixture from a fresh build, run the standard checks, and '
-    'commit the data and the fixture together:\n'
-    '    rm db.sqlite3 && python manage.py migrate && python manage.py ingest\n'
-    '    PYTHONUTF8=1 python manage.py dumpdata ned_app --indent 2 '
-    '--output ned_app/fixtures/initial_data.json\n'
-    '(In PowerShell, set $env:PYTHONUTF8 = 1 first; see the README.)'
-)
 
 
 def cascade(model, old_id, new_id):

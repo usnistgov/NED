@@ -388,6 +388,10 @@ class HierarchyGuardTests(SimpleTestCase):
                 ["test.json: record 0: specimen 'smith-2020|S1' does not resolve"],
             )
 
+    def test_check_data_dir_treats_a_missing_file_as_empty(self):
+        with tempfile.TemporaryDirectory() as data_dir:
+            self.assertEqual(check_data_dir(data_dir), [])
+
 
 class CanonicalJsonFormatTests(SimpleTestCase):
     """

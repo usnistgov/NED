@@ -102,6 +102,12 @@ class Command(BaseCommand):
 
     help = 'Ingests data from JSON files using a generic, configurable processor.'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--data_dir',
+            help='The JSON data directory (default: resources/data/).',
+        )
+
     def handle(self, *args, **options):
         """
         Execute the ingestion command.
@@ -111,8 +117,9 @@ class Command(BaseCommand):
 
         Args:
             *args: Positional arguments (unused).
-            **options: Command options (unused).
+            **options: Command options, including 'data_dir'.
         """
+        self.data_dir = options.get('data_dir')
         processing_config = [
             {
                 'model': Reference,
@@ -220,7 +227,8 @@ class Command(BaseCommand):
         if total_failed:
             raise CommandError(
                 f'\nIngestion finished with {total_failed} failure(s). See the '
-                'errors above, fix the source data in resources/data/, and re-run.'
+                f'errors above, fix the source data in '
+                f'{self.data_dir or "resources/data/"}, and re-run.'
             )
 
         self.stdout.write(
@@ -257,7 +265,10 @@ class Command(BaseCommand):
         model_name = model_class.__name__
         self.stdout.write(f'--- Processing {model_name} from {data_file} ---')
 
-        data_filepath = build_json_data_file_path(data_file)
+        if self.data_dir:
+            data_filepath = os.path.join(self.data_dir, data_file)
+        else:
+            data_filepath = build_json_data_file_path(data_file)
         created_count, updated_count, failed_count = 0, 0, 0
 
         if not os.path.exists(data_filepath):

@@ -335,3 +335,28 @@ class TestObservationFlatView:
             conn.close()
         with pytest.raises(sqlite3.OperationalError, match='legacy_ds_rank'):
             db_module._connect()
+
+    def test_blank_specimen_name_shows_the_label(self, db_module, fixture_db_path):
+        conn = sqlite3.connect(fixture_db_path)
+        try:
+            conn.execute(
+                "UPDATE ned_app_specimen SET name = '', label = 'S1_label' "
+                "WHERE specimen_id = 'Smith-2020|S1'"
+            )
+            conn.execute(
+                "UPDATE ned_app_specimen SET name = 'Specimen 2' "
+                "WHERE specimen_id = 'Jones-2021|S2'"
+            )
+            conn.commit()
+        finally:
+            conn.close()
+        conn = db_module._connect()
+        try:
+            rows = conn.execute(
+                'SELECT observation_id, specimen FROM ned_app_observation_flat'
+            ).fetchall()
+        finally:
+            conn.close()
+        names = {oid.rsplit('|', 2)[0]: specimen for oid, specimen in rows}
+        assert names['Smith-2020|S1'] == 'S1_label'
+        assert names['Jones-2021|S2'] == 'Specimen 2'

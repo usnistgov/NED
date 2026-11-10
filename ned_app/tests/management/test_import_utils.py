@@ -28,10 +28,9 @@ class CoerceValueTests(SimpleTestCase):
         self.assertIsNone(import_utils.coerce_value('ds_rank', ''))
         self.assertIsNone(import_utils.coerce_value('edp_value', ''))
 
-    def test_empty_nullable_foreign_key_becomes_none(self):
-        # A blank 'test' means no link: null, as export_data writes it.
-        self.assertIsNone(import_utils.coerce_value('test', ''))
-        self.assertEqual(import_utils.coerce_value('test', 'P|S1|T1'), 'P|S1|T1')
+    def test_test_order_parsed_as_integer(self):
+        self.assertEqual(import_utils.coerce_value('test_order', '7'), 7)
+        self.assertIsNone(import_utils.coerce_value('test_order', ''))
 
     def test_unparseable_numeric_passes_through(self):
         # Producing valid JSON is the goal; bad types surface at ingest.
@@ -92,6 +91,12 @@ class BuildPkSetTests(SimpleTestCase):
 
     def test_skips_comment_records(self):
         records = [{'_comment': 'note'}, {'reference_id': 'a'}]
+        self.assertEqual(
+            import_utils.build_pk_set(records, ['reference_id']), {('a',)}
+        )
+
+    def test_reads_records_that_carry_a_comment(self):
+        records = [{'_comment': 'note', 'reference_id': 'a'}]
         self.assertEqual(
             import_utils.build_pk_set(records, ['reference_id']), {('a',)}
         )
@@ -273,12 +278,22 @@ class WriteJsonFilesTests(SimpleTestCase):
         with open(self._path(name), encoding='utf-8') as f:
             return json.load(f)
 
-    def test_writes_all_files_with_trailing_newline(self):
-        import_utils.write_json_files({'a.json': [{'x': 1}], 'b.json': [{'y': 2}]})
-        self.assertEqual(self._read('a.json'), [{'x': 1}])
-        self.assertEqual(self._read('b.json'), [{'y': 2}])
+    def test_writes_all_files_in_canonical_format(self):
+        import_utils.write_json_files({'a.json': [{'y': 2, 'x': 1}], 'b.json': []})
+        self.assertEqual(self._read('b.json'), [])
+        # As export_data writes it: sorted keys, indent 4, no trailing newline.
         with open(self._path('a.json'), encoding='utf-8') as f:
-            self.assertTrue(f.read().endswith('\n'))
+            self.assertEqual(
+                f.read(), '[\n    {\n        "x": 1,\n        "y": 2\n    }\n]'
+            )
+
+    def test_data_dir_overrides_the_default_directory(self):
+        with tempfile.TemporaryDirectory() as other:
+            import_utils.write_json_files({'a.json': [{'x': 1}]}, data_dir=other)
+            self.assertFalse(os.path.exists(self._path('a.json')))
+            self.assertEqual(
+                import_utils.load_json('a.json', data_dir=other), [{'x': 1}]
+            )
 
     def test_failure_restores_existing_files(self):
         # Seed two existing files, then fail on the second write. Both must

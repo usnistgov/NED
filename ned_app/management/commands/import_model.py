@@ -22,8 +22,8 @@ _MODEL_CONFIG = {
         # ingest and in the data-integrity tests.
         'serializer': ReferenceSerializer,
     },
-    # Observation import is paused until the flat observation importer
-    # (Stage 14): observations no longer carry a stored id to import by.
+    # Observations are imported with import_observation, which splits one
+    # flat CSV across the hierarchy's files.
     'ObservationFragilityModelBridge': {
         'json_file': 'observation_fragility_model_bridge.json',
         'pk_fields': ['observation', 'fragility_model'],

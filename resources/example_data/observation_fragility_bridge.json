@@ -1,7 +1,7 @@
 [
   {
     "_comment": "This is an example for an ObservationFragilityModelBridge object. It links an Observation (by its derived observation_id, '{test_id}|{label}') to a FragilityModel (by fragility_model_id).",
-    "observation": "Smith-2020|1|A|01",
+    "observation": "Smith-2020|W1|1|obs01",
     "fragility_model": "Smith-2020|fra1001"
   }
 ]

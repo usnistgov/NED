@@ -70,6 +70,23 @@ def validate_label(value):
         )
 
 
+def suggest_label(value):
+    """
+    Suggest a valid label for an invalid one, for an error message only.
+
+    Collapses whitespace, turns each run of disallowed characters into '_',
+    strips '_' from the ends and cuts to 100 characters.
+
+    Args:
+        value (str): The invalid label.
+
+    Returns:
+        str: The suggestion; empty if nothing usable is left.
+    """
+    collapsed = re.sub(r'\s+', ' ', value).strip()
+    return re.sub(r'[^A-Za-z0-9_.-]+', '_', collapsed).strip('_')[:100]
+
+
 # Global variable to cache the labels for efficiency
 _nistir_labels = None
 

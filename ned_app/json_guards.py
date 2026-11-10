@@ -142,8 +142,17 @@ def derivable_ids(records, derive):
 
 
 def _load(path, name):
-    with open(os.path.join(path, f'{name}.json'), 'r', encoding='utf-8') as f:
-        return [r for r in json.load(f) if '_comment' not in r]
+    file_path = os.path.join(path, f'{name}.json')
+    # A missing file holds no records, as for ingest and the importers.
+    if not os.path.exists(file_path):
+        return []
+    with open(file_path, 'r', encoding='utf-8') as f:
+        # Ignore the _comment key, as ingest does; a record that is only a
+        # comment is a note (ingest would reject it).
+        records = [
+            {k: v for k, v in r.items() if k != '_comment'} for r in json.load(f)
+        ]
+    return [r for r in records if r]
 
 
 def check_data_dir(path):

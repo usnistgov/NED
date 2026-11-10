@@ -1,0 +1,24 @@
+[
+    {
+        "label": "1",
+        "loading_protocol": "FEMA 461 interstory drift protocol",
+        "notes": "",
+        "peak_test_amplitude": "2.5% drift",
+        "prior_damage": "",
+        "prior_damage_repaired": "",
+        "specimen": "Smith-2020|W1",
+        "test_order": 1,
+        "test_type": "Quasi-static Cyclic, uniaxial"
+    },
+    {
+        "label": "2",
+        "loading_protocol": "1994 Northridge record",
+        "notes": "Shake table run after test 1, without repair",
+        "peak_test_amplitude": "1.0 g",
+        "prior_damage": "Gypsum board cracked and crushed in test 1",
+        "prior_damage_repaired": "No",
+        "specimen": "Smith-2020|W1",
+        "test_order": 2,
+        "test_type": "Dynamic, uniaxial"
+    }
+]
