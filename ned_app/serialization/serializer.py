@@ -9,11 +9,15 @@ from rest_framework import serializers
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
 )
 from ned_app.validators import (
     validate_nistir_component_id,
@@ -51,7 +55,6 @@ class ReferenceSerializer(serializers.ModelSerializer):
             'year',
             'study_type',
             'comp_type',
-            'pdf_saved',
             'csl_data',
         ]
 
@@ -185,73 +188,182 @@ class FragilityModelSerializer(serializers.ModelSerializer):
         ]
 
 
-class ExperimentSerializer(serializers.ModelSerializer):
+class FacilitySerializer(serializers.ModelSerializer):
     """
-    Serializer for Experiment with reference and component relationships.
+    Serializer for Facility.
 
-    Uses natural keys for foreign key lookups: reference.reference_id and component.component_id.
+    A facility has no parent, so its label is its identity and is writable.
     """
 
+    class Meta:
+        model = Facility
+        fields: ClassVar[list[str]] = [
+            'label',
+            'name',
+            'location',
+            'notes',
+        ]
+
+
+class ProgramSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Program.
+
+    program_id is read-only: it is always derived on save() from the label, or
+    the reference id when the label is blank. The reference field uses
+    SlugRelatedField for natural key lookup.
+    """
+
+    program_id = serializers.CharField(read_only=True)
     reference = serializers.SlugRelatedField(
         slug_field='reference_id', queryset=Reference.objects.all()
+    )
+
+    class Meta:
+        model = Program
+        fields: ClassVar[list[str]] = [
+            'program_id',
+            'label',
+            'name',
+            'notes',
+            'reference',
+        ]
+
+
+class SpecimenSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Specimen.
+
+    specimen_id is read-only: it is always derived on save() as
+    '{program_id}|{label}'. Foreign keys use natural keys; reference is an
+    optional override of the program's reference.
+    """
+
+    specimen_id = serializers.CharField(read_only=True)
+    program = serializers.SlugRelatedField(
+        slug_field='program_id', queryset=Program.objects.all()
+    )
+    facility = serializers.SlugRelatedField(
+        slug_field='label', queryset=Facility.objects.all()
+    )
+    reference = serializers.SlugRelatedField(
+        slug_field='reference_id',
+        queryset=Reference.objects.all(),
+        allow_null=True,
+        required=False,
     )
     component = serializers.SlugRelatedField(
         slug_field='component_id', queryset=Component.objects.all()
     )
 
     class Meta:
-        model = Experiment
+        model = Specimen
         fields: ClassVar[list[str]] = [
-            'id',
+            'specimen_id',
+            'program',
+            'facility',
             'reference',
-            'specimen',
-            'specimen_inspection_sequence',
+            'label',
+            'name',
             'contributor',
             'component',
             'comp_detail',
             'material',
             'size_class',
-            'test_type',
-            'loading_protocol',
-            'peak_test_amplitude',
-            'location',
             'governing_design_standard',
             'design_objective',
             'comp_description',
-            'ds_description',
+            'notes',
+        ]
+
+
+class TestSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Test.
+
+    test_id is read-only: it is always derived on save() as
+    '{specimen_id}|{label}'. The specimen field uses SlugRelatedField for
+    natural key lookup.
+    """
+
+    # Not a test case: keep pytest from collecting this class.
+    __test__ = False
+
+    test_id = serializers.CharField(read_only=True)
+    specimen = serializers.SlugRelatedField(
+        slug_field='specimen_id', queryset=Specimen.objects.all()
+    )
+
+    class Meta:
+        model = Test
+        fields: ClassVar[list[str]] = [
+            'test_id',
+            'specimen',
+            'label',
+            'test_order',
+            'test_type',
+            'loading_protocol',
+            'peak_test_amplitude',
             'prior_damage',
             'prior_damage_repaired',
+            'notes',
+        ]
+
+
+class ObservationSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Observation with its test relationship.
+
+    observation_id is read-only: it is always derived on save() as
+    '{test_id}|{label}'. The test is looked up by its natural key, test_id.
+    """
+
+    observation_id = serializers.CharField(read_only=True)
+    test = serializers.SlugRelatedField(
+        slug_field='test_id', queryset=Test.objects.all()
+    )
+
+    class Meta:
+        model = Observation
+        fields: ClassVar[list[str]] = [
+            'observation_id',
+            'ds_description',
+            'legacy_prior_damage',
+            'legacy_prior_damage_repaired',
             'edp_metric',
             'edp_unit',
             'edp_value',
             'alt_edp_metric',
             'alt_edp_unit',
             'alt_edp_value',
-            'ds_rank',
+            'legacy_ds_rank',
             'ds_class',
             'notes',
+            'test',
+            'label',
+            'damage_location',
         ]
 
 
-class ExperimentFragilityModelBridgeSerializer(serializers.ModelSerializer):
+class ObservationFragilityModelBridgeSerializer(serializers.ModelSerializer):
     """
-    Serializer for ExperimentFragilityModelBridge relationship.
+    Serializer for ObservationFragilityModelBridge relationship.
 
     Manages the many-to-many relationship between experiments and fragility models.
     """
 
-    experiment = serializers.SlugRelatedField(
-        slug_field='id', queryset=Experiment.objects.all()
+    observation = serializers.SlugRelatedField(
+        slug_field='observation_id', queryset=Observation.objects.all()
     )
     fragility_model = serializers.SlugRelatedField(
         slug_field='fragility_model_id', queryset=FragilityModel.objects.all()
     )
 
     class Meta:
-        model = ExperimentFragilityModelBridge
+        model = ObservationFragilityModelBridge
         fields: ClassVar[list[str]] = [
             'id',
-            'experiment',
+            'observation',
             'fragility_model',
         ]
 

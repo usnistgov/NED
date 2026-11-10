@@ -1,4 +1,6 @@
+import re
 import sqlite3
+from pathlib import Path
 
 import pandas as pd
 import pytest
@@ -70,8 +72,8 @@ class TestGetComponents:
 
     def test_test_and_fragility_model_counts(self, db_module):
         df = db_module.get_components().set_index('ID')
-        # B2011 has two experiments (EXP-001, EXP-003) and one fragility
-        # model, linked through both bridge tables.
+        # B2011 has two experiments (Smith-2020|S1|1|01, Smith-2020|S3|1|01)
+        # and one fragility model, linked through both bridge tables.
         assert df.loc['B2011', '# Tests'] == 2
         assert df.loc['B2011', '# Fragility Models'] == 1
         # B3010 has neither.
@@ -209,23 +211,23 @@ class TestGetFragilityCurves:
 class TestGetFragilityModelExperiments:
     def test_returns_experiments_linked_via_bridge(self, db_module):
         df = db_module.get_fragility_model_experiments('Smith-2020|M1')
-        assert df['experiment_id'].tolist() == ['EXP-001']
+        assert df['experiment_id'].tolist() == ['Smith-2020|S1|1|01']
         assert df.iloc[0]['Source'] == 'Smith, 2020'
 
 
 class TestGetFragilityModelAvailableExperiments:
     def test_returns_same_component_experiments_not_linked(self, db_module):
         df = db_module.get_fragility_model_available_experiments('Smith-2020|M1')
-        assert df['experiment_id'].tolist() == ['EXP-003']
+        assert df['experiment_id'].tolist() == ['Smith-2020|S3|1|01']
         assert df.iloc[0]['Source'] == 'Smith, 2020'
 
     def test_excludes_experiments_on_other_components(self, db_module):
         df = db_module.get_fragility_model_available_experiments('Smith-2020|M1')
-        assert 'EXP-002' not in df['experiment_id'].tolist()
+        assert 'Jones-2021|S2|1|01' not in df['experiment_id'].tolist()
 
     def test_excludes_experiment_already_linked_to_the_model(self, db_module):
         df = db_module.get_fragility_model_available_experiments('Smith-2020|M1')
-        assert 'EXP-001' not in df['experiment_id'].tolist()
+        assert 'Smith-2020|S1|1|01' not in df['experiment_id'].tolist()
 
 
 class TestGetFragilityModelAvailableExperimentsExport:
@@ -233,7 +235,7 @@ class TestGetFragilityModelAvailableExperimentsExport:
         df = db_module.get_fragility_model_available_experiments_export(
             'Smith-2020|M1'
         )
-        assert df['Experiment ID'].tolist() == ['EXP-003']
+        assert df['Experiment ID'].tolist() == ['Smith-2020|S3|1|01']
         row = df.iloc[0]
         assert row['author'] == 'Smith'
         assert row['year'] == 2020
@@ -242,23 +244,26 @@ class TestGetFragilityModelAvailableExperimentsExport:
 
 class TestGetExperimentFragilityModels:
     def test_reverse_lookup_from_experiment(self, db_module):
-        df = db_module.get_experiment_fragility_models('EXP-001')
+        df = db_module.get_experiment_fragility_models('Smith-2020|S1|1|01')
         assert df['Fragility Model ID'].tolist() == ['Smith-2020|M1']
         assert df.iloc[0]['Component Type'] == 'Curtain Wall'
 
     def test_number_of_tests_counts_linked_experiments(self, db_module):
-        df = db_module.get_experiment_fragility_models('EXP-001')
+        df = db_module.get_experiment_fragility_models('Smith-2020|S1|1|01')
         assert df.iloc[0]['Number of Tests'] == 1
 
     def test_experiment_without_models_returns_empty(self, db_module):
-        df = db_module.get_experiment_fragility_models('EXP-002')
+        df = db_module.get_experiment_fragility_models('Jones-2021|S2|1|01')
         assert df.empty
 
 
 class TestGetComponentExperiments:
     def test_returns_experiments_for_component(self, db_module):
         df = db_module.get_component_experiments('B2011')
-        assert df['experiment_id'].tolist() == ['EXP-001', 'EXP-003']
+        assert df['experiment_id'].tolist() == [
+            'Smith-2020|S1|1|01',
+            'Smith-2020|S3|1|01',
+        ]
         assert df.iloc[0]['NISTIR Subelement'] == '1 - Curtain Walls'
 
 
@@ -274,8 +279,84 @@ class TestGetComponentExperimentsExport:
 
 class TestGetExperimentDetail:
     def test_returns_full_experiment_row(self, db_module):
-        df = db_module.get_experiment_detail('EXP-001')
+        df = db_module.get_experiment_detail('Smith-2020|S1|1|01')
         row = df.iloc[0]
         assert row['Specimen'] == 'S1'
         assert row['reference_id'] == 'Smith-2020'
         assert row['DS Class'] == 'Consequential'
+
+
+class TestObservationFlatView:
+    """The ned_app_observation_flat view (ui/sql/observation_flat.sql) that
+    _connect() creates, and that ui/db.py's observation queries read."""
+
+    def test_one_row_per_observation(self, db_module):
+        conn = db_module._connect()
+        try:
+            observations = conn.execute(
+                'SELECT observation_id FROM ned_app_observation'
+            ).fetchall()
+            rows = conn.execute(
+                'SELECT observation_id FROM ned_app_observation_flat'
+            ).fetchall()
+        finally:
+            conn.close()
+        assert observations
+        assert sorted(rows) == sorted(observations)
+
+    def test_columns_cover_every_column_db_py_selects(self, db_module):
+        # Every observation query aliases the view as `e`, so scanning for
+        # `e.<column>` finds everything ui/db.py reads from it. The lookahead
+        # skips the "e.g." in its docstrings.
+        source = Path(db_module.__file__).read_text(encoding='utf-8')
+        selected = set(re.findall(r'\be\.(\w+)\b(?!\.)', source))
+        conn = db_module._connect()
+        try:
+            cursor = conn.execute('SELECT * FROM ned_app_observation_flat LIMIT 0')
+            columns = {d[0] for d in cursor.description}
+        finally:
+            conn.close()
+        assert selected
+        assert selected <= columns, sorted(selected - columns)
+
+    def test_connect_fails_on_a_database_from_before_the_cutover(
+        self, db_module, fixture_db_path
+    ):
+        # Before the cutover the column was ds_rank. SQLite accepts the view
+        # anyway, so only _connect()'s probe turns this into an error.
+        conn = sqlite3.connect(fixture_db_path)
+        try:
+            conn.execute(
+                'ALTER TABLE ned_app_observation '
+                'RENAME COLUMN legacy_ds_rank TO ds_rank'
+            )
+            conn.commit()
+        finally:
+            conn.close()
+        with pytest.raises(sqlite3.OperationalError, match='legacy_ds_rank'):
+            db_module._connect()
+
+    def test_blank_specimen_name_shows_the_label(self, db_module, fixture_db_path):
+        conn = sqlite3.connect(fixture_db_path)
+        try:
+            conn.execute(
+                "UPDATE ned_app_specimen SET name = '', label = 'S1_label' "
+                "WHERE specimen_id = 'Smith-2020|S1'"
+            )
+            conn.execute(
+                "UPDATE ned_app_specimen SET name = 'Specimen 2' "
+                "WHERE specimen_id = 'Jones-2021|S2'"
+            )
+            conn.commit()
+        finally:
+            conn.close()
+        conn = db_module._connect()
+        try:
+            rows = conn.execute(
+                'SELECT observation_id, specimen FROM ned_app_observation_flat'
+            ).fetchall()
+        finally:
+            conn.close()
+        names = {oid.rsplit('|', 2)[0]: specimen for oid, specimen in rows}
+        assert names['Smith-2020|S1'] == 'S1_label'
+        assert names['Jones-2021|S2'] == 'Specimen 2'

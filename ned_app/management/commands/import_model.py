@@ -10,8 +10,7 @@ from ned_app.management.import_utils import (
     write_json,
 )
 from ned_app.serialization.serializer import (
-    ExperimentFragilityModelBridgeSerializer,
-    ExperimentSerializer,
+    ObservationFragilityModelBridgeSerializer,
     ReferenceSerializer,
 )
 
@@ -23,15 +22,12 @@ _MODEL_CONFIG = {
         # ingest and in the data-integrity tests.
         'serializer': ReferenceSerializer,
     },
-    'Experiment': {
-        'json_file': 'experiment.json',
-        'pk_fields': ['id'],
-        'serializer': ExperimentSerializer,
-    },
-    'ExperimentFragilityModelBridge': {
-        'json_file': 'experiment_fragility_model_bridge.json',
-        'pk_fields': ['experiment', 'fragility_model'],
-        'serializer': ExperimentFragilityModelBridgeSerializer,
+    # Observations are imported with import_observation, which splits one
+    # flat CSV across the hierarchy's files.
+    'ObservationFragilityModelBridge': {
+        'json_file': 'observation_fragility_model_bridge.json',
+        'pk_fields': ['observation', 'fragility_model'],
+        'serializer': ObservationFragilityModelBridgeSerializer,
     },
 }
 
@@ -189,7 +185,7 @@ class Command(BaseCommand):
             type=str,
             required=False,
             help=(
-                'Model name to import (e.g., Experiment, Reference). '
+                'Model name to import (e.g., Reference). '
                 'Use --list-models to see all importable models.'
             ),
         )
@@ -293,8 +289,8 @@ class Command(BaseCommand):
             new_records.append(record)
 
         # Report skipped rows so a dropped record is never silently discarded.
-        # (Only models with a stored dedupe key reach here — Experiment and the
-        # bridge; References have no dedupe key and are always appended.)
+        # (Only models with a stored dedupe key reach here — the bridge;
+        # References have no dedupe key and are always appended.)
         if skipped_existing:
             self.stdout.write(
                 self.style.WARNING(

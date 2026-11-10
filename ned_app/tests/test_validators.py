@@ -8,6 +8,8 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from ned_app.validators import (
+    suggest_label,
+    validate_label,
     validate_nistir_component_id,
     validate_positive,
     validate_reference_label,
@@ -284,3 +286,37 @@ class ReferenceLabelValidatorTest(TestCase):
 
     def test_max_length_label_passes(self):
         validate_reference_label('A' * 100)
+
+
+class LabelValidatorTest(TestCase):
+    """Test case for validate_label, the shared rule for labels in derived ids."""
+
+    def test_valid_labels_pass(self):
+        for label in ('S6', 'JAB-1', 'Config8._Specimen_20', 'A' * 100):
+            with self.subTest(label=label):
+                validate_label(label)
+
+    def test_invalid_labels_raise(self):
+        # Empty, whitespace, the '|' id separator, a trailing newline, too long.
+        for label in ('', 'S 6', 'a|b', 'S6\n', 'A' * 101):
+            with self.subTest(label=label), self.assertRaises(ValidationError):
+                validate_label(label)
+
+
+class SuggestLabelTest(TestCase):
+    """Test case for suggest_label, the slug offered for an invalid label."""
+
+    def test_suggestions(self):
+        cases = {
+            'Config8. Specimen 20': 'Config8._Specimen_20',
+            '  Wall  #1 (east) ': 'Wall_1_east',
+            'a|b': 'a_b',
+            '###': '',
+            'S' * 120: 'S' * 100,
+        }
+        for value, expected in cases.items():
+            with self.subTest(value=value):
+                self.assertEqual(suggest_label(value), expected)
+
+    def test_suggestion_is_valid(self):
+        validate_label(suggest_label('Test 3a (repeat)'))

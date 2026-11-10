@@ -3,7 +3,7 @@ Tests for the import_model management command.
 
 Covers the keystone contract (template -> import -> ingest produces correct
 records) and the importer's own behaviors (append, dry-run, column warnings, and
-stored-key dedupe for Experiment/the bridge). References have no dedupe key —
+stored-key dedupe for the bridge). References have no dedupe key —
 their derived id is validated at ingest and by the data-integrity tests, not
 here. Validation itself is delegated to ingest and is not retested here.
 """
@@ -12,7 +12,6 @@ import json
 import os
 import shutil
 import tempfile
-from decimal import Decimal
 from io import StringIO
 from unittest.mock import patch
 
@@ -21,7 +20,7 @@ from django.core.management.base import CommandError
 from django.test import TransactionTestCase
 
 from ned_app.management import import_utils
-from ned_app.models import Component, Experiment, Reference
+from ned_app.models import Reference
 
 TEMPLATE_DIR = 'resources/import_templates'
 
@@ -72,7 +71,6 @@ class ImportModelCommandTests(TransactionTestCase):
             reference_id=reference_id,
             study_type='Experiment',
             comp_type='Sprinkler systems',
-            pdf_saved=True,
             csl_data={
                 'type': 'article-journal',
                 'title': 'Seismic performance of CPVC sprinkler systems',
@@ -97,8 +95,7 @@ class ImportModelCommandTests(TransactionTestCase):
         call_command('ingest', stdout=StringIO(), stderr=StringIO())
 
         ref = Reference.objects.get(reference_id='Smith-2020')
-        # CSL reconstruction + boolean coercion verified end to end.
-        self.assertIs(ref.pdf_saved, True)
+        # CSL reconstruction verified end to end.
         self.assertEqual(ref.year, 2020)
         self.assertEqual(ref.title, 'Seismic performance of CPVC sprinkler systems')
         # No 'id' is carried into the stored CSL data.
@@ -107,10 +104,9 @@ class ImportModelCommandTests(TransactionTestCase):
     def test_reference_label_drives_derived_id(self):
         # An optional reference_label overrides the surname token in the id.
         header = (
-            'reference_label,study_type,pdf_saved,csl_type,csl_title,'
-            'csl_year,csl_authors\n'
+            'reference_label,study_type,csl_type,csl_title,csl_year,csl_authors\n'
         )
-        row = 'FEMA_P58,Experiment,True,article-journal,A Title,2020,"Smith, John"\n'
+        row = 'FEMA_P58,Experiment,article-journal,A Title,2020,"Smith, John"\n'
         path = self._write_csv('labeled.csv', header + row)
 
         out = StringIO()
@@ -125,38 +121,67 @@ class ImportModelCommandTests(TransactionTestCase):
             Reference.objects.filter(reference_id='FEMA_P58-2020').exists()
         )
 
-    def test_experiment_template_imports_and_ingests(self):
-        self._make_reference()
-        Component.objects.create(
-            component_id='D.50.2.1.A', name='CPVC sprinkler pipe'
-        )
-
-        call_command(
-            'import_model',
-            model='Experiment',
-            input_file=_template('experiment_template.csv'),
-            stdout=StringIO(),
-        )
-        call_command('ingest', stdout=StringIO(), stderr=StringIO())
-
-        exp = Experiment.objects.get(id='exp001')
-        self.assertEqual(exp.reference.reference_id, 'Smith-2020')
-        self.assertEqual(exp.component.component_id, 'D.50.2.1.A')
-        self.assertEqual(exp.edp_value, Decimal('0.45'))
+    def test_observation_import_is_rejected(self):
+        # Observations are imported with import_observation instead.
+        with self.assertRaises(CommandError) as cm:
+            call_command(
+                'import_model',
+                model='Observation',
+                input_file=_template('observation_template.csv'),
+                stdout=StringIO(),
+            )
+        self.assertIn('does not support CSV import', str(cm.exception))
+        self.assertFalse(os.path.exists(self._json_path('observation.json')))
 
     def test_bridge_template_converts_to_expected_record(self):
         # The bridge uses the generic conversion path; verify the appended
         # JSON record without standing up the full FK graph.
         call_command(
             'import_model',
-            model='ExperimentFragilityModelBridge',
-            input_file=_template('experiment_fragility_bridge_template.csv'),
+            model='ObservationFragilityModelBridge',
+            input_file=_template('observation_fragility_bridge_template.csv'),
             stdout=StringIO(),
         )
-        records = self._read_json('experiment_fragility_model_bridge.json')
+        records = self._read_json('observation_fragility_model_bridge.json')
         self.assertEqual(
             records,
-            [{'experiment': 'exp001', 'fragility_model': 'Smith-2020|fra001'}],
+            [
+                {
+                    'observation': 'Smith-2020|W1|1|obs01',
+                    'fragility_model': 'Smith-2020|fra001',
+                }
+            ],
+        )
+
+    def test_bridge_dedupe_by_stored_key(self):
+        # Models with a stored natural key (the bridge's observation +
+        # fragility_model) dedupe against the existing JSON and within the CSV,
+        # reported so no drop is silent.
+        existing = {'observation': 'Smith-2020|S1|a|01', 'fragility_model': 'M|1'}
+        self._write_json('observation_fragility_model_bridge.json', [existing])
+        rows = (
+            'observation,fragility_model\n'
+            'Smith-2020|S1|a|01,M|1\n'  # already present
+            'Smith-2020|S1|a|02,M|1\n'  # new
+            'Smith-2020|S1|a|02,M|1\n'  # dup within CSV
+        )
+        path = self._write_csv('dup_bridge.csv', rows)
+
+        out = StringIO()
+        call_command(
+            'import_model',
+            model='ObservationFragilityModelBridge',
+            input_file=path,
+            stdout=out,
+        )
+        value = out.getvalue()
+        self.assertIn('already present', value)
+        self.assertIn('within this CSV', value)
+        # Only the one genuinely new pair is appended.
+        records = self._read_json('observation_fragility_model_bridge.json')
+        self.assertEqual(
+            sorted(r['observation'] for r in records),
+            ['Smith-2020|S1|a|01', 'Smith-2020|S1|a|02'],
         )
 
     # -- Tier 1.2: drift guard — accepted columns vs template header ----
@@ -169,9 +194,8 @@ class ImportModelCommandTests(TransactionTestCase):
 
         templates = {
             'Reference': 'reference_template.csv',
-            'Experiment': 'experiment_template.csv',
-            'ExperimentFragilityModelBridge': (
-                'experiment_fragility_bridge_template.csv'
+            'ObservationFragilityModelBridge': (
+                'observation_fragility_bridge_template.csv'
             ),
         }
         for model_name, template_name in templates.items():
@@ -192,35 +216,14 @@ class ImportModelCommandTests(TransactionTestCase):
     def test_reference_rows_are_appended_without_dedupe(self):
         # References have no dedupe key (reference_id is derived), so the importer
         # is a pure converter: identical rows are appended, not collapsed.
-        header = 'study_type,pdf_saved,csl_type,csl_title,csl_year,csl_authors\n'
-        row = 'Experiment,True,article-journal,A Title,2020,"Smith, John"\n'
+        header = 'study_type,csl_type,csl_title,csl_year,csl_authors\n'
+        row = 'Experiment,article-journal,A Title,2020,"Smith, John"\n'
         path = self._write_csv('dups.csv', header + row + row)
 
         out = StringIO()
         call_command('import_model', model='Reference', input_file=path, stdout=out)
         self.assertEqual(len(self._read_json('reference.json')), 2)
         self.assertNotIn('duplicate', out.getvalue().lower())
-
-    def test_experiment_dedupe_by_stored_key(self):
-        # Models with a stored natural key (Experiment id) still dedupe — against
-        # the existing JSON and within the CSV — reported so no drop is silent.
-        self._write_json('experiment.json', [{'id': 'exp001'}])
-        header = 'id,reference,component,test_type\n'
-        rows = (
-            'exp001,Smith-2020,D.50.2.1.A,"Dynamic, uniaxial"\n'  # already present
-            'exp002,Smith-2020,D.50.2.1.A,"Dynamic, uniaxial"\n'  # new
-            'exp002,Smith-2020,D.50.2.1.A,"Dynamic, uniaxial"\n'  # dup within CSV
-        )
-        path = self._write_csv('dup_exp.csv', header + rows)
-
-        out = StringIO()
-        call_command('import_model', model='Experiment', input_file=path, stdout=out)
-        value = out.getvalue()
-        self.assertIn('already present', value)  # exp001
-        self.assertIn('within this CSV', value)  # the second exp002
-        # Only the one genuinely new experiment (exp002) is appended.
-        ids = [r['id'] for r in self._read_json('experiment.json')]
-        self.assertEqual(sorted(ids), ['exp001', 'exp002'])
 
     def test_dry_run_writes_nothing(self):
         call_command(
@@ -233,10 +236,8 @@ class ImportModelCommandTests(TransactionTestCase):
         self.assertFalse(os.path.exists(self._json_path('reference.json')))
 
     def test_unknown_column_warning(self):
-        header = (
-            'study_type,pdf_saved,csl_type,csl_title,csl_year,csl_authors,edp_val\n'
-        )
-        row = 'Experiment,True,article-journal,A Title,2020,"Smith, John",oops\n'
+        header = 'study_type,csl_type,csl_title,csl_year,csl_authors,edp_val\n'
+        row = 'Experiment,article-journal,A Title,2020,"Smith, John",oops\n'
         path = self._write_csv('typo.csv', header + row)
 
         out = StringIO()
@@ -247,11 +248,8 @@ class ImportModelCommandTests(TransactionTestCase):
     def test_reference_id_column_is_no_longer_accepted(self):
         # reference_id is derived at ingest, so supplying it as a column is a
         # mistake: it must be flagged as unrecognized and never stored.
-        header = (
-            'reference_id,study_type,pdf_saved,csl_type,csl_title,'
-            'csl_year,csl_authors\n'
-        )
-        row = 'MINE-9,Experiment,True,article-journal,A Title,2020,"Smith, John"\n'
+        header = 'reference_id,study_type,csl_type,csl_title,csl_year,csl_authors\n'
+        row = 'MINE-9,Experiment,article-journal,A Title,2020,"Smith, John"\n'
         path = self._write_csv('with_refid.csv', header + row)
 
         out = StringIO()
@@ -265,8 +263,8 @@ class ImportModelCommandTests(TransactionTestCase):
     def test_non_numeric_csl_year_does_not_crash(self):
         # A non-numeric csl_year must convert (passing the raw value through)
         # rather than crashing; ingest's CSL validation reports it later.
-        header = 'study_type,pdf_saved,csl_type,csl_title,csl_year,csl_authors\n'
-        row = 'Experiment,True,article-journal,A Title,in press,"Smith, John"\n'
+        header = 'study_type,csl_type,csl_title,csl_year,csl_authors\n'
+        row = 'Experiment,article-journal,A Title,in press,"Smith, John"\n'
         path = self._write_csv('badyear.csv', header + row)
 
         call_command(
@@ -279,8 +277,8 @@ class ImportModelCommandTests(TransactionTestCase):
     def test_semicolon_delimited_csv_is_rejected(self):
         # A semicolon-delimited CSV (common from non-US Excel) must be caught
         # with guidance rather than silently importing garbage.
-        header = 'study_type;pdf_saved;csl_type;csl_title;csl_year;csl_authors\n'
-        row = 'Experiment;True;article-journal;A Title;2020;Smith\n'
+        header = 'study_type;csl_type;csl_title;csl_year;csl_authors\n'
+        row = 'Experiment;article-journal;A Title;2020;Smith\n'
         path = self._write_csv('semicolon.csv', header + row)
 
         with self.assertRaises(CommandError) as cm:

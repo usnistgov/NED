@@ -67,6 +67,7 @@ OWNS = [
     '.gitignore',
     '.streamlit/config.toml',
     'assets',
+    'sql',
     'views',
 ]
 

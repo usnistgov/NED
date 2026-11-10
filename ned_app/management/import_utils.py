@@ -6,22 +6,39 @@ import tempfile
 
 from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
 
-_INT_FIELDS = {'ds_rank', 'num_observations'}
+_INT_FIELDS = {'ds_rank', 'num_observations', 'test_order'}
 _FLOAT_FIELDS = {'edp_value', 'alt_edp_value', 'median', 'beta', 'probability'}
-_BOOL_FIELDS = {'pdf_saved'}
+
+# Printed after a command writes resources/data/.
+FIXTURE_STEPS = (
+    'Regenerate the fixture from a fresh build, run the standard checks, and '
+    'commit the data and the fixture together:\n'
+    '    rm db.sqlite3 && python manage.py migrate && python manage.py ingest\n'
+    '    PYTHONUTF8=1 python manage.py dumpdata ned_app --indent 2 '
+    '--output ned_app/fixtures/initial_data.json\n'
+    '(In PowerShell, set $env:PYTHONUTF8 = 1 first; see the README.)'
+)
 
 
-def load_json(filename):
+def _data_file_path(filename, data_dir=None):
+    """Return a JSON file's path in data_dir, or in resources/data/ if None."""
+    if data_dir is None:
+        return build_json_data_file_path(filename)
+    return os.path.join(data_dir, filename)
+
+
+def load_json(filename, data_dir=None):
     """
     Load the contents of a canonical JSON data file.
 
     Args:
-        filename (str): JSON filename within resources/data/.
+        filename (str): JSON filename within the data directory.
+        data_dir (str | None): The data directory; resources/data/ if None.
 
     Returns:
         list[dict]: Parsed records, or an empty list if the file does not exist.
     """
-    filepath = build_json_data_file_path(filename)
+    filepath = _data_file_path(filename, data_dir)
     if not os.path.exists(filepath):
         return []
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -38,7 +55,6 @@ def _dump_json(filepath, data):
     """
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, sort_keys=True, ensure_ascii=True)
-        f.write('\n')
 
 
 def write_json(filename, data):
@@ -52,7 +68,7 @@ def write_json(filename, data):
     write_json_files({filename: data})
 
 
-def write_json_files(file_data_map):
+def write_json_files(file_data_map, data_dir=None):
     """
     Write several canonical JSON files as an all-or-nothing batch.
 
@@ -66,9 +82,10 @@ def write_json_files(file_data_map):
 
     Args:
         file_data_map (dict[str, list]): Maps each JSON filename (within
-            resources/data/) to the full record list to write.
+            the data directory) to the full record list to write.
+        data_dir (str | None): The data directory; resources/data/ if None.
     """
-    paths = {name: build_json_data_file_path(name) for name in file_data_map}
+    paths = {name: _data_file_path(name, data_dir) for name in file_data_map}
 
     with tempfile.TemporaryDirectory() as backup_dir:
         backups = {}
@@ -103,7 +120,9 @@ def build_pk_set(records, pk_fields):
     """
     pk_set = set()
     for rec in records:
-        if '_comment' in rec:
+        # A record holding only a _comment is a note (ingest would reject it);
+        # one with data is a real record.
+        if set(rec) == {'_comment'}:
             continue
         pk_tuple = tuple(str(rec.get(f, '') or '') for f in pk_fields)
         pk_set.add(pk_tuple)
@@ -185,13 +204,6 @@ def coerce_value(field, val):
     if val == '' or val is None:
         if field in _INT_FIELDS or field in _FLOAT_FIELDS:
             return None
-        return val
-    if field in _BOOL_FIELDS:
-        lowered = val.strip().lower() if isinstance(val, str) else val
-        if lowered == 'true':
-            return True
-        if lowered == 'false':
-            return False
         return val
     if field in _INT_FIELDS:
         try:

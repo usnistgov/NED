@@ -40,39 +40,77 @@ CREATE TABLE ned_app_reference (
     year INTEGER NOT NULL,
     study_type VARCHAR(50) NOT NULL,
     comp_type VARCHAR(255),
-    pdf_saved BOOLEAN,
     csl_data TEXT NOT NULL
 );
 
-CREATE TABLE ned_app_experiment (
-    id VARCHAR(255) PRIMARY KEY,
-    reference_id VARCHAR(255) NOT NULL REFERENCES ned_app_reference(reference_id),
-    component_id VARCHAR(20) NOT NULL REFERENCES ned_app_component(component_id),
-    specimen VARCHAR(255),
-    specimen_inspection_sequence VARCHAR(255),
+CREATE TABLE ned_app_facility (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    label VARCHAR(100) UNIQUE NOT NULL,
+    name VARCHAR(255),
+    location VARCHAR(255),
+    notes TEXT
+);
+
+CREATE TABLE ned_app_program (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    label VARCHAR(100),
+    program_id VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255),
+    notes TEXT,
+    reference_id VARCHAR(255) NOT NULL REFERENCES ned_app_reference(reference_id)
+);
+
+CREATE TABLE ned_app_specimen (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    specimen_id VARCHAR(255) UNIQUE NOT NULL,
+    label VARCHAR(100) NOT NULL,
+    name VARCHAR(255),
     contributor VARCHAR(50),
     comp_detail VARCHAR(100),
     material VARCHAR(100),
     size_class VARCHAR(100),
-    test_type VARCHAR(50),
-    loading_protocol TEXT,
-    peak_test_amplitude VARCHAR(255),
-    location VARCHAR(255),
     governing_design_standard VARCHAR(255),
     design_objective TEXT,
     comp_description TEXT NOT NULL,
-    ds_description TEXT NOT NULL,
+    notes TEXT,
+    component_id VARCHAR(20) NOT NULL REFERENCES ned_app_component(component_id),
+    facility_id VARCHAR(100) NOT NULL REFERENCES ned_app_facility(label),
+    program_id VARCHAR(255) NOT NULL REFERENCES ned_app_program(program_id),
+    reference_id VARCHAR(255) REFERENCES ned_app_reference(reference_id)
+);
+
+CREATE TABLE ned_app_test (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    test_id VARCHAR(255) UNIQUE NOT NULL,
+    label VARCHAR(100) NOT NULL,
+    test_order INTEGER,
+    test_type VARCHAR(50),
+    loading_protocol TEXT,
+    peak_test_amplitude VARCHAR(255),
     prior_damage TEXT,
     prior_damage_repaired TEXT,
+    notes TEXT,
+    specimen_id VARCHAR(255) NOT NULL REFERENCES ned_app_specimen(specimen_id)
+);
+
+CREATE TABLE ned_app_observation (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    observation_id VARCHAR(255) UNIQUE NOT NULL,
+    ds_description TEXT NOT NULL,
+    legacy_prior_damage TEXT,
+    legacy_prior_damage_repaired TEXT,
     edp_metric VARCHAR(50),
     edp_unit VARCHAR(50),
     edp_value DECIMAL,
     alt_edp_metric VARCHAR(50),
     alt_edp_unit VARCHAR(50),
     alt_edp_value DECIMAL,
-    ds_rank INTEGER,
+    legacy_ds_rank INTEGER,
     ds_class VARCHAR(50),
-    notes TEXT
+    notes TEXT,
+    label VARCHAR(100) NOT NULL,
+    damage_location VARCHAR(255),
+    test_id VARCHAR(255) NOT NULL REFERENCES ned_app_test(test_id)
 );
 
 CREATE TABLE ned_app_fragilitymodel (
@@ -91,9 +129,10 @@ CREATE TABLE ned_app_fragilitymodel (
     edp_unit VARCHAR(255)
 );
 
-CREATE TABLE ned_app_experimentfragilitymodelbridge (
+CREATE TABLE ned_app_observationfragilitymodelbridge (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    experiment_id VARCHAR(255) NOT NULL REFERENCES ned_app_experiment(id),
+    observation_id VARCHAR(255) NOT NULL
+        REFERENCES ned_app_observation(observation_id),
     fragility_model_id VARCHAR(255) NOT NULL
         REFERENCES ned_app_fragilitymodel(fragility_model_id)
 );
@@ -128,8 +167,9 @@ def _seed(conn: sqlite3.Connection) -> None:
     exercised), a component with no subelement (fillna('—') path), one fully
     wired-up component -> experiment -> fragility model -> curve chain (via
     both bridge tables) for the relational queries, and a second experiment
-    (EXP-003) on that same component that is *not* linked to the fragility
+    (Smith-2020|S3|1|01) on that same component that is *not* linked to the fragility
     model, so there's an "available but unused" experiment to query for.
+    Experiment ids are derived observation_ids ('{test_id}|{label}').
 
     D2010 additionally carries 2 experiments and 2 fragility models. The
     components query LEFT JOINs both off the same component in one
@@ -186,7 +226,7 @@ def _seed(conn: sqlite3.Connection) -> None:
     conn.executemany(
         'INSERT INTO ned_app_reference '
         '(reference_id, reference_label, title, author, year, study_type, '
-        'comp_type, pdf_saved, csl_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'comp_type, csl_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         [
             (
                 'Smith-2020',
@@ -196,7 +236,6 @@ def _seed(conn: sqlite3.Connection) -> None:
                 2020,
                 'Experiment',
                 '',
-                0,
                 json.dumps({'DOI': '10.1000/xyz123'}),
             ),
             (
@@ -207,7 +246,6 @@ def _seed(conn: sqlite3.Connection) -> None:
                 2021,
                 'Analytical Study',
                 '',
-                0,
                 json.dumps({'URL': 'https://example.com/paper'}),
             ),
             (
@@ -218,26 +256,102 @@ def _seed(conn: sqlite3.Connection) -> None:
                 2022,
                 'Experiment',
                 '',
-                0,
                 json.dumps({'DOI': '10.1000/abc789'}),
             ),
         ],
     )
 
+    # The hierarchy behind each observation below. ui/db.py reads the moved
+    # fields (specimen, component, test type, ...) only through the
+    # ned_app_observation_flat view, which takes them from these tables.
+    conn.execute(
+        'INSERT INTO ned_app_facility (label, name, location) VALUES (?, ?, ?)',
+        ('Test_Lab', 'Test Lab', 'Somewhere'),
+    )
     conn.executemany(
-        'INSERT INTO ned_app_experiment '
-        '(id, reference_id, component_id, specimen, test_type, '
-        'comp_description, ds_description, edp_metric, edp_unit, edp_value, '
-        'ds_rank, ds_class) '
-        'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO ned_app_program (label, program_id, reference_id) '
+        'VALUES (?, ?, ?)',
+        [
+            ('', 'Smith-2020', 'Smith-2020'),
+            ('', 'Jones-2021', 'Jones-2021'),
+            ('', 'Lee-2022', 'Lee-2022'),
+        ],
+    )
+    conn.executemany(
+        'INSERT INTO ned_app_specimen '
+        '(specimen_id, label, name, component_id, comp_description, '
+        'facility_id, program_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
         [
             (
-                'EXP-001',
-                'Smith-2020',
-                'B.20.1.1',
+                'Smith-2020|S1',
                 'S1',
-                'Dynamic, uniaxial',
+                'S1',
+                'B.20.1.1',
                 'Wall panel',
+                'Test_Lab',
+                'Smith-2020',
+            ),
+            (
+                'Jones-2021|S2',
+                'S2',
+                'S2',
+                'B.20.1.2',
+                'Storefront glazing',
+                'Test_Lab',
+                'Jones-2021',
+            ),
+            (
+                'Smith-2020|S3',
+                'S3',
+                'S3',
+                'B.20.1.1',
+                'Wall panel',
+                'Test_Lab',
+                'Smith-2020',
+            ),
+            (
+                'Lee-2022|S1',
+                'S1',
+                'S1',
+                'D.20.1.0',
+                'Riser pipe',
+                'Test_Lab',
+                'Lee-2022',
+            ),
+            (
+                'Lee-2022|S2',
+                'S2',
+                'S2',
+                'D.20.1.0',
+                'Riser bracing',
+                'Test_Lab',
+                'Lee-2022',
+            ),
+        ],
+    )
+    conn.executemany(
+        'INSERT INTO ned_app_test '
+        '(test_id, label, test_order, test_type, specimen_id) '
+        'VALUES (?, ?, ?, ?, ?)',
+        [
+            ('Smith-2020|S1|1', '1', 1, 'Dynamic, uniaxial', 'Smith-2020|S1'),
+            ('Jones-2021|S2|1', '1', None, 'Monotonic, lateral', 'Jones-2021|S2'),
+            ('Smith-2020|S3|1', '1', None, 'Dynamic, uniaxial', 'Smith-2020|S3'),
+            ('Lee-2022|S1|1', '1', None, 'Dynamic, uniaxial', 'Lee-2022|S1'),
+            ('Lee-2022|S2|1', '1', None, 'Dynamic, uniaxial', 'Lee-2022|S2'),
+        ],
+    )
+
+    conn.executemany(
+        'INSERT INTO ned_app_observation '
+        '(observation_id, test_id, label, ds_description, edp_metric, edp_unit, '
+        'edp_value, legacy_ds_rank, ds_class) '
+        'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+            (
+                'Smith-2020|S1|1|01',
+                'Smith-2020|S1|1',
+                '01',
                 'Cracking observed',
                 'Story Drift Ratio',
                 'Ratio',
@@ -246,12 +360,9 @@ def _seed(conn: sqlite3.Connection) -> None:
                 'Consequential',
             ),
             (
-                'EXP-002',
-                'Jones-2021',
-                'B.20.1.2',
-                'S2',
-                'Monotonic, lateral',
-                'Storefront glazing',
+                'Jones-2021|S2|1|01',
+                'Jones-2021|S2|1',
+                '01',
                 'No visible damage',
                 'Peak Floor Acceleration, horizontal',
                 'g',
@@ -260,12 +371,9 @@ def _seed(conn: sqlite3.Connection) -> None:
                 'No damage',
             ),
             (
-                'EXP-003',
-                'Smith-2020',
-                'B.20.1.1',
-                'S3',
-                'Dynamic, uniaxial',
-                'Wall panel',
+                'Smith-2020|S3|1|01',
+                'Smith-2020|S3|1',
+                '01',
                 'No visible damage',
                 'Story Drift Ratio',
                 'Ratio',
@@ -274,12 +382,9 @@ def _seed(conn: sqlite3.Connection) -> None:
                 'No damage',
             ),
             (
-                'EXP-004',
-                'Lee-2022',
-                'D.20.1.0',
-                'S1',
-                'Dynamic, uniaxial',
-                'Riser pipe',
+                'Lee-2022|S1|1|01',
+                'Lee-2022|S1|1',
+                '01',
                 'Joint leakage',
                 'Peak Floor Acceleration, horizontal',
                 'g',
@@ -288,12 +393,9 @@ def _seed(conn: sqlite3.Connection) -> None:
                 'Consequential',
             ),
             (
-                'EXP-005',
-                'Lee-2022',
-                'D.20.1.0',
-                'S2',
-                'Dynamic, uniaxial',
-                'Riser bracing',
+                'Lee-2022|S2|1|01',
+                'Lee-2022|S2|1',
+                '01',
                 'Brace buckling',
                 'Peak Floor Acceleration, horizontal',
                 'g',
@@ -346,9 +448,9 @@ def _seed(conn: sqlite3.Connection) -> None:
         ],
     )
     conn.execute(
-        'INSERT INTO ned_app_experimentfragilitymodelbridge '
-        '(experiment_id, fragility_model_id) VALUES (?, ?)',
-        ('EXP-001', 'Smith-2020|M1'),
+        'INSERT INTO ned_app_observationfragilitymodelbridge '
+        '(observation_id, fragility_model_id) VALUES (?, ?)',
+        ('Smith-2020|S1|1|01', 'Smith-2020|M1'),
     )
 
     conn.execute(

@@ -1,0 +1,18 @@
+[
+    {
+        "comp_description": "Steel-framed gypsum partition wall, 12 ft tall",
+        "comp_detail": "Slip track at top of wall",
+        "component": "A.10.1.1.A",
+        "contributor": "Example Contributor Name",
+        "design_objective": "Code compliant",
+        "facility": "Example_Lab",
+        "governing_design_standard": "ASCE 7-22",
+        "label": "W1",
+        "material": "Steel studs, gypsum board",
+        "name": "Wall 1",
+        "notes": "",
+        "program": "Smith-2020",
+        "reference": null,
+        "size_class": "Full scale"
+    }
+]

@@ -5,11 +5,15 @@ from django.utils.translation import gettext as _
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
 )
 
 
@@ -27,10 +31,10 @@ class ReferenceAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Experiment)
-class ExperimentAdmin(admin.ModelAdmin):
+@admin.register(Observation)
+class ObservationAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('id', 'reference', 'specimen')
+    list_display = ('observation_id', 'test', 'label')
 
 
 @admin.register(Component)
@@ -64,13 +68,40 @@ class FragilityModelAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(ExperimentFragilityModelBridge)
-class ExperimentFragilityModelBridgeAdmin(admin.ModelAdmin):
+@admin.register(ObservationFragilityModelBridge)
+class ObservationFragilityModelBridgeAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
-    list_display = ('experiment', 'fragility_model')
+    list_display = ('observation', 'fragility_model')
 
 
 @admin.register(ComponentFragilityModelBridge)
 class ComponentFragilityModelBridgeAdmin(admin.ModelAdmin):
     # how column data is displayed in the report for all entered data
     list_display = ('component', 'fragility_model')
+
+
+@admin.register(Facility)
+class FacilityAdmin(admin.ModelAdmin):
+    # how column data is displayed in the report for all entered data
+    list_display = ('label', 'name', 'location')
+
+
+@admin.register(Program)
+class ProgramAdmin(admin.ModelAdmin):
+    # how column data is displayed in the report for all entered data
+    list_display = ('program_id', 'reference', 'name')
+    readonly_fields = ('program_id',)
+
+
+@admin.register(Specimen)
+class SpecimenAdmin(admin.ModelAdmin):
+    # how column data is displayed in the report for all entered data
+    list_display = ('specimen_id', 'program', 'facility', 'name')
+    readonly_fields = ('specimen_id',)
+
+
+@admin.register(Test)
+class TestAdmin(admin.ModelAdmin):
+    # how column data is displayed in the report for all entered data
+    list_display = ('test_id', 'specimen', 'test_order', 'test_type')
+    readonly_fields = ('test_id',)

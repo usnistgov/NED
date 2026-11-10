@@ -1,0 +1,104 @@
+[
+    {
+        "label": "UB_SEESL",
+        "location": "Buffalo, NY",
+        "name": "University at Buffalo Structural Engineering and Earthquake Simulation Laboratory (SEESL)",
+        "notes": ""
+    },
+    {
+        "label": "cal_poly_SLO",
+        "location": "San Luis Obispo, CA",
+        "name": "Cal Poly San Luis Obispo",
+        "notes": ""
+    },
+    {
+        "label": "UCSD",
+        "location": "San Diego, CA",
+        "name": "University of California, San Diego, Structural Laboratories",
+        "notes": ""
+    },
+    {
+        "label": "China",
+        "location": "China",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "E-Defense",
+        "location": "Miki City, Japan",
+        "name": "E-Defense",
+        "notes": ""
+    },
+    {
+        "label": "Italy",
+        "location": "Italy",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Japan",
+        "location": "Japan",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Stanford",
+        "location": "Stanford, CA",
+        "name": "Stanford University Blume Earthquake Engineering Center",
+        "notes": ""
+    },
+    {
+        "label": "UNR_CCEER",
+        "location": "Reno, NV",
+        "name": "University of Nevada Reno Center for Civil Engineering Earthquake Research",
+        "notes": ""
+    },
+    {
+        "label": "U_Canterbury",
+        "location": "Christchurch, New Zealand",
+        "name": "University of Canterbury Structural Engineering Laboratory",
+        "notes": ""
+    },
+    {
+        "label": "Oregon_State",
+        "location": "Corvallis, OR",
+        "name": "Oregon State University",
+        "notes": ""
+    },
+    {
+        "label": "Penn_State",
+        "location": "University Park, PA",
+        "name": "The Pennsylvania State University",
+        "notes": ""
+    },
+    {
+        "label": "Republic_of_Korea",
+        "location": "Republic of Korea",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Taiwan",
+        "location": "Taiwan",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "U_Naples",
+        "location": "Naples, Italy",
+        "name": "University of Naples",
+        "notes": ""
+    },
+    {
+        "label": "US",
+        "location": "US",
+        "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Kyoto_DPRI",
+        "location": "Uji, Japan",
+        "name": "Kyoto University Disaster Prevention Research Institute (DPRI)",
+        "notes": ""
+    }
+]

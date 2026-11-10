@@ -20,6 +20,10 @@
         "name": "Masonry Chimney"
     },
     {
+        "component_id": "B.20.2.1.A",
+        "name": "Dry-glazed stick built windows"
+    },
+    {
         "component_id": "B.20.2.2.A",
         "name": "Dry-glazed stick built curtain walls"
     },
@@ -96,8 +100,16 @@
         "name": "Interior Wall Finish"
     },
     {
+        "component_id": "C.30.1.1.B",
+        "name": "Wall bottom track firestop seals"
+    },
+    {
         "component_id": "C.30.1.2.A",
         "name": "Interior Wall Finish"
+    },
+    {
+        "component_id": "C.30.1.2.B",
+        "name": "Wall bottom track firestop seals"
     },
     {
         "component_id": "C.30.2.1.A",
@@ -222,6 +234,10 @@
     {
         "component_id": "D.40.1.1.H",
         "name": "Fire sprinkler structural braces"
+    },
+    {
+        "component_id": "D.40.1.1.I",
+        "name": "Fire Sprinkler Water Piping - Risers"
     },
     {
         "component_id": "D.50.1.1.A",

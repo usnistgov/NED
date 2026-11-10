@@ -8,9 +8,11 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models.functions import Lower
 from django.utils.translation import gettext as _
 
 from ned_app.validators import (
+    validate_label,
     validate_nistir_component_id,
     validate_positive,
     validate_reference_label,
@@ -167,7 +169,6 @@ class Reference(models.Model):
         year (int): The year the study was published (auto-populated from csl_data).
         study_type (str): A classification of the type of study conducted.
         comp_type (str): The type of component(s) investigated in study.
-        pdf_saved (bool): Is a pdf saved in the archive repository.
         csl_data (dict): Reference data in CSL-JSON format.
     """
 
@@ -222,11 +223,6 @@ class Reference(models.Model):
         max_length=255,
         blank=True,
         help_text='The type of component(s) investigated in study.',
-    )
-    pdf_saved = models.BooleanField(
-        _('pdf saved'),
-        default=False,
-        help_text='Is a pdf saved in the archive repository.',
     )
     csl_data = models.JSONField(
         _('csl data'),
@@ -322,151 +318,54 @@ class Reference(models.Model):
                         else:  # 3 or more authors
                             self.author = f'{family_names[0]} et al.'
 
-        # Auto-generate the reference id from the label (or first-author
-        # surname) and year when it is not explicitly set. reference_id is not
-        # stored in the source JSON, so the ingest pipeline always derives it;
-        # an explicitly provided id (e.g. in tests/admin) is respected.
-        if not self.reference_id:
-            self.reference_id = derive_reference_id(
-                self.reference_label, self.csl_data
-            )
+        # Always re-derive the id from the label (or first-author surname) and
+        # year, so it can't go stale after an edit; rename_identity cascades it.
+        self.reference_id = derive_reference_id(self.reference_label, self.csl_data)
 
         super().save(*args, **kwargs)
 
 
-class Experiment(models.Model):
+class Observation(models.Model):
     """
     A model representing an experimental observation of component damage.
 
     Attributes:
-        reference (id): ID of the published reference documenting this experimental observation.
-        specimen (str): ID or name of the specimen as recorded in the reference.
-        specimen_inspection_sequence (str): The ith test of this specimen.
-        contributor (str): Individual or institution responsible for documenting this particular fragility in the database.
-        component (id): Identifier of the component type.
-        comp_detail (str): Classification or short description of the component attachment detailing.
-        material (str): Classification or short description of the component material (if applicable).
-        size_class (str): Classification or short description of the general size of this particular component compared to others of the same type (if applicable).
-        test_type (str): The type of test generally describing the condition under which the specimen was loaded.
-        loading_protocol (str): Name, ID, or general description of the ground motion or loading protocol used in the test.
-        peak_test_amplitude (str): The maximum amplitude to which this test was performed.
-        location (str): The location where the test was conducted.
-        governing_design_standard (str): Name of the standard governing the design of the specimen, if applicable.
-        design_objective (str): General description of the performance level to which the specimen was designed, e.g., code compliant, common construction practice, low-damage-design, or meeting a certain damage objective under a specific loading condition.
-        comp_description (str): General description of the type of component.
+        observation_id (str): Derived identity, '{test_id}|{label}'.
         ds_description (str): Description of the damage being observed.
-        prior_damage (str): Description of any prior damage that was noted during a previous test of this specimen. Should also describe if and how the specimen was repaired prior to this test. Empty if no prior damage was noted.
-        prior_damage_repaired (str): TRUE if prior damage was noted and repaired prior to this test. FALSE if prior damage was noted and not repaired. Or, a general description of the previous damage that was repaired.
+        legacy_prior_damage (str): Deprecated. Verbatim pre-split prior_damage: description of any prior damage that was noted during a previous test of this specimen. Should also describe if and how the specimen was repaired prior to this test. Empty if no prior damage was noted.
+        legacy_prior_damage_repaired (str): Deprecated. Verbatim pre-split prior_damage_repaired: TRUE if prior damage was noted and repaired prior to this test. FALSE if prior damage was noted and not repaired. Or, a general description of the previous damage that was repaired.
         edp_metric (str): Measure of the engineering demand parameter (EDP), e.g., peak story drift ratio.
         edp_unit (str): Unit of the engineering demand parameter.
         edp_value (float): Value of the engineering demand parameter recorded for this observation.
         alt_edp_metric (str): Secondary EDP metric.
         alt_edp_unit (str): Secondary EDP unit.
         alt_edp_value (float): Secondary EDP value.
-        ds_rank (int): Integer rank ordering this observed damage with other damage observed in the same specimen.
+        legacy_ds_rank (int): Deprecated. Verbatim pre-split ds_rank: integer rank ordering this observed damage with other damage observed in the same specimen.
         ds_class (str): General identification of damage as consequential or not.
         notes (str): Additional notes providing context for damage observations.
+        test (Test): The test this observation belongs to.
+        label (str): Identifier within the test, and the observations' sort key.
+        damage_location (str): Where on the specimen the damage was observed.
     """
 
-    id = models.CharField(_('id'), primary_key=True, max_length=255)
-    reference = models.ForeignKey(
-        'Reference',
-        on_delete=models.PROTECT,
-        to_field='reference_id',
-        help_text='ID of the published reference documenting this experimental observation.',
-    )
-    specimen = models.CharField(
-        _('specimen'),
+    observation_id = models.CharField(
+        _('observation id'),
         max_length=255,
-        blank=True,
-        help_text='ID or name of the specimen as recorded in the reference.',
-    )
-    specimen_inspection_sequence = models.CharField(
-        _('specimen inspection sequence'),
-        max_length=255,
-        blank=True,
-        help_text='The ith test of this specimen.',
-    )
-    contributor = models.CharField(
-        _('contributor'),
-        max_length=50,
-        blank=True,
-        help_text='Individual or institution responsible for documenting this particular fragility in the database.',
-    )
-    component = models.ForeignKey(
-        'Component',
-        on_delete=models.PROTECT,
-        to_field='component_id',
-        help_text='Identifier of the component type',
-    )
-    comp_detail = models.CharField(
-        _('component detail tag'),
-        max_length=100,
-        blank=True,
-        help_text='Classification or short description of the component attachment detailing.',
-    )
-    material = models.CharField(
-        _('material classification tag'),
-        max_length=100,
-        blank=True,
-        help_text='Classification or short description of the component material (if applicable).',
-    )
-    size_class = models.CharField(
-        _('size classification tag'),
-        max_length=100,
-        blank=True,
-        help_text='Classification or short description of the general size of this particular component compared to others of the same type (if applicable).',
-    )
-    test_type = models.CharField(
-        _('test type'),
-        max_length=50,
-        choices=TestTypeChoices.choices,
-        help_text='The type of test generally describing the condition under which the specimen was loaded.',
-    )
-    loading_protocol = models.TextField(
-        _('loading protocol'),
-        blank=True,
-        help_text='Name, ID, or general description of the ground motion or loading protocol used in the test.',
-    )
-    peak_test_amplitude = models.CharField(
-        _('peak test amplitude'),
-        max_length=255,
-        blank=True,
-        help_text='The maximum amplitude to which this test was performed.',
-    )
-    location = models.CharField(
-        _('location'),
-        max_length=255,
-        blank=True,
-        help_text='The location where the test was conducted.',
-    )
-    governing_design_standard = models.CharField(
-        _('governing design standard'),
-        max_length=255,
-        blank=True,
-        help_text='Name of the standard governing the design of the specimen, if applicable.',
-    )
-    design_objective = models.TextField(
-        _('design objective'),
-        blank=True,
-        help_text='General description of the performance level to which the specimen was designed, e.g., code compliant, common construction practice, low-damage-design, or meeting a certain damage objective under a specific loading condition.',
-    )
-    comp_description = models.TextField(
-        _('component description'),
-        blank=False,
-        help_text='General description of the type of component.',
+        unique=True,
+        editable=False,
+        help_text="Derived: '{test_id}|{label}'.",
     )
     ds_description = models.TextField(
         _('damage state description'),
         blank=False,
         help_text='Description of the damage being observed.',
     )
-    prior_damage = models.TextField(
+    legacy_prior_damage = models.TextField(
         _('prior damage'),
         blank=True,
         help_text='Description of any prior damage that was noted during a previous test of this specimen. Should also describe if and how the specimen was repaired prior to this test. Empty if no prior damage was noted.',
     )
-    prior_damage_repaired = models.TextField(
+    legacy_prior_damage_repaired = models.TextField(
         _('is prior damage repaired'),
         max_length=255,
         blank=True,
@@ -516,7 +415,7 @@ class Experiment(models.Model):
         null=True,
         help_text='Secondary EDP value. ',
     )
-    ds_rank = models.IntegerField(
+    legacy_ds_rank = models.IntegerField(
         _('damage state rank'),
         blank=True,
         null=True,
@@ -534,13 +433,42 @@ class Experiment(models.Model):
         blank=True,
         help_text='Additional notes providing context for damage observations.',
     )
+    test = models.ForeignKey(
+        'Test',
+        on_delete=models.PROTECT,
+        to_field='test_id',
+        help_text='The test this observation belongs to.',
+    )
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        validators=[validate_label],
+        help_text='Identifier within the test; observations are ordered by label.',
+    )
+    damage_location = models.CharField(
+        _('damage location'),
+        max_length=255,
+        blank=True,
+        help_text='Where on the specimen the damage was observed.',
+    )
 
     class Meta:
         verbose_name = 'Experiment'
         verbose_name_plural = 'Experiments'
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(
+                Lower('label'),
+                models.F('test'),
+                name='observation_label_ci_unique_in_test',
+            ),
+        ]
 
     def __str__(self):
-        return self.id
+        return self.observation_id
+
+    def save(self, *args, **kwargs):
+        self.observation_id = f'{self.test_id}|{self.label}'
+        super().save(*args, **kwargs)
 
 
 class FragilityModel(models.Model):
@@ -661,17 +589,20 @@ class FragilityModel(models.Model):
         super().save(*args, **kwargs)
 
 
-class ExperimentFragilityModelBridge(models.Model):
+class ObservationFragilityModelBridge(models.Model):
     """
     A bridge model facilitating a many-to-many relationship between experiments and fragility models.
 
     Attributes:
-        experiment (str): Experiment model ID.
+        observation (str): Observation ID (observation_id).
         fragility_model (str): fragility model ID.
     """
 
-    experiment = models.ForeignKey(
-        'Experiment', on_delete=models.PROTECT, help_text='Experiment model ID'
+    observation = models.ForeignKey(
+        'Observation',
+        on_delete=models.PROTECT,
+        to_field='observation_id',
+        help_text='Experiment model ID',
     )
     fragility_model = models.ForeignKey(
         'FragilityModel',
@@ -685,7 +616,7 @@ class ExperimentFragilityModelBridge(models.Model):
         verbose_name_plural = 'Experiment - Fragility Pairs'
 
     def __str__(self):
-        return f'{self.experiment}_{self.fragility_model}'
+        return f'{self.observation}_{self.fragility_model}'
 
 
 class ComponentFragilityModelBridge(models.Model):
@@ -938,3 +869,341 @@ class Component(models.Model):
                     self.subelement = f'{parts[3]} - {labels[subelement_key]}'
 
         super().save(*args, **kwargs)
+
+
+class Facility(models.Model):
+    """
+    A laboratory or test facility where specimens were tested.
+
+    Attributes:
+        label (str): Short identifier, unique database-wide regardless of case.
+        name (str): The facility's full official title.
+        location (str): Where the facility is.
+        notes (str): Free-text notes.
+    """
+
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        unique=True,
+        validators=[validate_label],
+        help_text='Short identifier for the facility, e.g. UCSD_LHPOST.',
+    )
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        blank=True,
+        help_text="The facility's full official title.",
+    )
+    location = models.CharField(
+        _('location'),
+        max_length=255,
+        blank=True,
+        help_text='Where the facility is.',
+    )
+    notes = models.TextField(_('notes'), blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Facilities'
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(Lower('label'), name='facility_label_ci_unique'),
+        ]
+
+    def __str__(self):
+        return self.label
+
+
+class Program(models.Model):
+    """
+    A test program: a body of tests documented by one reference.
+
+    Attributes:
+        label (str): Optional short identifier; blank for one program per reference.
+        program_id (str): Derived identity, the label if set, else the reference id.
+        name (str): The program's descriptive name.
+        notes (str): Free-text notes.
+        reference (Reference): The reference that documents the program.
+    """
+
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        blank=True,
+        validators=[validate_label],
+        help_text='Optional short identifier; leave blank to use the reference id.',
+    )
+    program_id = models.CharField(
+        _('program id'),
+        max_length=255,
+        unique=True,
+        editable=False,
+        help_text='Derived: the label if set, else the reference id.',
+    )
+    name = models.CharField(_('name'), max_length=255, blank=True)
+    notes = models.TextField(_('notes'), blank=True)
+    reference = models.ForeignKey(
+        'Reference',
+        on_delete=models.PROTECT,
+        to_field='reference_id',
+        help_text='The reference that documents the program.',
+    )
+
+    class Meta:
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(
+                Lower('program_id'), name='program_id_ci_unique'
+            ),
+        ]
+
+    def __str__(self):
+        return self.program_id
+
+    def save(self, *args, **kwargs):
+        self.program_id = self.label or self.reference_id
+        super().save(*args, **kwargs)
+
+
+class Specimen(models.Model):
+    """
+    A physical specimen tested in a program, at one facility.
+
+    Attributes:
+        specimen_id (str): Derived identity, '{program_id}|{label}'.
+        program (Program): The program the specimen belongs to.
+        facility (Facility): Where the specimen was tested.
+        reference (Reference): Optional override, for a specimen documented by its own report.
+        label (str): Short identifier, unique within the program regardless of case.
+        name (str): The specimen's name as the reference writes it.
+        contributor (str): Individual or institution that documented the specimen.
+        component (id): Identifier of the component type.
+        comp_detail, material, size_class (str): Component subcategorization tags.
+        design_objective, governing_design_standard, comp_description (str): Design context.
+        notes (str): Free-text notes.
+    """
+
+    specimen_id = models.CharField(
+        _('specimen id'),
+        max_length=255,
+        unique=True,
+        editable=False,
+        help_text="Derived: '{program_id}|{label}'.",
+    )
+    program = models.ForeignKey(
+        'Program',
+        on_delete=models.PROTECT,
+        to_field='program_id',
+        help_text='The program the specimen belongs to.',
+    )
+    facility = models.ForeignKey(
+        'Facility',
+        on_delete=models.PROTECT,
+        to_field='label',
+        help_text='Where the specimen was tested.',
+    )
+    reference = models.ForeignKey(
+        'Reference',
+        on_delete=models.PROTECT,
+        to_field='reference_id',
+        null=True,
+        blank=True,
+        help_text="Optional: set only when the specimen is documented by a different reference than its program's.",
+    )
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        validators=[validate_label],
+        help_text='Short identifier, unique within the program.',
+    )
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        blank=True,
+        help_text='ID or name of the specimen as recorded in the reference.',
+    )
+    contributor = models.CharField(
+        _('contributor'),
+        max_length=50,
+        blank=True,
+        help_text='Individual or institution responsible for documenting this specimen in the database.',
+    )
+    component = models.ForeignKey(
+        'Component',
+        on_delete=models.PROTECT,
+        to_field='component_id',
+        help_text='Identifier of the component type',
+    )
+    comp_detail = models.CharField(
+        _('component detail tag'),
+        max_length=100,
+        blank=True,
+        help_text='Classification or short description of the component attachment detailing.',
+    )
+    material = models.CharField(
+        _('material classification tag'),
+        max_length=100,
+        blank=True,
+        help_text='Classification or short description of the component material (if applicable).',
+    )
+    size_class = models.CharField(
+        _('size classification tag'),
+        max_length=100,
+        blank=True,
+        help_text='Classification or short description of the general size of this particular component compared to others of the same type (if applicable).',
+    )
+    governing_design_standard = models.CharField(
+        _('governing design standard'),
+        max_length=255,
+        blank=True,
+        help_text='Name of the standard governing the design of the specimen, if applicable.',
+    )
+    design_objective = models.TextField(
+        _('design objective'),
+        blank=True,
+        help_text='General description of the performance level to which the specimen was designed, e.g., code compliant, common construction practice, low-damage-design, or meeting a certain damage objective under a specific loading condition.',
+    )
+    comp_description = models.TextField(
+        _('component description'),
+        blank=False,
+        help_text='General description of the type of component.',
+    )
+    notes = models.TextField(_('notes'), blank=True)
+
+    class Meta:
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(
+                Lower('label'),
+                models.F('program'),
+                name='specimen_label_ci_unique_in_program',
+            ),
+        ]
+
+    def __str__(self):
+        return self.specimen_id
+
+    def save(self, *args, **kwargs):
+        self.specimen_id = f'{self.program_id}|{self.label}'
+        super().save(*args, **kwargs)
+
+    @property
+    def effective_reference_id(self):
+        """The specimen's own reference if set, else its program's."""
+        return self.reference_id or self.program.reference_id
+
+    @property
+    def number_of_tests(self):
+        return self.test_set.count()
+
+
+class Test(models.Model):
+    """
+    One test of a specimen: a loading run whose damage is recorded as observations.
+
+    Attributes:
+        test_id (str): Derived identity, '{specimen_id}|{label}'.
+        specimen (Specimen): The specimen tested.
+        label (str): Short identifier, unique within the specimen regardless of case.
+        test_order (int): The test's place in the specimen's test order; null if not recorded.
+        test_type (str): The type of test generally describing the loading condition.
+        loading_protocol (str): The ground motion or loading protocol used.
+        peak_test_amplitude (str): The maximum amplitude of the test.
+        prior_damage (str): The specimen's condition entering this test.
+        prior_damage_repaired (str): Whether prior damage was repaired before this test.
+        notes (str): Free-text notes.
+    """
+
+    # Not a test case: keep pytest from collecting this class.
+    __test__ = False
+
+    test_id = models.CharField(
+        _('test id'),
+        max_length=255,
+        unique=True,
+        editable=False,
+        help_text="Derived: '{specimen_id}|{label}'.",
+    )
+    specimen = models.ForeignKey(
+        'Specimen',
+        on_delete=models.PROTECT,
+        to_field='specimen_id',
+        help_text='The specimen tested.',
+    )
+    label = models.CharField(
+        _('label'),
+        max_length=100,
+        validators=[validate_label],
+        help_text='Short identifier, unique within the specimen.',
+    )
+    test_order = models.PositiveIntegerField(
+        _('test order'),
+        null=True,
+        blank=True,
+        help_text="The test's place in the specimen's test order, as the reference numbers it; blank if not recorded.",
+    )
+    test_type = models.CharField(
+        _('test type'),
+        max_length=50,
+        choices=TestTypeChoices.choices,
+        help_text='The type of test generally describing the condition under which the specimen was loaded.',
+    )
+    loading_protocol = models.TextField(
+        _('loading protocol'),
+        blank=True,
+        help_text='Name, ID, or general description of the ground motion or loading protocol used in the test.',
+    )
+    peak_test_amplitude = models.CharField(
+        _('peak test amplitude'),
+        max_length=255,
+        blank=True,
+        help_text='The maximum amplitude to which this test was performed.',
+    )
+    prior_damage = models.TextField(
+        _('prior damage'),
+        blank=True,
+        help_text='The condition the specimen was in entering this test, including damage from outside the database.',
+    )
+    prior_damage_repaired = models.TextField(
+        _('is prior damage repaired'),
+        blank=True,
+        help_text='Whether the prior damage entering this test was repaired before it.',
+    )
+    notes = models.TextField(_('notes'), blank=True)
+
+    class Meta:
+        constraints: ClassVar[list] = [
+            models.UniqueConstraint(
+                Lower('label'),
+                models.F('specimen'),
+                name='test_label_ci_unique_in_specimen',
+            ),
+            models.UniqueConstraint(
+                fields=['specimen', 'test_order'],
+                name='test_order_unique_in_specimen',
+            ),
+        ]
+
+    def __str__(self):
+        return self.test_id
+
+    def save(self, *args, **kwargs):
+        self.test_id = f'{self.specimen_id}|{self.label}'
+        super().save(*args, **kwargs)
+
+    @property
+    def damaged_by_earlier_test(self):
+        """Whether an earlier test holds observations; None if the order can't tell (design 2.2)."""
+        others = self.specimen.test_set.exclude(pk=self.pk)
+        if (
+            self.test_order is not None
+            and Observation.objects.filter(
+                test__specimen=self.specimen, test__test_order__lt=self.test_order
+            ).exists()
+        ):
+            return True
+        if not others.exists():
+            return False
+        if (
+            self.test_order is not None
+            and not others.filter(test_order__isnull=True).exists()
+        ):
+            return False
+        return None

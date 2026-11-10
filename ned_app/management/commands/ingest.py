@@ -3,26 +3,35 @@ import os
 
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand, CommandError
+from django.db import transaction
 
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
     derive_reference_id,
 )
 from ned_app.serialization.file_and_path_utiles import build_json_data_file_path
 from ned_app.serialization.serializer import (
     ComponentFragilityModelBridgeSerializer,
     ComponentSerializer,
-    ExperimentFragilityModelBridgeSerializer,
-    ExperimentSerializer,
+    FacilitySerializer,
     FragilityCurveSerializer,
     FragilityModelSerializer,
+    ObservationFragilityModelBridgeSerializer,
+    ObservationSerializer,
+    ProgramSerializer,
     ReferenceSerializer,
+    SpecimenSerializer,
+    TestSerializer,
 )
 
 
@@ -93,6 +102,12 @@ class Command(BaseCommand):
 
     help = 'Ingests data from JSON files using a generic, configurable processor.'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--data_dir',
+            help='The JSON data directory (default: resources/data/).',
+        )
+
     def handle(self, *args, **options):
         """
         Execute the ingestion command.
@@ -102,8 +117,9 @@ class Command(BaseCommand):
 
         Args:
             *args: Positional arguments (unused).
-            **options: Command options (unused).
+            **options: Command options, including 'data_dir'.
         """
+        self.data_dir = options.get('data_dir')
         processing_config = [
             {
                 'model': Reference,
@@ -125,6 +141,41 @@ class Command(BaseCommand):
                 'lookup_field': ['component_id'],
             },
             {
+                'model': Facility,
+                'serializer': FacilitySerializer,
+                'file': 'facility.json',
+                'lookup_field': ['label'],
+            },
+            {
+                'model': Program,
+                'serializer': ProgramSerializer,
+                'file': 'program.json',
+                'lookup_field': ['program_id'],
+                # Derived ids below are not stored in the JSON either; each is
+                # rebuilt from the record's label and its parent's stored id.
+                'lookup_deriver': lambda item: {
+                    'program_id': item.get('label') or item['reference']
+                },
+            },
+            {
+                'model': Specimen,
+                'serializer': SpecimenSerializer,
+                'file': 'specimen.json',
+                'lookup_field': ['specimen_id'],
+                'lookup_deriver': lambda item: {
+                    'specimen_id': f'{item["program"]}|{item["label"]}'
+                },
+            },
+            {
+                'model': Test,
+                'serializer': TestSerializer,
+                'file': 'test.json',
+                'lookup_field': ['test_id'],
+                'lookup_deriver': lambda item: {
+                    'test_id': f'{item["specimen"]}|{item["label"]}'
+                },
+            },
+            {
                 'model': FragilityModel,
                 'serializer': FragilityModelSerializer,
                 'file': 'fragility_model.json',
@@ -137,16 +188,22 @@ class Command(BaseCommand):
                 'lookup_field': ['component', 'fragility_model'],
             },
             {
-                'model': Experiment,
-                'serializer': ExperimentSerializer,
-                'file': 'experiment.json',
-                'lookup_field': ['id'],
+                'model': Observation,
+                'serializer': ObservationSerializer,
+                'file': 'observation.json',
+                'lookup_field': ['observation_id'],
+                'lookup_deriver': lambda item: {
+                    'observation_id': f'{item["test"]}|{item["label"]}'
+                },
+                # Old-shape keys (e.g. ds_rank, now legacy_ds_rank) would
+                # otherwise be dropped silently, losing their values.
+                'reject_unknown_keys': True,
             },
             {
-                'model': ExperimentFragilityModelBridge,
-                'serializer': ExperimentFragilityModelBridgeSerializer,
-                'file': 'experiment_fragility_model_bridge.json',
-                'lookup_field': ['experiment', 'fragility_model'],
+                'model': ObservationFragilityModelBridge,
+                'serializer': ObservationFragilityModelBridgeSerializer,
+                'file': 'observation_fragility_model_bridge.json',
+                'lookup_field': ['observation', 'fragility_model'],
             },
             {
                 'model': FragilityCurve,
@@ -164,12 +221,14 @@ class Command(BaseCommand):
                 data_file=config['file'],
                 lookup_field=config['lookup_field'],
                 lookup_deriver=config.get('lookup_deriver'),
+                reject_unknown_keys=config.get('reject_unknown_keys', False),
             )
 
         if total_failed:
             raise CommandError(
                 f'\nIngestion finished with {total_failed} failure(s). See the '
-                'errors above, fix the source data in resources/data/, and re-run.'
+                f'errors above, fix the source data in '
+                f'{self.data_dir or "resources/data/"}, and re-run.'
             )
 
         self.stdout.write(
@@ -183,6 +242,7 @@ class Command(BaseCommand):
         data_file,
         lookup_field,
         lookup_deriver=None,
+        reject_unknown_keys=False,
     ):
         """
         Process a JSON data file for a given model.
@@ -195,6 +255,8 @@ class Command(BaseCommand):
             serializer_class: The serializer class for validation and saving.
             data_file (str): The name of the JSON file to process.
             lookup_field (list): List of field names used to identify existing records.
+            reject_unknown_keys (bool): Fail any record with a key that is not
+                one of the serializer's fields (``_comment`` is allowed).
 
         Returns:
             int: The number of failures (unreadable file or invalid records).
@@ -203,7 +265,10 @@ class Command(BaseCommand):
         model_name = model_class.__name__
         self.stdout.write(f'--- Processing {model_name} from {data_file} ---')
 
-        data_filepath = build_json_data_file_path(data_file)
+        if self.data_dir:
+            data_filepath = os.path.join(self.data_dir, data_file)
+        else:
+            data_filepath = build_json_data_file_path(data_file)
         created_count, updated_count, failed_count = 0, 0, 0
 
         if not os.path.exists(data_filepath):
@@ -219,19 +284,20 @@ class Command(BaseCommand):
             self.stderr.write(f'Error: Invalid JSON in {data_filepath}: {ex}')
             return 1
 
+        known_keys = {*serializer_class.Meta.fields, '_comment'}
         for item in data:
             lookup_params = None
             try:
                 if lookup_deriver is not None:
                     # The lookup key is not stored in the JSON; compute it. A
-                    # malformed record (e.g. missing csl_data or its year) can't
-                    # be keyed — surface a clear message, not a bare KeyError.
+                    # malformed record (e.g. missing csl_data, or a missing
+                    # label or parent) can't be keyed — surface a clear
+                    # message, not a bare KeyError.
                     try:
                         lookup_params = lookup_deriver(item)
                     except (KeyError, IndexError, TypeError) as exc:
                         raise ValueError(
-                            'could not derive the lookup key from the record '
-                            f'(malformed csl_data?): {exc!r}'
+                            f'could not derive the lookup id from the record: {exc!r}'
                         ) from exc
                     have_lookup = True
                 else:
@@ -239,6 +305,13 @@ class Command(BaseCommand):
                         field: item.get(field) for field in lookup_field
                     }
                     have_lookup = all(field in item for field in lookup_field)
+                if reject_unknown_keys:
+                    unknown = sorted(set(item) - known_keys)
+                    if unknown:
+                        raise ValueError(
+                            f'unknown key(s) {", ".join(map(repr, unknown))}: not '
+                            f'{model_name} fields (renamed or moved to another table?)'
+                        )
                 instance = None
 
                 if have_lookup:
@@ -253,7 +326,11 @@ class Command(BaseCommand):
                     serializer = serializer_class(data=item)
 
                 serializer.is_valid(raise_exception=True)
-                serializer.save()
+                # A savepoint per record: a database error (e.g. a case-only
+                # label clash, which DRF doesn't validate for the Lower(...)
+                # constraints) fails this record only, and the rest continue.
+                with transaction.atomic():
+                    serializer.save()
 
                 if instance:
                     updated_count += 1

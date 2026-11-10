@@ -9,6 +9,32 @@ _DEFAULT_DB = os.path.join(
 )
 _DB_PATH = os.environ.get('DB_PATH', _DEFAULT_DB)
 
+# Creates the ned_app_observation_flat TEMP view the observation queries read.
+_FLAT_VIEW_SQL = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'sql', 'observation_flat.sql'
+)
+
+
+def _connect() -> sqlite3.Connection:
+    """Open the database with the flat observation view created on it.
+
+    Reads _DB_PATH at call time, since tests and the AC19 capture patch it.
+    The view is TEMP, so it lives only on this connection and the database
+    file never stores it. Not cached: st.cache_data caches the DataFrames.
+    """
+    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    try:
+        with open(_FLAT_VIEW_SQL, encoding='utf-8') as f:
+            conn.execute(f.read())
+        # SQLite checks a view's columns only when it is read, so probe it
+        # here: a database built before the cutover fails at connect.
+        conn.execute('SELECT * FROM ned_app_observation_flat LIMIT 0')
+    except Exception:
+        conn.close()
+        raise
+    return conn
+
+
 _COMPONENTS_QUERY = """
 SELECT
     c.id                                    AS "ID",
@@ -17,10 +43,10 @@ SELECT
     c.element                               AS "Element",
     c.subelement                            AS "Subelement",
     c.name                                  AS "Name",
-    COUNT(DISTINCT e.id)                    AS "# Tests",
+    COUNT(DISTINCT e.observation_id)        AS "# Tests",
     COUNT(DISTINCT b.fragility_model_id)    AS "# Fragility Models"
 FROM ned_app_component c
-LEFT JOIN ned_app_experiment e
+LEFT JOIN ned_app_observation_flat e
        ON e.component_id = c.component_id
 LEFT JOIN ned_app_componentfragilitymodelbridge b
        ON b.component_id = c.component_id
@@ -54,7 +80,7 @@ def _shape_components_df(df: pd.DataFrame) -> pd.DataFrame:
 
 @st.cache_data
 def get_components() -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         df = pd.read_sql(_COMPONENTS_QUERY, conn)
     finally:
@@ -112,7 +138,7 @@ def resolve_group_filter(option: str) -> tuple[str | None, str | None]:
 
 @st.cache_data
 def get_component_detail(component_id: str) -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             'SELECT id, name, component_id, major_group, "group", element, subelement '
@@ -126,7 +152,7 @@ def get_component_detail(component_id: str) -> pd.DataFrame:
 
 @st.cache_data
 def get_component_fragility_models(component_id: str) -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
@@ -137,11 +163,11 @@ def get_component_fragility_models(component_id: str) -> pd.DataFrame:
                 fm.material             AS "Material",
                 fm.size_class           AS "Size Class",
                 fm.comp_description     AS "Component Description",
-                COUNT(DISTINCT efmb.experiment_id) AS "Number of Tests"
+                COUNT(DISTINCT efmb.observation_id) AS "Number of Tests"
             FROM ned_app_componentfragilitymodelbridge b
             JOIN ned_app_fragilitymodel fm ON fm.fragility_model_id = b.fragility_model_id
             JOIN ned_app_component c ON c.component_id = b.component_id
-            LEFT JOIN ned_app_experimentfragilitymodelbridge efmb
+            LEFT JOIN ned_app_observationfragilitymodelbridge efmb
                    ON efmb.fragility_model_id = fm.fragility_model_id
             WHERE c.id = ?
             GROUP BY fm.fragility_model_id, c.name, fm.comp_detail, fm.material,
@@ -161,7 +187,7 @@ def get_component_fragility_models_export(component_id: str) -> pd.DataFrame:
     on the Fragility Model view page — one row per fragility curve (damage
     state), with model attributes repeated. Includes the reference columns
     needed to build the citation ('author', 'year', 'title', 'csl_data')."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
@@ -209,7 +235,7 @@ def get_component_for_fragility_model(fragility_model_id: str) -> str | None:
     many-to-many component-fragility-model bridge. A model can be linked to
     more than one component; this returns the first (by component id), which
     is sufficient for backfilling a missing 'component' deep-link param."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         df = pd.read_sql(
             """
@@ -232,14 +258,14 @@ def get_component_for_fragility_model(fragility_model_id: str) -> str | None:
 def get_component_for_experiment(experiment_id: str) -> str | None:
     """The id of the component an experiment belongs to, for backfilling a
     missing 'component' deep-link param."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         df = pd.read_sql(
             """
             SELECT c.id
-            FROM ned_app_experiment e
+            FROM ned_app_observation_flat e
             JOIN ned_app_component c ON c.component_id = e.component_id
-            WHERE e.id = ?
+            WHERE e.observation_id = ?
             """,
             conn,
             params=(experiment_id,),
@@ -253,7 +279,7 @@ def get_component_for_experiment(experiment_id: str) -> str | None:
 def get_fragility_models() -> pd.DataFrame:
     """All fragility models paired with the (human-readable) component id they
     belong to, so the list can be filtered by component/taxonomy/search."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
@@ -275,7 +301,7 @@ def get_fragility_models() -> pd.DataFrame:
 
 @st.cache_data
 def get_reference(reference_id: str) -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             'SELECT reference_id, title, author, year, study_type, comp_type, csl_data '
@@ -289,7 +315,7 @@ def get_reference(reference_id: str) -> pd.DataFrame:
 
 @st.cache_data
 def get_fragility_model_detail(fragility_model_id: str) -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             'SELECT fragility_model_id, reference_id, p58_fragility, '
@@ -305,7 +331,7 @@ def get_fragility_model_detail(fragility_model_id: str) -> pd.DataFrame:
 
 @st.cache_data
 def get_fragility_curves(fragility_model_id: str) -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
@@ -333,12 +359,12 @@ def get_fragility_model_experiments(fragility_model_id: str) -> pd.DataFrame:
     """Experiments underlying a fragility model, via the experiment–fragility
     model bridge, with the same summary fields as the component experiments
     table."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
             SELECT
-                e.id                    AS "experiment_id",
+                e.observation_id        AS "experiment_id",
                 r.author || ', ' || r.year AS "Source",
                 COALESCE(
                     json_extract(r.csl_data, '$.DOI'),
@@ -358,12 +384,12 @@ def get_fragility_model_experiments(fragility_model_id: str) -> pd.DataFrame:
                 e.ds_class              AS "DS Class",
                 e.reference_id          AS "Reference ID",
                 c.subelement            AS "NISTIR Subelement"
-            FROM ned_app_experimentfragilitymodelbridge b
-            JOIN ned_app_experiment e ON e.id = b.experiment_id
+            FROM ned_app_observationfragilitymodelbridge b
+            JOIN ned_app_observation_flat e ON e.observation_id = b.observation_id
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE b.fragility_model_id = ?
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(fragility_model_id,),
@@ -377,12 +403,12 @@ def get_fragility_model_experiments_export(fragility_model_id: str) -> pd.DataFr
     """All experiments underlying a fragility model with the full set of
     fields shown on the Experiment view page, plus the reference columns
     needed to build the citation ('author', 'year', 'title', 'csl_data')."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
             SELECT
-                e.id                        AS "Experiment ID",
+                e.observation_id            AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
                 e.contributor               AS "Contributor",
@@ -413,11 +439,11 @@ def get_fragility_model_experiments_export(fragility_model_id: str) -> pd.DataFr
                 r.title                     AS "title",
                 r.csl_data                  AS "csl_data",
                 r.study_type                AS "Study Type"
-            FROM ned_app_experimentfragilitymodelbridge b
-            JOIN ned_app_experiment e ON e.id = b.experiment_id
+            FROM ned_app_observationfragilitymodelbridge b
+            JOIN ned_app_observation_flat e ON e.observation_id = b.observation_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE b.fragility_model_id = ?
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(fragility_model_id,),
@@ -435,12 +461,12 @@ def get_fragility_model_available_experiments(
     available-but-unused counterpart to ``get_fragility_model_experiments()``,
     for comparing a fragility's basis against experimentation that could have
     informed it but didn't. Same summary fields as that function."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
             SELECT
-                e.id                    AS "experiment_id",
+                e.observation_id        AS "experiment_id",
                 r.author || ', ' || r.year AS "Source",
                 COALESCE(
                     json_extract(r.csl_data, '$.DOI'),
@@ -460,7 +486,7 @@ def get_fragility_model_available_experiments(
                 e.ds_class              AS "DS Class",
                 e.reference_id          AS "Reference ID",
                 c.subelement            AS "NISTIR Subelement"
-            FROM ned_app_experiment e
+            FROM ned_app_observation_flat e
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE e.component_id IN (
@@ -468,12 +494,12 @@ def get_fragility_model_available_experiments(
                 FROM ned_app_componentfragilitymodelbridge b
                 WHERE b.fragility_model_id = ?
             )
-            AND e.id NOT IN (
-                SELECT efmb.experiment_id
-                FROM ned_app_experimentfragilitymodelbridge efmb
+            AND e.observation_id NOT IN (
+                SELECT efmb.observation_id
+                FROM ned_app_observationfragilitymodelbridge efmb
                 WHERE efmb.fragility_model_id = ?
             )
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(fragility_model_id, fragility_model_id),
@@ -491,12 +517,12 @@ def get_fragility_model_available_experiments_export(
     the full set of fields shown on the Experiment view page, plus the
     reference columns needed to build the citation ('author', 'year',
     'title', 'csl_data')."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
             SELECT
-                e.id                        AS "Experiment ID",
+                e.observation_id            AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
                 e.contributor               AS "Contributor",
@@ -527,19 +553,19 @@ def get_fragility_model_available_experiments_export(
                 r.title                     AS "title",
                 r.csl_data                  AS "csl_data",
                 r.study_type                AS "Study Type"
-            FROM ned_app_experiment e
+            FROM ned_app_observation_flat e
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE e.component_id IN (
                 SELECT b.component_id
                 FROM ned_app_componentfragilitymodelbridge b
                 WHERE b.fragility_model_id = ?
             )
-            AND e.id NOT IN (
-                SELECT efmb.experiment_id
-                FROM ned_app_experimentfragilitymodelbridge efmb
+            AND e.observation_id NOT IN (
+                SELECT efmb.observation_id
+                FROM ned_app_observationfragilitymodelbridge efmb
                 WHERE efmb.fragility_model_id = ?
             )
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(fragility_model_id, fragility_model_id),
@@ -557,7 +583,7 @@ def get_experiment_fragility_models(experiment_id: str) -> pd.DataFrame:
     fragility-models table so the row rendering can be reused. A model can be
     linked to more than one component (see ``get_component_for_fragility_model``),
     so "Component Type" picks the first, by component id."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
@@ -576,13 +602,13 @@ def get_experiment_fragility_models(experiment_id: str) -> pd.DataFrame:
                 fm.size_class           AS "Size Class",
                 fm.comp_description     AS "Component Description",
                 (
-                    SELECT COUNT(DISTINCT efmb.experiment_id)
-                    FROM ned_app_experimentfragilitymodelbridge efmb
+                    SELECT COUNT(DISTINCT efmb.observation_id)
+                    FROM ned_app_observationfragilitymodelbridge efmb
                     WHERE efmb.fragility_model_id = fm.fragility_model_id
                 )                       AS "Number of Tests"
-            FROM ned_app_experimentfragilitymodelbridge b
+            FROM ned_app_observationfragilitymodelbridge b
             JOIN ned_app_fragilitymodel fm ON fm.fragility_model_id = b.fragility_model_id
-            WHERE b.experiment_id = ?
+            WHERE b.observation_id = ?
             ORDER BY fm.fragility_model_id
             """,
             conn,
@@ -594,12 +620,12 @@ def get_experiment_fragility_models(experiment_id: str) -> pd.DataFrame:
 
 @st.cache_data
 def get_component_experiments(component_id: str) -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
             SELECT
-                e.id                    AS "experiment_id",
+                e.observation_id        AS "experiment_id",
                 r.author || ', ' || r.year AS "Source",
                 COALESCE(
                     json_extract(r.csl_data, '$.DOI'),
@@ -619,11 +645,11 @@ def get_component_experiments(component_id: str) -> pd.DataFrame:
                 e.ds_class              AS "DS Class",
                 e.reference_id          AS "Reference ID",
                 c.subelement            AS "NISTIR Subelement"
-            FROM ned_app_experiment e
+            FROM ned_app_observation_flat e
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE c.id = ?
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(component_id,),
@@ -637,12 +663,12 @@ def get_component_experiments_export(component_id: str) -> pd.DataFrame:
     """All experiments for a component with the full set of fields shown on
     the Experiment view page, plus the reference columns needed to build the
     citation ('author', 'year', 'title', 'csl_data')."""
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
             SELECT
-                e.id                        AS "Experiment ID",
+                e.observation_id            AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
                 e.contributor               AS "Contributor",
@@ -673,11 +699,11 @@ def get_component_experiments_export(component_id: str) -> pd.DataFrame:
                 r.title                     AS "title",
                 r.csl_data                  AS "csl_data",
                 r.study_type                AS "Study Type"
-            FROM ned_app_experiment e
+            FROM ned_app_observation_flat e
             JOIN ned_app_component c ON c.component_id = e.component_id
             JOIN ned_app_reference r ON r.reference_id = e.reference_id
             WHERE c.id = ?
-            ORDER BY e.reference_id, e.specimen, e.ds_rank
+            ORDER BY e.reference_id, e.specimen, e.ds_rank, e.observation_id
             """,
             conn,
             params=(component_id,),
@@ -688,12 +714,12 @@ def get_component_experiments_export(component_id: str) -> pd.DataFrame:
 
 @st.cache_data
 def get_experiment_detail(experiment_id: str) -> pd.DataFrame:
-    conn = sqlite3.connect(_DB_PATH, check_same_thread=False)
+    conn = _connect()
     try:
         return pd.read_sql(
             """
             SELECT
-                e.id                        AS "Experiment ID",
+                e.observation_id            AS "Experiment ID",
                 e.specimen                  AS "Specimen",
                 e.specimen_inspection_sequence AS "Inspection Sequence",
                 e.contributor               AS "Contributor",
@@ -720,8 +746,8 @@ def get_experiment_detail(experiment_id: str) -> pd.DataFrame:
                 e.prior_damage_repaired     AS "Prior Damage Repaired",
                 e.notes                     AS "Notes",
                 e.reference_id              AS "reference_id"
-            FROM ned_app_experiment e
-            WHERE e.id = ?
+            FROM ned_app_observation_flat e
+            WHERE e.observation_id = ?
             """,
             conn,
             params=(experiment_id,),

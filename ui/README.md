@@ -121,7 +121,7 @@ All data lives in a single SQLite file. The app is strictly read-only.
 
 **ned_app_reference** — Research publications. Stores author, title, year, study type, and a `csl_data` column containing full CSL-JSON citation metadata.
 
-**ned_app_experiment** — Individual test observations. Each record ties to one component and one reference, and captures the specimen, test type, loading protocol, engineering demand parameter (EDP metric, unit, value), damage state rank/class, and a free-text damage description.
+**ned_app_observation** — Individual test observations. Each record belongs to one test (`test_id`, with its `label`) and captures the engineering demand parameter (EDP metric, unit, value), damage state class, a free-text damage description, and the `legacy_ds_rank`, `legacy_prior_damage` and `legacy_prior_damage_repaired` columns. The component, reference, specimen, test type and loading protocol now live on `ned_app_specimen` and `ned_app_test`; the app reads the flat row through the TEMP view `ned_app_observation_flat` (`ui/sql/observation_flat.sql`).
 
 **ned_app_fragilitymodel** — Fragility model definitions. Links to a component and reference, with fields for P-58 fragility ID, material, size class, and component description.
 
@@ -130,7 +130,7 @@ All data lives in a single SQLite file. The app is strictly read-only.
 ### Bridge tables
 
 - **ned_app_componentfragilitymodelbridge** — Many-to-many link between components and fragility models.
-- **ned_app_experimentfragilitymodelbridge** — Many-to-many link between experiments and fragility models.
+- **ned_app_observationfragilitymodelbridge** — Many-to-many link between experiments and fragility models.
 
 ### Taxonomy reference
 

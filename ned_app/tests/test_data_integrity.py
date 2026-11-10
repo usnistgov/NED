@@ -4,34 +4,132 @@ import tempfile
 from typing import ClassVar
 from unittest.mock import patch
 
+from django.apps import apps
 from django.core.management import call_command
-from django.test import SimpleTestCase, TransactionTestCase, tag
+from django.db import connection
+from django.test import SimpleTestCase, TestCase, TransactionTestCase, tag
 
+from ned_app.json_guards import (
+    DERIVE_ID,
+    check_data_dir,
+    derived_id_problems,
+    label_problems,
+    orphan_problems,
+    parent_problems,
+)
 from ned_app.models import (
     Component,
-    Experiment,
-    ExperimentFragilityModelBridge,
+    ComponentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
+    Program,
     Reference,
-    derive_reference_id,
+    Specimen,
+    Test,
 )
 
 
 @tag('integrity')
 class DataIntegrityTests(TransactionTestCase):
     fixtures: ClassVar[list[str]] = ['initial_data.json']
+    # The round trip keys rows by pk, and flush resets the sequences before
+    # ingest recreates the rows. Start from reset sequences too, so the rows
+    # seeded here get the same pks as their re-ingested copies.
+    reset_sequences = True
 
     def setUp(self):
         self.temp_dir_path = tempfile.mkdtemp()
 
+    # Every model in the app, in ingest order. test_db_round_trip asserts this
+    # list is complete, so a new model can't be left out of the round trip.
+    ROUND_TRIP_MODELS: ClassVar[list] = [
+        Reference,
+        Component,
+        Facility,
+        Program,
+        Specimen,
+        Test,
+        FragilityModel,
+        ComponentFragilityModelBridge,
+        Observation,
+        ObservationFragilityModelBridge,
+        FragilityCurve,
+    ]
+
+    def _seed_hierarchy(self):
+        """
+        Seed synthetic Facility/Program/Specimen/Test rows and link an observation.
+
+        The converted data never has a labelled program or a specimen with its
+        own reference, so these rows cover those cases. They use references
+        with no program yet, so the unlabelled program doesn't clash.
+        """
+        reference, other_reference = Reference.objects.filter(
+            program__isnull=True
+        ).order_by('pk')[:2]
+        component = Component.objects.order_by('pk').first()
+        facility = Facility.objects.create(
+            label='Synthetic_Lab', name='Synthetic Lab', location='Nowhere'
+        )
+        unlabelled_program = Program.objects.create(reference=reference)
+        labelled_program = Program.objects.create(
+            label='Synthetic_Program', name='A program', reference=reference
+        )
+        specimen = Specimen.objects.create(
+            program=unlabelled_program,
+            facility=facility,
+            label='S1',
+            component=component,
+            comp_description='Synthetic specimen',
+        )
+        Specimen.objects.create(
+            program=labelled_program,
+            facility=facility,
+            reference=other_reference,
+            label='S2',
+            component=component,
+            comp_description='Synthetic specimen with its own reference',
+        )
+        ordered_test = Test.objects.create(
+            specimen=specimen,
+            label='T1',
+            test_order=1,
+            test_type='Dynamic, uniaxial',
+        )
+        Test.objects.create(
+            specimen=specimen,
+            label='T2',
+            test_type='Dynamic, uniaxial',
+        )
+        # Relabelling re-derives the observation_id, so pick an observation
+        # with no bridge rows; otherwise they would be left dangling.
+        observation = (
+            Observation.objects
+            .exclude(observationfragilitymodelbridge__isnull=False)
+            .order_by('pk')
+            .first()
+        )
+        observation.test = ordered_test
+        observation.label = '01'
+        observation.damage_location = 'Base'
+        observation.save()
+
     def test_db_round_trip(self):
-        initial_references = list(Reference.objects.all())
-        initial_components = list(Component.objects.all())
-        initial_fragility_models = list(FragilityModel.objects.all())
-        initial_experiments = list(Experiment.objects.all())
-        initial_exp_frag_bridges = list(ExperimentFragilityModelBridge.objects.all())
-        initial_fragility_curves = list(FragilityCurve.objects.all())
+        self.assertCountEqual(
+            self.ROUND_TRIP_MODELS, apps.get_app_config('ned_app').get_models()
+        )
+
+        self._seed_hierarchy()
+
+        initial_rows = {}
+        for model in self.ROUND_TRIP_MODELS:
+            initial_rows[model] = list(model.objects.all())
+            self.assertTrue(
+                initial_rows[model], f'{model.__name__} has no rows to round-trip'
+            )
 
         call_command('export_data', output_dir=self.temp_dir_path)
 
@@ -46,96 +144,33 @@ class DataIntegrityTests(TransactionTestCase):
         ):
             call_command('ingest')
 
-        final_references = list(Reference.objects.all())
-        final_components = list(Component.objects.all())
-        final_fragility_models = list(FragilityModel.objects.all())
-        final_experiments = list(Experiment.objects.all())
-        final_exp_frag_bridges = list(ExperimentFragilityModelBridge.objects.all())
-        final_fragility_curves = list(FragilityCurve.objects.all())
+        def field_values(row):
+            return {k: v for k, v in row.__dict__.items() if k != '_state'}
 
-        self.assertEqual(len(initial_references), len(final_references))
-        self.assertEqual(len(initial_components), len(final_components))
-        self.assertEqual(len(initial_fragility_models), len(final_fragility_models))
-        self.assertEqual(len(initial_experiments), len(final_experiments))
-        self.assertEqual(len(initial_exp_frag_bridges), len(final_exp_frag_bridges))
-        self.assertEqual(len(initial_fragility_curves), len(final_fragility_curves))
+        # Keyed by .pk, which works for string and integer keys alike.
+        for model in self.ROUND_TRIP_MODELS:
+            final_rows = {row.pk: row for row in model.objects.all()}
+            self.assertEqual(
+                len(initial_rows[model]), len(final_rows), model.__name__
+            )
+            for initial_row in initial_rows[model]:
+                self.assertEqual(
+                    field_values(initial_row),
+                    field_values(final_rows[initial_row.pk]),
+                )
 
-        final_references_dict = {ref.id: ref for ref in final_references}
-        final_components_dict = {comp.id: comp for comp in final_components}
-        final_fragility_models_dict = {fm.id: fm for fm in final_fragility_models}
-        final_experiments_dict = {exp.id: exp for exp in final_experiments}
-        final_exp_frag_bridges_dict = {
-            bridge.id: bridge for bridge in final_exp_frag_bridges
-        }
-        final_fragility_curves_dict = {
-            curve.id: curve for curve in final_fragility_curves
-        }
-
-        for initial_ref in initial_references:
-            final_ref = final_references_dict[initial_ref.id]
-            initial_dict = {
-                k: v for k, v in initial_ref.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_ref.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_comp in initial_components:
-            final_comp = final_components_dict[initial_comp.id]
-            initial_dict = {
-                k: v for k, v in initial_comp.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_comp.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_fm in initial_fragility_models:
-            final_fm = final_fragility_models_dict[initial_fm.id]
-            initial_dict = {
-                k: v for k, v in initial_fm.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_fm.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_exp in initial_experiments:
-            final_exp = final_experiments_dict[initial_exp.id]
-            initial_dict = {
-                k: v for k, v in initial_exp.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_exp.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_exp_frag_bridge in initial_exp_frag_bridges:
-            final_exp_frag_bridge = final_exp_frag_bridges_dict[
-                initial_exp_frag_bridge.id
-            ]
-            initial_dict = {
-                k: v
-                for k, v in initial_exp_frag_bridge.__dict__.items()
-                if k != '_state'
-            }
-            final_dict = {
-                k: v
-                for k, v in final_exp_frag_bridge.__dict__.items()
-                if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
-
-        for initial_curve in initial_fragility_curves:
-            final_curve = final_fragility_curves_dict[initial_curve.id]
-            initial_dict = {
-                k: v for k, v in initial_curve.__dict__.items() if k != '_state'
-            }
-            final_dict = {
-                k: v for k, v in final_curve.__dict__.items() if k != '_state'
-            }
-            self.assertEqual(initial_dict, final_dict)
+        # A second ingest must find every row by its lookup (derived ids
+        # included) and create nothing.
+        counts = {model: model.objects.count() for model in self.ROUND_TRIP_MODELS}
+        with patch(
+            'ned_app.management.commands.ingest.build_json_data_file_path',
+            side_effect=mock_build_json_data_file_path,
+        ):
+            call_command('ingest')
+        self.assertEqual(
+            counts,
+            {model: model.objects.count() for model in self.ROUND_TRIP_MODELS},
+        )
 
     def test_json_to_db_to_json_round_trip_is_lossless(self):
         temp_export_dir = tempfile.mkdtemp()
@@ -156,19 +191,23 @@ class DataIntegrityTests(TransactionTestCase):
                     x['reference'],
                     x['model_id'],
                 ),
-                'experiment.json': lambda x: x['id'],
+                'observation.json': lambda x: (x['test'], x['label'].lower()),
                 'component_fragility_model_bridge.json': lambda x: (
                     x['component'],
                     x['fragility_model'],
                 ),
-                'experiment_fragility_model_bridge.json': lambda x: (
-                    x['experiment'],
+                'observation_fragility_model_bridge.json': lambda x: (
+                    x['observation'],
                     x['fragility_model'],
                 ),
                 'fragility_curve.json': lambda x: (
                     x['fragility_model'],
                     x['ds_rank'],
                 ),
+                'facility.json': lambda x: x['label'].lower(),
+                'program.json': lambda x: (x['reference'], x['label']),
+                'specimen.json': lambda x: (x['program'], x['label'].lower()),
+                'test.json': lambda x: (x['specimen'], x['label'].lower()),
             }
 
             for json_file, sort_func in json_files.items():
@@ -200,8 +239,8 @@ class CanonicalReferenceDataTests(SimpleTestCase):
     """
     Guards on the canonical reference.json source data (no DB needed).
 
-    reference_id is derived at ingest, not stored. These checks make the two
-    failure modes of that scheme legible at test time.
+    reference_id is derived at ingest, not stored; the derived ids themselves
+    are checked by CanonicalHierarchyDataTests.
     """
 
     REFERENCE_JSON = 'resources/data/reference.json'
@@ -227,36 +266,213 @@ class CanonicalReferenceDataTests(SimpleTestCase):
             + '\n'.join(offenders),
         )
 
-    def test_derived_reference_ids_are_derivable_and_unique(self):
-        # The importer appends references without deriving/deduping, so this is
-        # the first place a bad id shows up. Two references deriving the same id
-        # would silently merge on ingest; a record whose csl_data can't be keyed
-        # would fail ingest cryptically. Catch both here with a clean message,
-        # not a raw KeyError.
-        seen = {}
-        problems = []
-        for ref in self._load_references():
-            title = ref.get('csl_data', {}).get('title', '<no title>')
-            try:
-                derived = derive_reference_id(
-                    ref.get('reference_label', '') or '', ref['csl_data']
-                )
-            except (KeyError, IndexError, TypeError) as exc:
-                problems.append(
-                    f'{title!r}: reference_id cannot be derived ({exc!r})'
-                )
-                continue
-            if derived in seen:
-                problems.append(f'{derived}: {seen[derived]!r} vs {title!r}')
-            else:
-                seen[derived] = title
+
+class CanonicalHierarchyDataTests(SimpleTestCase):
+    """
+    Runs the JSON guards (ned_app.json_guards) on the canonical data.
+
+    Derived ids are rebuilt at ingest and every child file stores its parent's
+    derived id, so the guards catch an id that can't be built, a case-only
+    duplicate and a dangling parent before ingest does. Two references deriving
+    the same id would otherwise merge silently on ingest. The guards themselves
+    are unit-tested in HierarchyGuardTests and OrphanGuardTests.
+    """
+
+    def test_canonical_data_passes_the_json_guards(self):
+        problems = check_data_dir('resources/data')
         self.assertEqual(
             problems,
             [],
-            'reference.json has references whose derived id is missing or '
-            'duplicated (add a reference_label / fix csl_data):\n'
-            + '\n'.join(problems),
+            'resources/data/ fails the JSON guards (fix the data, or add a '
+            'reference_label for a duplicate reference id):\n' + '\n'.join(problems),
         )
+
+    def test_canonical_data_has_no_orphans(self):
+        # Every facility and program has a specimen, every specimen a test.
+        problems = orphan_problems('resources/data')
+        self.assertEqual(
+            problems,
+            [],
+            'resources/data/ holds rows with no children (add the children, or '
+            'remove the unused row):\n' + '\n'.join(problems),
+        )
+
+
+class HierarchyGuardTests(SimpleTestCase):
+    """Unit tests for the hierarchy guard helpers, on small bad inputs."""
+
+    def test_clean_records_pass(self):
+        programs = [
+            {'label': '', 'reference': 'Smith-2020'},
+            {'label': 'P1', 'reference': 'Smith-2020'},
+        ]
+        self.assertEqual(derived_id_problems(programs, DERIVE_ID['program']), [])
+        self.assertEqual(label_problems(programs, allow_blank=True), [])
+        self.assertEqual(parent_problems(programs, 'reference', {'Smith-2020'}), [])
+
+    def test_case_only_duplicate_id_is_reported(self):
+        specimens = [
+            {'program': 'P1', 'label': 'S6'},
+            {'program': 'P1', 'label': 's6'},
+        ]
+        problems = derived_id_problems(specimens, DERIVE_ID['specimen'])
+        self.assertEqual(len(problems), 1)
+        self.assertIn('P1|s6', problems[0])
+
+    def test_underivable_id_is_reported(self):
+        tests = [{'label': 'T1'}]
+        problems = derived_id_problems(tests, DERIVE_ID['test'])
+        self.assertEqual(len(problems), 1)
+        self.assertIn('cannot be derived', problems[0])
+
+    def test_bad_label_is_reported(self):
+        tests = [{'specimen': 'P1|S1', 'label': 'T 1'}]
+        self.assertEqual(len(label_problems(tests)), 1)
+
+    def test_blank_label_is_reported_unless_allowed(self):
+        records = [{'label': ''}]
+        self.assertEqual(len(label_problems(records)), 1)
+        self.assertEqual(label_problems(records, allow_blank=True), [])
+
+    def test_wrong_case_parent_is_reported(self):
+        tests = [{'specimen': 'P1|s1', 'label': 'T1'}]
+        problems = parent_problems(tests, 'specimen', {'P1|S1'})
+        self.assertEqual(len(problems), 1)
+        self.assertIn("'P1|s1'", problems[0])
+
+    def test_unresolved_observation_test_is_reported(self):
+        observations = [
+            {'test': 'P1|S1|T1', 'label': '01'},
+            {'test': 'P1|S1|T9', 'label': '01'},
+        ]
+        problems = parent_problems(observations, 'test', {'P1|S1|T1'})
+        self.assertEqual(problems, ["record 1: test 'P1|S1|T9' does not resolve"])
+
+    def test_case_only_duplicate_observation_id_is_reported(self):
+        observations = [
+            {'test': 'P1|S1|T1', 'label': 'a01'},
+            {'test': 'P1|S1|T1', 'label': 'A01'},
+        ]
+        problems = derived_id_problems(observations, DERIVE_ID['observation'])
+        self.assertEqual(len(problems), 1)
+        self.assertIn('P1|S1|T1|A01', problems[0])
+
+    def test_null_parent_is_reported_unless_nullable(self):
+        specimens = [{'program': 'P1', 'label': 'S1', 'reference': None}]
+        self.assertEqual(len(parent_problems(specimens, 'reference', set())), 1)
+        self.assertEqual(
+            parent_problems(specimens, 'reference', set(), nullable=True), []
+        )
+
+    def test_check_data_dir_names_the_file(self):
+        files = {
+            'reference.json': [
+                {
+                    'csl_data': {
+                        'author': [{'family': 'Smith'}],
+                        'issued': {'date-parts': [[2020]]},
+                    }
+                }
+            ],
+            'component.json': [{'component_id': 'A.10.1.1'}],
+            'facility.json': [{'label': 'Lab'}],
+            'program.json': [{'label': '', 'reference': 'Smith-2020'}],
+            'specimen.json': [
+                {
+                    'program': 'Smith-2020',
+                    'facility': 'Lab',
+                    'reference': None,
+                    'component': 'A.10.1.1',
+                    'label': 'S1',
+                }
+            ],
+            'test.json': [{'specimen': 'smith-2020|S1', 'label': 'T1'}],
+            'observation.json': [],
+            'observation_fragility_model_bridge.json': [],
+        }
+        with tempfile.TemporaryDirectory() as data_dir:
+            for name, records in files.items():
+                with open(os.path.join(data_dir, name), 'w') as f:
+                    json.dump(records, f)
+            self.assertEqual(
+                check_data_dir(data_dir),
+                ["test.json: record 0: specimen 'smith-2020|S1' does not resolve"],
+            )
+
+    def test_check_data_dir_treats_a_missing_file_as_empty(self):
+        with tempfile.TemporaryDirectory() as data_dir:
+            self.assertEqual(check_data_dir(data_dir), [])
+
+
+class OrphanGuardTests(SimpleTestCase):
+    """Unit tests for orphan_problems, on small data directories."""
+
+    def _orphans(self, files):
+        with tempfile.TemporaryDirectory() as data_dir:
+            for name, records in files.items():
+                with open(os.path.join(data_dir, name), 'w') as f:
+                    json.dump(records, f)
+            return orphan_problems(data_dir)
+
+    def _files(self):
+        return {
+            'facility.json': [{'label': 'Lab'}],
+            'program.json': [{'label': '', 'reference': 'Smith-2020'}],
+            'specimen.json': [
+                {'program': 'Smith-2020', 'facility': 'Lab', 'label': 'S1'}
+            ],
+            'test.json': [{'specimen': 'Smith-2020|S1', 'label': 'T1'}],
+        }
+
+    def test_clean_data_passes(self):
+        self.assertEqual(self._orphans(self._files()), [])
+
+    def test_unused_rows_are_reported_at_each_level(self):
+        files = self._files()
+        files['facility.json'].append({'label': 'Empty_Lab'})
+        files['program.json'].append({'label': 'P2', 'reference': 'Smith-2020'})
+        files['specimen.json'].append({
+            'program': 'Smith-2020',
+            'facility': 'Lab',
+            'label': 'S2',
+        })
+        self.assertEqual(
+            self._orphans(files),
+            [
+                'facility.json: record 1: Empty_Lab has no specimen',
+                'program.json: record 1: P2 has no specimen',
+                'specimen.json: record 1: Smith-2020|S2 has no test',
+            ],
+        )
+
+    def test_children_must_match_exactly(self):
+        # A wrong-case child doesn't resolve, so its parent counts as unused.
+        files = self._files()
+        files['test.json'] = [{'specimen': 'smith-2020|S1', 'label': 'T1'}]
+        self.assertEqual(
+            self._orphans(files),
+            ['specimen.json: record 0: Smith-2020|S1 has no test'],
+        )
+
+    def test_reference_with_no_program_is_allowed(self):
+        # Fragility-only references have no program.
+        files = self._files()
+        files['reference.json'] = [
+            {
+                'csl_data': {
+                    'author': [{'family': 'Jones'}],
+                    'issued': {'date-parts': [[2021]]},
+                }
+            }
+        ]
+        self.assertEqual(self._orphans(files), [])
+
+    def test_missing_files_hold_no_orphans(self):
+        self.assertEqual(self._orphans({}), [])
+
+    def test_underivable_records_are_skipped(self):
+        # derived_id_problems reports them; the orphan check mustn't crash.
+        self.assertEqual(self._orphans({'facility.json': [{'name': 'X'}]}), [])
 
 
 class CanonicalJsonFormatTests(SimpleTestCase):
@@ -300,3 +516,12 @@ class CanonicalJsonFormatTests(SimpleTestCase):
             'hand:\n    python manage.py export_data --output_dir '
             'resources/data/',
         )
+
+
+class NoStoredViewTests(TestCase):
+    """A stored view would break the migrations that drop the columns it reads."""
+
+    def test_migrated_database_stores_no_view(self):
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT name FROM sqlite_master WHERE type = 'view'")
+            self.assertEqual(cursor.fetchall(), [])

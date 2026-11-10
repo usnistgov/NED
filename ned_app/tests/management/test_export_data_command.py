@@ -3,18 +3,71 @@ import os
 import tempfile
 from decimal import Decimal
 
+from django.apps import apps
 from django.core.management import call_command
 from django.test import TestCase
 
 from ned_app.models import (
     Component,
     ComponentFragilityModelBridge,
-    Experiment,
-    ExperimentFragilityModelBridge,
+    Facility,
     FragilityCurve,
     FragilityModel,
+    Observation,
+    ObservationFragilityModelBridge,
+    Program,
     Reference,
+    Specimen,
+    Test,
 )
+from ned_app.serialization.serializer import (
+    ComponentFragilityModelBridgeSerializer,
+    ComponentSerializer,
+    FacilitySerializer,
+    FragilityCurveSerializer,
+    FragilityModelSerializer,
+    ObservationFragilityModelBridgeSerializer,
+    ObservationSerializer,
+    ProgramSerializer,
+    ReferenceSerializer,
+    SpecimenSerializer,
+    TestSerializer,
+)
+
+# Every model, with the serializer ingest reads it through and the file
+# export_data writes it to. test_export_keys_match_serializer_fields asserts
+# this covers every model in the app.
+EXPORTED_MODELS = {
+    Reference: (ReferenceSerializer, 'reference.json'),
+    Component: (ComponentSerializer, 'component.json'),
+    Facility: (FacilitySerializer, 'facility.json'),
+    Program: (ProgramSerializer, 'program.json'),
+    Specimen: (SpecimenSerializer, 'specimen.json'),
+    Test: (TestSerializer, 'test.json'),
+    Observation: (ObservationSerializer, 'observation.json'),
+    FragilityModel: (FragilityModelSerializer, 'fragility_model.json'),
+    ComponentFragilityModelBridge: (
+        ComponentFragilityModelBridgeSerializer,
+        'component_fragility_model_bridge.json',
+    ),
+    ObservationFragilityModelBridge: (
+        ObservationFragilityModelBridgeSerializer,
+        'observation_fragility_model_bridge.json',
+    ),
+    FragilityCurve: (FragilityCurveSerializer, 'fragility_curve.json'),
+}
+
+# Writable serializer fields that export_data deliberately does not write.
+EXPORT_EXCEPTIONS = {
+    Reference: {
+        # Denormalized from csl_data on save(); never exported.
+        'title',
+        'author',
+        'year',
+        # Exported only when set, and the setUp Reference has none.
+        'reference_label',
+    },
+}
 
 
 class ExportDataCommandTest(TestCase):
@@ -29,10 +82,8 @@ class ExportDataCommandTest(TestCase):
         )
 
         self.reference = Reference.objects.create(
-            reference_id='test-ref-001',
             study_type='Experiment',
             comp_type='Test Component Type',
-            pdf_saved=True,
             csl_data={
                 'type': 'article-journal',
                 'title': 'Test Reference Article',
@@ -45,33 +96,52 @@ class ExportDataCommandTest(TestCase):
             },
         )
 
-        self.experiment = Experiment.objects.create(
-            id='test-exp-001',
-            reference=self.reference,
-            component=self.component,
-            specimen='Test specimen',
-            specimen_inspection_sequence='1st test',
+        self.facility = Facility.objects.create(
+            label='Test_Lab', name='Test Laboratory', location='Test City'
+        )
+
+        self.program = Program.objects.create(
+            label='Test_Program', name='Test program', reference=self.reference
+        )
+
+        self.specimen = Specimen.objects.create(
+            program=self.program,
+            facility=self.facility,
+            label='S1',
+            name='Specimen 1',
             contributor='Test contributor',
-            test_type='Dynamic, uniaxial',
+            component=self.component,
             comp_detail='Detailed connection',
             material='Steel',
             size_class='Medium',
-            loading_protocol='FEMA P-695',
-            peak_test_amplitude='2.5% drift',
-            location='University Test Lab',
             governing_design_standard='ASCE 7-16',
             design_objective='Life safety performance level',
-            comp_description='Test component description',
+            comp_description='Test specimen description',
+        )
+
+        self.test = Test.objects.create(
+            specimen=self.specimen,
+            label='T1',
+            test_order=1,
+            test_type='Dynamic, uniaxial',
+            loading_protocol='FEMA P-695',
+            peak_test_amplitude='2.5% drift',
+        )
+
+        self.experiment = Observation.objects.create(
+            test=self.test,
+            label='01',
+            damage_location='Base track',
             ds_description='Test damage state description',
-            prior_damage='No prior damage',
-            prior_damage_repaired='N/A',
+            legacy_prior_damage='No prior damage',
+            legacy_prior_damage_repaired='N/A',
             edp_metric='Story Drift Ratio',
             edp_unit='Ratio',
             edp_value=Decimal('0.01'),
             alt_edp_metric='Peak Floor Acceleration, horizontal',
             alt_edp_unit='g',
             alt_edp_value=Decimal('0.35'),
-            ds_rank=2,
+            legacy_ds_rank=2,
             ds_class='Consequential',
             notes='Test notes about the experiment.',
         )
@@ -97,8 +167,8 @@ class ExportDataCommandTest(TestCase):
             )
         )
 
-        self.bridge = ExperimentFragilityModelBridge.objects.create(
-            experiment=self.experiment, fragility_model=self.fragility_model
+        self.bridge = ObservationFragilityModelBridge.objects.create(
+            observation=self.experiment, fragility_model=self.fragility_model
         )
 
         self.fragility_curve = FragilityCurve.objects.create(
@@ -119,10 +189,14 @@ class ExportDataCommandTest(TestCase):
         expected_files = [
             'reference.json',
             'component.json',
-            'experiment.json',
+            'facility.json',
+            'program.json',
+            'specimen.json',
+            'test.json',
+            'observation.json',
             'fragility_model.json',
             'component_fragility_model_bridge.json',
-            'experiment_fragility_model_bridge.json',
+            'observation_fragility_model_bridge.json',
             'fragility_curve.json',
         ]
 
@@ -156,8 +230,6 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(ref_data['study_type'], 'Experiment')
             self.assertIn('comp_type', ref_data)
             self.assertEqual(ref_data['comp_type'], 'Test Component Type')
-            self.assertIn('pdf_saved', ref_data)
-            self.assertEqual(ref_data['pdf_saved'], True)
             self.assertIn('csl_data', ref_data)
             self.assertNotIn('id', ref_data['csl_data'])
             self.assertEqual(ref_data['csl_data']['title'], 'Test Reference Article')
@@ -192,56 +264,34 @@ class ExportDataCommandTest(TestCase):
             self.assertNotIn('element', comp_data)
             self.assertNotIn('subelement', comp_data)
 
-        with open(os.path.join(self.temp_dir, 'experiment.json'), 'r') as f:
+        with open(os.path.join(self.temp_dir, 'observation.json'), 'r') as f:
             experiment_data = json.load(f)
             self.assertEqual(len(experiment_data), 1)
             exp_data = experiment_data[0]
 
-            self.assertIn('id', exp_data)
-            self.assertEqual(exp_data['id'], 'test-exp-001')
-            self.assertIn('reference', exp_data)
-            self.assertEqual(exp_data['reference'], 'test-ref-001')
-            self.assertIn('component', exp_data)
-            self.assertEqual(exp_data['component'], 'B.20.1.1.A')
+            # observation_id is derived at ingest; neither it nor the integer
+            # pk is exported.
+            self.assertNotIn('id', exp_data)
+            self.assertNotIn('observation_id', exp_data)
+            # The moved fields are exported with Specimen, Test and Facility.
+            for moved in (
+                'reference',
+                'component',
+                'specimen',
+                'specimen_inspection_sequence',
+                'test_type',
+                'material',
+                'location',
+            ):
+                self.assertNotIn(moved, exp_data)
 
-            self.assertIn('specimen', exp_data)
-            self.assertEqual(exp_data['specimen'], 'Test specimen')
-            self.assertIn('specimen_inspection_sequence', exp_data)
-            self.assertEqual(exp_data['specimen_inspection_sequence'], '1st test')
-            self.assertIn('contributor', exp_data)
-            self.assertEqual(exp_data['contributor'], 'Test contributor')
-            self.assertIn('test_type', exp_data)
-            self.assertEqual(exp_data['test_type'], 'Dynamic, uniaxial')
-            self.assertIn('comp_detail', exp_data)
-            self.assertEqual(exp_data['comp_detail'], 'Detailed connection')
-            self.assertIn('material', exp_data)
-            self.assertEqual(exp_data['material'], 'Steel')
-            self.assertIn('size_class', exp_data)
-            self.assertEqual(exp_data['size_class'], 'Medium')
-            self.assertIn('loading_protocol', exp_data)
-            self.assertEqual(exp_data['loading_protocol'], 'FEMA P-695')
-            self.assertIn('peak_test_amplitude', exp_data)
-            self.assertEqual(exp_data['peak_test_amplitude'], '2.5% drift')
-            self.assertIn('location', exp_data)
-            self.assertEqual(exp_data['location'], 'University Test Lab')
-            self.assertIn('governing_design_standard', exp_data)
-            self.assertEqual(exp_data['governing_design_standard'], 'ASCE 7-16')
-            self.assertIn('design_objective', exp_data)
-            self.assertEqual(
-                exp_data['design_objective'], 'Life safety performance level'
-            )
-            self.assertIn('comp_description', exp_data)
-            self.assertEqual(
-                exp_data['comp_description'], 'Test component description'
-            )
             self.assertIn('ds_description', exp_data)
             self.assertEqual(
                 exp_data['ds_description'], 'Test damage state description'
             )
-            self.assertIn('prior_damage', exp_data)
-            self.assertEqual(exp_data['prior_damage'], 'No prior damage')
-            self.assertIn('prior_damage_repaired', exp_data)
-            self.assertEqual(exp_data['prior_damage_repaired'], 'N/A')
+            self.assertEqual(exp_data['legacy_prior_damage'], 'No prior damage')
+            self.assertEqual(exp_data['legacy_prior_damage_repaired'], 'N/A')
+            self.assertNotIn('prior_damage', exp_data)
             self.assertIn('edp_metric', exp_data)
             self.assertEqual(exp_data['edp_metric'], 'Story Drift Ratio')
             self.assertIn('edp_unit', exp_data)
@@ -256,12 +306,15 @@ class ExportDataCommandTest(TestCase):
             self.assertEqual(exp_data['alt_edp_unit'], 'g')
             self.assertIn('alt_edp_value', exp_data)
             self.assertEqual(float(exp_data['alt_edp_value']), 0.35)
-            self.assertIn('ds_rank', exp_data)
-            self.assertEqual(exp_data['ds_rank'], 2)
+            self.assertEqual(exp_data['legacy_ds_rank'], 2)
+            self.assertNotIn('ds_rank', exp_data)
             self.assertIn('ds_class', exp_data)
             self.assertEqual(exp_data['ds_class'], 'Consequential')
             self.assertIn('notes', exp_data)
             self.assertEqual(exp_data['notes'], 'Test notes about the experiment.')
+            self.assertEqual(exp_data['test'], 'Test_Program|S1|T1')
+            self.assertEqual(exp_data['label'], '01')
+            self.assertEqual(exp_data['damage_location'], 'Base track')
 
         with open(os.path.join(self.temp_dir, 'fragility_model.json'), 'r') as f:
             fragility_model_data = json.load(f)
@@ -269,7 +322,7 @@ class ExportDataCommandTest(TestCase):
             fm_data = fragility_model_data[0]
 
             self.assertIn('reference', fm_data)
-            self.assertEqual(fm_data['reference'], 'test-ref-001')
+            self.assertEqual(fm_data['reference'], 'Smith-2023')
             self.assertIn('model_id', fm_data)
             self.assertEqual(fm_data['model_id'], 'test-fm-001')
             self.assertNotIn('component', fm_data)
@@ -307,9 +360,7 @@ class ExportDataCommandTest(TestCase):
             self.assertIn('component', cfm_bridge)
             self.assertEqual(cfm_bridge['component'], 'B.20.1.1.A')
             self.assertIn('fragility_model', cfm_bridge)
-            self.assertEqual(
-                cfm_bridge['fragility_model'], 'test-ref-001|test-fm-001'
-            )
+            self.assertEqual(cfm_bridge['fragility_model'], 'Smith-2023|test-fm-001')
 
             self.assertEqual(
                 len(cfm_bridge.keys()),
@@ -318,22 +369,22 @@ class ExportDataCommandTest(TestCase):
             )
 
         with open(
-            os.path.join(self.temp_dir, 'experiment_fragility_model_bridge.json'),
+            os.path.join(self.temp_dir, 'observation_fragility_model_bridge.json'),
             'r',
         ) as f:
             bridge_data = json.load(f)
             self.assertEqual(len(bridge_data), 1)
             bridge = bridge_data[0]
 
-            self.assertIn('experiment', bridge)
-            self.assertEqual(bridge['experiment'], 'test-exp-001')
+            self.assertIn('observation', bridge)
+            self.assertEqual(bridge['observation'], 'Test_Program|S1|T1|01')
             self.assertIn('fragility_model', bridge)
-            self.assertEqual(bridge['fragility_model'], 'test-ref-001|test-fm-001')
+            self.assertEqual(bridge['fragility_model'], 'Smith-2023|test-fm-001')
 
             self.assertEqual(
                 len(bridge.keys()),
                 2,
-                'ExperimentFragilityModelBridge should only have 2 fields',
+                'ObservationFragilityModelBridge should only have 2 fields',
             )
 
         with open(os.path.join(self.temp_dir, 'fragility_curve.json'), 'r') as f:
@@ -342,7 +393,7 @@ class ExportDataCommandTest(TestCase):
             curve = curve_data[0]
 
             self.assertIn('fragility_model', curve)
-            self.assertEqual(curve['fragility_model'], 'test-ref-001|test-fm-001')
+            self.assertEqual(curve['fragility_model'], 'Smith-2023|test-fm-001')
             self.assertIn('basis', curve)
             self.assertEqual(curve['basis'], 'Experiment')
             self.assertIn('num_observations', curve)
@@ -367,13 +418,93 @@ class ExportDataCommandTest(TestCase):
             self.assertNotIn('edp_unit', curve)
             self.assertNotIn('reference', curve)
 
+    def test_hierarchy_exports_parents_as_stored_strings(self):
+        """Parent foreign keys are written as stored strings; own derived ids are not."""
+        call_command('export_data', output_dir=self.temp_dir)
+
+        def read(filename):
+            with open(os.path.join(self.temp_dir, filename), 'r') as f:
+                return json.load(f)
+
+        self.assertEqual(
+            read('facility.json'),
+            [
+                {
+                    'label': 'Test_Lab',
+                    'location': 'Test City',
+                    'name': 'Test Laboratory',
+                    'notes': '',
+                }
+            ],
+        )
+        [program] = read('program.json')
+        self.assertEqual(program['reference'], 'Smith-2023')
+        self.assertEqual(program['label'], 'Test_Program')
+        self.assertNotIn('program_id', program)
+
+        [specimen] = read('specimen.json')
+        self.assertEqual(specimen['program'], 'Test_Program')
+        self.assertEqual(specimen['facility'], 'Test_Lab')
+        self.assertIsNone(specimen['reference'])
+        self.assertEqual(specimen['component'], 'B.20.1.1.A')
+        self.assertEqual(specimen['contributor'], 'Test contributor')
+        self.assertEqual(specimen['comp_detail'], 'Detailed connection')
+        self.assertEqual(specimen['material'], 'Steel')
+        self.assertEqual(specimen['size_class'], 'Medium')
+        self.assertEqual(specimen['governing_design_standard'], 'ASCE 7-16')
+        self.assertEqual(
+            specimen['design_objective'], 'Life safety performance level'
+        )
+        self.assertNotIn('specimen_id', specimen)
+
+        [test] = read('test.json')
+        self.assertEqual(test['specimen'], 'Test_Program|S1')
+        self.assertEqual(test['test_order'], 1)
+        self.assertEqual(test['test_type'], 'Dynamic, uniaxial')
+        self.assertEqual(test['loading_protocol'], 'FEMA P-695')
+        self.assertEqual(test['peak_test_amplitude'], '2.5% drift')
+        self.assertNotIn('test_id', test)
+
+    def test_export_keys_match_serializer_fields(self):
+        """
+        Each exported file's keys equal its serializer's writable fields.
+
+        Guards the field-list rule: a field added to a model must be added to
+        both its serializer and its export method, or it is silently dropped
+        on the JSON round trip. Deliberate differences live in
+        EXPORT_EXCEPTIONS.
+        """
+        self.assertCountEqual(
+            EXPORTED_MODELS, apps.get_app_config('ned_app').get_models()
+        )
+
+        call_command('export_data', output_dir=self.temp_dir)
+
+        for model, (serializer_class, filename) in EXPORTED_MODELS.items():
+            with self.subTest(model=model.__name__):
+                with open(os.path.join(self.temp_dir, filename), 'r') as f:
+                    records = json.load(f)
+                self.assertTrue(records, f'{filename} exported no records')
+                writable = {
+                    name
+                    for name, field in serializer_class().fields.items()
+                    if not field.read_only
+                }
+                expected = writable - EXPORT_EXCEPTIONS.get(model, set())
+                for record in records:
+                    self.assertEqual(set(record), expected)
+
     def tearDown(self):
         """Clean up test data and temporary files."""
         FragilityCurve.objects.all().delete()
-        ExperimentFragilityModelBridge.objects.all().delete()
+        ObservationFragilityModelBridge.objects.all().delete()
         ComponentFragilityModelBridge.objects.all().delete()
         FragilityModel.objects.all().delete()
-        Experiment.objects.all().delete()
+        Observation.objects.all().delete()
+        Test.objects.all().delete()
+        Specimen.objects.all().delete()
+        Program.objects.all().delete()
+        Facility.objects.all().delete()
         Reference.objects.all().delete()
         Component.objects.all().delete()
 

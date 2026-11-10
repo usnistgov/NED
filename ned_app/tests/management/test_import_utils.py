@@ -28,10 +28,9 @@ class CoerceValueTests(SimpleTestCase):
         self.assertIsNone(import_utils.coerce_value('ds_rank', ''))
         self.assertIsNone(import_utils.coerce_value('edp_value', ''))
 
-    def test_boolean_true_false_case_insensitive(self):
-        self.assertIs(import_utils.coerce_value('pdf_saved', 'True'), True)
-        self.assertIs(import_utils.coerce_value('pdf_saved', 'false'), False)
-        self.assertIs(import_utils.coerce_value('pdf_saved', 'FALSE'), False)
+    def test_test_order_parsed_as_integer(self):
+        self.assertEqual(import_utils.coerce_value('test_order', '7'), 7)
+        self.assertIsNone(import_utils.coerce_value('test_order', ''))
 
     def test_unparseable_numeric_passes_through(self):
         # Producing valid JSON is the goal; bad types surface at ingest.
@@ -92,6 +91,12 @@ class BuildPkSetTests(SimpleTestCase):
 
     def test_skips_comment_records(self):
         records = [{'_comment': 'note'}, {'reference_id': 'a'}]
+        self.assertEqual(
+            import_utils.build_pk_set(records, ['reference_id']), {('a',)}
+        )
+
+    def test_reads_records_that_carry_a_comment(self):
+        records = [{'_comment': 'note', 'reference_id': 'a'}]
         self.assertEqual(
             import_utils.build_pk_set(records, ['reference_id']), {('a',)}
         )
@@ -211,20 +216,17 @@ class BuildCslDataTests(SimpleTestCase):
 class RowToRecordTests(SimpleTestCase):
     """Tests for import_model._row_to_record conversion."""
 
-    def test_reference_flattens_csl_and_coerces_boolean(self):
+    def test_reference_flattens_csl(self):
         row = {
             'reference_id': 'R',
             'study_type': 'Experiment',
             'comp_type': 'Walls',
-            'pdf_saved': 'True',
             'csl_type': 'article-journal',
             'csl_title': 'T',
             'csl_year': '2020',
             'csl_authors': 'Smith, John',
         }
         record = import_model._row_to_record(row, 'Reference')
-        # pdf_saved coerced to a real boolean, not the string "True"
-        self.assertIs(record['pdf_saved'], True)
         # csl_* columns are folded into nested csl_data, not left flat
         self.assertNotIn('csl_title', record)
         self.assertEqual(record['csl_data']['title'], 'T')
@@ -233,11 +235,11 @@ class RowToRecordTests(SimpleTestCase):
         self.assertNotIn('id', record['csl_data'])
 
     def test_non_reference_coerces_numerics(self):
-        row = {'id': 'exp1', 'ds_rank': '2', 'edp_value': '0.45'}
-        record = import_model._row_to_record(row, 'Experiment')
+        row = {'label': '01', 'ds_rank': '2', 'edp_value': '0.45'}
+        record = import_model._row_to_record(row, 'Observation')
         self.assertEqual(record['ds_rank'], 2)
         self.assertEqual(record['edp_value'], 0.45)
-        self.assertEqual(record['id'], 'exp1')
+        self.assertEqual(record['label'], '01')
 
 
 class ExpectedColumnsTests(SimpleTestCase):
@@ -276,12 +278,22 @@ class WriteJsonFilesTests(SimpleTestCase):
         with open(self._path(name), encoding='utf-8') as f:
             return json.load(f)
 
-    def test_writes_all_files_with_trailing_newline(self):
-        import_utils.write_json_files({'a.json': [{'x': 1}], 'b.json': [{'y': 2}]})
-        self.assertEqual(self._read('a.json'), [{'x': 1}])
-        self.assertEqual(self._read('b.json'), [{'y': 2}])
+    def test_writes_all_files_in_canonical_format(self):
+        import_utils.write_json_files({'a.json': [{'y': 2, 'x': 1}], 'b.json': []})
+        self.assertEqual(self._read('b.json'), [])
+        # As export_data writes it: sorted keys, indent 4, no trailing newline.
         with open(self._path('a.json'), encoding='utf-8') as f:
-            self.assertTrue(f.read().endswith('\n'))
+            self.assertEqual(
+                f.read(), '[\n    {\n        "x": 1,\n        "y": 2\n    }\n]'
+            )
+
+    def test_data_dir_overrides_the_default_directory(self):
+        with tempfile.TemporaryDirectory() as other:
+            import_utils.write_json_files({'a.json': [{'x': 1}]}, data_dir=other)
+            self.assertFalse(os.path.exists(self._path('a.json')))
+            self.assertEqual(
+                import_utils.load_json('a.json', data_dir=other), [{'x': 1}]
+            )
 
     def test_failure_restores_existing_files(self):
         # Seed two existing files, then fail on the second write. Both must

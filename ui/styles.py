@@ -127,11 +127,9 @@ div[data-testid="stSelectbox"] > div {
    height. Pinning the widths trades a little Description width for far fewer
    wrapped rows.
 
-   Tuned per table rather than applied to all of them: the tables further down
-   (Experiment, Fragility Model, Fragility Curve) carry much longer Type values
-   and shorter descriptions, and these same widths make those *taller*, so they
-   keep the browser's automatic sizing. Table order follows the section order in
-   assets/data_dictionary.md — 1 is Reference, 2 is Component. */
+   Only Reference and Component (tables 1 and 2, in assets/data_dictionary.md's
+   section order) get fixed widths; the rest keep automatic layout. Keep those
+   two sections first, with no table above them. */
 .st-key-data-dictionary table:nth-of-type(1),
 .st-key-data-dictionary table:nth-of-type(2) {
     table-layout: fixed;
