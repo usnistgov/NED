@@ -1,26 +1,20 @@
 [
     {
-        "label": "Buffalo_New_York",
-        "location": "Buffalo, New York",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "Buffalo_NY",
+        "label": "UB_SEESL",
         "location": "Buffalo, NY",
-        "name": "",
+        "name": "University at Buffalo Structural Engineering and Earthquake Simulation Laboratory (SEESL)",
         "notes": ""
     },
     {
-        "label": "Cal_Poly_San_Luis_Obispo",
-        "location": "Cal Poly San Luis Obispo",
-        "name": "",
+        "label": "cal_poly_SLO",
+        "location": "San Luis Obispo, CA",
+        "name": "Cal Poly San Luis Obispo",
         "notes": ""
     },
     {
-        "label": "California",
-        "location": "California",
-        "name": "",
+        "label": "UCSD",
+        "location": "San Diego, CA",
+        "name": "University of California, San Diego, Structural Laboratories",
         "notes": ""
     },
     {
@@ -30,14 +24,14 @@
         "notes": ""
     },
     {
-        "label": "E-defense_shake_table_in_Japan",
-        "location": "E-defense shake table in Japan",
-        "name": "",
+        "label": "E-Defense",
+        "location": "Miki City, Japan",
+        "name": "E-Defense",
         "notes": ""
     },
     {
-        "label": "Europe_Italy",
-        "location": "Europe, Italy",
+        "label": "Italy",
+        "location": "Italy",
         "name": "",
         "notes": ""
     },
@@ -48,74 +42,38 @@
         "notes": ""
     },
     {
-        "label": "laboratory_of_Stanford_University_s_John_A._Blume_Earthquake_Engineering_Center",
-        "location": "laboratory of Stanford University\u2019s John A. Blume Earthquake Engineering Center",
-        "name": "",
+        "label": "Stanford",
+        "location": "Stanford, CA",
+        "name": "Stanford University Blume Earthquake Engineering Center",
         "notes": ""
     },
     {
-        "label": "NEES_E-Defense_Japan",
-        "location": "NEES/E-Defense Japan",
-        "name": "",
+        "label": "UNR_CCEER",
+        "location": "Reno, NV",
+        "name": "University of Nevada Reno Center for Civil Engineering Earthquake Research",
         "notes": ""
     },
     {
-        "label": "NEES_University_of_Nevada_Reno",
-        "location": "NEES, University of Nevada, Reno",
-        "name": "",
+        "label": "U_Canterbury",
+        "location": "Christchurch, New Zealand",
+        "name": "University of Canterbury Structural Engineering Laboratory",
         "notes": ""
     },
     {
-        "label": "Nevada",
-        "location": "Nevada",
-        "name": "",
+        "label": "Oregon_State",
+        "location": "Corvallis, OR",
+        "name": "Oregon State University",
         "notes": ""
     },
     {
-        "label": "Nevada_Reno",
-        "location": "Nevada, Reno",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "New_York",
-        "location": "New York",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "New_Zealand",
-        "location": "New Zealand",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "NHERI_U_of_California_San_Diego",
-        "location": "NHERI, U of California San Diego",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "Oregon_State_Uni",
-        "location": "Oregon State Uni",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "Penn_State_Univ.",
-        "location": "Penn State Univ.",
-        "name": "",
+        "label": "Penn_State",
+        "location": "University Park, PA",
+        "name": "The Pennsylvania State University",
         "notes": ""
     },
     {
         "label": "Republic_of_Korea",
         "location": "Republic of Korea",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "San_Diego",
-        "location": "San Diego",
         "name": "",
         "notes": ""
     },
@@ -126,75 +84,21 @@
         "notes": ""
     },
     {
-        "label": "U_of_Nevada_Reno",
-        "location": "U of Nevada, Reno",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "UB_New_York",
-        "location": "UB, New York",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "UCSD_California",
-        "location": "UCSD, California",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "Univ._of_Canterbury_New_Zealand",
-        "location": "Univ. of Canterbury, New Zealand",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "University_at_Buffalo",
-        "location": "University at Buffalo",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "University_at_Buffalo_Nonstructural_Component_Simulator_UB-NCS",
-        "location": "University at Buffalo Nonstructural Component Simulator (UB-NCS)",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "University_at_Buffalo_Nonstructural_Component_Simulator_UB-NCS_.",
-        "location": "University at Buffalo Nonstructural Component Simulator (UB-NCS).",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "University_of_Canterbury_New_Zealand",
-        "location": "University of Canterbury, New Zealand",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "University_of_Naples_Italy",
-        "location": "University of Naples, Italy",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "University_of_Nevada_Reno_Network_for_Earthquake_Engineering_Simulation_site",
-        "location": "University of Nevada, Reno Network for Earthquake Engineering Simulation site",
-        "name": "",
-        "notes": ""
-    },
-    {
-        "label": "UNR-NEES_site",
-        "location": "UNR-NEES site",
-        "name": "",
+        "label": "U_Naples",
+        "location": "Naples, Italy",
+        "name": "University of Naples",
         "notes": ""
     },
     {
         "label": "US",
         "location": "US",
         "name": "",
+        "notes": ""
+    },
+    {
+        "label": "Kyoto_DPRI",
+        "location": "Uji, Japan",
+        "name": "Kyoto University Disaster Prevention Research Institute (DPRI)",
         "notes": ""
     }
 ]
