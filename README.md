@@ -15,6 +15,8 @@ This repository provides remote hosting and version control for the development 
 - [Importing Data from CSV](#importing-data-from-csv)
   - [Using the `import_model` Command](#using-the-import_model-command)
   - [Using the `import_fragility` Command](#using-the-import_fragility-command)
+  - [Using the `import_observation` Command](#using-the-import_observation-command)
+    - [Label rules](#label-rules)
   - [Templates](#templates)
   - [CSV Conventions](#csv-conventions)
   - [Examples](#examples-1)
@@ -38,13 +40,17 @@ This repository provides remote hosting and version control for the development 
 ## Database Architecture
 The goal of this project is to develop a robust and scalable database of fragility and consequence models of nonstructural building elements for seismic performance evaluation. Data is organized in a way such that each data table represents an abstract portion of the fragility model, e.g., separating observations of component performance from an experimental test from that of a fragility model and repair costs consequence models. In that way, that data is both nimble/scalable with new information and can be clearly linked back to original source data and models through explicit relational keys. The outcomes of this project will expand the applicability of performance- and recovery-based earthquake assessments, resulting in a publicly available database to support current research and building design. The figure below outlines the current portions of the database under development and future development plans.
 
+> **Note:** the figure predates the split of each experiment record into a program, specimen, test and observation, so it still shows the old flat Experiment table. The [hierarchy diagram](ui/assets/data_dictionary.md#hierarchy) in the data dictionary shows the current structure; redrawing the figure is planned follow-up work.
+
 <img width="950" height="1232" alt="ned_erd" src="https://github.com/user-attachments/assets/52debba8-324a-43c4-9f27-7906e7200c7c" />
 
 ## Repository Organization
 - **resources/data/** - Canonical JSON data files serving as the single source of truth for the database.
 - **ned_app** - Django application (python) facilitating database management (e.g., model definition, serializers, management commands).
 - **ned_proj** - Django project settings.
-- **resources/example_data/** - Template JSON files for contributors to use when adding new data.
+- **resources/example_data/** - Example JSON files showing the format of each data file, and `observation_example.csv`, an example observation import whose output is the example facility, program, specimen, test and observation files.
+- **resources/import_templates/** - CSV templates for the import commands (see [Importing Data from CSV](#importing-data-from-csv)), and a generated `README.md` listing the values already used for each component's specimen fields.
+- **resources/archive/observation_id_map.json** - Maps each observation's id from before the experiment split (`exp…`) to its `observation_id` (see [resources/archive/README.md](resources/archive/README.md)).
 - **scripts** - General project scripts that are outside the Django application management process.
 - **ui** - The Streamlit front-end (browser UI). NED is the source of truth for this code; it is published to the separate deployment repo via `scripts/export_frontend.py` (see [Front-end (UI)](#front-end-ui)).
 - **db.sqlite3** - SQLite database file (disposable build artifact, generated from JSON data via `python manage.py ingest`).
@@ -52,7 +58,7 @@ The goal of this project is to develop a robust and scalable database of fragili
 - **uv.lock** - Locked, exact versions for every dependency; `uv sync` installs from this file.
 
 ### Data Schema
-A human-readable data dictionary describing every attribute of the main tables (definitions, accepted values, and bounds) is provided in [ui/assets/data_dictionary.md](ui/assets/data_dictionary.md); it lives under `ui/` so the same document is also rendered as the *Data dictionary* page of the browser UI. The authoritative schema definition lives in the docstrings and field declarations in ned_app/models.py. The overview below provides a brief description of two of the fields found in the specimen model.
+A human-readable data dictionary describing every attribute of the main tables (definitions, accepted values, and bounds) is provided in [ui/assets/data_dictionary.md](ui/assets/data_dictionary.md); it lives under `ui/` so the same document is also rendered as the *Data dictionary* page of the browser UI. The authoritative schema definition lives in the docstrings and field declarations in ned_app/models.py. The overview below provides a brief description of two attributes: the component subcategorization, recorded on each specimen, and the DS Class, recorded on each observation.
 
 #### Component Subcategorization Hierarchy
 To categorize building components, we rely on the UNIFORMAT II element classification system (NISTIR 6389). However, this system only classifies nonstructural components at a high level, and further detail is needed to adequately separate different types of components within each category for the purpose of assessing building performance.  Therefore, we propose a new subcategorization hierarchy consisting of four nested component attributes:
@@ -211,13 +217,11 @@ python manage.py query_to_csv --model Observation --output_file exports\\data.cs
 
 The NED database includes a management command for importing new records from CSV files directly into the canonical JSON source data. This provides an alternative to manually editing JSON files, which may be preferable for contributors working primarily in spreadsheet tools.
 
-> **Important:** The import commands only convert your CSV into JSON and append it to the source files — they do **not** validate the data. After importing, you must (1) check JSON files in the `resources/data/` directory to ensure what has been appended to the source files is correct, (2) run `python manage.py ingest` to load the new records into the database, and (3) run `python manage.py test` to validate them. `ingest` reports any invalid records and exits with a non-zero status if any fail.
+> **Important:** `import_model` and `import_fragility` only convert your CSV into JSON and append it to the source files — they do **not** validate the data. `import_observation` checks identity and consistency before it writes anything, and its `--dry_run` runs the full validation (a real `ingest` of a scratch copy) without writing. After importing, you must (1) check JSON files in the `resources/data/` directory to ensure what has been appended to the source files is correct, (2) run `python manage.py ingest` to load the new records into the database, and (3) run `python manage.py test` to validate them. `ingest` reports any invalid records and exits with a non-zero status if any fail.
 
 ### Using the `import_model` Command
 
-Use `import_model` to import **Reference** or **ObservationFragilityModelBridge** records from a CSV. For fragility models, curves, and component links, use [`import_fragility`](#using-the-import_fragility-command) instead.
-
-> **Observation import is paused.** Observations are now identified by a derived `observation_id` (`{test_id}|{label}`) rather than a stored `id`, so `--model Observation` is rejected until the flat observation importer replaces it. Until then, add observations by editing `resources/data/observation.json` directly (Option A in [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data)).
+Use `import_model` to import **Reference** or **ObservationFragilityModelBridge** records from a CSV. For fragility models, curves, and component links, use [`import_fragility`](#using-the-import_fragility-command) instead; for observations, use [`import_observation`](#using-the-import_observation-command).
 
 #### Basic Usage
 
@@ -253,10 +257,102 @@ python manage.py import_fragility --input_file my_fragilities.csv
 | `--input_file` | Yes | Path to the fragility import CSV file |
 | `--dry_run` | No | Report what would be appended without writing any changes |
 
+### Using the `import_observation` Command
+
+The `import_observation` command imports experimental observations from a single flat CSV, one row per observation. Each row also names the facility, program, specimen and test the observation belongs to, so the command splits the rows across `facility.json`, `program.json`, `specimen.json`, `test.json` and `observation.json`, creates the parent records that don't exist yet, and derives every id. This is the only way to add observations, or the records above them (see [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data)).
+
+#### Basic Usage
+
+```bash
+python manage.py import_observation --input_file my_observations.csv --dry_run
+python manage.py import_observation --input_file my_observations.csv
+```
+
+#### Available Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--input_file` | Yes | Path to the observation import CSV file |
+| `--dry_run` | No | Import into a scratch copy of the data directory, then run `migrate` and `ingest` into a scratch database and the JSON integrity checks over the copy. Reports every problem and writes nothing. It rebuilds the whole database, so it takes minutes |
+| `--data_dir` | No | The JSON data directory to import into (default: `resources/data/`) |
+
+**What is checked, and where.** The command itself checks identity and consistency: the identity columns, the labels, that the rows naming a record agree, and that no id is taken. Choice values, required fields and the component are checked by `ingest`, which is what `--dry_run` runs on the scratch copy, so the dry run applies the same checks `ingest` will apply after a real import (you still regenerate the fixture afterwards: see the [working order](#working-order)). **Always run the dry run first.** Every problem the command finds is reported with its row and column, and both values where two disagree, and nothing is written until all of them are fixed. A disagreement is never resolved by majority vote or by taking the first row.
+
+#### Template columns
+
+Start from `resources/import_templates/observation_template.csv`. Rows that describe the same specimen or test repeat its columns. The *Record* column says which record a column fills in; the fields themselves are defined in the [data dictionary](ui/assets/data_dictionary.md).
+
+| Column | Record | Required | Notes |
+|---|---|---|---|
+| `reference` | Program | Yes | The `reference_id` of an existing reference (e.g. `Smith-2020`). Import the reference first. It is always the program's reference: the command never sets a specimen's reference override |
+| `program` | Program | No | Leave blank for the reference's single program, which is created on first use. Fill it only when one reference documents more than one program: an existing `program_id`, or the label of a new program |
+| `facility` | Specimen | Yes | The label of the facility where the specimen was tested. A new label creates the facility |
+| `facility_location` | Facility | No | Where the facility is. Sets the location of a new facility; for an existing one, leave it blank or match the stored value |
+| `specimen` | Specimen | Yes | The specimen's label |
+| `specimen_name` | Specimen | No | The specimen's name or ID as the paper writes it, verbatim. The app shows the label when it's blank |
+| `contributor`, `component`, `comp_detail`, `material`, `size_class`, `design_objective`, `governing_design_standard`, `comp_description` | Specimen | `component`, `comp_description` | `component` is an existing `component_id`. [resources/import_templates/README.md](resources/import_templates/README.md) lists the values already used for each component; reuse one where it fits |
+| `specimen_notes` | Specimen | No | |
+| `test` | Test | Yes | The test's label, as the paper names the test; `a` for a specimen's only test. Labels carry no order |
+| `test_order` | Test | No | The paper's test number: see the `test_order` rule under [Label rules](#label-rules) |
+| `test_type`, `loading_protocol`, `peak_test_amplitude` | Test | `test_type` | |
+| `prior_damage`, `prior_damage_repaired` | Test | No | About the test, not the previous observation: the specimen's condition entering this test, and whether that damage was repaired before it |
+| `test_notes` | Test | No | |
+| `observation` | Observation | Yes | The observation's label. Observations sort by it as text: see [Label rules](#label-rules) |
+| `damage_location`, `ds_description`, `ds_class`, `edp_metric`, `edp_unit`, `edp_value`, `alt_edp_metric`, `alt_edp_unit`, `alt_edp_value`, `notes` | Observation | `ds_description`, `ds_class`, `edp_metric`, `edp_unit`, `edp_value` | `edp_value` may be blank only when it is genuinely unavailable |
+
+The **identity columns**, `reference`, `facility`, `specimen`, `test` and `observation`, must be in the header and filled in on every row. Rows are grouped by them: the rows with the same `reference` and `program` belong to one program, the rows with the same `specimen` label in that program to one specimen, the rows with the same `test` label in that specimen to one test, and every row is one observation.
+
+A few fields are not in the template. A new facility or program is created with a blank `name` and `notes` (the command reminds you to name a new facility), and a new specimen with no reference override (`Specimen.reference` is null). Set them afterwards by editing the JSON.
+
+#### Label rules
+
+The `facility`, `program`, `specimen`, `test` and `observation` columns are **labels**: short identifiers you choose, from which NED derives each record's id by joining it to its parent's id with `|`. The program's id is its label, or the reference id when the label is blank, so observation `obs01` of test `1` of specimen `W1` in the program of `Smith-2020` is `Smith-2020|W1|1|obs01`.
+
+- **Characters:** 1 to 100 letters, digits, `_`, `.` and `-`. No spaces, and no `|`, which separates the parts of an id. An invalid label is an error whose message suggests a valid one (`Specimen 3` → `Specimen_3`); the command never rewrites a label for you.
+- **Case is kept but not significant.** `S6` and `s6` are the same label, so they can't both exist under one parent. A label that differs from a stored one only in case (`ucsd_lab` for a stored `UCSD_Lab`) is an error naming both spellings; use the stored one.
+- **Uniqueness:** a facility label and a program label are unique across the whole database (a facility has no parent, and a program label replaces the reference id outright, so it can't equal another program's id). A specimen label is unique within its program, a test label within its specimen, and an observation label within its test.
+- **The `reference_label` rule:** a reference's optional `reference_label` is a token in its derived `reference_id`, with stricter rules than the labels here: 1 to 100 letters, digits and underscores only (no hyphens, since the hyphen comes before the year, and no dots or spaces), no leading or trailing underscore, and not a bare number such as a year. The labels here may use `.` and `-`, and may be a bare number (test `1`).
+- **Test labels carry no order.** Name the test as the paper does (`Test_14`, `B-1`). The order goes in `test_order`.
+- **Observation labels sort as text**, and a test's observations are shown in label order, so `10` sorts before `2`. Zero-pad numbers (`01`, `02`), or better, use a prefix (`obs01`, `obs02`): Excel strips the leading zeros from a bare number such as `01`. The command warns when a test's observation labels have numbers of different widths.
+- **The `test_order` rule:** the paper's test number, copied exactly, gaps included (tests 7–13 stay 7–13), as a positive whole number unique within the specimen. If the paper's identifiers aren't whole numbers (`3a`, `3b`), put them in the `test` label, give whole numbers that keep their order here, and say so in `test_notes`. Leave it blank if the paper gives no basis for an order.
+
+To change a label once it is in the data, use `rename_identity`; see [Changing an identifier](#changing-an-identifier).
+
+#### Existing records
+
+A CSV can add tests to an existing specimen, or observations to an existing test, by naming it with the same identity columns.
+
+- **A blank cell for an existing record means "not restated".** A row adding an observation to a stored test still fills in the identity columns, but can leave the specimen's and test's other columns (`comp_description`, `test_type` and so on) blank. A cell that is filled in must equal the stored value, after trimming spaces at either end and normalizing line endings.
+- **For a new record, every row naming it must agree exactly** on its columns.
+- **The reference must already exist.** A program that exists under a different reference is an error, and so is a blank `program` when the reference has only labelled programs, or when other rows give the same reference a new labelled program (it would otherwise create a second program silently).
+- **An observation that already exists is an error**, so re-importing the same CSV fails and writes nothing.
+
+#### Working order
+
+1. **References first,** with `import_model --model Reference` (see [Using the `import_model` Command](#using-the-import_model-command)). If your specimens use a component type NED doesn't have yet, add it to `component.json` by hand; there is no component importer.
+2. **Observations,** with `import_observation`: run it with `--dry_run`, fix what it reports, then run it without.
+3. **Fragility models,** if you have any, with `import_fragility`.
+4. **Observation–fragility links,** with `import_model --model ObservationFragilityModelBridge`. They need each observation's `observation_id`, which you can build from your CSV: the `program_id`, then the specimen, test and observation labels, joined with `|` (e.g. `Smith-2020|W1|1|obs01`).
+5. **Validate and regenerate the fixture.** After a real import into `resources/data/`, the command prints the steps: build a fresh database, regenerate the fixture, run the tests, and commit the data and the fixture together (see [Validate Locally](#3-validate-locally-recommended)). If you like, also rerun `python scripts/list_field_values.py` to refresh the list of existing specimen values, and commit it with them.
+
+#### Trying the example
+
+`resources/example_data/observation_example.csv` is a complete example: one facility, one program, one specimen, two tests and four observations. Its reference (`Smith-2020`) and component (`A.10.1.1.A`) are placeholders that aren't in the real data, so run it against a scratch data directory seeded with the example reference and component, never against `resources/data/`:
+
+```bash
+mkdir example_run
+cp resources/example_data/reference.json resources/example_data/component.json example_run/
+python manage.py import_observation --input_file resources/example_data/observation_example.csv --data_dir example_run --dry_run
+python manage.py import_observation --input_file resources/example_data/observation_example.csv --data_dir example_run
+```
+In PowerShell, copy the two files with `Copy-Item resources/example_data/reference.json, resources/example_data/component.json example_run/`.
+
+The dry run leaves `example_run/` untouched. The real import writes `facility.json`, `program.json`, `specimen.json`, `test.json` and `observation.json` there, identical to the files of the same names in `resources/example_data/`. Running it again fails on the four existing observations and writes nothing. Delete `example_run/` when you are done.
+
 
 ### Templates
 
-CSV templates with example rows are provided in `resources/import_templates/`. Copy the relevant template, replace the example row(s) with your data, and remove any rows you do not wish to import.
+CSV templates with example rows are provided in `resources/import_templates/`. Copy the relevant template, replace the example row(s) with your data, and remove any rows you do not wish to import. `resources/import_templates/README.md` lists the values already used for each component's specimen fields; it is generated by `python scripts/list_field_values.py`. The list is a snapshot that nothing checks; rerun the script after adding or changing specimens to refresh it (see [Validate Locally](#3-validate-locally-recommended)).
 
 ### CSV Conventions
 
@@ -264,12 +360,13 @@ CSV templates with example rows are provided in `resources/import_templates/`. C
   - `reference` → the generated id of the reference it belongs to (e.g., `Smith-2020`)
   - `component` → the `component_id` (e.g., `D.50.2.1.A`)
   - `fragility_model` → the full `fragility_model_id` (e.g., `Smith-2020|fra001`)
-  - `observation` → the derived `observation_id`, `{test_id}|{label}` (e.g., `Smith-2020|S1|a|01`)
-- **Choice fields** must exactly match one of the valid values. See `ned_app/models.py` for accepted values.
+  - `observation` (in the observation–fragility link template) → the derived `observation_id`, `{test_id}|{label}` (e.g., `Smith-2020|S1|a|01`)
+- **In the observation template**, the `facility`, `program`, `specimen`, `test` and `observation` columns hold labels, not ids: see [Label rules](#label-rules).
+- **Choice fields** must exactly match one of the valid values. See the [data dictionary](ui/assets/data_dictionary.md#shared-choice-vocabularies) or `ned_app/models.py` for accepted values.
 - **Optional numeric fields** (e.g., `alt_edp_value`) may be left blank; they will be stored as `null`.
 - **Values containing commas** must be wrapped in double quotes (standard CSV quoting).
 - Files should be **UTF-8** encoded and **comma-delimited**. Some non-US Excel versions save semicolon-delimited CSVs; if the importer reports this, re-save as *CSV UTF-8 (Comma delimited)*.
-- **Reference imports** use flattened `csl_*` columns for the bibliographic details; the command reconstructs them into the nested CSL-JSON `csl_data`. NED generates the `reference_id` for you at ingest from the first author's surname and the year (e.g. `Smith-2020`). Fill the optional `reference_label` column to choose the token yourself — for an institutional author (e.g. `FEMA_P58`), or when two references would otherwise derive the same id (same surname and year), which **requires** a distinguishing label. Labels use letters, digits, and underscores only (no hyphens, not a bare year, at most 100 characters). See [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data) for details.
+- **Reference imports** use flattened `csl_*` columns for the bibliographic details; the command reconstructs them into the nested CSL-JSON `csl_data`. NED generates the `reference_id` for you at ingest from the first author's surname and the year (e.g. `Smith-2020`). Fill the optional `reference_label` column to choose the token yourself — for an institutional author (e.g. `FEMA_P58`), or when two references would otherwise derive the same id (same surname and year), which **requires** a distinguishing label. See the `reference_label` rule under [Label rules](#label-rules) for the characters allowed, and see [How to Add New Data or Modify Existing Data](#how-to-add-new-data-or-modify-existing-data) for details.
 
 ### Examples
 
@@ -286,7 +383,7 @@ python manage.py import_model --model Reference \
   --input_file my_references.csv
 ```
 
-**Import experiment-fragility links:**
+**Import observation-fragility links:**
 ```bash
 python manage.py import_model --model ObservationFragilityModelBridge \
   --input_file my_links.csv
@@ -299,7 +396,7 @@ python manage.py import_fragility --input_file my_fragilities.csv
 
 ### Tips
 
-- **Import order matters for foreign keys.** Import `Reference` records before the records that reference them; `ingest` resolves foreign keys by natural key, so the target records must already be present.
+- **Import order matters for foreign keys.** Import `Reference` records before the records that reference them; `ingest` resolves foreign keys by natural key, so the target records must already be present. See the [working order](#working-order) for observations.
 - **Use `--dry_run` first** to preview which records would be appended (and surface the column warning) before changing the JSON files.
 - **Always run `ingest` and the test suite after importing** — they are where invalid values, choices, and foreign keys are caught.
 - **Commit after each successful batch.** Once `ingest` and the tests pass, commit before starting the next import. Each commit is a safe checkpoint: if a later batch fails validation, you can restore to it without losing the batches you already verified.
@@ -390,33 +487,41 @@ Create your own fork of the repository and start a new feature branch for your s
 
 
 #### 2. Add Your Data or Edit existing data
-You have two options for adding data:
+You have two options for adding data. **New observations must use Option B:** observations, and the facilities, programs, specimens and tests they belong to, are added only with `import_observation`, which derives their ids and checks that the rows describing each record agree. Never add records to `facility.json`, `program.json`, `specimen.json`, `test.json` or `observation.json` by hand.
 
-**Option A — Edit JSON directly** (recommended for small additions or when working in a code editor):
+**Option A — Edit JSON directly** (for references, components and fragility data, and for correcting values in any file):
 Directly edit the JSON files in the `resources/data/` directory.
 *   **Important:** Do **not** use the Django Admin interface or a web API to input new data.
 *   **Templates:** Check `resources/example_data/` for examples of proper formatting.
+*   **Components** are always added this way, in `component.json`: there is no component importer.
 
-> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Use `reference_label` (letters, digits, and underscores only — no hyphens, not a bare year, at most 100 characters) to choose the token yourself — for an institutional author (e.g. `FEMA_P58`) or one author's multiple works (e.g. `Bhatta_CladdingCyclic`). **A distinguishing `reference_label` is required whenever two references would otherwise derive the same id** (same first-author surname and year); without one they collide and silently merge on ingest, so a data-integrity test rejects duplicate derived ids. Any `reference_id`, or any `id` inside `csl_data`, that you include is **ignored and stripped on ingest**, so a stored value can never disagree with the derived id. Records in `program.json`, `specimen.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
+> **Reference identifiers are auto-generated — do not assign them.** When adding a reference, provide only the bibliographic `csl_data` (with **no `id` field**) plus, optionally, a `reference_label`. NED derives the `reference_id` at ingest: `<reference_label>-<year>` when a label is set, otherwise `<first-author-surname>-<year>` (e.g. `Smith-2020`). Use `reference_label` (see the `reference_label` rule under [Label rules](#label-rules)) to choose the token yourself — for an institutional author (e.g. `FEMA_P58`) or one author's multiple works (e.g. `Bhatta_CladdingCyclic`). **A distinguishing `reference_label` is required whenever two references would otherwise derive the same id** (same first-author surname and year); without one they collide and silently merge on ingest, so a data-integrity test rejects duplicate derived ids. Any `reference_id`, or any `id` inside `csl_data`, that you include is **ignored and stripped on ingest**, so a stored value can never disagree with the derived id. Records in `program.json`, `specimen.json`, `fragility_model.json`, and the bridge/curve files refer to a reference by its derived `reference_id`.
 
 **Option B — Import from CSV** (useful for larger datasets or contributors who prefer spreadsheet tools):
 Populate a CSV template from `resources/import_templates/` and use the appropriate import command:
 ```bash
-# References and experiment-fragility links (observation import is paused)
-python manage.py import_model --model Reference --input_file my_data.csv
+# Observations, with their facilities, programs, specimens and tests (one flat CSV)
+python manage.py import_observation --input_file my_observations.csv --dry_run
+python manage.py import_observation --input_file my_observations.csv
+
+# References, and observation-fragility links (import the references first)
+python manage.py import_model --model Reference --input_file my_references.csv
+python manage.py import_model --model ObservationFragilityModelBridge --input_file my_links.csv
 
 # Fragility models, curves, and component links (all in one flat CSV)
 python manage.py import_fragility --input_file my_fragilities.csv
 ```
-See [Importing Data from CSV](#importing-data-from-csv) for full instructions.
+See [Importing Data from CSV](#importing-data-from-csv) for full instructions, and the [working order](#working-order) when you add references, observations and fragility links together.
 *   **Common Files:**
-    *   `observation.json`: For new experimental results.
+    *   `facility.json`, `program.json`, `specimen.json`, `test.json`, `observation.json`: Experimental results, as a hierarchy. Written by `import_observation`.
     *   `reference.json`: For new bibliographic references.
-    *   `fragility_model.json`: For new fragility functions.
+    *   `component.json`: For new component types (edited by hand).
+    *   `fragility_model.json`, `fragility_curve.json`, `component_fragility_model_bridge.json`: For new fragility functions. Written by `import_fragility`.
+    *   `observation_fragility_model_bridge.json`: Links between observations and fragility models.
 *   **Editing Existing Records:** Only modify field values; do **not** change the data structure or schema.    
 
 If modifying existing data:
-*   **Important:** Only modify field values; do not change the structure or schema. If you need to add, rename, or remove a *field*, stop here and follow [How to Modify the Database Structure](#how-to-modify-the-database-structure) instead — schema changes go through the Django model, never through these files.
+*   **Important:** Only modify field values; do not change the structure or schema. Hand-editing JSON is for correcting values, never for adding records to the hierarchy files (see Option B above). If you need to add, rename, or remove a *field*, stop here and follow [How to Modify the Database Structure](#how-to-modify-the-database-structure) instead — schema changes go through the Django model, never through these files.
 *   **Examples of valid modifications:**
     *   Correcting spelling or grammar in descriptions
     *   Updating numeric values or material classifications
@@ -428,11 +533,13 @@ If modifying existing data:
 #### 3. Validate Locally (Recommended)
 Before submitting, we strongly recommend building the database locally to catch any errors. This ensures your data fits the schema and doesn't break any links.
 
-**Setup your local DB:**
+**Build a fresh local DB:**
 ```bash
+rm -f db.sqlite3
 python manage.py migrate
 python manage.py ingest
 ```
+Start from a fresh database, not one you have been ingesting into: the fixture below is dumped from it, and only a fresh build keeps the fixture's keys and order stable, so its diff shows just your changes. On Windows, deleting `db.sqlite3` fails while the Streamlit UI has it open, so stop the UI first (in PowerShell, delete it with `Remove-Item db.sqlite3`).
 
 **Regenerate the fixture snapshot:**
 
@@ -455,6 +562,12 @@ python manage.py test ned_app.tests
 ```
 *   *What this checks:* It verifies that all Foreign Keys match (e.g., every specimen points to a valid component ID) and that Primary Keys are unique.
 
+**Refresh the list of existing values (optional):**
+```bash
+python scripts/list_field_values.py
+```
+*   If you added or changed specimens, this rewrites `resources/import_templates/README.md`, the values already used for each component's specimen fields. The list is a snapshot that nothing checks, so this step is optional; if the file changed, commit it with your data.
+
 #### 4. Submit a Pull Request
 Commit your changes and open a Pull Request (PR) to the `main` branch. 
 
@@ -471,7 +584,7 @@ A project maintainer will review your PR. They will check the "JSON Diff" to see
 ### Changing an identifier
 Labels and citations are identities. Every child file stores its parent's derived id (an observation's `test` is e.g. `Smith-2020|S1|a`), and a fragility model's id embeds its `reference_id`. So **never hand-edit a `label`, a `reference_label` or a citation (`csl_data`) in the JSON**: the children would still name the old id and fail at `ingest`. Use `rename_identity` instead. In one transaction it saves the record and rewrites every descendant's foreign keys and derived ids, then it exports `resources/data/`.
 
-1. **Build a fresh database from the current JSON first** (`rm db.sqlite3 && python manage.py migrate && python manage.py ingest`). The command exports the database over the JSON, so it refuses to run unless an export already matches `resources/data/` byte for byte.
+1. **Build a fresh database from the current JSON first** (`rm db.sqlite3 && python manage.py migrate && python manage.py ingest`; in Windows PowerShell 5.1, run them as separate lines and delete with `Remove-Item db.sqlite3`). The command exports the database over the JSON, so it refuses to run unless an export already matches `resources/data/` byte for byte.
 2. **Run the command.** Quote ids that contain `|`:
 ```bash
 python manage.py rename_identity facility    UCSD_Lab --label UCSD_LHPOST
@@ -510,8 +623,9 @@ Start with a fresh local database populated with the current canonical data. **K
 rm -f db.sqlite3
 python manage.py migrate
 python manage.py ingest
-cp db.sqlite3 db_before_changes.sqlite3
+cp db.sqlite3 db_before.sqlite3
 ```
+On Windows, `rm db.sqlite3` fails while the Streamlit UI has the file open: stop the UI first, here and in Step 5.
 
 #### Step 2: Implement Schema Change & Data Migration
 Modify `models.py` and create your migrations.
@@ -528,22 +642,31 @@ Update the remaining code to match the **new** schema:
 *   **`export_data` command:** Update the logic to serialize your new DB fields back to JSON.
 *   **`admin.py`:** Register any new models and update existing admin classes as needed.
 *   *Constraint:* The loop `Export(Ingest(Source))` must be idempotent (lossless).
+*   **The field-list test**, `test_export_keys_match_serializer_fields` in `ned_app/tests/management/test_export_data_command.py`, fails when a file's exported keys differ from its serializer's fields, so a field added to one but not the other is caught.
+
+For the hierarchy models (`Facility`, `Program`, `Specimen`, `Test`, `Observation`), also update:
+*   **`import_observation`:** the CSV column maps at the top of `ned_app/management/commands/import_observation.py`, and the template `resources/import_templates/observation_template.csv` with them.
+*   **`rename_identity`:** its relation table (`CHILDREN` in `ned_app/management/commands/rename_identity.py`), for a new foreign key onto a derived id.
+*   **`ned_app/json_guards.py`:** the derived-id rules and parent checks run over the JSON.
+*   **`ui/sql/observation_flat.sql`:** the flat view the browser UI reads observations through.
 
 #### Step 4: Apply Migrations to the Saved Database
 Restore the database you saved in Step 1 and apply your new migrations to it. This transforms the data **through the migration**, ensuring correctness without relying on the updated serializers (which expect the new schema).
 ```bash
-cp db_before_changes.sqlite3 db.sqlite3
+cp db_before.sqlite3 db.sqlite3
 python manage.py migrate
 ```
 
 > **Do not rebuild the database with `ingest` at this point.** `ingest` would read `resources/data/*.json`, which still uses the *old* schema. The serializers silently ignore keys they no longer recognize, and any field that is `blank=True` is not required — so on a rename, `ingest` reports **0 failures** while dropping every value in the renamed field, and Step 5 then exports the emptied column over your source data. Migrating the populated database you saved in Step 1 is what carries the values across.
 
 #### Step 5: Export Updated Canonical Data
-Export the migrated database to generate the updated canonical JSON files and fixture:
+Export the migrated database to generate the updated canonical JSON files, then regenerate the fixture from a **fresh** build of those files, not from the migrated database:
 ```bash
 python manage.py export_data --output_dir resources/data/
-python manage.py dumpdata ned_app --indent 2 --exclude contenttypes --exclude auth.permission -o ned_app/fixtures/initial_data.json
+rm db.sqlite3 && python manage.py migrate && python manage.py ingest
+PYTHONUTF8=1 python manage.py dumpdata ned_app --indent 2 --output ned_app/fixtures/initial_data.json
 ```
+These are the same fixture commands that `import_observation` and `rename_identity` print. A fresh build keeps the fixture's keys and order stable, so its diff shows only real changes. Windows PowerShell 5.1 has no `&&`, so there run the rebuild as separate lines (`Remove-Item db.sqlite3`, `python manage.py migrate`, `python manage.py ingest`) and set `$env:PYTHONUTF8 = "1"` before `dumpdata` (see [Validate Locally](#3-validate-locally-recommended)).
 
 #### Step 6: Verification (The "Round-Trip" Protocol)
 Run these tests to prove that data flows safely in both directions:
@@ -559,7 +682,7 @@ python manage.py test ned_app.tests
 ```
 
 #### Step 8: Finalize and Commit
-Update `README.md` and templates in `resources/example_data/` if your change affects the user-facing data structure. Commit all changed files (models, migrations, updated JSONs, scripts, and fixtures) and open your PR.
+If your change affects the user-facing data structure, update `README.md`, the data dictionary (`ui/assets/data_dictionary.md`), the examples in `resources/example_data/` and the CSV templates in `resources/import_templates/`. If the specimen data changed, rerun `python scripts/list_field_values.py` to refresh `resources/import_templates/README.md`. Commit all changed files (models, migrations, updated JSONs, scripts, and fixtures, but not `db_before.sqlite3`) and open your PR.
 
 ### Launch the Django Admin
 To launch and take advantage of the administrative interface, run the web server:
@@ -708,7 +831,7 @@ python manage.py test ned_app.tests.test_models.ReferenceModelTest.test_save_pop
 - **Missing test data**: Ensure test fixtures and sample data are properly set up
 - **Import errors**: Run `uv sync` to make sure your environment has every dependency from the lock
 
-**Test coverage**: The project has 191 tests covering models, serializers, and data processing. When adding new features, consider adding corresponding tests.
+**Test coverage**: The test suite covers models, serializers, and data processing. When adding new features, consider adding corresponding tests.
 
 **Data Integrity Tests**: The test suite includes critical end-to-end validation tests that ensure the integrity of the Git-as-Source data pipeline:
 - `test_db_round_trip`: Validates that data can be exported from the database and re-ingested without loss
