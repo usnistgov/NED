@@ -196,3 +196,45 @@ def check_data_dir(path):
             for p in parent_problems(records[name], field, ids[parent], nullable)
         ]
     return problems
+
+
+# (file, child file, the child's foreign-key key)
+CHILD_CHECKS = [
+    ('facility', 'specimen', 'facility'),
+    ('program', 'specimen', 'program'),
+    ('specimen', 'test', 'specimen'),
+]
+
+
+def orphan_problems(path):
+    """
+    Report facilities and programs with no specimen, and specimens with no test.
+
+    Kept out of check_data_dir, which also runs on data sets that hold unused
+    rows on purpose (the rename_identity tests, import_observation --dry_run).
+    A reference with no program is allowed (a fragility-only reference).
+
+    Args:
+        path (str): The directory holding the JSON files.
+
+    Returns:
+        list[str]: One line per orphan, prefixed with its file; empty when
+            the directory has none.
+    """
+    names = {name for check in CHILD_CHECKS for name in check[:2]}
+    records = {name: _load(path, name) for name in names}
+    problems = []
+    for name, child, field in CHILD_CHECKS:
+        # Matched exactly, as parent_problems resolves parents.
+        used = {r.get(field) for r in records[child]}
+        for index, record in enumerate(records[name]):
+            try:
+                derived = DERIVE_ID[name](record)
+            except (KeyError, IndexError, TypeError):
+                # derived_id_problems reports it.
+                continue
+            if derived not in used:
+                problems.append(
+                    f'{name}.json: record {index}: {derived} has no {child}'
+                )
+    return problems

@@ -14,6 +14,7 @@ from ned_app.json_guards import (
     check_data_dir,
     derived_id_problems,
     label_problems,
+    orphan_problems,
     parent_problems,
 )
 from ned_app.models import (
@@ -274,7 +275,7 @@ class CanonicalHierarchyDataTests(SimpleTestCase):
     derived id, so the guards catch an id that can't be built, a case-only
     duplicate and a dangling parent before ingest does. Two references deriving
     the same id would otherwise merge silently on ingest. The guards themselves
-    are unit-tested in HierarchyGuardTests.
+    are unit-tested in HierarchyGuardTests and OrphanGuardTests.
     """
 
     def test_canonical_data_passes_the_json_guards(self):
@@ -284,6 +285,16 @@ class CanonicalHierarchyDataTests(SimpleTestCase):
             [],
             'resources/data/ fails the JSON guards (fix the data, or add a '
             'reference_label for a duplicate reference id):\n' + '\n'.join(problems),
+        )
+
+    def test_canonical_data_has_no_orphans(self):
+        # Every facility and program has a specimen, every specimen a test.
+        problems = orphan_problems('resources/data')
+        self.assertEqual(
+            problems,
+            [],
+            'resources/data/ holds rows with no children (add the children, or '
+            'remove the unused row):\n' + '\n'.join(problems),
         )
 
 
@@ -391,6 +402,77 @@ class HierarchyGuardTests(SimpleTestCase):
     def test_check_data_dir_treats_a_missing_file_as_empty(self):
         with tempfile.TemporaryDirectory() as data_dir:
             self.assertEqual(check_data_dir(data_dir), [])
+
+
+class OrphanGuardTests(SimpleTestCase):
+    """Unit tests for orphan_problems, on small data directories."""
+
+    def _orphans(self, files):
+        with tempfile.TemporaryDirectory() as data_dir:
+            for name, records in files.items():
+                with open(os.path.join(data_dir, name), 'w') as f:
+                    json.dump(records, f)
+            return orphan_problems(data_dir)
+
+    def _files(self):
+        return {
+            'facility.json': [{'label': 'Lab'}],
+            'program.json': [{'label': '', 'reference': 'Smith-2020'}],
+            'specimen.json': [
+                {'program': 'Smith-2020', 'facility': 'Lab', 'label': 'S1'}
+            ],
+            'test.json': [{'specimen': 'Smith-2020|S1', 'label': 'T1'}],
+        }
+
+    def test_clean_data_passes(self):
+        self.assertEqual(self._orphans(self._files()), [])
+
+    def test_unused_rows_are_reported_at_each_level(self):
+        files = self._files()
+        files['facility.json'].append({'label': 'Empty_Lab'})
+        files['program.json'].append({'label': 'P2', 'reference': 'Smith-2020'})
+        files['specimen.json'].append({
+            'program': 'Smith-2020',
+            'facility': 'Lab',
+            'label': 'S2',
+        })
+        self.assertEqual(
+            self._orphans(files),
+            [
+                'facility.json: record 1: Empty_Lab has no specimen',
+                'program.json: record 1: P2 has no specimen',
+                'specimen.json: record 1: Smith-2020|S2 has no test',
+            ],
+        )
+
+    def test_children_must_match_exactly(self):
+        # A wrong-case child doesn't resolve, so its parent counts as unused.
+        files = self._files()
+        files['test.json'] = [{'specimen': 'smith-2020|S1', 'label': 'T1'}]
+        self.assertEqual(
+            self._orphans(files),
+            ['specimen.json: record 0: Smith-2020|S1 has no test'],
+        )
+
+    def test_reference_with_no_program_is_allowed(self):
+        # Fragility-only references have no program.
+        files = self._files()
+        files['reference.json'] = [
+            {
+                'csl_data': {
+                    'author': [{'family': 'Jones'}],
+                    'issued': {'date-parts': [[2021]]},
+                }
+            }
+        ]
+        self.assertEqual(self._orphans(files), [])
+
+    def test_missing_files_hold_no_orphans(self):
+        self.assertEqual(self._orphans({}), [])
+
+    def test_underivable_records_are_skipped(self):
+        # derived_id_problems reports them; the orphan check mustn't crash.
+        self.assertEqual(self._orphans({'facility.json': [{'name': 'X'}]}), [])
 
 
 class CanonicalJsonFormatTests(SimpleTestCase):

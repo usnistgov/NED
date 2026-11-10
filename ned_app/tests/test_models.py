@@ -1,4 +1,7 @@
+from io import StringIO
+
 from django.core.exceptions import ValidationError
+from django.core.management import call_command
 from django.db import IntegrityError, transaction
 from django.test import TestCase
 
@@ -6,6 +9,7 @@ from ned_app.models import (
     Component,
     Facility,
     Observation,
+    ObservationFragilityModelBridge,
     Program,
     Reference,
     Specimen,
@@ -791,3 +795,91 @@ class DamagedByEarlierTestTest(TestCase):
         # Neither side can rule out earlier damage.
         self.assertIsNone(unordered.damaged_by_earlier_test)
         self.assertIsNone(ordered.damaged_by_earlier_test)
+
+
+class SchemaTest(TestCase):
+    """The schema matches design 2.1 and 2.2, and the migrations match the models."""
+
+    # Design 2.2's Observation table. None of the columns that moved to the
+    # hierarchy, nor reference, may come back.
+    OBSERVATION_FIELDS = (
+        'id',
+        'observation_id',
+        'test',
+        'label',
+        'damage_location',
+        'ds_description',
+        'ds_class',
+        'edp_metric',
+        'edp_unit',
+        'edp_value',
+        'alt_edp_metric',
+        'alt_edp_unit',
+        'alt_edp_value',
+        'notes',
+        'legacy_prior_damage',
+        'legacy_prior_damage_repaired',
+        'legacy_ds_rank',
+    )
+
+    # Design 2.1's FK table: (model, field, parent model, the parent field it
+    # points at).
+    HIERARCHY_FKS = (
+        (Program, 'reference', Reference, 'reference_id'),
+        (Specimen, 'program', Program, 'program_id'),
+        (Specimen, 'facility', Facility, 'label'),
+        (Specimen, 'reference', Reference, 'reference_id'),
+        (Specimen, 'component', Component, 'component_id'),
+        (Test, 'specimen', Specimen, 'specimen_id'),
+        (Observation, 'test', Test, 'test_id'),
+        (
+            ObservationFragilityModelBridge,
+            'observation',
+            Observation,
+            'observation_id',
+        ),
+    )
+
+    def test_observation_fields_are_the_declared_list(self):
+        self.assertCountEqual(
+            [f.name for f in Observation._meta.concrete_fields],
+            self.OBSERVATION_FIELDS,
+        )
+
+    def test_hierarchy_fks_point_at_the_parent_derived_id_or_label(self):
+        for model, name, parent, to_field in self.HIERARCHY_FKS:
+            with self.subTest(fk=f'{model.__name__}.{name}'):
+                field = model._meta.get_field(name)
+                self.assertTrue(field.many_to_one)
+                self.assertIs(field.related_model, parent)
+                self.assertEqual(field.target_field.name, to_field)
+
+    def test_hierarchy_fks_are_all_declared(self):
+        # A new FK on a hierarchy model must be added to the table above.
+        declared = {(m, name) for m, name, _, _ in self.HIERARCHY_FKS}
+        for model in (Facility, Program, Specimen, Test, Observation):
+            for field in model._meta.concrete_fields:
+                if field.is_relation:
+                    self.assertIn(
+                        (model, field.name),
+                        declared,
+                        f'{model.__name__}.{field.name} is not in HIERARCHY_FKS',
+                    )
+
+    def test_migrations_match_the_models(self):
+        # makemigrations --check exits non-zero when a model change has no
+        # migration; --noinput stops a rename question waiting for an answer.
+        out = StringIO()
+        try:
+            call_command(
+                'makemigrations',
+                '--check',
+                '--dry-run',
+                '--noinput',
+                stdout=out,
+                stderr=out,
+            )
+        except SystemExit:
+            self.fail(
+                f'The models have changes with no migration:\n{out.getvalue()}'
+            )
